@@ -257,3 +257,12 @@ p{margin-bottom:.8rem}p:last-child{margin-bottom:0}
 .rel-card .rp{font-size:.88rem;font-weight:700;color:var(--black)}
 @media(min-width:640px){.rel-grid{grid-template-columns:repeat(2,1fr)}}
 @media(min-width:960px){.rel-grid{grid-template-columns:repeat(4,1fr)}}
+
+/* ── Service cards 4-col grid ── */
+.svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:1.5rem}
+.svc-grid .route-card{display:flex;flex-direction:column}
+.svc-grid .route-card p{flex:1}
+@media(max-width:960px){.svc-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.svc-grid{grid-template-columns:1fr}}
+/* ── Prose wide (full-width content) ── */
+.prose--wide{max-width:none}
