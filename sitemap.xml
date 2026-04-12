@@ -121,4 +121,42 @@
     <priority>0.6</priority>
   </url>
 
+  <!-- Blog Pages -->
+  <url>
+    <loc>https://padmashreetravels.netlify.app/blog/</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://padmashreetravels.netlify.app/blog/taj-mahal-visiting-guide/</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://padmashreetravels.netlify.app/blog/best-time-to-visit-taj-mahal/</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://padmashreetravels.netlify.app/blog/agra-one-day-sightseeing/</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://padmashreetravels.netlify.app/blog/mathura-vrindavan-travel-guide/</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://padmashreetravels.netlify.app/blog/agra-mathura-vrindavan-one-day-trip/</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
 </urlset>

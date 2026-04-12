@@ -18,3 +18,18 @@
 /agra-to-vrindavan-cab/*        /agra-to-vrindavan-cab/index.html  200
 /agra-local-sightseeing/*       /agra-local-sightseeing/index.html 200
 /mathura-vrindavan-tour-from-agra/*  /mathura-vrindavan-tour-from-agra/index.html  200
+
+# Blog clean URL redirects
+/blog                                         /blog/                                                   301
+/blog/taj-mahal-visiting-guide                /blog/taj-mahal-visiting-guide/                          301
+/blog/best-time-to-visit-taj-mahal            /blog/best-time-to-visit-taj-mahal/                      301
+/blog/agra-one-day-sightseeing                /blog/agra-one-day-sightseeing/                          301
+/blog/mathura-vrindavan-travel-guide          /blog/mathura-vrindavan-travel-guide/                    301
+/blog/agra-mathura-vrindavan-one-day-trip     /blog/agra-mathura-vrindavan-one-day-trip/               301
+
+# Blog 200 rewrites for nested paths
+/blog/taj-mahal-visiting-guide/*              /blog/taj-mahal-visiting-guide/index.html                200
+/blog/best-time-to-visit-taj-mahal/*          /blog/best-time-to-visit-taj-mahal/index.html            200
+/blog/agra-one-day-sightseeing/*              /blog/agra-one-day-sightseeing/index.html                200
+/blog/mathura-vrindavan-travel-guide/*        /blog/mathura-vrindavan-travel-guide/index.html          200
+/blog/agra-mathura-vrindavan-one-day-trip/*   /blog/agra-mathura-vrindavan-one-day-trip/index.html     200
