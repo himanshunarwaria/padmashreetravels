@@ -1,0 +1,20 @@
+# Netlify _redirects — Padma Shree Travels
+# Ensures clean URLs work and legacy .html paths redirect properly
+
+# Serve new SEO folder pages (already handled by folder/index.html structure)
+# These are here as fallbacks in case Netlify needs explicit rules
+
+# Redirect old-style flat paths to clean folder URLs (301 permanent)
+/agra-to-mathura-taxi         /agra-to-mathura-taxi/         301
+/agra-to-vrindavan-cab        /agra-to-vrindavan-cab/        301
+/agra-local-sightseeing       /agra-local-sightseeing/       301
+/mathura-vrindavan-tour-from-agra  /mathura-vrindavan-tour-from-agra/  301
+
+# Redirect any trailing .html on existing pages to clean paths (optional, keep disabled by default)
+# /agra-to-mathura-vrindavan  /agra-to-mathura-vrindavan.html  200
+
+# 200 rewrites so folder URLs serve index.html without redirect loops
+/agra-to-mathura-taxi/*         /agra-to-mathura-taxi/index.html   200
+/agra-to-vrindavan-cab/*        /agra-to-vrindavan-cab/index.html  200
+/agra-local-sightseeing/*       /agra-local-sightseeing/index.html 200
+/mathura-vrindavan-tour-from-agra/*  /mathura-vrindavan-tour-from-agra/index.html  200

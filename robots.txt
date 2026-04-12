@@ -1,0 +1,31 @@
+# robots.txt — Padma Shree Travels
+# https://padmashreetravels.netlify.app
+
+User-agent: *
+Allow: /
+Disallow: /.netlify/
+
+Sitemap: https://padmashreetravels.netlify.app/sitemap.xml
+
+# Allow major search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Allow AI crawlers (for AI search visibility)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
