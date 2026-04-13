@@ -266,3 +266,86 @@ p{margin-bottom:.8rem}p:last-child{margin-bottom:0}
 @media(max-width:480px){.svc-grid{grid-template-columns:1fr}}
 /* ── Prose wide (full-width content) ── */
 .prose--wide{max-width:none}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   LUCIDE ICON SYSTEM
+   Primary colour: #d4af37 (premium gold)
+   All Lucide <i data-lucide="..."> tags become SVGs after createIcons() runs.
+   The classes below target both the <i> placeholder AND the resulting <svg>.
+───────────────────────────────────────────────────────────────────────── */
+:root { --gold:#d4af37; --gold-bg:rgba(212,175,55,.09); --gold-border:rgba(212,175,55,.2) }
+
+/* Base icon — applies to every icon on the site */
+.icon,
+[data-lucide] {
+  display:inline-block;
+  width:20px;
+  height:20px;
+  stroke:#d4af37;
+  stroke-width:1.75;
+  fill:none;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  vertical-align:middle;
+  flex-shrink:0;
+  transition:transform .2s ease;
+}
+/* Size modifiers */
+.icon--sm,[data-lucide].icon--sm { width:15px;height:15px }
+.icon--lg,[data-lucide].icon--lg { width:24px;height:24px }
+.icon--xl,[data-lucide].icon--xl { width:28px;height:28px }
+
+/* Colour modifiers */
+.icon--white,[data-lucide].icon--white { stroke:#fff }
+.icon--black,[data-lucide].icon--black { stroke:var(--black) }
+.icon--gray,[data-lucide].icon--gray   { stroke:var(--g500) }
+.icon--muted,[data-lucide].icon--muted { stroke:var(--g300) }
+.icon--green,[data-lucide].icon--green { stroke:var(--green) }
+.icon--gold,[data-lucide].icon--gold   { stroke:#d4af37 }
+
+/* ── Trust chip icons ── */
+.tchip__i [data-lucide],
+.tchip__i svg { width:15px;height:15px;stroke:#d4af37;stroke-width:2.25;fill:none;stroke-linecap:round;stroke-linejoin:round }
+
+/* ── "Why choose us" (inc) icons ── */
+.inc__i [data-lucide],
+.inc__i svg { width:24px;height:24px;stroke:#d4af37;stroke-width:1.75;fill:none;stroke-linecap:round;stroke-linejoin:round }
+
+/* ── Service card icon wrapper ── */
+.svc-icon {
+  width:52px;height:52px;
+  background:var(--gold-bg);
+  border:1px solid var(--gold-border);
+  border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:.9rem;
+  transition:background var(--t);
+}
+.svc-icon [data-lucide],
+.svc-icon svg { width:24px;height:24px;stroke:#d4af37;stroke-width:1.75;fill:none;stroke-linecap:round;stroke-linejoin:round }
+.route-card:hover .svc-icon { background:rgba(212,175,55,.16) }
+
+/* ── Footer contact icons ── */
+.ft__ci [data-lucide],
+.ft__ci svg { width:13px;height:13px;stroke:var(--g400);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round }
+
+/* ── Input field icon wrapper ── */
+.field-wrap { position:relative }
+.field-wrap .field-icon {
+  position:absolute;left:.85rem;top:50%;transform:translateY(-50%);
+  pointer-events:none;display:flex;align-items:center;
+}
+.field-wrap .field-icon [data-lucide],
+.field-wrap .field-icon svg { width:16px;height:16px;stroke:var(--g300);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round;transition:stroke var(--t) }
+.field-wrap .finput { padding-left:2.5rem }
+.field-wrap .finput:focus ~ .field-icon [data-lucide],
+.field-wrap .finput:focus ~ .field-icon svg,
+.field-wrap:focus-within .field-icon [data-lucide],
+.field-wrap:focus-within .field-icon svg { stroke:#d4af37 }
+/* For textarea field-wrap */
+.field-wrap--ta .field-icon { top:1rem;transform:none }
+.field-wrap--ta .finput { padding-left:2.5rem;padding-top:.85rem }
+
+/* ── WhatsApp float icon fix ── */
+.waf [data-lucide],
+.waf svg { width:24px;height:24px;stroke:#fff;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round }
