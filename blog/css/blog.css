@@ -107,7 +107,7 @@
 .blog-hero-listing h1{color:var(--white);margin-bottom:.7rem}
 .blog-hero-listing p{color:var(--g400);font-size:1rem;max-width:55ch}
 .blog-grid{display:grid;grid-template-columns:1fr;gap:1.2rem;margin-top:2.5rem}
-.bcard{background:var(--white);border:1px solid var(--g100);border-radius:var(--r);padding:1.8rem 2rem;transition:all var(--t);display:block;color:inherit}
+.bcard{background:var(--white);border:1px solid var(--g100);border-radius:var(--r);padding:1.8rem 2rem;transition:all var(--t);display:block;color:inherit;overflow:hidden}
 .bcard:hover{box-shadow:var(--md);transform:translateY(-2px);border-color:var(--g200)}
 .bcard__tag{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--g500);margin-bottom:.65rem;display:block}
 .bcard h2{font-size:1.08rem;color:var(--black);margin-bottom:.45rem;line-height:1.3;font-weight:700}
@@ -115,6 +115,34 @@
 .bcard .bc-foot{display:flex;justify-content:space-between;align-items:center;font-size:.73rem}
 .bcard .bc-meta{color:var(--g400)}
 .bcard .bc-read{font-weight:700;color:var(--black)}
+
+/* ── Blog card thumbnail ── */
+.bcard__thumb{width:calc(100% + 4rem);margin:-1.8rem -2rem 1.4rem;aspect-ratio:16/9;overflow:hidden;border-radius:var(--r) var(--r) 0 0;background:var(--g100);display:flex;align-items:center;justify-content:center;position:relative;flex-shrink:0}
+.bcard__thumb img{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;transition:transform .4s ease}
+.bcard:hover .bcard__thumb img{transform:scale(1.04)}
+/* Placeholder state — shown until a real image is added */
+.bcard__thumb--ph{background:linear-gradient(135deg,var(--g50) 0%,var(--g100) 60%,var(--g200) 100%)}
+.bcard__thumb-ph{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.55rem;color:var(--g400);text-align:center;pointer-events:none}
+.bcard__thumb-ph svg{width:30px;height:30px;opacity:.45}
+.bcard__thumb-ph span{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;opacity:.6}
+
+/* ── Article hero image (just below the page hero section) ── */
+.article-hero-img{max-width:800px;margin:0 auto;padding:1.8rem 1.5rem 0}
+.article-hero-img figure{margin:0;border-radius:var(--r);overflow:hidden;border:1px solid var(--g100);background:var(--g50);display:flex;flex-direction:column}
+.article-hero-img img{width:100%;display:block;aspect-ratio:16/9;object-fit:cover;background:var(--g100)}
+.article-hero-img figcaption{padding:.6rem 1rem;font-size:.72rem;color:var(--g500);background:var(--g50);border-top:1px solid var(--g100);text-align:center;line-height:1.55}
+/* Placeholder state for hero image */
+.article-hero-img .img-ph{background:linear-gradient(135deg,var(--g50) 0%,var(--g100) 60%,var(--g200) 100%)}
+.article-hero-img .img-ph img{display:none}
+.article-hero-img .img-ph figcaption{display:none}
+.article-hero-img .img-ph::after{content:'Add your hero image here — see HTML comment above';display:flex;align-items:center;justify-content:center;aspect-ratio:16/9;font-size:.65rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--g400);padding:1rem}
+
+/* ── In-article image (figure inside .article) ── */
+.article-img{margin:1.5rem 0 2rem;border-radius:var(--r);overflow:hidden;border:1px solid var(--g100);background:var(--g50)}
+.article-img img{width:100%;display:block;object-fit:cover;background:var(--g100)}
+.article-img figcaption{padding:.6rem 1rem;font-size:.72rem;color:var(--g500);background:var(--g50);border-top:1px solid var(--g100);text-align:center;line-height:1.55}
+/* Wide variant — bleeds to article edges */
+.article-img--wide{margin-left:-1.5rem;margin-right:-1.5rem;border-radius:0;border-left:none;border-right:none}
 
 /* ── Responsive ── */
 @media(min-width:640px){
