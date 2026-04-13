@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 update_prices.py)",
+      "Bash(python update_prices.py)",
+      "Bash(/c/Users/himan/AppData/Local/Microsoft/WindowsApps/python3 update_prices.py)",
+      "Bash(powershell -Command \"Write-Host ''PowerShell available''\")",
+      "Bash(powershell -Command \"[IO.File]::ReadAllText\\(''''d:\\\\Himanshu Design\\\\Padam Shree Travels Designs\\\\03 Website\\\\02 Padam Shree Travels\\\\update_prices.ps1'''', [Text.Encoding]::UTF8\\)\")",
+      "Bash(powershell -ExecutionPolicy Bypass -File \"d:\\\\Himanshu Design\\\\Padam Shree Travels Designs\\\\03 Website\\\\02 Padam Shree Travels\\\\fix_prices.ps1\")",
+      "Bash(powershell -ExecutionPolicy Bypass -Command \":*)",
+      "Bash(powershell -ExecutionPolicy Bypass -File \"d:\\\\Himanshu Design\\\\Padam Shree Travels Designs\\\\03 Website\\\\02 Padam Shree Travels\\\\add_routes.ps1\")",
+      "Bash(powershell -ExecutionPolicy Bypass -File add_routes.ps1)"
+    ]
+  }
+}
