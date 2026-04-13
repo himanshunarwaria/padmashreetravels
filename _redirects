@@ -19,6 +19,10 @@
 /agra-local-sightseeing/*       /agra-local-sightseeing/index.html 200
 /mathura-vrindavan-tour-from-agra/*  /mathura-vrindavan-tour-from-agra/index.html  200
 
+# Booking page clean URL
+/book                                         /book/                                                   301
+/book/*                                       /book/index.html                                         200
+
 # Blog clean URL redirects
 /blog                                         /blog/                                                   301
 /blog/taj-mahal-visiting-guide                /blog/taj-mahal-visiting-guide/                          301

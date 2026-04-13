@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en"
+  data-google-ads-id="REPLACE_WITH_AW-XXXXXXXXXX"
+  data-google-ads-conversion-label="REPLACE_WITH_LABEL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="robots" content="index, follow">
+<title>Book &amp; Pay Online &ndash; Padma Shree Travels | Agra Taxi Booking</title>
+<meta name="description" content="Book and pay for your Agra taxi online. Razorpay-secured checkout. Instant email confirmation. Taj Mahal tours, Mathura trips, outstation cabs.">
+<link rel="canonical" href="https://padmashreetravels.netlify.app/book/">
+<meta property="og:title" content="Book &amp; Pay Online — Padma Shree Travels">
+<meta property="og:description" content="Secure online booking for Agra taxis. Pay via Razorpay, get instant confirmation.">
+<meta property="og:url" content="https://padmashreetravels.netlify.app/book/">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/png" href="../images/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<style>
+  :root { --ff: Inter,-apple-system,sans-serif; --ffd: Inter,-apple-system,sans-serif }
+
+  /* ── Price display badge ── */
+  .price-badge {
+    display: flex; align-items: center; gap: .9rem;
+    background: var(--g50); border: 1px solid var(--g200);
+    border-left: 4px solid var(--black);
+    border-radius: var(--r); padding: 1rem 1.4rem;
+    margin: 1.2rem 0;
+  }
+  .price-badge__label { font-size: .75rem; font-weight: 600; color: var(--g500); text-transform: uppercase; letter-spacing: .06em; }
+  .price-badge__amount { font-size: 1.7rem; font-weight: 800; color: var(--black); }
+  .price-badge__note { font-size: .73rem; color: var(--g400); margin-top: .1rem; }
+
+  /* ── Trust bar ── */
+  .trust-bar { display: flex; flex-wrap: wrap; gap: .65rem; margin: 1.4rem 0 0; }
+  .trust-item { display: flex; align-items: center; gap: .4rem; font-size: .73rem; color: var(--g500); font-weight: 500; }
+  .trust-item svg { width: 15px; height: 15px; color: var(--green); flex-shrink: 0; }
+
+  /* ── Global error alert ── */
+  .form-error-bar {
+    background: #FFF1F0; border: 1px solid #FFB3B0;
+    border-radius: var(--r); padding: 1rem 1.2rem;
+    color: var(--red); font-size: .87rem; line-height: 1.5;
+    margin: .8rem 0;
+  }
+
+  /* ── Loading spinner ── */
+  .spin {
+    display: inline-block; width: 18px; height: 18px;
+    border: 2px solid rgba(255,255,255,.3); border-top-color: #fff;
+    border-radius: 50%; animation: spin .7s linear infinite;
+    vertical-align: middle; margin-right: .5rem;
+  }
+  @keyframes spin { to { transform: rotate(360deg) } }
+
+  /* ── Success card ── */
+  .booking-success {
+    background: var(--white); border: 1px solid var(--g100);
+    border-radius: var(--r); padding: 2.5rem 2rem; text-align: center;
+  }
+  .booking-success__icon {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: var(--green); color: #fff; font-size: 2rem;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1.2rem;
+  }
+  .booking-success h2 { font-size: 1.4rem; margin-bottom: .4rem; }
+  .booking-success p { color: var(--g500); font-size: .9rem; margin-bottom: 1.4rem; }
+  .booking-success__details {
+    background: var(--g50); border-radius: var(--r);
+    padding: 1.2rem; margin: 1.2rem 0; text-align: left;
+  }
+  .booking-success__row { display: flex; justify-content: space-between; font-size: .85rem; padding: .4rem 0; border-bottom: 1px solid var(--g100); }
+  .booking-success__row:last-child { border-bottom: none; }
+  .booking-success__row span:first-child { color: var(--g500); }
+  .booking-success__row span:last-child { font-weight: 600; color: var(--black); word-break: break-all; }
+  .booking-success__acts { display: flex; gap: .65rem; justify-content: center; flex-wrap: wrap; margin-top: 1.4rem; }
+
+  /* ── Sidebar info card ── */
+  .side-info { background: var(--g50); border: 1px solid var(--g100); border-radius: var(--r); padding: 1.5rem; }
+  .side-info h3 { font-size: .95rem; margin-bottom: 1rem; }
+  .side-info__item { display: flex; gap: .7rem; margin-bottom: .9rem; font-size: .84rem; color: var(--g700); align-items: flex-start; }
+  .side-info__item:last-child { margin-bottom: 0; }
+  .side-info__i { font-size: 1.1rem; flex-shrink: 0; margin-top: .1rem; }
+
+  /* ── Two-col layout on desktop ── */
+  .book-layout { display: grid; gap: 2rem; }
+  @media(min-width: 820px) {
+    .book-layout { grid-template-columns: 1fr 340px; align-items: start; }
+  }
+</style>
+
+<!-- Google Ads global tag — replace AW-XXXXXXXXXX with your real ID -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=REPLACE_WITH_AW-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'REPLACE_WITH_AW-XXXXXXXXXX');
+</script>
+</head>
+<body>
+
+<!-- ── Header ─────────────────────────────────────────────────────────────── -->
+<header class="hdr"><div class="hdr__in">
+<a href="../" class="logo">
+  <img src="../images/logo.png" alt="Padma Shree Travels Logo" class="logo__img">
+  <div class="logo__t">Padma Shree Travels<small>Agra Taxi Service</small></div>
+</a>
+<nav class="nav"><ul class="nav__l">
+<li><a href="../" class="nav__a">Home</a></li>
+<li><a href="../agra-to-mathura-taxi/" class="nav__a">Mathura Taxi</a></li>
+<li><a href="../agra-to-vrindavan-cab/" class="nav__a">Vrindavan Cab</a></li>
+<li><a href="../agra-local-sightseeing/" class="nav__a">Sightseeing</a></li>
+<li><a href="../mathura-vrindavan-tour-from-agra/" class="nav__a">M-V Tour</a></li>
+<li class="nav__dd"><a href="../#routes" class="nav__a">More &#9662;</a><div class="nav__ddm">
+<a href="../agra-to-mathura-vrindavan.html">Agra to Mathura &amp; Vrindavan <span class="ptag">&#8377;3000</span></a>
+<a href="../mathura-vrindavan-barsana.html">Mathura, Vrindavan &amp; Barsana <span class="ptag">&#8377;3500</span></a>
+<a href="../fatehpur-sikri.html">Fatehpur Sikri <span class="ptag">&#8377;2500</span></a>
+<a href="../taj-mahal-agra-fort.html">Taj Mahal, Agra Fort &amp; More <span class="ptag">&#8377;2500</span></a>
+<a href="../agra-to-aligarh.html">Agra to Aligarh <span class="ptag">&#8377;3000</span></a>
+<a href="../agra-to-hathras.html">Agra to Hathras <span class="ptag">&#8377;2000</span></a>
+<a href="../agra-to-gwalior.html">Agra to Gwalior <span class="ptag">&#8377;3000</span></a>
+</div></li>
+<li><a href="/blog/" class="nav__a">Blog</a></li>
+<li><a href="../contact.html" class="nav__a">Contact</a></li>
+<li><a href="tel:+918720081102" class="btn btn--b btn--sm">&#128222; Call Now</a></li>
+</ul></nav>
+<button class="ham" id="ham" aria-label="Menu"><span></span><span></span><span></span></button>
+</div></header>
+
+<div class="mnav" id="mnav">
+<a href="../">Home</a>
+<a href="../agra-to-mathura-taxi/">Agra to Mathura Taxi</a>
+<a href="../agra-to-vrindavan-cab/">Agra to Vrindavan Cab</a>
+<a href="../agra-local-sightseeing/">Local Sightseeing</a>
+<a href="../mathura-vrindavan-tour-from-agra/">Mathura Vrindavan Tour</a>
+<a href="/blog/">Travel Blog</a>
+<a href="../agra-to-mathura-vrindavan.html">Agra to Mathura &amp; Vrindavan</a>
+<a href="../mathura-vrindavan-barsana.html">Mathura, Vrindavan &amp; Barsana</a>
+<a href="../fatehpur-sikri.html">Fatehpur Sikri</a>
+<a href="../contact.html">Contact / Book Now</a>
+<div class="mnav__cta">
+<a href="tel:+918720081102" class="btn btn--b btn--lg">&#128222; Call Now</a>
+<a href="https://wa.me/918720081102?text=Hi!%20I%20need%20a%20cab%20from%20Agra" class="btn btn--wa btn--lg" target="_blank" rel="noopener">&#128172; WhatsApp</a>
+</div></div>
+
+<!-- ── Page Hero ───────────────────────────────────────────────────────────── -->
+<section class="phero"><div class="container"><div class="phero__in">
+<div class="bc"><a href="../">Home</a> &#8250; <span>Book &amp; Pay</span></div>
+<span class="sbadge">Secure Online Booking</span>
+<h1>Book Your Agra Taxi &mdash; Pay Online</h1>
+<p class="phero__tag">Select your route, pick a date, pay securely via Razorpay. Confirmation sent to your email instantly.</p>
+<div class="trust-bar" style="margin-top:.9rem">
+  <span class="trust-item" style="color:rgba(255,255,255,.7)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:#05944F"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    Razorpay secured
+  </span>
+  <span class="trust-item" style="color:rgba(255,255,255,.7)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:#05944F"><polyline points="20 6 9 17 4 12"/></svg>
+    Instant email confirmation
+  </span>
+  <span class="trust-item" style="color:rgba(255,255,255,.7)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:#05944F"><polyline points="20 6 9 17 4 12"/></svg>
+    Free cancellation (2 hrs before)
+  </span>
+</div>
+</div></div></section>
+
+<!-- ── Booking Section ─────────────────────────────────────────────────────── -->
+<section class="section"><div class="container">
+<div class="book-layout">
+
+  <!-- Left: Form -->
+  <div>
+    <!-- Success state (hidden until payment verified) -->
+    <div id="pb-success" class="booking-success" hidden>
+      <div class="booking-success__icon">&#10003;</div>
+      <h2>Booking Confirmed!</h2>
+      <p>Your cab is booked. A confirmation has been sent to your email.</p>
+      <div class="booking-success__details">
+        <div class="booking-success__row">
+          <span>Route</span><span id="pb-success-route"></span>
+        </div>
+        <div class="booking-success__row">
+          <span>Amount Paid</span><span id="pb-success-amount"></span>
+        </div>
+        <div class="booking-success__row">
+          <span>Payment ID</span><span id="pb-success-pid" style="font-size:.78rem;font-family:monospace"></span>
+        </div>
+      </div>
+      <p style="font-size:.84rem;color:var(--g500)">Our driver will contact you before your trip. Questions? Call or WhatsApp us.</p>
+      <div class="booking-success__acts">
+        <a href="tel:+918720081102" class="btn btn--b btn--lg">&#128222; +91-87200 81102</a>
+        <a href="https://wa.me/918720081102" class="btn btn--wa btn--lg" target="_blank" rel="noopener">&#128172; WhatsApp</a>
+      </div>
+    </div>
+
+    <!-- Booking form card -->
+    <div class="bform">
+      <h2 style="font-size:1.15rem;margin-bottom:1.4rem">Enter Booking Details</h2>
+
+      <!-- Global error bar -->
+      <div id="pb-error" class="form-error-bar" hidden aria-live="polite"></div>
+
+      <form id="payBookingForm" novalidate>
+        <div class="fgrid">
+
+          <div class="fg">
+            <label for="pb-name">Full Name <span class="req" aria-hidden="true">*</span></label>
+            <input type="text" id="pb-name" name="name" class="finput"
+              placeholder="Your full name" required autocomplete="name"
+              aria-required="true">
+            <div class="ferr" role="alert"></div>
+          </div>
+
+          <div class="fg">
+            <label for="pb-email">Email Address <span class="req" aria-hidden="true">*</span></label>
+            <input type="email" id="pb-email" name="email" class="finput"
+              placeholder="you@example.com" required autocomplete="email"
+              aria-required="true">
+            <div class="ferr" role="alert"></div>
+          </div>
+
+          <div class="fg">
+            <label for="pb-phone">Mobile Number <span class="req" aria-hidden="true">*</span></label>
+            <input type="tel" id="pb-phone" name="phone" class="finput"
+              placeholder="10-digit mobile number" required autocomplete="tel"
+              inputmode="numeric" aria-required="true">
+            <div class="ferr" role="alert"></div>
+          </div>
+
+          <div class="fg" style="grid-column:1/-1">
+            <label for="pb-route">Select Route <span class="req" aria-hidden="true">*</span></label>
+            <select id="pb-route" name="route" class="finput" required aria-required="true">
+              <option value="">— Choose your route —</option>
+              <optgroup label="Agra Local Sightseeing">
+                <option value="taj-mahal-agra-fort">Taj Mahal, Agra Fort &amp; More — ₹2,500</option>
+                <option value="agra-local-sightseeing">Agra Full Day Sightseeing — ₹2,500</option>
+                <option value="fatehpur-sikri">Fatehpur Sikri Tour — ₹2,500</option>
+              </optgroup>
+              <optgroup label="Mathura &amp; Vrindavan">
+                <option value="agra-to-mathura-vrindavan">Agra to Mathura &amp; Vrindavan — ₹3,000</option>
+                <option value="agra-to-mathura-taxi">Agra to Mathura — ₹3,000</option>
+                <option value="agra-to-vrindavan-cab">Agra to Vrindavan — ₹3,000</option>
+                <option value="mathura-vrindavan-tour">Mathura Vrindavan Full Day Tour — ₹3,000</option>
+                <option value="mathura-vrindavan-barsana">Mathura, Vrindavan &amp; Barsana — ₹3,500</option>
+              </optgroup>
+              <optgroup label="Outstation">
+                <option value="agra-to-aligarh">Agra to Aligarh — ₹3,000</option>
+                <option value="agra-to-hathras">Agra to Hathras — ₹2,000</option>
+                <option value="agra-to-sirsaganj">Agra to Sirsaganj — ₹3,000</option>
+                <option value="agra-to-etawah">Agra to Etawah — ₹3,500</option>
+                <option value="agra-to-gwalior">Agra to Gwalior — ₹3,000</option>
+                <option value="agra-to-firozabad">Agra to Firozabad — ₹2,500</option>
+                <option value="agra-to-bateshwar">Agra to Bateshwar — ₹3,000</option>
+                <option value="agra-to-tundla">Agra to Tundla — ₹2,000</option>
+                <option value="agra-to-shikohabad">Agra to Shikohabad — ₹3,000</option>
+              </optgroup>
+            </select>
+            <div class="ferr" role="alert"></div>
+          </div>
+
+          <div class="fg">
+            <label for="pb-date">Travel Date <span class="req" aria-hidden="true">*</span></label>
+            <input type="date" id="pb-date" name="date" class="finput"
+              required aria-required="true">
+            <div class="ferr" role="alert"></div>
+          </div>
+
+          <div class="fg">
+            <label for="pb-time">Pickup Time <span class="req" aria-hidden="true">*</span></label>
+            <input type="time" id="pb-time" name="time" class="finput"
+              required aria-required="true">
+            <div class="ferr" role="alert"></div>
+          </div>
+
+        </div><!-- /.fgrid -->
+
+        <!-- Live price display (shown after route selection) -->
+        <div id="pb-price-display" hidden>
+          <div class="price-badge">
+            <div>
+              <div class="price-badge__label">Total Amount</div>
+              <div class="price-badge__amount" id="pb-price-amount"></div>
+              <div class="price-badge__note">AC sedan &middot; includes driver &middot; GST incl.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Loading indicator -->
+        <div id="pb-loading" style="text-align:center;padding:.7rem 0;color:var(--g500);font-size:.85rem" hidden>
+          <span class="spin"></span> Opening secure payment…
+        </div>
+
+        <div style="margin-top:1.2rem">
+          <button type="submit" id="pb-submit" class="btn btn--b btn--lg" style="width:100%;justify-content:center;font-size:1rem">
+            Book &amp; Pay Now &#8594;
+          </button>
+        </div>
+
+        <p style="margin:.9rem 0 0;font-size:.72rem;color:var(--g400);text-align:center">
+          &#128274; Secured by Razorpay &bull; UPI, Cards, Net Banking, Wallets accepted
+        </p>
+      </form>
+    </div><!-- /.bform -->
+  </div>
+
+  <!-- Right: Info sidebar -->
+  <aside>
+    <div class="side-info">
+      <h3>Why Book Online?</h3>
+      <div class="side-info__item">
+        <span class="side-info__i">&#9989;</span>
+        <span>Instant booking confirmation sent to your email</span>
+      </div>
+      <div class="side-info__item">
+        <span class="side-info__i">&#128274;</span>
+        <span>Razorpay-secured checkout — cards, UPI, wallets, net banking</span>
+      </div>
+      <div class="side-info__item">
+        <span class="side-info__i">&#128664;</span>
+        <span>AC sedan with experienced local driver</span>
+      </div>
+      <div class="side-info__item">
+        <span class="side-info__i">&#128197;</span>
+        <span>Free cancellation up to 2 hours before pickup</span>
+      </div>
+      <div class="side-info__item">
+        <span class="side-info__i">&#127919;</span>
+        <span>Price shown is all-inclusive — no hidden charges</span>
+      </div>
+    </div>
+
+    <div class="side-info" style="margin-top:1rem">
+      <h3>Prefer to Call?</h3>
+      <div class="side-info__item">
+        <span class="side-info__i">&#128222;</span>
+        <div>
+          <a href="tel:+918720081102" style="font-weight:700;color:var(--black);font-size:.95rem">+91-87200 81102</a>
+          <p style="margin:.15rem 0 0;font-size:.75rem;color:var(--g400)">Available 24/7</p>
+        </div>
+      </div>
+      <div class="side-info__item">
+        <span class="side-info__i">&#128172;</span>
+        <a href="https://wa.me/918720081102?text=Hi!%20I%20want%20to%20book%20a%20cab%20from%20Agra"
+           class="btn btn--wa" target="_blank" rel="noopener"
+           style="font-size:.82rem;padding:.55rem 1.1rem">
+          WhatsApp Us
+        </a>
+      </div>
+    </div>
+
+    <div style="margin-top:1rem;padding:1rem 1.2rem;background:var(--g50);border-radius:var(--r);border:1px solid var(--g100)">
+      <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem">
+        <span style="font-size:1rem">&#11088;</span>
+        <span style="font-weight:700;font-size:.88rem">4.8 / 5 Rating</span>
+      </div>
+      <p style="font-size:.78rem;color:var(--g500);margin:0">"Very punctual driver, clean car. Highly recommend for Taj Mahal tour." — Priya S., Delhi</p>
+    </div>
+  </aside>
+
+</div><!-- /.book-layout -->
+</div></section>
+
+<!-- ── CTA ─────────────────────────────────────────────────────────────────── -->
+<section class="cta"><div class="container">
+<h2>Questions About Your Booking?</h2>
+<p>Call or WhatsApp us — we confirm within minutes.</p>
+<div class="cta__acts">
+<a href="tel:+918720081102" class="btn btn--w btn--lg">&#128222; Call +91-87200-81102</a>
+<a href="https://wa.me/918720081102?text=Hi!%20I%20need%20a%20cab%20from%20Agra" class="btn btn--wa btn--lg" target="_blank" rel="noopener">&#128172; WhatsApp Us</a>
+</div></div></section>
+
+<!-- ── Footer ─────────────────────────────────────────────────────────────── -->
+<footer class="ft"><div class="container"><div class="ft__grid">
+<div class="ft__brand">
+  <div class="logo"><img src="../images/logo.png" alt="Padma Shree Travels" class="logo__img">
+  <div class="logo__t" style="color:#fff">Padma Shree Travels<small>Agra Taxi Service</small></div></div>
+  <p>Your trusted partner for taxi and cab booking in Agra. Affordable outstation trips, sightseeing tours, and airport transfers. Available 24/7.</p>
+</div>
+<div><h4 class="ft__h">Quick Links</h4><ul class="ft__links">
+<li><a href="../">Home</a></li>
+<li><a href="../agra-to-mathura-taxi/">Agra to Mathura Taxi</a></li>
+<li><a href="../agra-to-vrindavan-cab/">Agra to Vrindavan Cab</a></li>
+<li><a href="../agra-local-sightseeing/">Local Sightseeing</a></li>
+<li><a href="/blog/">Travel Blog</a></li>
+<li><a href="../contact.html">Contact</a></li></ul></div>
+<div><h4 class="ft__h">Routes</h4><ul class="ft__links">
+<li><a href="../taj-mahal-agra-fort.html">Taj Mahal &amp; Agra Fort</a></li>
+<li><a href="../agra-to-mathura-vrindavan.html">Mathura &amp; Vrindavan</a></li>
+<li><a href="../mathura-vrindavan-barsana.html">Barsana Tour</a></li>
+<li><a href="../fatehpur-sikri.html">Fatehpur Sikri</a></li>
+<li><a href="../agra-to-gwalior.html">Agra to Gwalior</a></li></ul></div>
+<div><h4 class="ft__h">Contact Us</h4>
+<div class="ft__cr"><div class="ft__ci">&#128205;</div><div>Rajeshwar Mandir, Kaveri Vihar Phase II, Shamsabad, Agra, Uttar Pradesh 282001</div></div>
+<div class="ft__cr"><div class="ft__ci">&#128222;</div><div><a href="tel:+918720081102" style="color:var(--g400)">+91-87200 81102</a></div></div>
+<div class="ft__cr"><div class="ft__ci">&#9993;&#65039;</div><div><a href="mailto:travels.padamshree@gmail.com" style="color:var(--g400)">travels.padamshree@gmail.com</a></div></div>
+</div></div>
+<div class="ft__bot">
+  <div>&copy; 2025 Padma Shree Travels. All rights reserved.</div>
+  <div>Agra Taxi Service &bull; Secure Online Booking &bull; Razorpay</div>
+</div>
+</div></footer>
+
+<a href="tel:+918720081102" class="scall">&#128222; Call +91-87200 81102 &ndash; Book Now</a>
+<a href="https://wa.me/918720081102?text=Hi!%20I%20need%20a%20cab%20from%20Agra" class="waf" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp">&#128172;</a>
+
+<!-- Razorpay SDK -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<!-- Site JS -->
+<script src="../js/main.js"></script>
+<!-- Booking JS -->
+<script src="../js/booking.js"></script>
+</body>
+</html>

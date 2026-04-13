@@ -1,0 +1,21 @@
+{
+  "name": "padmashreetravels",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Padma Shree Travels — Agra taxi booking website with Razorpay payment integration",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "razorpay": "^2.9.2",
+    "@sendgrid/mail": "^8.1.3",
+    "googleapis": "^140.0.1"
+  },
+  "devDependencies": {
+    "netlify-cli": "^17.0.0"
+  },
+  "scripts": {
+    "dev": "netlify dev",
+    "deploy": "netlify deploy --prod"
+  }
+}
