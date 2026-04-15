@@ -213,33 +213,88 @@ p:last-child { margin-bottom: 0 }
 }
 .nav__a:hover::after, .nav__a.on::after { width: 100% }
 
-/* Dropdown */
+/* ── Dropdown — hover-stable, keyboard-accessible ───────────────────────── */
 .nav__dd { position: relative }
+
 .nav__ddm {
-  display: none;
+  /*
+   * Use visibility + opacity instead of display:none so we can:
+   *  1. Transition on both open and close
+   *  2. Delay the close (visibility switches after 220ms — the forgiveness window)
+   *
+   * display:block is always set so the element can receive pointer events during
+   * the close delay (visibility:visible is still true during those 220ms).
+   */
+  display: block;
+  visibility: hidden;
+  opacity: 0;
   position: absolute;
-  top: calc(100% + 12px);
+  /*
+   * top:100% positions the panel flush against the bottom of the <li> — no gap.
+   * padding-top provides the visual 10px separation WITHOUT creating a dead zone.
+   * Previously: top:calc(100%+12px) created a 12px gap where :hover was lost.
+   */
+  top: 100%;
   left: -1.5rem;
-  min-width: 290px;
+  min-width: 295px;
   background: var(--white);
   border-radius: var(--r-lg);
   box-shadow: var(--lg);
   border: 1px solid var(--g100);
-  padding: .5rem 0;
+  padding: 10px 0 .6rem;        /* top padding = visual gap, no DOM gap */
   z-index: 100;
+  transform: translateY(-5px);
+  /*
+   * CLOSE: opacity/transform animate over 180ms, then visibility hides after 220ms.
+   * This 220ms window keeps the panel interactive (cursor can re-enter).
+   */
+  transition:
+    opacity   .18s ease,
+    transform .18s ease,
+    visibility 0s linear .22s;
 }
-.nav__dd:hover .nav__ddm { display: block }
+
+/* Invisible hover bridge — spans upward from panel top, covers any sub-pixel gap */
+.nav__ddm::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 0;
+  right: 0;
+  height: 10px;
+}
+
+/*
+ * OPEN state: triggered by mouse hover OR keyboard focus-within OR JS class.
+ * Transition overrides remove the close delay — opening is always immediate.
+ */
+.nav__dd:hover .nav__ddm,
+.nav__dd:focus-within .nav__ddm,
+.nav__dd--open .nav__ddm {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity   .15s ease,
+    transform .15s ease,
+    visibility 0s linear 0s;   /* no delay on open */
+}
+
+/* Dropdown links */
 .nav__ddm a {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: .58rem 1.2rem;
+  padding: .6rem 1.2rem;
   font-size: .83rem;
   font-weight: 500;
   color: var(--g700);
+  border-radius: 0;
   transition: background var(--t), color var(--t);
+  outline-offset: -2px;     /* keep focus ring inside the panel */
 }
-.nav__ddm a:hover { background: var(--g50); color: var(--black) }
+.nav__ddm a:hover  { background: var(--g50); color: var(--black) }
+.nav__ddm a:focus-visible { background: var(--g50); color: var(--black); outline: 2px solid var(--black) }
 .ptag { font-size: .76rem; color: var(--g400); font-weight: 600 }
 
 /* Hamburger */

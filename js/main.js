@@ -20,4 +20,34 @@ document.addEventListener('DOMContentLoaded',function(){
   function se(inp,msg){var g=inp.closest('.fg');if(g){g.classList.add('has-error');inp.classList.add('error');var e=g.querySelector('.ferr');if(e)e.textContent=msg}}
   var today=new Date().toISOString().split('T')[0];document.querySelectorAll('input[type="date"]').forEach(function(d){d.setAttribute('min',today)});
   document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var t=document.querySelector(this.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}})});
+
+  // ── Nav dropdown keyboard accessibility ──────────────────────────────────
+  document.querySelectorAll('.nav__dd').forEach(function(dd){
+    var trigger=dd.querySelector(':scope > .nav__a');
+    if(!trigger)return;
+    trigger.setAttribute('aria-haspopup','true');
+    trigger.setAttribute('aria-expanded','false');
+
+    // Track focus within the dropdown
+    dd.addEventListener('focusin',function(){
+      dd.classList.add('nav__dd--open');
+      trigger.setAttribute('aria-expanded','true');
+    });
+    dd.addEventListener('focusout',function(e){
+      // Only close if focus moves completely outside this dropdown
+      if(!dd.contains(e.relatedTarget)){
+        dd.classList.remove('nav__dd--open');
+        trigger.setAttribute('aria-expanded','false');
+      }
+    });
+
+    // Escape key — collapse and return focus to trigger
+    dd.addEventListener('keydown',function(e){
+      if(e.key==='Escape'){
+        dd.classList.remove('nav__dd--open');
+        trigger.setAttribute('aria-expanded','false');
+        trigger.focus();
+      }
+    });
+  });
 });
