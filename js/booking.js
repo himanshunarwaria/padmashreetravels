@@ -7,6 +7,7 @@
  *  3. Show live price when route is selected
  *  4. Form validation
  *  5. createOrder → Razorpay Checkout → verifyPayment flow
+ *     → Falls back to WhatsApp booking if API is not configured
  *  6. Fire Google Ads conversion after verified success
  *  7. Show success state
  */
@@ -33,6 +34,26 @@
     'agra-to-bateshwar': 3000,
     'agra-to-tundla': 2000,
     'agra-to-shikohabad': 3000,
+  };
+
+  const ROUTE_LABELS = {
+    'taj-mahal-agra-fort': 'Taj Mahal, Agra Fort & More',
+    'agra-local-sightseeing': 'Agra Local Sightseeing',
+    'fatehpur-sikri': 'Fatehpur Sikri Tour',
+    'agra-to-mathura-vrindavan': 'Agra to Mathura & Vrindavan',
+    'agra-to-mathura-taxi': 'Agra to Mathura Taxi',
+    'agra-to-vrindavan-cab': 'Agra to Vrindavan Cab',
+    'mathura-vrindavan-tour': 'Mathura Vrindavan Tour from Agra',
+    'mathura-vrindavan-barsana': 'Mathura, Vrindavan & Barsana',
+    'agra-to-aligarh': 'Agra to Aligarh',
+    'agra-to-hathras': 'Agra to Hathras',
+    'agra-to-sirsaganj': 'Agra to Sirsaganj',
+    'agra-to-etawah': 'Agra to Etawah',
+    'agra-to-gwalior': 'Agra to Gwalior',
+    'agra-to-firozabad': 'Agra to Firozabad',
+    'agra-to-bateshwar': 'Agra to Bateshwar',
+    'agra-to-tundla': 'Agra to Tundla',
+    'agra-to-shikohabad': 'Agra to Shikohabad',
   };
 
   // ── 1. UTM / GCLID capture ────────────────────────────────────────────────
@@ -196,7 +217,42 @@
     }
   }
 
-  // ── 5. Google Ads conversion ───────────────────────────────────────────────
+  // ── 5. WhatsApp fallback ───────────────────────────────────────────────────
+  // Used when Razorpay is not configured or payment is not needed.
+
+  function fallbackToWhatsApp(name, phone, route, date, time) {
+    const routeLabel = ROUTE_LABELS[route] || route;
+    const price = ROUTE_PRICES[route] ? `₹${ROUTE_PRICES[route].toLocaleString('en-IN')}` : '';
+    const msg = [
+      'Hi! I want to book a cab.',
+      `Name: ${name}`,
+      `Phone: ${phone}`,
+      `Route: ${routeLabel}${price ? ' — ' + price : ''}`,
+      `Date: ${date}`,
+      `Pickup Time: ${time}`,
+    ].join('\n');
+    // Show success-like UI first, then open WhatsApp
+    form.closest('.bform') && (form.closest('.bform').hidden = true);
+    if (successEl) {
+      successEl.hidden = false;
+      const pidEl = document.getElementById('pb-success-pid');
+      const routeEl = document.getElementById('pb-success-route');
+      const amtEl = document.getElementById('pb-success-amount');
+      const h2 = successEl.querySelector('h2');
+      const p = successEl.querySelector('p');
+      if (h2) h2.textContent = 'Request Sent!';
+      if (p) p.textContent = "We'll confirm your booking on WhatsApp within minutes.";
+      if (pidEl) { pidEl.textContent = 'Via WhatsApp'; pidEl.style.fontFamily = 'inherit'; }
+      if (routeEl) routeEl.textContent = routeLabel;
+      if (amtEl) amtEl.textContent = price || '—';
+      successEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    setTimeout(function () {
+      window.open('https://wa.me/918720081102?text=' + encodeURIComponent(msg), '_blank');
+    }, 800);
+  }
+
+  // ── 6. Google Ads conversion ───────────────────────────────────────────────
 
   let conversionFired = false;
   function fireConversion(paymentId, amountInr) {
@@ -207,7 +263,7 @@
 
     const adsId = document.documentElement.dataset.googleAdsId;
     const label = document.documentElement.dataset.googleAdsConversionLabel;
-    if (!adsId || !label) return;
+    if (!adsId || !label || adsId.includes('REPLACE') || label.includes('REPLACE')) return;
 
     gtag('event', 'conversion', {
       send_to: `${adsId}/${label}`,
@@ -217,7 +273,7 @@
     });
   }
 
-  // ── 6. Main form submit flow ───────────────────────────────────────────────
+  // ── 7. Main form submit flow ───────────────────────────────────────────────
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -243,14 +299,39 @@
         body: JSON.stringify({ name, email, phone, route, date, time, ...attr }),
       });
       orderData = await res.json();
-      if (!orderData.ok) throw new Error(orderData.error || 'Order creation failed');
+
+      // If API returns a config/setup error, fall back to WhatsApp gracefully
+      if (!orderData.ok) {
+        const errMsg = (orderData.error || '').toLowerCase();
+        const isConfigError = errMsg.includes('not configured') || errMsg.includes('missing') ||
+          errMsg.includes('credentials') || res.status >= 500;
+        if (isConfigError) {
+          setLoading(false);
+          fallbackToWhatsApp(name, phone, route, date, time);
+          return;
+        }
+        throw new Error(orderData.error || 'Order creation failed');
+      }
     } catch (err) {
+      // Network error (e.g. function not deployed) — fall back to WhatsApp
+      if (err.name === 'TypeError' || err.message.includes('fetch') || err.message.includes('Failed')) {
+        setLoading(false);
+        fallbackToWhatsApp(name, phone, route, date, time);
+        return;
+      }
       setLoading(false);
       showGlobalError(`Could not start payment: ${err.message}`);
       return;
     }
 
     // ── Step B: Open Razorpay Checkout ────────────────────────────────────────
+    if (typeof Razorpay === 'undefined') {
+      setLoading(false);
+      // Razorpay SDK didn't load — fall back to WhatsApp
+      fallbackToWhatsApp(name, phone, route, date, time);
+      return;
+    }
+
     const rzpOptions = {
       key: orderData.keyId,
       amount: orderData.amount,
@@ -305,13 +386,6 @@
         },
       },
     };
-
-    // Razorpay SDK must be loaded on the page
-    if (typeof Razorpay === 'undefined') {
-      setLoading(false);
-      showGlobalError('Payment SDK failed to load. Please refresh and try again.');
-      return;
-    }
 
     const rzp = new Razorpay(rzpOptions);
     rzp.open();
