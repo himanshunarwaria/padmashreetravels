@@ -21,6 +21,20 @@ document.addEventListener('DOMContentLoaded',function(){
   var today=new Date().toISOString().split('T')[0];document.querySelectorAll('input[type="date"]').forEach(function(d){d.setAttribute('min',today)});
   document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var t=document.querySelector(this.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}})});
 
+  // ── Mobile nav accordion ─────────────────────────────────────────────────
+  // Close accordion subs when ham is closed
+  if(mn){mn.querySelectorAll('.mnav__cat').forEach(function(btn){
+    btn.addEventListener('click',function(e){
+      e.stopPropagation();
+      var sub=btn.nextElementSibling;
+      var isOpen=sub.classList.contains('open');
+      // close all
+      mn.querySelectorAll('.mnav__sub').forEach(function(s){s.classList.remove('open')});
+      mn.querySelectorAll('.mnav__cat').forEach(function(b){b.setAttribute('aria-expanded','false')});
+      if(!isOpen){sub.classList.add('open');btn.setAttribute('aria-expanded','true')}
+    });
+  });}
+
   // ── Nav dropdown keyboard accessibility ──────────────────────────────────
   document.querySelectorAll('.nav__dd').forEach(function(dd){
     var trigger=dd.querySelector(':scope > .nav__a');

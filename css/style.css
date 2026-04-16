@@ -1173,21 +1173,61 @@ p:last-child { margin-bottom: 0 }
 @media (min-width: 960px) { .svc-grid { grid-template-columns: repeat(4, 1fr) } }
 @media (max-width: 400px) { .svc-grid { grid-template-columns: 1fr } }
 
-/* ── Nav dropdown section headers ────────────────────────────────────────── */
-.nav__ddh {
-  font-size: .62rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: .11em;
+/* ── Dropdown "View All" link ─────────────────────────────────────────────── */
+.dd__more {
+  font-size: .78rem !important;
+  font-weight: 700 !important;
+  color: var(--black) !important;
+  border-top: 1px solid var(--g100) !important;
+  margin-top: .25rem;
+  padding-top: .7rem !important;
+  letter-spacing: .01em;
+}
+.dd__more:hover { background: var(--g50) !important }
+
+/* ── Mobile nav accordion ─────────────────────────────────────────────────── */
+.mnav__home {
+  font-weight: 600;
+  color: var(--black) !important;
+}
+.mnav__cat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: .85rem .4rem;
+  font-size: .93rem;
+  font-weight: 600;
+  color: var(--black);
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--g100);
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--ff);
+}
+.mnav__arr {
+  font-size: .7rem;
   color: var(--g400);
-  padding: .55rem 1.2rem .2rem;
-  pointer-events: none;
+  transition: transform .2s ease;
+  display: inline-block;
 }
-.nav__ddm .nav__ddh:not(:first-child) {
-  border-top: 1px solid var(--g100);
-  margin-top: .35rem;
-  padding-top: .65rem;
+.mnav__cat[aria-expanded="true"] .mnav__arr { transform: rotate(180deg) }
+.mnav__sub {
+  display: none;
+  background: var(--g50);
+  border-bottom: 1px solid var(--g100);
 }
+.mnav__sub.open { display: block }
+.mnav__sub a {
+  padding-left: 1.4rem !important;
+  font-size: .88rem !important;
+  font-weight: 500 !important;
+  color: var(--g600) !important;
+  border-bottom: 1px solid var(--g100) !important;
+}
+.mnav__sub a:last-child { border-bottom: none !important }
+.mnav__sub a:hover { color: var(--black) !important; background: var(--g100) }
 
 /* ── Route category grouping on homepage ─────────────────────────────────── */
 .rcat-section { margin-top: 2.5rem }
