@@ -17,7 +17,6 @@
 
   // ── Route pricing (mirrors server — display only, server is authoritative) ──
   const ROUTE_PRICES = {
-    'taj-mahal-agra-fort': 2500,
     'agra-local-sightseeing': 2500,
     'fatehpur-sikri': 2500,
     'agra-to-mathura-vrindavan': 3000,
@@ -37,7 +36,6 @@
   };
 
   const ROUTE_LABELS = {
-    'taj-mahal-agra-fort': 'Taj Mahal, Agra Fort & More',
     'agra-local-sightseeing': 'Agra Local Sightseeing',
     'fatehpur-sikri': 'Fatehpur Sikri Tour',
     'agra-to-mathura-vrindavan': 'Agra to Mathura & Vrindavan',

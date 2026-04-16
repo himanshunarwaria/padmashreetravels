@@ -6,11 +6,6 @@
 
 const ROUTES = {
   // ── Agra Local ──────────────────────────────────────────────────────────
-  'taj-mahal-agra-fort': {
-    label: 'Taj Mahal, Agra Fort & More',
-    amount: 2500,
-    duration: 'Full day',
-  },
   'agra-local-sightseeing': {
     label: 'Agra Local Sightseeing',
     amount: 2500,
@@ -99,7 +94,7 @@ const ROUTES = {
 
 /**
  * Look up a route by key.
- * @param {string} key - route slug, e.g. 'taj-mahal-agra-fort'
+ * @param {string} key - route slug, e.g. 'agra-local-sightseeing'
  * @returns {{ label, amount, duration } | null}
  */
 function getRoute(key) {
