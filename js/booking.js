@@ -54,6 +54,26 @@
     'agra-to-shikohabad': 'Agra to Shikohabad',
   };
 
+  // Trip type labels shown in the price badge
+  const ROUTE_TYPE = {
+    'agra-local-sightseeing': 'Full Day',
+    'fatehpur-sikri': 'Full Day',
+    'agra-to-mathura-vrindavan': 'Round Trip',
+    'agra-to-mathura-taxi': 'Round Trip',
+    'agra-to-vrindavan-cab': 'Round Trip',
+    'mathura-vrindavan-tour': 'Full Day Tour',
+    'mathura-vrindavan-barsana': 'Full Day Tour',
+    'agra-to-aligarh': 'Round Trip',
+    'agra-to-hathras': 'Round Trip',
+    'agra-to-sirsaganj': 'Round Trip',
+    'agra-to-etawah': 'Round Trip',
+    'agra-to-gwalior': 'Round Trip',
+    'agra-to-firozabad': 'Round Trip',
+    'agra-to-bateshwar': 'Round Trip',
+    'agra-to-tundla': 'Round Trip',
+    'agra-to-shikohabad': 'Round Trip',
+  };
+
   // ── 1. UTM / GCLID capture ────────────────────────────────────────────────
 
   const UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'gclid'];
@@ -94,6 +114,10 @@
   const loadingEl = document.getElementById('pb-loading');
   const errorEl = document.getElementById('pb-error');
   const successEl = document.getElementById('pb-success');
+  const passengersSelect = document.getElementById('pb-passengers');
+  const suvNote = document.getElementById('pb-suv-note');
+  const groupNote = document.getElementById('pb-group-note');
+  const priceTypeEl = document.getElementById('pb-price-type');
 
   // Prefill route from ?route= query param
   const urlRoute = new URLSearchParams(window.location.search).get('route');
@@ -111,11 +135,19 @@
     const price = ROUTE_PRICES[routeKey];
     if (price && priceDisplay && priceAmount) {
       priceAmount.textContent = `₹${price.toLocaleString('en-IN')}`;
+      if (priceTypeEl) priceTypeEl.textContent = (ROUTE_TYPE[routeKey] || 'AC Sedan');
       priceDisplay.hidden = false;
     } else if (priceDisplay) {
       priceDisplay.hidden = true;
     }
   }
+
+  // Show SUV/group advisory based on passenger count
+  passengersSelect && passengersSelect.addEventListener('change', () => {
+    const val = passengersSelect.value;
+    if (suvNote) suvNote.hidden = (val !== '5-6');
+    if (groupNote) groupNote.hidden = (val !== '7+');
+  });
 
   // Set today as minimum date
   const dateInput = document.getElementById('pb-date');
@@ -153,8 +185,10 @@
     const email = document.getElementById('pb-email')?.value.trim();
     const phone = document.getElementById('pb-phone')?.value.trim();
     const route = document.getElementById('pb-route')?.value;
+    const pickup = document.getElementById('pb-pickup')?.value.trim();
     const date = document.getElementById('pb-date')?.value;
     const time = document.getElementById('pb-time')?.value;
+    const passengers = document.getElementById('pb-passengers')?.value;
 
     if (!name || name.length < 2) {
       fieldError('pb-name', 'Please enter your full name'); valid = false;
@@ -168,6 +202,9 @@
     if (!route) {
       fieldError('pb-route', 'Please select a route'); valid = false;
     }
+    if (!pickup || pickup.length < 4) {
+      fieldError('pb-pickup', 'Please enter your pickup location'); valid = false;
+    }
     if (!date) {
       fieldError('pb-date', 'Please select a travel date'); valid = false;
     } else {
@@ -178,6 +215,9 @@
     }
     if (!time) {
       fieldError('pb-time', 'Please select a pickup time'); valid = false;
+    }
+    if (!passengers) {
+      fieldError('pb-passengers', 'Please select number of passengers'); valid = false;
     }
 
     return valid;
@@ -201,16 +241,33 @@
     }
   }
 
-  function showSuccess(paymentId, routeLabel, amountInr) {
+  function fmtDate(ds) {
+    const d = new Date(ds + 'T00:00:00');
+    return d.toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
+  }
+
+  function fmtTime(ts) {
+    const [h, m] = ts.split(':').map(Number);
+    const ap = h >= 12 ? 'PM' : 'AM';
+    return `${h % 12 || 12}:${String(m).padStart(2, '0')} ${ap}`;
+  }
+
+  function showSuccess(paymentId, routeLabel, amountInr, date, time, pickup) {
     form.closest('.bform') && (form.closest('.bform').hidden = true);
     if (successEl) {
       successEl.hidden = false;
       const pidEl = document.getElementById('pb-success-pid');
       const routeEl = document.getElementById('pb-success-route');
       const amtEl = document.getElementById('pb-success-amount');
+      const dateEl = document.getElementById('pb-success-date');
+      const timeEl = document.getElementById('pb-success-time');
+      const pickupEl = document.getElementById('pb-success-pickup');
       if (pidEl) pidEl.textContent = paymentId;
       if (routeEl) routeEl.textContent = routeLabel;
       if (amtEl) amtEl.textContent = `₹${Number(amountInr).toLocaleString('en-IN')}`;
+      if (dateEl && date) dateEl.textContent = fmtDate(date);
+      if (timeEl && time) timeEl.textContent = fmtTime(time);
+      if (pickupEl && pickup) pickupEl.textContent = pickup;
       successEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }
@@ -218,17 +275,20 @@
   // ── 5. WhatsApp fallback ───────────────────────────────────────────────────
   // Used when Razorpay is not configured or payment is not needed.
 
-  function fallbackToWhatsApp(name, phone, route, date, time) {
+  function fallbackToWhatsApp(name, phone, route, date, time, pickup, passengers, notes) {
     const routeLabel = ROUTE_LABELS[route] || route;
     const price = ROUTE_PRICES[route] ? `₹${ROUTE_PRICES[route].toLocaleString('en-IN')}` : '';
     const msg = [
       'Hi! I want to book a cab.',
       `Name: ${name}`,
       `Phone: ${phone}`,
-      `Route: ${routeLabel}${price ? ' — ' + price : ''}`,
+      `Route: ${routeLabel}${price ? ' \u2014 ' + price : ''}`,
+      pickup ? `Pickup: ${pickup}` : null,
       `Date: ${date}`,
-      `Pickup Time: ${time}`,
-    ].join('\n');
+      `Time: ${time}`,
+      passengers ? `Passengers: ${passengers}` : null,
+      notes ? `Note: ${notes}` : null,
+    ].filter(Boolean).join('\n');
     // Show success-like UI first, then open WhatsApp
     form.closest('.bform') && (form.closest('.bform').hidden = true);
     if (successEl) {
@@ -236,13 +296,19 @@
       const pidEl = document.getElementById('pb-success-pid');
       const routeEl = document.getElementById('pb-success-route');
       const amtEl = document.getElementById('pb-success-amount');
+      const dateEl = document.getElementById('pb-success-date');
+      const timeEl = document.getElementById('pb-success-time');
+      const pickupEl = document.getElementById('pb-success-pickup');
       const h2 = successEl.querySelector('h2');
       const p = successEl.querySelector('p');
       if (h2) h2.textContent = 'Request Sent!';
-      if (p) p.textContent = "We'll confirm your booking on WhatsApp within minutes.";
+      if (p) p.textContent = 'We\u2019ll confirm your booking on WhatsApp within minutes.';
       if (pidEl) { pidEl.textContent = 'Via WhatsApp'; pidEl.style.fontFamily = 'inherit'; }
       if (routeEl) routeEl.textContent = routeLabel;
-      if (amtEl) amtEl.textContent = price || '—';
+      if (amtEl) amtEl.textContent = price || '\u2014';
+      if (dateEl && date) dateEl.textContent = fmtDate(date);
+      if (timeEl && time) timeEl.textContent = fmtTime(time);
+      if (pickupEl && pickup) pickupEl.textContent = pickup;
       successEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
     setTimeout(function () {
@@ -281,8 +347,11 @@
     const email = document.getElementById('pb-email').value.trim();
     const phone = document.getElementById('pb-phone').value.trim();
     const route = document.getElementById('pb-route').value;
+    const pickup = document.getElementById('pb-pickup')?.value.trim() || '';
     const date = document.getElementById('pb-date').value;
     const time = document.getElementById('pb-time').value;
+    const passengers = document.getElementById('pb-passengers')?.value || '';
+    const notes = document.getElementById('pb-notes')?.value.trim() || '';
     const attr = getAttribution();
 
     setLoading(true);
@@ -294,7 +363,7 @@
       const res = await fetch('/.netlify/functions/createOrder', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, phone, route, date, time, ...attr }),
+        body: JSON.stringify({ name, email, phone, route, pickup, date, time, passengers, notes, ...attr }),
       });
       orderData = await res.json();
 
@@ -305,7 +374,7 @@
           errMsg.includes('credentials') || res.status >= 500;
         if (isConfigError) {
           setLoading(false);
-          fallbackToWhatsApp(name, phone, route, date, time);
+          fallbackToWhatsApp(name, phone, route, date, time, pickup, passengers, notes);
           return;
         }
         throw new Error(orderData.error || 'Order creation failed');
@@ -314,7 +383,7 @@
       // Network error (e.g. function not deployed) — fall back to WhatsApp
       if (err.name === 'TypeError' || err.message.includes('fetch') || err.message.includes('Failed')) {
         setLoading(false);
-        fallbackToWhatsApp(name, phone, route, date, time);
+        fallbackToWhatsApp(name, phone, route, date, time, pickup, passengers, notes);
         return;
       }
       setLoading(false);
@@ -326,7 +395,7 @@
     if (typeof Razorpay === 'undefined') {
       setLoading(false);
       // Razorpay SDK didn't load — fall back to WhatsApp
-      fallbackToWhatsApp(name, phone, route, date, time);
+      fallbackToWhatsApp(name, phone, route, date, time, pickup, passengers, notes);
       return;
     }
 
@@ -341,8 +410,11 @@
       prefill: orderData.prefill,
       notes: {
         route,
+        pickup,
         date,
         time,
+        passengers,
+        notes: notes || '',
         utmSource: attr.utmSource,
         gclid: attr.gclid,
       },
@@ -359,7 +431,7 @@
               razorpay_order_id: rzpResponse.razorpay_order_id,
               razorpay_payment_id: rzpResponse.razorpay_payment_id,
               razorpay_signature: rzpResponse.razorpay_signature,
-              name, email, phone, route, date, time,
+              name, email, phone, route, pickup, date, time, passengers, notes,
               ...attr,
               sourcePage: window.location.href,
             }),
@@ -374,7 +446,7 @@
 
         setLoading(false);
         fireConversion(verifyData.paymentId, verifyData.amountInr);
-        showSuccess(verifyData.paymentId, verifyData.routeLabel, verifyData.amountInr);
+        showSuccess(verifyData.paymentId, verifyData.routeLabel, verifyData.amountInr, date, time, pickup);
       },
 
       modal: {

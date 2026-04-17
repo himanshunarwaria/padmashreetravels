@@ -203,13 +203,22 @@
           <span>Route</span><span id="pb-success-route"></span>
         </div>
         <div class="booking-success__row">
+          <span>Travel Date</span><span id="pb-success-date"></span>
+        </div>
+        <div class="booking-success__row">
+          <span>Pickup Time</span><span id="pb-success-time"></span>
+        </div>
+        <div class="booking-success__row">
+          <span>Pickup From</span><span id="pb-success-pickup"></span>
+        </div>
+        <div class="booking-success__row">
           <span>Amount Paid</span><span id="pb-success-amount"></span>
         </div>
         <div class="booking-success__row">
           <span>Payment ID</span><span id="pb-success-pid" style="font-size:.78rem;font-family:monospace"></span>
         </div>
       </div>
-      <p style="font-size:.84rem;color:var(--g500)">Our driver will contact you before your trip. Questions? Call or WhatsApp us.</p>
+      <p style="font-size:.84rem;color:var(--g500)">Confirmation email sent. Our team will call you within 2 hours to confirm driver details.</p>
       <div class="booking-success__acts">
         <a href="tel:+918720081102" class="btn btn--b btn--lg"><i data-lucide="phone" class="icon icon--white" aria-hidden="true"></i> +91-87200 81102</a>
         <a href="https://wa.me/918720081102" class="btn btn--wa btn--lg" target="_blank" rel="noopener"><i data-lucide="message-circle" class="icon icon--white" aria-hidden="true"></i> WhatsApp</a>
@@ -262,12 +271,11 @@
                 <option value="agra-local-sightseeing">Agra Full Day Sightseeing — ₹2,500 (Full Day)</option>
                 <option value="fatehpur-sikri">Fatehpur Sikri Day Trip — ₹2,500 (Full Day)</option>
               </optgroup>
-              <optgroup label="Mathura &amp; Vrindavan">
-                <option value="agra-to-mathura-vrindavan">Agra to Mathura &amp; Vrindavan — ₹3,000 (Round Trip)</option>
-                <option value="agra-to-mathura-taxi">Agra to Mathura — ₹3,000 (Round Trip)</option>
-                <option value="agra-to-vrindavan-cab">Agra to Vrindavan — ₹3,000 (Round Trip)</option>
-                <option value="mathura-vrindavan-tour">Mathura + Vrindavan Full Day Tour — ₹3,000 (Full Day)</option>
-                <option value="mathura-vrindavan-barsana">Mathura, Vrindavan &amp; Barsana — ₹3,500 (Full Day)</option>
+              <optgroup label="Mathura &amp; Vrindavan Pilgrimage">
+                <option value="agra-to-mathura-taxi">Mathura Only (Round Trip from Agra) — ₹3,000</option>
+                <option value="agra-to-vrindavan-cab">Vrindavan Only (Round Trip from Agra) — ₹3,000</option>
+                <option value="mathura-vrindavan-tour">Mathura + Vrindavan Full Day Tour — ₹3,000</option>
+                <option value="mathura-vrindavan-barsana">Mathura + Vrindavan + Barsana Full Day — ₹3,500</option>
               </optgroup>
               <optgroup label="Outstation">
                 <option value="agra-to-aligarh">Agra to Aligarh — ₹3,000 (Round Trip)</option>
@@ -283,6 +291,16 @@
             </select></div>
             <div class="ferr" role="alert"></div>
             <p style="font-size:.72rem;color:var(--g400);margin:.3rem 0 0">Online booking covers round trips &amp; full-day tours. For one-way fares, <a href="tel:+918720081102" style="color:var(--g500)">call us</a>.</p>
+          </div>
+
+          <div class="fg" style="grid-column:1/-1">
+            <label for="pb-pickup">Pickup Location <span class="req" aria-hidden="true">*</span></label>
+            <div class="field-wrap"><span class="field-icon"><i data-lucide="navigation" class="icon icon--sm icon--muted" aria-hidden="true"></i></span>
+            <input type="text" id="pb-pickup" name="pickup" class="finput"
+              placeholder="Hotel name, railway station, or street address" required autocomplete="street-address"
+              aria-required="true"></div>
+            <div class="ferr" role="alert"></div>
+            <p style="font-size:.72rem;color:var(--g400);margin:.3rem 0 0">Where should the driver pick you up? Hotel name + area is enough.</p>
           </div>
 
           <div class="fg">
@@ -301,13 +319,43 @@
             <div class="ferr" role="alert"></div>
           </div>
 
+          <div class="fg">
+            <label for="pb-passengers">Passengers <span class="req" aria-hidden="true">*</span></label>
+            <div class="field-wrap"><span class="field-icon"><i data-lucide="users" class="icon icon--sm icon--muted" aria-hidden="true"></i></span>
+            <select id="pb-passengers" name="passengers" class="finput" required aria-required="true">
+              <option value="">— Select —</option>
+              <option value="1">1 Passenger</option>
+              <option value="2">2 Passengers</option>
+              <option value="3">3 Passengers</option>
+              <option value="4">4 Passengers</option>
+              <option value="5-6">5–6 Passengers (SUV needed)</option>
+              <option value="7+">7+ Passengers (please call us)</option>
+            </select></div>
+            <div class="ferr" role="alert"></div>
+          </div>
+
+          <div class="fg" style="grid-column:1/-1">
+            <label for="pb-notes">Special Requests <span style="color:var(--g400);font-weight:400;font-size:.83em">(optional)</span></label>
+            <textarea id="pb-notes" name="notes" class="finput" rows="2"
+              placeholder="e.g. need child seat, extra luggage, drop to airport after tour, early morning pickup…"
+              style="resize:vertical"></textarea>
+          </div>
+
         </div><!-- /.fgrid -->
+
+        <!-- SUV / group advisory — shown by JS on passengers change -->
+        <p id="pb-suv-note" hidden style="font-size:.73rem;margin:1rem 0 0;padding:.65rem .9rem;background:#FFFBEB;border:1px solid #FCD34D;border-radius:var(--r);color:#78350F">
+          &#9432; For 5–6 passengers, SUV pricing applies (&#8377;3,800–&#8377;4,500 depending on route). Our team will confirm the exact fare on WhatsApp after booking.
+        </p>
+        <p id="pb-group-note" hidden style="font-size:.73rem;margin:1rem 0 0;padding:.65rem .9rem;background:#FEF2F2;border:1px solid #FECACA;border-radius:var(--r);color:#991B1B">
+          &#9888; For groups of 7+, please <a href="tel:+918720081102" style="color:inherit;font-weight:600">call us</a> for a Tempo Traveller quote. Online booking covers up to 6 passengers.
+        </p>
 
         <!-- Live price display (shown after route selection) -->
         <div id="pb-price-display" hidden>
           <div class="price-badge">
             <div>
-              <div class="price-badge__label">Total Amount</div>
+              <div class="price-badge__label">Total Fare &mdash; <span id="pb-price-type">AC Sedan</span></div>
               <div class="price-badge__amount" id="pb-price-amount"></div>
               <div class="price-badge__note">Fuel &amp; driver incl. &middot; Tolls &amp; parking extra</div>
             </div>
@@ -319,14 +367,23 @@
           <span class="spin"></span> Opening secure payment…
         </div>
 
-        <div style="margin-top:1.2rem">
+        <div style="margin-top:1.4rem">
           <button type="submit" id="pb-submit" class="btn btn--b btn--lg" style="width:100%;justify-content:center;font-size:1rem">
             Book &amp; Pay Now &#8594;
           </button>
         </div>
 
+        <div style="margin-top:1.2rem;padding:.9rem 1.1rem;background:var(--g50);border:1px solid var(--g100);border-radius:var(--r)">
+          <p style="font-size:.79rem;font-weight:600;margin:0 0 .4rem;color:var(--black)">What happens after you book?</p>
+          <ol style="margin:0;padding-left:1.25rem;font-size:.76rem;color:var(--g500);line-height:1.8">
+            <li>Instant email confirmation — your booking is secured.</li>
+            <li>Our team calls within 2 hours to confirm pickup details.</li>
+            <li>Driver name &amp; number shared on WhatsApp before your trip.</li>
+          </ol>
+        </div>
+
         <p style="margin:.9rem 0 0;font-size:.72rem;color:var(--g400);text-align:center">
-          <i data-lucide="lock" class="icon icon--sm icon--muted" aria-hidden="true"></i> Secured by Razorpay &bull; UPI, Cards, Net Banking, Wallets accepted
+          <i data-lucide="lock" class="icon icon--sm icon--muted" aria-hidden="true"></i> Secured by Razorpay &bull; UPI, Cards, Net Banking, Wallets &bull; Free cancellation 2 hrs before pickup
         </p>
       </form>
     </div><!-- /.bform -->
