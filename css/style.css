@@ -1452,3 +1452,39 @@ p:last-child { margin-bottom: 0 }
   .rcard__acts { gap: .35rem }
   .mnav__cta .btn { min-height: 48px }
 }
+
+/* ── Mobile CTA bar (3-button sticky bottom) ─────────────────────────────── */
+.mcta-bar {
+  display: none;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 901;
+  background: var(--white);
+  border-top: 2px solid var(--g200);
+  padding: .5rem .6rem calc(.5rem + env(safe-area-inset-bottom));
+  gap: .4rem;
+}
+.mcta-bar__a {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .3rem;
+  padding: .65rem .35rem;
+  border-radius: var(--r);
+  font-size: .78rem;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+.mcta-bar__call { background: var(--black); color: var(--white); }
+.mcta-bar__wa   { background: var(--wa);    color: var(--white); }
+.mcta-bar__book { background: var(--g100);  color: var(--black); border: 1px solid var(--g200); }
+@media (max-width: 959px) {
+  .mcta-bar { display: flex; }
+  .scall    { display: none !important; }
+  .waf      { display: none !important; }
+  body      { padding-bottom: 72px; }
+}
