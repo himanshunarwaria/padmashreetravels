@@ -64,4 +64,16 @@ document.addEventListener('DOMContentLoaded',function(){
       }
     });
   });
+
+  // ── WhatsApp booking conversion (GTM dataLayer) ───────────────────────────
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a[href*="wa.me"]');
+    if(!a)return;
+    window.dataLayer=window.dataLayer||[];
+    window.dataLayer.push({
+      event:'whatsapp_booking',
+      conversion_id:'AW-18103087307',
+      conversion_label:'XY8MCNfs7Z4CEMvhnLhD'
+    });
+  });
 });

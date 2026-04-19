@@ -6,9 +6,8 @@
  *  2. Prefill route dropdown from ?route= query param
  *  3. Show live price when route is selected
  *  4. Form validation
- *  5. createOrder → Razorpay Checkout → verifyPayment flow
- *     → Falls back to WhatsApp booking if API is not configured
- *  6. Fire Google Ads conversion after verified success
+ *  5. Submit booking via WhatsApp
+ *  6. Fire Google Ads conversion on submission
  *  7. Show success state
  */
 
@@ -134,7 +133,7 @@
   function showPrice(routeKey) {
     const price = ROUTE_PRICES[routeKey];
     if (price && priceDisplay && priceAmount) {
-      priceAmount.textContent = `₹${price.toLocaleString('en-IN')}`;
+      priceAmount.textContent = `approx \u20b9${price.toLocaleString('en-IN')}`;
       if (priceTypeEl) priceTypeEl.textContent = (ROUTE_TYPE[routeKey] || 'AC Sedan');
       priceDisplay.hidden = false;
     } else if (priceDisplay) {
@@ -229,7 +228,7 @@
     if (submitBtn) submitBtn.disabled = on;
     if (loadingEl) loadingEl.hidden = !on;
     if (submitBtn) {
-      submitBtn.textContent = on ? 'Processing…' : 'Book & Pay Now →';
+      submitBtn.textContent = on ? 'Preparing\u2026' : 'Book Now on WhatsApp \u2192';
     }
   }
 
@@ -272,12 +271,12 @@
     }
   }
 
-  // ── 5. WhatsApp fallback ───────────────────────────────────────────────────
-  // Used when Razorpay is not configured or payment is not needed.
+  // ── 5. WhatsApp booking ────────────────────────────────────────────────────
 
   function fallbackToWhatsApp(name, phone, route, date, time, pickup, passengers, notes) {
     const routeLabel = ROUTE_LABELS[route] || route;
-    const price = ROUTE_PRICES[route] ? `₹${ROUTE_PRICES[route].toLocaleString('en-IN')}` : '';
+    const price = ROUTE_PRICES[route] ? `\u20b9${ROUTE_PRICES[route].toLocaleString('en-IN')}` : '';
+    const approxPrice = ROUTE_PRICES[route] ? `approx \u20b9${ROUTE_PRICES[route].toLocaleString('en-IN')}` : '';
     const msg = [
       'Hi! I want to book a cab.',
       `Name: ${name}`,
@@ -289,11 +288,9 @@
       passengers ? `Passengers: ${passengers}` : null,
       notes ? `Note: ${notes}` : null,
     ].filter(Boolean).join('\n');
-    // Show success-like UI first, then open WhatsApp
     form.closest('.bform') && (form.closest('.bform').hidden = true);
     if (successEl) {
       successEl.hidden = false;
-      const pidEl = document.getElementById('pb-success-pid');
       const routeEl = document.getElementById('pb-success-route');
       const amtEl = document.getElementById('pb-success-amount');
       const dateEl = document.getElementById('pb-success-date');
@@ -303,9 +300,8 @@
       const p = successEl.querySelector('p');
       if (h2) h2.textContent = 'Request Sent!';
       if (p) p.textContent = 'We\u2019ll confirm your booking on WhatsApp within minutes.';
-      if (pidEl) { pidEl.textContent = 'Via WhatsApp'; pidEl.style.fontFamily = 'inherit'; }
       if (routeEl) routeEl.textContent = routeLabel;
-      if (amtEl) amtEl.textContent = price || '\u2014';
+      if (amtEl) amtEl.textContent = approxPrice || '\u2014';
       if (dateEl && date) dateEl.textContent = fmtDate(date);
       if (timeEl && time) timeEl.textContent = fmtTime(time);
       if (pickupEl && pickup) pickupEl.textContent = pickup;
@@ -316,35 +312,27 @@
     }, 800);
   }
 
-  // ── 6. Google Ads conversion ───────────────────────────────────────────────
+  // ── 6. GTM dataLayer push helper ─────────────────────────────────────────
 
   let conversionFired = false;
-  function fireConversion(paymentId, amountInr) {
+  function fireConversion() {
     if (conversionFired) return;
     conversionFired = true;
-
-    if (typeof gtag !== 'function') return;
-
-    const adsId = document.documentElement.dataset.googleAdsId;
-    const label = document.documentElement.dataset.googleAdsConversionLabel;
-    if (!adsId || !label || adsId.includes('REPLACE') || label.includes('REPLACE')) return;
-
-    gtag('event', 'conversion', {
-      send_to: `${adsId}/${label}`,
-      value: amountInr,
-      currency: 'INR',
-      transaction_id: paymentId,
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: 'whatsapp_booking',
+      conversion_id: 'AW-18103087307',
+      conversion_label: 'XY8MCNfs7Z4CEMvhnLhD',
     });
   }
 
   // ── 7. Main form submit flow ───────────────────────────────────────────────
 
-  form.addEventListener('submit', async (e) => {
+  form.addEventListener('submit', (e) => {
     e.preventDefault();
     if (!validateForm()) return;
 
     const name = document.getElementById('pb-name').value.trim();
-    const email = document.getElementById('pb-email').value.trim();
     const phone = document.getElementById('pb-phone').value.trim();
     const route = document.getElementById('pb-route').value;
     const pickup = document.getElementById('pb-pickup')?.value.trim() || '';
@@ -352,113 +340,13 @@
     const time = document.getElementById('pb-time').value;
     const passengers = document.getElementById('pb-passengers')?.value || '';
     const notes = document.getElementById('pb-notes')?.value.trim() || '';
-    const attr = getAttribution();
 
     setLoading(true);
     clearErrors();
 
-    // ── Step A: Create Razorpay order ────────────────────────────────────────
-    let orderData;
-    try {
-      const res = await fetch('/.netlify/functions/createOrder', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, phone, route, pickup, date, time, passengers, notes, ...attr }),
-      });
-      orderData = await res.json();
-
-      // If API returns a config/setup error, fall back to WhatsApp gracefully
-      if (!orderData.ok) {
-        const errMsg = (orderData.error || '').toLowerCase();
-        const isConfigError = errMsg.includes('not configured') || errMsg.includes('missing') ||
-          errMsg.includes('credentials') || res.status >= 500;
-        if (isConfigError) {
-          setLoading(false);
-          fallbackToWhatsApp(name, phone, route, date, time, pickup, passengers, notes);
-          return;
-        }
-        throw new Error(orderData.error || 'Order creation failed');
-      }
-    } catch (err) {
-      // Network error (e.g. function not deployed) — fall back to WhatsApp
-      if (err.name === 'TypeError' || err.message.includes('fetch') || err.message.includes('Failed')) {
-        setLoading(false);
-        fallbackToWhatsApp(name, phone, route, date, time, pickup, passengers, notes);
-        return;
-      }
-      setLoading(false);
-      showGlobalError(`Could not start payment: ${err.message}`);
-      return;
-    }
-
-    // ── Step B: Open Razorpay Checkout ────────────────────────────────────────
-    if (typeof Razorpay === 'undefined') {
-      setLoading(false);
-      // Razorpay SDK didn't load — fall back to WhatsApp
-      fallbackToWhatsApp(name, phone, route, date, time, pickup, passengers, notes);
-      return;
-    }
-
-    const rzpOptions = {
-      key: orderData.keyId,
-      amount: orderData.amount,
-      currency: orderData.currency,
-      order_id: orderData.orderId,
-      name: 'Padma Shree Travels',
-      description: orderData.routeLabel,
-      image: '/images/logo.png',
-      prefill: orderData.prefill,
-      notes: {
-        route,
-        pickup,
-        date,
-        time,
-        passengers,
-        notes: notes || '',
-        utmSource: attr.utmSource,
-        gclid: attr.gclid,
-      },
-      theme: { color: '#000000' },
-
-      handler: async function (rzpResponse) {
-        // ── Step C: Verify payment on server ─────────────────────────────────
-        let verifyData;
-        try {
-          const res = await fetch('/.netlify/functions/verifyPayment', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              razorpay_order_id: rzpResponse.razorpay_order_id,
-              razorpay_payment_id: rzpResponse.razorpay_payment_id,
-              razorpay_signature: rzpResponse.razorpay_signature,
-              name, email, phone, route, pickup, date, time, passengers, notes,
-              ...attr,
-              sourcePage: window.location.href,
-            }),
-          });
-          verifyData = await res.json();
-          if (!verifyData.ok) throw new Error(verifyData.error || 'Verification failed');
-        } catch (err) {
-          setLoading(false);
-          showGlobalError(`Payment received but verification failed: ${err.message}. Please contact us with payment ID: ${rzpResponse.razorpay_payment_id}`);
-          return;
-        }
-
-        setLoading(false);
-        fireConversion(verifyData.paymentId, verifyData.amountInr);
-        showSuccess(verifyData.paymentId, verifyData.routeLabel, verifyData.amountInr, date, time, pickup);
-      },
-
-      modal: {
-        ondismiss: function () {
-          setLoading(false);
-          showGlobalError('Payment was cancelled. You have not been charged.');
-        },
-      },
-    };
-
-    const rzp = new Razorpay(rzpOptions);
-    rzp.open();
+    fireConversion();
+    fallbackToWhatsApp(name, phone, route, date, time, pickup, passengers, notes);
+    setLoading(false);
   });
 
 })();
