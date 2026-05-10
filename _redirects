@@ -1,6 +1,12 @@
 # Netlify _redirects — Padma Shree Travels
 # Ensures clean URLs work and legacy .html paths redirect properly
 
+# ── Domain canonicalisation: force all traffic to custom domain ──────────────
+# Must be FIRST so Netlify evaluates them before path-based rules.
+# The ! suffix forces redirect even when a matching file exists.
+https://padmashreetravels.netlify.app/*  https://padmashreetravels.in/:splat  301!
+http://padmashreetravels.netlify.app/*   https://padmashreetravels.in/:splat  301!
+
 # Serve new SEO folder pages (already handled by folder/index.html structure)
 # These are here as fallbacks in case Netlify needs explicit rules
 

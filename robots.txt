@@ -1,11 +1,11 @@
 # robots.txt — Padma Shree Travels
-# https://padmashreetravels.netlify.app
+# https://padmashreetravels.in
 
 User-agent: *
 Allow: /
 Disallow: /.netlify/
 
-Sitemap: https://padmashreetravels.netlify.app/sitemap.xml
+Sitemap: https://padmashreetravels.in/sitemap.xml
 
 # Allow major search engines
 User-agent: Googlebot
