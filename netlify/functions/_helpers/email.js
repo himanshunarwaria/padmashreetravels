@@ -108,7 +108,7 @@ async function sendCustomerConfirmation(booking) {
     <tr><td style="background:#f6f6f6;padding:20px 32px;border-top:1px solid #eee">
       <p style="margin:0;font-size:12px;color:#8a8a8a;text-align:center">
         Padma Shree Travels · Agra, Uttar Pradesh ·
-        <a href="https://padmashreetravels.netlify.app" style="color:#8a8a8a">padmashreetravels.netlify.app</a>
+        <a href="https://padmashreetravels.in" style="color:#8a8a8a">padmashreetravels.in</a>
       </p>
     </td></tr>
 
