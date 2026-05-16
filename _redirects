@@ -16,6 +16,10 @@ http://padmashreetravels.netlify.app/*   https://padmashreetravels.in/:splat  30
 /agra-local-sightseeing       /agra-local-sightseeing/       301
 /mathura-vrindavan-tour-from-agra  /mathura-vrindavan-tour-from-agra/  301
 
+# Short-alias redirects (SEO-friendly URL alternatives)
+/agra-to-vrindavan    /agra-to-vrindavan-cab/    301
+/agra-to-mathura      /agra-to-mathura-taxi/     301
+
 # .html → clean URL 301! redirects (force even when file exists)
 /agra-to-mathura-vrindavan.html    /agra-to-mathura-vrindavan    301!
 /mathura-vrindavan-barsana.html    /mathura-vrindavan-barsana    301!
