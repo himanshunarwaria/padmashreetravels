@@ -16,8 +16,35 @@ http://padmashreetravels.netlify.app/*   https://padmashreetravels.in/:splat  30
 /agra-local-sightseeing       /agra-local-sightseeing/       301
 /mathura-vrindavan-tour-from-agra  /mathura-vrindavan-tour-from-agra/  301
 
-# Redirect any trailing .html on existing pages to clean paths (optional, keep disabled by default)
-# /agra-to-mathura-vrindavan  /agra-to-mathura-vrindavan.html  200
+# .html → clean URL 301! redirects (force even when file exists)
+/agra-to-mathura-vrindavan.html    /agra-to-mathura-vrindavan    301!
+/mathura-vrindavan-barsana.html    /mathura-vrindavan-barsana    301!
+/fatehpur-sikri.html               /fatehpur-sikri               301!
+/agra-to-aligarh.html              /agra-to-aligarh              301!
+/agra-to-hathras.html              /agra-to-hathras              301!
+/agra-to-sirsaganj.html            /agra-to-sirsaganj            301!
+/agra-to-etawah.html               /agra-to-etawah               301!
+/agra-to-gwalior.html              /agra-to-gwalior              301!
+/agra-to-firozabad.html            /agra-to-firozabad            301!
+/agra-to-bateshwar.html            /agra-to-bateshwar            301!
+/agra-to-tundla.html               /agra-to-tundla               301!
+/agra-to-shikohabad.html           /agra-to-shikohabad           301!
+/contact.html                      /contact                      301!
+
+# 200 rewrites so clean flat URLs serve .html files
+/agra-to-mathura-vrindavan         /agra-to-mathura-vrindavan.html    200
+/mathura-vrindavan-barsana         /mathura-vrindavan-barsana.html    200
+/fatehpur-sikri                    /fatehpur-sikri.html               200
+/agra-to-aligarh                   /agra-to-aligarh.html              200
+/agra-to-hathras                   /agra-to-hathras.html              200
+/agra-to-sirsaganj                 /agra-to-sirsaganj.html            200
+/agra-to-etawah                    /agra-to-etawah.html               200
+/agra-to-gwalior                   /agra-to-gwalior.html              200
+/agra-to-firozabad                 /agra-to-firozabad.html            200
+/agra-to-bateshwar                 /agra-to-bateshwar.html            200
+/agra-to-tundla                    /agra-to-tundla.html               200
+/agra-to-shikohabad                /agra-to-shikohabad.html           200
+/contact                           /contact.html                      200
 
 # 200 rewrites so folder URLs serve index.html without redirect loops
 /agra-to-mathura-taxi/*         /agra-to-mathura-taxi/index.html   200
