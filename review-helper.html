@@ -21,7 +21,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <style>
 /* ── Review Helper ─────────────────────────────────────────────────────────── */
 
-.rh-main  { padding: 2rem 0 3.5rem }
+.rh-main  { padding: .75rem 0 2rem }
 .rh-wrap  { max-width: 580px; margin: 0 auto; padding: 0 1.25rem }
 
 /* Single main card */
@@ -35,8 +35,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 /* Route pills section */
 .rh-routes {
-  padding: 1.4rem 1.6rem 1.2rem;
+  padding: .9rem 1.25rem .75rem;
   border-bottom: 1px solid var(--g100);
+}
+.rh-thankyou {
+  font-size: .92rem;
+  font-weight: 700;
+  color: var(--black);
+  margin: 0 0 .3rem;
 }
 .rh-routes__label {
   font-size: .72rem;
@@ -44,16 +50,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   text-transform: uppercase;
   letter-spacing: .1em;
   color: var(--g400);
-  margin-bottom: .75rem;
+  margin-bottom: .45rem;
 }
 .rh-pills {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: .45rem;
+  gap: .4rem;
 }
 .rh-pill {
-  min-height: 46px;
-  padding: .55rem .8rem;
+  min-height: 40px;
+  padding: .45rem .75rem;
   border: 1.5px solid var(--g100);
   border-radius: var(--r);
   background: var(--white);
@@ -79,19 +85,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 /* Review area */
 .rh-review {
-  padding: 1.4rem 1.6rem;
+  padding: .9rem 1.25rem;
 }
 .rh-stars {
-  font-size: 1.45rem;
+  font-size: 1.35rem;
   color: var(--gold);
   letter-spacing: .12em;
-  margin-bottom: 1rem;
+  margin-bottom: .5rem;
   line-height: 1;
 }
 .rh-textarea {
   width: 100%;
-  min-height: 158px;
-  padding: .95rem 1.05rem;
+  min-height: 120px;
+  padding: .8rem .9rem;
   border: 1.5px solid var(--g100);
   border-radius: var(--r);
   font-family: var(--ff);
@@ -112,8 +118,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .rh-hint {
   font-size: .74rem;
   color: var(--g400);
-  margin-top: .5rem;
-  margin-bottom: 1.25rem;
+  margin-top: .4rem;
+  margin-bottom: .75rem;
 }
 
 /* Primary CTA */
@@ -123,7 +129,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   align-items: center;
   justify-content: center;
   gap: .55rem;
-  padding: 1.05rem 1.5rem;
+  padding: .9rem 1.5rem;
   font-size: .97rem;
   font-weight: 700;
   border-radius: var(--r);
@@ -201,8 +207,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .rh-tips.open { display: block }
 
 @media (max-width: 400px) {
-  .rh-routes { padding: 1.2rem 1.2rem 1rem }
-  .rh-review  { padding: 1.2rem }
+  .rh-routes { padding: .75rem 1rem .65rem }
+  .rh-review  { padding: .75rem 1rem }
   .rh-alt     { flex-direction: column }
 }
 </style>
@@ -273,13 +279,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 </div>
 
-<!-- ── Hero ────────────────────────────────────────────────────────────────── -->
-<section class="phero"><div class="container"><div class="phero__in">
-<nav class="bc" aria-label="Breadcrumb"><a href="index.html">Home</a> &#8250; <span>Review Helper</span></nav>
-<h1>Thank You for Travelling<br>with Us &#x1F64F;</h1>
-<p class="phero__tag">Your review helps other families and pilgrims find trusted cab service in Agra. Tap your trip, copy, paste on Google — done in seconds.</p>
-</div></div></section>
-
 <!-- ── Review Tool ──────────────────────────────────────────────────────────── -->
 <main class="rh-main">
   <div class="rh-wrap">
@@ -288,6 +287,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <!-- Route pills -->
       <div class="rh-routes">
+        <p class="rh-thankyou">Thank you for travelling with us &#x1F64F;</p>
         <p class="rh-routes__label">Which trip did you take?</p>
         <div class="rh-pills">
           <button class="rh-pill active" data-route="local" onclick="setRoute('local')">
