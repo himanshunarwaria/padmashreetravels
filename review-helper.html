@@ -290,7 +290,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="rh-routes">
         <p class="rh-routes__label">Which trip did you take?</p>
         <div class="rh-pills">
-          <button class="rh-pill active" data-route="mathura" onclick="setRoute('mathura')">
+          <button class="rh-pill active" data-route="local" onclick="setRoute('local')">
+            Local Agra Trip
+            <span class="rp-sub">Within city</span>
+          </button>
+          <button class="rh-pill" data-route="airport" onclick="setRoute('airport')">
+            Airport / Station
+            <span class="rp-sub">Transfer &amp; pickup</span>
+          </button>
+          <button class="rh-pill" data-route="mathura" onclick="setRoute('mathura')">
             Agra &#8594; Mathura
             <span class="rp-sub">Mathura darshan</span>
           </button>
@@ -298,21 +306,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             Agra &#8594; Vrindavan
             <span class="rp-sub">Vrindavan darshan</span>
           </button>
-          <button class="rh-pill" data-route="fullday" onclick="setRoute('fullday')">
-            Mathura + Vrindavan
-            <span class="rp-sub">Full-day tour</span>
-          </button>
           <button class="rh-pill" data-route="sightseeing" onclick="setRoute('sightseeing')">
             Agra Sightseeing
             <span class="rp-sub">Taj Mahal &amp; forts</span>
           </button>
-          <button class="rh-pill" data-route="fatehpur" onclick="setRoute('fatehpur')">
-            Fatehpur Sikri
-            <span class="rp-sub">Heritage day trip</span>
-          </button>
-          <button class="rh-pill" data-route="airport" onclick="setRoute('airport')">
-            Airport / Station
-            <span class="rp-sub">Transfer service</span>
+          <button class="rh-pill" data-route="outstation" onclick="setRoute('outstation')">
+            Outstation Trip
+            <span class="rp-sub">Gwalior, Aligarh etc.</span>
           </button>
         </div>
       </div>
@@ -397,40 +397,40 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script>
 /* Pre-written review variants — 3 per route, randomly picked each time */
 var REVIEWS = {
-  mathura: [
-    'We recently booked Padma Shree Travels for an Agra to Mathura trip. The driver arrived on time and the cab was clean and comfortable. Fare was shared upfront with no hidden charges — the driver waited patiently while we visited the temples. Very reliable service. Would recommend Padma Shree Travels to anyone travelling from Agra.',
-    'Booked a taxi from Agra to Mathura with Padma Shree Travels. Punctual pickup, polite driver, and a clean AC cab. The driver waited at every temple stop without any rush. Pricing was transparent — exactly what was quoted. Good experience overall. Will book again.',
-    'Travelled from Agra to Mathura with Padma Shree Travels. Easy WhatsApp booking, driver was on time, and the cab was comfortable throughout the journey. No hidden charges. The driver was helpful and knew all the important temple routes in Mathura. Would definitely recommend.'
-  ],
-
-  vrindavan: [
-    'Used Padma Shree Travels for an Agra to Vrindavan cab. Punctual pickup, clean AC car, and a polite driver who waited without any rush during darshan. Booking was easy over WhatsApp and the price was transparent. Good experience — will book again.',
-    'Took a cab from Agra to Vrindavan with Padma Shree Travels. The driver was on time and very helpful throughout the temple visits. Clean, comfortable AC car and no surprise charges. WhatsApp booking was quick and straightforward. Highly recommended.',
-    'Hired Padma Shree Travels for a cab to Vrindavan from Agra. Smooth journey, well-maintained cab, and a patient driver who waited during darshan at Banke Bihari Temple and ISKCON. Upfront pricing, no hidden costs. Would recommend to families and pilgrims.'
-  ],
-
-  fullday: [
-    'Booked Padma Shree Travels for a full-day Mathura and Vrindavan tour from Agra. The driver was helpful and patient at every stop, from Krishna Janmabhoomi to Banke Bihari Temple. Clean AC cab, on-time pickup, and no hidden charges. Highly recommended for pilgrimage trips from Agra.',
-    'We did a full-day Mathura and Vrindavan tour with Padma Shree Travels. The driver covered all the important temples and waited at each stop. Very comfortable cab and professional service throughout the day. Fixed pricing with no surprises. Great experience for the whole family.',
-    'Excellent full-day pilgrimage tour from Agra covering both Mathura and Vrindavan. Padma Shree Travels provided a clean AC cab and a knowledgeable driver. Pickup was on time and the driver patiently waited at every temple. Would especially recommend for senior travellers and families.'
-  ],
-
-  sightseeing: [
-    'Hired Padma Shree Travels for a full-day Agra sightseeing tour. We visited the Taj Mahal, Agra Fort, Baby Taj, and Mehtab Bagh. The driver was professional and the car was comfortable and clean. Easy to book via WhatsApp and the pricing was fixed and upfront. Good service overall.',
-    'Had a great day seeing Agra with Padma Shree Travels. The driver took us to the Taj Mahal, Agra Fort, Baby Taj, and more. Clean AC car, punctual pickup, and no hidden charges. Very smooth experience from booking to drop-off. Would use again.',
-    'Booked Padma Shree Travels for an Agra sightseeing cab. Covered all the major monuments — Taj Mahal, Agra Fort, Itmad-ud-Daulah, and Mehtab Bagh. Professional driver, clean cab, and completely transparent pricing. WhatsApp booking was confirmed in minutes. Highly recommended.'
-  ],
-
-  fatehpur: [
-    'Took a Fatehpur Sikri day trip with Padma Shree Travels from Agra. Smooth and comfortable ride, helpful driver, and no surprises on the fare. The cab was clean and well-maintained. Simple WhatsApp booking. Would use their service again.',
-    'Hired Padma Shree Travels for a trip to Fatehpur Sikri from Agra. Clean cab, timely pickup, and a polite driver who waited while we explored the monument. Fixed price with no hidden charges. Overall a pleasant and hassle-free experience.',
-    'Used Padma Shree Travels to visit Fatehpur Sikri. The driver was punctual and very familiar with the heritage site. Clean, comfortable cab and completely transparent pricing. Booking was confirmed quickly on WhatsApp. Would recommend to anyone visiting from Agra.'
+  local: [
+    'Been using Padma Shree Travels for local trips around Agra for a while now. Always on time, clean AC cab, and polite driver. Fixed pricing with no surge charges — much more reliable than Ola or Uber. Booking directly on WhatsApp is fast and easy. My go-to cab in Agra.',
+    'Switched to Padma Shree Travels for my daily local trips in Agra. No app cancellations, no surge pricing, and the driver always shows up on time. Clean and comfortable cab every time. Direct WhatsApp booking makes it so convenient. Highly recommend over app-based cabs.',
+    'Great local cab service in Agra. Padma Shree Travels is more reliable than Ola and Uber — the driver never cancels and the fare is always fixed upfront. Clean AC car, punctual, and courteous service. Booking on WhatsApp is simple and quick. Would highly recommend.'
   ],
 
   airport: [
-    'Used Padma Shree Travels for a transfer service in Agra. The driver arrived on time and the cab was clean and comfortable. Booking was quick via WhatsApp and the fare was clear from the start. Reliable and professional — would recommend for airport and station pickups.',
-    'Booked Padma Shree Travels for an airport transfer in Agra. Driver was punctual, cab was clean, and pricing was clear upfront with no surprises. Quick and reliable service — would definitely use again for future transfers.',
-    'Used Padma Shree Travels for a station pickup in Agra. The driver was waiting on time, helped with luggage, and the cab was clean and comfortable. Easy WhatsApp booking and a fixed fare. Professional, dependable service. Highly recommended.'
+    'Used Padma Shree Travels for an airport transfer in Agra. Driver arrived on time, helped with luggage, and the cab was clean and comfortable. Fixed pricing with no surge charges. Stress-free and reliable — much better than waiting for Ola or Uber at the last minute.',
+    'Booked Padma Shree Travels for a pickup from Agra Cantt station. The driver was already waiting when I arrived, helped with bags, and the cab was spotless. Fare was exactly as quoted — no hidden charges. Quick WhatsApp booking. Will definitely use again.',
+    'Padma Shree Travels handled my airport drop from Agra perfectly. Punctual pickup from home, clean comfortable cab, and a professional driver. The fixed fare was much better than app surge pricing at odd hours. Highly recommend for airport and station transfers in Agra.'
+  ],
+
+  mathura: [
+    'Booked Padma Shree Travels for an Agra to Mathura trip. Driver arrived on time, clean AC cab, and no hidden charges. The driver waited patiently at every temple stop. Much better experience than app-based cabs — fixed fare, no surge, and direct WhatsApp booking. Would recommend.',
+    'Took a cab from Agra to Mathura with Padma Shree Travels. Punctual pickup, polite driver, and a comfortable ride throughout. Pricing was transparent — exactly what was quoted. The driver waited without any rush during darshan. Good experience. Will book again.',
+    'Travelled from Agra to Mathura with Padma Shree Travels. Easy WhatsApp booking, on-time driver, and no surprise charges. The driver was helpful and knew all the important temple routes in Mathura. Reliable service — would definitely recommend to anyone making this trip.'
+  ],
+
+  vrindavan: [
+    'Used Padma Shree Travels for an Agra to Vrindavan cab. Punctual pickup, clean AC car, and a polite driver who waited during darshan without any rush. Fixed fare, no hidden charges. Booking was easy over WhatsApp. Good experience — will book again.',
+    'Hired Padma Shree Travels for a trip to Vrindavan from Agra. Smooth ride, well-maintained cab, and a patient driver who waited at Banke Bihari Temple and ISKCON. Transparent pricing and quick WhatsApp booking. Would recommend to families and pilgrims.',
+    'Took a cab to Vrindavan with Padma Shree Travels. The driver was on time and very helpful throughout the temple visits. Clean, comfortable AC car and no surprise charges. Much more reliable than app-based services. Highly recommended.'
+  ],
+
+  sightseeing: [
+    'Hired Padma Shree Travels for a full-day Agra sightseeing tour. Visited the Taj Mahal, Agra Fort, Baby Taj, and Mehtab Bagh. Professional driver, clean car, and fixed pricing upfront. Easy WhatsApp booking. Much better than haggling with local cabs or dealing with Uber surge. Good service overall.',
+    'Had a great day sightseeing in Agra with Padma Shree Travels. The driver covered all the major monuments — Taj Mahal, Agra Fort, Baby Taj, and more. Clean AC cab, punctual, and no hidden charges. Very smooth experience from start to finish. Would use again.',
+    'Booked Padma Shree Travels for an Agra sightseeing cab. The driver was professional, knew all the spots, and the car was clean and comfortable throughout the day. Fixed pricing, no surprises. WhatsApp booking was confirmed in minutes. Highly recommended.'
+  ],
+
+  outstation: [
+    'Booked Padma Shree Travels for an outstation trip from Agra. Fixed fare shared upfront, clean AC cab, and a professional driver throughout the journey. No hidden charges and no surge pricing. Easy WhatsApp booking. Better value and more reliable than app-based services for longer routes.',
+    'Used Padma Shree Travels for an outstation cab from Agra. The driver was on time, the car was well-maintained, and the pricing was completely transparent. No last-minute cancellations, no surge. Direct booking on WhatsApp was quick and hassle-free. Would definitely book again.',
+    'Hired Padma Shree Travels for an outstation trip. Comfortable AC cab, punctual pickup, and a fixed fare with no surprises. The driver was courteous and professional throughout. Much more reliable and better priced than app-based cabs for outstation routes. Highly recommended.'
   ]
 };
 
@@ -522,8 +522,8 @@ function toggleTips() {
     : 'What makes a good review? &#9662;';
 }
 
-/* Pre-load a random Mathura review on page open */
-document.getElementById('rh-text').value = pickRandom(REVIEWS.mathura);
+/* Pre-load a random local review on page open */
+document.getElementById('rh-text').value = pickRandom(REVIEWS.local);
 </script>
 <script src="js/main.js"></script>
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
