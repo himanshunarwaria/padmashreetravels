@@ -8,8 +8,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- End Google Tag Manager -->
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>Padma Shree Travels Google Review Helper | Agra Taxi Service</title>
-<meta name="description" content="Write your genuine Padma Shree Travels review faster. Select your Agra taxi route, edit your experience, copy your review and share it on Google.">
+<title>Leave a Google Review — Padma Shree Travels</title>
+<meta name="description" content="Leave a Google review for Padma Shree Travels in seconds. Select your trip, copy the review, paste on Google.">
 <link rel="icon" type="image/png" href="images/logo.png">
 <link rel="apple-touch-icon" href="images/logo.png">
 <link rel="manifest" href="/site.webmanifest">
@@ -19,236 +19,191 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="stylesheet" href="css/style.css">
 <style>:root{--ff:Inter,-apple-system,sans-serif;--ffd:Inter,-apple-system,sans-serif}</style>
 <style>
-/* ── Review Helper — page-specific styles ──────────────────────────────────── */
+/* ── Review Helper ─────────────────────────────────────────────────────────── */
 
-.rh-main { padding: 2.75rem 0 3.5rem }
-.rh-wrap { max-width: 680px; margin: 0 auto; padding: 0 1.25rem }
+.rh-main  { padding: 2rem 0 3.5rem }
+.rh-wrap  { max-width: 580px; margin: 0 auto; padding: 0 1.25rem }
 
-/* Cards */
+/* Single main card */
 .rh-card {
   background: var(--white);
   border-radius: var(--r-lg);
   box-shadow: var(--md);
   border: 1px solid var(--g100);
-  padding: 1.75rem;
-  margin-bottom: 1.25rem;
+  overflow: hidden;
 }
-.rh-card:last-child { margin-bottom: 0 }
-.rh-card__hd {
-  display: flex;
-  align-items: center;
-  gap: .65rem;
-  margin-bottom: 1.3rem;
+
+/* Route pills section */
+.rh-routes {
+  padding: 1.4rem 1.6rem 1.2rem;
+  border-bottom: 1px solid var(--g100);
 }
-.rh-step {
-  width: 27px; height: 27px;
-  background: var(--black);
-  color: var(--white);
-  border-radius: 50%;
+.rh-routes__label {
   font-size: .72rem;
   font-weight: 700;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-}
-.rh-card__hd h2 {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--black);
-  letter-spacing: -.01em;
-  margin: 0;
-}
-.rh-card__hd .opt-tag {
-  font-size: .75rem;
-  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: .1em;
   color: var(--g400);
-  margin-left: .2rem;
+  margin-bottom: .75rem;
 }
-
-/* Form fields */
-.rh-fg { margin-bottom: 1.15rem }
-.rh-fg:last-of-type { margin-bottom: 0 }
-.rh-label {
-  display: block;
-  font-size: .82rem;
-  font-weight: 600;
-  color: var(--black);
-  margin-bottom: .42rem;
-  letter-spacing: -.005em;
-}
-.rh-select,
-.rh-input {
-  width: 100%;
-  padding: .83rem 1rem;
-  border: 1.5px solid var(--g200);
-  border-radius: var(--r);
-  font-family: var(--ff);
-  font-size: .95rem;
-  color: var(--black);
-  background: var(--g50);
-  transition: border-color var(--t), box-shadow var(--t), background var(--t);
-  -webkit-appearance: none;
-  appearance: none;
-}
-.rh-select {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236B6B6B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right .9rem center;
-  background-size: 16px;
-  padding-right: 2.6rem;
-  cursor: pointer;
-}
-.rh-select:focus,
-.rh-input:focus {
-  border-color: var(--black);
-  box-shadow: 0 0 0 3px rgba(0,0,0,.07);
-  outline: none;
-  background: var(--white);
-}
-.rh-input::placeholder { color: var(--g300) }
-
-/* Checkboxes */
-.rh-sub { font-size: .83rem; color: var(--g500); margin-bottom: 1rem; line-height: 1.5 }
-.rh-checks {
+.rh-pills {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: .6rem;
+  gap: .45rem;
 }
-.rh-check {
-  display: flex;
-  align-items: center;
-  gap: .55rem;
-  padding: .68rem .85rem;
+.rh-pill {
+  min-height: 46px;
+  padding: .55rem .8rem;
   border: 1.5px solid var(--g100);
   border-radius: var(--r);
-  cursor: pointer;
-  transition: border-color var(--t), background var(--t);
-  -webkit-tap-highlight-color: transparent;
-  user-select: none;
-  min-height: 48px;
-}
-.rh-check input[type="checkbox"] {
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
-  pointer-events: none;
-}
-.rh-cbox {
-  width: 19px; height: 19px;
-  border: 2px solid var(--g200);
-  border-radius: 5px;
-  flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center;
-  transition: background var(--t), border-color var(--t);
-}
-.rh-check input:checked ~ .rh-cbox {
-  background: var(--green);
-  border-color: var(--green);
-}
-.rh-check input:checked ~ .rh-cbox::after {
-  content: '';
-  width: 5px; height: 9px;
-  border: 2px solid var(--white);
-  border-top: none;
-  border-left: none;
-  transform: rotate(45deg) translate(0, -1px);
-  display: block;
-}
-.rh-check span { font-size: .8rem; font-weight: 500; color: var(--g700); line-height: 1.35 }
-.rh-check:hover { border-color: var(--g300); background: var(--g50) }
-.rh-check:has(input:checked) {
-  border-color: var(--green);
-  background: rgba(5,148,79,.05);
-}
-.rh-check:has(input:checked) span { color: var(--green); font-weight: 600 }
-
-/* Generate button wrapper */
-.rh-generate-wrap { margin-top: 1.6rem }
-
-/* Green button — external/confirm actions */
-.btn--green {
-  background: var(--green);
-  color: var(--white);
-  border: none;
+  background: var(--white);
+  color: var(--g700);
+  font-size: .8rem;
   font-weight: 600;
+  font-family: var(--ff);
+  cursor: pointer;
+  transition: all var(--t);
+  text-align: left;
+  line-height: 1.3;
+  -webkit-tap-highlight-color: transparent;
 }
-.btn--green:hover { background: #047040; box-shadow: 0 4px 16px rgba(5,148,79,.3) }
+.rh-pill:hover  { border-color: var(--g300); background: var(--g50); color: var(--black) }
+.rh-pill.active { background: var(--black); border-color: var(--black); color: var(--white) }
+.rh-pill .rp-sub {
+  display: block;
+  font-size: .68rem;
+  font-weight: 500;
+  opacity: .65;
+  margin-top: .1rem;
+}
 
-/* Result card */
-.rh-result-label { font-size: .81rem; color: var(--g500); margin-bottom: .9rem; line-height: 1.55 }
+/* Review area */
+.rh-review {
+  padding: 1.4rem 1.6rem;
+}
+.rh-stars {
+  font-size: 1.45rem;
+  color: var(--gold);
+  letter-spacing: .12em;
+  margin-bottom: 1rem;
+  line-height: 1;
+}
 .rh-textarea {
   width: 100%;
-  min-height: 185px;
-  padding: 1rem 1.1rem;
-  border: 1.5px solid var(--g200);
+  min-height: 158px;
+  padding: .95rem 1.05rem;
+  border: 1.5px solid var(--g100);
   border-radius: var(--r);
   font-family: var(--ff);
-  font-size: .96rem;
-  color: var(--black);
-  line-height: 1.72;
+  font-size: .91rem;
+  color: var(--g700);
+  line-height: 1.75;
   resize: vertical;
   background: var(--g50);
-  transition: border-color var(--t), box-shadow var(--t);
+  transition: border-color var(--t), box-shadow var(--t), background var(--t);
 }
 .rh-textarea:focus {
   border-color: var(--black);
   box-shadow: 0 0 0 3px rgba(0,0,0,.07);
   outline: none;
   background: var(--white);
+  color: var(--black);
+}
+.rh-hint {
+  font-size: .74rem;
+  color: var(--g400);
+  margin-top: .5rem;
+  margin-bottom: 1.25rem;
 }
 
-/* Action buttons row */
-.rh-acts {
+/* Primary CTA */
+.rh-cta {
+  width: 100%;
   display: flex;
-  flex-wrap: wrap;
-  gap: .7rem;
-  margin-top: 1.1rem;
+  align-items: center;
+  justify-content: center;
+  gap: .55rem;
+  padding: 1.05rem 1.5rem;
+  font-size: .97rem;
+  font-weight: 700;
+  border-radius: var(--r);
+  background: var(--black);
+  color: var(--white);
+  border: none;
+  cursor: pointer;
+  font-family: var(--ff);
+  transition: background var(--t), box-shadow var(--t), transform var(--t);
+  letter-spacing: .005em;
 }
-.rh-acts .btn { flex: 1; min-width: 130px; justify-content: center }
+.rh-cta:hover  { background: var(--g800); box-shadow: 0 4px 16px rgba(0,0,0,.18) }
+.rh-cta:active { transform: scale(.98) }
+.rh-cta.done   { background: var(--green) }
+.rh-cta.done:hover { background: #047040 }
 
-/* Tips section */
+/* Secondary actions */
+.rh-alt {
+  display: flex;
+  gap: .5rem;
+  margin-top: .6rem;
+}
+.rh-alt .btn { flex: 1; justify-content: center; font-size: .84rem }
+
+/* Success banner */
+.rh-success {
+  display: none;
+  align-items: flex-start;
+  gap: .55rem;
+  padding: .85rem 1rem;
+  margin-top: .85rem;
+  background: rgba(5,148,79,.07);
+  border: 1px solid rgba(5,148,79,.2);
+  border-radius: var(--r);
+  font-size: .83rem;
+  color: #047040;
+  line-height: 1.55;
+}
+.rh-success svg { flex-shrink: 0; margin-top: .1rem }
+
+/* Footer tips toggle */
+.rh-tips-toggle {
+  display: block;
+  text-align: center;
+  font-size: .78rem;
+  color: var(--g400);
+  margin-top: 1.5rem;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  background: none;
+  border: none;
+  font-family: var(--ff);
+  width: 100%;
+}
+.rh-tips-toggle:hover { color: var(--g700) }
 .rh-tips {
+  display: none;
   background: var(--g50);
   border: 1px solid var(--g100);
   border-radius: var(--r-lg);
-  padding: 1.75rem;
-  margin-top: 1.25rem;
+  padding: 1.4rem 1.5rem;
+  margin-top: .75rem;
 }
-.rh-tips h3 {
-  font-size: .97rem;
-  font-weight: 700;
-  color: var(--black);
-  margin-bottom: 1.05rem;
-  display: flex;
-  align-items: center;
-  gap: .5rem;
-}
+.rh-tips h3 { font-size: .93rem; margin-bottom: .85rem; color: var(--black) }
 .rh-tips ul { list-style: none; padding: 0; margin: 0 }
 .rh-tips li {
-  display: flex;
-  align-items: flex-start;
-  gap: .6rem;
-  padding: .42rem 0;
-  font-size: .88rem;
-  color: var(--g700);
-  line-height: 1.55;
+  display: flex; align-items: flex-start; gap: .55rem;
+  padding: .35rem 0;
+  font-size: .85rem; color: var(--g700); line-height: 1.5;
   border-bottom: 1px solid var(--g100);
 }
-.rh-tips li:last-child { border-bottom: none; padding-bottom: 0 }
-.rh-tips li::before {
-  content: '✓';
-  color: var(--green);
-  font-weight: 700;
-  font-size: .86rem;
-  flex-shrink: 0;
-  margin-top: .1rem;
-}
+.rh-tips li:last-child { border-bottom: none }
+.rh-tips li::before { content: '✓'; color: var(--green); font-weight: 700; font-size: .82rem; flex-shrink: 0; margin-top: .1rem }
+.rh-tips.open { display: block }
 
-@media (max-width: 480px) {
-  .rh-card { padding: 1.35rem }
-  .rh-checks { grid-template-columns: 1fr }
-  .rh-acts { flex-direction: column }
-  .rh-acts .btn { min-width: unset; width: 100% }
+@media (max-width: 400px) {
+  .rh-routes { padding: 1.2rem 1.2rem 1rem }
+  .rh-review  { padding: 1.2rem }
+  .rh-alt     { flex-direction: column }
 }
 </style>
 </head><body>
@@ -257,7 +212,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
-<!-- ── Header ────────────────────────────────────────────────────────────────── -->
+<!-- ── Header ──────────────────────────────────────────────────────────────── -->
 <header class="hdr" id="hdr"><div class="hdr__in">
 <a href="index.html" class="logo"><img src="images/logo.png" alt="Padma Shree Travels Logo" class="logo__img"><div class="logo__t">Padma Shree Travels<small>Agra Taxi Service</small></div></a><nav class="nav"><ul class="nav__l">
 <li><a href="index.html" class="nav__a">Home</a></li>
@@ -318,198 +273,103 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 </div>
 
-<!-- ── Hero ──────────────────────────────────────────────────────────────────── -->
+<!-- ── Hero ────────────────────────────────────────────────────────────────── -->
 <section class="phero"><div class="container"><div class="phero__in">
 <nav class="bc" aria-label="Breadcrumb"><a href="index.html">Home</a> &#8250; <span>Review Helper</span></nav>
-<h1>Write Your Google Review<br>in 30 Seconds</h1>
-<p class="phero__tag">Select your trip details, tick what went well, edit the text in your own words, and copy it directly to Google.</p>
-<div class="pbanner" style="gap:.75rem;align-items:flex-start;padding:.95rem 1.2rem">
-  <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0;margin-top:.1rem"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-  <p style="font-size:.83rem;color:rgba(255,255,255,.65);line-height:1.6;margin:0">Please write only about your real travel experience. The generated text is a starting point — always edit it before posting.</p>
-</div>
+<h1>Thank You for Travelling<br>with Us &#x1F64F;</h1>
+<p class="phero__tag">Your review helps other families and pilgrims find trusted cab service in Agra. Tap your trip, copy, paste on Google — done in seconds.</p>
 </div></div></section>
 
-<!-- ── Trust strip ────────────────────────────────────────────────────────────── -->
-<section class="trust"><div class="container"><div class="trust__in">
-<div class="tchip"><div class="tchip__i"><i data-lucide="list-checks" aria-hidden="true"></i></div>3 Easy Steps</div>
-<div class="tchip"><div class="tchip__i"><i data-lucide="pencil" aria-hidden="true"></i></div>Edit Before Posting</div>
-<div class="tchip"><div class="tchip__i"><i data-lucide="shield-check" aria-hidden="true"></i></div>Genuine Reviews Only</div>
-<div class="tchip"><div class="tchip__i"><i data-lucide="copy" aria-hidden="true"></i></div>Copy &amp; Paste to Google</div>
-</div></div></section>
-
-<!-- ── Review Builder ────────────────────────────────────────────────────────── -->
+<!-- ── Review Tool ──────────────────────────────────────────────────────────── -->
 <main class="rh-main">
   <div class="rh-wrap">
 
-    <!-- Step 1 — Route & Trip Type -->
     <div class="rh-card">
-      <div class="rh-card__hd">
-        <span class="rh-step">1</span>
-        <h2>Your Trip Details</h2>
+
+      <!-- Route pills -->
+      <div class="rh-routes">
+        <p class="rh-routes__label">Which trip did you take?</p>
+        <div class="rh-pills">
+          <button class="rh-pill active" data-route="mathura" onclick="setRoute('mathura')">
+            Agra &#8594; Mathura
+            <span class="rp-sub">Mathura darshan</span>
+          </button>
+          <button class="rh-pill" data-route="vrindavan" onclick="setRoute('vrindavan')">
+            Agra &#8594; Vrindavan
+            <span class="rp-sub">Vrindavan darshan</span>
+          </button>
+          <button class="rh-pill" data-route="fullday" onclick="setRoute('fullday')">
+            Mathura + Vrindavan
+            <span class="rp-sub">Full-day tour</span>
+          </button>
+          <button class="rh-pill" data-route="sightseeing" onclick="setRoute('sightseeing')">
+            Agra Sightseeing
+            <span class="rp-sub">Taj Mahal &amp; forts</span>
+          </button>
+          <button class="rh-pill" data-route="fatehpur" onclick="setRoute('fatehpur')">
+            Fatehpur Sikri
+            <span class="rp-sub">Heritage day trip</span>
+          </button>
+          <button class="rh-pill" data-route="airport" onclick="setRoute('airport')">
+            Airport / Station
+            <span class="rp-sub">Transfer service</span>
+          </button>
+        </div>
       </div>
 
-      <div class="rh-fg">
-        <label class="rh-label" for="rh-route">Route</label>
-        <select class="rh-select" id="rh-route">
-          <option value="">Select your route&hellip;</option>
-          <option value="agra-mathura">Agra to Mathura Taxi</option>
-          <option value="agra-vrindavan">Agra to Vrindavan Cab</option>
-          <option value="mathura-vrindavan">Mathura Vrindavan Tour</option>
-          <option value="agra-sightseeing">Agra Sightseeing Taxi</option>
-          <option value="fatehpur-sikri">Fatehpur Sikri Trip</option>
-          <option value="airport">Agra Airport Pickup</option>
-          <option value="cantt">Agra Cantt Railway Station Pickup</option>
-          <option value="custom">Custom Route</option>
-        </select>
-      </div>
+      <!-- Review area -->
+      <div class="rh-review">
+        <div class="rh-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
 
-      <div class="rh-fg">
-        <label class="rh-label" for="rh-type">Travel Type</label>
-        <select class="rh-select" id="rh-type">
-          <option value="">Select travel type&hellip;</option>
-          <option value="family">Family Trip</option>
-          <option value="pilgrimage">Pilgrimage Trip</option>
-          <option value="couple">Couple Trip</option>
-          <option value="senior">Senior Citizen Travel</option>
-          <option value="solo">Solo Travel</option>
-          <option value="business">Business Travel</option>
-          <option value="sameday">Same-Day Return Trip</option>
-        </select>
-      </div>
-    </div>
+        <textarea id="rh-text" class="rh-textarea" spellcheck="true" aria-label="Your review — edit if you like"></textarea>
 
-    <!-- Step 2 — Experience checkboxes -->
-    <div class="rh-card">
-      <div class="rh-card__hd">
-        <span class="rh-step">2</span>
-        <h2>Your Experience</h2>
-      </div>
-      <p class="rh-sub">Select everything that applies to your trip:</p>
-      <div class="rh-checks">
-        <label class="rh-check">
-          <input type="checkbox" name="exp" value="clean">
-          <span class="rh-cbox"></span>
-          <span>Cab was clean</span>
-        </label>
-        <label class="rh-check">
-          <input type="checkbox" name="exp" value="ontime">
-          <span class="rh-cbox"></span>
-          <span>Driver was on time</span>
-        </label>
-        <label class="rh-check">
-          <input type="checkbox" name="exp" value="polite">
-          <span class="rh-cbox"></span>
-          <span>Driver was polite</span>
-        </label>
-        <label class="rh-check">
-          <input type="checkbox" name="exp" value="fare">
-          <span class="rh-cbox"></span>
-          <span>Fare was transparent</span>
-        </label>
-        <label class="rh-check">
-          <input type="checkbox" name="exp" value="ac">
-          <span class="rh-cbox"></span>
-          <span>AC cab was comfortable</span>
-        </label>
-        <label class="rh-check">
-          <input type="checkbox" name="exp" value="darshan">
-          <span class="rh-cbox"></span>
-          <span>Driver waited during darshan</span>
-        </label>
-        <label class="rh-check">
-          <input type="checkbox" name="exp" value="safe">
-          <span class="rh-cbox"></span>
-          <span>Safe driving</span>
-        </label>
-        <label class="rh-check">
-          <input type="checkbox" name="exp" value="booking">
-          <span class="rh-cbox"></span>
-          <span>Easy WhatsApp booking</span>
-        </label>
-        <label class="rh-check">
-          <input type="checkbox" name="exp" value="guidance">
-          <span class="rh-cbox"></span>
-          <span>Good local guidance</span>
-        </label>
-        <label class="rh-check">
-          <input type="checkbox" name="exp" value="pickup">
-          <span class="rh-cbox"></span>
-          <span>Smooth pickup and drop</span>
-        </label>
-      </div>
-    </div>
+        <p class="rh-hint">Feel free to edit the text above before posting.</p>
 
-    <!-- Step 3 — Optional personal details -->
-    <div class="rh-card">
-      <div class="rh-card__hd">
-        <span class="rh-step">3</span>
-        <h2>Personal Details <span class="opt-tag">(Optional)</span></h2>
-      </div>
-
-      <div class="rh-fg">
-        <label class="rh-label" for="rh-driver">Driver Name</label>
-        <input class="rh-input" type="text" id="rh-driver" placeholder="Driver name, if you remember" autocomplete="off" spellcheck="false">
-      </div>
-
-      <div class="rh-fg">
-        <label class="rh-label" for="rh-detail">Anything Specific About Your Trip</label>
-        <input class="rh-input" type="text" id="rh-detail" placeholder="e.g. early morning pickup, visited 5 temples, Innova cab&hellip;" autocomplete="off">
-      </div>
-
-      <div class="rh-generate-wrap">
-        <button class="btn btn--b btn--lg" onclick="generateReview()" style="width:100%;display:flex;align-items:center;justify-content:center;gap:.55rem">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-          Generate My Review
+        <!-- Primary CTA — copies + opens Google in one tap -->
+        <button id="rh-main-btn" class="rh-cta" onclick="copyAndOpen()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Copy Review &amp; Open Google
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
         </button>
+
+        <!-- Success state -->
+        <div id="rh-success" class="rh-success">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Review copied! Google Review page is open in a new tab &mdash; just paste and tap <strong>Post</strong>.</span>
+        </div>
+
+        <!-- Secondary: separate copy or open -->
+        <div class="rh-alt">
+          <button class="btn btn--o" onclick="copyOnly()" id="rh-copy-only" style="font-size:.82rem">
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy Only
+          </button>
+          <a class="btn btn--o" href="https://g.page/r/CUjtXu1x_3bPEBM/review" target="_blank" rel="noopener" style="font-size:.82rem;justify-content:center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Open Google Review
+          </a>
+        </div>
       </div>
     </div>
 
-    <!-- Generated Review -->
-    <div class="rh-card" id="rh-result" style="display:none">
-      <div class="rh-card__hd">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        <h2>Your Review &mdash; Edit Before Posting</h2>
-      </div>
-      <p class="rh-result-label">The text below is based on your selections. Read it, edit it in your own words, then copy and paste it on Google.</p>
-      <textarea class="rh-textarea" id="rh-text" rows="7" spellcheck="true" aria-label="Your generated review — edit before posting"></textarea>
-
-      <div class="rh-acts">
-        <button class="btn btn--b" id="rh-copy" onclick="copyReview()" style="display:flex;align-items:center;gap:.5rem">
-          <svg id="ico-copy" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-          <span id="copy-label">Copy Review</span>
-        </button>
-        <a class="btn btn--green" href="https://g.page/r/CUjtXu1x_3bPEBM/review" target="_blank" rel="noopener" id="rh-google" style="display:flex;align-items:center;gap:.5rem;text-decoration:none">
-          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          Open Google Review
-        </a>
-        <button class="btn btn--o" onclick="resetForm()" style="display:flex;align-items:center;gap:.45rem">
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-5"/></svg>
-          Reset
-        </button>
-      </div>
-    </div>
-
-    <!-- Tips -->
-    <div class="rh-tips">
-      <h3>
-        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-        What to mention in your Google review?
-      </h3>
+    <!-- Tips — collapsed by default -->
+    <button class="rh-tips-toggle" id="rh-tips-btn" onclick="toggleTips()">What makes a good review? &#9662;</button>
+    <div class="rh-tips" id="rh-tips">
+      <h3>What to mention</h3>
       <ul>
-        <li>Your route &mdash; e.g. Agra to Mathura, Vrindavan, or Sightseeing</li>
-        <li>Pickup timing &mdash; was the driver on time?</li>
+        <li>Your route — e.g. Agra to Mathura, Vrindavan, or Sightseeing</li>
+        <li>Was the driver on time for pickup?</li>
         <li>Cab cleanliness and comfort</li>
-        <li>Driver behaviour and politeness</li>
-        <li>Fare transparency &mdash; was the price shared upfront?</li>
-        <li>Safety and driving comfort on the road</li>
-        <li>Whether the driver waited during darshan or sightseeing</li>
+        <li>Driver behaviour and helpfulness</li>
+        <li>Fare transparency — no hidden charges?</li>
+        <li>Whether the driver waited during darshan</li>
       </ul>
     </div>
 
   </div>
 </main>
 
-<!-- ── Footer ────────────────────────────────────────────────────────────────── -->
+<!-- ── Footer ──────────────────────────────────────────────────────────────── -->
 <footer class="ft"><div class="container"><div class="ft__grid">
 <div class="ft__brand"><div class="logo"><img src="images/logo.png" alt="Padma Shree Travels" class="logo__img"><div class="logo__t" style="color:#fff">Padma Shree Travels<small>Agra Taxi Service</small></div></div>
 <p>Your trusted partner for taxi and cab booking in Agra. Affordable outstation trips, sightseeing tours, and airport transfers. Available 24/7.</p></div>
@@ -533,142 +393,115 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="mcta-bar"><a href="tel:+918720081102" class="mcta-bar__a mcta-bar__call">&#128222; Call Now</a><a href="https://wa.me/918720081102?text=Hi!%20I%20need%20a%20cab%20from%20Agra" class="mcta-bar__a mcta-bar__wa" target="_blank" rel="noopener">&#128172; WhatsApp</a><a href="book/" class="mcta-bar__a mcta-bar__book">&#128274; Book Online</a></div>
 <a href="https://wa.me/918720081102?text=Hi!%20I%20need%20a%20cab%20from%20Agra" class="waf" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp"><i data-lucide="message-circle" aria-hidden="true"></i></a>
 
-<!-- ── Review Generation Script ──────────────────────────────────────────────── -->
+<!-- ── Script ───────────────────────────────────────────────────────────────── -->
 <script>
-var ROUTES = {
-  'agra-mathura':     { phrase: 'our Agra to Mathura trip',              place: 'from Agra' },
-  'agra-vrindavan':   { phrase: 'our Agra to Vrindavan cab ride',         place: 'from Agra' },
-  'mathura-vrindavan':{ phrase: 'our Mathura and Vrindavan full-day tour', place: 'from Agra' },
-  'agra-sightseeing': { phrase: 'a full-day Agra sightseeing tour',       place: 'in Agra'   },
-  'fatehpur-sikri':   { phrase: 'our Fatehpur Sikri day trip',            place: 'from Agra' },
-  'airport':          { phrase: 'an airport transfer',                    place: 'in Agra'   },
-  'cantt':            { phrase: 'a railway station pickup',               place: 'in Agra'   },
-  'custom':           { phrase: 'our recent cab trip',                    place: 'from Agra' }
+/* Pre-written reviews — ready to post as-is */
+var REVIEWS = {
+  mathura:
+    'We recently booked Padma Shree Travels for an Agra to Mathura trip. The driver arrived on time and the cab was clean and comfortable. Fare was shared upfront with no hidden charges — the driver waited patiently while we visited the temples. Very reliable service. Would recommend Padma Shree Travels to anyone travelling from Agra.',
+
+  vrindavan:
+    'Used Padma Shree Travels for an Agra to Vrindavan cab. Punctual pickup, clean AC car, and a polite driver who waited without any rush during darshan. Booking was easy over WhatsApp and the price was transparent. Good experience — will book again.',
+
+  fullday:
+    'Booked Padma Shree Travels for a full-day Mathura and Vrindavan tour from Agra. The driver was helpful and patient at every stop, from Krishna Janmabhoomi to Banke Bihari Temple. Clean AC cab, on-time pickup, and no hidden charges. Highly recommended for pilgrimage trips from Agra.',
+
+  sightseeing:
+    'Hired Padma Shree Travels for a full-day Agra sightseeing tour. We visited the Taj Mahal, Agra Fort, Baby Taj, and Mehtab Bagh. The driver was professional and the car was comfortable and clean. Easy to book via WhatsApp and the pricing was fixed and upfront. Good service overall.',
+
+  fatehpur:
+    'Took a Fatehpur Sikri day trip with Padma Shree Travels from Agra. Smooth and comfortable ride, helpful driver, and no surprises on the fare. The cab was clean and well-maintained. Simple WhatsApp booking. Would use their service again.',
+
+  airport:
+    'Used Padma Shree Travels for a transfer service in Agra. The driver arrived on time and the cab was clean and comfortable. Booking was quick via WhatsApp and the fare was clear from the start. Reliable and professional — would recommend for airport and station pickups.'
 };
 
-var TYPES = {
-  family:    'with my family',
-  pilgrimage:'for a pilgrimage',
-  couple:    'with my partner',
-  senior:    'with elderly family members',
-  solo:      'as a solo traveller',
-  business:  'for a business visit',
-  sameday:   'for a same-day return trip'
-};
+var GOOGLE_URL = 'https://g.page/r/CUjtXu1x_3bPEBM/review';
 
-var EXP = {
-  clean:    'The cab was clean and well-maintained.',
-  ontime:   'The driver arrived exactly on time.',
-  polite:   'The driver was polite and well-mannered throughout the journey.',
-  fare:     'The fare was shared upfront with no hidden charges.',
-  ac:       'The AC cab was comfortable, especially in the heat.',
-  darshan:  'The driver patiently waited during our darshan without any rush.',
-  safe:     'The drive was smooth and safe.',
-  booking:  'Booking was simple — just a quick WhatsApp message and it was confirmed.',
-  guidance: 'The driver gave helpful guidance about the local routes and temple timings.',
-  pickup:   'The pickup and drop were completely hassle-free.'
-};
-
-var OPENERS = [
-  'We recently used Padma Shree Travels for {trip} {type}.',
-  'Booked Padma Shree Travels for {trip} {type} and it was a good experience.',
-  'I travelled with Padma Shree Travels for {trip} {type}.',
-  'We hired Padma Shree Travels for {trip} {type}.'
-];
-
-var CLOSERS = [
-  'Overall a reliable and comfortable cab experience {place}. Would recommend Padma Shree Travels.',
-  'Happy with the service overall. A dependable taxi service {place}.',
-  'Would recommend Padma Shree Travels to anyone looking for a reliable cab {place}.',
-  'Good experience. Will book again for future trips {place}.'
-];
-
-function pick(arr) { return arr[Math.floor(Math.random() * arr.length)] }
-
-function generateReview() {
-  var routeKey  = document.getElementById('rh-route').value;
-  var typeKey   = document.getElementById('rh-type').value;
-  var driverVal = document.getElementById('rh-driver').value.trim();
-  var detailVal = document.getElementById('rh-detail').value.trim();
-  var checked   = Array.from(document.querySelectorAll('input[name="exp"]:checked')).map(function(c){ return c.value });
-
-  if (!routeKey && !typeKey && checked.length === 0) {
-    alert('Please select at least your route or one experience to generate a review.');
-    return;
-  }
-
-  var route      = ROUTES[routeKey] || { phrase: 'our trip', place: 'from Agra' };
-  var typePhrase = typeKey ? TYPES[typeKey] : '';
-
-  var opener = pick(OPENERS)
-    .replace('{trip}', route.phrase)
-    .replace('{type}', typePhrase)
-    .replace(/\s{2,}/g, ' ')
-    .replace(' .', '.');
-
-  var body = [];
-  checked.forEach(function(k){ if (EXP[k]) body.push(EXP[k]) });
-  if (driverVal) body.push('Special mention to ' + driverVal + ' for the friendly and professional service.');
-  if (detailVal) {
-    var d = detailVal.charAt(0).toUpperCase() + detailVal.slice(1);
-    body.push(d + (d.endsWith('.') ? '' : '.'));
-  }
-
-  var closer = pick(CLOSERS).replace('{place}', route.place);
-  var parts  = [opener];
-  if (body.length) parts.push(body.join(' '));
-  parts.push(closer);
-
-  document.getElementById('rh-text').value = parts.join(' ');
-
-  var card = document.getElementById('rh-result');
-  card.style.display = 'block';
-  setTimeout(function(){ card.scrollIntoView({ behavior: 'smooth', block: 'start' }) }, 80);
-  resetCopyBtn();
+/* Set active route and populate review */
+function setRoute(route) {
+  document.querySelectorAll('.rh-pill').forEach(function(p) {
+    p.classList.toggle('active', p.dataset.route === route);
+  });
+  document.getElementById('rh-text').value = REVIEWS[route] || REVIEWS.mathura;
+  /* Reset any prior copy state */
+  resetState();
 }
 
-function copyReview() {
+/* Copy + open Google in one tap */
+function copyAndOpen() {
+  /* Open Google first — must be synchronous to avoid popup blockers */
+  window.open(GOOGLE_URL, '_blank', 'noopener');
+  doCopy(function() {
+    showSuccess();
+  });
+}
+
+/* Copy only */
+function copyOnly() {
+  doCopy(function() {
+    var btn = document.getElementById('rh-copy-only');
+    var orig = btn.innerHTML;
+    btn.innerHTML = '&#10003; Copied';
+    btn.style.borderColor = 'var(--green)';
+    btn.style.color = 'var(--green)';
+    setTimeout(function() {
+      btn.innerHTML = orig;
+      btn.style.borderColor = '';
+      btn.style.color = '';
+    }, 2500);
+  });
+}
+
+function doCopy(cb) {
   var text = document.getElementById('rh-text').value.trim();
   if (!text) return;
-  var btn = document.getElementById('rh-copy');
   if (navigator.clipboard && window.isSecureContext) {
-    navigator.clipboard.writeText(text).then(function(){ showCopied(btn) }).catch(function(){ legacyCopy(text, btn) });
+    navigator.clipboard.writeText(text).then(cb).catch(function() { legacyCopy(text); cb(); });
   } else {
-    legacyCopy(text, btn);
+    legacyCopy(text); cb();
   }
 }
 
-function legacyCopy(text, btn) {
+function legacyCopy(text) {
   var ta = document.getElementById('rh-text');
   ta.select(); ta.setSelectionRange(0, 99999);
-  try { document.execCommand('copy'); showCopied(btn); } catch(e){}
+  try { document.execCommand('copy'); } catch(e) {}
 }
 
-var copyTimer;
-function showCopied(btn) {
-  clearTimeout(copyTimer);
-  btn.style.background = 'var(--green)';
-  document.getElementById('ico-copy').innerHTML = '<polyline points="20 6 9 17 4 12"/>';
-  document.getElementById('copy-label').textContent = 'Copied!';
-  copyTimer = setTimeout(resetCopyBtn, 2800);
+function showSuccess() {
+  var btn = document.getElementById('rh-main-btn');
+  btn.classList.add('done');
+  btn.innerHTML =
+    '<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>' +
+    'Copied &mdash; Open Google Again' +
+    '<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>';
+  btn.onclick = function() { window.open(GOOGLE_URL, '_blank', 'noopener'); };
+  document.getElementById('rh-success').style.display = 'flex';
 }
 
-function resetCopyBtn() {
-  var btn = document.getElementById('rh-copy');
-  btn.style.background = '';
-  document.getElementById('ico-copy').innerHTML = '<rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>';
-  document.getElementById('copy-label').textContent = 'Copy Review';
+function resetState() {
+  var btn = document.getElementById('rh-main-btn');
+  btn.classList.remove('done');
+  btn.innerHTML =
+    '<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>' +
+    'Copy Review &amp; Open Google' +
+    '<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>';
+  btn.onclick = copyAndOpen;
+  document.getElementById('rh-success').style.display = 'none';
 }
 
-function resetForm() {
-  ['rh-route','rh-type'].forEach(function(id){ document.getElementById(id).value = '' });
-  document.querySelectorAll('input[name="exp"]').forEach(function(c){ c.checked = false });
-  document.getElementById('rh-driver').value = '';
-  document.getElementById('rh-detail').value = '';
-  document.getElementById('rh-text').value = '';
-  document.getElementById('rh-result').style.display = 'none';
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+function toggleTips() {
+  var el  = document.getElementById('rh-tips');
+  var btn = document.getElementById('rh-tips-btn');
+  var open = el.classList.toggle('open');
+  btn.innerHTML = open
+    ? 'What makes a good review? &#9652;'
+    : 'What makes a good review? &#9662;';
 }
+
+/* Pre-load default review on page ready */
+document.getElementById('rh-text').value = REVIEWS.mathura;
 </script>
 <script src="js/main.js"></script>
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
