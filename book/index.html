@@ -27,120 +27,125 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <style>
 :root { --ff: Inter,-apple-system,sans-serif; --ffd: Inter,-apple-system,sans-serif }
 
-/* ── Layout ────────────────────────────────────────────────────────────── */
-.bk-main  { padding: .5rem 0 5rem }
+/* ── Page ──────────────────────────────────────────────────────────── */
+.bk-main  { padding: .25rem 0 5rem }
 .bk-wrap  { max-width: 500px; margin: 0 auto; padding: 0 1rem }
 
-/* ── Page top ──────────────────────────────────────────────────────────── */
-.bk-pagetop  { padding: 1.25rem 0 .85rem }
-.bk-city     { display:inline-flex; align-items:center; gap:.3rem; font-size:.73rem; font-weight:600; color:var(--g500); margin-bottom:.5rem }
-.bk-h1       { font-size:clamp(1.6rem,5vw,2rem); font-weight:800; line-height:1.2; margin:0 0 .4rem }
-.bk-sub      { font-size:.84rem; color:var(--g500); line-height:1.5; margin:0 }
+/* ── Hero ──────────────────────────────────────────────────────────── */
+.bk-hero      { padding: 1.4rem 0 .9rem }
+.bk-city      { display:inline-flex; align-items:center; gap:.3rem; font-size:.72rem; font-weight:600; color:var(--g500); margin-bottom:.45rem }
+.bk-h1        { font-size:clamp(1.6rem,5vw,2rem); font-weight:800; line-height:1.2; margin:0 0 .4rem }
+.bk-sub       { font-size:.83rem; color:var(--g500); line-height:1.5; margin:0 }
 
-/* ── Card ──────────────────────────────────────────────────────────────── */
-.bk-card { background:var(--white); border:1px solid var(--g100); border-radius:var(--r-lg); box-shadow:0 2px 24px rgba(0,0,0,.08); overflow:hidden }
+/* ── Card ──────────────────────────────────────────────────────────── */
+.bk-card  { background:var(--white); border:1px solid var(--g100); border-radius:var(--r-lg); box-shadow:0 2px 24px rgba(0,0,0,.08); overflow:hidden }
 
-/* ── Card sections ─────────────────────────────────────────────────────── */
-.bk-sec           { padding: .95rem 1.1rem }
-.bk-sec--sep      { border-top: 1px solid var(--g100) }
+/* ── Card sections ─────────────────────────────────────────────────── */
+.bk-sec          { padding:.9rem 1.1rem }
+.bk-sec--sep     { border-top:1px solid var(--g100) }
+.bk-sec--tight   { padding-top:.65rem; padding-bottom:.65rem }
 
-/* ── Toggle pills ──────────────────────────────────────────────────────── */
-.bk-toggle        { display:flex; gap:.28rem; background:var(--g50); border-radius:var(--r); padding:.2rem }
-.bk-toggle__btn   { flex:1; padding:.55rem .4rem; border:none; border-radius:calc(var(--r) - 2px); background:transparent; font-family:var(--ff); font-size:.81rem; font-weight:600; color:var(--g500); cursor:pointer; transition:all .15s; -webkit-tap-highlight-color:transparent; line-height:1.3; text-align:center }
+/* ── Toggle pills ──────────────────────────────────────────────────── */
+.bk-toggle       { display:flex; gap:.25rem; background:var(--g50); border-radius:var(--r); padding:.2rem }
+.bk-toggle__btn  { flex:1; padding:.52rem .4rem; border:none; border-radius:calc(var(--r) - 2px); background:transparent; font-family:var(--ff); font-size:.8rem; font-weight:600; color:var(--g500); cursor:pointer; transition:all .15s; -webkit-tap-highlight-color:transparent; line-height:1.3; text-align:center }
 .bk-toggle__btn.active { background:var(--white); color:var(--black); box-shadow:0 1px 4px rgba(0,0,0,.12) }
 
-/* ── Location block ────────────────────────────────────────────────────── */
-.bk-locs       { border:1.5px solid var(--g100); border-radius:var(--r-lg); overflow:hidden }
-.bk-locs.error { border-color:#E11D48 }
-.bk-loc-row    { display:flex; align-items:center; gap:.7rem; padding:.82rem .95rem }
+/* ── Location block ────────────────────────────────────────────────── */
+.bk-locs         { border:1.5px solid var(--g100); border-radius:var(--r-lg); overflow:hidden; transition:border-color .15s }
+.bk-locs.error   { border-color:#E11D48 }
+.bk-loc-row      { display:flex; align-items:center; gap:.65rem; padding:.8rem .9rem }
 .bk-loc-row:focus-within { background:var(--g50) }
-.bk-loc-sep    { height:1px; background:var(--g100); margin:0 .95rem 0 2.6rem }
-.bk-loc-dot    { width:10px; height:10px; border-radius:50%; background:var(--black); flex-shrink:0; transition:background .15s }
-.bk-loc-sq     { width:10px; height:10px; border-radius:2px; background:var(--black); flex-shrink:0; transition:background .15s }
-.bk-loc-wrap   { flex:1; min-width:0 }
-.bk-loc-input, .bk-loc-sel {
-  display:block; width:100%; border:none; outline:none;
-  font-family:var(--ff); font-size:.93rem; color:var(--black); background:transparent; padding:0; line-height:1.4
-}
-.bk-loc-input::placeholder { color:var(--g400) }
-.bk-loc-sel    { -webkit-appearance:none; cursor:pointer }
-.bk-loc-sel:invalid, .bk-loc-sel option[value=""] { color:var(--g400) }
+.bk-loc-sep      { height:1px; background:var(--g100); margin:0 .9rem 0 2.55rem }
+.bk-loc-dot      { width:10px; height:10px; border-radius:50%; background:var(--black); flex-shrink:0 }
+.bk-loc-sq       { width:10px; height:10px; border-radius:2px; background:var(--black); flex-shrink:0 }
+.bk-loc-f        { flex:1; min-width:0 }
+.bk-loc-in       { display:block; width:100%; border:none; outline:none; font-family:var(--ff); font-size:.93rem; color:var(--black); background:transparent; padding:0; line-height:1.4 }
+.bk-loc-in::placeholder { color:var(--g400) }
+.bk-geo-btn      { width:30px; height:30px; border:none; background:var(--g50); border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; color:var(--g500); flex-shrink:0; transition:all .15s; -webkit-tap-highlight-color:transparent }
+.bk-geo-btn:hover { background:var(--g100); color:var(--black) }
+.bk-geo-btn.spin svg { animation:bk-geo-spin .9s linear infinite }
+@keyframes bk-geo-spin { to { transform:rotate(360deg) } }
 
-/* ── Standard inputs ───────────────────────────────────────────────────── */
-.bk-input {
-  display:block; width:100%; padding:.72rem .88rem;
-  border:1.5px solid var(--g100); border-radius:var(--r);
-  font-family:var(--ff); font-size:.9rem; color:var(--black); background:var(--g50);
-  outline:none; -webkit-appearance:none; appearance:none; box-sizing:border-box;
-  transition:border-color .15s, background .15s, box-shadow .15s
-}
-.bk-input:focus  { border-color:var(--black); background:var(--white); box-shadow:0 0 0 3px rgba(0,0,0,.07) }
-.bk-input.error  { border-color:#E11D48 }
-.bk-label        { display:block; font-size:.74rem; font-weight:600; color:var(--g700); margin-bottom:.28rem }
+/* ── Standard inputs ───────────────────────────────────────────────── */
+.bk-input { display:block; width:100%; padding:.7rem .85rem; border:1.5px solid var(--g100); border-radius:var(--r); font-family:var(--ff); font-size:.9rem; color:var(--black); background:var(--g50); outline:none; -webkit-appearance:none; appearance:none; box-sizing:border-box; transition:border-color .15s, background .15s, box-shadow .15s }
+.bk-input:focus { border-color:var(--black); background:var(--white); box-shadow:0 0 0 3px rgba(0,0,0,.07) }
+.bk-input.error { border-color:#E11D48 }
+.bk-label { display:block; font-size:.73rem; font-weight:600; color:var(--g700); margin-bottom:.27rem }
 
-/* ── 2-col grid ────────────────────────────────────────────────────────── */
-.bk-2col { display:grid; grid-template-columns:1fr 1fr; gap:.6rem }
+/* ── 2-col ─────────────────────────────────────────────────────────── */
+.bk-2col { display:grid; grid-template-columns:1fr 1fr; gap:.55rem }
 @media (max-width:380px) { .bk-2col { grid-template-columns:1fr } }
 
-/* ── Errors ────────────────────────────────────────────────────────────── */
-.bk-ferr     { font-size:.69rem; color:#E11D48; margin-top:.2rem; min-height:.85rem }
-.bk-err-bar  { margin:.6rem 1.1rem 0; padding:.65rem .9rem; background:#FFF1F0; border:1px solid #FFB3B0; border-radius:var(--r); font-size:.82rem; color:#B91C1C; line-height:1.45 }
+/* ── Error states ──────────────────────────────────────────────────── */
+.bk-ferr    { font-size:.69rem; color:#E11D48; margin-top:.2rem; min-height:.85rem }
+.bk-err-bar { margin:.6rem 1.1rem 0; padding:.65rem .9rem; background:#FFF1F0; border:1px solid #FFB3B0; border-radius:var(--r); font-size:.82rem; color:#B91C1C; line-height:1.45 }
 
-/* ── Price badge ───────────────────────────────────────────────────────── */
-.bk-price { display:flex; align-items:center; gap:.65rem; padding:.65rem .95rem; background:var(--g50); border-top:1px solid var(--g100); border-bottom:1px solid var(--g100) }
-.bk-price__lbl  { font-size:.63rem; font-weight:700; text-transform:uppercase; letter-spacing:.07em; color:var(--g400) }
-.bk-price__amt  { font-size:1.3rem; font-weight:800; color:var(--black) }
-.bk-price__note { font-size:.65rem; color:var(--g400); margin-top:.05rem }
+/* ── Price badge ───────────────────────────────────────────────────── */
+.bk-price     { display:flex; align-items:center; gap:.6rem; padding:.6rem .9rem; background:var(--g50); border-top:1px solid var(--g100); border-bottom:1px solid var(--g100) }
+.bk-price__lbl  { font-size:.62rem; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--g400) }
+.bk-price__amt  { font-size:1.28rem; font-weight:800; color:var(--black) }
+.bk-price__note { font-size:.64rem; color:var(--g400); margin-top:.04rem }
 
-/* ── Divider label ─────────────────────────────────────────────────────── */
-.bk-divider { padding:.45rem 1.1rem; font-size:.67rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--g400); background:var(--g50); border-top:1px solid var(--g100); border-bottom:1px solid var(--g100) }
+/* ── Step 2 reveal ─────────────────────────────────────────────────── */
+.bk-reveal     { display:none }
+.bk-reveal.on  { display:block; animation:bk-in .25s ease forwards }
+@keyframes bk-in { from { opacity:0; transform:translateY(6px) } to { opacity:1; transform:translateY(0) } }
 
-/* ── Advisory ──────────────────────────────────────────────────────────── */
-.bk-advisory { margin:.6rem 1.1rem 0; padding:.55rem .8rem; border-radius:var(--r); font-size:.71rem; line-height:1.5 }
+/* ── Divider label ─────────────────────────────────────────────────── */
+.bk-divider { padding:.42rem 1.1rem; font-size:.66rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--g400); background:var(--g50); border-top:1px solid var(--g100); border-bottom:1px solid var(--g100) }
+
+/* ── Advisory ──────────────────────────────────────────────────────── */
+.bk-advisory     { margin:.55rem 1.1rem 0; padding:.52rem .75rem; border-radius:var(--r); font-size:.7rem; line-height:1.5 }
 .bk-advisory--suv   { background:#FFFBEB; border:1px solid #FCD34D; color:#78350F }
 .bk-advisory--group { background:#FEF2F2; border:1px solid #FECACA; color:#991B1B }
 
-/* ── CTA ───────────────────────────────────────────────────────────────── */
-.bk-cta-sec    { padding:.9rem 1.1rem 1.1rem; border-top:1px solid var(--g100) }
-.bk-submit     { width:100%; padding:.9rem 1.5rem; background:#25D366; color:#fff; border:none; border-radius:var(--r); font-family:var(--ff); font-size:.97rem; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:.45rem; transition:background .15s, transform .15s; -webkit-tap-highlight-color:transparent }
+/* ── One-way callout ───────────────────────────────────────────────── */
+.bk-oneway       { padding:1rem 1.1rem; background:#F8F9FA; border-top:1px solid var(--g100) }
+.bk-oneway p     { font-size:.84rem; color:var(--g700); margin:0 0 .7rem; line-height:1.5 }
+.bk-oneway__acts { display:flex; gap:.4rem }
+
+/* ── CTA ───────────────────────────────────────────────────────────── */
+.bk-cta-sec   { padding:.85rem 1.1rem 1.1rem; border-top:1px solid var(--g100) }
+.bk-submit    { width:100%; padding:.88rem 1.5rem; background:#25D366; color:#fff; border:none; border-radius:var(--r); font-family:var(--ff); font-size:.97rem; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:.45rem; transition:background .15s, transform .15s; -webkit-tap-highlight-color:transparent }
 .bk-submit:hover   { background:#1ebe5e }
 .bk-submit:active  { transform:scale(.98) }
 .bk-submit:disabled { opacity:.65; cursor:not-allowed }
-.bk-policy     { text-align:center; font-size:.67rem; color:var(--g400); margin:.5rem 0 0; line-height:1.55 }
+.bk-policy    { text-align:center; font-size:.67rem; color:var(--g400); margin:.5rem 0 0; line-height:1.55 }
 
-/* ── One-way callout ───────────────────────────────────────────────────── */
-.bk-oneway      { padding:1.1rem; border-top:1px solid var(--g100); background:#FFFBEB }
-.bk-oneway p    { font-size:.85rem; color:#78350F; margin:0 0 .7rem; line-height:1.55 }
-.bk-oneway__acts { display:flex; gap:.45rem }
-
-/* ── Success ───────────────────────────────────────────────────────────── */
-.bk-success { padding:1.75rem 1.25rem 1.5rem; text-align:center }
-.bk-success__icon { width:50px; height:50px; background:#25D366; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto .85rem; font-size:1.3rem; color:#fff }
-.bk-success h2    { font-size:1.15rem; margin:0 0 .3rem }
-.bk-success__sub  { font-size:.83rem; color:var(--g500); margin:0 0 1rem; line-height:1.5 }
-.bk-success__details { background:var(--g50); border:1px solid var(--g100); border-radius:var(--r); padding:.85rem .95rem; text-align:left; margin:.5rem 0 1rem }
-.bk-success__row  { display:flex; justify-content:space-between; align-items:flex-start; font-size:.8rem; padding:.28rem 0; border-bottom:1px solid var(--g100); gap:.5rem }
+/* ── Success ───────────────────────────────────────────────────────── */
+.bk-success         { padding:1.75rem 1.25rem 1.5rem; text-align:center }
+.bk-success__icon   { width:50px; height:50px; background:#25D366; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto .85rem; font-size:1.3rem; color:#fff }
+.bk-success h2      { font-size:1.15rem; margin:0 0 .3rem }
+.bk-success__sub    { font-size:.83rem; color:var(--g500); margin:0 0 1rem; line-height:1.5 }
+.bk-success__details { background:var(--g50); border:1px solid var(--g100); border-radius:var(--r); padding:.82rem .95rem; text-align:left; margin:.5rem 0 1rem }
+.bk-success__row    { display:flex; justify-content:space-between; align-items:flex-start; font-size:.79rem; padding:.27rem 0; border-bottom:1px solid var(--g100); gap:.5rem }
 .bk-success__row:last-child { border-bottom:none }
 .bk-success__row span:first-child { color:var(--g400); white-space:nowrap }
 .bk-success__row span:last-child  { font-weight:600; color:var(--black); text-align:right; word-break:break-word }
-.bk-success__acts { display:flex; gap:.5rem; justify-content:center; flex-wrap:wrap }
+.bk-success__acts   { display:flex; gap:.5rem; justify-content:center; flex-wrap:wrap }
 
-/* ── Trust strip ───────────────────────────────────────────────────────── */
-.bk-trust { display:flex; justify-content:center; gap:.4rem 1.2rem; flex-wrap:wrap; padding:.8rem 1rem 0 }
-.bk-trust__item { display:flex; align-items:center; gap:.3rem; font-size:.69rem; color:var(--g500); font-weight:500 }
+/* ── Trust strip ───────────────────────────────────────────────────── */
+.bk-trust       { display:flex; justify-content:center; gap:.4rem 1.1rem; flex-wrap:wrap; padding:.75rem 1rem 0 }
+.bk-trust__item { display:flex; align-items:center; gap:.28rem; font-size:.68rem; color:var(--g500); font-weight:500 }
 
-/* ── Spinner ───────────────────────────────────────────────────────────── */
+/* ── Spinner ───────────────────────────────────────────────────────── */
 .bk-spin { display:inline-block; width:15px; height:15px; border:2px solid rgba(255,255,255,.3); border-top-color:#fff; border-radius:50%; animation:bk-spin .7s linear infinite; vertical-align:middle }
 @keyframes bk-spin { to { transform:rotate(360deg) } }
+
+/* ── Google Places autocomplete dropdown ──────────────────────────── */
+.pac-container { border-radius:var(--r); box-shadow:0 4px 20px rgba(0,0,0,.12); border:1px solid var(--g100); font-family:var(--ff); margin-top:2px }
+.pac-item       { padding:.55rem .9rem; font-size:.85rem; cursor:pointer; border-top:1px solid var(--g50) }
+.pac-item:hover { background:var(--g50) }
+.pac-item-query { font-size:.88rem; font-weight:600; color:var(--black) }
+.pac-matched    { font-weight:700; color:var(--black) }
 </style>
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NWDQLKM9"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
 
-<!-- ── Header ─────────────────────────────────────────────────────────── -->
+<!-- ── Header ──────────────────────────────────────────────────────── -->
 <header class="hdr" id="hdr"><div class="hdr__in">
 <a href="../index.html" class="logo"><img src="../images/logo.png" alt="Padma Shree Travels Logo" class="logo__img"><div class="logo__t">Padma Shree Travels<small>Agra Taxi Service</small></div></a>
 <nav class="nav"><ul class="nav__l">
@@ -201,37 +206,37 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <a href="https://wa.me/918720081102?text=Hi!%20I%20need%20a%20cab%20from%20Agra" class="btn btn--wa btn--lg" target="_blank" rel="noopener"><i data-lucide="message-circle" class="icon icon--white" aria-hidden="true"></i> WhatsApp</a>
 </div></div>
 
-<!-- ── Main ────────────────────────────────────────────────────────────── -->
+<!-- ── Main ─────────────────────────────────────────────────────────── -->
 <main class="bk-main">
 <div class="bk-wrap">
 
-  <!-- Page top -->
-  <div class="bk-pagetop">
-    <div class="bk-city">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+  <!-- Hero -->
+  <div class="bk-hero">
+    <p class="bk-city">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
       Agra, IN
-    </div>
+    </p>
     <h1 class="bk-h1">Book your cab<br>for now or later</h1>
     <p class="bk-sub">WhatsApp confirmation within minutes. No advance payment required.</p>
   </div>
 
-  <!-- Booking card -->
+  <!-- Card -->
   <div class="bk-card" id="bk-card">
 
-    <!-- ── Success state (hidden until submit) ── -->
+    <!-- Success (hidden until submit) -->
     <div id="pb-success" class="bk-success" hidden>
       <div class="bk-success__icon">&#10003;</div>
       <h2>Opening WhatsApp&#8230;</h2>
-      <p class="bk-success__sub">Your booking details are ready. Just press <strong>Send</strong> in WhatsApp to confirm.</p>
+      <p class="bk-success__sub">Your booking details are ready. Press <strong>Send</strong> in WhatsApp to confirm.</p>
       <div class="bk-success__details">
-        <div class="bk-success__row"><span>Route</span><span id="pb-success-route"></span></div>
-        <div class="bk-success__row"><span>Pickup From</span><span id="pb-success-pickup"></span></div>
-        <div class="bk-success__row"><span>Date</span><span id="pb-success-date"></span></div>
-        <div class="bk-success__row"><span>Time</span><span id="pb-success-time"></span></div>
-        <div class="bk-success__row"><span>Est. Fare</span><span id="pb-success-amount"></span></div>
+        <div class="bk-success__row"><span>Pickup</span><span id="pb-s-pickup"></span></div>
+        <div class="bk-success__row"><span>Drop</span><span id="pb-s-drop"></span></div>
+        <div class="bk-success__row"><span>When</span><span id="pb-s-when"></span></div>
+        <div class="bk-success__row"><span>Passengers</span><span id="pb-s-pax"></span></div>
+        <div class="bk-success__row"><span>Est. Fare</span><span id="pb-s-fare"></span></div>
       </div>
-      <p style="font-size:.76rem;color:#B91C1C;background:#FEF2F2;border:1px solid #FECACA;border-radius:var(--r);padding:.6rem .85rem;margin:0 0 .9rem;line-height:1.5;text-align:left">
-        No advance payment required. Pay after booking is confirmed or after ride completion.
+      <p style="font-size:.75rem;color:#B91C1C;background:#FEF2F2;border:1px solid #FECACA;border-radius:var(--r);padding:.58rem .82rem;margin:0 0 .9rem;line-height:1.5;text-align:left">
+        No advance payment. Pay after booking is confirmed or after ride completion.
       </p>
       <div class="bk-success__acts">
         <a href="tel:+918720081102" class="btn btn--b btn--lg"><i data-lucide="phone" class="icon icon--white" aria-hidden="true"></i> Call Us</a>
@@ -239,124 +244,155 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </div>
 
-    <!-- ── Form main ── -->
+    <!-- Form -->
     <div id="bk-form-main">
+
+      <!-- Hidden state inputs -->
+      <input type="hidden" id="pb-trip-type" value="roundtrip">
+      <input type="hidden" id="pb-timing" value="now">
+
+      <!-- ── Step 1: trip setup + locations ── -->
 
       <!-- ① Trip type -->
       <div class="bk-sec">
         <div class="bk-toggle" role="group" aria-label="Trip type">
-          <button type="button" class="bk-toggle__btn active" data-trip="roundtrip" onclick="bkSetTrip('roundtrip')">
+          <button type="button" class="bk-toggle__btn active" data-trip="roundtrip" onclick="bkTrip('roundtrip')">
             Round Trip / Full Day
           </button>
-          <button type="button" class="bk-toggle__btn" data-trip="oneway" onclick="bkSetTrip('oneway')">
+          <button type="button" class="bk-toggle__btn" data-trip="oneway" onclick="bkTrip('oneway')">
             One Way
           </button>
         </div>
       </div>
 
-      <!-- One-way callout -->
-      <div id="bk-oneway" class="bk-oneway" style="display:none" aria-live="polite">
-        <p>For one-way fares, <strong>call or WhatsApp us</strong> and we&#8217;ll confirm a custom quote on the spot.</p>
-        <div class="bk-oneway__acts">
-          <a href="tel:+918720081102" class="btn btn--b"><i data-lucide="phone" class="icon icon--sm icon--white" aria-hidden="true"></i> Call Now</a>
-          <a href="https://wa.me/918720081102?text=Hi!%20I%20need%20a%20one-way%20cab%20from%20Agra.%20Can%20you%20share%20the%20fare%3F" class="btn btn--wa" target="_blank" rel="noopener"><i data-lucide="message-circle" class="icon icon--sm icon--white" aria-hidden="true"></i> WhatsApp</a>
+      <!-- ② Timing -->
+      <div class="bk-sec bk-sec--sep">
+        <div class="bk-toggle" role="group" aria-label="Pickup timing">
+          <button type="button" class="bk-toggle__btn active" data-timing="now" onclick="bkTiming('now')">
+            &#128336; Pickup now
+          </button>
+          <button type="button" class="bk-toggle__btn" data-timing="schedule" onclick="bkTiming('schedule')">
+            &#128197; Schedule ride
+          </button>
         </div>
       </div>
 
-      <!-- Round-trip form body -->
-      <div id="bk-form-body">
+      <!-- ③ Locations -->
+      <div class="bk-sec bk-sec--sep">
+        <div class="bk-locs" id="bk-locs">
+          <!-- Pickup -->
+          <div class="bk-loc-row">
+            <span class="bk-loc-dot" aria-hidden="true"></span>
+            <div class="bk-loc-f fg" id="fg-pb-pickup">
+              <input type="text" id="pb-pickup" name="pickup"
+                class="bk-loc-in"
+                placeholder="Pickup location"
+                autocomplete="off"
+                list="bk-pickup-list"
+                required aria-required="true" aria-label="Pickup location">
+              <div class="bk-ferr" role="alert"></div>
+            </div>
+            <button type="button" class="bk-geo-btn" id="bk-geo-btn"
+              onclick="bkGeolocate()" title="Use my current location" aria-label="Use my location">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M1 12h4M19 12h4"/></svg>
+            </button>
+          </div>
+          <div class="bk-loc-sep" aria-hidden="true"></div>
+          <!-- Drop -->
+          <div class="bk-loc-row">
+            <span class="bk-loc-sq" aria-hidden="true"></span>
+            <div class="bk-loc-f fg" id="fg-pb-drop">
+              <input type="text" id="pb-drop" name="drop"
+                class="bk-loc-in"
+                placeholder="Drop location / destination"
+                autocomplete="off"
+                list="bk-drop-list"
+                required aria-required="true" aria-label="Drop location">
+              <div class="bk-ferr" role="alert"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fallback datalists (used when Places API is not loaded) -->
+        <datalist id="bk-pickup-list">
+          <option value="Agra Cantt Railway Station">
+          <option value="Agra Fort Railway Station">
+          <option value="Idgah Bus Terminal, Agra">
+          <option value="Agra Airport (Kheria)">
+          <option value="Taj Mahal East Gate, Agra">
+          <option value="Taj Mahal West Gate, Agra">
+          <option value="Agra Fort, Agra">
+          <option value="Sadar Bazar, Agra">
+          <option value="Sikandra, Agra">
+          <option value="Shahganj, Agra">
+          <option value="Bodla, Agra">
+        </datalist>
+        <datalist id="bk-drop-list">
+          <option value="Mathura">
+          <option value="Vrindavan">
+          <option value="Mathura &amp; Vrindavan">
+          <option value="Mathura, Vrindavan &amp; Barsana">
+          <option value="Fatehpur Sikri">
+          <option value="Agra Sightseeing (Taj Mahal, Fort)">
+          <option value="Gwalior">
+          <option value="Aligarh">
+          <option value="Etawah">
+          <option value="Firozabad">
+          <option value="Bateshwar">
+          <option value="Tundla">
+          <option value="Shikohabad">
+          <option value="Hathras">
+          <option value="Sirsaganj">
+        </datalist>
+      </div>
+
+      <!-- One-way callout (hidden by default) -->
+      <div id="bk-oneway" class="bk-oneway" style="display:none">
+        <p>For one-way fares, <strong>call or WhatsApp us</strong> and we&#8217;ll confirm a custom quote right away.</p>
+        <div class="bk-oneway__acts">
+          <a href="tel:+918720081102" class="btn btn--b">
+            <i data-lucide="phone" class="icon icon--sm icon--white" aria-hidden="true"></i> Call Now
+          </a>
+          <a href="https://wa.me/918720081102?text=Hi!%20I%20need%20a%20one-way%20cab%20from%20Agra.%20Can%20you%20share%20the%20fare%3F" class="btn btn--wa" target="_blank" rel="noopener">
+            <i data-lucide="message-circle" class="icon icon--sm icon--white" aria-hidden="true"></i> WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Schedule fields (hidden by default, shown when "schedule ride" tapped) -->
+      <div id="bk-sched" class="bk-reveal">
+        <div class="bk-sec bk-sec--sep bk-2col">
+          <div class="fg" id="fg-pb-date">
+            <label class="bk-label" for="pb-date">Travel Date</label>
+            <input type="date" id="pb-date" name="date" class="bk-input" aria-required="true">
+            <div class="bk-ferr" role="alert"></div>
+          </div>
+          <div class="fg" id="fg-pb-time">
+            <label class="bk-label" for="pb-time">Pickup Time</label>
+            <input type="time" id="pb-time" name="time" class="bk-input" aria-required="true">
+            <div class="bk-ferr" role="alert"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fare preview (shown when route matched from drop text) -->
+      <div id="pb-price-display" class="bk-price" hidden>
+        <div>
+          <div class="bk-price__lbl"><span id="pb-price-type">Round Trip</span> &mdash; Est. Fare</div>
+          <div class="bk-price__amt" id="pb-price-amount"></div>
+          <div class="bk-price__note">Fuel &amp; driver incl. &bull; Tolls &amp; parking extra</div>
+        </div>
+      </div>
+
+      <!-- ── Step 2: trip details (revealed when both locations filled) ── -->
+      <div id="bk-step2" class="bk-reveal">
+
         <form id="payBookingForm" novalidate>
 
-          <!-- Global error -->
+          <!-- Error bar -->
           <div id="pb-error" class="bk-err-bar" hidden aria-live="polite"></div>
 
-          <!-- ② Locations -->
-          <div class="bk-sec bk-sec--sep">
-            <div class="bk-locs" id="bk-locs">
-              <div class="bk-loc-row">
-                <span class="bk-loc-dot" aria-hidden="true"></span>
-                <div class="bk-loc-wrap fg" id="fg-pb-pickup">
-                  <input type="text" id="pb-pickup" name="pickup"
-                    class="bk-loc-input"
-                    placeholder="Pickup location"
-                    required autocomplete="street-address"
-                    aria-required="true" aria-label="Pickup location">
-                  <div class="bk-ferr" role="alert"></div>
-                </div>
-              </div>
-              <div class="bk-loc-sep" aria-hidden="true"></div>
-              <div class="bk-loc-row">
-                <span class="bk-loc-sq" aria-hidden="true"></span>
-                <div class="bk-loc-wrap fg" id="fg-pb-route">
-                  <select id="pb-route" name="route"
-                    class="bk-loc-sel"
-                    required aria-required="true" aria-label="Destination / Route">
-                    <option value="">Where to?</option>
-                    <optgroup label="Local Sightseeing">
-                      <option value="agra-local-sightseeing">Agra Full Day Sightseeing &mdash; &#8377;2,500</option>
-                      <option value="fatehpur-sikri">Fatehpur Sikri Day Trip &mdash; &#8377;2,500</option>
-                    </optgroup>
-                    <optgroup label="Mathura &amp; Vrindavan Pilgrimage">
-                      <option value="agra-to-mathura-taxi">Mathura (Round Trip) &mdash; &#8377;3,000</option>
-                      <option value="agra-to-vrindavan-cab">Vrindavan (Round Trip) &mdash; &#8377;3,000</option>
-                      <option value="mathura-vrindavan-tour">Mathura + Vrindavan Tour &mdash; &#8377;3,000</option>
-                      <option value="mathura-vrindavan-barsana">Mathura + Vrindavan + Barsana &mdash; &#8377;3,500</option>
-                    </optgroup>
-                    <optgroup label="Outstation">
-                      <option value="agra-to-aligarh">Agra to Aligarh &mdash; &#8377;3,000</option>
-                      <option value="agra-to-hathras">Agra to Hathras &mdash; &#8377;2,000</option>
-                      <option value="agra-to-sirsaganj">Agra to Sirsaganj &mdash; &#8377;3,000</option>
-                      <option value="agra-to-etawah">Agra to Etawah &mdash; &#8377;3,500</option>
-                      <option value="agra-to-gwalior">Agra to Gwalior &mdash; &#8377;3,000</option>
-                      <option value="agra-to-firozabad">Agra to Firozabad &mdash; &#8377;2,500</option>
-                      <option value="agra-to-bateshwar">Agra to Bateshwar &mdash; &#8377;3,000</option>
-                      <option value="agra-to-tundla">Agra to Tundla &mdash; &#8377;2,000</option>
-                      <option value="agra-to-shikohabad">Agra to Shikohabad &mdash; &#8377;3,000</option>
-                    </optgroup>
-                  </select>
-                  <div class="bk-ferr" role="alert"></div>
-                </div>
-              </div>
-            </div>
-            <p style="font-size:.69rem;color:var(--g400);margin:.4rem 0 0">Online booking covers round trips &amp; full-day tours. For one-way fares, tap <strong>One Way</strong> above.</p>
-          </div>
-
-          <!-- Price badge (shown after route selection) -->
-          <div id="pb-price-display" class="bk-price" hidden>
-            <div>
-              <div class="bk-price__lbl"><span id="pb-price-type">Round Trip</span> &mdash; Est. Fare</div>
-              <div class="bk-price__amt" id="pb-price-amount"></div>
-              <div class="bk-price__note">Fuel &amp; driver incl. &bull; Tolls &amp; parking extra</div>
-            </div>
-          </div>
-
-          <!-- ③ Timing -->
-          <div class="bk-sec bk-sec--sep">
-            <div class="bk-toggle" role="group" aria-label="Pickup timing">
-              <button type="button" class="bk-toggle__btn active" data-timing="now" onclick="bkSetTiming('now')">
-                &#128336; Pickup now
-              </button>
-              <button type="button" class="bk-toggle__btn" data-timing="schedule" onclick="bkSetTiming('schedule')">
-                &#128197; Schedule ride
-              </button>
-            </div>
-          </div>
-
-          <!-- ④ Date + Time -->
-          <div class="bk-sec bk-sec--sep bk-2col" id="bk-datetime">
-            <div class="fg" id="fg-pb-date">
-              <label class="bk-label" for="pb-date">Travel Date</label>
-              <input type="date" id="pb-date" name="date" class="bk-input" required aria-required="true">
-              <div class="bk-ferr" role="alert"></div>
-            </div>
-            <div class="fg" id="fg-pb-time">
-              <label class="bk-label" for="pb-time">Pickup Time</label>
-              <input type="time" id="pb-time" name="time" class="bk-input" required aria-required="true">
-              <div class="bk-ferr" role="alert"></div>
-            </div>
-          </div>
-
-          <!-- ⑤ Passengers -->
+          <!-- ④ Passengers -->
           <div class="bk-sec bk-sec--sep">
             <div class="fg" id="fg-pb-passengers">
               <label class="bk-label" for="pb-passengers">Passengers</label>
@@ -373,18 +409,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
           </div>
 
-          <!-- Advisory notes -->
           <p id="pb-suv-note" hidden class="bk-advisory bk-advisory--suv">
-            &#9432; For 5&ndash;6 passengers, SUV pricing applies (&#8377;3,800&ndash;&#8377;4,500 depending on route). Our team will confirm the exact fare on WhatsApp.
+            &#9432; SUV pricing applies for 5&ndash;6 passengers (&#8377;3,800&ndash;&#8377;4,500 depending on route). Our team confirms exact fare on WhatsApp.
           </p>
           <p id="pb-group-note" hidden class="bk-advisory bk-advisory--group">
             &#9888; For 7+ passengers, please <a href="tel:+918720081102" style="color:inherit;font-weight:600">call us</a> for a Tempo Traveller quote.
           </p>
 
-          <!-- ── Contact divider ── -->
+          <!-- Contact divider -->
           <div class="bk-divider">Your details</div>
 
-          <!-- ⑥ Name + Phone -->
+          <!-- ⑤ Name + Phone -->
           <div class="bk-sec bk-2col">
             <div class="fg" id="fg-pb-name">
               <label class="bk-label" for="pb-name">Full Name</label>
@@ -401,17 +436,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
           </div>
 
-          <!-- ⑦ Notes (optional) -->
+          <!-- ⑥ Notes (optional) -->
           <div class="bk-sec bk-sec--sep">
             <div class="fg">
               <label class="bk-label" for="pb-notes">Special Requests <span style="font-weight:400;color:var(--g400)">(optional)</span></label>
               <textarea id="pb-notes" name="notes" class="bk-input" rows="2"
-                placeholder="Child seat, extra luggage, early morning pickup&#8230;"
-                style="resize:vertical"></textarea>
+                placeholder="Child seat, extra luggage, early morning pickup&#8230;" style="resize:vertical"></textarea>
             </div>
           </div>
 
-          <!-- ⑧ CTA -->
+          <!-- ⑦ CTA -->
           <div class="bk-cta-sec">
             <div id="pb-loading" style="text-align:center;padding:.4rem 0;font-size:.82rem;color:var(--g500)" hidden>
               <span class="bk-spin"></span> Preparing your booking&#8230;
@@ -420,11 +454,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
               Book on WhatsApp
             </button>
-            <p class="bk-policy">No advance payment &bull; Pay after ride &bull; Tolls &amp; parking extra where applicable</p>
+            <p class="bk-policy">No advance payment &bull; Pay after ride &bull; Tolls &amp; parking extra</p>
           </div>
 
         </form>
-      </div><!-- /#bk-form-body -->
+      </div><!-- /#bk-step2 -->
+
     </div><!-- /#bk-form-main -->
   </div><!-- /.bk-card -->
 
@@ -436,7 +471,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </span>
     <span class="bk-trust__item">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#05944F" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-      Confirmed within minutes
+      WhatsApp confirmation in minutes
     </span>
     <span class="bk-trust__item">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#05944F" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
@@ -447,7 +482,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div><!-- /.bk-wrap -->
 </main>
 
-<!-- ── Footer ─────────────────────────────────────────────────────────── -->
+<!-- ── Footer ──────────────────────────────────────────────────────── -->
 <footer class="ft"><div class="container"><div class="ft__grid">
 <div class="ft__brand">
   <div class="logo"><img src="../images/logo.png" alt="Padma Shree Travels" class="logo__img">
@@ -480,58 +515,172 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="mcta-bar"><a href="tel:+918720081102" class="mcta-bar__a mcta-bar__call">&#128222; Call Now</a><a href="https://wa.me/918720081102?text=Hi!%20I%20need%20a%20cab%20from%20Agra" class="mcta-bar__a mcta-bar__wa" target="_blank" rel="noopener">&#128172; WhatsApp</a><a href="../book/" class="mcta-bar__a mcta-bar__book">&#128274; Book Online</a></div>
 <a href="https://wa.me/918720081102?text=Hi!%20I%20need%20a%20cab%20from%20Agra" class="waf" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp"><i data-lucide="message-circle" aria-hidden="true"></i></a>
 
+<!-- ── Page JS ───────────────────────────────────────────────────────── -->
 <script>
-/* ── Trip type toggle ─────────────────────────────────────────────────── */
-function bkSetTrip(type) {
+/* ─── Config: add your Google Maps API key to enable Places autocomplete ─── */
+var MAPS_KEY = ''; /* e.g. 'AIzaSy...' */
+
+/* ─── Trip type toggle ──────────────────────────────────────────────────── */
+function bkTrip(type) {
   document.querySelectorAll('[data-trip]').forEach(function(b) {
     b.classList.toggle('active', b.dataset.trip === type);
   });
+  document.getElementById('pb-trip-type').value = type;
   var ow = document.getElementById('bk-oneway');
-  var fb = document.getElementById('bk-form-body');
+  var s2 = document.getElementById('bk-step2');
   if (type === 'oneway') {
     ow.style.display = 'block';
-    fb.style.display = 'none';
+    s2.classList.remove('on');
   } else {
     ow.style.display = 'none';
-    fb.style.display = 'block';
+    bkCheckReveal();
   }
 }
 
-/* ── Timing toggle ────────────────────────────────────────────────────── */
-function bkSetTiming(type) {
+/* ─── Timing toggle ─────────────────────────────────────────────────────── */
+function bkTiming(type) {
   document.querySelectorAll('[data-timing]').forEach(function(b) {
     b.classList.toggle('active', b.dataset.timing === type);
   });
-  var di = document.getElementById('pb-date');
-  var ti = document.getElementById('pb-time');
-  if (type === 'now') {
-    var n = new Date();
-    di.value = n.toISOString().split('T')[0];
-    n.setHours(n.getHours() + 1, 0, 0, 0);
-    ti.value = String(n.getHours()).padStart(2,'0') + ':00';
-    document.getElementById('bk-datetime').style.opacity = '.55';
+  document.getElementById('pb-timing').value = type;
+  var sched = document.getElementById('bk-sched');
+  if (type === 'schedule') {
+    sched.classList.add('on');
+    /* Clear pre-filled values so user picks manually */
+    document.getElementById('pb-date').value = '';
+    document.getElementById('pb-time').value = '';
+    document.getElementById('pb-date').setAttribute('required', '');
+    document.getElementById('pb-time').setAttribute('required', '');
+    setTimeout(function() {
+      document.getElementById('pb-date').focus();
+    }, 260);
   } else {
-    di.value = '';
-    ti.value = '';
-    document.getElementById('bk-datetime').style.opacity = '1';
-    di.focus();
+    sched.classList.remove('on');
+    document.getElementById('pb-date').removeAttribute('required');
+    document.getElementById('pb-time').removeAttribute('required');
   }
 }
 
-/* ── Init: prefill "now" defaults ─────────────────────────────────────── */
-(function() {
-  var n = new Date();
-  var di = document.getElementById('pb-date');
-  var ti = document.getElementById('pb-time');
-  if (di) di.value = n.toISOString().split('T')[0];
-  if (ti) {
-    n.setHours(n.getHours() + 1, 0, 0, 0);
-    ti.value = String(n.getHours()).padStart(2,'0') + ':00';
+/* ─── Check if step 2 should appear ────────────────────────────────────── */
+function bkCheckReveal() {
+  var pickup = (document.getElementById('pb-pickup').value || '').trim();
+  var drop   = (document.getElementById('pb-drop').value   || '').trim();
+  var trip   = document.getElementById('pb-trip-type').value;
+  var s2     = document.getElementById('bk-step2');
+  if (pickup.length > 1 && drop.length > 1 && trip !== 'oneway') {
+    if (!s2.classList.contains('on')) {
+      s2.classList.add('on');
+      /* Scroll to bring it into view gently */
+      setTimeout(function() {
+        s2.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 80);
+    }
+  } else {
+    s2.classList.remove('on');
   }
-  /* Set date min */
+  /* Route match for fare preview — delegates to booking.js once loaded */
+  if (drop.length > 1 && typeof bkMatchRoute === 'function') {
+    bkMatchRoute(drop);
+  }
+}
+
+/* ─── Geolocation ───────────────────────────────────────────────────────── */
+function bkGeolocate() {
+  if (!navigator.geolocation) return;
+  var btn = document.getElementById('bk-geo-btn');
+  btn.classList.add('spin');
+  navigator.geolocation.getCurrentPosition(
+    function(pos) {
+      btn.classList.remove('spin');
+      var lat = pos.coords.latitude.toFixed(6);
+      var lng = pos.coords.longitude.toFixed(6);
+      /* Reverse geocode via Nominatim (free, no API key) */
+      fetch('https://nominatim.openstreetmap.org/reverse?lat=' + lat + '&lon=' + lng + '&format=json&accept-language=en')
+        .then(function(r) { return r.json(); })
+        .then(function(d) {
+          var a = d.address || {};
+          var parts = [
+            a.road || a.pedestrian,
+            a.suburb || a.neighbourhood || a.residential,
+            a.city || a.town || a.village || 'Agra'
+          ].filter(Boolean);
+          document.getElementById('pb-pickup').value = parts.join(', ');
+          bkCheckReveal();
+        })
+        .catch(function() {
+          document.getElementById('pb-pickup').value = 'My Current Location';
+          bkCheckReveal();
+        });
+    },
+    function() {
+      btn.classList.remove('spin');
+      /* Graceful fail: user just types manually */
+    },
+    { timeout: 9000, maximumAge: 60000 }
+  );
+}
+
+/* ─── Google Places autocomplete (loaded only if MAPS_KEY is set) ───────── */
+function initPlaces() {
+  if (typeof google === 'undefined' || !google.maps || !google.maps.places) return;
+  var bounds = new google.maps.LatLngBounds(
+    new google.maps.LatLng(26.8, 77.6),
+    new google.maps.LatLng(27.5, 78.4)
+  );
+  var baseOpts = {
+    bounds: bounds,
+    strictBounds: false,
+    componentRestrictions: { country: 'in' },
+    fields: ['formatted_address', 'name']
+  };
+  var pickupAC = new google.maps.places.Autocomplete(
+    document.getElementById('pb-pickup'), baseOpts
+  );
+  var dropAC = new google.maps.places.Autocomplete(
+    document.getElementById('pb-drop'), baseOpts
+  );
+  /* Remove native datalist when Places is active */
+  document.getElementById('pb-pickup').removeAttribute('list');
+  document.getElementById('pb-drop').removeAttribute('list');
+
+  pickupAC.addListener('place_changed', function() {
+    var p = pickupAC.getPlace();
+    if (p && p.name) document.getElementById('pb-pickup').value = p.name;
+    bkCheckReveal();
+  });
+  dropAC.addListener('place_changed', function() {
+    var p = dropAC.getPlace();
+    if (p && p.name) document.getElementById('pb-drop').value = p.name;
+    bkCheckReveal();
+  });
+}
+
+/* ─── Init ──────────────────────────────────────────────────────────────── */
+(function() {
+  /* Date min */
+  var di = document.getElementById('pb-date');
   if (di) di.min = new Date().toISOString().split('T')[0];
+
+  /* Listen for input on location fields */
+  var pu = document.getElementById('pb-pickup');
+  var dr = document.getElementById('pb-drop');
+  if (pu) pu.addEventListener('input', bkCheckReveal);
+  if (dr) dr.addEventListener('input', bkCheckReveal);
+
+  /* ?route= prefill: handled in booking.js after DOM + route data loaded */
+
+  /* Load Google Maps Places if key provided */
+  if (MAPS_KEY) {
+    var s = document.createElement('script');
+    s.src = 'https://maps.googleapis.com/maps/api/js?key=' + MAPS_KEY + '&libraries=places&callback=initPlaces';
+    s.async = true;
+    s.defer = true;
+    s.onerror = function() { /* silently fall back to datalist */ };
+    document.head.appendChild(s);
+  }
 })();
 </script>
+
 <script src="../js/main.js"></script>
 <script src="../js/booking.js"></script>
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>

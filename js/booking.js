@@ -1,66 +1,66 @@
 /**
  * booking.js — Padma Shree Travels
- * Handles: UTM capture · route prefill · live price · validation · WhatsApp booking · GTM conversion
+ * Handles: UTM capture · route matching · live price · validation · WhatsApp booking · GTM conversion
  */
 (function () {
   'use strict';
 
   // ── Route data ────────────────────────────────────────────────────────────
   const ROUTE_PRICES = {
-    'agra-local-sightseeing':   2500,
-    'fatehpur-sikri':           2500,
-    'agra-to-mathura-vrindavan':3000,
-    'agra-to-mathura-taxi':     3000,
-    'agra-to-vrindavan-cab':    3000,
-    'mathura-vrindavan-tour':   3000,
-    'mathura-vrindavan-barsana':3500,
-    'agra-to-aligarh':          3000,
-    'agra-to-hathras':          2000,
-    'agra-to-sirsaganj':        3000,
-    'agra-to-etawah':           3500,
-    'agra-to-gwalior':          3000,
-    'agra-to-firozabad':        2500,
-    'agra-to-bateshwar':        3000,
-    'agra-to-tundla':           2000,
-    'agra-to-shikohabad':       3000,
+    'agra-local-sightseeing':    2500,
+    'fatehpur-sikri':            2500,
+    'agra-to-mathura-vrindavan': 3000,
+    'agra-to-mathura-taxi':      3000,
+    'agra-to-vrindavan-cab':     3000,
+    'mathura-vrindavan-tour':    3000,
+    'mathura-vrindavan-barsana': 3500,
+    'agra-to-aligarh':           3000,
+    'agra-to-hathras':           2000,
+    'agra-to-sirsaganj':         3000,
+    'agra-to-etawah':            3500,
+    'agra-to-gwalior':           3000,
+    'agra-to-firozabad':         2500,
+    'agra-to-bateshwar':         3000,
+    'agra-to-tundla':            2000,
+    'agra-to-shikohabad':        3000,
   };
 
   const ROUTE_LABELS = {
-    'agra-local-sightseeing':   'Agra Local Sightseeing',
-    'fatehpur-sikri':           'Fatehpur Sikri Tour',
-    'agra-to-mathura-vrindavan':'Agra to Mathura & Vrindavan',
-    'agra-to-mathura-taxi':     'Agra to Mathura',
-    'agra-to-vrindavan-cab':    'Agra to Vrindavan',
-    'mathura-vrindavan-tour':   'Mathura + Vrindavan Tour',
-    'mathura-vrindavan-barsana':'Mathura + Vrindavan + Barsana',
-    'agra-to-aligarh':          'Agra to Aligarh',
-    'agra-to-hathras':          'Agra to Hathras',
-    'agra-to-sirsaganj':        'Agra to Sirsaganj',
-    'agra-to-etawah':           'Agra to Etawah',
-    'agra-to-gwalior':          'Agra to Gwalior',
-    'agra-to-firozabad':        'Agra to Firozabad',
-    'agra-to-bateshwar':        'Agra to Bateshwar',
-    'agra-to-tundla':           'Agra to Tundla',
-    'agra-to-shikohabad':       'Agra to Shikohabad',
+    'agra-local-sightseeing':    'Agra Local Sightseeing',
+    'fatehpur-sikri':            'Fatehpur Sikri Tour',
+    'agra-to-mathura-vrindavan': 'Agra to Mathura & Vrindavan',
+    'agra-to-mathura-taxi':      'Agra to Mathura',
+    'agra-to-vrindavan-cab':     'Agra to Vrindavan',
+    'mathura-vrindavan-tour':    'Mathura + Vrindavan Tour',
+    'mathura-vrindavan-barsana': 'Mathura + Vrindavan + Barsana',
+    'agra-to-aligarh':           'Agra to Aligarh',
+    'agra-to-hathras':           'Agra to Hathras',
+    'agra-to-sirsaganj':         'Agra to Sirsaganj',
+    'agra-to-etawah':            'Agra to Etawah',
+    'agra-to-gwalior':           'Agra to Gwalior',
+    'agra-to-firozabad':         'Agra to Firozabad',
+    'agra-to-bateshwar':         'Agra to Bateshwar',
+    'agra-to-tundla':            'Agra to Tundla',
+    'agra-to-shikohabad':        'Agra to Shikohabad',
   };
 
   const ROUTE_TYPE = {
-    'agra-local-sightseeing':   'Full Day',
-    'fatehpur-sikri':           'Full Day',
-    'agra-to-mathura-vrindavan':'Round Trip',
-    'agra-to-mathura-taxi':     'Round Trip',
-    'agra-to-vrindavan-cab':    'Round Trip',
-    'mathura-vrindavan-tour':   'Full Day Tour',
-    'mathura-vrindavan-barsana':'Full Day Tour',
-    'agra-to-aligarh':          'Round Trip',
-    'agra-to-hathras':          'Round Trip',
-    'agra-to-sirsaganj':        'Round Trip',
-    'agra-to-etawah':           'Round Trip',
-    'agra-to-gwalior':          'Round Trip',
-    'agra-to-firozabad':        'Round Trip',
-    'agra-to-bateshwar':        'Round Trip',
-    'agra-to-tundla':           'Round Trip',
-    'agra-to-shikohabad':       'Round Trip',
+    'agra-local-sightseeing':    'Full Day',
+    'fatehpur-sikri':            'Full Day',
+    'agra-to-mathura-vrindavan': 'Round Trip',
+    'agra-to-mathura-taxi':      'Round Trip',
+    'agra-to-vrindavan-cab':     'Round Trip',
+    'mathura-vrindavan-tour':    'Full Day Tour',
+    'mathura-vrindavan-barsana': 'Full Day Tour',
+    'agra-to-aligarh':           'Round Trip',
+    'agra-to-hathras':           'Round Trip',
+    'agra-to-sirsaganj':         'Round Trip',
+    'agra-to-etawah':            'Round Trip',
+    'agra-to-gwalior':           'Round Trip',
+    'agra-to-firozabad':         'Round Trip',
+    'agra-to-bateshwar':         'Round Trip',
+    'agra-to-tundla':            'Round Trip',
+    'agra-to-shikohabad':        'Round Trip',
   };
 
   // ── UTM / GCLID capture ───────────────────────────────────────────────────
@@ -77,35 +77,54 @@
   captureAttribution();
 
   // ── DOM refs ──────────────────────────────────────────────────────────────
-  const form           = document.getElementById('payBookingForm');
+  const form         = document.getElementById('payBookingForm');
   if (!form) return;
 
-  const routeSelect    = document.getElementById('pb-route');
-  const priceDisplay   = document.getElementById('pb-price-display');
-  const priceAmount    = document.getElementById('pb-price-amount');
-  const priceTypeEl    = document.getElementById('pb-price-type');
-  const submitBtn      = document.getElementById('pb-submit');
-  const loadingEl      = document.getElementById('pb-loading');
-  const errorEl        = document.getElementById('pb-error');
-  const successEl      = document.getElementById('pb-success');
-  const formMain       = document.getElementById('bk-form-main');
-  const locsEl         = document.getElementById('bk-locs');
-  const passengersEl   = document.getElementById('pb-passengers');
-  const suvNote        = document.getElementById('pb-suv-note');
-  const groupNote      = document.getElementById('pb-group-note');
-  const waRetry        = document.getElementById('bk-wa-retry');
+  const dropInput    = document.getElementById('pb-drop');
+  const priceDisplay = document.getElementById('pb-price-display');
+  const priceAmount  = document.getElementById('pb-price-amount');
+  const priceTypeEl  = document.getElementById('pb-price-type');
+  const submitBtn    = document.getElementById('pb-submit');
+  const loadingEl    = document.getElementById('pb-loading');
+  const errorEl      = document.getElementById('pb-error');
+  const successEl    = document.getElementById('pb-success');
+  const formMain     = document.getElementById('bk-form-main');
+  const locsEl       = document.getElementById('bk-locs');
+  const passengersEl = document.getElementById('pb-passengers');
+  const suvNote      = document.getElementById('pb-suv-note');
+  const groupNote    = document.getElementById('pb-group-note');
+  const waRetry      = document.getElementById('bk-wa-retry');
 
-  // ── ?route= prefill ───────────────────────────────────────────────────────
-  const urlRoute = new URLSearchParams(window.location.search).get('route');
-  if (urlRoute && routeSelect) {
-    routeSelect.value = urlRoute;
-    showPrice(urlRoute);
+  // ── Route matching from free-text drop ────────────────────────────────────
+  let _matchedRouteKey = '';
+
+  function bkMatchRoute(text) {
+    const t = (text || '').toLowerCase();
+    let key = '';
+
+    if      (t.includes('barsana'))                                      key = 'mathura-vrindavan-barsana';
+    else if (t.includes('fatehpur') || t.includes('sikri'))              key = 'fatehpur-sikri';
+    else if (t.includes('mathura') && t.includes('vrindavan'))           key = 'agra-to-mathura-vrindavan';
+    else if (t.includes('mathura'))                                       key = 'agra-to-mathura-taxi';
+    else if (t.includes('vrindavan'))                                     key = 'agra-to-vrindavan-cab';
+    else if (t.includes('local') || t.includes('sightseeing') ||
+             t.includes('taj') || t.includes('fort'))                    key = 'agra-local-sightseeing';
+    else if (t.includes('aligarh'))                                       key = 'agra-to-aligarh';
+    else if (t.includes('hathras'))                                       key = 'agra-to-hathras';
+    else if (t.includes('sirsaganj'))                                     key = 'agra-to-sirsaganj';
+    else if (t.includes('etawah'))                                        key = 'agra-to-etawah';
+    else if (t.includes('gwalior'))                                       key = 'agra-to-gwalior';
+    else if (t.includes('firozabad'))                                     key = 'agra-to-firozabad';
+    else if (t.includes('bateshwar'))                                     key = 'agra-to-bateshwar';
+    else if (t.includes('tundla'))                                        key = 'agra-to-tundla';
+    else if (t.includes('shikohabad'))                                    key = 'agra-to-shikohabad';
+
+    _matchedRouteKey = key;
+    showPriceBadge(key);
   }
+  window.bkMatchRoute = bkMatchRoute;
 
-  // ── Live price on route change ────────────────────────────────────────────
-  routeSelect && routeSelect.addEventListener('change', () => showPrice(routeSelect.value));
-
-  function showPrice(key) {
+  function showPriceBadge(key) {
     const price = ROUTE_PRICES[key];
     if (price && priceDisplay && priceAmount) {
       priceAmount.textContent = 'approx ₹' + price.toLocaleString('en-IN');
@@ -114,6 +133,14 @@
     } else if (priceDisplay) {
       priceDisplay.hidden = true;
     }
+  }
+  window.showPriceBadge = showPriceBadge;
+
+  // ── ?route= prefill ───────────────────────────────────────────────────────
+  const urlRoute = new URLSearchParams(window.location.search).get('route');
+  if (urlRoute && ROUTE_LABELS[urlRoute] && dropInput) {
+    dropInput.value = ROUTE_LABELS[urlRoute];
+    bkMatchRoute(ROUTE_LABELS[urlRoute]);
   }
 
   // ── Passenger advisory ────────────────────────────────────────────────────
@@ -134,16 +161,16 @@
       const ferr = fg.querySelector('.bk-ferr, .ferr');
       if (ferr) ferr.textContent = msg;
     }
-    // For location block, also highlight the container
-    if (locsEl && (id === 'pb-pickup' || id === 'pb-route')) {
+    if (locsEl && (id === 'pb-pickup' || id === 'pb-drop')) {
       locsEl.classList.add('error');
     }
   }
 
   function clearErrors() {
-    form.querySelectorAll('.fg').forEach((fg) => {
+    const scope = document.getElementById('bk-form-main') || form;
+    scope.querySelectorAll('.fg').forEach((fg) => {
       fg.classList.remove('has-error');
-      fg.querySelectorAll('.bk-input, .bk-loc-input, .bk-loc-sel').forEach((i) => i.classList.remove('error'));
+      fg.querySelectorAll('.bk-input, .bk-loc-in').forEach((i) => i.classList.remove('error'));
       const ferr = fg.querySelector('.bk-ferr, .ferr');
       if (ferr) ferr.textContent = '';
     });
@@ -157,11 +184,12 @@
 
     const name       = document.getElementById('pb-name')?.value.trim();
     const phone      = document.getElementById('pb-phone')?.value.trim();
-    const route      = document.getElementById('pb-route')?.value;
     const pickup     = document.getElementById('pb-pickup')?.value.trim();
+    const drop       = document.getElementById('pb-drop')?.value.trim();
+    const passengers = document.getElementById('pb-passengers')?.value;
+    const timing     = document.getElementById('pb-timing')?.value || 'now';
     const date       = document.getElementById('pb-date')?.value;
     const time       = document.getElementById('pb-time')?.value;
-    const passengers = document.getElementById('pb-passengers')?.value;
 
     if (!name || name.length < 2) {
       fieldError('pb-name', 'Please enter your full name'); valid = false;
@@ -169,25 +197,27 @@
     if (!phone || !/^[6-9]\d{9}$/.test(phone.replace(/[\s\-+]/g, ''))) {
       fieldError('pb-phone', 'Please enter a valid 10-digit mobile number'); valid = false;
     }
-    if (!route) {
-      fieldError('pb-route', 'Please select a destination'); valid = false;
-    }
     if (!pickup || pickup.length < 3) {
       fieldError('pb-pickup', 'Please enter your pickup location'); valid = false;
     }
-    if (!date) {
-      fieldError('pb-date', 'Please select a travel date'); valid = false;
-    } else {
-      const today = new Date(); today.setHours(0, 0, 0, 0);
-      if (new Date(date) < today) {
-        fieldError('pb-date', 'Date cannot be in the past'); valid = false;
-      }
-    }
-    if (!time) {
-      fieldError('pb-time', 'Please select a pickup time'); valid = false;
+    if (!drop || drop.length < 2) {
+      fieldError('pb-drop', 'Please enter your drop location'); valid = false;
     }
     if (!passengers) {
       fieldError('pb-passengers', 'Please select number of passengers'); valid = false;
+    }
+    if (timing === 'schedule') {
+      if (!date) {
+        fieldError('pb-date', 'Please select a travel date'); valid = false;
+      } else {
+        const today = new Date(); today.setHours(0, 0, 0, 0);
+        if (new Date(date) < today) {
+          fieldError('pb-date', 'Date cannot be in the past'); valid = false;
+        }
+      }
+      if (!time) {
+        fieldError('pb-time', 'Please select a pickup time'); valid = false;
+      }
     }
 
     return valid;
@@ -217,41 +247,44 @@
   }
 
   // ── WhatsApp booking ──────────────────────────────────────────────────────
-  function doWhatsAppBooking(name, phone, route, date, time, pickup, passengers, notes) {
-    const routeLabel = ROUTE_LABELS[route] || route;
-    const price      = ROUTE_PRICES[route] ? 'approx ₹' + ROUTE_PRICES[route].toLocaleString('en-IN') : '';
-    const tripType   = ROUTE_TYPE[route]   || 'Round Trip';
+  function doWhatsAppBooking(name, phone, pickup, drop, timing, date, time, passengers, notes) {
+    const tripTypeVal = document.getElementById('pb-trip-type')?.value || 'roundtrip';
+    const tripLabel   = tripTypeVal === 'oneway'
+      ? 'One Way'
+      : (_matchedRouteKey ? (ROUTE_TYPE[_matchedRouteKey] || 'Round Trip') : 'Round Trip');
+
+    const price    = _matchedRouteKey ? ROUTE_PRICES[_matchedRouteKey] : null;
+    const priceStr = price ? 'approx ₹' + price.toLocaleString('en-IN') : '';
+    const whenStr  = timing === 'schedule'
+      ? fmtDate(date) + ' at ' + fmtTime(time)
+      : 'As soon as possible';
 
     const lines = [
       'Hi! I want to book a cab.',
       '',
-      'Trip Type: ' + tripType,
-      'Route: ' + routeLabel + (price ? ' — ' + price : ''),
-      'Pickup: ' + pickup,
-      'Date: '   + fmtDate(date),
-      'Time: '   + fmtTime(time),
+      'Trip Type: '  + tripLabel,
+      'Pickup: '     + pickup,
+      'Drop: '       + drop,
+      'When: '       + whenStr,
       'Passengers: ' + passengers,
-      '',
-      'Name: '  + name,
-      'Phone: ' + phone,
     ];
+    if (priceStr) lines.push('Est. Fare: ' + priceStr);
+    lines.push('', 'Name: ' + name, 'Phone: ' + phone);
     if (notes) lines.push('Note: ' + notes);
 
     const waUrl = 'https://wa.me/918720081102?text=' + encodeURIComponent(lines.join('\n'));
 
-    // Update retry link
     if (waRetry) waRetry.href = waUrl;
 
-    // Show success
     if (formMain) formMain.hidden = true;
     if (successEl) {
       successEl.hidden = false;
       const get = (id) => document.getElementById(id);
-      if (get('pb-success-route'))  get('pb-success-route').textContent  = routeLabel;
-      if (get('pb-success-pickup')) get('pb-success-pickup').textContent = pickup;
-      if (get('pb-success-date'))   get('pb-success-date').textContent   = fmtDate(date);
-      if (get('pb-success-time'))   get('pb-success-time').textContent   = fmtTime(time);
-      if (get('pb-success-amount')) get('pb-success-amount').textContent = price || '—';
+      if (get('pb-s-pickup')) get('pb-s-pickup').textContent = pickup;
+      if (get('pb-s-drop'))   get('pb-s-drop').textContent   = drop;
+      if (get('pb-s-when'))   get('pb-s-when').textContent   = whenStr;
+      if (get('pb-s-pax'))    get('pb-s-pax').textContent    = passengers;
+      if (get('pb-s-fare'))   get('pb-s-fare').textContent   = priceStr || '—';
       successEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
@@ -277,23 +310,25 @@
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     if (!validateForm()) {
-      const firstErr = form.querySelector('.fg.has-error');
+      const scope    = document.getElementById('bk-form-main') || form;
+      const firstErr = scope.querySelector('.fg.has-error');
       if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
     }
 
     const name       = document.getElementById('pb-name').value.trim();
     const phone      = document.getElementById('pb-phone').value.trim();
-    const route      = document.getElementById('pb-route').value;
     const pickup     = document.getElementById('pb-pickup').value.trim();
-    const date       = document.getElementById('pb-date').value;
-    const time       = document.getElementById('pb-time').value;
+    const drop       = document.getElementById('pb-drop').value.trim();
+    const timing     = document.getElementById('pb-timing')?.value || 'now';
+    const date       = document.getElementById('pb-date')?.value   || '';
+    const time       = document.getElementById('pb-time')?.value   || '';
     const passengers = document.getElementById('pb-passengers').value;
     const notes      = document.getElementById('pb-notes')?.value.trim() || '';
 
     setLoading(true);
     fireConversion();
-    doWhatsAppBooking(name, phone, route, date, time, pickup, passengers, notes);
+    doWhatsAppBooking(name, phone, pickup, drop, timing, date, time, passengers, notes);
     setLoading(false);
   });
 
