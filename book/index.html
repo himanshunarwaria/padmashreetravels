@@ -1,5 +1,4 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -19,84 +18,121 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta property="og:url" content="https://padmashreetravels.in/book/">
 <meta property="og:type" content="website">
 <link rel="icon" type="image/png" href="../images/logo.png">
+<link rel="apple-touch-icon" href="../images/logo.png">
+<link rel="manifest" href="/site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css">
 <style>
-  :root { --ff: Inter,-apple-system,sans-serif; --ffd: Inter,-apple-system,sans-serif }
+:root { --ff: Inter,-apple-system,sans-serif; --ffd: Inter,-apple-system,sans-serif }
 
-  /* ── Price display badge ── */
-  .price-badge {
-    display: flex; align-items: center; gap: .9rem;
-    background: var(--g50); border: 1px solid var(--g200);
-    border-left: 4px solid var(--black);
-    border-radius: var(--r); padding: 1rem 1.4rem;
-    margin: 1.2rem 0;
-  }
-  .price-badge__label { font-size: .75rem; font-weight: 600; color: var(--g500); text-transform: uppercase; letter-spacing: .06em; }
-  .price-badge__amount { font-size: 1.7rem; font-weight: 800; color: var(--black); }
-  .price-badge__note { font-size: .73rem; color: var(--g400); margin-top: .1rem; }
+/* ── Layout ────────────────────────────────────────────────────────────── */
+.bk-main  { padding: .5rem 0 5rem }
+.bk-wrap  { max-width: 500px; margin: 0 auto; padding: 0 1rem }
 
-  /* ── Trust bar ── */
-  .trust-bar { display: flex; flex-wrap: wrap; gap: .65rem; margin: 1.4rem 0 0; }
-  .trust-item { display: flex; align-items: center; gap: .4rem; font-size: .73rem; color: var(--g500); font-weight: 500; }
-  .trust-item svg { width: 15px; height: 15px; color: var(--green); flex-shrink: 0; }
+/* ── Page top ──────────────────────────────────────────────────────────── */
+.bk-pagetop  { padding: 1.25rem 0 .85rem }
+.bk-city     { display:inline-flex; align-items:center; gap:.3rem; font-size:.73rem; font-weight:600; color:var(--g500); margin-bottom:.5rem }
+.bk-h1       { font-size:clamp(1.6rem,5vw,2rem); font-weight:800; line-height:1.2; margin:0 0 .4rem }
+.bk-sub      { font-size:.84rem; color:var(--g500); line-height:1.5; margin:0 }
 
-  /* ── Global error alert ── */
-  .form-error-bar {
-    background: #FFF1F0; border: 1px solid #FFB3B0;
-    border-radius: var(--r); padding: 1rem 1.2rem;
-    color: var(--red); font-size: .87rem; line-height: 1.5;
-    margin: .8rem 0;
-  }
+/* ── Card ──────────────────────────────────────────────────────────────── */
+.bk-card { background:var(--white); border:1px solid var(--g100); border-radius:var(--r-lg); box-shadow:0 2px 24px rgba(0,0,0,.08); overflow:hidden }
 
-  /* ── Loading spinner ── */
-  .spin {
-    display: inline-block; width: 18px; height: 18px;
-    border: 2px solid rgba(255,255,255,.3); border-top-color: #fff;
-    border-radius: 50%; animation: spin .7s linear infinite;
-    vertical-align: middle; margin-right: .5rem;
-  }
-  @keyframes spin { to { transform: rotate(360deg) } }
+/* ── Card sections ─────────────────────────────────────────────────────── */
+.bk-sec           { padding: .95rem 1.1rem }
+.bk-sec--sep      { border-top: 1px solid var(--g100) }
 
-  /* ── Success card ── */
-  .booking-success {
-    background: var(--white); border: 1px solid var(--g100);
-    border-radius: var(--r); padding: 2.5rem 2rem; text-align: center;
-  }
-  .booking-success__icon {
-    width: 64px; height: 64px; border-radius: 50%;
-    background: var(--green); color: #fff; font-size: 2rem;
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 1.2rem;
-  }
-  .booking-success h2 { font-size: 1.4rem; margin-bottom: .4rem; }
-  .booking-success p { color: var(--g500); font-size: .9rem; margin-bottom: 1.4rem; }
-  .booking-success__details {
-    background: var(--g50); border-radius: var(--r);
-    padding: 1.2rem; margin: 1.2rem 0; text-align: left;
-  }
-  .booking-success__row { display: flex; justify-content: space-between; font-size: .85rem; padding: .4rem 0; border-bottom: 1px solid var(--g100); }
-  .booking-success__row:last-child { border-bottom: none; }
-  .booking-success__row span:first-child { color: var(--g500); }
-  .booking-success__row span:last-child { font-weight: 600; color: var(--black); word-break: break-all; }
-  .booking-success__acts { display: flex; gap: .65rem; justify-content: center; flex-wrap: wrap; margin-top: 1.4rem; }
+/* ── Toggle pills ──────────────────────────────────────────────────────── */
+.bk-toggle        { display:flex; gap:.28rem; background:var(--g50); border-radius:var(--r); padding:.2rem }
+.bk-toggle__btn   { flex:1; padding:.55rem .4rem; border:none; border-radius:calc(var(--r) - 2px); background:transparent; font-family:var(--ff); font-size:.81rem; font-weight:600; color:var(--g500); cursor:pointer; transition:all .15s; -webkit-tap-highlight-color:transparent; line-height:1.3; text-align:center }
+.bk-toggle__btn.active { background:var(--white); color:var(--black); box-shadow:0 1px 4px rgba(0,0,0,.12) }
 
-  /* ── Sidebar info card ── */
-  .side-info { background: var(--g50); border: 1px solid var(--g100); border-radius: var(--r); padding: 1.5rem; }
-  .side-info h3 { font-size: .95rem; margin-bottom: 1rem; }
-  .side-info__item { display: flex; gap: .7rem; margin-bottom: .9rem; font-size: .84rem; color: var(--g700); align-items: flex-start; }
-  .side-info__item:last-child { margin-bottom: 0; }
-  .side-info__i { font-size: 1.1rem; flex-shrink: 0; margin-top: .1rem; }
+/* ── Location block ────────────────────────────────────────────────────── */
+.bk-locs       { border:1.5px solid var(--g100); border-radius:var(--r-lg); overflow:hidden }
+.bk-locs.error { border-color:#E11D48 }
+.bk-loc-row    { display:flex; align-items:center; gap:.7rem; padding:.82rem .95rem }
+.bk-loc-row:focus-within { background:var(--g50) }
+.bk-loc-sep    { height:1px; background:var(--g100); margin:0 .95rem 0 2.6rem }
+.bk-loc-dot    { width:10px; height:10px; border-radius:50%; background:var(--black); flex-shrink:0; transition:background .15s }
+.bk-loc-sq     { width:10px; height:10px; border-radius:2px; background:var(--black); flex-shrink:0; transition:background .15s }
+.bk-loc-wrap   { flex:1; min-width:0 }
+.bk-loc-input, .bk-loc-sel {
+  display:block; width:100%; border:none; outline:none;
+  font-family:var(--ff); font-size:.93rem; color:var(--black); background:transparent; padding:0; line-height:1.4
+}
+.bk-loc-input::placeholder { color:var(--g400) }
+.bk-loc-sel    { -webkit-appearance:none; cursor:pointer }
+.bk-loc-sel:invalid, .bk-loc-sel option[value=""] { color:var(--g400) }
 
-  /* ── Two-col layout on desktop ── */
-  .book-layout { display: grid; gap: 2rem; }
-  @media(min-width: 820px) {
-    .book-layout { grid-template-columns: 1fr 340px; align-items: start; }
-  }
+/* ── Standard inputs ───────────────────────────────────────────────────── */
+.bk-input {
+  display:block; width:100%; padding:.72rem .88rem;
+  border:1.5px solid var(--g100); border-radius:var(--r);
+  font-family:var(--ff); font-size:.9rem; color:var(--black); background:var(--g50);
+  outline:none; -webkit-appearance:none; appearance:none; box-sizing:border-box;
+  transition:border-color .15s, background .15s, box-shadow .15s
+}
+.bk-input:focus  { border-color:var(--black); background:var(--white); box-shadow:0 0 0 3px rgba(0,0,0,.07) }
+.bk-input.error  { border-color:#E11D48 }
+.bk-label        { display:block; font-size:.74rem; font-weight:600; color:var(--g700); margin-bottom:.28rem }
+
+/* ── 2-col grid ────────────────────────────────────────────────────────── */
+.bk-2col { display:grid; grid-template-columns:1fr 1fr; gap:.6rem }
+@media (max-width:380px) { .bk-2col { grid-template-columns:1fr } }
+
+/* ── Errors ────────────────────────────────────────────────────────────── */
+.bk-ferr     { font-size:.69rem; color:#E11D48; margin-top:.2rem; min-height:.85rem }
+.bk-err-bar  { margin:.6rem 1.1rem 0; padding:.65rem .9rem; background:#FFF1F0; border:1px solid #FFB3B0; border-radius:var(--r); font-size:.82rem; color:#B91C1C; line-height:1.45 }
+
+/* ── Price badge ───────────────────────────────────────────────────────── */
+.bk-price { display:flex; align-items:center; gap:.65rem; padding:.65rem .95rem; background:var(--g50); border-top:1px solid var(--g100); border-bottom:1px solid var(--g100) }
+.bk-price__lbl  { font-size:.63rem; font-weight:700; text-transform:uppercase; letter-spacing:.07em; color:var(--g400) }
+.bk-price__amt  { font-size:1.3rem; font-weight:800; color:var(--black) }
+.bk-price__note { font-size:.65rem; color:var(--g400); margin-top:.05rem }
+
+/* ── Divider label ─────────────────────────────────────────────────────── */
+.bk-divider { padding:.45rem 1.1rem; font-size:.67rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--g400); background:var(--g50); border-top:1px solid var(--g100); border-bottom:1px solid var(--g100) }
+
+/* ── Advisory ──────────────────────────────────────────────────────────── */
+.bk-advisory { margin:.6rem 1.1rem 0; padding:.55rem .8rem; border-radius:var(--r); font-size:.71rem; line-height:1.5 }
+.bk-advisory--suv   { background:#FFFBEB; border:1px solid #FCD34D; color:#78350F }
+.bk-advisory--group { background:#FEF2F2; border:1px solid #FECACA; color:#991B1B }
+
+/* ── CTA ───────────────────────────────────────────────────────────────── */
+.bk-cta-sec    { padding:.9rem 1.1rem 1.1rem; border-top:1px solid var(--g100) }
+.bk-submit     { width:100%; padding:.9rem 1.5rem; background:#25D366; color:#fff; border:none; border-radius:var(--r); font-family:var(--ff); font-size:.97rem; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:.45rem; transition:background .15s, transform .15s; -webkit-tap-highlight-color:transparent }
+.bk-submit:hover   { background:#1ebe5e }
+.bk-submit:active  { transform:scale(.98) }
+.bk-submit:disabled { opacity:.65; cursor:not-allowed }
+.bk-policy     { text-align:center; font-size:.67rem; color:var(--g400); margin:.5rem 0 0; line-height:1.55 }
+
+/* ── One-way callout ───────────────────────────────────────────────────── */
+.bk-oneway      { padding:1.1rem; border-top:1px solid var(--g100); background:#FFFBEB }
+.bk-oneway p    { font-size:.85rem; color:#78350F; margin:0 0 .7rem; line-height:1.55 }
+.bk-oneway__acts { display:flex; gap:.45rem }
+
+/* ── Success ───────────────────────────────────────────────────────────── */
+.bk-success { padding:1.75rem 1.25rem 1.5rem; text-align:center }
+.bk-success__icon { width:50px; height:50px; background:#25D366; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto .85rem; font-size:1.3rem; color:#fff }
+.bk-success h2    { font-size:1.15rem; margin:0 0 .3rem }
+.bk-success__sub  { font-size:.83rem; color:var(--g500); margin:0 0 1rem; line-height:1.5 }
+.bk-success__details { background:var(--g50); border:1px solid var(--g100); border-radius:var(--r); padding:.85rem .95rem; text-align:left; margin:.5rem 0 1rem }
+.bk-success__row  { display:flex; justify-content:space-between; align-items:flex-start; font-size:.8rem; padding:.28rem 0; border-bottom:1px solid var(--g100); gap:.5rem }
+.bk-success__row:last-child { border-bottom:none }
+.bk-success__row span:first-child { color:var(--g400); white-space:nowrap }
+.bk-success__row span:last-child  { font-weight:600; color:var(--black); text-align:right; word-break:break-word }
+.bk-success__acts { display:flex; gap:.5rem; justify-content:center; flex-wrap:wrap }
+
+/* ── Trust strip ───────────────────────────────────────────────────────── */
+.bk-trust { display:flex; justify-content:center; gap:.4rem 1.2rem; flex-wrap:wrap; padding:.8rem 1rem 0 }
+.bk-trust__item { display:flex; align-items:center; gap:.3rem; font-size:.69rem; color:var(--g500); font-weight:500 }
+
+/* ── Spinner ───────────────────────────────────────────────────────────── */
+.bk-spin { display:inline-block; width:15px; height:15px; border:2px solid rgba(255,255,255,.3); border-top-color:#fff; border-radius:50%; animation:bk-spin .7s linear infinite; vertical-align:middle }
+@keyframes bk-spin { to { transform:rotate(360deg) } }
 </style>
-
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -104,9 +140,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
-<!-- ── Header ─────────────────────────────────────────────────────────────── -->
-<header class="hdr"><div class="hdr__in">
-<a href="../index.html" class="logo"><img src="../images/logo.png" alt="Padma Shree Travels Logo" class="logo__img"><div class="logo__t">Padma Shree Travels<small>Agra Taxi Service</small></div></a><nav class="nav"><ul class="nav__l">
+<!-- ── Header ─────────────────────────────────────────────────────────── -->
+<header class="hdr" id="hdr"><div class="hdr__in">
+<a href="../index.html" class="logo"><img src="../images/logo.png" alt="Padma Shree Travels Logo" class="logo__img"><div class="logo__t">Padma Shree Travels<small>Agra Taxi Service</small></div></a>
+<nav class="nav"><ul class="nav__l">
 <li><a href="../index.html" class="nav__a">Home</a></li>
 <li class="nav__dd"><a href="../index.html#routes" class="nav__a">Pilgrimage &#9662;</a><div class="nav__ddm">
 <a href="../agra-to-mathura-taxi/">Agra &#8594; Mathura Taxi <span class="ptag">from &#8377;1,500</span></a>
@@ -157,302 +194,260 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <a href="../agra-to-firozabad">Agra to Firozabad <span class="ptag">&#8377;2,500 &middot; RT</span></a>
 <a href="../agra-to-etawah">Agra to Etawah <span class="ptag">&#8377;3,500 &middot; RT</span></a>
 </div>
-<a href="../blog/">Travel Blog</a>
-<a href="../contact">Contact / Book Now</a>
+<a href="../blog/" class="mnav__home">Blog</a>
+<a href="../contact" class="mnav__home">Contact</a>
 <div class="mnav__cta">
 <a href="tel:+918720081102" class="btn btn--b btn--lg"><i data-lucide="phone" class="icon icon--white" aria-hidden="true"></i> Call Now</a>
 <a href="https://wa.me/918720081102?text=Hi!%20I%20need%20a%20cab%20from%20Agra" class="btn btn--wa btn--lg" target="_blank" rel="noopener"><i data-lucide="message-circle" class="icon icon--white" aria-hidden="true"></i> WhatsApp</a>
 </div></div>
 
-<!-- ── Page Hero ───────────────────────────────────────────────────────────── -->
-<section class="phero"><div class="container"><div class="phero__in">
-<div class="bc"><a href="../">Home</a> &#8250; <span>Book Now</span></div>
-<span class="sbadge">Easy WhatsApp Booking</span>
-<h1>Book Your Agra Taxi on WhatsApp</h1>
-<p class="phero__tag">Fill in your details and we&#8217;ll confirm your booking on WhatsApp within minutes. No advance payment required.</p>
-<div class="trust-bar" style="margin-top:.9rem">
-  <span class="trust-item" style="color:rgba(255,255,255,.7)">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:#05944F"><polyline points="20 6 9 17 4 12"/></svg>
-    No advance payment required
-  </span>
-  <span class="trust-item" style="color:rgba(255,255,255,.7)">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:#05944F"><polyline points="20 6 9 17 4 12"/></svg>
-    Confirmed within minutes
-  </span>
-  <span class="trust-item" style="color:rgba(255,255,255,.7)">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:#05944F"><polyline points="20 6 9 17 4 12"/></svg>
-    Free cancellation (2 hrs before)
-  </span>
-</div>
-</div></div></section>
+<!-- ── Main ────────────────────────────────────────────────────────────── -->
+<main class="bk-main">
+<div class="bk-wrap">
 
-<!-- ── Booking Section ─────────────────────────────────────────────────────── -->
-<section class="section"><div class="container">
-<div class="book-layout">
-
-  <!-- Left: Form -->
-  <div>
-    <!-- Success state (hidden until payment verified) -->
-    <div id="pb-success" class="booking-success" hidden>
-      <div class="booking-success__icon">&#10003;</div>
-      <h2>Booking Confirmed!</h2>
-      <p>Your cab is booked. A confirmation has been sent to your email.</p>
-      <div class="booking-success__details">
-        <div class="booking-success__row">
-          <span>Route</span><span id="pb-success-route"></span>
-        </div>
-        <div class="booking-success__row">
-          <span>Travel Date</span><span id="pb-success-date"></span>
-        </div>
-        <div class="booking-success__row">
-          <span>Pickup Time</span><span id="pb-success-time"></span>
-        </div>
-        <div class="booking-success__row">
-          <span>Pickup From</span><span id="pb-success-pickup"></span>
-        </div>
-        <div class="booking-success__row">
-          <span>Amount to Be Paid</span><span id="pb-success-amount"></span>
-        </div>
-      </div>
-      <p style="font-size:.84rem;color:#B91C1C;font-weight:500;background:#FEF2F2;border:1px solid #FECACA;border-radius:var(--r);padding:.75rem 1rem;margin:1rem 0">We don&#8217;t receive any advance payment. You can pay the amount once we confirm the booking or after completion of the ride.</p>
-      <p style="font-size:.84rem;color:var(--g500)">Our team will call you within 2 hours to confirm driver details.</p>
-      <div class="booking-success__acts">
-        <a href="tel:+918720081102" class="btn btn--b btn--lg"><i data-lucide="phone" class="icon icon--white" aria-hidden="true"></i> +91-87200 81102</a>
-        <a href="https://wa.me/918720081102" class="btn btn--wa btn--lg" target="_blank" rel="noopener"><i data-lucide="message-circle" class="icon icon--white" aria-hidden="true"></i> WhatsApp</a>
-      </div>
+  <!-- Page top -->
+  <div class="bk-pagetop">
+    <div class="bk-city">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      Agra, IN
     </div>
-
-    <!-- Booking form card -->
-    <div class="bform">
-      <h2 style="font-size:1.15rem;margin-bottom:1.4rem">Enter Booking Details</h2>
-
-      <!-- Global error bar -->
-      <div id="pb-error" class="form-error-bar" hidden aria-live="polite"></div>
-
-      <form id="payBookingForm" novalidate>
-        <div class="fgrid">
-
-          <div class="fg">
-            <label for="pb-name">Full Name <span class="req" aria-hidden="true">*</span></label>
-            <div class="field-wrap"><span class="field-icon"><i data-lucide="user" class="icon icon--sm icon--muted" aria-hidden="true"></i></span>
-            <input type="text" id="pb-name" name="name" class="finput"
-              placeholder="Your full name" required autocomplete="name"
-              aria-required="true"></div>
-            <div class="ferr" role="alert"></div>
-          </div>
-
-          <div class="fg">
-            <label for="pb-email">Email Address <span class="req" aria-hidden="true">*</span></label>
-            <div class="field-wrap"><span class="field-icon"><i data-lucide="mail" class="icon icon--sm icon--muted" aria-hidden="true"></i></span>
-            <input type="email" id="pb-email" name="email" class="finput"
-              placeholder="you@example.com" required autocomplete="email"
-              aria-required="true"></div>
-            <div class="ferr" role="alert"></div>
-          </div>
-
-          <div class="fg">
-            <label for="pb-phone">Mobile Number <span class="req" aria-hidden="true">*</span></label>
-            <div class="field-wrap"><span class="field-icon"><i data-lucide="phone" class="icon icon--sm icon--muted" aria-hidden="true"></i></span>
-            <input type="tel" id="pb-phone" name="phone" class="finput"
-              placeholder="10-digit mobile number" required autocomplete="tel"
-              inputmode="numeric" aria-required="true"></div>
-            <div class="ferr" role="alert"></div>
-          </div>
-
-          <div class="fg" style="grid-column:1/-1">
-            <label for="pb-route">Select Route <span class="req" aria-hidden="true">*</span></label>
-            <div class="field-wrap"><span class="field-icon"><i data-lucide="map-pin" class="icon icon--sm icon--muted" aria-hidden="true"></i></span>
-            <select id="pb-route" name="route" class="finput" required aria-required="true">
-              <option value="">— Choose your route —</option>
-              <optgroup label="Agra Local Sightseeing">
-                <option value="agra-local-sightseeing">Agra Full Day Sightseeing — ₹2,500 (Full Day)</option>
-                <option value="fatehpur-sikri">Fatehpur Sikri Day Trip — ₹2,500 (Full Day)</option>
-              </optgroup>
-              <optgroup label="Mathura &amp; Vrindavan Pilgrimage">
-                <option value="agra-to-mathura-taxi">Mathura Only (Round Trip from Agra) — ₹3,000</option>
-                <option value="agra-to-vrindavan-cab">Vrindavan Only (Round Trip from Agra) — ₹3,000</option>
-                <option value="mathura-vrindavan-tour">Mathura + Vrindavan Full Day Tour — ₹3,000</option>
-                <option value="mathura-vrindavan-barsana">Mathura + Vrindavan + Barsana Full Day — ₹3,500</option>
-              </optgroup>
-              <optgroup label="Outstation">
-                <option value="agra-to-aligarh">Agra to Aligarh — ₹3,000 (Round Trip)</option>
-                <option value="agra-to-hathras">Agra to Hathras — ₹2,000 (Round Trip)</option>
-                <option value="agra-to-sirsaganj">Agra to Sirsaganj — ₹3,000 (Round Trip)</option>
-                <option value="agra-to-etawah">Agra to Etawah — ₹3,500 (Round Trip)</option>
-                <option value="agra-to-gwalior">Agra to Gwalior — ₹3,000 (Round Trip)</option>
-                <option value="agra-to-firozabad">Agra to Firozabad — ₹2,500 (Round Trip)</option>
-                <option value="agra-to-bateshwar">Agra to Bateshwar — ₹3,000 (Round Trip)</option>
-                <option value="agra-to-tundla">Agra to Tundla — ₹2,000 (Round Trip)</option>
-                <option value="agra-to-shikohabad">Agra to Shikohabad — ₹3,000 (Round Trip)</option>
-              </optgroup>
-            </select></div>
-            <div class="ferr" role="alert"></div>
-            <p style="font-size:.72rem;color:var(--g400);margin:.3rem 0 0">Online booking covers round trips &amp; full-day tours. For one-way fares, <a href="tel:+918720081102" style="color:var(--g500)">call us</a>.</p>
-          </div>
-
-          <div class="fg" style="grid-column:1/-1">
-            <label for="pb-pickup">Pickup Location <span class="req" aria-hidden="true">*</span></label>
-            <div class="field-wrap"><span class="field-icon"><i data-lucide="navigation" class="icon icon--sm icon--muted" aria-hidden="true"></i></span>
-            <input type="text" id="pb-pickup" name="pickup" class="finput"
-              placeholder="Hotel name, railway station, or street address" required autocomplete="street-address"
-              aria-required="true"></div>
-            <div class="ferr" role="alert"></div>
-            <p style="font-size:.72rem;color:var(--g400);margin:.3rem 0 0">Where should the driver pick you up? Hotel name + area is enough.</p>
-          </div>
-
-          <div class="fg">
-            <label for="pb-date">Travel Date <span class="req" aria-hidden="true">*</span></label>
-            <div class="field-wrap"><span class="field-icon"><i data-lucide="calendar" class="icon icon--sm icon--muted" aria-hidden="true"></i></span>
-            <input type="date" id="pb-date" name="date" class="finput"
-              required aria-required="true"></div>
-            <div class="ferr" role="alert"></div>
-          </div>
-
-          <div class="fg">
-            <label for="pb-time">Pickup Time <span class="req" aria-hidden="true">*</span></label>
-            <div class="field-wrap"><span class="field-icon"><i data-lucide="clock" class="icon icon--sm icon--muted" aria-hidden="true"></i></span>
-            <input type="time" id="pb-time" name="time" class="finput"
-              required aria-required="true"></div>
-            <div class="ferr" role="alert"></div>
-          </div>
-
-          <div class="fg">
-            <label for="pb-passengers">Passengers <span class="req" aria-hidden="true">*</span></label>
-            <div class="field-wrap"><span class="field-icon"><i data-lucide="users" class="icon icon--sm icon--muted" aria-hidden="true"></i></span>
-            <select id="pb-passengers" name="passengers" class="finput" required aria-required="true">
-              <option value="">— Select —</option>
-              <option value="1">1 Passenger</option>
-              <option value="2">2 Passengers</option>
-              <option value="3">3 Passengers</option>
-              <option value="4">4 Passengers</option>
-              <option value="5-6">5–6 Passengers (SUV needed)</option>
-              <option value="7+">7+ Passengers (please call us)</option>
-            </select></div>
-            <div class="ferr" role="alert"></div>
-          </div>
-
-          <div class="fg" style="grid-column:1/-1">
-            <label for="pb-notes">Special Requests <span style="color:var(--g400);font-weight:400;font-size:.83em">(optional)</span></label>
-            <textarea id="pb-notes" name="notes" class="finput" rows="2"
-              placeholder="e.g. need child seat, extra luggage, drop to airport after tour, early morning pickup…"
-              style="resize:vertical"></textarea>
-          </div>
-
-        </div><!-- /.fgrid -->
-
-        <!-- SUV / group advisory — shown by JS on passengers change -->
-        <p id="pb-suv-note" hidden style="font-size:.73rem;margin:1rem 0 0;padding:.65rem .9rem;background:#FFFBEB;border:1px solid #FCD34D;border-radius:var(--r);color:#78350F">
-          &#9432; For 5–6 passengers, SUV pricing applies (&#8377;3,800–&#8377;4,500 depending on route). Our team will confirm the exact fare on WhatsApp after booking.
-        </p>
-        <p id="pb-group-note" hidden style="font-size:.73rem;margin:1rem 0 0;padding:.65rem .9rem;background:#FEF2F2;border:1px solid #FECACA;border-radius:var(--r);color:#991B1B">
-          &#9888; For groups of 7+, please <a href="tel:+918720081102" style="color:inherit;font-weight:600">call us</a> for a Tempo Traveller quote. Online booking covers up to 6 passengers.
-        </p>
-
-        <!-- Live price display (shown after route selection) -->
-        <div id="pb-price-display" hidden>
-          <div class="price-badge">
-            <div>
-              <div class="price-badge__label">Total Fare &mdash; <span id="pb-price-type">AC Sedan</span></div>
-              <div class="price-badge__amount" id="pb-price-amount"></div>
-              <div class="price-badge__note">Fuel &amp; driver incl. &middot; Tolls &amp; parking extra</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Loading indicator -->
-        <div id="pb-loading" style="text-align:center;padding:.7rem 0;color:var(--g500);font-size:.85rem" hidden>
-          <span class="spin"></span> Preparing your WhatsApp message&hellip;
-        </div>
-
-        <div style="margin-top:1.4rem">
-          <button type="submit" id="pb-submit" class="btn btn--wa btn--lg" style="width:100%;justify-content:center;font-size:1rem">
-            Book Now on WhatsApp &#8594;
-          </button>
-        </div>
-
-        <div style="margin-top:1.2rem;padding:.9rem 1.1rem;background:var(--g50);border:1px solid var(--g100);border-radius:var(--r)">
-          <p style="font-size:.79rem;font-weight:600;margin:0 0 .4rem;color:var(--black)">What happens after you submit?</p>
-          <ol style="margin:0;padding-left:1.25rem;font-size:.76rem;color:var(--g500);line-height:1.8">
-            <li>Your details are sent to us via WhatsApp instantly.</li>
-            <li>Our team calls within 2 hours to confirm pickup details.</li>
-            <li>Driver name &amp; number shared on WhatsApp before your trip.</li>
-          </ol>
-        </div>
-
-        <p style="margin:.9rem 0 0;font-size:.72rem;color:var(--g400);text-align:center">
-          No advance payment required &bull; Pay after booking is confirmed or after ride &bull; Free cancellation 2 hrs before pickup
-        </p>
-      </form>
-    </div><!-- /.bform -->
+    <h1 class="bk-h1">Book your cab<br>for now or later</h1>
+    <p class="bk-sub">WhatsApp confirmation within minutes. No advance payment required.</p>
   </div>
 
-  <!-- Right: Info sidebar -->
-  <aside>
-    <div class="side-info">
-      <h3>Why Book With Us?</h3>
-      <div class="side-info__item">
-        <span class="side-info__i"><i data-lucide="shield-check" class="icon icon--sm" style="stroke:var(--green)" aria-hidden="true"></i></span>
-        <span>Booking confirmed within minutes on WhatsApp</span>
+  <!-- Booking card -->
+  <div class="bk-card" id="bk-card">
+
+    <!-- ── Success state (hidden until submit) ── -->
+    <div id="pb-success" class="bk-success" hidden>
+      <div class="bk-success__icon">&#10003;</div>
+      <h2>Opening WhatsApp&#8230;</h2>
+      <p class="bk-success__sub">Your booking details are ready. Just press <strong>Send</strong> in WhatsApp to confirm.</p>
+      <div class="bk-success__details">
+        <div class="bk-success__row"><span>Route</span><span id="pb-success-route"></span></div>
+        <div class="bk-success__row"><span>Pickup From</span><span id="pb-success-pickup"></span></div>
+        <div class="bk-success__row"><span>Date</span><span id="pb-success-date"></span></div>
+        <div class="bk-success__row"><span>Time</span><span id="pb-success-time"></span></div>
+        <div class="bk-success__row"><span>Est. Fare</span><span id="pb-success-amount"></span></div>
       </div>
-      <div class="side-info__item">
-        <span class="side-info__i"><i data-lucide="indian-rupee" class="icon icon--sm" style="stroke:var(--green)" aria-hidden="true"></i></span>
-        <span>No advance payment — pay after booking is confirmed or after ride</span>
-      </div>
-      <div class="side-info__item">
-        <span class="side-info__i"><i data-lucide="car" class="icon icon--sm" style="stroke:var(--green)" aria-hidden="true"></i></span>
-        <span>AC sedan with experienced local driver</span>
-      </div>
-      <div class="side-info__item">
-        <span class="side-info__i"><i data-lucide="calendar-check" class="icon icon--sm" style="stroke:var(--green)" aria-hidden="true"></i></span>
-        <span>Free cancellation up to 2 hours before pickup</span>
-      </div>
-      <div class="side-info__item">
-        <span class="side-info__i"><i data-lucide="info" class="icon icon--sm" style="stroke:var(--green)" aria-hidden="true"></i></span>
-        <span>Fare covers fuel &amp; driver. Tolls &amp; parking paid at the gate — told upfront.</span>
+      <p style="font-size:.76rem;color:#B91C1C;background:#FEF2F2;border:1px solid #FECACA;border-radius:var(--r);padding:.6rem .85rem;margin:0 0 .9rem;line-height:1.5;text-align:left">
+        No advance payment required. Pay after booking is confirmed or after ride completion.
+      </p>
+      <div class="bk-success__acts">
+        <a href="tel:+918720081102" class="btn btn--b btn--lg"><i data-lucide="phone" class="icon icon--white" aria-hidden="true"></i> Call Us</a>
+        <a id="bk-wa-retry" href="https://wa.me/918720081102" class="btn btn--wa btn--lg" target="_blank" rel="noopener"><i data-lucide="message-circle" class="icon icon--white" aria-hidden="true"></i> Open WhatsApp</a>
       </div>
     </div>
 
-    <div class="side-info" style="margin-top:1rem">
-      <h3>Prefer to Call?</h3>
-      <div class="side-info__item">
-        <span class="side-info__i"><i data-lucide="phone" class="icon icon--sm icon--muted" aria-hidden="true"></i></span>
-        <div>
-          <a href="tel:+918720081102" style="font-weight:700;color:var(--black);font-size:.95rem">+91-87200 81102</a>
-          <p style="margin:.15rem 0 0;font-size:.75rem;color:var(--g400)">Available 24/7</p>
+    <!-- ── Form main ── -->
+    <div id="bk-form-main">
+
+      <!-- ① Trip type -->
+      <div class="bk-sec">
+        <div class="bk-toggle" role="group" aria-label="Trip type">
+          <button type="button" class="bk-toggle__btn active" data-trip="roundtrip" onclick="bkSetTrip('roundtrip')">
+            Round Trip / Full Day
+          </button>
+          <button type="button" class="bk-toggle__btn" data-trip="oneway" onclick="bkSetTrip('oneway')">
+            One Way
+          </button>
         </div>
       </div>
-      <div class="side-info__item">
-        <span class="side-info__i"><i data-lucide="message-circle" class="icon icon--sm icon--muted" aria-hidden="true"></i></span>
-        <a href="https://wa.me/918720081102?text=Hi!%20I%20want%20to%20book%20a%20cab%20from%20Agra"
-           class="btn btn--wa" target="_blank" rel="noopener"
-           style="font-size:.82rem;padding:.55rem 1.1rem">
-          WhatsApp
-        </a>
+
+      <!-- One-way callout -->
+      <div id="bk-oneway" class="bk-oneway" style="display:none" aria-live="polite">
+        <p>For one-way fares, <strong>call or WhatsApp us</strong> and we&#8217;ll confirm a custom quote on the spot.</p>
+        <div class="bk-oneway__acts">
+          <a href="tel:+918720081102" class="btn btn--b"><i data-lucide="phone" class="icon icon--sm icon--white" aria-hidden="true"></i> Call Now</a>
+          <a href="https://wa.me/918720081102?text=Hi!%20I%20need%20a%20one-way%20cab%20from%20Agra.%20Can%20you%20share%20the%20fare%3F" class="btn btn--wa" target="_blank" rel="noopener"><i data-lucide="message-circle" class="icon icon--sm icon--white" aria-hidden="true"></i> WhatsApp</a>
+        </div>
       </div>
-    </div>
 
-    <div style="margin-top:1rem;padding:1rem 1.2rem;background:var(--g50);border-radius:var(--r);border:1px solid var(--g100)">
-      <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem">
-        <span style="font-size:1rem">&#11088;</span>
-        <span style="font-weight:700;font-size:.88rem">4.8 / 5 Rating</span>
-      </div>
-      <p style="font-size:.78rem;color:var(--g500);margin:0">"Very punctual driver, clean car. Highly recommend for Taj Mahal tour." — Priya S., Delhi</p>
-    </div>
-  </aside>
+      <!-- Round-trip form body -->
+      <div id="bk-form-body">
+        <form id="payBookingForm" novalidate>
 
-</div><!-- /.book-layout -->
-</div></section>
+          <!-- Global error -->
+          <div id="pb-error" class="bk-err-bar" hidden aria-live="polite"></div>
 
-<!-- ── CTA ─────────────────────────────────────────────────────────────────── -->
-<section class="cta"><div class="container">
-<h2>Questions About Your Booking?</h2>
-<p>Call or WhatsApp us — we confirm within minutes.</p>
-<div class="cta__acts">
-<a href="tel:+918720081102" class="btn btn--w btn--lg"><i data-lucide="phone" class="icon icon--black" aria-hidden="true"></i> Call Now</a>
-<a href="https://wa.me/918720081102?text=Hi!%20I%20need%20a%20cab%20from%20Agra" class="btn btn--wa btn--lg" target="_blank" rel="noopener"><i data-lucide="message-circle" class="icon icon--white" aria-hidden="true"></i> WhatsApp</a>
-</div></div></section>
+          <!-- ② Locations -->
+          <div class="bk-sec bk-sec--sep">
+            <div class="bk-locs" id="bk-locs">
+              <div class="bk-loc-row">
+                <span class="bk-loc-dot" aria-hidden="true"></span>
+                <div class="bk-loc-wrap fg" id="fg-pb-pickup">
+                  <input type="text" id="pb-pickup" name="pickup"
+                    class="bk-loc-input"
+                    placeholder="Pickup location"
+                    required autocomplete="street-address"
+                    aria-required="true" aria-label="Pickup location">
+                  <div class="bk-ferr" role="alert"></div>
+                </div>
+              </div>
+              <div class="bk-loc-sep" aria-hidden="true"></div>
+              <div class="bk-loc-row">
+                <span class="bk-loc-sq" aria-hidden="true"></span>
+                <div class="bk-loc-wrap fg" id="fg-pb-route">
+                  <select id="pb-route" name="route"
+                    class="bk-loc-sel"
+                    required aria-required="true" aria-label="Destination / Route">
+                    <option value="">Where to?</option>
+                    <optgroup label="Local Sightseeing">
+                      <option value="agra-local-sightseeing">Agra Full Day Sightseeing &mdash; &#8377;2,500</option>
+                      <option value="fatehpur-sikri">Fatehpur Sikri Day Trip &mdash; &#8377;2,500</option>
+                    </optgroup>
+                    <optgroup label="Mathura &amp; Vrindavan Pilgrimage">
+                      <option value="agra-to-mathura-taxi">Mathura (Round Trip) &mdash; &#8377;3,000</option>
+                      <option value="agra-to-vrindavan-cab">Vrindavan (Round Trip) &mdash; &#8377;3,000</option>
+                      <option value="mathura-vrindavan-tour">Mathura + Vrindavan Tour &mdash; &#8377;3,000</option>
+                      <option value="mathura-vrindavan-barsana">Mathura + Vrindavan + Barsana &mdash; &#8377;3,500</option>
+                    </optgroup>
+                    <optgroup label="Outstation">
+                      <option value="agra-to-aligarh">Agra to Aligarh &mdash; &#8377;3,000</option>
+                      <option value="agra-to-hathras">Agra to Hathras &mdash; &#8377;2,000</option>
+                      <option value="agra-to-sirsaganj">Agra to Sirsaganj &mdash; &#8377;3,000</option>
+                      <option value="agra-to-etawah">Agra to Etawah &mdash; &#8377;3,500</option>
+                      <option value="agra-to-gwalior">Agra to Gwalior &mdash; &#8377;3,000</option>
+                      <option value="agra-to-firozabad">Agra to Firozabad &mdash; &#8377;2,500</option>
+                      <option value="agra-to-bateshwar">Agra to Bateshwar &mdash; &#8377;3,000</option>
+                      <option value="agra-to-tundla">Agra to Tundla &mdash; &#8377;2,000</option>
+                      <option value="agra-to-shikohabad">Agra to Shikohabad &mdash; &#8377;3,000</option>
+                    </optgroup>
+                  </select>
+                  <div class="bk-ferr" role="alert"></div>
+                </div>
+              </div>
+            </div>
+            <p style="font-size:.69rem;color:var(--g400);margin:.4rem 0 0">Online booking covers round trips &amp; full-day tours. For one-way fares, tap <strong>One Way</strong> above.</p>
+          </div>
 
-<!-- ── Footer ─────────────────────────────────────────────────────────────── -->
+          <!-- Price badge (shown after route selection) -->
+          <div id="pb-price-display" class="bk-price" hidden>
+            <div>
+              <div class="bk-price__lbl"><span id="pb-price-type">Round Trip</span> &mdash; Est. Fare</div>
+              <div class="bk-price__amt" id="pb-price-amount"></div>
+              <div class="bk-price__note">Fuel &amp; driver incl. &bull; Tolls &amp; parking extra</div>
+            </div>
+          </div>
+
+          <!-- ③ Timing -->
+          <div class="bk-sec bk-sec--sep">
+            <div class="bk-toggle" role="group" aria-label="Pickup timing">
+              <button type="button" class="bk-toggle__btn active" data-timing="now" onclick="bkSetTiming('now')">
+                &#128336; Pickup now
+              </button>
+              <button type="button" class="bk-toggle__btn" data-timing="schedule" onclick="bkSetTiming('schedule')">
+                &#128197; Schedule ride
+              </button>
+            </div>
+          </div>
+
+          <!-- ④ Date + Time -->
+          <div class="bk-sec bk-sec--sep bk-2col" id="bk-datetime">
+            <div class="fg" id="fg-pb-date">
+              <label class="bk-label" for="pb-date">Travel Date</label>
+              <input type="date" id="pb-date" name="date" class="bk-input" required aria-required="true">
+              <div class="bk-ferr" role="alert"></div>
+            </div>
+            <div class="fg" id="fg-pb-time">
+              <label class="bk-label" for="pb-time">Pickup Time</label>
+              <input type="time" id="pb-time" name="time" class="bk-input" required aria-required="true">
+              <div class="bk-ferr" role="alert"></div>
+            </div>
+          </div>
+
+          <!-- ⑤ Passengers -->
+          <div class="bk-sec bk-sec--sep">
+            <div class="fg" id="fg-pb-passengers">
+              <label class="bk-label" for="pb-passengers">Passengers</label>
+              <select id="pb-passengers" name="passengers" class="bk-input" required aria-required="true">
+                <option value="">Select passengers</option>
+                <option value="1">1 Passenger</option>
+                <option value="2">2 Passengers</option>
+                <option value="3">3 Passengers</option>
+                <option value="4">4 Passengers</option>
+                <option value="5-6">5&ndash;6 Passengers (SUV)</option>
+                <option value="7+">7+ Passengers (please call)</option>
+              </select>
+              <div class="bk-ferr" role="alert"></div>
+            </div>
+          </div>
+
+          <!-- Advisory notes -->
+          <p id="pb-suv-note" hidden class="bk-advisory bk-advisory--suv">
+            &#9432; For 5&ndash;6 passengers, SUV pricing applies (&#8377;3,800&ndash;&#8377;4,500 depending on route). Our team will confirm the exact fare on WhatsApp.
+          </p>
+          <p id="pb-group-note" hidden class="bk-advisory bk-advisory--group">
+            &#9888; For 7+ passengers, please <a href="tel:+918720081102" style="color:inherit;font-weight:600">call us</a> for a Tempo Traveller quote.
+          </p>
+
+          <!-- ── Contact divider ── -->
+          <div class="bk-divider">Your details</div>
+
+          <!-- ⑥ Name + Phone -->
+          <div class="bk-sec bk-2col">
+            <div class="fg" id="fg-pb-name">
+              <label class="bk-label" for="pb-name">Full Name</label>
+              <input type="text" id="pb-name" name="name" class="bk-input"
+                placeholder="Your name" required autocomplete="name" aria-required="true">
+              <div class="bk-ferr" role="alert"></div>
+            </div>
+            <div class="fg" id="fg-pb-phone">
+              <label class="bk-label" for="pb-phone">Mobile Number</label>
+              <input type="tel" id="pb-phone" name="phone" class="bk-input"
+                placeholder="10-digit number" required autocomplete="tel"
+                inputmode="numeric" aria-required="true">
+              <div class="bk-ferr" role="alert"></div>
+            </div>
+          </div>
+
+          <!-- ⑦ Notes (optional) -->
+          <div class="bk-sec bk-sec--sep">
+            <div class="fg">
+              <label class="bk-label" for="pb-notes">Special Requests <span style="font-weight:400;color:var(--g400)">(optional)</span></label>
+              <textarea id="pb-notes" name="notes" class="bk-input" rows="2"
+                placeholder="Child seat, extra luggage, early morning pickup&#8230;"
+                style="resize:vertical"></textarea>
+            </div>
+          </div>
+
+          <!-- ⑧ CTA -->
+          <div class="bk-cta-sec">
+            <div id="pb-loading" style="text-align:center;padding:.4rem 0;font-size:.82rem;color:var(--g500)" hidden>
+              <span class="bk-spin"></span> Preparing your booking&#8230;
+            </div>
+            <button type="submit" id="pb-submit" class="bk-submit">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+              Book on WhatsApp
+            </button>
+            <p class="bk-policy">No advance payment &bull; Pay after ride &bull; Tolls &amp; parking extra where applicable</p>
+          </div>
+
+        </form>
+      </div><!-- /#bk-form-body -->
+    </div><!-- /#bk-form-main -->
+  </div><!-- /.bk-card -->
+
+  <!-- Trust strip -->
+  <div class="bk-trust">
+    <span class="bk-trust__item">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#05944F" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+      No advance payment
+    </span>
+    <span class="bk-trust__item">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#05944F" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+      Confirmed within minutes
+    </span>
+    <span class="bk-trust__item">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#05944F" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+      Free cancellation (2 hrs before)
+    </span>
+  </div>
+
+</div><!-- /.bk-wrap -->
+</main>
+
+<!-- ── Footer ─────────────────────────────────────────────────────────── -->
 <footer class="ft"><div class="container"><div class="ft__grid">
 <div class="ft__brand">
   <div class="logo"><img src="../images/logo.png" alt="Padma Shree Travels" class="logo__img">
@@ -466,11 +461,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <li><a href="../agra-local-sightseeing/">Local Sightseeing</a></li>
 <li><a href="../blog/">Travel Blog</a></li>
 <li><a href="../contact">Contact</a></li></ul></div>
-<div><h4 class="ft__h">Routes</h4><ul class="ft__links">
-<li><a href="../agra-to-mathura-vrindavan">Mathura &amp; Vrindavan</a></li>
-<li><a href="../mathura-vrindavan-barsana">Barsana Tour</a></li>
+<div><h4 class="ft__h">More Routes</h4><ul class="ft__links">
+<li><a href="../mathura-vrindavan-barsana">Mathura &amp; Barsana</a></li>
 <li><a href="../fatehpur-sikri">Fatehpur Sikri</a></li>
-<li><a href="../agra-to-gwalior">Agra to Gwalior</a></li></ul></div>
+<li><a href="../agra-to-gwalior">Agra to Gwalior</a></li>
+<li><a href="../agra-to-aligarh">Agra to Aligarh</a></li></ul></div>
 <div><h4 class="ft__h">Contact Us</h4>
 <div class="ft__cr"><div class="ft__ci"><i data-lucide="map-pin" aria-hidden="true"></i></div><div>Rajeshwar Mandir, Kaveri Vihar Phase II, Shamsabad, Agra, Uttar Pradesh 282001</div></div>
 <div class="ft__cr"><div class="ft__ci"><i data-lucide="phone" aria-hidden="true"></i></div><div><a href="tel:+918720081102" style="color:var(--g400)">+91-87200 81102</a></div></div>
@@ -485,9 +480,59 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="mcta-bar"><a href="tel:+918720081102" class="mcta-bar__a mcta-bar__call">&#128222; Call Now</a><a href="https://wa.me/918720081102?text=Hi!%20I%20need%20a%20cab%20from%20Agra" class="mcta-bar__a mcta-bar__wa" target="_blank" rel="noopener">&#128172; WhatsApp</a><a href="../book/" class="mcta-bar__a mcta-bar__book">&#128274; Book Online</a></div>
 <a href="https://wa.me/918720081102?text=Hi!%20I%20need%20a%20cab%20from%20Agra" class="waf" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp"><i data-lucide="message-circle" aria-hidden="true"></i></a>
 
-<!-- Site JS -->
+<script>
+/* ── Trip type toggle ─────────────────────────────────────────────────── */
+function bkSetTrip(type) {
+  document.querySelectorAll('[data-trip]').forEach(function(b) {
+    b.classList.toggle('active', b.dataset.trip === type);
+  });
+  var ow = document.getElementById('bk-oneway');
+  var fb = document.getElementById('bk-form-body');
+  if (type === 'oneway') {
+    ow.style.display = 'block';
+    fb.style.display = 'none';
+  } else {
+    ow.style.display = 'none';
+    fb.style.display = 'block';
+  }
+}
+
+/* ── Timing toggle ────────────────────────────────────────────────────── */
+function bkSetTiming(type) {
+  document.querySelectorAll('[data-timing]').forEach(function(b) {
+    b.classList.toggle('active', b.dataset.timing === type);
+  });
+  var di = document.getElementById('pb-date');
+  var ti = document.getElementById('pb-time');
+  if (type === 'now') {
+    var n = new Date();
+    di.value = n.toISOString().split('T')[0];
+    n.setHours(n.getHours() + 1, 0, 0, 0);
+    ti.value = String(n.getHours()).padStart(2,'0') + ':00';
+    document.getElementById('bk-datetime').style.opacity = '.55';
+  } else {
+    di.value = '';
+    ti.value = '';
+    document.getElementById('bk-datetime').style.opacity = '1';
+    di.focus();
+  }
+}
+
+/* ── Init: prefill "now" defaults ─────────────────────────────────────── */
+(function() {
+  var n = new Date();
+  var di = document.getElementById('pb-date');
+  var ti = document.getElementById('pb-time');
+  if (di) di.value = n.toISOString().split('T')[0];
+  if (ti) {
+    n.setHours(n.getHours() + 1, 0, 0, 0);
+    ti.value = String(n.getHours()).padStart(2,'0') + ':00';
+  }
+  /* Set date min */
+  if (di) di.min = new Date().toISOString().split('T')[0];
+})();
+</script>
 <script src="../js/main.js"></script>
-<!-- Booking JS -->
 <script src="../js/booking.js"></script>
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 <script>lucide.createIcons();</script>
