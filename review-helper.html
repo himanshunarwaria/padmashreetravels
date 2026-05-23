@@ -513,20 +513,56 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- ── Script ───────────────────────────────────────────────────────────────── -->
 <script>
-/* 1 fallback per category — shown instantly; fetch below adds the full 287 */
+/* 3 fallbacks per category — ensures randomness even if fetch fails */
 var REVIEWS = {
-  local:       ['Fixed fare, on-time driver, no cancellations. My go-to cab for local trips in Agra.'],
-  airport:     ['Pre-booked for airport drop. Driver came early, helped with bags, fare exactly as quoted.'],
-  mathura:     ['Agra to Mathura darshan — clean cab, driver waited at every temple, fair price. Will use again.'],
-  vrindavan:   ['Vrindavan trip with family. Driver knew all the main temples, waited during darshan, no extra charges.'],
-  sightseeing: ['Full day Agra tour — Taj Mahal, Fort, Mehtab Bagh. Driver knew the best timings. Smooth experience.'],
-  outstation:  ['Round trip to Gwalior from Agra. Highway-experienced driver, fare fixed before we left. No surprises.']
+  local: [
+    'Fixed fare, on-time driver, no cancellations. My go-to cab for local trips in Agra.',
+    'Booked a city ride from Tajganj to Agra Cantt. Driver was punctual and the fare was exactly what was quoted.',
+    'Used Padma Shree for a local drop near Sadar Bazaar. Clean car, no haggling, straightforward experience.'
+  ],
+  airport: [
+    'Pre-booked for airport drop. Driver came early, helped with bags, fare exactly as quoted.',
+    'Early morning Kheria airport pickup arranged the night before. Driver was waiting at the gate, no stress.',
+    'Booked a cab for my Agra Cantt station drop. Arrived on time, no last-minute price change. Reliable service.'
+  ],
+  mathura: [
+    'Agra to Mathura darshan — clean cab, driver waited at every temple, fair price. Will use again.',
+    'Took a cab to Mathura for Janmashtami. Driver knew the back roads and we reached on time despite the crowd.',
+    'Mathura pilgrimage with my parents. Driver was patient at Krishna Janmabhoomi, no rushing at all.'
+  ],
+  vrindavan: [
+    'Vrindavan trip with family. Driver knew all the main temples, waited during darshan, no extra charges.',
+    'Full day in Vrindavan — Banke Bihari, ISKCON, Prem Mandir. Driver handled the narrow lanes expertly.',
+    'Booked for Vrindavan darshan on Holi. Despite the festival rush, driver managed timing perfectly.'
+  ],
+  sightseeing: [
+    'Full day Agra tour — Taj Mahal, Fort, Mehtab Bagh. Driver knew the best timings. Smooth experience.',
+    'Agra sightseeing with my family from Delhi. Covered Taj, Agra Fort, and Baby Taj in one comfortable day.',
+    'Driver suggested the best sequence to avoid crowds at each monument. That local knowledge made the day.'
+  ],
+  outstation: [
+    'Round trip to Gwalior from Agra. Highway-experienced driver, fare fixed before we left. No surprises.',
+    'Agra to Aligarh and back. Fare was agreed upfront and did not change. Comfortable ride both ways.',
+    'Booked for Etawah trip. Driver arrived on time, maintained steady highway speed, and waited while I finished my work.'
+  ]
 };
 
 var GOOGLE_URL = 'https://g.page/r/CUjtXu1x_3bPEBM/review';
 
-function pickRandom(arr) {
-  return arr[Math.floor(Math.random() * arr.length)];
+/* Track last shown per route to prevent consecutive repeats */
+var lastShown = {};
+
+function pickRandom(arr, route) {
+  if (!arr || arr.length === 0) return '';
+  if (arr.length === 1) return arr[0];
+  var last = route ? lastShown[route] : null;
+  var pick, tries = 0;
+  do {
+    pick = arr[Math.floor(Math.random() * arr.length)];
+    tries++;
+  } while (pick === last && tries < 10);
+  if (route) lastShown[route] = pick;
+  return pick;
 }
 
 /* Set active route and populate a random review variant */
@@ -534,7 +570,7 @@ function setRoute(route) {
   document.querySelectorAll('.rh-pill').forEach(function(p) {
     p.classList.toggle('active', p.dataset.route === route);
   });
-  document.getElementById('rh-text').value = pickRandom(REVIEWS[route] || REVIEWS.mathura);
+  document.getElementById('rh-text').value = pickRandom(REVIEWS[route] || REVIEWS.mathura, route);
   /* Reset any prior copy state */
   resetState();
 }
@@ -639,13 +675,14 @@ function toggleTips() {
 }
 
 /* Pre-load the active pill's review on page open */
-document.getElementById('rh-text').value = pickRandom(REVIEWS.local);
+document.getElementById('rh-text').value = pickRandom(REVIEWS.local, 'local');
 
 /* Fetch full pool async — overrides fallback, refreshes textarea */
 fetch('reviews.json').then(function(r){return r.json();}).then(function(d){
   REVIEWS = d;
   var active = document.querySelector('.rh-pill.active');
-  document.getElementById('rh-text').value = pickRandom(d[active ? active.dataset.route : 'local']);
+  var route = active ? active.dataset.route : 'local';
+  document.getElementById('rh-text').value = pickRandom(d[route], route);
 });
 </script>
 <script src="js/main.js"></script>
