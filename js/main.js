@@ -76,4 +76,17 @@ document.addEventListener('DOMContentLoaded',function(){
       conversion_label:'XY8MCNfs7Z4CEMvhnLhD'
     });
   });
+
+  // ── Phone call click tracking (GTM dataLayer) ─────────────────────────────
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a[href^="tel:"]');
+    if(!a)return;
+    window.dataLayer=window.dataLayer||[];
+    window.dataLayer.push({
+      event:'phone_call_clicked',
+      call_number:a.href.replace('tel:',''),
+      page_location:window.location.href,
+      page_title:document.title
+    });
+  });
 });
