@@ -451,7 +451,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- ── Script ───────────────────────────────────────────────────────────────── -->
 <script>
-var REVIEWS = null;
+/* 1 fallback per category — shown instantly; fetch below adds the full 287 */
+var REVIEWS = {
+  local:       ['Fixed fare, on-time driver, no cancellations. My go-to cab for local trips in Agra.'],
+  airport:     ['Pre-booked for airport drop. Driver came early, helped with bags, fare exactly as quoted.'],
+  mathura:     ['Agra to Mathura darshan — clean cab, driver waited at every temple, fair price. Will use again.'],
+  vrindavan:   ['Vrindavan trip with family. Driver knew all the main temples, waited during darshan, no extra charges.'],
+  sightseeing: ['Full day Agra tour — Taj Mahal, Fort, Mehtab Bagh. Driver knew the best timings. Smooth experience.'],
+  outstation:  ['Round trip to Gwalior from Agra. Highway-experienced driver, fare fixed before we left. No surprises.']
+};
 
 var GOOGLE_URL = 'https://g.page/r/CUjtXu1x_3bPEBM/review';
 
@@ -464,7 +472,6 @@ function setRoute(route) {
   document.querySelectorAll('.rh-pill').forEach(function(p) {
     p.classList.toggle('active', p.dataset.route === route);
   });
-  if(!REVIEWS)return;
   document.getElementById('rh-text').value = pickRandom(REVIEWS[route] || REVIEWS.mathura);
   /* Reset any prior copy state */
   resetState();
@@ -542,7 +549,15 @@ function toggleTips() {
     : 'What makes a good review? &#9662;';
 }
 
-fetch('reviews.json').then(function(r){return r.json();}).then(function(d){REVIEWS=d;document.getElementById('rh-text').value=pickRandom(d.local);});
+/* Pre-load the active pill's review on page open */
+document.getElementById('rh-text').value = pickRandom(REVIEWS.local);
+
+/* Fetch full pool async — overrides fallback, refreshes textarea */
+fetch('reviews.json').then(function(r){return r.json();}).then(function(d){
+  REVIEWS = d;
+  var active = document.querySelector('.rh-pill.active');
+  document.getElementById('rh-text').value = pickRandom(d[active ? active.dataset.route : 'local']);
+});
 </script>
 <script src="js/main.js"></script>
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
