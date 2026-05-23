@@ -218,6 +218,54 @@ kbd {
   letter-spacing: 0;
 }
 
+/* Success check rows */
+.rh-s-check {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  font-size: .85rem;
+  font-weight: 700;
+  color: #047040;
+}
+
+/* Clipboard fallback */
+.rh-fallback {
+  display: none;
+  flex-direction: column;
+  gap: .5rem;
+  padding: .85rem 1rem;
+  margin-top: .85rem;
+  background: rgba(245,158,11,.06);
+  border: 1px solid rgba(245,158,11,.28);
+  border-radius: var(--r);
+}
+.rh-fallback__hd {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  font-size: .84rem;
+  font-weight: 700;
+  color: #92400e;
+  margin: 0;
+}
+.rh-fallback__sub { font-size: .77rem; color: var(--g600); margin: 0 }
+.rh-fallback__ta {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 82px;
+  padding: .6rem .75rem;
+  border: 1.5px solid rgba(245,158,11,.3);
+  border-radius: var(--r);
+  font-family: var(--ff);
+  font-size: .82rem;
+  color: var(--g800);
+  line-height: 1.6;
+  resize: none;
+  background: var(--white);
+  cursor: text;
+}
+.rh-fallback__ta:focus { outline: none; border-color: #92400e }
+
 /* Footer tips toggle */
 .rh-tips-toggle {
   display: block;
@@ -376,22 +424,36 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <!-- Primary CTA — copies + opens Google in one tap -->
         <button id="rh-main-btn" class="rh-cta" onclick="copyAndOpen()">
           <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-          Copy Review &amp; Open Google
+          Copy Review &amp; Open Google Review
           <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
         </button>
 
         <!-- Success state -->
         <div id="rh-success" class="rh-success">
-          <div class="rh-s-head">
-            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-            Review copied to clipboard
+          <div class="rh-s-check">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            Review text copied successfully
+          </div>
+          <div class="rh-s-check">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            Google Review page opened
           </div>
           <ol class="rh-s-steps">
             <li>Switch to the <strong>Google Reviews</strong> tab that just opened</li>
             <li>Tap the <strong>Write a review</strong> box</li>
-            <li>Paste &mdash; <kbd>Ctrl + V</kbd> on desktop &nbsp;&middot;&nbsp; long-press &rarr; <strong>Paste</strong> on phone</li>
+            <li id="rh-paste-hint"><kbd>Ctrl + V</kbd> on desktop &nbsp;&middot;&nbsp; long-press &rarr; <strong>Paste</strong> on phone</li>
             <li>Tap <strong>Post</strong> &mdash; done!</li>
           </ol>
+        </div>
+
+        <!-- Clipboard fallback — shown if copy API is unavailable -->
+        <div id="rh-fallback" class="rh-fallback">
+          <p class="rh-fallback__hd">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            Clipboard not available &mdash; copy manually
+          </p>
+          <p class="rh-fallback__sub">Tap the text below to select it, then copy and paste into Google Reviews:</p>
+          <textarea id="rh-fallback-ta" class="rh-fallback__ta" readonly onclick="this.select();this.setSelectionRange(0,99999)"></textarea>
         </div>
 
         <!-- Secondary: separate copy or open -->
@@ -477,13 +539,22 @@ function setRoute(route) {
   resetState();
 }
 
+/* Platform-specific paste instruction */
+function pasteHint() {
+  if (/ipad|iphone|ipod/i.test(navigator.userAgent)) {
+    return 'Long-press in the review box &rarr; tap <strong>Paste</strong> (iPhone)';
+  }
+  if (/android/i.test(navigator.userAgent)) {
+    return 'Long-press in the review box &rarr; tap <strong>Paste</strong> (Android)';
+  }
+  return '<kbd>Ctrl + V</kbd> on Windows &nbsp;&middot;&nbsp; <kbd>&#8984; V</kbd> on Mac';
+}
+
 /* Copy + open Google in one tap */
 function copyAndOpen() {
   /* Open Google first — must be synchronous to avoid popup blockers */
   window.open(GOOGLE_URL, '_blank', 'noopener');
-  doCopy(function() {
-    showSuccess();
-  });
+  doCopy(showSuccess, showFallback);
 }
 
 /* Copy only */
@@ -499,23 +570,30 @@ function copyOnly() {
       btn.style.borderColor = '';
       btn.style.color = '';
     }, 2500);
+  }, function() {
+    var ta = document.getElementById('rh-text');
+    ta.focus(); ta.select(); ta.setSelectionRange(0, 99999);
   });
 }
 
-function doCopy(cb) {
+function doCopy(onSuccess, onFail) {
   var text = document.getElementById('rh-text').value.trim();
   if (!text) return;
   if (navigator.clipboard && window.isSecureContext) {
-    navigator.clipboard.writeText(text).then(cb).catch(function() { legacyCopy(text); cb(); });
+    navigator.clipboard.writeText(text)
+      .then(onSuccess)
+      .catch(function() {
+        if (legacyCopy()) { onSuccess(); } else { onFail(text); }
+      });
   } else {
-    legacyCopy(text); cb();
+    if (legacyCopy()) { onSuccess(); } else { onFail(text); }
   }
 }
 
-function legacyCopy(text) {
+function legacyCopy() {
   var ta = document.getElementById('rh-text');
   ta.select(); ta.setSelectionRange(0, 99999);
-  try { document.execCommand('copy'); } catch(e) {}
+  try { return !!document.execCommand('copy'); } catch(e) { return false; }
 }
 
 function showSuccess() {
@@ -526,7 +604,17 @@ function showSuccess() {
     'Copied &mdash; Open Google Again' +
     '<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>';
   btn.onclick = function() { window.open(GOOGLE_URL, '_blank', 'noopener'); };
+  document.getElementById('rh-paste-hint').innerHTML = pasteHint();
   document.getElementById('rh-success').style.display = 'flex';
+  document.getElementById('rh-fallback').style.display = 'none';
+}
+
+function showFallback(text) {
+  var fta = document.getElementById('rh-fallback-ta');
+  fta.value = text;
+  document.getElementById('rh-fallback').style.display = 'flex';
+  document.getElementById('rh-success').style.display = 'none';
+  fta.focus(); fta.select(); fta.setSelectionRange(0, 99999);
 }
 
 function resetState() {
@@ -534,10 +622,11 @@ function resetState() {
   btn.classList.remove('done');
   btn.innerHTML =
     '<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>' +
-    'Copy Review &amp; Open Google' +
+    'Copy Review &amp; Open Google Review' +
     '<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>';
   btn.onclick = copyAndOpen;
   document.getElementById('rh-success').style.display = 'none';
+  document.getElementById('rh-fallback').style.display = 'none';
 }
 
 function toggleTips() {
