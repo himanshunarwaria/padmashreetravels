@@ -219,6 +219,15 @@ textarea{min-height:78px;resize:vertical}
 .toast{position:fixed;left:50%;bottom:5.5rem;z-index:700;transform:translateX(-50%) translateY(12px);background:var(--black);color:var(--white);padding:.6rem 1.1rem;border-radius:var(--rp);font-size:.83rem;font-weight:700;box-shadow:0 4px 16px rgba(0,0,0,.22);opacity:0;pointer-events:none;transition:.2s ease;white-space:nowrap}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
+/* ── FAST-ENTRY: larger inputs + green save ── */
+.finput--lg{padding:1rem 1rem;font-size:1.05rem;font-weight:500;border-width:2px;border-color:var(--g200)}
+.finput--lg:focus{border-color:var(--black);box-shadow:0 0 0 3px rgba(0,0,0,.08)}
+.btn-save--green{background:var(--green);box-shadow:0 4px 14px rgba(5,148,79,.28)}
+.btn-save--green:hover{background:#047040}
+.btn-save--green:active{transform:scale(.97)}
+.pill-group--routes{gap:.4rem}
+.pill-group--routes .pill-opt{padding:.55rem .95rem;font-size:.88rem;min-height:38px}
+
 /* ── RESPONSIVE ── */
 @media(min-width:640px){.rec-cards{display:grid;grid-template-columns:repeat(2,1fr)}}
 @media(max-width:400px){.stats{grid-template-columns:repeat(2,1fr)}.two-col{grid-template-columns:1fr}}
@@ -289,81 +298,58 @@ textarea{min-height:78px;resize:vertical}
     <button class="back-btn" onclick="goBack('passenger')">&#8592; Back</button>
     <h2 class="view-title" id="pFormTitle">Add Passenger Lead</h2>
   </div>
-  <div class="crm-wrap" style="padding-top:.9rem">
+  <div class="crm-wrap" style="padding-top:.75rem">
     <input type="hidden" id="pEditIdx" value="" />
-    <form id="pForm" class="form-card form-body" onsubmit="savePassenger(event)">
+    <form id="pForm" class="form-card form-body" onsubmit="savePassenger(event)" style="gap:.9rem">
+
       <div class="fgroup">
         <label class="flabel">Customer Name <span class="freq">*</span></label>
-        <input type="text" id="pName" placeholder="e.g. Amit Sharma" required autocomplete="off" />
+        <input type="text" id="pName" class="finput--lg" placeholder="Full name" required autocomplete="off" autocapitalize="words" />
       </div>
+
       <div class="fgroup">
         <label class="flabel">Mobile Number <span class="freq">*</span></label>
-        <div class="fhint">Customer's contact number</div>
-        <input type="tel" id="pPhone" placeholder="e.g. 9876543210" required autocomplete="off" inputmode="numeric" />
+        <input type="tel" id="pPhone" class="finput--lg" placeholder="10-digit number" required autocomplete="off" inputmode="numeric" />
       </div>
+
       <div class="fgroup">
-        <label class="flabel">Where to go? <span class="freq">*</span></label>
-        <div class="fhint">Select the trip route</div>
-        <select id="pRoute" required>
-          <option value="">— Select Route —</option>
-          <option>Agra Local</option>
-          <option>Agra to Mathura</option>
-          <option>Agra to Vrindavan</option>
-          <option>Mathura + Vrindavan</option>
-          <option>Agra to Barsana / Govardhan</option>
-          <option>Agra to Fatehpur Sikri</option>
-          <option>Agra to Delhi</option>
-          <option>Agra to Jaipur</option>
-          <option>Other</option>
-        </select>
-      </div>
-      <div class="two-col">
-        <div class="fgroup">
-          <label class="flabel">Travel Date <span class="freq">*</span></label>
-          <input type="date" id="pDate" required />
+        <label class="flabel">Route <span class="freq">*</span></label>
+        <div class="pill-group pill-group--routes" id="pRouteGrp">
+          <button type="button" class="pill-opt" data-v="Agra Local"          onclick="pill('pRouteGrp','pRoute',this)">Agra Local</button>
+          <button type="button" class="pill-opt" data-v="Agra to Mathura"     onclick="pill('pRouteGrp','pRoute',this)">Mathura</button>
+          <button type="button" class="pill-opt" data-v="Agra to Vrindavan"   onclick="pill('pRouteGrp','pRoute',this)">Vrindavan</button>
+          <button type="button" class="pill-opt" data-v="Mathura + Vrindavan" onclick="pill('pRouteGrp','pRoute',this)">Mathura + Vrindavan</button>
+          <button type="button" class="pill-opt" data-v="Barsana / Govardhan" onclick="pill('pRouteGrp','pRoute',this)">Barsana / Govardhan</button>
+          <button type="button" class="pill-opt" data-v="Fatehpur Sikri"      onclick="pill('pRouteGrp','pRoute',this)">Fatehpur Sikri</button>
+          <button type="button" class="pill-opt" data-v="Agra to Delhi"       onclick="pill('pRouteGrp','pRoute',this)">Delhi</button>
+          <button type="button" class="pill-opt" data-v="Agra to Jaipur"      onclick="pill('pRouteGrp','pRoute',this)">Jaipur</button>
+          <button type="button" class="pill-opt" data-v="Other"               onclick="pill('pRouteGrp','pRoute',this)">Other</button>
         </div>
-        <div class="fgroup">
-          <label class="flabel">Pickup Time <span class="freq">*</span></label>
-          <input type="time" id="pTime" required />
-        </div>
+        <input type="hidden" id="pRoute" />
       </div>
+
       <div class="fgroup">
-        <label class="flabel">Cab Type <span class="freq">*</span></label>
-        <div class="pill-group" id="pCarGrp">
-          <button type="button" class="pill-opt" data-v="Sedan"   onclick="pill('pCarGrp','pCar',this)">Sedan</button>
-          <button type="button" class="pill-opt" data-v="SUV"     onclick="pill('pCarGrp','pCar',this)">SUV</button>
-          <button type="button" class="pill-opt" data-v="Innova"  onclick="pill('pCarGrp','pCar',this)">Innova</button>
-          <button type="button" class="pill-opt" data-v="Tempo"   onclick="pill('pCarGrp','pCar',this)">Tempo</button>
-          <button type="button" class="pill-opt" data-v="Any Cab" onclick="pill('pCarGrp','pCar',this)">Any Cab</button>
-        </div>
-        <input type="hidden" id="pCar" />
+        <label class="flabel">Travel Date <span class="freq">*</span></label>
+        <input type="date" id="pDate" class="finput--lg" required />
       </div>
+
       <div class="fgroup">
-        <label class="flabel">Booking Status <span class="freq">*</span></label>
+        <label class="flabel">Status <span class="freq">*</span></label>
         <div class="pill-group" id="pStGrp">
-          <button type="button" class="pill-opt" data-v="New Lead"  data-c="green"  onclick="pill('pStGrp','pStatus',this)">New Lead</button>
-          <button type="button" class="pill-opt" data-v="Follow-up" data-c="gold"   onclick="pill('pStGrp','pStatus',this)">Follow-up</button>
-          <button type="button" class="pill-opt" data-v="Confirmed" data-c="blue"   onclick="pill('pStGrp','pStatus',this)">Confirmed</button>
-          <button type="button" class="pill-opt" data-v="Completed" data-c="gray"   onclick="pill('pStGrp','pStatus',this)">Completed</button>
-          <button type="button" class="pill-opt" data-v="Cancelled" data-c="red"    onclick="pill('pStGrp','pStatus',this)">Cancelled</button>
+          <button type="button" class="pill-opt" data-v="New Lead"  data-c="green" onclick="pill('pStGrp','pStatus',this)">New Lead</button>
+          <button type="button" class="pill-opt" data-v="Follow-up" data-c="gold"  onclick="pill('pStGrp','pStatus',this)">Follow-up</button>
+          <button type="button" class="pill-opt" data-v="Confirmed" data-c="blue"  onclick="pill('pStGrp','pStatus',this)">Confirmed</button>
+          <button type="button" class="pill-opt" data-v="Completed" data-c="gray"  onclick="pill('pStGrp','pStatus',this)">Completed</button>
+          <button type="button" class="pill-opt" data-v="Cancelled" data-c="red"   onclick="pill('pStGrp','pStatus',this)">Cancelled</button>
         </div>
         <input type="hidden" id="pStatus" />
       </div>
-      <div class="fsep">Optional</div>
-      <div class="fgroup">
-        <label class="flabel">Fare Given <span class="fopt">Optional</span></label>
-        <div class="fhint">Fare quoted to the customer</div>
-        <input type="text" id="pFare" placeholder="e.g. ₹3500" autocomplete="off" />
-      </div>
-      <div class="fgroup">
-        <label class="flabel">Extra Note <span class="fopt">Optional</span></label>
-        <textarea id="pNotes" placeholder="e.g. Family of 4, return trip, wants clean AC cab..."></textarea>
-      </div>
+
     </form>
   </div>
   <div class="sticky-save">
     <div class="sticky-save-inner">
-      <button class="btn-save" id="pSaveBtn" onclick="submitForm('pForm')">Save Passenger Lead</button>
+      <button class="btn-save btn-save--green" id="pSaveBtn" onclick="submitForm('pForm')">&#10003; Save Lead</button>
     </div>
   </div>
 </div>
@@ -456,9 +442,8 @@ textarea{min-height:78px;resize:vertical}
       <p  class="success-sub"   id="sucSub">Entry saved successfully</p>
       <div id="sucSheet" class="sheet-badge warn">📊 <span id="sucSheetTxt">Saving to Sheet…</span></div>
       <div class="success-btns">
-        <button class="btn btn-prim" id="sucAnother" onclick="addAnother()">+ Add Another Lead</button>
-        <button class="btn btn-gold" onclick="showView('records')">📋 View Entries</button>
-        <button class="btn btn-outl" onclick="showView('home')">&#8592; Go Home</button>
+        <button class="btn btn-prim" id="sucAnother" onclick="addAnother()">+ Add Another</button>
+        <button class="btn btn-outl" onclick="showView('home')">&#8592; Home</button>
       </div>
     </div>
   </div>
@@ -618,7 +603,8 @@ function showView(name) {
   if (name === "home")      updateStats();
   if (name === "passenger" && $("pEditIdx").value === "") {
     $("pDate").value = today();
-    $("pTime").value = "08:00";
+    setPill("pStGrp","pStatus","New Lead");
+    setTimeout(() => $("pName") && $("pName").focus(), 80);
   }
 }
 function goBack(form) {
@@ -680,29 +666,33 @@ async function sendSheet(type, record) {
 /* ── PASSENGER ── */
 function savePassenger(e) {
   e.preventDefault();
-  if (!$("pCar").value)    { toast("Please select Cab Type");       return; }
-  if (!$("pStatus").value) { toast("Please select Booking Status"); return; }
+  if (!$("pRoute").value)  { toast("Please select a Route");  return; }
+  if (!$("pStatus").value) { toast("Please select a Status"); return; }
   const recs = get(PAX_KEY), idx = $("pEditIdx").value;
   const rec = {
-    name:$("pName").value.trim(), phone:$("pPhone").value.trim(),
-    route:$("pRoute").value, travelDate:$("pDate").value, pickupTime:$("pTime").value,
-    car:$("pCar").value, status:$("pStatus").value,
-    fare:$("pFare").value.trim(), notes:$("pNotes").value.trim(),
-    created: idx === "" ? todayFmt() : recs[+idx].created
+    name:       $("pName").value.trim(),
+    phone:      $("pPhone").value.trim(),
+    route:      $("pRoute").value,
+    travelDate: $("pDate").value,
+    status:     $("pStatus").value,
+    created:    idx === "" ? todayFmt() : recs[+idx].created
   };
   idx === "" ? recs.unshift(rec) : (recs[+idx] = rec);
   set(PAX_KEY, recs);
   lastFormType = "passenger";
-  showSuccess("Lead Saved!", "Passenger entry added", rec, "passenger");
+  showSuccess("Lead Saved!", rec.name + " · " + rec.route, rec, "passenger");
   resetPaxForm(); updateStats();
 }
 function editPax(i) {
   const p = get(PAX_KEY)[i]; if (!p) return;
-  $("pEditIdx").value=i; $("pName").value=p.name; $("pPhone").value=p.phone;
-  $("pRoute").value=p.route; $("pDate").value=p.travelDate; $("pTime").value=p.pickupTime;
-  setPill("pCarGrp","pCar",p.car); setPill("pStGrp","pStatus",p.status);
-  $("pFare").value=p.fare; $("pNotes").value=p.notes;
-  $("pFormTitle").textContent="Edit Lead"; $("pSaveBtn").textContent="Update Lead";
+  $("pEditIdx").value = i;
+  $("pName").value    = p.name;
+  $("pPhone").value   = p.phone;
+  setPill("pRouteGrp","pRoute", p.route);
+  $("pDate").value    = p.travelDate;
+  setPill("pStGrp","pStatus", p.status);
+  $("pFormTitle").textContent = "Edit Lead";
+  $("pSaveBtn").textContent   = "&#10003; Update Lead";
   showView("passenger");
 }
 function delPax(i) {
@@ -712,12 +702,15 @@ function delPax(i) {
   updateStats(); renderCards(); toast("Record deleted");
 }
 function resetPaxForm() {
-  $("pForm").reset(); $("pEditIdx").value=""; $("pCar").value=""; $("pStatus").value="";
-  document.querySelectorAll("#pCarGrp .pill-opt,#pStGrp .pill-opt").forEach(b => {
+  $("pForm").reset();
+  $("pEditIdx").value = "";
+  $("pRoute").value   = "";
+  $("pStatus").value  = "";
+  document.querySelectorAll("#pRouteGrp .pill-opt, #pStGrp .pill-opt").forEach(b => {
     b.className = b.className.replace(/\bsel-\w+\b/g,"").trim();
   });
-  $("pFormTitle").textContent="Add Passenger Lead";
-  $("pSaveBtn").textContent="Save Passenger Lead";
+  $("pFormTitle").textContent = "Add Passenger Lead";
+  $("pSaveBtn").innerHTML     = "&#10003; Save Lead";
 }
 
 /* ── DRIVER ── */
@@ -814,11 +807,8 @@ function renderCards() {
         </div>
         <div class="rec-meta">
           ${p.route?`<div class="rec-row">🗺 <strong>${esc(p.route)}</strong></div>`:""}
-          ${p.travelDate?`<div class="rec-row">📅 ${esc(p.travelDate)}${p.pickupTime?" · ⏰ "+esc(p.pickupTime):""}</div>`:""}
-          ${p.car?`<div class="rec-row">🚘 ${esc(p.car)}</div>`:""}
+          ${p.travelDate?`<div class="rec-row">📅 ${esc(p.travelDate)}</div>`:""}
         </div>
-        ${p.fare?`<div class="rec-fare">₹ ${esc(p.fare)}</div>`:""}
-        ${p.notes?`<div class="rec-note">${esc(p.notes)}</div>`:""}
         <div class="rec-actions">
           <a  class="act-btn act-call" href="tel:+${ph}">📞 Call</a>
           <a  class="act-btn act-wa"   href="https://wa.me/${ph}" target="_blank" rel="noopener">💬 WhatsApp</a>
@@ -1133,12 +1123,11 @@ function writeToSheet(data) {
   if (data.type === "passenger") {
     sheet = ss.getSheetByName("Passengers") || ss.insertSheet("Passengers");
     if (sheet.getLastRow() === 0) {
-      sheet.appendRow(["Submitted At","Name","Phone","Route","Travel Date",
-        "Pickup Time","Car Type","Status","Quoted Fare","Notes","Created"]);
-      sheet.getRange(1,1,1,11).setFontWeight("bold");
+      sheet.appendRow(["Submitted At","Name","Phone","Route","Travel Date","Status","Created"]);
+      sheet.getRange(1,1,1,7).setFontWeight("bold");
     }
-    sheet.appendRow([stamp, rec.name, rec.phone, rec.route, rec.travelDate,
-      rec.pickupTime, rec.car, rec.status, rec.fare, rec.notes, rec.created]);
+    sheet.appendRow([stamp, rec.name||"", rec.phone||"", rec.route||"",
+      rec.travelDate||"", rec.status||"", rec.created||""]);
   }
 
   if (data.type === "driver") {
