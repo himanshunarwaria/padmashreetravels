@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Staff CRM — Padma Shree Travels</title>
+<link rel="icon" type="image/png" href="../images/logo.png" />
+<link rel="apple-touch-icon" href="../images/logo.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/style.css" />
+<style>
+*,*::before,*::after{-webkit-tap-highlight-color:transparent}
+body{background:var(--g50);color:var(--black);line-height:1.5;min-height:100vh}
+
+/* ── HEADER ── */
+.crm-hdr{position:sticky;top:0;z-index:500;background:var(--white);border-bottom:1px solid var(--g100);box-shadow:var(--sm)}
+.crm-hdr__in{max-width:600px;margin:0 auto;padding:.7rem 1.25rem;display:flex;align-items:center;justify-content:space-between;gap:.75rem}
+.crm-logo{display:flex;align-items:center;gap:.6rem;text-decoration:none;color:var(--black)}
+.crm-logo__img{height:30px;width:auto;object-fit:contain}
+.crm-logo__t{font-size:.92rem;font-weight:700;line-height:1.2}
+.crm-logo__t small{display:block;font-size:.66rem;font-weight:500;color:var(--g500)}
+.hdr-right{display:flex;align-items:center;gap:.5rem}
+.conn-badge{display:inline-flex;align-items:center;gap:.35rem;padding:.32rem .75rem;border-radius:var(--rp);font-size:.68rem;font-weight:700;border:1.5px solid;white-space:nowrap}
+.conn-badge.on {color:#047040;border-color:rgba(5,148,79,.25);background:rgba(5,148,79,.07)}
+.conn-badge.off{color:var(--g500);border-color:var(--g200);background:var(--g50)}
+.conn-dot{width:6px;height:6px;border-radius:50%}
+.on  .conn-dot{background:#047040}
+.off .conn-dot{background:var(--g400)}
+.icon-btn{width:34px;height:34px;border-radius:var(--r);border:1.5px solid var(--g200);background:var(--white);color:var(--g500);cursor:pointer;display:grid;place-items:center;font-size:16px;transition:var(--t)}
+.icon-btn:hover{border-color:var(--g400);color:var(--black)}
+.icon-btn.unlocked{border-color:rgba(215,59,0,.3);color:var(--red);background:rgba(215,59,0,.05)}
+
+/* ── ADMIN BANNER ── */
+.admin-banner{background:rgba(215,59,0,.06);border-bottom:1px solid rgba(215,59,0,.14);padding:.45rem 1.25rem;display:flex;align-items:center;justify-content:space-between;font-size:.78rem;font-weight:700;color:var(--red)}
+.admin-banner button{background:none;border:1.5px solid rgba(215,59,0,.3);color:var(--red);border-radius:var(--rp);padding:.22rem .75rem;font:inherit;font-size:.72rem;font-weight:700;cursor:pointer;transition:var(--t)}
+.admin-banner button:hover{background:rgba(215,59,0,.08)}
+
+/* ── VIEW SYSTEM ── */
+.view{display:none}
+.view.active{display:block}
+.crm-wrap{max-width:600px;margin:0 auto;padding:1.5rem 1.25rem 7rem}
+.page-hd{margin-bottom:1.25rem}
+.page-hd h1{margin:0 0 .2rem;font-size:1.45rem;font-weight:800;letter-spacing:-.03em}
+.page-hd p{margin:0;color:var(--g500);font-size:.88rem}
+
+/* ── BACK BAR ── */
+.back-bar{display:flex;align-items:center;gap:.75rem;padding:.65rem 1.25rem;max-width:600px;margin:0 auto;background:var(--white);border-bottom:1px solid var(--g100)}
+.back-btn{background:none;border:none;color:var(--g500);font:inherit;font-size:.84rem;font-weight:600;cursor:pointer;padding:.2rem 0;display:flex;align-items:center;gap:.3rem;transition:color var(--t)}
+.back-btn:hover{color:var(--black)}
+.view-title{margin:0;font-size:1rem;font-weight:700}
+
+/* ── HOME CARDS ── */
+.action-cards{display:flex;flex-direction:column;gap:.65rem;margin-bottom:1.1rem}
+.action-card{display:flex;align-items:center;gap:.9rem;padding:1rem 1.15rem;border-radius:var(--r-lg);border:1.5px solid var(--g100);background:var(--white);cursor:pointer;transition:box-shadow var(--t),border-color var(--t),transform var(--t);user-select:none}
+.action-card:hover{box-shadow:var(--md);border-color:var(--g200)}
+.action-card:active{transform:scale(.98)}
+.action-card.prim{background:var(--black);border-color:var(--black);color:var(--white);box-shadow:0 4px 14px rgba(0,0,0,.2)}
+.action-card.prim:hover{background:var(--g800)}
+.action-card.gold-t{background:var(--gold-bg);border-color:var(--gold-border)}
+.ac-ico{width:46px;height:46px;border-radius:var(--r);display:grid;place-items:center;font-size:22px;flex-shrink:0}
+.prim   .ac-ico{background:rgba(255,255,255,.12)}
+.gold-t .ac-ico{background:rgba(184,148,58,.12)}
+.action-card:not(.prim):not(.gold-t) .ac-ico{background:var(--g50);border:1px solid var(--g100)}
+.ac-txt strong{display:block;font-size:.97rem;font-weight:700;line-height:1.2}
+.ac-txt span{display:block;font-size:.8rem;margin-top:.18rem;opacity:.72}
+.ac-arr{margin-left:auto;opacity:.38;font-size:1.2rem}
+.prim .ac-arr{opacity:.55}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem}
+.stat-box{background:var(--white);border:1px solid var(--g100);border-radius:var(--r);padding:.8rem .4rem;text-align:center}
+.stat-box strong{display:block;font-size:1.45rem;line-height:1;font-weight:800;letter-spacing:-.04em}
+.stat-box span{display:block;font-size:.6rem;color:var(--g500);margin-top:.3rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+
+/* ── FORM ── */
+.form-card{background:var(--white);border:1px solid var(--g100);border-radius:var(--r-lg);box-shadow:var(--sm);padding:1.25rem}
+.form-body{display:flex;flex-direction:column;gap:1rem}
+.fgroup{display:flex;flex-direction:column;gap:.45rem}
+.flabel{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--g500)}
+.fhint{font-size:.73rem;color:var(--g400);margin-top:-.2rem}
+.freq{color:var(--red);margin-left:2px}
+.fopt{font-size:.62rem;font-weight:600;color:var(--g400);background:var(--g100);padding:.08rem .45rem;border-radius:var(--rp);margin-left:.35rem;text-transform:none;letter-spacing:0}
+.fsep{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--g400);padding:.5rem 0 .15rem;border-top:1px solid var(--g100);margin-top:.2rem}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+input[type="text"],input[type="tel"],input[type="date"],input[type="time"],input[type="password"],select,textarea{width:100%;padding:.7rem .9rem;border:1.5px solid var(--g100);border-radius:var(--r);background:var(--white);color:var(--black);font:inherit;font-size:16px;outline:none;-webkit-appearance:none;appearance:none;transition:border-color var(--t),box-shadow var(--t)}
+input[type="date"],input[type="time"]{color-scheme:light}
+input::placeholder,textarea::placeholder{color:var(--g300)}
+input:focus,select:focus,textarea:focus{border-color:var(--black);box-shadow:0 0 0 3px rgba(0,0,0,.07)}
+select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath fill='%23909090' d='M6 8L0 0h12z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px;cursor:pointer}
+select option{background:var(--white);color:var(--black)}
+textarea{min-height:78px;resize:vertical}
+
+/* ── PILLS ── */
+.pill-group{display:flex;flex-wrap:wrap;gap:.45rem}
+.pill-opt{padding:.48rem .9rem;border-radius:var(--rp);border:1.5px solid var(--g200);background:var(--white);color:var(--g700);font:inherit;font-size:.83rem;font-weight:600;cursor:pointer;white-space:nowrap;transition:all var(--t)}
+.pill-opt:hover{border-color:var(--g500);background:var(--g50);color:var(--black)}
+.pill-opt:active{transform:scale(.94)}
+.pill-opt.sel-black {background:var(--black);border-color:var(--black);color:#fff}
+.pill-opt.sel-green {background:var(--green);border-color:var(--green);color:#fff}
+.pill-opt.sel-gold  {background:var(--gold); border-color:var(--gold); color:#fff}
+.pill-opt.sel-blue  {background:#276EF1;     border-color:#276EF1;     color:#fff}
+.pill-opt.sel-red   {background:var(--red);  border-color:var(--red);  color:#fff}
+.pill-opt.sel-gray  {background:var(--g700); border-color:var(--g700); color:#fff}
+.pill-opt.sel-amber {background:#C47900;     border-color:#C47900;     color:#fff}
+
+/* ── STICKY SAVE ── */
+.sticky-save{position:fixed;bottom:0;left:0;right:0;z-index:100;padding:.75rem 1.25rem 1.35rem;background:linear-gradient(to top,var(--g50) 68%,transparent)}
+.sticky-save-inner{max-width:600px;margin:0 auto}
+.btn-save{width:100%;padding:.9rem 1.5rem;border-radius:var(--rp);background:var(--black);color:var(--white);font:inherit;font-size:.97rem;font-weight:700;border:none;cursor:pointer;letter-spacing:.01em;box-shadow:0 4px 14px rgba(0,0,0,.2);transition:background var(--t),transform var(--t)}
+.btn-save:hover{background:var(--g800)}
+.btn-save:active{transform:scale(.97)}
+
+/* ── SUCCESS ── */
+.success-wrap{text-align:center;padding:3.5rem 1.5rem 3rem;max-width:420px;margin:0 auto}
+.success-ico{width:68px;height:68px;border-radius:50%;background:var(--black);display:grid;place-items:center;margin:0 auto 1.1rem;font-size:30px;color:var(--white)}
+.success-title{font-size:1.55rem;font-weight:800;letter-spacing:-.04em;margin:0 0 .4rem}
+.success-sub{color:var(--g500);font-size:.92rem;margin:0 0 1.35rem}
+.sheet-badge{display:inline-flex;align-items:center;gap:.4rem;padding:.5rem .95rem;border-radius:var(--rp);font-size:.8rem;font-weight:700;margin-bottom:1.35rem;border:1.5px solid}
+.sheet-badge.ok  {color:#047040;border-color:rgba(5,148,79,.22);background:rgba(5,148,79,.07)}
+.sheet-badge.warn{color:#8a6a00;border-color:var(--gold-border);background:var(--gold-bg)}
+.success-btns{display:flex;flex-direction:column;gap:.6rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.45rem;padding:.8rem 1.5rem;border-radius:var(--rp);border:none;font:inherit;font-size:.92rem;font-weight:700;cursor:pointer;transition:background var(--t),transform var(--t);text-decoration:none;white-space:nowrap}
+.btn:active{transform:scale(.97)}
+.btn-prim{background:var(--black);color:var(--white);box-shadow:0 4px 12px rgba(0,0,0,.16)}
+.btn-prim:hover{background:var(--g800)}
+.btn-outl{background:var(--white);color:var(--black);border:1.5px solid var(--g200)}
+.btn-outl:hover{border-color:var(--g500);background:var(--g50)}
+.btn-gold{background:var(--gold-bg);color:#7a5c00;border:1.5px solid var(--gold-border)}
+
+/* ── RECORDS ── */
+.rec-tabs{display:flex;gap:.5rem;margin-bottom:.65rem}
+.rec-tab{flex:1;padding:.62rem;border-radius:var(--r);border:1.5px solid var(--g100);background:var(--white);color:var(--g500);font:inherit;font-size:.83rem;font-weight:600;cursor:pointer;text-align:center;transition:var(--t)}
+.rec-tab.active{background:var(--black);border-color:var(--black);color:var(--white)}
+.rec-tab:hover:not(.active){border-color:var(--g300);color:var(--black)}
+.rec-add-row{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.65rem}
+.rec-add-btn{padding:.62rem;border-radius:var(--rp);border:1.5px solid var(--g200);background:var(--white);color:var(--g700);font:inherit;font-size:.8rem;font-weight:700;cursor:pointer;text-align:center;transition:var(--t)}
+.rec-add-btn:hover{border-color:var(--black);color:var(--black);background:var(--g50)}
+.search-wrap{position:relative;margin-bottom:.65rem}
+.search-ico{position:absolute;left:.85rem;top:50%;transform:translateY(-50%);color:var(--g400);pointer-events:none;font-size:.85rem}
+.search-wrap input{padding-left:2.4rem}
+.rec-cards{display:flex;flex-direction:column;gap:.65rem}
+.rec-card{background:var(--white);border:1px solid var(--g100);border-radius:var(--r-lg);padding:1rem;transition:box-shadow var(--t),border-color var(--t)}
+.rec-card:hover{box-shadow:var(--sm);border-color:var(--g200)}
+.rec-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:.5rem;margin-bottom:.65rem}
+.rec-name{font-size:.97rem;font-weight:700}
+.rec-phone{font-size:.8rem;color:var(--g500);margin-top:.12rem}
+.badge{display:inline-flex;padding:.2rem .6rem;border-radius:var(--rp);font-size:.7rem;font-weight:700;white-space:nowrap;flex-shrink:0}
+.b-new     {background:rgba(5,148,79,.10); color:#047040}
+.b-followup{background:var(--gold-bg);     color:#7a5c00}
+.b-conf    {background:rgba(39,110,241,.10);color:#276EF1}
+.b-done    {background:var(--g100);        color:var(--g700)}
+.b-cancel  {background:rgba(215,59,0,.10); color:var(--red)}
+.b-avail   {background:rgba(5,148,79,.10); color:#047040}
+.b-busy    {background:rgba(215,59,0,.10); color:var(--red)}
+.b-out     {background:var(--gold-bg);     color:#7a5c00}
+.b-backup  {background:var(--g100);        color:var(--g500)}
+.b-dna     {background:rgba(215,59,0,.12); color:var(--red)}
+.rec-meta{display:flex;flex-direction:column;gap:.28rem;margin-bottom:.65rem}
+.rec-row{display:flex;align-items:baseline;gap:.38rem;font-size:.82rem;color:var(--g500)}
+.rec-row strong{color:var(--black)}
+.rec-fare{font-size:.92rem;font-weight:700;margin-bottom:.6rem}
+.rec-note{font-size:.76rem;color:var(--g500);font-style:italic;margin-bottom:.6rem}
+.rec-actions{display:flex;gap:.45rem}
+.act-btn{flex:1;padding:.58rem .35rem;border-radius:var(--r);border:1.5px solid var(--g200);background:var(--white);color:var(--g700);font:inherit;font-size:.78rem;font-weight:700;cursor:pointer;text-align:center;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:.2rem;transition:all var(--t)}
+.act-btn:active{transform:scale(.94)}
+.act-call{background:var(--black);border-color:var(--black);color:var(--white)}
+.act-call:hover{background:var(--g800)}
+.act-wa{background:var(--wa);border-color:var(--wa);color:var(--white)}
+.act-wa:hover{background:#1EB254}
+.act-edit:hover{border-color:var(--black);background:var(--g50);color:var(--black)}
+.act-del{flex:0 0 38px;color:var(--red)}
+.act-del:hover{background:rgba(215,59,0,.07);border-color:var(--red)}
+.empty{text-align:center;padding:3rem 1.5rem;color:var(--g400)}
+.empty-ico{font-size:2.5rem;margin-bottom:.65rem}
+.empty p{margin:0;font-size:.9rem}
+
+/* ── ADMIN PANEL ── */
+.backdrop{position:fixed;inset:0;background:rgba(0,0,0,.38);z-index:400;display:none}
+.backdrop.open{display:block}
+.admin-panel{position:fixed;bottom:0;left:0;right:0;z-index:401;background:var(--white);border-radius:20px 20px 0 0;border-top:1px solid var(--g100);box-shadow:0 -4px 24px rgba(0,0,0,.10);padding:0 1.25rem 2.5rem;transform:translateY(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);max-height:90vh;overflow-y:auto}
+.admin-panel.open{transform:translateY(0)}
+.admin-handle{width:36px;height:4px;background:var(--g200);border-radius:var(--rp);margin:1rem auto 1.25rem}
+.admin-title{font-size:1.05rem;font-weight:800;margin:0 0 1.1rem}
+.admin-sec{margin-bottom:1.4rem}
+.admin-lbl{font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--g500);margin-bottom:.6rem}
+.admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:.45rem}
+.admin-btn{padding:.7rem;border-radius:var(--r);border:1.5px solid var(--g100);background:var(--g50);color:var(--g700);font:inherit;font-size:.8rem;font-weight:700;cursor:pointer;text-align:center;transition:var(--t)}
+.admin-btn:hover{border-color:var(--g300);background:var(--white);color:var(--black)}
+.admin-btn.danger{color:var(--red);border-color:rgba(215,59,0,.2);background:rgba(215,59,0,.05)}
+.admin-btn.danger:hover{background:rgba(215,59,0,.09)}
+.admin-status{font-size:.76rem;color:var(--g500);margin-top:.45rem}
+.admin-status.ok{color:#047040}
+
+/* ── PIN MODAL ── */
+.pin-backdrop{position:fixed;inset:0;z-index:600;background:rgba(0,0,0,.45);display:none;place-items:center;padding:1.5rem}
+.pin-backdrop.open{display:grid}
+.pin-card{background:var(--white);border-radius:var(--r-lg);padding:1.75rem 1.5rem;width:100%;max-width:320px;box-shadow:0 12px 40px rgba(0,0,0,.2);text-align:center}
+.pin-title{font-size:1.15rem;font-weight:800;margin:0 0 .35rem;letter-spacing:-.02em}
+.pin-sub{color:var(--g500);font-size:.84rem;margin:0 0 1.25rem;line-height:1.45}
+.pin-field{margin-bottom:.75rem}
+.pin-field label{display:block;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--g500);margin-bottom:.4rem;text-align:left}
+.pin-input{width:100%;text-align:center;font-size:1.4rem;letter-spacing:.35em;font-weight:700;padding:.7rem;border:2px solid var(--g100);border-radius:var(--r);outline:none;transition:border-color var(--t);font-family:var(--ff);-webkit-appearance:none;appearance:none}
+.pin-input:focus{border-color:var(--black)}
+.pin-error{color:var(--red);font-size:.8rem;font-weight:700;min-height:1.1em;margin-bottom:.7rem;text-align:left}
+.pin-btns{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-top:.25rem}
+.pin-btn{padding:.78rem;border-radius:var(--rp);border:none;font:inherit;font-size:.9rem;font-weight:700;cursor:pointer;transition:background var(--t),transform var(--t)}
+.pin-btn:active{transform:scale(.97)}
+.pin-btn.primary{background:var(--black);color:var(--white)}
+.pin-btn.primary:hover{background:var(--g800)}
+.pin-btn.cancel{background:var(--g50);color:var(--g700);border:1.5px solid var(--g200)}
+.pin-btn.cancel:hover{background:var(--g100)}
+.pin-divider{border:none;border-top:1px solid var(--g100);margin:1.25rem 0}
+.pin-forgot{font-size:.75rem;color:var(--g400);margin-top:.9rem;cursor:pointer;text-decoration:underline;text-underline-offset:2px}
+.pin-forgot:hover{color:var(--black)}
+
+/* ── TOAST ── */
+.toast{position:fixed;left:50%;bottom:5.5rem;z-index:700;transform:translateX(-50%) translateY(12px);background:var(--black);color:var(--white);padding:.6rem 1.1rem;border-radius:var(--rp);font-size:.83rem;font-weight:700;box-shadow:0 4px 16px rgba(0,0,0,.22);opacity:0;pointer-events:none;transition:.2s ease;white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ── RESPONSIVE ── */
+@media(min-width:640px){.rec-cards{display:grid;grid-template-columns:repeat(2,1fr)}}
+@media(max-width:400px){.stats{grid-template-columns:repeat(2,1fr)}.two-col{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header class="crm-hdr">
+  <div class="crm-hdr__in">
+    <a href="../index.html" class="crm-logo">
+      <img src="../images/logo.png" alt="Padma Shree Travels" class="crm-logo__img" />
+      <div class="crm-logo__t">Padma Shree Travels<small>Staff CRM</small></div>
+    </a>
+    <div class="hdr-right">
+      <div id="connBadge" class="conn-badge off">
+        <span class="conn-dot"></span>
+        <span id="connText">Not Connected</span>
+      </div>
+      <!-- 🔒 opens PIN modal · 🔓 opens admin panel (after unlock) -->
+      <button class="icon-btn" id="adminBtn" onclick="onAdminBtnTap()" title="Admin Login">🔒</button>
+    </div>
+  </div>
+</header>
+
+<!-- ── ADMIN MODE BANNER (hidden until PIN unlocked) ── -->
+<div id="adminBanner" class="admin-banner" style="display:none">
+  🔓 Admin Mode Active — delete and settings tools are visible
+  <button onclick="lockAdmin()">Lock</button>
+</div>
+
+<!-- ════ VIEW: HOME ════ -->
+<div id="view-home" class="view active">
+  <div class="crm-wrap">
+    <div class="page-hd">
+      <h1>Quick Entry</h1>
+      <p>Add a new passenger lead or driver record</p>
+    </div>
+    <div class="action-cards">
+      <div class="action-card prim" onclick="showView('passenger')">
+        <div class="ac-ico">🚗</div>
+        <div class="ac-txt"><strong>Add Passenger Lead</strong><span>New booking or inquiry</span></div>
+        <span class="ac-arr">›</span>
+      </div>
+      <div class="action-card" onclick="showView('driver')">
+        <div class="ac-ico">👨‍✈️</div>
+        <div class="ac-txt"><strong>Add Driver</strong><span>Add a driver record</span></div>
+        <span class="ac-arr">›</span>
+      </div>
+      <div class="action-card gold-t" onclick="showView('records')">
+        <div class="ac-ico">📋</div>
+        <div class="ac-txt"><strong>View Entries</strong><span>View and manage all records</span></div>
+        <span class="ac-arr">›</span>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat-box"><strong id="sPax">0</strong><span>Passengers</span></div>
+      <div class="stat-box"><strong id="sDrv">0</strong><span>Drivers</span></div>
+      <div class="stat-box"><strong id="sOpen">0</strong><span>New Leads</span></div>
+      <div class="stat-box"><strong id="sFup">0</strong><span>Follow-ups</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ VIEW: PASSENGER FORM ════ -->
+<div id="view-passenger" class="view">
+  <div class="back-bar">
+    <button class="back-btn" onclick="goBack('passenger')">&#8592; Back</button>
+    <h2 class="view-title" id="pFormTitle">Add Passenger Lead</h2>
+  </div>
+  <div class="crm-wrap" style="padding-top:.9rem">
+    <input type="hidden" id="pEditIdx" value="" />
+    <form id="pForm" class="form-card form-body" onsubmit="savePassenger(event)">
+      <div class="fgroup">
+        <label class="flabel">Customer Name <span class="freq">*</span></label>
+        <input type="text" id="pName" placeholder="e.g. Amit Sharma" required autocomplete="off" />
+      </div>
+      <div class="fgroup">
+        <label class="flabel">Mobile Number <span class="freq">*</span></label>
+        <div class="fhint">Customer's contact number</div>
+        <input type="tel" id="pPhone" placeholder="e.g. 9876543210" required autocomplete="off" inputmode="numeric" />
+      </div>
+      <div class="fgroup">
+        <label class="flabel">Where to go? <span class="freq">*</span></label>
+        <div class="fhint">Select the trip route</div>
+        <select id="pRoute" required>
+          <option value="">— Select Route —</option>
+          <option>Agra Local</option>
+          <option>Agra to Mathura</option>
+          <option>Agra to Vrindavan</option>
+          <option>Mathura + Vrindavan</option>
+          <option>Agra to Barsana / Govardhan</option>
+          <option>Agra to Fatehpur Sikri</option>
+          <option>Agra to Delhi</option>
+          <option>Agra to Jaipur</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="two-col">
+        <div class="fgroup">
+          <label class="flabel">Travel Date <span class="freq">*</span></label>
+          <input type="date" id="pDate" required />
+        </div>
+        <div class="fgroup">
+          <label class="flabel">Pickup Time <span class="freq">*</span></label>
+          <input type="time" id="pTime" required />
+        </div>
+      </div>
+      <div class="fgroup">
+        <label class="flabel">Cab Type <span class="freq">*</span></label>
+        <div class="pill-group" id="pCarGrp">
+          <button type="button" class="pill-opt" data-v="Sedan"   onclick="pill('pCarGrp','pCar',this)">Sedan</button>
+          <button type="button" class="pill-opt" data-v="SUV"     onclick="pill('pCarGrp','pCar',this)">SUV</button>
+          <button type="button" class="pill-opt" data-v="Innova"  onclick="pill('pCarGrp','pCar',this)">Innova</button>
+          <button type="button" class="pill-opt" data-v="Tempo"   onclick="pill('pCarGrp','pCar',this)">Tempo</button>
+          <button type="button" class="pill-opt" data-v="Any Cab" onclick="pill('pCarGrp','pCar',this)">Any Cab</button>
+        </div>
+        <input type="hidden" id="pCar" />
+      </div>
+      <div class="fgroup">
+        <label class="flabel">Booking Status <span class="freq">*</span></label>
+        <div class="pill-group" id="pStGrp">
+          <button type="button" class="pill-opt" data-v="New Lead"  data-c="green"  onclick="pill('pStGrp','pStatus',this)">New Lead</button>
+          <button type="button" class="pill-opt" data-v="Follow-up" data-c="gold"   onclick="pill('pStGrp','pStatus',this)">Follow-up</button>
+          <button type="button" class="pill-opt" data-v="Confirmed" data-c="blue"   onclick="pill('pStGrp','pStatus',this)">Confirmed</button>
+          <button type="button" class="pill-opt" data-v="Completed" data-c="gray"   onclick="pill('pStGrp','pStatus',this)">Completed</button>
+          <button type="button" class="pill-opt" data-v="Cancelled" data-c="red"    onclick="pill('pStGrp','pStatus',this)">Cancelled</button>
+        </div>
+        <input type="hidden" id="pStatus" />
+      </div>
+      <div class="fsep">Optional</div>
+      <div class="fgroup">
+        <label class="flabel">Fare Given <span class="fopt">Optional</span></label>
+        <div class="fhint">Fare quoted to the customer</div>
+        <input type="text" id="pFare" placeholder="e.g. ₹3500" autocomplete="off" />
+      </div>
+      <div class="fgroup">
+        <label class="flabel">Extra Note <span class="fopt">Optional</span></label>
+        <textarea id="pNotes" placeholder="e.g. Family of 4, return trip, wants clean AC cab..."></textarea>
+      </div>
+    </form>
+  </div>
+  <div class="sticky-save">
+    <div class="sticky-save-inner">
+      <button class="btn-save" id="pSaveBtn" onclick="submitForm('pForm')">Save Passenger Lead</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════ VIEW: DRIVER FORM ════ -->
+<div id="view-driver" class="view">
+  <div class="back-bar">
+    <button class="back-btn" onclick="goBack('driver')">&#8592; Back</button>
+    <h2 class="view-title" id="dFormTitle">Add Driver</h2>
+  </div>
+  <div class="crm-wrap" style="padding-top:.9rem">
+    <input type="hidden" id="dEditIdx" value="" />
+    <form id="dForm" class="form-card form-body" onsubmit="saveDriver(event)">
+      <div class="fgroup">
+        <label class="flabel">Driver Name <span class="freq">*</span></label>
+        <input type="text" id="dName" placeholder="e.g. Ravi Singh" required autocomplete="off" />
+      </div>
+      <div class="fgroup">
+        <label class="flabel">Mobile Number <span class="freq">*</span></label>
+        <input type="tel" id="dPhone" placeholder="e.g. 9876543210" required autocomplete="off" inputmode="numeric" />
+      </div>
+      <div class="fgroup">
+        <label class="flabel">Car Type <span class="freq">*</span></label>
+        <div class="pill-group" id="dCarGrp">
+          <button type="button" class="pill-opt" data-v="Sedan"     onclick="pill('dCarGrp','dCarType',this)">Sedan</button>
+          <button type="button" class="pill-opt" data-v="SUV"       onclick="pill('dCarGrp','dCarType',this)">SUV</button>
+          <button type="button" class="pill-opt" data-v="Innova"    onclick="pill('dCarGrp','dCarType',this)">Innova</button>
+          <button type="button" class="pill-opt" data-v="Tempo"     onclick="pill('dCarGrp','dCarType',this)">Tempo</button>
+          <button type="button" class="pill-opt" data-v="Hatchback" onclick="pill('dCarGrp','dCarType',this)">Hatchback</button>
+        </div>
+        <input type="hidden" id="dCarType" />
+      </div>
+      <div class="fgroup">
+        <label class="flabel">Car Number <span class="freq">*</span></label>
+        <input type="text" id="dCarNo" placeholder="e.g. UP80 XX 1234" required autocomplete="off" style="text-transform:uppercase" />
+      </div>
+      <div class="fgroup">
+        <label class="flabel">Availability <span class="freq">*</span></label>
+        <div class="pill-group" id="dAvailGrp">
+          <button type="button" class="pill-opt" data-v="Available"     data-c="green" onclick="pill('dAvailGrp','dAvail',this)">Available</button>
+          <button type="button" class="pill-opt" data-v="Busy"          data-c="red"   onclick="pill('dAvailGrp','dAvail',this)">Busy</button>
+          <button type="button" class="pill-opt" data-v="Outstation"    data-c="gold"  onclick="pill('dAvailGrp','dAvail',this)">Outstation</button>
+          <button type="button" class="pill-opt" data-v="Backup"        data-c="gray"  onclick="pill('dAvailGrp','dAvail',this)">Backup</button>
+          <button type="button" class="pill-opt" data-v="Do Not Assign" data-c="red"   onclick="pill('dAvailGrp','dAvail',this)">Do Not Assign</button>
+        </div>
+        <input type="hidden" id="dAvail" />
+      </div>
+      <div class="fsep">Optional</div>
+      <div class="fgroup">
+        <label class="flabel">Main Route <span class="fopt">Optional</span></label>
+        <select id="dRoute">
+          <option value="">— Select Route —</option>
+          <option>All Routes</option>
+          <option>Agra Local</option>
+          <option>Mathura / Vrindavan</option>
+          <option>Barsana / Govardhan</option>
+          <option>Delhi</option>
+          <option>Jaipur</option>
+          <option>Airport Transfers</option>
+        </select>
+      </div>
+      <div class="fgroup">
+        <label class="flabel">Driver Quality <span class="fopt">Optional</span></label>
+        <div class="pill-group" id="dQualGrp">
+          <button type="button" class="pill-opt" data-v="Good"    data-c="green" onclick="pill('dQualGrp','dQuality',this)">Good</button>
+          <button type="button" class="pill-opt" data-v="Average" data-c="amber" onclick="pill('dQualGrp','dQuality',this)">Average</button>
+          <button type="button" class="pill-opt" data-v="Avoid"   data-c="red"   onclick="pill('dQualGrp','dQuality',this)">Avoid</button>
+        </div>
+        <input type="hidden" id="dQuality" />
+      </div>
+      <div class="fgroup">
+        <label class="flabel">Notes <span class="fopt">Optional</span></label>
+        <textarea id="dNotes" placeholder="e.g. Good for family rides, very punctual, clean car..."></textarea>
+      </div>
+    </form>
+  </div>
+  <div class="sticky-save">
+    <div class="sticky-save-inner">
+      <button class="btn-save" id="dSaveBtn" onclick="submitForm('dForm')">Save Driver</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════ VIEW: SUCCESS ════ -->
+<div id="view-success" class="view">
+  <div class="crm-wrap">
+    <div class="success-wrap">
+      <div class="success-ico">✓</div>
+      <h2 class="success-title" id="sucTitle">Saved!</h2>
+      <p  class="success-sub"   id="sucSub">Entry saved successfully</p>
+      <div id="sucSheet" class="sheet-badge warn">📊 <span id="sucSheetTxt">Saving to Sheet…</span></div>
+      <div class="success-btns">
+        <button class="btn btn-prim" id="sucAnother" onclick="addAnother()">+ Add Another Lead</button>
+        <button class="btn btn-gold" onclick="showView('records')">📋 View Entries</button>
+        <button class="btn btn-outl" onclick="showView('home')">&#8592; Go Home</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ VIEW: RECORDS ════ -->
+<div id="view-records" class="view">
+  <div class="back-bar">
+    <button class="back-btn" onclick="showView('home')">&#8592; Back</button>
+    <h2 class="view-title">Entries</h2>
+  </div>
+  <div class="crm-wrap" style="padding-top:.9rem">
+    <div class="rec-tabs">
+      <button class="rec-tab active" id="tabP" onclick="switchTab('passengers')">Passengers (<span id="cntP">0</span>)</button>
+      <button class="rec-tab"        id="tabD" onclick="switchTab('drivers')">Drivers (<span id="cntD">0</span>)</button>
+    </div>
+    <div class="rec-add-row">
+      <button class="rec-add-btn" onclick="showView('passenger')">+ Add Passenger</button>
+      <button class="rec-add-btn" onclick="showView('driver')">+ Add Driver</button>
+    </div>
+    <div class="search-wrap">
+      <span class="search-ico">🔍</span>
+      <input type="text" id="searchBox" placeholder="Search by name, phone, route…" oninput="renderCards()" autocomplete="off" />
+    </div>
+    <div id="cardArea" class="rec-cards"></div>
+  </div>
+</div>
+
+<!-- ════ ADMIN PANEL (only opened after PIN unlock) ════ -->
+<div class="backdrop" id="backdrop" onclick="adminClose()"></div>
+<div class="admin-panel" id="adminPanel">
+  <div class="admin-handle"></div>
+  <h3 class="admin-title">⚙️ Admin Settings</h3>
+
+  <div class="admin-sec">
+    <div class="admin-lbl">Google Sheet Connection</div>
+    <div class="fgroup" style="margin-bottom:.6rem">
+      <label class="flabel">Apps Script Web App URL</label>
+      <input type="text" id="adminUrl" placeholder="https://script.google.com/macros/s/…/exec" />
+    </div>
+    <button class="btn btn-prim" style="width:100%;margin-bottom:.45rem;border-radius:var(--r)" onclick="saveAdminUrl()">Save Connection</button>
+    <div id="adminUrlStatus" class="admin-status">Not connected</div>
+    <button class="admin-btn" style="margin-top:.55rem;width:100%" onclick="testConnection()">🔗 Test Connection</button>
+    <div id="testResult" style="font-size:.76rem;margin-top:.45rem;display:none;padding:.5rem .75rem;border-radius:var(--r);border:1px solid var(--g100)"></div>
+    <p style="font-size:.72rem;color:var(--g400);margin:.65rem 0 0">
+      Apps Script → Deploy → New Deployment → Web App.<br>Execute as: <strong>Me</strong> · Who has access: <strong>Anyone</strong>.
+    </p>
+  </div>
+
+  <div class="admin-sec">
+    <div class="admin-lbl">Export &amp; Backup</div>
+    <div class="admin-grid">
+      <button class="admin-btn" onclick="doExportCSV('passengers')">Export Passengers CSV</button>
+      <button class="admin-btn" onclick="doExportCSV('drivers')">Export Drivers CSV</button>
+      <button class="admin-btn" onclick="doDownloadBackup()">Download Full Backup</button>
+      <button class="admin-btn" onclick="document.getElementById('importFile').click()">Import Backup</button>
+    </div>
+    <input type="file" id="importFile" accept=".json" style="display:none" onchange="doImportBackup(event)" />
+  </div>
+
+  <div class="admin-sec">
+    <div class="admin-lbl">Danger Zone</div>
+    <div class="admin-grid">
+      <button class="admin-btn danger" onclick="doClear('passengers')">Clear Passengers</button>
+      <button class="admin-btn danger" onclick="doClear('drivers')">Clear Drivers</button>
+    </div>
+  </div>
+
+  <div class="admin-sec" style="border-top:1px solid var(--g100);padding-top:1.1rem">
+    <div class="admin-lbl">Admin PIN</div>
+    <div class="admin-grid">
+      <button class="admin-btn" onclick="openChangePinFlow()">Change PIN</button>
+      <button class="admin-btn danger" onclick="lockAdmin();adminClose()">Lock &amp; Exit</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════ PIN MODAL ════ -->
+<div class="pin-backdrop" id="pinBackdrop">
+  <div class="pin-card">
+    <div style="font-size:2rem;margin-bottom:.75rem" id="pinIcon">🔒</div>
+    <h3 class="pin-title" id="pinTitle">Admin Login</h3>
+    <p  class="pin-sub"   id="pinSub">Enter your PIN to unlock admin tools</p>
+
+    <div class="pin-field">
+      <label id="pinLabel1">PIN</label>
+      <input type="password" class="pin-input" id="pinInput" inputmode="numeric" maxlength="8" placeholder="••••" autocomplete="off" />
+    </div>
+
+    <!-- Confirm field — shown only when creating/changing PIN -->
+    <div class="pin-field" id="pinConfirmField" style="display:none">
+      <label>Confirm PIN</label>
+      <input type="password" class="pin-input" id="pinConfirm" inputmode="numeric" maxlength="8" placeholder="••••" autocomplete="off" />
+    </div>
+
+    <div class="pin-error" id="pinError"></div>
+
+    <div class="pin-btns">
+      <button class="pin-btn cancel" onclick="closePinModal()">Cancel</button>
+      <button class="pin-btn primary" id="pinSubmit" onclick="submitPin()">Unlock</button>
+    </div>
+
+    <p class="pin-forgot" id="pinForgot" onclick="resetPinFlow()" style="display:none">Forgot PIN? Reset it</p>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════
+   SECURITY NOTE — read before deploying
+   ═══════════════════════════════════════════════════════════
+   The PIN system is CONVENIENCE-LEVEL UI PROTECTION ONLY.
+   It prevents accidental deletion by non-technical staff.
+
+   It does NOT stop someone who can open browser DevTools from
+   calling JS functions directly or manipulating localStorage.
+
+   Real security for this setup:
+   1. Google Sheet is owned by admin — staff never get edit access
+   2. Apps Script only appends rows — there is no delete endpoint
+   3. Staff do not hold the Google Account that owns the sheet
+
+   The PIN is hashed with SHA-256 and stored in localStorage.
+   Short numeric PINs are brute-forceable offline if someone
+   exports localStorage — acceptable for this use case.
+   ═══════════════════════════════════════════════════════════ */
+
+"use strict";
+
+const PAX_KEY     = "pst_v3_passengers";
+const DRV_KEY     = "pst_v3_drivers";
+const URL_KEY     = "pst_v3_apps_url";
+const PIN_KEY     = "pst_admin_hash";
+const DEFAULT_URL = "https://script.google.com/macros/s/AKfycbzxWx09F5yzKj10pG7yoeqOjUbNtA3jF0wDiz3LMVFIdGPhy-6gcBc2q9-oiHUdRhPV/exec";
+
+// isAdmin is in-memory only — resets to false on every page load/refresh
+let isAdmin      = false;
+let activeTab    = "passengers";
+let lastFormType = "passenger";
+let pinMode      = "login"; // "login" | "create" | "change"
+
+const $      = id => document.getElementById(id);
+const get    = k  => { try { return JSON.parse(localStorage.getItem(k)) || []; } catch { return []; } };
+const set    = (k,v) => localStorage.setItem(k, JSON.stringify(v));
+const esc    = v  => String(v||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+const today  = () => new Date().toISOString().slice(0,10);
+const todayFmt = () => new Date().toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"});
+const cleanPh  = p => p.replace(/[\s\-]/g,"").replace(/^\+91/,"").replace(/^0/,"");
+
+/* ── VIEWS ── */
+function showView(name) {
+  document.querySelectorAll(".view").forEach(v => v.classList.remove("active"));
+  const el = $("view-" + name);
+  if (el) { el.classList.add("active"); window.scrollTo({top:0,behavior:"instant"}); }
+  if (name === "records")   renderCards();
+  if (name === "home")      updateStats();
+  if (name === "passenger" && $("pEditIdx").value === "") {
+    $("pDate").value = today();
+    $("pTime").value = "08:00";
+  }
+}
+function goBack(form) {
+  showView("home");
+  if (form === "passenger") resetPaxForm();
+  if (form === "driver")    resetDrvForm();
+}
+
+/* ── PILLS ── */
+const PILL_COLOR = {
+  "New Lead":"green","Follow-up":"gold","Confirmed":"blue","Completed":"gray","Cancelled":"red",
+  "Available":"green","Busy":"red","Outstation":"gold","Backup":"gray","Do Not Assign":"red",
+  "Good":"green","Average":"amber","Avoid":"red"
+};
+function pill(groupId, hiddenId, btn) {
+  document.querySelectorAll("#"+groupId+" .pill-opt").forEach(b => {
+    b.className = b.className.replace(/\bsel-\w+\b/g,"").trim();
+  });
+  btn.classList.add("sel-" + (btn.dataset.c || PILL_COLOR[btn.dataset.v] || "black"));
+  $(hiddenId).value = btn.dataset.v;
+}
+function setPill(groupId, hiddenId, val) {
+  document.querySelectorAll("#"+groupId+" .pill-opt").forEach(b => {
+    b.className = b.className.replace(/\bsel-\w+\b/g,"").trim();
+    if (b.dataset.v === val)
+      b.classList.add("sel-" + (b.dataset.c || PILL_COLOR[val] || "black"));
+  });
+  $(hiddenId).value = val;
+}
+
+/* ── STATS ── */
+function updateStats() {
+  const p = get(PAX_KEY), d = get(DRV_KEY);
+  $("sPax").textContent  = p.length;
+  $("sDrv").textContent  = d.length;
+  $("sOpen").textContent = p.filter(x => x.status === "New Lead").length;
+  $("sFup").textContent  = p.filter(x => x.status === "Follow-up").length;
+}
+
+/* ── GOOGLE SHEET ──
+   Uses GET + URL params — most reliable for Apps Script.
+   Browsers convert cross-origin POST→GET after the 302 redirect
+   that Apps Script issues, so doPost never fires from a browser. */
+async function sendSheet(type, record) {
+  const url = localStorage.getItem(URL_KEY);
+  if (!url) return false;
+  const payload = JSON.stringify({ type, record, submittedAt: new Date().toISOString(), sourcePage: "Padma Shree CRM v3" });
+  try {
+    await fetch(url + "?payload=" + encodeURIComponent(payload), { mode: "no-cors" });
+    return true;
+  } catch {
+    try {
+      await fetch(url, { method:"POST", mode:"no-cors", headers:{"Content-Type":"text/plain;charset=utf-8"}, body: payload });
+      return true;
+    } catch { return false; }
+  }
+}
+
+/* ── PASSENGER ── */
+function savePassenger(e) {
+  e.preventDefault();
+  if (!$("pCar").value)    { toast("Please select Cab Type");       return; }
+  if (!$("pStatus").value) { toast("Please select Booking Status"); return; }
+  const recs = get(PAX_KEY), idx = $("pEditIdx").value;
+  const rec = {
+    name:$("pName").value.trim(), phone:$("pPhone").value.trim(),
+    route:$("pRoute").value, travelDate:$("pDate").value, pickupTime:$("pTime").value,
+    car:$("pCar").value, status:$("pStatus").value,
+    fare:$("pFare").value.trim(), notes:$("pNotes").value.trim(),
+    created: idx === "" ? todayFmt() : recs[+idx].created
+  };
+  idx === "" ? recs.unshift(rec) : (recs[+idx] = rec);
+  set(PAX_KEY, recs);
+  lastFormType = "passenger";
+  showSuccess("Lead Saved!", "Passenger entry added", rec, "passenger");
+  resetPaxForm(); updateStats();
+}
+function editPax(i) {
+  const p = get(PAX_KEY)[i]; if (!p) return;
+  $("pEditIdx").value=i; $("pName").value=p.name; $("pPhone").value=p.phone;
+  $("pRoute").value=p.route; $("pDate").value=p.travelDate; $("pTime").value=p.pickupTime;
+  setPill("pCarGrp","pCar",p.car); setPill("pStGrp","pStatus",p.status);
+  $("pFare").value=p.fare; $("pNotes").value=p.notes;
+  $("pFormTitle").textContent="Edit Lead"; $("pSaveBtn").textContent="Update Lead";
+  showView("passenger");
+}
+function delPax(i) {
+  if (!isAdmin) { toast("Admin access required — tap 🔒 to login"); return; }
+  if (!confirm("Delete this passenger record?")) return;
+  const r = get(PAX_KEY); r.splice(i,1); set(PAX_KEY,r);
+  updateStats(); renderCards(); toast("Record deleted");
+}
+function resetPaxForm() {
+  $("pForm").reset(); $("pEditIdx").value=""; $("pCar").value=""; $("pStatus").value="";
+  document.querySelectorAll("#pCarGrp .pill-opt,#pStGrp .pill-opt").forEach(b => {
+    b.className = b.className.replace(/\bsel-\w+\b/g,"").trim();
+  });
+  $("pFormTitle").textContent="Add Passenger Lead";
+  $("pSaveBtn").textContent="Save Passenger Lead";
+}
+
+/* ── DRIVER ── */
+function saveDriver(e) {
+  e.preventDefault();
+  if (!$("dCarType").value) { toast("Please select Car Type");     return; }
+  if (!$("dAvail").value)   { toast("Please select Availability"); return; }
+  const recs = get(DRV_KEY), idx = $("dEditIdx").value;
+  const rec = {
+    name:$("dName").value.trim(), phone:$("dPhone").value.trim(),
+    carType:$("dCarType").value, carNumber:$("dCarNo").value.trim().toUpperCase(),
+    availability:$("dAvail").value, route:$("dRoute").value,
+    quality:$("dQuality").value, notes:$("dNotes").value.trim(),
+    created: idx === "" ? todayFmt() : recs[+idx].created
+  };
+  idx === "" ? recs.unshift(rec) : (recs[+idx] = rec);
+  set(DRV_KEY, recs);
+  lastFormType = "driver";
+  showSuccess("Driver Saved!", "Driver record added", rec, "driver");
+  resetDrvForm(); updateStats();
+}
+function editDrv(i) {
+  const d = get(DRV_KEY)[i]; if (!d) return;
+  $("dEditIdx").value=i; $("dName").value=d.name; $("dPhone").value=d.phone;
+  setPill("dCarGrp","dCarType",d.carType); $("dCarNo").value=d.carNumber;
+  setPill("dAvailGrp","dAvail",d.availability); $("dRoute").value=d.route;
+  if (d.quality) setPill("dQualGrp","dQuality",d.quality);
+  $("dNotes").value=d.notes;
+  $("dFormTitle").textContent="Edit Driver"; $("dSaveBtn").textContent="Update Driver";
+  showView("driver");
+}
+function delDrv(i) {
+  if (!isAdmin) { toast("Admin access required — tap 🔒 to login"); return; }
+  if (!confirm("Delete this driver record?")) return;
+  const r = get(DRV_KEY); r.splice(i,1); set(DRV_KEY,r);
+  updateStats(); renderCards(); toast("Record deleted");
+}
+function resetDrvForm() {
+  $("dForm").reset(); $("dEditIdx").value=""; $("dCarType").value=""; $("dAvail").value=""; $("dQuality").value="";
+  document.querySelectorAll("#dCarGrp .pill-opt,#dAvailGrp .pill-opt,#dQualGrp .pill-opt").forEach(b => {
+    b.className = b.className.replace(/\bsel-\w+\b/g,"").trim();
+  });
+  $("dFormTitle").textContent="Add Driver"; $("dSaveBtn").textContent="Save Driver";
+}
+
+/* ── SUCCESS ── */
+function showSuccess(title, sub, rec, type) {
+  $("sucTitle").textContent=title; $("sucSub").textContent=sub;
+  $("sucAnother").textContent = type==="passenger" ? "+ Add Another Lead" : "+ Add Another Driver";
+  $("sucSheet").className="sheet-badge warn"; $("sucSheetTxt").textContent="Saving to Sheet…";
+  showView("success");
+  sendSheet(type, rec).then(ok => {
+    const hasUrl = !!localStorage.getItem(URL_KEY);
+    $("sucSheet").className    = ok ? "sheet-badge ok" : "sheet-badge warn";
+    $("sucSheetTxt").textContent = ok ? "Saved to Google Sheet ✓"
+      : hasUrl ? "Sheet sync failed — saved on phone"
+      : "Saved on phone · Admin needs to add Sheet URL";
+  });
+}
+function addAnother() { showView(lastFormType === "passenger" ? "passenger" : "driver"); }
+
+/* ── RECORDS ── */
+function switchTab(tab) {
+  activeTab = tab;
+  $("tabP").classList.toggle("active", tab==="passengers");
+  $("tabD").classList.toggle("active", tab==="drivers");
+  $("searchBox").value = ""; renderCards();
+}
+const BADGE_CLASS = {
+  "New Lead":"b-new","Follow-up":"b-followup","Confirmed":"b-conf","Completed":"b-done","Cancelled":"b-cancel",
+  "Available":"b-avail","Busy":"b-busy","Outstation":"b-out","Backup":"b-backup","Do Not Assign":"b-dna"
+};
+const Q_COLOR = {"Good":"#047040","Average":"#7a5c00","Avoid":"#D73B00"};
+
+function renderCards() {
+  const term = ($("searchBox").value||"").toLowerCase().trim();
+  const pax  = get(PAX_KEY), drv = get(DRV_KEY);
+  $("cntP").textContent = pax.length; $("cntD").textContent = drv.length;
+  const area = $("cardArea");
+  // Delete button only rendered when admin is unlocked
+  const delBtn = (fn, i) => isAdmin
+    ? `<button class="act-btn act-del" onclick="${fn}(${i})" title="Delete">🗑</button>`
+    : "";
+
+  if (activeTab === "passengers") {
+    const rows = pax.map((p,i)=>({p,i})).filter(({p})=>!term||Object.values(p).join(" ").toLowerCase().includes(term));
+    if (!rows.length) { area.innerHTML=`<div class="empty"><div class="empty-ico">🚗</div><p>No passenger records yet.</p></div>`; return; }
+    area.innerHTML = rows.map(({p,i}) => {
+      const ph = "91" + cleanPh(p.phone);
+      return `<div class="rec-card">
+        <div class="rec-card-top">
+          <div><div class="rec-name">${esc(p.name)}</div><div class="rec-phone">${esc(p.phone)}</div></div>
+          <span class="badge ${BADGE_CLASS[p.status]||"b-new"}">${esc(p.status)}</span>
+        </div>
+        <div class="rec-meta">
+          ${p.route?`<div class="rec-row">🗺 <strong>${esc(p.route)}</strong></div>`:""}
+          ${p.travelDate?`<div class="rec-row">📅 ${esc(p.travelDate)}${p.pickupTime?" · ⏰ "+esc(p.pickupTime):""}</div>`:""}
+          ${p.car?`<div class="rec-row">🚘 ${esc(p.car)}</div>`:""}
+        </div>
+        ${p.fare?`<div class="rec-fare">₹ ${esc(p.fare)}</div>`:""}
+        ${p.notes?`<div class="rec-note">${esc(p.notes)}</div>`:""}
+        <div class="rec-actions">
+          <a  class="act-btn act-call" href="tel:+${ph}">📞 Call</a>
+          <a  class="act-btn act-wa"   href="https://wa.me/${ph}" target="_blank" rel="noopener">💬 WhatsApp</a>
+          <button class="act-btn act-edit" onclick="editPax(${i})">✏️ Edit</button>
+          ${delBtn("delPax", i)}
+        </div>
+      </div>`;
+    }).join("");
+  } else {
+    const rows = drv.map((d,i)=>({d,i})).filter(({d})=>!term||Object.values(d).join(" ").toLowerCase().includes(term));
+    if (!rows.length) { area.innerHTML=`<div class="empty"><div class="empty-ico">👨‍✈️</div><p>No driver records yet.</p></div>`; return; }
+    area.innerHTML = rows.map(({d,i}) => {
+      const ph = "91" + cleanPh(d.phone);
+      const qc = d.quality ? `color:${Q_COLOR[d.quality]||"var(--g500)"}` : "";
+      return `<div class="rec-card">
+        <div class="rec-card-top">
+          <div><div class="rec-name">${esc(d.name)}</div><div class="rec-phone">${esc(d.phone)}</div></div>
+          <span class="badge ${BADGE_CLASS[d.availability]||"b-avail"}">${esc(d.availability)}</span>
+        </div>
+        <div class="rec-meta">
+          ${d.carType?`<div class="rec-row">🚘 <strong>${esc(d.carType)}</strong>${d.carNumber?" · "+esc(d.carNumber):""}</div>`:""}
+          ${d.route?`<div class="rec-row">🗺 ${esc(d.route)}</div>`:""}
+          ${d.quality?`<div class="rec-row" style="${qc}">⭐ ${esc(d.quality)}</div>`:""}
+        </div>
+        ${d.notes?`<div class="rec-note">${esc(d.notes)}</div>`:""}
+        <div class="rec-actions">
+          <a  class="act-btn act-call" href="tel:+${ph}">📞 Call</a>
+          <a  class="act-btn act-wa"   href="https://wa.me/${ph}" target="_blank" rel="noopener">💬 WhatsApp</a>
+          <button class="act-btn act-edit" onclick="editDrv(${i})">✏️ Edit</button>
+          ${delBtn("delDrv", i)}
+        </div>
+      </div>`;
+    }).join("");
+  }
+}
+
+/* ── ADMIN PANEL ── */
+function adminOpen() {
+  const url = localStorage.getItem(URL_KEY)||"";
+  $("adminUrl").value = url;
+  $("adminUrlStatus").textContent = url ? "Connected — URL saved" : "Not connected";
+  $("adminUrlStatus").className   = url ? "admin-status ok" : "admin-status";
+  $("backdrop").classList.add("open");
+  $("adminPanel").classList.add("open");
+}
+function adminClose() {
+  $("backdrop").classList.remove("open");
+  $("adminPanel").classList.remove("open");
+}
+function saveAdminUrl() {
+  if (!isAdmin) { toast("Admin access required"); return; }
+  const url = $("adminUrl").value.trim();
+  if (!url || !url.startsWith("https://script.google.com/")) {
+    alert("Please paste a valid Google Apps Script URL starting with https://script.google.com/"); return;
+  }
+  localStorage.setItem(URL_KEY, url);
+  $("adminUrlStatus").textContent = "Connected — URL saved";
+  $("adminUrlStatus").className   = "admin-status ok";
+  updateConnBadge(); toast("Sheet connected ✓"); adminClose();
+}
+function updateConnBadge() {
+  const has = !!localStorage.getItem(URL_KEY);
+  $("connBadge").className  = "conn-badge " + (has ? "on" : "off");
+  $("connText").textContent = has ? "Connected" : "Not Connected";
+}
+async function testConnection() {
+  const url = ($("adminUrl").value.trim()) || localStorage.getItem(URL_KEY);
+  const res = $("testResult");
+  if (!url) { res.style.display="block"; res.style.color="var(--red)"; res.textContent="⚠ Enter the URL first."; return; }
+  res.style.display="block"; res.style.color="var(--g500)"; res.textContent="Sending test ping…";
+  const p = JSON.stringify({type:"test",record:{name:"CRM Test"},submittedAt:new Date().toISOString(),sourcePage:"Padma Shree CRM v3 - Test"});
+  try {
+    await fetch(url + "?payload=" + encodeURIComponent(p), {mode:"no-cors"});
+    res.style.color="#047040"; res.textContent="✓ Request sent. Check your Google Sheet for a row in the Test tab within 10 seconds.";
+  } catch(err) {
+    res.style.color="var(--red)"; res.textContent="✗ Network error: " + err.message;
+  }
+}
+
+/* ── PIN / ADMIN SYSTEM ── */
+
+async function sha256(str) {
+  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,"0")).join("");
+}
+
+function onAdminBtnTap() {
+  if (isAdmin) { adminOpen(); }
+  else         { openPinModal("login"); }
+}
+
+function openPinModal(mode) {
+  pinMode = mode || (localStorage.getItem(PIN_KEY) ? "login" : "create");
+  $("pinInput").value = "";
+  $("pinConfirm").value = "";
+  $("pinError").textContent = "";
+  const confirmField = $("pinConfirmField");
+  const submitBtn    = $("pinSubmit");
+  const forgotLink   = $("pinForgot");
+
+  if (pinMode === "create") {
+    $("pinIcon").textContent    = "🔐";
+    $("pinTitle").textContent   = "Create Admin PIN";
+    $("pinSub").textContent     = "No PIN set yet. Create a PIN (min 4 digits) to protect admin tools.";
+    confirmField.style.display  = "block";
+    submitBtn.textContent       = "Create PIN";
+    forgotLink.style.display    = "none";
+  } else if (pinMode === "change") {
+    $("pinIcon").textContent    = "🔑";
+    $("pinTitle").textContent   = "Change PIN";
+    $("pinSub").textContent     = "Enter a new PIN (min 4 digits).";
+    confirmField.style.display  = "block";
+    submitBtn.textContent       = "Set New PIN";
+    forgotLink.style.display    = "none";
+  } else {
+    $("pinIcon").textContent    = "🔒";
+    $("pinTitle").textContent   = "Admin Login";
+    $("pinSub").textContent     = "Enter your PIN to unlock admin tools.";
+    confirmField.style.display  = "none";
+    submitBtn.textContent       = "Unlock";
+    forgotLink.style.display    = "block";
+  }
+
+  $("pinBackdrop").classList.add("open");
+  setTimeout(() => $("pinInput").focus(), 80);
+}
+
+function closePinModal() {
+  $("pinBackdrop").classList.remove("open");
+  $("pinInput").value = "";
+  $("pinConfirm").value = "";
+  $("pinError").textContent = "";
+}
+
+async function submitPin() {
+  const pin  = $("pinInput").value.trim();
+  const errEl = $("pinError");
+  if (pin.length < 4) { errEl.textContent = "PIN must be at least 4 digits."; return; }
+
+  if (pinMode === "create" || pinMode === "change") {
+    const confirm = $("pinConfirm").value.trim();
+    if (pin !== confirm) { errEl.textContent = "PINs do not match."; $("pinConfirm").value=""; return; }
+    localStorage.setItem(PIN_KEY, await sha256(pin));
+    closePinModal();
+    if (pinMode === "create") { unlockAdmin(); }
+    else { toast("PIN changed successfully"); }
+  } else {
+    const stored  = localStorage.getItem(PIN_KEY);
+    if (!stored) { openPinModal("create"); return; }
+    const entered = await sha256(pin);
+    if (entered === stored) {
+      closePinModal();
+      unlockAdmin();
+    } else {
+      errEl.textContent = "Incorrect PIN. Try again.";
+      $("pinInput").value = "";
+      $("pinInput").focus();
+    }
+  }
+}
+
+function resetPinFlow() {
+  const confirmed = confirm(
+    "Reset Admin PIN?\n\nThis will clear the current PIN so you can set a new one.\n" +
+    "You will need to create a new PIN on next login."
+  );
+  if (!confirmed) return;
+  localStorage.removeItem(PIN_KEY);
+  closePinModal();
+  toast("PIN reset. Create a new PIN on next admin login.");
+}
+
+function openChangePinFlow() {
+  adminClose();
+  openPinModal("change");
+}
+
+function unlockAdmin() {
+  isAdmin = true;
+  $("adminBtn").textContent = "🔓";
+  $("adminBtn").classList.add("unlocked");
+  $("adminBtn").title       = "Admin Mode — tap to open settings";
+  $("adminBanner").style.display = "flex";
+  toast("Admin mode unlocked");
+  if ($("view-records").classList.contains("active")) renderCards();
+}
+
+function lockAdmin() {
+  isAdmin = false;
+  $("adminBtn").textContent = "🔒";
+  $("adminBtn").classList.remove("unlocked");
+  $("adminBtn").title       = "Admin Login";
+  $("adminBanner").style.display = "none";
+  toast("Admin mode locked");
+  if ($("view-records").classList.contains("active")) renderCards();
+}
+
+/* Enter key support in PIN modal */
+["pinInput","pinConfirm"].forEach(id => {
+  const el = $(id);
+  if (el) el.addEventListener("keydown", e => { if (e.key === "Enter") submitPin(); });
+});
+
+/* ── EXPORT / BACKUP ── */
+function toCSV(rows) {
+  if (!rows.length) return "";
+  const h = Object.keys(rows[0]);
+  const q = v => `"${String(v??"").replace(/"/g,'""')}"`;
+  return [h.join(","), ...rows.map(r => h.map(k => q(r[k])).join(","))].join("\n");
+}
+function dlFile(name, content, type) {
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([content],{type}));
+  a.download = name; document.body.appendChild(a); a.click(); document.body.removeChild(a);
+}
+function doExportCSV(type) {
+  if (!isAdmin) { toast("Admin access required"); return; }
+  const rows = get(type==="passengers" ? PAX_KEY : DRV_KEY);
+  if (!rows.length) { toast("No records to export"); return; }
+  dlFile(`pst-${type}-${today()}.csv`, toCSV(rows), "text/csv;charset=utf-8;");
+  toast("CSV exported");
+}
+function doDownloadBackup() {
+  if (!isAdmin) { toast("Admin access required"); return; }
+  const bk = {app:"Padma Shree Travels CRM v3", exportedAt:new Date().toISOString(), passengers:get(PAX_KEY), drivers:get(DRV_KEY)};
+  dlFile(`pst-backup-${today()}.json`, JSON.stringify(bk,null,2), "application/json;charset=utf-8;");
+  toast("Backup downloaded");
+}
+function doImportBackup(ev) {
+  if (!isAdmin) { toast("Admin access required"); ev.target.value=""; return; }
+  const file = ev.target.files?.[0]; if (!file) return;
+  const fr = new FileReader();
+  fr.onload = e => {
+    try {
+      const bk = JSON.parse(e.target.result);
+      const p  = Array.isArray(bk.passengers) ? bk.passengers : [];
+      const d  = Array.isArray(bk.drivers)    ? bk.drivers    : [];
+      if (!confirm(`Import ${p.length} passenger and ${d.length} driver records?\nThis replaces current data.`)) return;
+      set(PAX_KEY,p); set(DRV_KEY,d); updateStats(); renderCards();
+      toast("Backup imported"); adminClose();
+    } catch { alert("Invalid backup file."); }
+    finally  { ev.target.value = ""; }
+  };
+  fr.readAsText(file);
+}
+function doClear(type) {
+  if (!isAdmin) { toast("Admin access required"); return; }
+  if (!confirm(`Delete ALL ${type==="passengers"?"passenger":"driver"} records? This cannot be undone.`)) return;
+  localStorage.removeItem(type==="passengers" ? PAX_KEY : DRV_KEY);
+  updateStats(); renderCards(); toast("Data cleared");
+}
+
+/* ── FORM SUBMIT ── */
+function submitForm(id) {
+  const f = $(id);
+  if (f.requestSubmit) f.requestSubmit();
+  else if (f.checkValidity()) f.dispatchEvent(new Event("submit",{bubbles:true,cancelable:true}));
+  else f.reportValidity();
+}
+
+/* ── TOAST ── */
+let toastTmr;
+function toast(msg) {
+  const el = $("toast");
+  el.textContent = msg; el.classList.add("show");
+  clearTimeout(toastTmr);
+  toastTmr = setTimeout(() => el.classList.remove("show"), 2400);
+}
+
+/* ── INIT ── */
+if (!localStorage.getItem(URL_KEY)) localStorage.setItem(URL_KEY, DEFAULT_URL);
+// If no PIN has ever been set, the lock icon will open "Create PIN" flow automatically
+updateConnBadge();
+updateStats();
+
+/*
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ GOOGLE APPS SCRIPT — UPDATED CODE (doGet-based)
+ 1. Open script.google.com → open your project
+ 2. Replace ALL existing code with the code below
+ 3. Deploy → Manage Deployments → edit existing
+    (or New Deployment if first time)
+    Execute as: Me · Who has access: Anyone
+ 4. Copy the Web App URL → paste in Admin Settings
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+function doGet(e) {
+  try {
+    var raw  = e.parameter.payload;
+    var data = raw ? JSON.parse(raw) : {};
+    return writeToSheet(data);
+  } catch(err) {
+    return ContentService.createTextOutput("error: " + err.toString());
+  }
+}
+
+function doPost(e) {
+  try {
+    var data = JSON.parse(e.postData.contents);
+    return writeToSheet(data);
+  } catch(err) {
+    return ContentService.createTextOutput("error: " + err.toString());
+  }
+}
+
+function writeToSheet(data) {
+  var ss    = SpreadsheetApp.getActiveSpreadsheet();
+  var rec   = data.record || {};
+  var stamp = data.submittedAt || new Date().toISOString();
+  var sheet;
+
+  if (data.type === "passenger") {
+    sheet = ss.getSheetByName("Passengers") || ss.insertSheet("Passengers");
+    if (sheet.getLastRow() === 0) {
+      sheet.appendRow(["Submitted At","Name","Phone","Route","Travel Date",
+        "Pickup Time","Car Type","Status","Quoted Fare","Notes","Created"]);
+      sheet.getRange(1,1,1,11).setFontWeight("bold");
+    }
+    sheet.appendRow([stamp, rec.name, rec.phone, rec.route, rec.travelDate,
+      rec.pickupTime, rec.car, rec.status, rec.fare, rec.notes, rec.created]);
+  }
+
+  if (data.type === "driver") {
+    sheet = ss.getSheetByName("Drivers") || ss.insertSheet("Drivers");
+    if (sheet.getLastRow() === 0) {
+      sheet.appendRow(["Submitted At","Name","Phone","Car Type","Car Number",
+        "Availability","Main Route","Driver Quality","Notes","Created"]);
+      sheet.getRange(1,1,1,10).setFontWeight("bold");
+    }
+    sheet.appendRow([stamp, rec.name, rec.phone, rec.carType, rec.carNumber,
+      rec.availability, rec.route, rec.quality, rec.notes, rec.created]);
+  }
+
+  if (data.type === "test") {
+    sheet = ss.getSheetByName("Test") || ss.insertSheet("Test");
+    sheet.appendRow([stamp, "CRM connection test OK"]);
+  }
+
+  // NOTE: No delete endpoint exists here intentionally.
+  // All writes are append-only. Deleting rows requires
+  // direct Google Sheet access by the owner.
+
+  return ContentService.createTextOutput("ok");
+}
+*/
+</script>
+</body>
+</html>
