@@ -645,21 +645,18 @@ function updateStats() {
 }
 
 /* ── GOOGLE SHEET ──
-   Uses GET + URL params — most reliable for Apps Script.
-   Browsers convert cross-origin POST→GET after the 302 redirect
-   that Apps Script issues, so doPost never fires from a browser. */
+   Apps Script sets Access-Control-Allow-Origin:* so we can read the
+   response directly — no need for mode:"no-cors". */
 async function sendSheet(type, record) {
   const url = localStorage.getItem(URL_KEY);
   if (!url) return false;
   const payload = JSON.stringify({ type, record, submittedAt: new Date().toISOString(), sourcePage: "Padma Shree CRM v3" });
   try {
-    await fetch(url + "?payload=" + encodeURIComponent(payload), { mode: "no-cors" });
-    return true;
+    const res  = await fetch(url + "?payload=" + encodeURIComponent(payload));
+    const data = await res.json().catch(() => null);
+    return !!(data && data.status === "ok");
   } catch {
-    try {
-      await fetch(url, { method:"POST", mode:"no-cors", headers:{"Content-Type":"text/plain;charset=utf-8"}, body: payload });
-      return true;
-    } catch { return false; }
+    return false;
   }
 }
 
@@ -765,9 +762,9 @@ function showSuccess(title, sub, rec, type) {
   sendSheet(type, rec).then(ok => {
     const hasUrl = !!localStorage.getItem(URL_KEY);
     $("sucSheet").className    = ok ? "sheet-badge ok" : "sheet-badge warn";
-    $("sucSheetTxt").textContent = ok ? "Saved to Google Sheet ✓"
-      : hasUrl ? "Sheet sync failed — saved on phone"
-      : "Saved on phone · Admin needs to add Sheet URL";
+    $("sucSheetTxt").textContent = ok ? "✓ Saved to Google Sheet"
+      : hasUrl ? "⚠ Sheet not saving — Admin must redeploy Apps Script"
+      : "Saved on phone only — connect Google Sheet in Admin";
   });
 }
 function addAnother() { showView(lastFormType === "passenger" ? "passenger" : "driver"); }
@@ -878,13 +875,20 @@ async function testConnection() {
   const url = ($("adminUrl").value.trim()) || localStorage.getItem(URL_KEY);
   const res = $("testResult");
   if (!url) { res.style.display="block"; res.style.color="var(--red)"; res.textContent="⚠ Enter the URL first."; return; }
-  res.style.display="block"; res.style.color="var(--g500)"; res.textContent="Sending test ping…";
+  res.style.display="block"; res.style.color="var(--g500)"; res.textContent="Testing…";
   const p = JSON.stringify({type:"test",record:{name:"CRM Test"},submittedAt:new Date().toISOString(),sourcePage:"Padma Shree CRM v3 - Test"});
   try {
-    await fetch(url + "?payload=" + encodeURIComponent(p), {mode:"no-cors"});
-    res.style.color="#047040"; res.textContent="✓ Request sent. Check your Google Sheet for a row in the Test tab within 10 seconds.";
+    const r    = await fetch(url + "?payload=" + encodeURIComponent(p));
+    const data = await r.json().catch(() => null);
+    if (data && data.status === "ok") {
+      res.style.color="#047040";
+      res.textContent="✓ Connected — test row written to Google Sheet successfully.";
+    } else {
+      res.style.color="var(--red)";
+      res.textContent="⚠ Script responded but is NOT writing to sheet. Redeploy the Apps Script from crm/google-apps-script.gs — see instructions at the top of that file.";
+    }
   } catch(err) {
-    res.style.color="var(--red)"; res.textContent="✗ Network error: " + err.message;
+    res.style.color="var(--red)"; res.textContent="✗ Connection failed: " + err.message;
   }
 }
 
