@@ -1,4 +1,9 @@
 # Netlify _redirects — Padma Shree Travels
+
+# ── Internal CRM — not linked from site, not indexed ─────────────────────────
+# /crm/ root returns 404 so guessing the path doesn't reveal anything.
+# Staff access via the direct file URL: /crm/pst-crm-simple.html
+/crm/          /    404
 # Ensures clean URLs work and legacy .html paths redirect properly
 
 # ── Domain canonicalisation: force all traffic to custom domain ──────────────

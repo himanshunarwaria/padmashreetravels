@@ -4,6 +4,7 @@
 User-agent: *
 Allow: /
 Disallow: /.netlify/
+Disallow: /crm/
 
 Sitemap: https://padmashreetravels.in/sitemap.xml
 
