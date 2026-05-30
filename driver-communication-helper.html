@@ -126,9 +126,9 @@ body{font-family:var(--ff);font-size:16px;line-height:1.6;color:var(--g700);
 .sec-desc{font-size:.72rem;color:var(--g400);padding:0 1rem .55rem}
 .grp-divider{height:1px;background:var(--g100);margin:.6rem 0 0}
 
-/* ── CATEGORY HEADING (FIX 17: sticky within section) ────── */
+/* ── CATEGORY HEADING (sticky within section) ───────────── */
 .cat-heading{display:flex;align-items:center;gap:.5rem;
-             padding:.9rem 1rem .3rem;
+             padding:.75rem 1rem .25rem;
              position:sticky;top:var(--content-top);z-index:10;
              background:var(--white)}
 .cat-heading__icon{width:28px;height:28px;border-radius:8px;
@@ -141,44 +141,39 @@ body{font-family:var(--ff);font-size:16px;line-height:1.6;color:var(--g700);
 .cat-heading__name{font-size:.85rem;font-weight:700;color:var(--black)}
 .cat-heading__line{flex:1;height:1px;background:var(--g100)}
 
-/* ── PHRASE CARD (FIX 15: more breathing room) ───────────── */
+/* ── PHRASE CARD ─────────────────────────────────────────── */
 .phrase-card{background:var(--white);border:1px solid var(--g100);
-             border-left:3px solid var(--gold-border);border-radius:var(--r);
-             /* FIX 15 */
-             margin:.6rem 1rem;
-             padding:1.1rem 1rem 1rem;
+             border-left:2px solid var(--gold-border);border-radius:var(--r);
+             margin:.45rem 1rem;padding:.85rem 1rem;
              transition:box-shadow var(--t),border-color var(--t)}
 .phrase-card:hover{box-shadow:var(--md);border-color:var(--g200);border-left-color:var(--gold)}
-.phrase-card.mu{background:var(--white);border-color:var(--g100);border-left-color:var(--gold-border)}
-.phrase-card.emerg{border-left-color:rgba(215,59,0,.35)}
+.phrase-card.mu{border-left-color:var(--gold-border)}
+.phrase-card.emerg{border-left-color:rgba(215,59,0,.3)}
 .phrase-card.emerg:hover{border-left-color:var(--red)}
 .phrase-card.loc{border-left-color:var(--accent-b)}
 .phrase-card.loc:hover{border-left-color:var(--accent)}
 .phrase-card.coord{border-left-color:var(--green-b)}
 .phrase-card.coord:hover{border-left-color:var(--green)}
 
-/* FIX 3: larger readable text */
-.p-hindi{font-size:1.1rem;font-weight:600;color:var(--black);line-height:1.45;margin-bottom:.3rem}
-.p-english{font-size:1rem;color:var(--g600);line-height:1.5;margin-bottom:.9rem}
+.p-hindi{font-size:1.05rem;font-weight:600;color:var(--black);line-height:1.4;margin-bottom:.18rem}
+.p-english{font-size:.93rem;color:var(--g500);line-height:1.5;margin-bottom:.65rem}
 
-/* ── CARD BUTTONS — 2-ROW LAYOUT (FIX 2) ────────────────── */
-.card-btns{display:flex;flex-direction:column;gap:.4rem}
-.card-btns-row{display:flex;gap:.4rem}
-.cbtn{padding:.8rem .6rem;border-radius:var(--rp);border:none;
-      /* FIX 3: button label bigger */
-      font-size:.82rem;font-weight:600;font-family:var(--ff);
-      cursor:pointer;text-align:center;white-space:nowrap;
+/* ── CARD BUTTONS — single row ───────────────────────────── */
+.card-btns{display:flex;gap:.35rem;align-items:stretch}
+.cbtn{padding:.68rem .7rem;border-radius:var(--rp);border:none;
+      font-size:.78rem;font-weight:600;font-family:var(--ff);
+      cursor:pointer;white-space:nowrap;
       transition:background var(--t),box-shadow var(--t),transform var(--t);
       -webkit-user-select:none;user-select:none;
-      min-height:48px;display:flex;align-items:center;justify-content:center;gap:.3rem}
-.cbtn:active{transform:scale(.95)}
-/* Row 1: copy buttons share the row equally */
-.cbtn-en{flex:1;background:var(--black);color:var(--white)}
-.cbtn-en:hover{background:var(--g800);box-shadow:0 4px 12px rgba(0,0,0,.18)}
-.cbtn-hi{flex:1;background:var(--white);color:var(--g700);border:1.5px solid var(--g200)}
-.cbtn-hi:hover{border-color:var(--g700)}
-/* Row 2: Show Tourist — full width, prominent gold */
-.cbtn-show{width:100%;background:var(--gold);color:var(--white);font-size:.88rem}
+      min-height:42px;display:flex;align-items:center;justify-content:center;gap:.2rem}
+.cbtn:active{transform:scale(.94)}
+/* compact copy chips */
+.cbtn-en{flex:0 0 auto;background:var(--black);color:var(--white)}
+.cbtn-en:hover{background:var(--g800)}
+.cbtn-hi{flex:0 0 auto;background:var(--white);color:var(--g600);border:1.5px solid var(--g200)}
+.cbtn-hi:hover{border-color:var(--g700);color:var(--black)}
+/* show tourist fills remaining width */
+.cbtn-show{flex:1;background:var(--gold);color:var(--white);font-size:.82rem}
 .cbtn-show:hover{background:#a67e2a;box-shadow:0 4px 12px rgba(184,148,58,.28)}
 
 /* ── EMERGENCY STICKY (FIX 6: safe-area-inset-bottom) ────── */
@@ -270,21 +265,20 @@ body{font-family:var(--ff);font-size:16px;line-height:1.6;color:var(--g700);
 .word-sep{color:var(--g300);font-weight:300;font-size:.9rem}
 .word-pron{font-size:.78rem;color:var(--g400);font-style:italic;margin-bottom:.85rem}
 
-/* word buttons — same pill style as phrase cards */
-.word-btns{display:flex;flex-direction:column;gap:.38rem}
-.word-btns-row{display:flex;gap:.38rem}
-.wbtn{flex:1;padding:.72rem .6rem;border-radius:var(--rp);border:none;
-      font-size:.8rem;font-weight:600;font-family:var(--ff);
-      cursor:pointer;text-align:center;white-space:nowrap;
+/* word buttons — single row, same as phrase card pattern */
+.word-btns{display:flex;gap:.35rem;align-items:stretch;margin-top:.65rem}
+.wbtn{padding:.68rem .7rem;border-radius:var(--rp);border:none;
+      font-size:.78rem;font-weight:600;font-family:var(--ff);
+      cursor:pointer;white-space:nowrap;
       transition:background var(--t),box-shadow var(--t),transform var(--t);
       -webkit-user-select:none;user-select:none;
-      min-height:44px;display:flex;align-items:center;justify-content:center;gap:.25rem}
-.wbtn:active{transform:scale(.95)}
-.wbtn-en{background:var(--black);color:var(--white)}
+      min-height:42px;display:flex;align-items:center;justify-content:center;gap:.2rem}
+.wbtn:active{transform:scale(.94)}
+.wbtn-en{flex:0 0 auto;background:var(--black);color:var(--white)}
 .wbtn-en:hover{background:var(--g800)}
-.wbtn-hi{background:var(--white);color:var(--g700);border:1.5px solid var(--g200)}
-.wbtn-hi:hover{border-color:var(--g700)}
-.wbtn-show{width:100%;background:var(--gold);color:var(--white);font-size:.85rem}
+.wbtn-hi{flex:0 0 auto;background:var(--white);color:var(--g600);border:1.5px solid var(--g200)}
+.wbtn-hi:hover{border-color:var(--g700);color:var(--black)}
+.wbtn-show{flex:1;background:var(--gold);color:var(--white);font-size:.82rem}
 .wbtn-show:hover{background:#a67e2a;box-shadow:0 4px 12px rgba(184,148,58,.28)}
 
 /* word-count bar */
@@ -923,28 +917,22 @@ function makeCard(p, catId, group, muClass) {
   const ph = document.createElement('div'); ph.className = 'p-hindi';   ph.textContent = p.h;
   const pe = document.createElement('div'); pe.className = 'p-english'; pe.textContent = p.e;
 
-  /* ── 2-row button layout ── */
+  /* ── single-row buttons ── */
   const btns = document.createElement('div'); btns.className = 'card-btns';
 
-  /* Row 1: copy buttons */
-  const row1 = document.createElement('div'); row1.className = 'card-btns-row';
-
   const bEn = document.createElement('button'); bEn.className = 'cbtn cbtn-en';
-  bEn.innerHTML = '📋 Copy English';
+  bEn.textContent = 'Copy EN';
   bEn.addEventListener('click', () => copyText(p.e, 'English copied ✓'));
 
   const bHi = document.createElement('button'); bHi.className = 'cbtn cbtn-hi';
-  bHi.innerHTML = '📋 Copy Hindi';
+  bHi.textContent = 'Copy HI';
   bHi.addEventListener('click', () => copyText(p.h, 'Hindi copied ✓'));
 
-  row1.appendChild(bEn); row1.appendChild(bHi);
-
-  /* Row 2: Show Tourist — full width */
   const bSh = document.createElement('button'); bSh.className = 'cbtn cbtn-show';
-  bSh.innerHTML = '👁 Show to Tourist';
+  bSh.innerHTML = '👁&nbsp; Show Tourist';
   bSh.addEventListener('click', () => showOverlay(p.e, p.h));
 
-  btns.appendChild(row1); btns.appendChild(bSh);
+  btns.appendChild(bEn); btns.appendChild(bHi); btns.appendChild(bSh);
   d.appendChild(ph); d.appendChild(pe); d.appendChild(btns);
   return d;
 }
@@ -1411,24 +1399,22 @@ function makeWordCard(w) {
   /* pronunciation */
   const pr = document.createElement('div'); pr.className = 'word-pron'; pr.textContent = w.p;
 
-  /* buttons */
+  /* buttons — single row */
   const btns = document.createElement('div'); btns.className = 'word-btns';
-  const row1 = document.createElement('div'); row1.className = 'word-btns-row';
 
   const bEn = document.createElement('button'); bEn.className = 'wbtn wbtn-en';
-  bEn.textContent = 'Copy English';
+  bEn.textContent = 'Copy EN';
   bEn.addEventListener('click', () => copyText(w.e, 'English copied ✓'));
 
   const bHi = document.createElement('button'); bHi.className = 'wbtn wbtn-hi';
-  bHi.textContent = 'Copy Hindi';
+  bHi.textContent = 'Copy HI';
   bHi.addEventListener('click', () => copyText(w.h, 'Hindi copied ✓'));
 
   const bSh = document.createElement('button'); bSh.className = 'wbtn wbtn-show';
-  bSh.textContent = '👁 Show to Tourist';
-  bSh.addEventListener('click', () => showOverlay(w.e + '\n\n' + w.h, w.p));
+  bSh.innerHTML = '👁&nbsp; Show Tourist';
+  bSh.addEventListener('click', () => showOverlay(w.e, w.h));
 
-  row1.appendChild(bEn); row1.appendChild(bHi);
-  btns.appendChild(row1); btns.appendChild(bSh);
+  btns.appendChild(bEn); btns.appendChild(bHi); btns.appendChild(bSh);
 
   d.appendChild(top); d.appendChild(pr); d.appendChild(btns);
   return d;
