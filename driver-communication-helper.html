@@ -17,10 +17,11 @@
   --g900:#1A1A1A; --g800:#292929; --g700:#3D3D3D;
   --g600:#4F4F4F; --g500:#6B6B6B; --g400:#909090;
   --g300:#ADADAD; --g200:#D4D4D4; --g100:#EBEBEB; --g50:#F7F7F7;
-  --gold:#B8943A; --gold-bg:rgba(184,148,58,.07); --gold-b:rgba(184,148,58,.35);
+  --gold:#B8943A; --gold-bg:rgba(184,148,58,.08); --gold-border:rgba(184,148,58,.18);
   --red:#D73B00;  --red-bg:rgba(215,59,0,.07);
-  --green:#05944F; --teal:#0e7490;
-  --teal-b:rgba(14,116,144,.32); --grn-b:rgba(5,148,79,.3);
+  --green:#05944F; --accent:#276EF1;
+  --accent-bg:rgba(39,110,241,.07); --accent-b:rgba(39,110,241,.2);
+  --green-bg:rgba(5,148,79,.07);   --green-b:rgba(5,148,79,.2);
   --ff:Inter,-apple-system,'SF Pro Text','Segoe UI',Roboto,sans-serif;
   --r:10px; --r-lg:16px; --rp:999px;
   --sm:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
@@ -54,7 +55,7 @@ body{font-family:var(--ff);font-size:16px;line-height:1.6;color:var(--g700);
                text-transform:uppercase;color:var(--g400);margin-top:.1rem}
 /* FIX 16: ARIA-labeled badge */
 .hdr__badge{font-size:.62rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
-            background:var(--gold-bg);border:1px solid var(--gold-b);color:var(--gold);
+            background:var(--gold-bg);border:1px solid var(--gold-border);color:var(--gold);
             padding:.28rem .72rem;border-radius:var(--rp);white-space:nowrap}
 
 /* ── HERO STRIP (compact — FIX 4: no stats row) ─────────── */
@@ -119,7 +120,7 @@ body{font-family:var(--ff);font-size:16px;line-height:1.6;color:var(--g700);
 #most-used{background:var(--g50);padding-bottom:.5rem}
 .sec-label{display:flex;align-items:center;gap:.5rem;padding:.9rem 1rem .3rem}
 .sec-badge{font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
-           background:var(--gold-bg);border:1px solid var(--gold-b);color:var(--gold);
+           background:var(--gold-bg);border:1px solid var(--gold-border);color:var(--gold);
            padding:.22rem .6rem;border-radius:var(--rp)}
 .sec-title{font-size:.86rem;font-weight:700;color:var(--black)}
 .sec-desc{font-size:.72rem;color:var(--g400);padding:0 1rem .55rem}
@@ -134,26 +135,26 @@ body{font-family:var(--ff);font-size:16px;line-height:1.6;color:var(--g700);
                    background:var(--g50);border:1px solid var(--g100);
                    display:flex;align-items:center;justify-content:center;
                    font-size:13px;flex-shrink:0}
-.cat-heading__icon.loc{background:rgba(14,116,144,.08);border-color:var(--teal-b)}
+.cat-heading__icon.loc{background:var(--accent-bg);border-color:var(--accent-b)}
 .cat-heading__icon.emerg{background:var(--red-bg);border-color:rgba(215,59,0,.2)}
-.cat-heading__icon.coord{background:rgba(5,148,79,.08);border-color:var(--grn-b)}
+.cat-heading__icon.coord{background:var(--green-bg);border-color:var(--green-b)}
 .cat-heading__name{font-size:.85rem;font-weight:700;color:var(--black)}
 .cat-heading__line{flex:1;height:1px;background:var(--g100)}
 
 /* ── PHRASE CARD (FIX 15: more breathing room) ───────────── */
 .phrase-card{background:var(--white);border:1px solid var(--g100);
-             border-left:3px solid var(--gold-b);border-radius:var(--r);
+             border-left:3px solid var(--gold-border);border-radius:var(--r);
              /* FIX 15 */
              margin:.6rem 1rem;
              padding:1.1rem 1rem 1rem;
              transition:box-shadow var(--t),border-color var(--t)}
 .phrase-card:hover{box-shadow:var(--md);border-color:var(--g200);border-left-color:var(--gold)}
-.phrase-card.mu{background:var(--white);border-color:var(--g100);border-left-color:var(--gold-b)}
+.phrase-card.mu{background:var(--white);border-color:var(--g100);border-left-color:var(--gold-border)}
 .phrase-card.emerg{border-left-color:rgba(215,59,0,.35)}
 .phrase-card.emerg:hover{border-left-color:var(--red)}
-.phrase-card.loc{border-left-color:var(--teal-b)}
-.phrase-card.loc:hover{border-left-color:var(--teal)}
-.phrase-card.coord{border-left-color:var(--grn-b)}
+.phrase-card.loc{border-left-color:var(--accent-b)}
+.phrase-card.loc:hover{border-left-color:var(--accent)}
+.phrase-card.coord{border-left-color:var(--green-b)}
 .phrase-card.coord:hover{border-left-color:var(--green)}
 
 /* FIX 3: larger readable text */
