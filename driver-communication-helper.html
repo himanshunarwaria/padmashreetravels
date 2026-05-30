@@ -254,6 +254,50 @@ body{font-family:var(--ff);font-size:16px;line-height:1.6;color:var(--g700);
 #no-results small{font-size:.76rem;color:var(--g300);display:block;margin-top:.25rem}
 
 .footer-space{height:6rem}
+
+/* ── WORD DICTIONARY ─────────────────────────────────────── */
+.word-card{
+  background:var(--white);border:1px solid var(--g100);
+  border-radius:var(--r);margin:.5rem 1rem;
+  padding:1rem;
+  transition:box-shadow var(--t),border-color var(--t)}
+.word-card:hover{box-shadow:var(--md);border-color:var(--g200)}
+
+/* top row: english + hindi side by side */
+.word-top{display:flex;align-items:baseline;gap:.75rem;margin-bottom:.2rem;flex-wrap:wrap}
+.word-en{font-size:1.1rem;font-weight:700;color:var(--black);line-height:1.3}
+.word-hi{font-size:1.05rem;font-weight:600;color:var(--g700);line-height:1.3}
+.word-sep{color:var(--g300);font-weight:300;font-size:.9rem}
+.word-pron{font-size:.78rem;color:var(--g400);font-style:italic;margin-bottom:.85rem}
+
+/* word buttons — same pill style as phrase cards */
+.word-btns{display:flex;flex-direction:column;gap:.38rem}
+.word-btns-row{display:flex;gap:.38rem}
+.wbtn{flex:1;padding:.72rem .6rem;border-radius:var(--rp);border:none;
+      font-size:.8rem;font-weight:600;font-family:var(--ff);
+      cursor:pointer;text-align:center;white-space:nowrap;
+      transition:background var(--t),box-shadow var(--t),transform var(--t);
+      -webkit-user-select:none;user-select:none;
+      min-height:44px;display:flex;align-items:center;justify-content:center;gap:.25rem}
+.wbtn:active{transform:scale(.95)}
+.wbtn-en{background:var(--black);color:var(--white)}
+.wbtn-en:hover{background:var(--g800)}
+.wbtn-hi{background:var(--white);color:var(--g700);border:1.5px solid var(--g200)}
+.wbtn-hi:hover{border-color:var(--g700)}
+.wbtn-show{width:100%;background:var(--gold);color:var(--white);font-size:.85rem}
+.wbtn-show:hover{background:#a67e2a;box-shadow:0 4px 12px rgba(184,148,58,.28)}
+
+/* word-count bar */
+#word-result-count{display:none;padding:.3rem 1rem .1rem;
+                   font-size:.75rem;font-weight:600;color:var(--g400)}
+/* A-Z quick strip */
+.az-strip{display:flex;flex-wrap:wrap;gap:.3rem;padding:.5rem 1rem .2rem;
+          background:var(--white)}
+.az-btn{padding:.32rem .55rem;border-radius:6px;border:1.5px solid var(--g100);
+        background:var(--g50);color:var(--g500);font-size:.72rem;font-weight:700;
+        cursor:pointer;transition:all var(--t);min-height:32px;font-family:var(--ff)}
+.az-btn:hover{border-color:var(--g300);color:var(--black)}
+.az-btn.active{background:var(--black);color:var(--white);border-color:var(--black)}
 </style>
 </head>
 <body>
@@ -287,6 +331,9 @@ body{font-family:var(--ff);font-size:16px;line-height:1.6;color:var(--g700);
   <button class="gtab" onclick="setGroup('collab',this)" role="tab" aria-selected="false" aria-label="Coordination phrases">
     <span class="gtab__icon">📞</span>Coordination
   </button>
+  <button class="gtab" onclick="setGroup('words',this)" role="tab" aria-selected="false" aria-label="Word dictionary">
+    <span class="gtab__icon">🔤</span>Dictionary
+  </button>
 </div>
 
 <!-- ── EMERGENCY STICKY (FIX 6+16) ──────────────────────── -->
@@ -311,20 +358,30 @@ body{font-family:var(--ff);font-size:16px;line-height:1.6;color:var(--g700);
   <div class="ov-hint">Tap ✕ to close</div>
 </div>
 
-<!-- ── SEARCH (FIX 14: shortened placeholder, autocorrect off) ── -->
-<div class="search-wrap">
+<!-- ── PHRASE SEARCH ──────────────────────────────────────── -->
+<div class="search-wrap" id="phrase-search-wrap">
   <input id="search" class="search-input" type="search" inputmode="search"
-    placeholder="🔍 Search: hotel, payment, doctor, Taj Mahal…"
+    placeholder="🔍 Search phrases: hotel, payment, doctor, Taj Mahal…"
     oninput="onSearch()" autocomplete="off" autocorrect="off"
     autocapitalize="off" spellcheck="false">
 </div>
-
-<!-- ── RESULT COUNT (FIX 8) ──────────────────────────────── -->
 <div id="result-count" aria-live="polite"></div>
-
-<!-- ── CATEGORY PILLS with gradient fade wrapper (FIX 9) ── -->
-<div class="cats-outer">
+<div class="cats-outer" id="phrase-pills-wrap">
   <div class="cats-wrap" id="cat-pills" role="group" aria-label="Filter by category"></div>
+</div>
+
+<!-- ── WORD SEARCH (shown only in Dictionary tab) ────────── -->
+<div class="search-wrap" id="word-search-wrap" style="display:none">
+  <input id="word-search" class="search-input" type="search" inputmode="search"
+    placeholder="🔍 Search words: water, taxi, temple, left…"
+    oninput="onWordSearch()" autocomplete="off" autocorrect="off"
+    autocapitalize="off" spellcheck="false">
+</div>
+<div id="word-result-count" aria-live="polite"></div>
+<!-- A-Z quick-jump strip -->
+<div class="az-strip" id="az-strip" style="display:none"></div>
+<div class="cats-outer" id="word-pills-wrap" style="display:none">
+  <div class="cats-wrap" id="word-cat-pills" role="group" aria-label="Filter words by category"></div>
 </div>
 
 <!-- ── MAIN CONTENT ──────────────────────────────────────── -->
@@ -333,6 +390,11 @@ body{font-family:var(--ff);font-size:16px;line-height:1.6;color:var(--g700);
   <div class="nr-icon">🔍</div>
   <p>No phrases found</p>
   <small>Search checks all tabs automatically</small>
+</div>
+<div id="no-word-results" style="display:none">
+  <div class="nr-icon">🔍</div>
+  <p>No words found</p>
+  <small>Try English or Hindi spelling</small>
 </div>
 <div class="footer-space"></div>
 
@@ -891,6 +953,7 @@ function makeCard(p, catId, group, muClass) {
    RENDER
    ============================================================ */
 function render() {
+  if (activeGroup === 'words') { renderWords(); return; }
   const content = document.getElementById('content');
   content.innerHTML = '';
   let total = 0;
@@ -975,6 +1038,7 @@ function render() {
    PILLS — with phrase counts + active pill scroll (FIX 9+10)
    ============================================================ */
 function buildPills(group) {
+  if (group === 'words') { buildWordPills(); return; }
   const wrap = document.getElementById('cat-pills');
   wrap.innerHTML = '';
 
@@ -1013,11 +1077,30 @@ function setCat(id, btn) {
 function setGroup(group, btn) {
   activeGroup = group;
   activeCat   = 'all';
+  query       = '';
+  wordQuery   = '';
   document.querySelectorAll('.gtab').forEach(b => {
     b.classList.remove('active');
     b.setAttribute('aria-selected', 'false');
   });
   if (btn) { btn.classList.add('active'); btn.setAttribute('aria-selected', 'true'); }
+
+  const isWords = (group === 'words');
+  /* toggle phrase UI vs word UI */
+  document.getElementById('phrase-search-wrap').style.display  = isWords ? 'none' : '';
+  document.getElementById('phrase-pills-wrap').style.display   = isWords ? 'none' : '';
+  document.getElementById('result-count').style.display        = 'none';
+  document.getElementById('word-search-wrap').style.display    = isWords ? '' : 'none';
+  document.getElementById('word-pills-wrap').style.display     = isWords ? '' : 'none';
+  document.getElementById('az-strip').style.display            = isWords ? '' : 'none';
+  document.getElementById('word-result-count').style.display   = 'none';
+  document.getElementById('emer-btn').style.display            = isWords ? 'none' : '';
+  document.getElementById('no-results').style.display          = 'none';
+  document.getElementById('no-word-results').style.display     = 'none';
+  /* clear both search inputs */
+  document.getElementById('search').value       = '';
+  document.getElementById('word-search').value  = '';
+
   buildPills(group);
   render();
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1042,6 +1125,447 @@ function goEmergency() {
     const el = document.getElementById('cat-emergency');
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }, 100);
+}
+
+/* ============================================================
+   WORD DICTIONARY — DATA
+   ============================================================ */
+let wordQuery    = '';
+let activeWordCat = 'all';
+let activeWordLetter = 'all';
+
+const WORD_CATS = [
+  {id:'basic',     name:'Basic Communication', icon:'💬'},
+  {id:'vehicle',   name:'Vehicle & Transport',  icon:'🚗'},
+  {id:'places',    name:'Places & Locations',   icon:'📍'},
+  {id:'payment',   name:'Money & Payment',      icon:'💳'},
+  {id:'time',      name:'Time & Days',           icon:'🕐'},
+  {id:'direction', name:'Directions',            icon:'🧭'},
+  {id:'comfort',   name:'Comfort & Feelings',   icon:'😊'},
+  {id:'food',      name:'Food & Water',          icon:'🍽️'},
+  {id:'tourism',   name:'Tourism & Tickets',     icon:'🎫'},
+  {id:'religion',  name:'Religion & Pilgrimage', icon:'🛕'},
+  {id:'shopping',  name:'Shopping & Prices',     icon:'🛍️'},
+  {id:'emergency', name:'Emergency Words',        icon:'🚨'},
+  {id:'agra',      name:'Agra & Key Places',     icon:'🕌'},
+];
+
+/* e=English, h=Hindi, p=Pronunciation (Romanized), cat=category id */
+const WORDS = [
+/* ── BASIC COMMUNICATION ──────────────────────────────────── */
+  {e:'Hello',          h:'नमस्ते',          p:'Namaste',          cat:'basic'},
+  {e:'Welcome',        h:'स्वागत है',        p:'Swaagat hai',      cat:'basic'},
+  {e:'Thank you',      h:'धन्यवाद',          p:'Dhanyavaad',       cat:'basic'},
+  {e:'Please',         h:'कृपया',            p:'Kripaya',          cat:'basic'},
+  {e:'Sorry',          h:'माफ़ करें',         p:'Maaf karein',      cat:'basic'},
+  {e:'Yes',            h:'हाँ',              p:'Haan',             cat:'basic'},
+  {e:'No',             h:'नहीं',             p:'Nahin',            cat:'basic'},
+  {e:'Okay',           h:'ठीक है',           p:'Theek hai',        cat:'basic'},
+  {e:'Come',           h:'आइए',             p:'Aaiye',            cat:'basic'},
+  {e:'Go',             h:'जाइए',            p:'Jaaiye',           cat:'basic'},
+  {e:'Wait',           h:'रुकिए',            p:'Rukiye',           cat:'basic'},
+  {e:'Help',           h:'मदद',             p:'Madad',            cat:'basic'},
+  {e:'Good',           h:'अच्छा',            p:'Achha',            cat:'basic'},
+  {e:'Problem',        h:'समस्या',           p:'Samasya',          cat:'basic'},
+  {e:'Ready',          h:'तैयार',            p:'Taiyaar',          cat:'basic'},
+  {e:'Here',           h:'यहाँ',             p:'Yahaan',           cat:'basic'},
+  {e:'There',          h:'वहाँ',             p:'Vahaan',           cat:'basic'},
+  {e:'Now',            h:'अभी',              p:'Abhi',             cat:'basic'},
+  {e:'Later',          h:'बाद में',           p:'Baad mein',        cat:'basic'},
+  {e:'Understand',     h:'समझ गया',          p:'Samajh gaya',      cat:'basic'},
+  {e:'Repeat',         h:'फिर बोलिए',        p:'Phir boliye',      cat:'basic'},
+  {e:'Safe',           h:'सुरक्षित',          p:'Surakshit',        cat:'basic'},
+
+/* ── VEHICLE & TRANSPORT ──────────────────────────────────── */
+  {e:'Car / Cab',      h:'गाड़ी / कैब',       p:'Gaadi / Cab',      cat:'vehicle'},
+  {e:'Driver',         h:'ड्राइवर',           p:'Driver',           cat:'vehicle'},
+  {e:'Seat',           h:'सीट',              p:'Seat',             cat:'vehicle'},
+  {e:'Seat belt',      h:'सीट बेल्ट',         p:'Seat belt',        cat:'vehicle'},
+  {e:'AC',             h:'एयर कंडीशनर',       p:'Air conditioner',  cat:'vehicle'},
+  {e:'Window',         h:'खिड़की',            p:'Khidki',           cat:'vehicle'},
+  {e:'Door',           h:'दरवाज़ा',           p:'Darwaaza',         cat:'vehicle'},
+  {e:'Boot / Trunk',   h:'डिक्की',            p:'Dikki',            cat:'vehicle'},
+  {e:'Parking',        h:'पार्किंग',           p:'Parking',          cat:'vehicle'},
+  {e:'Traffic',        h:'ट्रैफिक',            p:'Traffic',          cat:'vehicle'},
+  {e:'Route',          h:'रास्ता',            p:'Raasta',           cat:'vehicle'},
+  {e:'Fuel / Petrol',  h:'पेट्रोल',           p:'Petrol',           cat:'vehicle'},
+  {e:'Toll',           h:'टोल',              p:'Toll',             cat:'vehicle'},
+  {e:'Luggage',        h:'सामान',            p:'Saamaan',          cat:'vehicle'},
+  {e:'Tyre',           h:'टायर',             p:'Tyre',             cat:'vehicle'},
+  {e:'Petrol pump',    h:'पेट्रोल पंप',        p:'Petrol pump',      cat:'vehicle'},
+  {e:'Expressway',     h:'एक्सप्रेसवे',         p:'Expressway',       cat:'vehicle'},
+  {e:'Highway',        h:'हाईवे',             p:'Highway',          cat:'vehicle'},
+  {e:'Shortcut',       h:'शॉर्टकट',            p:'Shortcut',         cat:'vehicle'},
+  {e:'Breakdown',      h:'गाड़ी खराब',          p:'Gaadi kharaab',    cat:'vehicle'},
+
+/* ── PLACES & LOCATIONS ───────────────────────────────────── */
+  {e:'Hotel',          h:'होटल',             p:'Hotel',            cat:'places'},
+  {e:'Airport',        h:'हवाई अड्डा',         p:'Hawai adda',       cat:'places'},
+  {e:'Railway station',h:'रेलवे स्टेशन',       p:'Railway station',   cat:'places'},
+  {e:'Temple',         h:'मंदिर',             p:'Mandir',           cat:'places'},
+  {e:'Mosque',         h:'मस्जिद',            p:'Masjid',           cat:'places'},
+  {e:'Fort',           h:'किला',              p:'Kila',             cat:'places'},
+  {e:'Garden / Park',  h:'बाग / पार्क',         p:'Baag / Park',      cat:'places'},
+  {e:'Market / Bazar', h:'बाज़ार',             p:'Bazaar',           cat:'places'},
+  {e:'Hospital',       h:'अस्पताल',            p:'Aspatal',          cat:'places'},
+  {e:'Pharmacy',       h:'दवाई की दुकान',       p:'Dawai ki dukaan',  cat:'places'},
+  {e:'ATM',            h:'एटीएम',             p:'ATM',              cat:'places'},
+  {e:'Restaurant',     h:'रेस्टोरेंट',           p:'Restaurant',       cat:'places'},
+  {e:'Washroom',       h:'शौचालय',            p:'Shauchalay',       cat:'places'},
+  {e:'Ticket counter', h:'टिकट काउंटर',        p:'Ticket counter',   cat:'places'},
+  {e:'Gate / Entry',   h:'गेट / प्रवेश',        p:'Gate / Pravesh',   cat:'places'},
+  {e:'Reception',      h:'रिसेप्शन',            p:'Reception',        cat:'places'},
+  {e:'Police station', h:'पुलिस थाना',          p:'Police thana',     cat:'places'},
+  {e:'Bank',           h:'बैंक',              p:'Bank',             cat:'places'},
+  {e:'Ghat',           h:'घाट',              p:'Ghaat',            cat:'places'},
+  {e:'Museum',         h:'संग्रहालय',           p:'Sangrahalay',      cat:'places'},
+
+/* ── MONEY & PAYMENT ──────────────────────────────────────── */
+  {e:'Cash',           h:'नकद',              p:'Nakad',            cat:'payment'},
+  {e:'UPI',            h:'यूपीआई',            p:'UPI',              cat:'payment'},
+  {e:'Card',           h:'कार्ड',             p:'Card',             cat:'payment'},
+  {e:'Payment',        h:'भुगतान',            p:'Bhugtaan',         cat:'payment'},
+  {e:'Fare',           h:'किराया',            p:'Kiraya',           cat:'payment'},
+  {e:'Bill / Receipt', h:'बिल / रसीद',         p:'Bill / Raseed',    cat:'payment'},
+  {e:'Charge',         h:'शुल्क',             p:'Shulk',            cat:'payment'},
+  {e:'Discount',       h:'छूट',              p:'Chhoot',           cat:'payment'},
+  {e:'Change (coins)', h:'खुल्ले पैसे',         p:'Khulle paise',     cat:'payment'},
+  {e:'Rupee (₹)',      h:'रुपया',             p:'Rupaya',           cat:'payment'},
+  {e:'Expensive',      h:'महंगा',             p:'Mehanga',          cat:'payment'},
+  {e:'Cheap',          h:'सस्ता',             p:'Sasta',            cat:'payment'},
+  {e:'Free',           h:'मुफ़्त',             p:'Muft',             cat:'payment'},
+  {e:'Round trip',     h:'आना-जाना',           p:'Aana-jaana',       cat:'payment'},
+  {e:'Package',        h:'पैकेज',             p:'Package',          cat:'payment'},
+  {e:'Waiting charge', h:'प्रतीक्षा शुल्क',      p:'Prateeksha shulk', cat:'payment'},
+  {e:'No extra charge',h:'कोई extra charge नहीं',p:'Koi extra charge nahin',cat:'payment'},
+  {e:'Fixed price',    h:'तय क़ीमत',           p:'Tay qeemat',       cat:'payment'},
+
+/* ── TIME & DAYS ──────────────────────────────────────────── */
+  {e:'Minute',         h:'मिनट',             p:'Minute',           cat:'time'},
+  {e:'Hour',           h:'घंटा',             p:'Ghanta',           cat:'time'},
+  {e:'Morning',        h:'सुबह',             p:'Subah',            cat:'time'},
+  {e:'Afternoon',      h:'दोपहर',            p:'Dopahar',          cat:'time'},
+  {e:'Evening',        h:'शाम',              p:'Shaam',            cat:'time'},
+  {e:'Night',          h:'रात',              p:'Raat',             cat:'time'},
+  {e:'Today',          h:'आज',              p:'Aaj',              cat:'time'},
+  {e:'Tomorrow',       h:'कल',              p:'Kal',              cat:'time'},
+  {e:'Early',          h:'जल्दी',            p:'Jaldi',            cat:'time'},
+  {e:'Late',           h:'देर',              p:'Der',              cat:'time'},
+  {e:'Sunday',         h:'रविवार',            p:'Ravivaar',         cat:'time'},
+  {e:'Monday',         h:'सोमवार',            p:'Somvaar',          cat:'time'},
+  {e:'Tuesday',        h:'मंगलवार',           p:'Mangalvaar',       cat:'time'},
+  {e:'Wednesday',      h:'बुधवार',            p:'Budhvaar',         cat:'time'},
+  {e:'Thursday',       h:'गुरुवार',            p:'Guruvaar',         cat:'time'},
+  {e:'Friday',         h:'शुक्रवार',           p:'Shukravaar',       cat:'time'},
+  {e:'Saturday',       h:'शनिवार',            p:'Shanivaar',        cat:'time'},
+
+/* ── DIRECTIONS ───────────────────────────────────────────── */
+  {e:'Left',           h:'बाईं ओर',           p:'Baayin or',        cat:'direction'},
+  {e:'Right',          h:'दाईं ओर',           p:'Daayin or',        cat:'direction'},
+  {e:'Straight',       h:'सीधे',             p:'Seedhe',           cat:'direction'},
+  {e:'Stop',           h:'रुकिए',             p:'Rukiye',           cat:'direction'},
+  {e:'Near',           h:'पास',              p:'Paas',             cat:'direction'},
+  {e:'Far',            h:'दूर',              p:'Door',             cat:'direction'},
+  {e:'Front / Ahead',  h:'आगे',              p:'Aage',             cat:'direction'},
+  {e:'Back / Behind',  h:'पीछे',             p:'Peeche',           cat:'direction'},
+  {e:'Up / Upstairs',  h:'ऊपर',              p:'Oopar',            cat:'direction'},
+  {e:'Down / Below',   h:'नीचे',             p:'Neeche',           cat:'direction'},
+  {e:'U-turn',         h:'यू-टर्न',           p:'U-turn',           cat:'direction'},
+  {e:'Crossroads',     h:'चौराहा',            p:'Chauraaha',        cat:'direction'},
+  {e:'Traffic signal', h:'सिग्नल',            p:'Signal',           cat:'direction'},
+
+/* ── COMFORT & FEELINGS ───────────────────────────────────── */
+  {e:'Hot',            h:'गर्म',              p:'Garam',            cat:'comfort'},
+  {e:'Cold',           h:'ठंडा',             p:'Thanda',           cat:'comfort'},
+  {e:'Comfortable',    h:'आरामदायक',          p:'Araamdayak',       cat:'comfort'},
+  {e:'Tired',          h:'थका हुआ',           p:'Thaka hua',        cat:'comfort'},
+  {e:'Hungry',         h:'भूखा',             p:'Bhookha',          cat:'comfort'},
+  {e:'Thirsty',        h:'प्यासा',            p:'Pyaasa',           cat:'comfort'},
+  {e:'Fast',           h:'तेज़',              p:'Tez',              cat:'comfort'},
+  {e:'Slow',           h:'धीरे',             p:'Dheere',           cat:'comfort'},
+  {e:'Quiet',          h:'शांत',             p:'Shaant',           cat:'comfort'},
+  {e:'Loud',           h:'तेज़ आवाज़',          p:'Tez aawaaz',       cat:'comfort'},
+  {e:'Sick / Unwell',  h:'बीमार',            p:'Beemaar',          cat:'comfort'},
+  {e:'Better',         h:'बेहतर',             p:'Behtar',           cat:'comfort'},
+  {e:'Happy',          h:'खुश',              p:'Khush',            cat:'comfort'},
+  {e:'Worried',        h:'चिंतित',            p:'Chintit',          cat:'comfort'},
+
+/* ── FOOD & WATER ─────────────────────────────────────────── */
+  {e:'Water',          h:'पानी',             p:'Paani',            cat:'food'},
+  {e:'Tea',            h:'चाय',              p:'Chaay',            cat:'food'},
+  {e:'Coffee',         h:'कॉफ़ी',             p:'Coffee',           cat:'food'},
+  {e:'Food / Meal',    h:'खाना',             p:'Khaana',           cat:'food'},
+  {e:'Lunch',          h:'दोपहर का खाना',     p:'Dopahar ka khaana',cat:'food'},
+  {e:'Dinner',         h:'रात का खाना',       p:'Raat ka khaana',   cat:'food'},
+  {e:'Breakfast',      h:'नाश्ता',            p:'Naashta',          cat:'food'},
+  {e:'Vegetarian',     h:'शाकाहारी',          p:'Shaakaahaari',     cat:'food'},
+  {e:'Non-vegetarian', h:'मांसाहारी',          p:'Maansaahaari',     cat:'food'},
+  {e:'Spicy',          h:'मसालेदार',          p:'Masaaledaar',      cat:'food'},
+  {e:'Sweet',          h:'मीठा',             p:'Meetha',           cat:'food'},
+  {e:'Restaurant',     h:'रेस्टोरेंट',          p:'Restaurant',       cat:'food'},
+  {e:'Washroom',       h:'शौचालय',            p:'Shauchalay',       cat:'food'},
+  {e:'Allergy',        h:'एलर्जी',            p:'Allergy',          cat:'food'},
+
+/* ── TOURISM & TICKETS ────────────────────────────────────── */
+  {e:'Ticket',         h:'टिकट',             p:'Ticket',           cat:'tourism'},
+  {e:'Entry',          h:'प्रवेश',            p:'Pravesh',          cat:'tourism'},
+  {e:'Guide',          h:'गाइड',             p:'Guide',            cat:'tourism'},
+  {e:'Photo',          h:'फ़ोटो',             p:'Photo',            cat:'tourism'},
+  {e:'Camera',         h:'कैमरा',             p:'Camera',           cat:'tourism'},
+  {e:'Monument',       h:'स्मारक',            p:'Smarak',           cat:'tourism'},
+  {e:'Heritage site',  h:'विरासत स्थल',        p:'Viraasat sthal',   cat:'tourism'},
+  {e:'Sunrise',        h:'सूर्योदय',           p:'Suryoday',         cat:'tourism'},
+  {e:'Sunset',         h:'सूर्यास्त',           p:'Suryast',          cat:'tourism'},
+  {e:'View',           h:'दृश्य',             p:'Drishya',          cat:'tourism'},
+  {e:'Famous',         h:'प्रसिद्ध',           p:'Prasiddh',         cat:'tourism'},
+  {e:'History',        h:'इतिहास',            p:'Itihaas',          cat:'tourism'},
+  {e:'UNESCO',         h:'यूनेस्को',           p:'UNESCO',           cat:'tourism'},
+  {e:'Souvenir',       h:'यादगार चीज़',         p:'Yaadgaar cheez',   cat:'tourism'},
+  {e:'Booking',        h:'बुकिंग',            p:'Booking',          cat:'tourism'},
+
+/* ── RELIGION & PILGRIMAGE ────────────────────────────────── */
+  {e:'Temple',         h:'मंदिर',             p:'Mandir',           cat:'religion'},
+  {e:'Darshan',        h:'दर्शन',             p:'Darshan',          cat:'religion'},
+  {e:'Prayer',         h:'प्रार्थना',           p:'Praarthna',        cat:'religion'},
+  {e:'Prasad',         h:'प्रसाद',             p:'Prasaad',          cat:'religion'},
+  {e:'Aarti',          h:'आरती',             p:'Aarti',            cat:'religion'},
+  {e:'Puja',           h:'पूजा',              p:'Pooja',            cat:'religion'},
+  {e:'Ghat',           h:'घाट',              p:'Ghaat',            cat:'religion'},
+  {e:'Pilgrimage',     h:'तीर्थ यात्रा',        p:'Teerth Yatra',     cat:'religion'},
+  {e:'Bhajan',         h:'भजन',              p:'Bhajan',           cat:'religion'},
+  {e:'Holy',           h:'पवित्र',            p:'Pavitra',          cat:'religion'},
+  {e:'Donation',       h:'दान',              p:'Daan',             cat:'religion'},
+  {e:'Remove shoes',   h:'जूते उतारें',         p:'Joote utaarein',   cat:'religion'},
+  {e:'Silence',        h:'मौन / शांति',         p:'Maun / Shaanti',   cat:'religion'},
+  {e:'Circumambulation',h:'परिक्रमा',           p:'Parikrama',        cat:'religion'},
+  {e:'Head covering',  h:'सिर ढकना',           p:'Sir dhakna',       cat:'religion'},
+
+/* ── SHOPPING & PRICES ────────────────────────────────────── */
+  {e:'Price',          h:'क़ीमत',             p:'Qeemat',           cat:'shopping'},
+  {e:'Marble',         h:'संगमरमर',           p:'Sangmarmar',       cat:'shopping'},
+  {e:'Leather',        h:'चमड़ा',             p:'Chamda',           cat:'shopping'},
+  {e:'Bargain',        h:'मोल-भाव',           p:'Mol bhaav',        cat:'shopping'},
+  {e:'Quality',        h:'गुणवत्ता',           p:'Gunvatta',         cat:'shopping'},
+  {e:'Original',       h:'असली',             p:'Asli',             cat:'shopping'},
+  {e:'Fake',           h:'नकली',             p:'Nakli',            cat:'shopping'},
+  {e:'Craft',          h:'हस्तकला',           p:'Hastakala',        cat:'shopping'},
+  {e:'Emporium',       h:'एम्पोरियम',           p:'Emporium',         cat:'shopping'},
+  {e:'Fixed price',    h:'निश्चित मूल्य',        p:'Nishchit moolya',  cat:'shopping'},
+  {e:'No pressure',    h:'कोई मजबूरी नहीं',      p:'Koi majboori nahin',cat:'shopping'},
+  {e:'Petha (sweet)',  h:'पेठा',              p:'Petha',            cat:'shopping'},
+
+/* ── EMERGENCY WORDS ──────────────────────────────────────── */
+  {e:'Police',         h:'पुलिस',             p:'Police',           cat:'emergency'},
+  {e:'Ambulance',      h:'एम्बुलेंस',           p:'Ambulance',        cat:'emergency'},
+  {e:'Doctor',         h:'डॉक्टर',            p:'Doctor',           cat:'emergency'},
+  {e:'Hospital',       h:'अस्पताल',            p:'Aspatal',          cat:'emergency'},
+  {e:'Emergency',      h:'आपातकाल',           p:'Aapatkal',         cat:'emergency'},
+  {e:'Help',           h:'मदद',              p:'Madad',            cat:'emergency'},
+  {e:'Accident',       h:'दुर्घटना',           p:'Durghatan',        cat:'emergency'},
+  {e:'Sick',           h:'बीमार',            p:'Beemaar',          cat:'emergency'},
+  {e:'Pain',           h:'दर्द',              p:'Dard',             cat:'emergency'},
+  {e:'Safe',           h:'सुरक्षित',           p:'Surakshit',        cat:'emergency'},
+  {e:'Calm down',      h:'शांत रहें',           p:'Shaant rahein',    cat:'emergency'},
+  {e:'Fire',           h:'आग',              p:'Aag',              cat:'emergency'},
+  {e:'Police (100)',   h:'पुलिस 100',          p:'Police 100',       cat:'emergency'},
+  {e:'Ambulance (108)',h:'एम्बुलेंस 108',        p:'Ambulance 108',    cat:'emergency'},
+
+/* ── AGRA & KEY PLACES ────────────────────────────────────── */
+  {e:'Taj Mahal',      h:'ताज महल',           p:'Taj Mahal',        cat:'agra'},
+  {e:'Agra Fort',      h:'आगरा किला',          p:'Agra Kila',        cat:'agra'},
+  {e:'Baby Taj',       h:'बेबी ताज',           p:'Baby Taj',         cat:'agra'},
+  {e:'Mehtab Bagh',    h:'मेहताब बाग',          p:'Mehtab Baag',      cat:'agra'},
+  {e:'Fatehpur Sikri', h:'फतेहपुर सीकरी',        p:'Fatehpur Sikri',   cat:'agra'},
+  {e:'Mathura',        h:'मथुरा',             p:'Mathura',          cat:'agra'},
+  {e:'Vrindavan',      h:'वृंदावन',            p:'Vrindavan',        cat:'agra'},
+  {e:'Barsana',        h:'बरसाना',            p:'Barsana',          cat:'agra'},
+  {e:'Govardhan',      h:'गोवर्धन',            p:'Govardhan',        cat:'agra'},
+  {e:'Gokul',         h:'गोकुल',             p:'Gokul',            cat:'agra'},
+  {e:'Bharatpur',      h:'भरतपुर',            p:'Bharatpur',        cat:'agra'},
+  {e:'Delhi',         h:'दिल्ली',             p:'Dilli',            cat:'agra'},
+  {e:'Jaipur',        h:'जयपुर',             p:'Jaipur',           cat:'agra'},
+  {e:'Banke Bihari',   h:'बांके बिहारी',        p:'Banke Bihari',     cat:'agra'},
+  {e:'ISKCON',        h:'इस्कॉन',             p:'ISKCON',           cat:'agra'},
+  {e:'Prem Mandir',    h:'प्रेम मंदिर',          p:'Prem Mandir',      cat:'agra'},
+  {e:'Yamuna River',   h:'यमुना नदी',           p:'Yamuna Nadi',      cat:'agra'},
+  {e:'Vishram Ghat',   h:'विश्राम घाट',          p:'Vishram Ghaat',    cat:'agra'},
+  {e:'Akbar\'s Tomb',  h:'अकबर का मकबरा',        p:'Akbar ka maqbara', cat:'agra'},
+  {e:'Sikandra',       h:'सिकंदरा',            p:'Sikandaraa',       cat:'agra'},
+];
+
+/* ============================================================
+   WORD DICTIONARY — FUNCTIONS
+   ============================================================ */
+
+function makeWordCard(w) {
+  const d  = document.createElement('div');
+  d.className = 'word-card';
+
+  /* top row: English · Hindi */
+  const top = document.createElement('div'); top.className = 'word-top';
+  const en  = document.createElement('span'); en.className = 'word-en'; en.textContent = w.e;
+  const sep = document.createElement('span'); sep.className = 'word-sep'; sep.textContent = '·';
+  const hi  = document.createElement('span'); hi.className = 'word-hi'; hi.textContent = w.h;
+  top.appendChild(en); top.appendChild(sep); top.appendChild(hi);
+
+  /* pronunciation */
+  const pr = document.createElement('div'); pr.className = 'word-pron'; pr.textContent = w.p;
+
+  /* buttons */
+  const btns = document.createElement('div'); btns.className = 'word-btns';
+  const row1 = document.createElement('div'); row1.className = 'word-btns-row';
+
+  const bEn = document.createElement('button'); bEn.className = 'wbtn wbtn-en';
+  bEn.textContent = 'Copy English';
+  bEn.addEventListener('click', () => copyText(w.e, 'English copied ✓'));
+
+  const bHi = document.createElement('button'); bHi.className = 'wbtn wbtn-hi';
+  bHi.textContent = 'Copy Hindi';
+  bHi.addEventListener('click', () => copyText(w.h, 'Hindi copied ✓'));
+
+  const bSh = document.createElement('button'); bSh.className = 'wbtn wbtn-show';
+  bSh.textContent = '👁 Show to Tourist';
+  bSh.addEventListener('click', () => showOverlay(w.e + '\n\n' + w.h, w.p));
+
+  row1.appendChild(bEn); row1.appendChild(bHi);
+  btns.appendChild(row1); btns.appendChild(bSh);
+
+  d.appendChild(top); d.appendChild(pr); d.appendChild(btns);
+  return d;
+}
+
+function buildWordPills() {
+  const wrap = document.getElementById('word-cat-pills');
+  wrap.innerHTML = '';
+
+  const allBtn = document.createElement('button');
+  allBtn.className = 'cat-pill' + (activeWordCat === 'all' ? ' active' : '');
+  allBtn.innerHTML = 'All <span class="pill-count">· ' + WORDS.length + '</span>';
+  allBtn.addEventListener('click', () => setWordCat('all', allBtn));
+  wrap.appendChild(allBtn);
+
+  WORD_CATS.forEach(cat => {
+    const count = WORDS.filter(w => w.cat === cat.id).length;
+    const b = document.createElement('button');
+    b.className = 'cat-pill' + (activeWordCat === cat.id ? ' active' : '');
+    b.innerHTML = cat.icon + ' ' + cat.name + ' <span class="pill-count">· ' + count + '</span>';
+    b.addEventListener('click', () => setWordCat(cat.id, b));
+    wrap.appendChild(b);
+  });
+
+  buildAZStrip();
+}
+
+function setWordCat(id, btn) {
+  activeWordCat    = id;
+  activeWordLetter = 'all';
+  /* reset A-Z */
+  document.querySelectorAll('.az-btn').forEach(b => b.classList.remove('active'));
+  const allAz = document.querySelector('.az-btn[data-letter="all"]');
+  if (allAz) allAz.classList.add('active');
+
+  document.querySelectorAll('#word-cat-pills .cat-pill').forEach(b => b.classList.remove('active'));
+  if (btn) {
+    btn.classList.add('active');
+    btn.scrollIntoView({ inline: 'nearest', block: 'nearest', behavior: 'smooth' });
+  }
+  renderWords();
+}
+
+function buildAZStrip() {
+  const strip = document.getElementById('az-strip');
+  strip.innerHTML = '';
+
+  const allBtn = document.createElement('button');
+  allBtn.className = 'az-btn active'; allBtn.textContent = 'All';
+  allBtn.dataset.letter = 'all';
+  allBtn.addEventListener('click', () => setWordLetter('all', allBtn));
+  strip.appendChild(allBtn);
+
+  const letters = [...new Set(WORDS.map(w => w.e[0].toUpperCase()))].sort();
+  letters.forEach(l => {
+    const b = document.createElement('button');
+    b.className = 'az-btn'; b.textContent = l; b.dataset.letter = l;
+    b.addEventListener('click', () => setWordLetter(l, b));
+    strip.appendChild(b);
+  });
+}
+
+function setWordLetter(letter, btn) {
+  activeWordLetter = letter;
+  activeWordCat    = 'all';
+  /* reset category pills */
+  document.querySelectorAll('#word-cat-pills .cat-pill').forEach(b => b.classList.remove('active'));
+  const allPill = document.querySelector('#word-cat-pills .cat-pill');
+  if (allPill) allPill.classList.add('active');
+
+  document.querySelectorAll('.az-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  renderWords();
+}
+
+function onWordSearch() {
+  wordQuery        = document.getElementById('word-search').value.trim();
+  activeWordCat    = 'all';
+  activeWordLetter = 'all';
+  /* reset pills + A-Z */
+  document.querySelectorAll('#word-cat-pills .cat-pill').forEach(b => b.classList.remove('active'));
+  const allPill = document.querySelector('#word-cat-pills .cat-pill');
+  if (allPill) allPill.classList.add('active');
+  document.querySelectorAll('.az-btn').forEach(b => b.classList.remove('active'));
+  const allAz = document.querySelector('.az-btn[data-letter="all"]');
+  if (allAz) allAz.classList.add('active');
+  renderWords();
+}
+
+function renderWords() {
+  const content = document.getElementById('content');
+  content.innerHTML = '';
+  document.getElementById('no-results').style.display     = 'none';
+  document.getElementById('no-word-results').style.display = 'none';
+
+  const q = wordQuery.toLowerCase();
+
+  let filtered = WORDS.filter(w => {
+    if (activeWordCat !== 'all' && w.cat !== activeWordCat) return false;
+    if (activeWordLetter !== 'all' && w.e[0].toUpperCase() !== activeWordLetter) return false;
+    if (!q) return true;
+    return w.e.toLowerCase().includes(q) || w.h.includes(q) || w.p.toLowerCase().includes(q);
+  });
+
+  /* group by category for display when browsing all */
+  const showGrouped = (activeWordCat === 'all' && activeWordLetter === 'all' && !q);
+
+  if (showGrouped) {
+    WORD_CATS.forEach(cat => {
+      const catWords = filtered.filter(w => w.cat === cat.id);
+      if (!catWords.length) return;
+
+      const grp = document.createElement('div');
+      const hd  = document.createElement('div'); hd.className = 'cat-heading';
+      const ic  = document.createElement('div'); ic.className = 'cat-heading__icon'; ic.textContent = cat.icon;
+      const nm  = document.createElement('span'); nm.className = 'cat-heading__name'; nm.textContent = cat.name;
+      const ln  = document.createElement('div'); ln.className = 'cat-heading__line';
+      hd.appendChild(ic); hd.appendChild(nm); hd.appendChild(ln);
+      grp.appendChild(hd);
+      catWords.forEach(w => grp.appendChild(makeWordCard(w)));
+      content.appendChild(grp);
+    });
+  } else {
+    filtered.forEach(w => content.appendChild(makeWordCard(w)));
+  }
+
+  /* result count */
+  const rc = document.getElementById('word-result-count');
+  if (q || activeWordCat !== 'all' || activeWordLetter !== 'all') {
+    rc.textContent = filtered.length + ' word' + (filtered.length === 1 ? '' : 's') + ' found';
+    rc.style.display = 'block';
+  } else {
+    rc.textContent = WORDS.length + ' words in ' + WORD_CATS.length + ' categories';
+    rc.style.display = 'block';
+  }
+
+  document.getElementById('no-word-results').style.display = (!filtered.length && q) ? 'block' : 'none';
 }
 
 /* ============================================================
