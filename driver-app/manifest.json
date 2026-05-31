@@ -1,7 +1,7 @@
 {
-  "name": "Padma Shree Driver Helper",
-  "short_name": "Driver Helper",
-  "description": "Hindi-English communication tool for Padma Shree Travels drivers",
+  "name": "PST DriveLink",
+  "short_name": "DriveLink",
+  "description": "DriveLink — Hindi-English communication tool for Padma Shree Travels drivers",
   "start_url": "/driver-app/",
   "scope": "/driver-app/",
   "display": "standalone",

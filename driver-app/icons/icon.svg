@@ -102,10 +102,10 @@
     <text class="st2" transform="translate(52.35 290)"><tspan x="0" y="0">PST</tspan></text>
     <path class="st5" d="M131.5,340h249c.83,0,1.5.67,1.5,1.5h0c0,.83-.67,1.5-1.5,1.5h-249c-.83,0-1.5-.67-1.5-1.5h0c0-.83.67-1.5,1.5-1.5Z"/>
     <g class="st9">
-      <text class="st6" transform="translate(147.32 390)"><tspan x="0" y="0">DRIVER</tspan></text>
+      <text class="st6" transform="translate(147.32 390)"><tspan x="0" y="0">DRIVE</tspan></text>
     </g>
     <g class="st9">
-      <text class="st4" transform="translate(168.4 452)"><tspan x="0" y="0">HELPER</tspan></text>
+      <text class="st4" transform="translate(168.4 452)"><tspan x="0" y="0">LINK</tspan></text>
     </g>
     <circle class="st3" cx="256" cy="105" r="12"/>
   </g>
@@ -117,7 +117,7 @@
     <circle class="st11" cx="256" cy="256" r="192"/>
     <path class="st5" d="M131.5,340h249c.83,0,1.5.67,1.5,1.5h0c0,.83-.67,1.5-1.5,1.5h-249c-.83,0-1.5-.67-1.5-1.5h0c0-.83.67-1.5,1.5-1.5Z"/>
     <g class="st9">
-      <text class="st6" transform="translate(148.09 402.26)"><tspan x="0" y="0">DRIVER</tspan></text>
+      <text class="st6" transform="translate(148.09 402.26)"><tspan x="0" y="0">DRIVE</tspan></text>
     </g>
     <circle class="st3" cx="256" cy="105" r="12"/>
     <g>

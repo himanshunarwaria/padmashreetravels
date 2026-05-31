@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PST Driver Helper — Icon Generator</title>
+<title>PST DriveLink — Icon Generator</title>
 <style>
   body { font-family: -apple-system, 'Segoe UI', sans-serif; padding: 24px; background: #f5f3ee; color: #222; max-width: 700px; margin: 0 auto; }
   h1 { color: #B8943A; font-size: 1.4rem; margin-bottom: 4px; }
@@ -28,7 +28,7 @@
 </head>
 <body>
 
-<h1>PST Driver Helper — Icon Generator</h1>
+<h1>PST DriveLink — Icon Generator</h1>
 <p class="subtitle">Generate PNG icons for the PWA. Open this file in Google Chrome on your computer.</p>
 
 <div class="note">
@@ -123,13 +123,13 @@ function drawIcon(ctx, size, maskable) {
   ctx.font = `700 ${driverSize}px Arial, sans-serif`;
   ctx.fillStyle = 'rgba(255,255,255,0.78)';
   ctx.textBaseline = 'middle';
-  ctx.fillText('DRIVER', cx, s * (maskable ? 0.748 : 0.758));
+  ctx.fillText('DRIVE', cx, s * (maskable ? 0.748 : 0.758));
 
   // ── "HELPER" ──
   const helperSize = Math.round(s * 0.066);
   ctx.font = `500 ${helperSize}px Arial, sans-serif`;
   ctx.fillStyle = 'rgba(255,255,255,0.46)';
-  ctx.fillText('HELPER', cx, s * (maskable ? 0.838 : 0.845));
+  ctx.fillText('LINK', cx, s * (maskable ? 0.838 : 0.845));
 
   // ── Small accent dot ──
   ctx.beginPath();

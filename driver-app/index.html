@@ -5,7 +5,7 @@
 <!-- FIX 13: removed maximum-scale=1.0 so tourists can pinch-zoom overlay text -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>Driver Communication Helper – Padma Shree Travels</title>
+<title>DriveLink – Padma Shree Travels</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -13,7 +13,7 @@
 <link rel="manifest" href="/driver-app/manifest.json">
 <meta name="theme-color" content="#B8943A">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Driver Helper">
+<meta name="apple-mobile-web-app-title" content="DriveLink">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="apple-touch-icon" href="/driver-app/icons/icon-512.png">
 <style>
@@ -366,13 +366,13 @@ body{font-family:var(--ff);font-size:16px;line-height:1.6;color:var(--g700);
       <div class="logo__t">Padma Shree Travels<small>Agra Taxi Service</small></div>
     </a>
     <!-- FIX 16: aria-label on badge -->
-    <span class="hdr__badge" aria-label="This is a private driver tool">Driver Tool</span>
+    <span class="hdr__badge" aria-label="DriveLink app">DriveLink</span>
   </div>
 </header>
 
 <!-- ── HERO STRIP ─────────────────────────────────────────── -->
 <div class="hero-strip">
-  <h1>Driver Communication Helper</h1>
+  <h1>DriveLink</h1>
   <p>Hindi → English &nbsp;·&nbsp; Tourist के साथ आसान बातचीत</p>
 </div>
 
@@ -1724,7 +1724,7 @@ if ('serviceWorker' in navigator) {
   window.addEventListener('load', function () {
     navigator.serviceWorker.register('/driver-app/sw.js', { scope: '/driver-app/' })
       .catch(function(error) {
-        console.warn('Driver Helper service worker registration failed:', error);
+        console.warn('DriveLink service worker registration failed:', error);
       });
   });
 }

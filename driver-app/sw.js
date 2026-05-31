@@ -1,10 +1,10 @@
 /* ============================================================
-   Padma Shree Driver Helper — Service Worker
+   PST DriveLink — Service Worker
    Scope: /driver-app/ ONLY — does NOT touch the main website
-   Cache: padma-driver-helper-v1
+   Cache: drivelink-v1
    ============================================================ */
 
-const CACHE_NAME = 'padma-driver-helper-v1';
+const CACHE_NAME = 'drivelink-v1';
 
 // Core app files guaranteed to exist — pre-cached on install
 const PRECACHE_URLS = [
@@ -49,7 +49,7 @@ self.addEventListener('activate', event => {
       Promise.all(
         keys
           .filter(key =>
-            key.startsWith('padma-driver-helper-') && key !== CACHE_NAME
+            (key.startsWith('drivelink-') || key.startsWith('padma-driver-helper-')) && key !== CACHE_NAME
           )
           .map(key => caches.delete(key))
       )
