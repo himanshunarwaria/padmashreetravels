@@ -38,7 +38,7 @@ html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;
      /* FIX 16: push anchored targets below sticky chrome */
      scroll-padding-top:calc(var(--content-top) + 8px)}
 body{font-family:var(--ff);font-size:16px;line-height:1.6;color:var(--g700);
-     background:var(--white);overflow-x:hidden;
+     background:#FAF9F6;overflow-x:hidden;
      -webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;
      /* FIX 6: iOS safe area support */
      padding-bottom:env(safe-area-inset-bottom)}
@@ -141,40 +141,87 @@ body{font-family:var(--ff);font-size:16px;line-height:1.6;color:var(--g700);
 .cat-heading__name{font-size:.85rem;font-weight:700;color:var(--black)}
 .cat-heading__line{flex:1;height:1px;background:var(--g100)}
 
+/* ── GUIDE STRIP ─────────────────────────────────────────── */
+.guide-strip{background:#FFF8EC;border-bottom:1px solid var(--gold-border);
+             padding:.55rem 1rem;display:flex;align-items:center;gap:.6rem;
+             font-size:.72rem;color:#7a6020;line-height:1.4;
+             position:relative}
+.guide-strip-icon{font-size:.9rem;flex-shrink:0}
+.guide-strip-dismiss{position:absolute;right:.75rem;top:50%;transform:translateY(-50%);
+                     background:none;border:none;color:#b09040;font-size:.9rem;
+                     cursor:pointer;padding:.2rem;min-width:28px;min-height:28px;
+                     display:flex;align-items:center;justify-content:center}
+
 /* ── PHRASE CARD ─────────────────────────────────────────── */
-.phrase-card{background:var(--white);border:1px solid var(--g100);
-             border-left:2px solid var(--gold-border);border-radius:var(--r);
-             margin:.45rem 1rem;padding:.85rem 1rem;
+.phrase-card{background:var(--white);border:1px solid #EDE9DF;
+             border-left:3px solid var(--gold-border);border-radius:12px;
+             margin:.55rem 1rem;padding:1rem;
+             box-shadow:0 1px 4px rgba(0,0,0,.04);
              transition:box-shadow var(--t),border-color var(--t)}
-.phrase-card:hover{box-shadow:var(--md);border-color:var(--g200);border-left-color:var(--gold)}
-.phrase-card.mu{border-left-color:var(--gold-border)}
-.phrase-card.emerg{border-left-color:rgba(215,59,0,.3)}
-.phrase-card.emerg:hover{border-left-color:var(--red)}
+.phrase-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.09);border-color:#D8D3C8;border-left-color:var(--gold)}
+.phrase-card.mu{border-left-color:var(--gold)}
+.phrase-card.emerg{border-left-color:#C13B2E;background:#FFFAF9}
+.phrase-card.emerg:hover{border-left-color:#9e2e23}
 .phrase-card.loc{border-left-color:var(--accent-b)}
 .phrase-card.loc:hover{border-left-color:var(--accent)}
 .phrase-card.coord{border-left-color:var(--green-b)}
 .phrase-card.coord:hover{border-left-color:var(--green)}
 
-.p-hindi{font-size:1.05rem;font-weight:600;color:var(--black);line-height:1.4;margin-bottom:.18rem}
-.p-english{font-size:.93rem;color:var(--g500);line-height:1.5;margin-bottom:.65rem}
+.p-hindi{font-size:1.1rem;font-weight:700;color:var(--black);line-height:1.4;margin-bottom:.22rem}
+.p-english{font-size:.95rem;color:var(--g600);line-height:1.5;margin-bottom:.75rem;font-weight:500}
 
-/* ── CARD BUTTONS — single row ───────────────────────────── */
-.card-btns{display:flex;gap:.35rem;align-items:stretch}
-.cbtn{padding:.68rem .7rem;border-radius:var(--rp);border:none;
-      font-size:.78rem;font-weight:600;font-family:var(--ff);
+/* ── CARD BUTTONS — speak-first hierarchy ────────────────── */
+.cbtn{border:none;border-radius:var(--rp);
+      font-size:.8rem;font-weight:700;font-family:var(--ff);
       cursor:pointer;white-space:nowrap;
       transition:background var(--t),box-shadow var(--t),transform var(--t);
       -webkit-user-select:none;user-select:none;
-      min-height:42px;display:flex;align-items:center;justify-content:center;gap:.2rem}
-.cbtn:active{transform:scale(.94)}
-/* compact copy chips */
-.cbtn-en{flex:0 0 auto;background:var(--black);color:var(--white)}
-.cbtn-en:hover{background:var(--g800)}
-.cbtn-hi{flex:0 0 auto;background:var(--white);color:var(--g600);border:1.5px solid var(--g200)}
-.cbtn-hi:hover{border-color:var(--g700);color:var(--black)}
-/* show tourist fills remaining width */
-.cbtn-show{flex:1;background:var(--gold);color:var(--white);font-size:.82rem}
-.cbtn-show:hover{background:#a67e2a;box-shadow:0 4px 12px rgba(184,148,58,.28)}
+      min-height:44px;display:flex;align-items:center;justify-content:center;gap:.3rem;
+      letter-spacing:.01em}
+.cbtn:active{transform:scale(.95)}
+
+/* PRIMARY: Speak English — full width, gold */
+.cbtn-speak{width:100%;padding:.82rem 1rem;font-size:.9rem;font-weight:700;
+            background:var(--gold);color:var(--white);margin-bottom:.4rem;
+            box-shadow:0 2px 8px rgba(184,148,58,.25)}
+.cbtn-speak:hover{background:#9e7c28;box-shadow:0 4px 14px rgba(184,148,58,.38)}
+.cbtn-speak.speaking{background:#7a6020;animation:speakPulse .7s infinite}
+@keyframes speakPulse{0%,100%{opacity:1}50%{opacity:.72}}
+
+/* SECONDARY ROW */
+.card-row2{display:flex;gap:.35rem}
+/* Show Big — flex-fill, dark */
+.cbtn-showbig{flex:1;padding:.7rem .6rem;background:var(--black);color:var(--white)}
+.cbtn-showbig:hover{background:var(--g800)}
+/* Copy chips — compact outline */
+.cbtn-copy-en,.cbtn-copy-hi{flex:0 0 auto;padding:.7rem .65rem;
+                              background:var(--white);color:var(--g600);
+                              border:1.5px solid var(--g200)}
+.cbtn-copy-en:hover,.cbtn-copy-hi:hover{border-color:var(--g700);color:var(--black)}
+/* Speak Hindi chip */
+.cbtn-speak-hi{flex:0 0 auto;padding:.7rem .6rem;
+               background:var(--white);color:var(--g500);
+               border:1.5px solid var(--g200)}
+.cbtn-speak-hi:hover{border-color:var(--gold);color:var(--gold)}
+.cbtn-speak-hi.speaking{border-color:var(--gold);color:var(--gold);
+                         animation:speakPulse .7s infinite}
+
+/* ── QUICK MODE CARDS (Most Used) ────────────────────────── */
+.quick-card{background:var(--white);border:1.5px solid #E8E0CC;
+            border-left:3px solid var(--gold);border-radius:12px;
+            margin:.55rem 1rem;padding:1.1rem 1rem;
+            box-shadow:0 2px 8px rgba(184,148,58,.08)}
+.qc-hindi{font-size:1.15rem;font-weight:700;color:var(--black);line-height:1.4;margin-bottom:.22rem}
+.qc-english{font-size:1rem;color:var(--g600);line-height:1.5;margin-bottom:.85rem;font-weight:500}
+.qc-btns{display:flex;flex-direction:column;gap:.4rem}
+.cbtn-speak-xl{width:100%;padding:.9rem 1rem;font-size:.95rem;font-weight:700;
+               background:var(--gold);color:var(--white);
+               box-shadow:0 2px 10px rgba(184,148,58,.28)}
+.cbtn-speak-xl:hover{background:#9e7c28}
+.cbtn-speak-xl.speaking{background:#7a6020;animation:speakPulse .7s infinite}
+.cbtn-showbig-full{width:100%;padding:.82rem 1rem;font-size:.88rem;font-weight:700;
+                   background:var(--black);color:var(--white)}
+.cbtn-showbig-full:hover{background:var(--g800)}
 
 /* ── EMERGENCY STICKY (FIX 6: safe-area-inset-bottom) ────── */
 #emer-btn{position:fixed;
@@ -308,10 +355,17 @@ body{font-family:var(--ff);font-size:16px;line-height:1.6;color:var(--g700);
   </div>
 </header>
 
-<!-- ── HERO STRIP (FIX 4: compact, no stats) ─────────────── -->
+<!-- ── HERO STRIP ─────────────────────────────────────────── -->
 <div class="hero-strip">
   <h1>Driver Communication Helper</h1>
   <p>Hindi → English &nbsp;·&nbsp; Tourist के साथ आसान बातचीत</p>
+</div>
+
+<!-- ── HINDI GUIDANCE STRIP ───────────────────────────────── -->
+<div class="guide-strip" id="guide-strip">
+  <span class="guide-strip-icon">💡</span>
+  <span><strong>कैसे use करें:</strong> &nbsp;1️⃣ Line खोजो &nbsp;2️⃣ <strong>Speak English</strong> दबाओ &nbsp;3️⃣ Tourist को दिखाने के लिए <strong>Show Big</strong> दबाओ</span>
+  <button class="guide-strip-dismiss" onclick="this.parentElement.style.display='none'" aria-label="Dismiss tip">✕</button>
 </div>
 
 <!-- ── GROUP TABS ─────────────────────────────────────────── -->
@@ -843,6 +897,33 @@ function vibrate(ms = 8) {
 }
 
 /* ============================================================
+   SPEECH SYNTHESIS
+   ============================================================ */
+const CAN_SPEAK = 'speechSynthesis' in window;
+
+function speakText(text, lang, btn) {
+  if (!CAN_SPEAK) { toast('Speaker not supported on this browser'); return; }
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang  = lang || 'en-IN';
+  u.rate  = 0.88;
+  u.pitch = 1.0;
+  u.volume = 1.0;
+  vibrate(10);
+  if (btn) {
+    const orig = btn.innerHTML;
+    btn.classList.add('speaking');
+    btn.innerHTML = btn.innerHTML.replace(/Speak\s*(English|हिंदी|हि)/i, '⏹ Speaking…');
+    const done = () => { btn.classList.remove('speaking'); btn.innerHTML = orig; };
+    u.onend = done; u.onerror = done;
+    /* iOS workaround — resume on page visibility */
+    const resume = () => { if (window.speechSynthesis.paused) window.speechSynthesis.resume(); };
+    document.addEventListener('visibilitychange', resume, {once:true});
+  }
+  window.speechSynthesis.speak(u);
+}
+
+/* ============================================================
    HELPERS
    ============================================================ */
 function toast(msg) {
@@ -910,6 +991,33 @@ function cardClass(catId, group) {
   return '';
 }
 
+/* ── Quick Mode card (Most Used) — 2 buttons only ── */
+function makeQuickCard(p) {
+  const d = document.createElement('div'); d.className = 'quick-card';
+
+  const ph = document.createElement('div'); ph.className = 'qc-hindi';   ph.textContent = p.h;
+  const pe = document.createElement('div'); pe.className = 'qc-english'; pe.textContent = p.e;
+
+  const btns = document.createElement('div'); btns.className = 'qc-btns';
+
+  const bSpeak = document.createElement('button');
+  bSpeak.className = 'cbtn cbtn-speak-xl';
+  bSpeak.innerHTML = '🔊&nbsp; Speak English';
+  bSpeak.setAttribute('aria-label', 'Speak English: ' + p.e);
+  bSpeak.addEventListener('click', () => speakText(p.e, 'en-IN', bSpeak));
+
+  const bShow = document.createElement('button');
+  bShow.className = 'cbtn cbtn-showbig-full';
+  bShow.innerHTML = '👁&nbsp; Show Big';
+  bShow.setAttribute('aria-label', 'Show to tourist: ' + p.e);
+  bShow.addEventListener('click', () => showOverlay(p.e, p.h));
+
+  btns.appendChild(bSpeak); btns.appendChild(bShow);
+  d.appendChild(ph); d.appendChild(pe); d.appendChild(btns);
+  return d;
+}
+
+/* ── Regular phrase card — full action set ── */
 function makeCard(p, catId, group, muClass) {
   const d = document.createElement('div');
   d.className = 'phrase-card ' + (muClass || cardClass(catId, group));
@@ -917,23 +1025,43 @@ function makeCard(p, catId, group, muClass) {
   const ph = document.createElement('div'); ph.className = 'p-hindi';   ph.textContent = p.h;
   const pe = document.createElement('div'); pe.className = 'p-english'; pe.textContent = p.e;
 
-  /* ── single-row buttons ── */
-  const btns = document.createElement('div'); btns.className = 'card-btns';
+  /* Row 1: PRIMARY — Speak English */
+  const bSpeak = document.createElement('button');
+  bSpeak.className = 'cbtn cbtn-speak';
+  bSpeak.innerHTML = '🔊&nbsp; Speak English';
+  bSpeak.setAttribute('aria-label', 'Speak English: ' + p.e);
+  bSpeak.addEventListener('click', () => speakText(p.e, 'en-IN', bSpeak));
 
-  const bEn = document.createElement('button'); bEn.className = 'cbtn cbtn-en';
-  bEn.textContent = 'Copy EN';
-  bEn.addEventListener('click', () => copyText(p.e, 'English copied ✓'));
+  /* Row 2: secondary actions */
+  const row2 = document.createElement('div'); row2.className = 'card-row2';
 
-  const bHi = document.createElement('button'); bHi.className = 'cbtn cbtn-hi';
-  bHi.textContent = 'Copy HI';
-  bHi.addEventListener('click', () => copyText(p.h, 'Hindi copied ✓'));
+  const bShow = document.createElement('button');
+  bShow.className = 'cbtn cbtn-showbig';
+  bShow.innerHTML = '👁&nbsp; Show Big';
+  bShow.setAttribute('aria-label', 'Show to tourist: ' + p.e);
+  bShow.addEventListener('click', () => showOverlay(p.e, p.h));
 
-  const bSh = document.createElement('button'); bSh.className = 'cbtn cbtn-show';
-  bSh.innerHTML = '👁&nbsp; Show Tourist';
-  bSh.addEventListener('click', () => showOverlay(p.e, p.h));
+  const bCpEn = document.createElement('button');
+  bCpEn.className = 'cbtn cbtn-copy-en';
+  bCpEn.textContent = 'Copy EN';
+  bCpEn.addEventListener('click', () => copyText(p.e, 'English copied ✓'));
 
-  btns.appendChild(bEn); btns.appendChild(bHi); btns.appendChild(bSh);
-  d.appendChild(ph); d.appendChild(pe); d.appendChild(btns);
+  const bCpHi = document.createElement('button');
+  bCpHi.className = 'cbtn cbtn-copy-hi';
+  bCpHi.textContent = 'Copy HI';
+  bCpHi.addEventListener('click', () => copyText(p.h, 'Hindi copied ✓'));
+
+  const bSpHi = document.createElement('button');
+  bSpHi.className = 'cbtn cbtn-speak-hi';
+  bSpHi.innerHTML = '🔊&nbsp;हि';
+  bSpHi.setAttribute('aria-label', 'Speak Hindi: ' + p.h);
+  bSpHi.addEventListener('click', () => speakText(p.h, 'hi-IN', bSpHi));
+
+  row2.appendChild(bShow); row2.appendChild(bCpEn);
+  row2.appendChild(bCpHi); row2.appendChild(bSpHi);
+
+  d.appendChild(ph); d.appendChild(pe);
+  d.appendChild(bSpeak); d.appendChild(row2);
   return d;
 }
 
@@ -958,7 +1086,7 @@ function render() {
     const desc = document.createElement('p'); desc.className = 'sec-desc';
     desc.textContent = 'Tap "Show to Tourist" to display full-screen English text';
     sec.appendChild(desc);
-    MOST_USED.forEach(p => sec.appendChild(makeCard(p, 'most-used', 'trip', 'mu')));
+    MOST_USED.forEach(p => sec.appendChild(makeQuickCard(p)));
     const div = document.createElement('div'); div.className = 'grp-divider'; sec.appendChild(div);
     content.appendChild(sec);
   }
@@ -1399,22 +1527,34 @@ function makeWordCard(w) {
   /* pronunciation */
   const pr = document.createElement('div'); pr.className = 'word-pron'; pr.textContent = w.p;
 
-  /* buttons — single row */
+  /* buttons — speak first */
   const btns = document.createElement('div'); btns.className = 'word-btns';
 
-  const bEn = document.createElement('button'); bEn.className = 'wbtn wbtn-en';
+  const bSpeak = document.createElement('button'); bSpeak.className = 'cbtn cbtn-speak';
+  bSpeak.innerHTML = '🔊&nbsp; Speak English';
+  bSpeak.setAttribute('aria-label', 'Speak: ' + w.e);
+  bSpeak.addEventListener('click', () => speakText(w.e, 'en-IN', bSpeak));
+
+  const row2 = document.createElement('div'); row2.className = 'card-row2';
+
+  const bSh = document.createElement('button'); bSh.className = 'cbtn cbtn-showbig';
+  bSh.innerHTML = '👁&nbsp; Show Big';
+  bSh.addEventListener('click', () => showOverlay(w.e, w.h));
+
+  const bEn = document.createElement('button'); bEn.className = 'cbtn cbtn-copy-en';
   bEn.textContent = 'Copy EN';
   bEn.addEventListener('click', () => copyText(w.e, 'English copied ✓'));
 
-  const bHi = document.createElement('button'); bHi.className = 'wbtn wbtn-hi';
+  const bHi = document.createElement('button'); bHi.className = 'cbtn cbtn-copy-hi';
   bHi.textContent = 'Copy HI';
   bHi.addEventListener('click', () => copyText(w.h, 'Hindi copied ✓'));
 
-  const bSh = document.createElement('button'); bSh.className = 'wbtn wbtn-show';
-  bSh.innerHTML = '👁&nbsp; Show Tourist';
-  bSh.addEventListener('click', () => showOverlay(w.e, w.h));
+  const bSpHi = document.createElement('button'); bSpHi.className = 'cbtn cbtn-speak-hi';
+  bSpHi.innerHTML = '🔊&nbsp;हि';
+  bSpHi.addEventListener('click', () => speakText(w.h, 'hi-IN', bSpHi));
 
-  btns.appendChild(bEn); btns.appendChild(bHi); btns.appendChild(bSh);
+  row2.appendChild(bSh); row2.appendChild(bEn); row2.appendChild(bHi); row2.appendChild(bSpHi);
+  btns.appendChild(bSpeak); btns.appendChild(row2);
 
   d.appendChild(top); d.appendChild(pr); d.appendChild(btns);
   return d;
