@@ -1,0 +1,1764 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<!-- FIX 13: removed maximum-scale=1.0 so tourists can pinch-zoom overlay text -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Driver Communication Helper – Padma Shree Travels</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="../images/logo.png">
+<link rel="manifest" href="/driver-app/manifest.json">
+<meta name="theme-color" content="#B8943A">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Driver Helper">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="apple-touch-icon" href="/driver-app/icons/icon-512.png">
+<style>
+/* ── Design tokens — matching padmashreetravels.in ──────── */
+:root{
+  --black:#0A0A0A; --white:#ffffff;
+  --g900:#1A1A1A; --g800:#292929; --g700:#3D3D3D;
+  --g600:#4F4F4F; --g500:#6B6B6B; --g400:#909090;
+  --g300:#ADADAD; --g200:#D4D4D4; --g100:#EBEBEB; --g50:#F7F7F7;
+  --gold:#B8943A; --gold-bg:rgba(184,148,58,.08); --gold-border:rgba(184,148,58,.18);
+  --red:#D73B00;  --red-bg:rgba(215,59,0,.07);
+  --green:#05944F; --accent:#276EF1;
+  --accent-bg:rgba(39,110,241,.07); --accent-b:rgba(39,110,241,.2);
+  --green-bg:rgba(5,148,79,.07);   --green-b:rgba(5,148,79,.2);
+  --ff:Inter,-apple-system,'SF Pro Text','Segoe UI',Roboto,sans-serif;
+  --r:10px; --r-lg:16px; --rp:999px;
+  --sm:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
+  --md:0 4px 16px rgba(0,0,0,.08),0 2px 4px rgba(0,0,0,.04);
+  --t:.18s ease;
+  /* FIX 2: dynamic sticky heights set by JS on load + resize */
+  --hdr-h: 56px;
+  --tabs-h: 44px;
+  --content-top: 100px; /* hdr + tabs */
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;
+     /* FIX 16: push anchored targets below sticky chrome */
+     scroll-padding-top:calc(var(--content-top) + 8px)}
+body{font-family:var(--ff);font-size:16px;line-height:1.6;color:var(--g700);
+     background:#FAF9F6;overflow-x:hidden;
+     -webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;
+     /* FIX 6: iOS safe area support */
+     padding-bottom:env(safe-area-inset-bottom)}
+
+/* ── HEADER ──────────────────────────────────────────────── */
+.hdr{position:sticky;top:0;z-index:400;background:var(--white);
+     border-bottom:1px solid var(--g100);box-shadow:var(--sm)}
+.hdr__in{display:flex;align-items:center;justify-content:space-between;
+         padding:.6rem 1rem;max-width:900px;margin:0 auto}
+.logo{display:flex;align-items:center;gap:.5rem;text-decoration:none}
+.logo img{height:30px;width:auto;object-fit:contain}
+.logo__t{font-size:.88rem;font-weight:700;color:var(--black);line-height:1.15}
+.logo__t small{display:block;font-size:.52rem;font-weight:500;letter-spacing:.1em;
+               text-transform:uppercase;color:var(--g400);margin-top:.1rem}
+/* FIX 16: ARIA-labeled badge */
+.hdr__badge{font-size:.62rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+            background:var(--gold-bg);border:1px solid var(--gold-border);color:var(--gold);
+            padding:.28rem .72rem;border-radius:var(--rp);white-space:nowrap}
+
+/* ── HERO STRIP (compact — FIX 4: no stats row) ─────────── */
+.hero-strip{background:var(--black);padding:1rem 1rem .9rem;text-align:center}
+.hero-strip h1{font-size:1.05rem;font-weight:800;letter-spacing:-.02em;
+               color:var(--white);margin-bottom:.2rem;line-height:1.25}
+.hero-strip p{font-size:.72rem;color:rgba(255,255,255,.4);letter-spacing:.06em;text-transform:uppercase}
+
+/* ── GROUP TABS  (FIX 2: top set dynamically via --hdr-h) ── */
+.group-tabs{display:flex;background:var(--white);border-bottom:1px solid var(--g100);
+            padding:0 .5rem;overflow-x:auto;scrollbar-width:none;
+            position:sticky;top:var(--hdr-h);z-index:300}
+.group-tabs::-webkit-scrollbar{display:none}
+.gtab{flex:1;min-width:80px;display:flex;flex-direction:column;align-items:center;
+      gap:.2rem;padding:.75rem .5rem;border:none;background:transparent;
+      color:rgba(60,60,67,.5);font-size:.75rem;font-weight:500;font-family:var(--ff);
+      white-space:nowrap;cursor:pointer;
+      border-bottom:2px solid transparent;margin-bottom:-1px;
+      transition:color .18s,border-color .18s;
+      min-height:52px}
+.gtab.active{color:var(--black);border-bottom-color:var(--black);font-weight:600}
+.gtab__icon{font-size:18px;line-height:1}
+
+/* ── SEARCH ──────────────────────────────────────────────── */
+.search-wrap{padding:.85rem 1rem .45rem;background:var(--white)}
+.search-input{width:100%;padding:.8rem 1rem;
+              border:1.5px solid var(--g200);border-radius:var(--rp);
+              /* FIX 3: 16px prevents iOS auto-zoom */
+              font-size:1rem;font-family:var(--ff);color:var(--black);background:var(--g50);
+              outline:none;transition:border-color var(--t),box-shadow var(--t),background var(--t)}
+.search-input:focus{border-color:var(--black);background:var(--white);
+                    box-shadow:0 0 0 3px rgba(10,10,10,.06)}
+.search-input::placeholder{color:var(--g300)}
+
+/* ── RESULT COUNT (FIX 8) ────────────────────────────────── */
+#result-count{display:none;padding:.3rem 1rem .1rem;
+              font-size:.75rem;font-weight:600;color:var(--g400)}
+
+/* ── CATEGORY PILLS + GRADIENT FADE (FIX 9) ──────────────── */
+.cats-outer{position:relative;background:var(--white)}
+/* gradient fade on right edge */
+.cats-outer::after{content:'';position:absolute;top:0;right:0;bottom:0;width:3rem;
+                   background:linear-gradient(to right,transparent,var(--white));
+                   pointer-events:none;z-index:1}
+.cats-wrap{padding:.4rem 1rem .7rem;display:flex;gap:.4rem;
+           overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.cats-wrap::-webkit-scrollbar{display:none}
+/* extra right padding so last pill clears the fade */
+.cats-wrap::after{content:'';flex-shrink:0;width:2rem}
+.cat-pill{flex-shrink:0;padding:.48rem 1.05rem;border-radius:var(--rp);
+          border:none;background:rgba(116,116,128,.12);
+          color:var(--g900);font-size:.78rem;font-weight:500;font-family:var(--ff);
+          white-space:nowrap;cursor:pointer;transition:background .18s,color .18s;min-height:36px}
+.cat-pill:hover{background:rgba(116,116,128,.2);color:var(--black)}
+.cat-pill.active{background:var(--black);color:var(--white)}
+.cat-pill .pill-count{opacity:.5;font-size:.7rem;font-weight:400;margin-left:.25rem}
+.cat-pill.active .pill-count{opacity:.65}
+
+/* ── MOST USED SECTION ───────────────────────────────────── */
+#most-used{background:var(--g50);padding-bottom:.5rem}
+.sec-label{display:flex;align-items:center;gap:.5rem;padding:.9rem 1rem .3rem}
+.sec-badge{font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+           background:var(--gold-bg);border:1px solid var(--gold-border);color:var(--gold);
+           padding:.22rem .6rem;border-radius:var(--rp)}
+.sec-title{font-size:.86rem;font-weight:700;color:var(--black)}
+.sec-desc{font-size:.72rem;color:var(--g400);padding:0 1rem .55rem}
+.grp-divider{height:1px;background:var(--g100);margin:.6rem 0 0}
+
+/* ── CATEGORY HEADING (sticky within section) ───────────── */
+.cat-heading{display:flex;align-items:center;gap:.5rem;
+             padding:.75rem 1rem .25rem;
+             position:sticky;top:var(--content-top);z-index:10;
+             background:var(--white)}
+.cat-heading__icon{width:28px;height:28px;border-radius:8px;
+                   background:var(--g50);border:1px solid var(--g100);
+                   display:flex;align-items:center;justify-content:center;
+                   font-size:13px;flex-shrink:0}
+.cat-heading__icon.loc{background:var(--accent-bg);border-color:var(--accent-b)}
+.cat-heading__icon.emerg{background:var(--red-bg);border-color:rgba(215,59,0,.2)}
+.cat-heading__icon.coord{background:var(--green-bg);border-color:var(--green-b)}
+.cat-heading__name{font-size:.85rem;font-weight:700;color:var(--black)}
+.cat-heading__line{flex:1;height:1px;background:var(--g100)}
+
+/* ── GUIDE STRIP ─────────────────────────────────────────── */
+.guide-strip{background:#FFF8EC;border-bottom:1px solid var(--gold-border);
+             padding:.55rem 1rem;display:flex;align-items:center;gap:.6rem;
+             font-size:.72rem;color:#7a6020;line-height:1.4;
+             position:relative}
+.guide-strip-icon{font-size:.9rem;flex-shrink:0}
+.guide-strip-dismiss{position:absolute;right:.75rem;top:50%;transform:translateY(-50%);
+                     background:none;border:none;color:#b09040;font-size:.9rem;
+                     cursor:pointer;padding:.2rem;min-width:28px;min-height:28px;
+                     display:flex;align-items:center;justify-content:center}
+
+/* ── PHRASE CARD ─────────────────────────────────────────── */
+.phrase-card{background:var(--white);border:1px solid #EDE9DF;
+             border-left:3px solid var(--gold-border);border-radius:12px;
+             margin:.55rem 1rem;padding:1rem;
+             box-shadow:0 1px 4px rgba(0,0,0,.04);
+             transition:box-shadow var(--t),border-color var(--t)}
+.phrase-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.09);border-color:#D8D3C8;border-left-color:var(--gold)}
+.phrase-card.mu{border-left-color:var(--gold)}
+.phrase-card.emerg{border-left-color:#C13B2E;background:#FFFAF9}
+.phrase-card.emerg:hover{border-left-color:#9e2e23}
+.phrase-card.loc{border-left-color:var(--accent-b)}
+.phrase-card.loc:hover{border-left-color:var(--accent)}
+.phrase-card.coord{border-left-color:var(--green-b)}
+.phrase-card.coord:hover{border-left-color:var(--green)}
+
+.p-hindi{font-size:1.1rem;font-weight:700;color:var(--black);line-height:1.4;margin-bottom:.22rem}
+.p-english{font-size:.95rem;color:var(--g600);line-height:1.5;margin-bottom:.75rem;font-weight:500}
+
+/* ── CARD BUTTONS — matching padmashreetravels.in button style ── */
+.cbtn{border:none;border-radius:var(--rp);
+      font-size:.8rem;font-weight:700;font-family:var(--ff);
+      cursor:pointer;white-space:nowrap;
+      transition:background var(--t),box-shadow var(--t),transform var(--t);
+      -webkit-user-select:none;user-select:none;
+      min-height:44px;display:flex;align-items:center;justify-content:center;gap:.3rem;
+      letter-spacing:.01em}
+.cbtn:active{transform:scale(.95)}
+@keyframes speakPulse{0%,100%{opacity:1}50%{opacity:.72}}
+
+/* PRIMARY: Speak English — solid gold pill */
+.cbtn-speak{width:100%;padding:.82rem 1rem;font-size:.9rem;font-weight:700;
+            background:var(--gold);color:var(--white);margin-bottom:.4rem;
+            box-shadow:0 2px 8px rgba(184,148,58,.25)}
+.cbtn-speak:hover{background:#9e7c28;box-shadow:0 4px 14px rgba(184,148,58,.38)}
+.cbtn-speak.speaking{background:#7a6020;animation:speakPulse .7s infinite}
+
+/* SECONDARY ROW */
+.card-row2{display:flex;gap:.35rem}
+/* Show Big — solid black pill (website primary style) */
+.cbtn-showbig{flex:1;padding:.7rem .6rem;background:var(--black);color:var(--white)}
+.cbtn-showbig:hover{background:var(--g800)}
+/* Copy chips — outline pill (website secondary style) */
+.cbtn-copy-en,.cbtn-copy-hi{flex:0 0 auto;padding:.7rem .65rem;
+                              background:var(--white);color:var(--g600);
+                              border:1.5px solid var(--g200)}
+.cbtn-copy-en:hover,.cbtn-copy-hi:hover{border-color:var(--g700);color:var(--black)}
+/* Speak Hindi — outline pill, gold on hover */
+.cbtn-speak-hi{flex:0 0 auto;padding:.7rem .6rem;
+               background:var(--white);color:var(--g500);
+               border:1.5px solid var(--g200)}
+.cbtn-speak-hi:hover{border-color:var(--gold);color:var(--gold)}
+.cbtn-speak-hi.speaking{border-color:var(--gold);color:var(--gold);
+                         animation:speakPulse .7s infinite}
+
+/* ── QUICK MODE CARDS (Most Used) ────────────────────────── */
+.quick-card{background:var(--white);border:1.5px solid #E8E0CC;
+            border-left:3px solid var(--gold);border-radius:12px;
+            margin:.55rem 1rem;padding:1.1rem 1rem;
+            box-shadow:0 2px 8px rgba(184,148,58,.08)}
+.qc-hindi{font-size:1.15rem;font-weight:700;color:var(--black);line-height:1.4;margin-bottom:.22rem}
+.qc-english{font-size:1rem;color:var(--g600);line-height:1.5;margin-bottom:.85rem;font-weight:500}
+.qc-btns{display:flex;gap:.4rem}
+/* Quick speak XL — solid gold pill */
+.cbtn-speak-xl{flex:1.4;padding:.72rem .8rem;font-size:.84rem;font-weight:700;
+               background:var(--gold);color:var(--white);
+               box-shadow:0 2px 8px rgba(184,148,58,.22)}
+.cbtn-speak-xl:hover{background:#9e7c28}
+.cbtn-speak-xl.speaking{background:#7a6020;animation:speakPulse .7s infinite}
+/* Quick show big — solid black pill */
+.cbtn-showbig-full{flex:1;padding:.72rem .8rem;font-size:.82rem;font-weight:700;
+                   background:var(--black);color:var(--white)}
+.cbtn-showbig-full:hover{background:var(--g800)}
+
+/* ── EMERGENCY STICKY (FIX 6: safe-area-inset-bottom) ────── */
+#emer-btn{position:fixed;
+          bottom:calc(1.1rem + env(safe-area-inset-bottom));
+          right:1rem;z-index:9000;
+          background:var(--red);color:var(--white);
+          border:none;border-radius:var(--rp);
+          padding:.75rem 1.1rem;
+          font-size:.82rem;font-weight:700;font-family:var(--ff);
+          box-shadow:0 4px 18px rgba(215,59,0,.35);
+          cursor:pointer;display:flex;align-items:center;gap:.4rem;
+          transition:transform var(--t),box-shadow var(--t);min-height:48px}
+#emer-btn:hover{background:#bf3400;box-shadow:0 6px 22px rgba(215,59,0,.42)}
+#emer-btn:active{transform:scale(.95)}
+
+/* ── BACK TO TOP FAB (FIX 7) ─────────────────────────────── */
+#back-top{position:fixed;
+          /* sits just above emergency button */
+          bottom:calc(4.2rem + env(safe-area-inset-bottom));
+          right:1rem;z-index:8999;
+          width:40px;height:40px;border-radius:50%;
+          background:var(--white);color:var(--g700);
+          border:1.5px solid var(--g200);
+          font-size:1rem;font-weight:700;font-family:var(--ff);
+          box-shadow:var(--md);cursor:pointer;
+          display:none;align-items:center;justify-content:center;
+          transition:opacity var(--t),transform var(--t),box-shadow var(--t)}
+#back-top.visible{display:flex}
+#back-top:hover{border-color:var(--g700);color:var(--black);box-shadow:0 6px 20px rgba(0,0,0,.12)}
+#back-top:active{transform:scale(.93)}
+
+/* ── TOAST (FIX 6: safe-area + FIX 16: role=status) ─────── */
+#toast{position:fixed;
+       bottom:calc(5.8rem + env(safe-area-inset-bottom));
+       left:50%;transform:translateX(-50%) translateY(8px);
+       background:var(--g900);color:var(--white);
+       padding:.6rem 1.4rem;border-radius:var(--rp);
+       font-size:.8rem;font-weight:600;font-family:var(--ff);
+       z-index:9500;opacity:0;pointer-events:none;
+       transition:opacity .22s,transform .22s;white-space:nowrap}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ── TOURIST OVERLAY ─────────────────────────────────────── */
+#overlay{display:none;position:fixed;inset:0;
+         background:var(--black);z-index:99999;
+         flex-direction:column;align-items:center;justify-content:center;
+         padding:2rem 1.5rem;text-align:center}
+#overlay.on{display:flex}
+#ov-close{position:absolute;top:calc(1rem + env(safe-area-inset-top));right:1rem;
+          background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.12);
+          color:var(--white);width:44px;height:44px;border-radius:50%;
+          font-size:1.1rem;font-weight:600;cursor:pointer;
+          display:flex;align-items:center;justify-content:center;
+          font-family:var(--ff);transition:background var(--t)}
+#ov-close:hover{background:rgba(255,255,255,.18)}
+.ov-logo{display:flex;align-items:center;gap:.55rem;margin-bottom:1.8rem}
+.ov-logo img{height:26px;opacity:.6}
+.ov-logo-t{font-size:.68rem;font-weight:600;color:rgba(255,255,255,.4);
+           letter-spacing:.12em;text-transform:uppercase}
+.ov-rule{width:36px;height:1.5px;background:var(--gold);border-radius:2px;margin:0 auto 1.8rem}
+#ov-en{font-size:clamp(1.65rem,7vw,3.4rem);font-weight:800;
+       color:var(--white);line-height:1.25;letter-spacing:-.02em;margin-bottom:1.4rem}
+#ov-hi{font-size:clamp(.95rem,3.8vw,1.55rem);color:rgba(255,255,255,.36);
+       line-height:1.5;font-weight:500}
+.ov-hint{position:absolute;bottom:calc(1.2rem + env(safe-area-inset-bottom));
+         font-size:.65rem;color:rgba(255,255,255,.2);font-family:var(--ff)}
+
+/* ── NO RESULTS ──────────────────────────────────────────── */
+#no-results{display:none;text-align:center;padding:3rem 1rem;color:var(--g400)}
+#no-results .nr-icon{font-size:2rem;margin-bottom:.6rem}
+#no-results p{font-size:.9rem;font-weight:500}
+#no-results small{font-size:.76rem;color:var(--g300);display:block;margin-top:.25rem}
+
+.footer-space{height:6rem}
+
+/* ── WORD DICTIONARY ─────────────────────────────────────── */
+.word-card{
+  background:var(--white);border:1px solid #EDE9DF;
+  border-radius:12px;margin:.4rem 1rem;
+  padding:.8rem 1rem;
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:space-between;gap:.6rem;
+  box-shadow:0 1px 3px rgba(0,0,0,.04);
+  transition:box-shadow var(--t),border-color var(--t),background var(--t)}
+.word-card:hover{box-shadow:0 3px 12px rgba(0,0,0,.08);border-color:#D8D3C8;background:#FFFEF9}
+.word-card:active{background:#FFF8E8}
+/* speaker icon on right side */
+.word-speak-icon{font-size:1.1rem;opacity:.35;flex-shrink:0;transition:opacity var(--t)}
+.word-card:hover .word-speak-icon{opacity:.7}
+.word-card.speaking .word-speak-icon{opacity:1;animation:speakPulse .7s infinite}
+
+/* top row: english + hindi side by side */
+.word-top{display:flex;align-items:baseline;gap:.75rem;margin-bottom:.2rem;flex-wrap:wrap}
+.word-en{font-size:1.1rem;font-weight:700;color:var(--black);line-height:1.3}
+.word-hi{font-size:1.05rem;font-weight:600;color:var(--g700);line-height:1.3}
+.word-sep{color:var(--g300);font-weight:300;font-size:.9rem}
+.word-pron{font-size:.78rem;color:var(--g400);font-style:italic;margin-bottom:.85rem}
+
+/* word buttons — single row, same as phrase card pattern */
+.word-btns{display:flex;gap:.35rem;align-items:stretch;margin-top:.65rem}
+.wbtn{padding:.68rem .7rem;border-radius:var(--rp);border:none;
+      font-size:.78rem;font-weight:600;font-family:var(--ff);
+      cursor:pointer;white-space:nowrap;
+      transition:background var(--t),box-shadow var(--t),transform var(--t);
+      -webkit-user-select:none;user-select:none;
+      min-height:42px;display:flex;align-items:center;justify-content:center;gap:.2rem}
+.wbtn:active{transform:scale(.94)}
+.wbtn-en{flex:0 0 auto;background:var(--black);color:var(--white)}
+.wbtn-en:hover{background:var(--g800)}
+.wbtn-hi{flex:0 0 auto;background:var(--white);color:var(--g600);border:1.5px solid var(--g200)}
+.wbtn-hi:hover{border-color:var(--g700);color:var(--black)}
+.wbtn-show{flex:1;background:var(--gold);color:var(--white);font-size:.82rem}
+.wbtn-show:hover{background:#a67e2a;box-shadow:0 4px 12px rgba(184,148,58,.28)}
+
+/* word-count bar */
+#word-result-count{display:none;padding:.3rem 1rem .1rem;
+                   font-size:.75rem;font-weight:600;color:var(--g400)}
+/* A-Z quick strip */
+.az-strip{display:flex;flex-wrap:wrap;gap:.3rem;padding:.5rem 1rem .2rem;
+          background:var(--white)}
+.az-btn{padding:.32rem .55rem;border-radius:6px;border:none;
+        background:rgba(116,116,128,.1);color:rgba(60,60,67,.8);
+        font-size:.72rem;font-weight:600;
+        cursor:pointer;transition:background .15s,color .15s;min-height:32px;font-family:var(--ff)}
+.az-btn:hover{background:rgba(116,116,128,.2);color:var(--black)}
+.az-btn.active{background:var(--black);color:var(--white)}
+</style>
+</head>
+<body>
+
+<!-- ── HEADER ────────────────────────────────────────────── -->
+<header class="hdr" id="hdr">
+  <div class="hdr__in">
+    <a class="logo" href="https://padmashreetravels.in" target="_blank" rel="noopener">
+      <img src="../images/logo.png" alt="Padma Shree Travels">
+      <div class="logo__t">Padma Shree Travels<small>Agra Taxi Service</small></div>
+    </a>
+    <!-- FIX 16: aria-label on badge -->
+    <span class="hdr__badge" aria-label="This is a private driver tool">Driver Tool</span>
+  </div>
+</header>
+
+<!-- ── HERO STRIP ─────────────────────────────────────────── -->
+<div class="hero-strip">
+  <h1>Driver Communication Helper</h1>
+  <p>Hindi → English &nbsp;·&nbsp; Tourist के साथ आसान बातचीत</p>
+</div>
+
+<!-- ── PWA INSTALL BANNER ──────────────────────────────────── -->
+<div id="pwa-install-bar" style="display:none; background:#FFF8EC; border-bottom:2px solid #B8943A; padding:.65rem 1rem; align-items:center; gap:.75rem; font-size:.8rem; color:#5a4010; flex-wrap:nowrap;">
+  <span style="flex:1; min-width:0;">
+    📲 <strong>Install App</strong> — Driver के phone में app save करने के लिए:<br>
+    <small style="color:#8a6020; font-size:.72rem;">Chrome खोलें → Install App / Add to Home Screen दबाएँ</small>
+  </span>
+  <button id="pwa-install-btn" style="background:#B8943A; color:#fff; border:none; border-radius:999px; padding:.55rem 1.1rem; font-size:.8rem; font-weight:700; cursor:pointer; white-space:nowrap; font-family:inherit; flex-shrink:0;">Install App</button>
+  <button onclick="document.getElementById('pwa-install-bar').style.display='none'" aria-label="Dismiss" style="background:none; border:none; color:#8a6020; cursor:pointer; font-size:1rem; padding:.2rem .4rem; min-width:28px; min-height:28px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">✕</button>
+</div>
+
+<!-- ── HINDI GUIDANCE STRIP ───────────────────────────────── -->
+<div class="guide-strip" id="guide-strip">
+  <span class="guide-strip-icon">💡</span>
+  <span><strong>कैसे use करें:</strong> &nbsp;1️⃣ Line खोजो &nbsp;2️⃣ <strong>Speak English</strong> दबाओ &nbsp;3️⃣ Tourist को दिखाने के लिए <strong>Show Big</strong> दबाओ</span>
+  <button class="guide-strip-dismiss" onclick="this.parentElement.style.display='none'" aria-label="Dismiss tip">✕</button>
+</div>
+
+<!-- ── GROUP TABS ─────────────────────────────────────────── -->
+<div class="group-tabs" id="group-tabs" role="tablist">
+  <button class="gtab active" onclick="setGroup('trip',this)" role="tab" aria-selected="true" aria-label="On Trip phrases">
+    <span class="gtab__icon">🚗</span>On Trip
+  </button>
+  <button class="gtab" onclick="setGroup('location',this)" role="tab" aria-selected="false" aria-label="Location specific phrases">
+    <span class="gtab__icon">📍</span>Locations
+  </button>
+  <button class="gtab" onclick="setGroup('collab',this)" role="tab" aria-selected="false" aria-label="Coordination phrases">
+    <span class="gtab__icon">📞</span>Coordination
+  </button>
+  <button class="gtab" onclick="setGroup('words',this)" role="tab" aria-selected="false" aria-label="Word dictionary">
+    <span class="gtab__icon">🔤</span>Dictionary
+  </button>
+</div>
+
+<!-- ── EMERGENCY STICKY (FIX 6+16) ──────────────────────── -->
+<button id="emer-btn" onclick="goEmergency()" aria-label="Go to emergency phrases">🚨 Emergency</button>
+
+<!-- ── BACK TO TOP (FIX 7) ───────────────────────────────── -->
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
+
+<!-- ── TOAST (FIX 16: role=status) ──────────────────────── -->
+<div id="toast" role="status" aria-live="polite"></div>
+
+<!-- ── TOURIST OVERLAY ───────────────────────────────────── -->
+<div id="overlay" aria-modal="true" aria-label="Tourist display mode">
+  <button id="ov-close" onclick="closeOverlay()" aria-label="Close tourist display">✕</button>
+  <div class="ov-logo">
+    <img src="../images/logo.png" alt="Padma Shree Travels">
+    <span class="ov-logo-t">Padma Shree Travels</span>
+  </div>
+  <div class="ov-rule"></div>
+  <div id="ov-en"></div>
+  <div id="ov-hi"></div>
+  <div class="ov-hint">Tap ✕ to close</div>
+</div>
+
+<!-- ── PHRASE SEARCH ──────────────────────────────────────── -->
+<div class="search-wrap" id="phrase-search-wrap">
+  <input id="search" class="search-input" type="search" inputmode="search"
+    placeholder="🔍 Search phrases: hotel, payment, doctor, Taj Mahal…"
+    oninput="onSearch()" autocomplete="off" autocorrect="off"
+    autocapitalize="off" spellcheck="false">
+</div>
+<div id="result-count" aria-live="polite"></div>
+<div class="cats-outer" id="phrase-pills-wrap">
+  <div class="cats-wrap" id="cat-pills" role="group" aria-label="Filter by category"></div>
+</div>
+
+<!-- ── WORD SEARCH (shown only in Dictionary tab) ────────── -->
+<div class="search-wrap" id="word-search-wrap" style="display:none">
+  <input id="word-search" class="search-input" type="search" inputmode="search"
+    placeholder="🔍 Search words: water, taxi, temple, left…"
+    oninput="onWordSearch()" autocomplete="off" autocorrect="off"
+    autocapitalize="off" spellcheck="false">
+</div>
+<div id="word-result-count" aria-live="polite"></div>
+<!-- A-Z quick-jump strip -->
+<div class="az-strip" id="az-strip" style="display:none"></div>
+<div class="cats-outer" id="word-pills-wrap" style="display:none">
+  <div class="cats-wrap" id="word-cat-pills" role="group" aria-label="Filter words by category"></div>
+</div>
+
+<!-- ── MAIN CONTENT ──────────────────────────────────────── -->
+<div id="content"></div>
+<div id="no-results">
+  <div class="nr-icon">🔍</div>
+  <p>No phrases found</p>
+  <small>Search checks all tabs automatically</small>
+</div>
+<div id="no-word-results" style="display:none">
+  <div class="nr-icon">🔍</div>
+  <p>No words found</p>
+  <small>Try English or Hindi spelling</small>
+</div>
+<div class="footer-space"></div>
+
+<script>
+/* ============================================================
+   DATA — all 35 categories, 300+ phrases
+   ============================================================ */
+const MOST_USED = [
+  /* FIX 12: trimmed to 8 truly daily-use items */
+  {h:"मैं आपका ड्राइवर हूँ।",                             e:"I am your driver."},
+  {h:"कार यहीं खड़ी है, कृपया मेरे साथ आइए।",            e:"The car is parked here. Please come with me."},
+  {h:"कृपया seat belt लगा लीजिए।",                        e:"Please wear your seat belt."},
+  {h:"यहाँ से लगभग 20 मिनट लगेंगे।",                     e:"It will take around 20 minutes from here."},
+  {h:"मैं यहीं आपका इंतज़ार कर रहा हूँ।",               e:"I am waiting for you here."},
+  {h:"अगर ज़रूरत हो तो call कर दीजिए।",                  e:"Please call me if you need me."},
+  {h:"आप cash, UPI या card से payment कर सकते हैं।",      e:"You can pay by cash, UPI, or card."},
+  {h:"Padma Shree Travels चुनने के लिए धन्यवाद।",        e:"Thank you for choosing Padma Shree Travels."},
+];
+
+const CATS = [
+/* ── ON TRIP ────────────────────────────────────────────── */
+{id:"greeting",group:"trip",name:"Arrival / Greeting",icon:"🙏",phrases:[
+  {h:"नमस्ते सर/मैडम, आपका स्वागत है।",                                             e:"Hello Sir/Madam, welcome."},
+  {h:"मैं आपका ड्राइवर हूँ।",                                                        e:"I am your driver."},
+  {h:"मेरी अंग्रेज़ी थोड़ी कमज़ोर है, लेकिन मैं पूरी मदद करूंगा।",                  e:"My English is limited, but I will help you fully."},
+  {h:"आप चिंता मत कीजिए, मैं आपको सुरक्षित ले जाऊंगा।",                            e:"Please do not worry. I will take you safely and comfortably."},
+  {h:"क्या आपकी यात्रा अच्छी रही?",                                                  e:"Was your journey comfortable?"},
+  {h:"क्या आप पहली बार आगरा आए हैं?",                                                e:"Is this your first time in Agra?"},
+  {h:"आपका आगरा में स्वागत है।",                                                      e:"Welcome to Agra."},
+  {h:"क्या आप थके हुए हैं? पहले आराम करेंगे?",                                      e:"Are you tired? Would you like to rest first?"},
+]},
+{id:"pickup",group:"trip",name:"Pickup & Identity",icon:"🪪",phrases:[
+  {h:"क्या आप [Customer Name] हैं?",                                                  e:"Are you [Customer Name]?"},
+  {h:"क्या आपने Padma Shree Travels से cab book की है?",                              e:"Have you booked the cab with Padma Shree Travels?"},
+  {h:"कृपया booking confirmation दिखा दीजिए।",                                         e:"Please show me the booking confirmation."},
+  {h:"मैं आपकी cab लेकर आया हूँ।",                                                    e:"I have arrived with your cab."},
+  {h:"कार यहीं खड़ी है, कृपया मेरे साथ आइए।",                                        e:"The car is parked here. Please come with me."},
+  {h:"मैं आपका सामान कार तक ले चलता हूँ।",                                           e:"I will carry your luggage to the car."},
+  {h:"यह मेरा नाम और number है, save कर लीजिए।",                                      e:"This is my name and number. Please save it."},
+  {h:"क्या आपके साथ और कोई है जिसे pick करना है?",                                   e:"Is there anyone else we need to pick up?"},
+]},
+{id:"luggage",group:"trip",name:"Luggage",icon:"🧳",phrases:[
+  {h:"कृपया अपना सामान यहीं रख दीजिए।",                                              e:"Please keep your luggage here."},
+  {h:"मैं सामान डिक्की में रख देता हूँ।",                                            e:"I will keep the luggage in the boot."},
+  {h:"कृपया अपना कीमती सामान अपने पास रखें।",                                        e:"Please keep your valuable items with you."},
+  {h:"क्या आपका कोई और सामान बाकी है?",                                              e:"Is there any more luggage left?"},
+  {h:"कृपया अपना मोबाइल, पर्स और पासपोर्ट चेक कर लीजिए।",                          e:"Please check your phone, wallet, and passport."},
+  {h:"सामान बहुत भारी है, क्या मैं help करूं?",                                       e:"The luggage is very heavy. May I help?"},
+  {h:"आपका सामान सुरक्षित डिक्की में है।",                                            e:"Your luggage is safely in the boot."},
+]},
+{id:"seating",group:"trip",name:"Seating & Comfort",icon:"💺",phrases:[
+  {h:"कृपया आराम से बैठिए।",                                                          e:"Please sit comfortably."},
+  {h:"क्या सीट ठीक है?",                                                              e:"Is the seat comfortable?"},
+  {h:"क्या आपको आगे बैठना है या पीछे?",                                              e:"Would you like to sit in the front or back?"},
+  {h:"कृपया seat belt लगा लीजिए।",                                                   e:"Please wear your seat belt."},
+  {h:"क्या आपको गाड़ी रोकनी है?",                                                    e:"Do you want me to stop the car?"},
+  {h:"क्या आपको थोड़ी देर आराम करना है?",                                            e:"Would you like to rest for some time?"},
+  {h:"क्या आपको leg space ठीक है?",                                                  e:"Is the leg space okay for you?"},
+]},
+{id:"ac",group:"trip",name:"AC / Window / Music",icon:"❄️",phrases:[
+  {h:"क्या AC ठीक है?",                                                               e:"Is the AC temperature okay?"},
+  {h:"क्या AC तेज कर दूँ?",                                                           e:"Should I increase the AC?"},
+  {h:"क्या AC कम कर दूँ?",                                                            e:"Should I reduce the AC?"},
+  {h:"क्या AC बंद कर दूँ?",                                                           e:"Should I turn off the AC?"},
+  {h:"क्या खिड़की खोल दूँ?",                                                          e:"Should I open the window?"},
+  {h:"क्या खिड़की बंद कर दूँ?",                                                       e:"Should I close the window?"},
+  {h:"क्या music चलाऊँ?",                                                             e:"Should I play music?"},
+  {h:"क्या music बंद कर दूँ?",                                                        e:"Should I turn off the music?"},
+  {h:"क्या आपको शांत यात्रा पसंद है?",                                               e:"Do you prefer a quiet ride?"},
+]},
+{id:"route",group:"trip",name:"Route & Timing",icon:"🗺️",phrases:[
+  {h:"हम अभी आपके hotel जा रहे हैं।",                                                e:"We are going to your hotel now."},
+  {h:"यहाँ से लगभग 20 मिनट लगेंगे।",                                                e:"It will take around 20 minutes from here."},
+  {h:"traffic की वजह से थोड़ा समय लग सकता है।",                                      e:"It may take some extra time due to traffic."},
+  {h:"मैं सबसे अच्छा और सुरक्षित रास्ता ले रहा हूँ।",                               e:"I am taking the best and safest route."},
+  {h:"क्या आप रास्ते में कहीं रुकना चाहेंगे?",                                      e:"Would you like to stop anywhere on the way?"},
+  {h:"हम समय पर पहुँच जाएंगे।",                                                      e:"We will reach on time."},
+  {h:"यह रास्ता बंद है, दूसरा रास्ता लेना होगा।",                                   e:"This road is closed. We will take another route."},
+  {h:"Toll booth आएगी, बस एक मिनट में निकलते हैं।",                                  e:"There is a toll booth ahead. We will pass in a minute."},
+]},
+{id:"sightseeing",group:"trip",name:"Sightseeing",icon:"🏰",phrases:[
+  {h:"यह जगह बहुत famous है।",                                                        e:"This place is very famous."},
+  {h:"आप यहाँ photos ले सकते हैं।",                                                  e:"You can take photos here."},
+  {h:"मैं parking में आपका इंतज़ार करूंगा।",                                         e:"I will wait for you in the parking area."},
+  {h:"कृपया वापस आने का time बता दीजिए।",                                            e:"Please tell me your return time."},
+  {h:"मैं यहीं आपका इंतज़ार कर रहा हूँ।",                                           e:"I am waiting for you here."},
+  {h:"अगर ज़रूरत हो तो call कर दीजिए।",                                              e:"Please call me if you need me."},
+  {h:"अंदर जाने के लिए ticket counter आगे है।",                                       e:"The ticket counter for entry is ahead."},
+  {h:"यहाँ guide लेना चाहेंगे?",                                                      e:"Would you like to hire a guide here?"},
+  {h:"यहाँ कितनी देर रुकना चाहेंगे?",                                                e:"How long would you like to stay here?"},
+]},
+{id:"food",group:"trip",name:"Food & Water",icon:"🍽️",phrases:[
+  {h:"क्या आपको पानी चाहिए?",                                                         e:"Do you need water?"},
+  {h:"क्या आपको tea या coffee चाहिए?",                                                e:"Would you like tea or coffee?"},
+  {h:"क्या आप lunch / dinner करना चाहेंगे?",                                         e:"Would you like to have lunch or dinner?"},
+  {h:"मैं आपको एक अच्छा restaurant दिखा सकता हूँ।",                                 e:"I can show you a good restaurant."},
+  {h:"यहाँ vegetarian food मिलता है।",                                                e:"Vegetarian food is available here."},
+  {h:"यहाँ clean washroom भी है।",                                                    e:"Clean washrooms are also available here."},
+  {h:"क्या आप spicy food खाते हैं?",                                                 e:"Do you eat spicy food?"},
+  {h:"यहाँ famous local food मिलता है — ज़रूर try करें।",                            e:"Famous local food is available here. Please do try it."},
+  {h:"क्या आपको कोई food allergy है?",                                               e:"Do you have any food allergy?"},
+]},
+{id:"temple",group:"trip",name:"Temple / Religious",icon:"🛕",phrases:[
+  {h:"कृपया यहाँ shoes निकालने होंगे।",                                               e:"You need to remove your shoes here."},
+  {h:"कृपया अंदर शांति बनाए रखें।",                                                  e:"Please maintain silence inside."},
+  {h:"यहाँ photography allowed नहीं है।",                                             e:"Photography is not allowed here."},
+  {h:"यहाँ donation आपकी इच्छा पर है।",                                              e:"Donation is optional here."},
+  {h:"कृपया अपने सामान का ध्यान रखें।",                                              e:"Please take care of your belongings."},
+  {h:"मैं बाहर आपका इंतज़ार करूंगा।",                                                e:"I will wait outside for you."},
+  {h:"यहाँ सिर ढकना ज़रूरी है।",                                                     e:"Covering the head is required here."},
+  {h:"यहाँ leather items अंदर allowed नहीं हैं।",                                    e:"Leather items are not allowed inside."},
+]},
+{id:"shopping",group:"trip",name:"Shopping",icon:"🛍️",phrases:[
+  {h:"क्या आप shopping करना चाहेंगे?",                                               e:"Would you like to do some shopping?"},
+  {h:"यहाँ marble items famous हैं।",                                                 e:"Marble items are famous here."},
+  {h:"यहाँ leather items भी famous हैं।",                                             e:"Leather items are also famous here."},
+  {h:"आप पहले price पूछ लीजिए।",                                                      e:"Please ask the price first."},
+  {h:"खरीदना आपकी मर्ज़ी है, कोई मजबूरी नहीं है।",                                  e:"Buying is your choice. There is no pressure."},
+  {h:"अगर shopping नहीं करना, तो कोई problem नहीं।",                                 e:"If you do not want to shop, there is no problem."},
+  {h:"यहाँ fixed price shop है, bargaining नहीं होती।",                               e:"This is a fixed price shop. No bargaining."},
+  {h:"यहाँ government emporium है — quality guaranteed।",                             e:"This is a government emporium. Quality is guaranteed."},
+]},
+{id:"safety",group:"trip",name:"Safety",icon:"🛡️",phrases:[
+  {h:"कृपया अपना सामान अकेला न छोड़ें।",                                             e:"Please do not leave your belongings unattended."},
+  {h:"कृपया भीड़ में सावधान रहें।",                                                  e:"Please be careful in crowded areas."},
+  {h:"कृपया unknown person को पैसे न दें।",                                          e:"Please do not give money to unknown people."},
+  {h:"कृपया मेरे contact number को save कर लीजिए।",                                 e:"Please save my contact number."},
+  {h:"अगर रास्ता भूल जाएं, तो मुझे call करें।",                                     e:"If you lose your way, please call me."},
+  {h:"मैं आपकी safety का पूरा ध्यान रखूंगा।",                                       e:"I will take full care of your safety."},
+  {h:"यहाँ बाहर वाले guides से सावधान रहें।",                                        e:"Please be careful of unauthorized guides outside."},
+  {h:"कृपया passport और documents safe रखें।",                                       e:"Please keep your passport and documents safe."},
+]},
+{id:"rules",group:"trip",name:"Rules & Politeness",icon:"🤝",phrases:[
+  {h:"कृपया car में smoking न करें।",                                                 e:"Please do not smoke inside the car."},
+  {h:"कृपया car साफ रखने में मदद करें।",                                             e:"Please help keep the car clean."},
+  {h:"कोई जल्दी नहीं है, आप आराम से आइए।",                                          e:"There is no hurry. Please take your time."},
+  {h:"कृपया मुझे 5 मिनट पहले call कर दीजिए।",                                       e:"Please call me 5 minutes before you come."},
+  {h:"अगर कोई समस्या हो तो मुझे बता दीजिए।",                                        e:"Please tell me if you have any problem."},
+  {h:"मैं आपकी मदद के लिए हूँ।",                                                     e:"I am here to help you."},
+  {h:"कृपया car का दरवाज़ा धीरे से बंद करें।",                                       e:"Please close the car door gently."},
+]},
+{id:"payment",group:"trip",name:"Payment",icon:"💳",phrases:[
+  {h:"आपका total fare इतना है।",                                                      e:"Your total fare is this amount."},
+  {h:"आप cash, UPI या card से payment कर सकते हैं।",                                 e:"You can pay by cash, UPI, or card."},
+  {h:"कृपया payment कर दीजिए।",                                                      e:"Please make the payment."},
+  {h:"Payment receive हो गया है, धन्यवाद।",                                          e:"Payment has been received. Thank you."},
+  {h:"क्या आपको bill/receipt चाहिए?",                                                e:"Do you need a bill or receipt?"},
+  {h:"मैं office से bill भेजवा दूंगा।",                                              e:"I will ask the office to send the bill."},
+  {h:"Parking charge अलग है।",                                                         e:"Parking charges are separate."},
+  {h:"Toll charge अलग है।",                                                            e:"Toll charges are separate."},
+  {h:"क्या आपके पास change है?",                                                      e:"Do you have change?"},
+  {h:"UPI QR code यह है, scan कर लीजिए।",                                            e:"Here is the UPI QR code. Please scan it."},
+]},
+{id:"pricing",group:"trip",name:"Fare & Pricing",icon:"🏷️",phrases:[
+  {h:"आपका fare पहले से fixed है — कोई extra charge नहीं होगा।",                    e:"Your fare is fixed in advance. There will be no extra charges."},
+  {h:"यह Padma Shree Travels का official rate है।",                                   e:"This is the official rate of Padma Shree Travels."},
+  {h:"मैं आपसे कोई extra पैसे नहीं लूंगा।",                                          e:"I will not charge you any extra amount."},
+  {h:"क्या आप fare पहले confirm करना चाहते हैं?",                                    e:"Would you like to confirm the fare before we start?"},
+  {h:"Toll और parking charge अलग होंगे — सब बताता रहूंगा।",                         e:"Toll and parking charges are separate. I will inform you of each one."},
+  {h:"Night charge लागू होगी अगर रात को travel करेंगे।",                            e:"Night charges will apply if we travel at night."},
+  {h:"Meter नहीं है — यह fixed package rate है।",                                    e:"There is no meter. This is a fixed package rate."},
+  {h:"हमारे rates government approved हैं — बहुत fair हैं।",                         e:"Our rates are government approved and very fair."},
+  {h:"आप चाहें तो office से rate confirm कर सकते हैं।",                              e:"You can confirm the rate with our office if you wish."},
+  {h:"कोई hidden charge नहीं है — जो बोला वही लूंगा।",                              e:"There are no hidden charges. I will charge only what was agreed."},
+]},
+{id:"waiting",group:"trip",name:"Waiting & No Rush",icon:"⏳",phrases:[
+  {h:"मैं यहाँ आपका इंतज़ार करूंगा — कोई waiting charge नहीं।",                    e:"I will wait for you here. There is no waiting charge."},
+  {h:"पहले 1 घंटे का कोई waiting charge नहीं है।",                                  e:"There is no waiting charge for the first 1 hour."},
+  {h:"आप आराम से घूमिए, मैं यहाँ हूँ — कोई जल्दी नहीं।",                          e:"Please take your time and explore. I am right here. No rush at all."},
+  {h:"मुझे आपको जल्दी नहीं करानी — बस ready होने पर call करें।",                   e:"I will not rush you at all. Just call me when you are ready."},
+  {h:"कृपया अंदर जाने से पहले मुझे वापस आने का time बता दें।",                    e:"Please tell me your return time before you go inside."},
+  {h:"मैं इसी parking में रहूंगा — यहाँ से call करें।",                             e:"I will stay in this parking area. Please call me from here."},
+  {h:"आप जितना चाहें उतना रुकिए — मैं तैयार हूँ।",                                 e:"Please take as long as you like. I am ready and waiting."},
+  {h:"Waiting charge, अगर हो भी, तो बहुत कम होगा।",                                e:"Waiting charges, if any, will be very minimal."},
+  {h:"अगर आप बहुत लंबे समय के लिए जाएं तो मुझे बता दें।",                          e:"Please let me know if you will be inside for a very long time."},
+  {h:"Temple में darshan में समय लगता है — मैं समझता हूँ।",                         e:"I understand that darshan at a temple takes time. I will wait."},
+]},
+{id:"return",group:"trip",name:"Return Trip & Packages",icon:"🔄",phrases:[
+  {h:"वापसी की trip के लिए मैं बहुत कम charge करूंगा।",                              e:"For the return trip I will charge very little."},
+  {h:"क्या आप वापस भी मेरे साथ जाएंगे? मैं बहुत अच्छा rate दूंगा।",               e:"Will you return with me too? I will give you a very good rate."},
+  {h:"Round trip में आपको ज़्यादा saving होगी।",                                     e:"You will save more with a round trip booking."},
+  {h:"अगर same day वापस जाएंगे तो round trip rate लागू होगा।",                      e:"If you return the same day, the round trip rate will apply."},
+  {h:"मैं पूरे दिन आपके साथ रहूंगा — एक fixed daily rate पर।",                     e:"I will stay with you the entire day at one fixed daily rate."},
+  {h:"वापसी में traffic कम होगा, जल्दी पहुँचेंगे।",                                  e:"There will be less traffic on the way back. We will reach faster."},
+  {h:"Full day package में सभी sites cover होंगी — एक ही rate में।",                e:"All sites will be covered in the full day package at one rate."},
+  {h:"अगर कल भी trip चाहें तो मैं special rate दूंगा।",                              e:"If you need a trip tomorrow as well, I will give you a special rate."},
+  {h:"एक दिन में Agra, Mathura, Vrindavan — सब एक rate में।",                       e:"Agra, Mathura, and Vrindavan all in one day at one rate."},
+  {h:"आपको किसी और driver को ढूंढने की ज़रूरत नहीं — मैं हूँ ना।",                e:"You do not need to find another driver. I am here for you."},
+  {h:"अगर आप recommend करें तो आपके दोस्तों को भी discount मिलेगा।",               e:"If you recommend us, your friends will also get a discount."},
+]},
+{id:"emergency",group:"trip",name:"Emergency",icon:"🚨",phrases:[
+  {h:"क्या आप ठीक हैं?",                                                              e:"Are you okay?"},
+  {h:"क्या आपको doctor चाहिए?",                                                       e:"Do you need a doctor?"},
+  {h:"क्या मैं ambulance call करूँ?",                                                 e:"Should I call an ambulance?"},
+  {h:"कृपया शांत रहें, मैं मदद कर रहा हूँ।",                                        e:"Please stay calm. I am helping you."},
+  {h:"मैं police को call कर रहा हूँ।",                                                e:"I am calling the police."},
+  {h:"कृपया यहाँ बैठिए।",                                                             e:"Please sit here."},
+  {h:"कृपया पानी पी लीजिए।",                                                          e:"Please drink some water."},
+  {h:"आपका सामान सुरक्षित है।",                                                       e:"Your luggage is safe."},
+  {h:"मैं आपके hotel / travel office को inform कर रहा हूँ।",                         e:"I am informing your hotel and travel office."},
+  {h:"नज़दीक hospital यहाँ से 5 मिनट में है।",                                        e:"The nearest hospital is 5 minutes from here."},
+  {h:"Police 100 · Ambulance 108 · Tourist Helpline 1363",                            e:"Police 100 · Ambulance 108 · Tourist Helpline 1363"},
+]},
+{id:"hotel",group:"trip",name:"Hotel Drop",icon:"🏨",phrases:[
+  {h:"हम आपके hotel पहुँच गए हैं।",                                                  e:"We have reached your hotel."},
+  {h:"कृपया अपना सामान check कर लीजिए।",                                             e:"Please check your luggage."},
+  {h:"कृपया car में कुछ छूट तो नहीं गया?",                                           e:"Please check if anything is left in the car."},
+  {h:"मैं सामान बाहर निकाल देता हूँ।",                                              e:"I will take out your luggage."},
+  {h:"क्या आपको hotel reception तक मदद चाहिए?",                                     e:"Do you need help up to the hotel reception?"},
+  {h:"आपका दिन शुभ हो।",                                                              e:"Have a good day."},
+  {h:"अगर कल फिर ज़रूरत हो तो call कर दीजिए।",                                      e:"Please call me if you need me again tomorrow."},
+]},
+{id:"farewell",group:"trip",name:"Farewell / Review",icon:"⭐",phrases:[
+  {h:"आपकी यात्रा कैसी रही?",                                                         e:"How was your trip?"},
+  {h:"अगर service अच्छी लगी हो तो कृपया review दे दीजिए।",                         e:"If you liked the service, please leave a review."},
+  {h:"आपकी feedback हमारे लिए बहुत important है।",                                   e:"Your feedback is very important to us."},
+  {h:"Padma Shree Travels चुनने के लिए धन्यवाद।",                                   e:"Thank you for choosing Padma Shree Travels."},
+  {h:"दोबारा आगरा आएं तो हमें जरूर याद करें।",                                      e:"Please remember us when you visit Agra again."},
+  {h:"आपकी यात्रा मंगलमय हो।",                                                       e:"Have a safe and pleasant journey."},
+  {h:"Google पर review दे दीजिए — बहुत help होगी।",                                  e:"Please leave a review on Google — it will help us a lot."},
+]},
+{id:"vehicle",group:"trip",name:"Vehicle & Technical",icon:"🔧",phrases:[
+  {h:"गाड़ी में petrol भरना होगा, बस 5 मिनट लगेंगे।",                               e:"We need to fill fuel. It will take just 5 minutes."},
+  {h:"गाड़ी में थोड़ी problem है, office को call कर रहा हूँ।",                      e:"There is a small issue with the car. I am calling the office."},
+  {h:"एक और गाड़ी आपके लिए भेजी जा रही है।",                                        e:"Another car is being sent for you."},
+  {h:"कृपया थोड़ी देर इंतज़ार कीजिए।",                                               e:"Please wait for a short while."},
+  {h:"Toll booth है, बस एक मिनट में निकलते हैं।",                                    e:"This is the toll booth. We will pass through in a minute."},
+  {h:"Parking यहाँ मिलेगी, बस थोड़ा आगे।",                                          e:"We will find parking just a little ahead."},
+  {h:"आज traffic ज़्यादा है, alternate route लेंगे।",                                 e:"Traffic is heavy today. We will take an alternate route."},
+  {h:"Tyre puncture हो गई है, 10 मिनट में ठीक हो जाएगी।",                          e:"There is a tyre puncture. It will be fixed in 10 minutes."},
+]},
+{id:"health",group:"trip",name:"Health & Medical",icon:"🏥",phrases:[
+  {h:"क्या आपको motion sickness है?",                                                 e:"Do you experience motion sickness?"},
+  {h:"क्या आप ठीक महसूस कर रहे हैं?",                                               e:"Are you feeling okay?"},
+  {h:"यहाँ नज़दीक pharmacy है, दवाई मिल जाएगी।",                                     e:"There is a pharmacy nearby. You will get medicine there."},
+  {h:"नज़दीक hospital यहाँ से 5 मिनट में है।",                                        e:"The nearest hospital is 5 minutes from here."},
+  {h:"आज बहुत गर्मी है, पानी पीते रहें।",                                            e:"It is very hot today. Please keep drinking water."},
+  {h:"क्या आपको कोई allergy है?",                                                     e:"Do you have any allergy?"},
+  {h:"कृपया धूप से बचने के लिए hat पहनें।",                                          e:"Please wear a hat to protect from the sun."},
+  {h:"गाड़ी रोककर fresh air लेंगे?",                                                  e:"Should I stop the car so you can get some fresh air?"},
+]},
+{id:"currency",group:"trip",name:"Currency & ATM",icon:"💰",phrases:[
+  {h:"यहाँ नज़दीक ATM है।",                                                            e:"There is an ATM nearby."},
+  {h:"क्या आपको भारतीय रुपये चाहिए?",                                               e:"Do you need Indian Rupees?"},
+  {h:"यहाँ currency exchange होती है।",                                               e:"Currency exchange is available here."},
+  {h:"UPI और card से payment होती है यहाँ।",                                         e:"UPI and card payments are accepted here."},
+  {h:"कृपया छुट्टे पैसे रखें, parking में काम आएंगे।",                              e:"Please keep some change. It will be useful for parking."},
+  {h:"यहाँ cash ज़्यादा useful है।",                                                   e:"Cash is more useful here."},
+]},
+{id:"etiquette",group:"trip",name:"Cultural Etiquette",icon:"🙏",phrases:[
+  {h:"यहाँ सिर ढकना ज़रूरी है।",                                                     e:"Covering the head is required here."},
+  {h:"कृपया full कपड़े पहनें मंदिर में जाने के लिए।",                              e:"Please wear full clothes to enter the temple."},
+  {h:"यहाँ leather items अंदर allowed नहीं हैं।",                                    e:"Leather items are not allowed inside."},
+  {h:"कृपया queue में खड़े रहें।",                                                    e:"Please stand in the queue."},
+  {h:"Foreign tourists का ticket अलग counter से मिलेगा।",                            e:"Tickets for foreign tourists are from a separate counter."},
+  {h:"यहाँ prasad accept करना polite होता है।",                                       e:"It is polite to accept the prasad offered here."},
+  {h:"यहाँ local customs का सम्मान करें।",                                            e:"Please respect the local customs here."},
+]},
+{id:"children",group:"trip",name:"Travelling with Children",icon:"👨‍👩‍👧",phrases:[
+  {h:"क्या बच्चों के लिए seat ठीक है?",                                              e:"Is the seat okay for the children?"},
+  {h:"बच्चों का seat belt लगाने में मैं मदद करूंगा।",                               e:"I will help put on the seat belt for the children."},
+  {h:"क्या बच्चे को motion sickness होती है?",                                       e:"Does the child experience motion sickness?"},
+  {h:"रास्ते में ice cream के लिए रोकूं?",                                            e:"Should I stop for ice cream on the way?"},
+  {h:"यहाँ बच्चों के लिए कोई entry charge नहीं है।",                                e:"There is no entry charge for children here."},
+  {h:"बच्चे के लिए washroom की ज़रूरत है?",                                          e:"Does the child need a washroom?"},
+]},
+{id:"weather",group:"trip",name:"Weather & Comfort",icon:"🌤️",phrases:[
+  {h:"आज बहुत धूप है, hat लगाकर जाइए।",                                              e:"It is very sunny today. Please wear a hat."},
+  {h:"आज बहुत ठंड है, jacket साथ रखिए।",                                             e:"It is very cold today. Please keep a jacket."},
+  {h:"बारिश हो सकती है, छाता रख लीजिए।",                                            e:"It may rain. Please keep an umbrella."},
+  {h:"आज fog है, थोड़ा धीरे चलूंगा।",                                                e:"There is fog today. I will drive carefully."},
+  {h:"गर्मी ज़्यादा है — Taj Mahal सुबह जल्दी देखना बेहतर होगा।",                  e:"It is very hot. Visiting the Taj Mahal early morning is better."},
+  {h:"सूर्यास्त से पहले site देख लेते हैं।",                                          e:"Let us see the site before sunset."},
+]},
+/* ── LOCATIONS ───────────────────────────────────────────── */
+{id:"loc-taj",group:"location",name:"Taj Mahal & Agra Fort",icon:"🕌",phrases:[
+  {h:"यह Taj Mahal है — दुनिया के 7 अजूबों में से एक।",                             e:"This is the Taj Mahal — one of the 7 Wonders of the World."},
+  {h:"Indian tourists ₹50 · Foreign tourists ₹1100 ticket।",                          e:"Ticket: Indian tourists ₹50 · Foreign tourists ₹1,100."},
+  {h:"Ticket counter आगे है। मैं parking में इंतज़ार करूंगा।",                       e:"The ticket counter is ahead. I will wait in the parking."},
+  {h:"अंदर camera allowed है, लेकिन tripod और बड़ा bag नहीं।",                      e:"Camera is allowed inside, but tripods and large bags are not."},
+  {h:"Taj Mahal sunrise पर सबसे सुंदर दिखता है।",                                   e:"The Taj Mahal looks most beautiful at sunrise."},
+  {h:"East Gate और West Gate दोनों हैं।",                                            e:"There are East Gate and West Gate — both are entry points."},
+  {h:"Agra Fort यहाँ से सिर्फ 2 km दूर है।",                                        e:"Agra Fort is just 2 km from here."},
+  {h:"Fort के अंदर Diwan-e-Aam और Diwan-e-Khas ज़रूर देखिए।",                      e:"Please see Diwan-e-Aam and Diwan-e-Khas inside the Fort."},
+  {h:"Agra Fort से Taj Mahal का view बहुत सुंदर दिखता है।",                         e:"The view of the Taj Mahal from Agra Fort is very beautiful."},
+]},
+{id:"loc-agra",group:"location",name:"Other Agra Sites",icon:"🏛️",phrases:[
+  {h:"यह Baby Taj (Itimad-ud-Daulah) है — Taj से पहले बना था।",                     e:"This is Baby Taj (Itimad-ud-Daulah) — built before the Taj Mahal."},
+  {h:"Mehtab Bagh से Taj Mahal का view बहुत सुंदर आता है।",                         e:"The view of the Taj Mahal from Mehtab Bagh is very beautiful."},
+  {h:"Akbar's Tomb Sikandra में है, यहाँ से 10 km दूर।",                            e:"Akbar's Tomb is in Sikandra, 10 km from here."},
+  {h:"यहाँ famous Agra Petha मिलता है, ज़रूर try करें।",                            e:"Famous Agra Petha is available here. Do try it."},
+  {h:"Sadar Bazar से marble और leather की अच्छी shopping होती है।",                  e:"Sadar Bazar is good for marble and leather shopping."},
+  {h:"यहाँ से Fatehpur Sikri 38 km दूर है।",                                        e:"Fatehpur Sikri is 38 km from here."},
+]},
+{id:"loc-mathura",group:"location",name:"Mathura",icon:"🔱",phrases:[
+  {h:"यह Mathura है — भगवान श्री कृष्ण की जन्मभूमि।",                              e:"This is Mathura — the birthplace of Lord Krishna."},
+  {h:"Krishna Janmabhoomi बहुत पवित्र जगह है।",                                     e:"Krishna Janmabhoomi is a very sacred place."},
+  {h:"Dwarkadhish Temple यहाँ का सबसे प्रसिद्ध मंदिर है।",                         e:"Dwarkadhish Temple is the most famous temple here."},
+  {h:"Vishram Ghat पर यमुना आरती बहुत सुंदर होती है।",                             e:"The Yamuna Aarti at Vishram Ghat is very beautiful."},
+  {h:"यहाँ शाम 7 बजे आरती होती है।",                                                e:"The aarti here is at 7 PM."},
+  {h:"यहाँ shoes बाहर रखने होंगे।",                                                  e:"Shoes need to be kept outside here."},
+  {h:"Mathura से Vrindavan सिर्फ 12 km दूर है।",                                    e:"Vrindavan is just 12 km from Mathura."},
+  {h:"यहाँ का पेड़ा बहुत famous है, ज़रूर लें।",                                   e:"The Peda sweet here is very famous. Do try it."},
+]},
+{id:"loc-vrindavan",group:"location",name:"Vrindavan",icon:"🌺",phrases:[
+  {h:"यह Vrindavan है — श्री कृष्ण की लीला भूमि।",                                 e:"This is Vrindavan — the sacred land of Lord Krishna."},
+  {h:"Banke Bihari Temple यहाँ का सबसे famous temple है।",                          e:"Banke Bihari Temple is the most famous temple in Vrindavan."},
+  {h:"Banke Bihari Temple में photography बिल्कुल allowed नहीं है।",                e:"Photography is absolutely not allowed in Banke Bihari Temple."},
+  {h:"ISKCON Temple बहुत बड़ा और सुंदर है।",                                        e:"The ISKCON Temple is very large and beautiful."},
+  {h:"Prem Mandir रात को lights में बहुत सुंदर लगता है।",                           e:"Prem Mandir looks very beautiful with lights at night."},
+  {h:"Nidhivan में रात को रुकना allowed नहीं है।",                                  e:"Staying in Nidhivan at night is not allowed."},
+  {h:"यहाँ बंदर बहुत हैं — सामान संभालकर रखें।",                                   e:"There are many monkeys here. Please keep your belongings safe."},
+  {h:"यहाँ prasad मिलता है, आप ले सकते हैं।",                                       e:"Prasad is available here. You can take some."},
+]},
+{id:"loc-barsana",group:"location",name:"Barsana & Nandgaon",icon:"🌸",phrases:[
+  {h:"यह Barsana है — राधा रानी का जन्म स्थान।",                                    e:"This is Barsana — the birthplace of Radha Rani."},
+  {h:"Radha Rani Temple पहाड़ी पर है, थोड़ी चढ़ाई करनी होगी।",                    e:"Radha Rani Temple is on a hill. You will need to climb a little."},
+  {h:"यहाँ Lathmar Holi बहुत famous है — फाल्गुन माह में होती है।",               e:"Lathmar Holi is very famous here — held in the month of Phalgun."},
+  {h:"Nandgaon यहाँ से सिर्फ 8 km दूर है — श्री कृष्ण का गाँव।",                 e:"Nandgaon is just 8 km from here — Lord Krishna's village."},
+  {h:"Barsana से Mathura 42 km है।",                                                  e:"Mathura is 42 km from Barsana."},
+]},
+{id:"loc-fatehpur",group:"location",name:"Fatehpur Sikri",icon:"🏯",phrases:[
+  {h:"यह Fatehpur Sikri है — Mughal Emperor Akbar की राजधानी।",                    e:"This is Fatehpur Sikri — the capital of Mughal Emperor Akbar."},
+  {h:"यह UNESCO World Heritage Site है।",                                             e:"This is a UNESCO World Heritage Site."},
+  {h:"Buland Darwaza यहाँ का सबसे बड़ा दरवाज़ा है।",                               e:"Buland Darwaza is the largest gate here."},
+  {h:"Salim Chishti की Dargah यहाँ बहुत famous है।",                                e:"The Dargah of Salim Chishti is very famous here."},
+  {h:"Ticket counter आगे है — मैं parking में रहूंगा।",                              e:"The ticket counter is ahead. I will be in the parking."},
+  {h:"यहाँ guide available है, अगर चाहिए तो बताएं।",                               e:"A guide is available here. Please let me know if you need one."},
+  {h:"यहाँ से Agra वापस 38 km है।",                                                  e:"Agra is 38 km back from here."},
+]},
+{id:"loc-bharatpur",group:"location",name:"Bharatpur & Deeg",icon:"🦅",phrases:[
+  {h:"यह Bharatpur Bird Sanctuary (Keoladeo) है — UNESCO World Heritage Site।",     e:"This is Bharatpur Bird Sanctuary — a UNESCO World Heritage Site."},
+  {h:"यहाँ सर्दियों में Siberian Cranes आते हैं।",                                  e:"Siberian Cranes come here in winter."},
+  {h:"यहाँ cycling और cycle-rickshaw से घूमते हैं।",                                e:"You can explore here by cycling or cycle-rickshaw."},
+  {h:"Deeg Palace बहुत सुंदर है — यहाँ से 35 km दूर।",                             e:"Deeg Palace is very beautiful — 35 km from here."},
+  {h:"Bharatpur से Agra 55 km है।",                                                   e:"Agra is 55 km from Bharatpur."},
+  {h:"यहाँ का Kalakand और Khurchan बहुत famous है।",                                 e:"Kalakand and Khurchan sweets are very famous here."},
+]},
+{id:"loc-govardhan",group:"location",name:"Govardhan & Gokul",icon:"⛰️",phrases:[
+  {h:"यह Govardhan है — Giriraj Parvat, जो भगवान कृष्ण ने उठाया था।",             e:"This is Govardhan — the Giriraj Mountain lifted by Lord Krishna."},
+  {h:"यहाँ Govardhan Parikrama होती है — लगभग 21 km।",                              e:"The Govardhan Parikrama is done here — approximately 21 km."},
+  {h:"Manasi Ganga यहाँ की पवित्र झील है।",                                         e:"Manasi Ganga is the sacred lake here."},
+  {h:"Gokul यहाँ से 15 km दूर है — यहाँ श्री कृष्ण बड़े हुए।",                   e:"Gokul is 15 km from here — where Lord Krishna grew up."},
+  {h:"यहाँ से Mathura 22 km है।",                                                     e:"Mathura is 22 km from here."},
+]},
+{id:"loc-delhi",group:"location",name:"Delhi Route",icon:"🏙️",phrases:[
+  {h:"हम Yamuna Expressway से Delhi जाएंगे।",                                        e:"We will go to Delhi via the Yamuna Expressway."},
+  {h:"Agra से Delhi लगभग 200 km है — करीब 3-4 घंटे।",                               e:"Delhi is approximately 200 km from Agra — about 3 to 4 hours."},
+  {h:"Delhi में कौन सा area जाना है?",                                                e:"Which area in Delhi do you need to go to?"},
+  {h:"Delhi airport के कौन से terminal पर जाना है?",                                 e:"Which terminal of Delhi airport do you need?"},
+  {h:"रास्ते में Mathura और Vrindavan भी आता है — रुकना है?",                       e:"Mathura and Vrindavan come on the way. Would you like to stop?"},
+  {h:"रास्ते में अच्छा restaurant आएगा, lunch कर सकते हैं।",                        e:"There is a good restaurant on the way. We can have lunch there."},
+]},
+{id:"loc-jaipur",group:"location",name:"Jaipur Route",icon:"🏰",phrases:[
+  {h:"Agra से Jaipur 240 km है — लगभग 4-5 घंटे का सफर।",                           e:"Jaipur is 240 km from Agra — approximately 4 to 5 hours."},
+  {h:"हम NH-21 से जाएंगे — Golden Triangle Highway।",                                e:"We will go via NH-21 — the Golden Triangle Highway."},
+  {h:"रास्ते में Fatehpur Sikri आता है — रुकना है?",                                 e:"Fatehpur Sikri comes on the way. Would you like to stop?"},
+  {h:"Bharatpur Bird Sanctuary भी रास्ते में है।",                                   e:"Bharatpur Bird Sanctuary also comes on the way."},
+  {h:"Jaipur में कहाँ जाना है — City Palace, Amber Fort, या hotel?",                e:"Where in Jaipur — City Palace, Amber Fort, or hotel?"},
+  {h:"क्या रात Jaipur में रुकेंगे या वापस आएंगे?",                                  e:"Will you stay in Jaipur at night or return?"},
+]},
+{id:"loc-firozabad",group:"location",name:"Firozabad & Nearby",icon:"💎",phrases:[
+  {h:"यह Firozabad है — glass और bangles के लिए famous।",                           e:"This is Firozabad — famous for glass and bangles."},
+  {h:"यहाँ handmade glass bangles बहुत famous हैं।",                                 e:"Handmade glass bangles are very famous here."},
+  {h:"यहाँ glass factory visit की जा सकती है।",                                     e:"A glass factory visit can be arranged here."},
+  {h:"Firozabad से Agra सिर्फ 40 km दूर है।",                                       e:"Agra is just 40 km from Firozabad."},
+]},
+/* ── COORDINATION ────────────────────────────────────────── */
+{id:"coord-office",group:"collab",name:"Driver ↔ Office",icon:"📋",phrases:[
+  {h:"मैंने tourist को pick up कर लिया है।",                                          e:"I have picked up the tourists."},
+  {h:"Tourist अभी Taj Mahal में हैं — 1 घंटे में वापस आएंगे।",                     e:"The tourists are at the Taj Mahal. They will be back in 1 hour."},
+  {h:"Trip सही चल रही है, कोई problem नहीं।",                                        e:"The trip is going smoothly. No problems."},
+  {h:"गाड़ी में technical problem है — दूसरी गाड़ी भेजिए।",                         e:"There is a technical problem. Please send another car."},
+  {h:"Tourist का hotel check-in हो गया है।",                                          e:"The tourist's hotel check-in is done."},
+  {h:"Tourist ने payment कर दी है।",                                                  e:"The tourist has made the payment."},
+  {h:"एक tourist की तबियत ठीक नहीं — क्या करें?",                                  e:"One tourist is not feeling well. What should I do?"},
+  {h:"Route change करना है — confirm करें।",                                          e:"I need to change the route. Please confirm."},
+  {h:"Trip complete हो गई है, सब ठीक रहा।",                                          e:"The trip is complete. Everything went well."},
+  {h:"Tourist airport पहुँच गए हैं।",                                                 e:"The tourists have reached the airport."},
+]},
+{id:"coord-guide-intro",group:"collab",name:"Guide Introduction",icon:"🎙️",phrases:[
+  {h:"यह आपके guide हैं — ये आपको पूरी जानकारी देंगे।",                             e:"This is your guide. They will give you all the information."},
+  {h:"Guide बहुत experienced हैं और English में बात कर सकते हैं।",                  e:"The guide is very experienced and can speak in English."},
+  {h:"Guide आपके साथ अंदर जाएंगे — मैं parking में रहूंगा।",                        e:"The guide will go inside with you. I will wait in the parking."},
+  {h:"Guide की fee पहले से confirm हो चुकी है।",                                     e:"The guide's fee has already been confirmed."},
+  {h:"अगर guide की ज़रूरत नहीं, तो कोई बात नहीं।",                                 e:"If you do not need a guide, that is fine."},
+  {h:"यह official licensed guide है।",                                                 e:"This is an official licensed guide."},
+  {h:"Guide 2 घंटे में पूरी जगह दिखाएंगे।",                                         e:"The guide will show you the entire place in 2 hours."},
+]},
+{id:"coord-guide-timing",group:"collab",name:"Guide Timing",icon:"⏱️",phrases:[
+  {h:"Guide यहाँ कितने बजे तक रहेंगे?",                                              e:"Until what time will the guide be here?"},
+  {h:"क्या guide को extra time के लिए book किया जा सकता है?",                       e:"Can the guide be booked for extra time?"},
+  {h:"मैं [time] बजे यहाँ वापस आऊंगा।",                                              e:"I will return here at [time]."},
+  {h:"Guide का काम खत्म होने के बाद मुझे call करें।",                               e:"Please call me when the guide's work is finished."},
+  {h:"अगला stop [location] है — वहाँ guide नहीं होंगे।",                            e:"The next stop is [location]. There will be no guide there."},
+  {h:"अगर कोई problem हो तो तुरंत call करें।",                                       e:"If there is any problem, please call immediately."},
+]},
+{id:"coord-agent",group:"collab",name:"Driver ↔ Travel Agent",icon:"🏢",phrases:[
+  {h:"Tourist की booking confirm है — किस hotel में है?",                             e:"The tourist's booking is confirmed. Which hotel are they in?"},
+  {h:"Tour itinerary क्या है — आज कहाँ-कहाँ जाना है?",                              e:"What is the tour itinerary for today?"},
+  {h:"क्या tourist के साथ कोई special requirement है?",                              e:"Are there any special requirements for the tourist?"},
+  {h:"Entrance fees किसे pay करनी हैं — tourist या agency?",                        e:"Who pays the entrance fees — tourist or agency?"},
+  {h:"Tourist की flight/train कब है — drop time confirm करें।",                     e:"When is the tourist's flight or train? Please confirm drop time."},
+  {h:"आज का report कब भेजूं?",                                                       e:"When should I send today's report?"},
+]},
+{id:"coord-hotel",group:"collab",name:"Driver ↔ Hotel",icon:"🏩",phrases:[
+  {h:"मैं Padma Shree Travels का driver हूँ — tourist लाया हूँ।",                   e:"I am a driver from Padma Shree Travels. I have brought the tourists."},
+  {h:"इनकी booking किस नाम से है?",                                                   e:"Under what name is their booking?"},
+  {h:"क्या room ready है?",                                                            e:"Is the room ready?"},
+  {h:"Tourist का सामान reception पर रख सकते हैं?",                                   e:"Can the tourist's luggage be kept at the reception?"},
+  {h:"Check-in time क्या है?",                                                         e:"What is the check-in time?"},
+  {h:"Tourist को early check-in की ज़रूरत है।",                                      e:"The tourist needs an early check-in."},
+  {h:"क्या hotel से cab/auto arrange हो सकती है?",                                   e:"Can a cab or auto be arranged from the hotel?"},
+]},
+];
+
+/* ============================================================
+   STATE
+   ============================================================ */
+let activeGroup = 'trip';
+let activeCat   = 'all';
+let query       = '';
+
+/* ============================================================
+   STICKY POSITION UPDATER (FIX 2 — no hardcoded top:57px)
+   ============================================================ */
+function updateStickyPositions() {
+  const hdr  = document.getElementById('hdr');
+  const tabs = document.getElementById('group-tabs');
+  const hH   = hdr  ? hdr.offsetHeight  : 56;
+  const tH   = tabs ? tabs.offsetHeight : 44;
+  const root = document.documentElement;
+  root.style.setProperty('--hdr-h',       hH + 'px');
+  root.style.setProperty('--tabs-h',       tH + 'px');
+  root.style.setProperty('--content-top', (hH + tH) + 'px');
+}
+
+/* ============================================================
+   BACK TO TOP (FIX 7)
+   ============================================================ */
+window.addEventListener('scroll', () => {
+  const btn = document.getElementById('back-top');
+  if (window.scrollY > 280) btn.classList.add('visible');
+  else                        btn.classList.remove('visible');
+}, { passive: true });
+
+/* ============================================================
+   HAPTIC FEEDBACK (FIX 11)
+   ============================================================ */
+function vibrate(ms = 8) {
+  if (navigator.vibrate) navigator.vibrate(ms);
+}
+
+/* ============================================================
+   SPEECH SYNTHESIS
+   ============================================================ */
+const CAN_SPEAK = 'speechSynthesis' in window;
+
+function speakText(text, lang, btn) {
+  if (!CAN_SPEAK) { toast('Speaker not supported on this browser'); return; }
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang  = lang || 'en-IN';
+  u.rate  = 0.88;
+  u.pitch = 1.0;
+  u.volume = 1.0;
+  vibrate(10);
+  if (btn) {
+    const orig = btn.innerHTML;
+    btn.classList.add('speaking');
+    btn.innerHTML = btn.innerHTML.replace(/Speak\s*(English|हिंदी|हि)/i, '⏹ Speaking…');
+    const done = () => { btn.classList.remove('speaking'); btn.innerHTML = orig; };
+    u.onend = done; u.onerror = done;
+    /* iOS workaround — resume on page visibility */
+    const resume = () => { if (window.speechSynthesis.paused) window.speechSynthesis.resume(); };
+    document.addEventListener('visibilitychange', resume, {once:true});
+  }
+  window.speechSynthesis.speak(u);
+}
+
+/* ============================================================
+   HELPERS
+   ============================================================ */
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._to);
+  t._to = setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+function copyText(text, msg) {
+  vibrate();
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(() => toast(msg)).catch(() => fbCopy(text, msg));
+  } else { fbCopy(text, msg); }
+}
+
+function fbCopy(text, msg) {
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.cssText = 'position:fixed;top:-9999px;opacity:0';
+  document.body.appendChild(ta);
+  ta.focus(); ta.select();
+  try { document.execCommand('copy'); toast(msg); } catch(e) { toast('Copy failed'); }
+  document.body.removeChild(ta);
+}
+
+function showOverlay(en, hi) {
+  vibrate(12);
+  document.getElementById('ov-en').textContent = en;
+  document.getElementById('ov-hi').textContent = hi;
+  document.getElementById('overlay').classList.add('on');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeOverlay() {
+  document.getElementById('overlay').classList.remove('on');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeOverlay(); });
+
+/* ============================================================
+   RESULT COUNT (FIX 8)
+   ============================================================ */
+function updateResultCount(total, q) {
+  const rc = document.getElementById('result-count');
+  if (q && total >= 0) {
+    rc.textContent = total === 0
+      ? 'No phrases found'
+      : total + ' phrase' + (total === 1 ? '' : 's') + ' found';
+    rc.style.display = 'block';
+  } else {
+    rc.style.display = 'none';
+  }
+}
+
+/* ============================================================
+   CARD BUILDER (FIX 2: 2-row button layout)
+   ============================================================ */
+function cardClass(catId, group) {
+  if (catId === 'emergency') return 'emerg';
+  if (group === 'location')  return 'loc';
+  if (group === 'collab')    return 'coord';
+  return '';
+}
+
+/* ── Quick Mode card (Most Used) — 2 buttons only ── */
+function makeQuickCard(p) {
+  const d = document.createElement('div'); d.className = 'quick-card';
+
+  const ph = document.createElement('div'); ph.className = 'qc-hindi';   ph.textContent = p.h;
+  const pe = document.createElement('div'); pe.className = 'qc-english'; pe.textContent = p.e;
+
+  const btns = document.createElement('div'); btns.className = 'qc-btns';
+
+  const bSpeak = document.createElement('button');
+  bSpeak.className = 'cbtn cbtn-speak-xl';
+  bSpeak.innerHTML = '🔊&nbsp; Speak English';
+  bSpeak.setAttribute('aria-label', 'Speak English: ' + p.e);
+  bSpeak.addEventListener('click', () => speakText(p.e, 'en-IN', bSpeak));
+
+  const bShow = document.createElement('button');
+  bShow.className = 'cbtn cbtn-showbig-full';
+  bShow.innerHTML = '👁&nbsp; Show Big';
+  bShow.setAttribute('aria-label', 'Show to tourist: ' + p.e);
+  bShow.addEventListener('click', () => showOverlay(p.e, p.h));
+
+  btns.appendChild(bSpeak); btns.appendChild(bShow);
+  d.appendChild(ph); d.appendChild(pe); d.appendChild(btns);
+  return d;
+}
+
+/* ── Regular phrase card — full action set ── */
+function makeCard(p, catId, group, muClass) {
+  const d = document.createElement('div');
+  d.className = 'phrase-card ' + (muClass || cardClass(catId, group));
+
+  const ph = document.createElement('div'); ph.className = 'p-hindi';   ph.textContent = p.h;
+  const pe = document.createElement('div'); pe.className = 'p-english'; pe.textContent = p.e;
+
+  /* Row 1: PRIMARY — Speak English */
+  const bSpeak = document.createElement('button');
+  bSpeak.className = 'cbtn cbtn-speak';
+  bSpeak.innerHTML = '🔊&nbsp; Speak English';
+  bSpeak.setAttribute('aria-label', 'Speak English: ' + p.e);
+  bSpeak.addEventListener('click', () => speakText(p.e, 'en-IN', bSpeak));
+
+  /* Row 2: secondary actions */
+  const row2 = document.createElement('div'); row2.className = 'card-row2';
+
+  const bShow = document.createElement('button');
+  bShow.className = 'cbtn cbtn-showbig';
+  bShow.innerHTML = '👁&nbsp; Show Big';
+  bShow.setAttribute('aria-label', 'Show to tourist: ' + p.e);
+  bShow.addEventListener('click', () => showOverlay(p.e, p.h));
+
+  const bCpEn = document.createElement('button');
+  bCpEn.className = 'cbtn cbtn-copy-en';
+  bCpEn.textContent = 'Copy EN';
+  bCpEn.addEventListener('click', () => copyText(p.e, 'English copied ✓'));
+
+  const bCpHi = document.createElement('button');
+  bCpHi.className = 'cbtn cbtn-copy-hi';
+  bCpHi.textContent = 'Copy HI';
+  bCpHi.addEventListener('click', () => copyText(p.h, 'Hindi copied ✓'));
+
+  const bSpHi = document.createElement('button');
+  bSpHi.className = 'cbtn cbtn-speak-hi';
+  bSpHi.innerHTML = '🔊&nbsp;हि';
+  bSpHi.setAttribute('aria-label', 'Speak Hindi: ' + p.h);
+  bSpHi.addEventListener('click', () => speakText(p.h, 'hi-IN', bSpHi));
+
+  row2.appendChild(bShow); row2.appendChild(bCpEn);
+  row2.appendChild(bCpHi); row2.appendChild(bSpHi);
+
+  d.appendChild(ph); d.appendChild(pe);
+  d.appendChild(bSpeak); d.appendChild(row2);
+  return d;
+}
+
+/* ============================================================
+   RENDER
+   ============================================================ */
+function render() {
+  if (activeGroup === 'words') { renderWords(); return; }
+  const content = document.getElementById('content');
+  content.innerHTML = '';
+  let total = 0;
+  const q = query.toLowerCase();
+
+  /* Most Used — trip tab, all cats, no search */
+  if (activeGroup === 'trip' && activeCat === 'all' && !q) {
+    const sec = document.createElement('div');
+    sec.id = 'most-used';
+    const lbl = document.createElement('div'); lbl.className = 'sec-label';
+    const badge = document.createElement('span'); badge.className = 'sec-badge'; badge.textContent = 'Quick Lines';
+    const title = document.createElement('span'); title.className = 'sec-title'; title.textContent = 'Most Used Phrases';
+    lbl.appendChild(badge); lbl.appendChild(title); sec.appendChild(lbl);
+    const desc = document.createElement('p'); desc.className = 'sec-desc';
+    desc.textContent = 'Tap "Show to Tourist" to display full-screen English text';
+    sec.appendChild(desc);
+    MOST_USED.forEach(p => sec.appendChild(makeQuickCard(p)));
+    const div = document.createElement('div'); div.className = 'grp-divider'; sec.appendChild(div);
+    content.appendChild(sec);
+  }
+
+  CATS.forEach(cat => {
+    if (cat.group !== activeGroup) return;
+    if (activeCat !== 'all' && cat.id !== activeCat) return;
+
+    const matched = cat.phrases.filter(p => {
+      if (!q) return true;
+      return p.h.toLowerCase().includes(q) || p.e.toLowerCase().includes(q) || cat.name.toLowerCase().includes(q);
+    });
+    if (!matched.length) return;
+    total += matched.length;
+
+    const grp = document.createElement('div');
+    grp.id = 'cat-' + cat.id;
+
+    /* Sticky category heading (FIX 17) */
+    const hd = document.createElement('div'); hd.className = 'cat-heading';
+    const ic = document.createElement('div');
+    ic.className = 'cat-heading__icon'
+      + (cat.id.startsWith('loc-') ? ' loc' : cat.group === 'collab' ? ' coord' : cat.id === 'emergency' ? ' emerg' : '');
+    ic.textContent = cat.icon;
+    const nm = document.createElement('span'); nm.className = 'cat-heading__name'; nm.textContent = cat.name;
+    const ln = document.createElement('div'); ln.className = 'cat-heading__line';
+    hd.appendChild(ic); hd.appendChild(nm); hd.appendChild(ln);
+    grp.appendChild(hd);
+
+    matched.forEach(p => grp.appendChild(makeCard(p, cat.id, cat.group)));
+    content.appendChild(grp);
+  });
+
+  /* Cross-tab search fallback */
+  if (!total && q) {
+    CATS.forEach(cat => {
+      if (cat.group === activeGroup) return;
+      const matched = cat.phrases.filter(p =>
+        p.h.toLowerCase().includes(q) || p.e.toLowerCase().includes(q)
+      );
+      if (!matched.length) return;
+      total += matched.length;
+
+      const grp = document.createElement('div'); grp.id = 'cat-' + cat.id;
+      const hd = document.createElement('div'); hd.className = 'cat-heading';
+      const ic = document.createElement('div');
+      ic.className = 'cat-heading__icon'
+        + (cat.group === 'location' ? ' loc' : cat.group === 'collab' ? ' coord' : '');
+      ic.textContent = cat.icon;
+      const nm = document.createElement('span'); nm.className = 'cat-heading__name'; nm.textContent = cat.name;
+      const ln = document.createElement('div'); ln.className = 'cat-heading__line';
+      hd.appendChild(ic); hd.appendChild(nm); hd.appendChild(ln);
+      grp.appendChild(hd);
+      matched.forEach(p => grp.appendChild(makeCard(p, cat.id, cat.group)));
+      content.appendChild(grp);
+    });
+  }
+
+  /* FIX 8: result count */
+  updateResultCount(total, q);
+  document.getElementById('no-results').style.display = (!total && q) ? 'block' : 'none';
+}
+
+/* ============================================================
+   PILLS — with phrase counts + active pill scroll (FIX 9+10)
+   ============================================================ */
+function buildPills(group) {
+  if (group === 'words') { buildWordPills(); return; }
+  const wrap = document.getElementById('cat-pills');
+  wrap.innerHTML = '';
+
+  const all = document.createElement('button');
+  all.className = 'cat-pill active';
+  const totalAll = CATS.filter(c => c.group === group).reduce((s, c) => s + c.phrases.length, 0);
+  all.innerHTML = 'All <span class="pill-count">· ' + totalAll + '</span>';
+  all.addEventListener('click', () => setCat('all', all));
+  wrap.appendChild(all);
+
+  CATS.filter(c => c.group === group).forEach(cat => {
+    const b = document.createElement('button');
+    b.className = 'cat-pill';
+    b.dataset.catId = cat.id;
+    b.innerHTML = cat.icon + ' ' + cat.name + ' <span class="pill-count">· ' + cat.phrases.length + '</span>';
+    b.addEventListener('click', () => setCat(cat.id, b));
+    wrap.appendChild(b);
+  });
+}
+
+function setCat(id, btn) {
+  activeCat = id;
+  document.querySelectorAll('.cat-pill').forEach(b => b.classList.remove('active'));
+  if (btn) {
+    btn.classList.add('active');
+    /* FIX 9: scroll active pill into view */
+    btn.scrollIntoView({ inline: 'nearest', block: 'nearest', behavior: 'smooth' });
+  }
+  render();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ============================================================
+   GROUP TABS
+   ============================================================ */
+function setGroup(group, btn) {
+  activeGroup = group;
+  activeCat   = 'all';
+  query       = '';
+  wordQuery   = '';
+  document.querySelectorAll('.gtab').forEach(b => {
+    b.classList.remove('active');
+    b.setAttribute('aria-selected', 'false');
+  });
+  if (btn) { btn.classList.add('active'); btn.setAttribute('aria-selected', 'true'); }
+
+  const isWords = (group === 'words');
+  /* toggle phrase UI vs word UI */
+  document.getElementById('phrase-search-wrap').style.display  = isWords ? 'none' : '';
+  document.getElementById('phrase-pills-wrap').style.display   = isWords ? 'none' : '';
+  document.getElementById('result-count').style.display        = 'none';
+  document.getElementById('word-search-wrap').style.display    = isWords ? '' : 'none';
+  document.getElementById('word-pills-wrap').style.display     = isWords ? '' : 'none';
+  document.getElementById('az-strip').style.display            = isWords ? '' : 'none';
+  document.getElementById('word-result-count').style.display   = 'none';
+  document.getElementById('emer-btn').style.display            = isWords ? 'none' : '';
+  document.getElementById('no-results').style.display          = 'none';
+  document.getElementById('no-word-results').style.display     = 'none';
+  /* clear both search inputs */
+  document.getElementById('search').value       = '';
+  document.getElementById('word-search').value  = '';
+
+  buildPills(group);
+  render();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ============================================================
+   SEARCH (FIX 14)
+   ============================================================ */
+function onSearch() {
+  query = document.getElementById('search').value.trim();
+  render();
+}
+
+/* ============================================================
+   EMERGENCY
+   ============================================================ */
+function goEmergency() {
+  if (activeGroup !== 'trip') {
+    setGroup('trip', document.querySelector('.gtab'));
+  }
+  setTimeout(() => {
+    const el = document.getElementById('cat-emergency');
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 100);
+}
+
+/* ============================================================
+   WORD DICTIONARY — DATA
+   ============================================================ */
+let wordQuery    = '';
+let activeWordCat = 'all';
+let activeWordLetter = 'all';
+
+const WORD_CATS = [
+  {id:'basic',     name:'Basic Communication', icon:'💬'},
+  {id:'vehicle',   name:'Vehicle & Transport',  icon:'🚗'},
+  {id:'places',    name:'Places & Locations',   icon:'📍'},
+  {id:'payment',   name:'Money & Payment',      icon:'💳'},
+  {id:'time',      name:'Time & Days',           icon:'🕐'},
+  {id:'direction', name:'Directions',            icon:'🧭'},
+  {id:'comfort',   name:'Comfort & Feelings',   icon:'😊'},
+  {id:'food',      name:'Food & Water',          icon:'🍽️'},
+  {id:'tourism',   name:'Tourism & Tickets',     icon:'🎫'},
+  {id:'religion',  name:'Religion & Pilgrimage', icon:'🛕'},
+  {id:'shopping',  name:'Shopping & Prices',     icon:'🛍️'},
+  {id:'emergency', name:'Emergency Words',        icon:'🚨'},
+  {id:'agra',      name:'Agra & Key Places',     icon:'🕌'},
+];
+
+/* e=English, h=Hindi, p=Pronunciation (Romanized), cat=category id */
+const WORDS = [
+/* ── BASIC COMMUNICATION ──────────────────────────────────── */
+  {e:'Hello',          h:'नमस्ते',          p:'Namaste',          cat:'basic'},
+  {e:'Welcome',        h:'स्वागत है',        p:'Swaagat hai',      cat:'basic'},
+  {e:'Thank you',      h:'धन्यवाद',          p:'Dhanyavaad',       cat:'basic'},
+  {e:'Please',         h:'कृपया',            p:'Kripaya',          cat:'basic'},
+  {e:'Sorry',          h:'माफ़ करें',         p:'Maaf karein',      cat:'basic'},
+  {e:'Yes',            h:'हाँ',              p:'Haan',             cat:'basic'},
+  {e:'No',             h:'नहीं',             p:'Nahin',            cat:'basic'},
+  {e:'Okay',           h:'ठीक है',           p:'Theek hai',        cat:'basic'},
+  {e:'Come',           h:'आइए',             p:'Aaiye',            cat:'basic'},
+  {e:'Go',             h:'जाइए',            p:'Jaaiye',           cat:'basic'},
+  {e:'Wait',           h:'रुकिए',            p:'Rukiye',           cat:'basic'},
+  {e:'Help',           h:'मदद',             p:'Madad',            cat:'basic'},
+  {e:'Good',           h:'अच्छा',            p:'Achha',            cat:'basic'},
+  {e:'Problem',        h:'समस्या',           p:'Samasya',          cat:'basic'},
+  {e:'Ready',          h:'तैयार',            p:'Taiyaar',          cat:'basic'},
+  {e:'Here',           h:'यहाँ',             p:'Yahaan',           cat:'basic'},
+  {e:'There',          h:'वहाँ',             p:'Vahaan',           cat:'basic'},
+  {e:'Now',            h:'अभी',              p:'Abhi',             cat:'basic'},
+  {e:'Later',          h:'बाद में',           p:'Baad mein',        cat:'basic'},
+  {e:'Understand',     h:'समझ गया',          p:'Samajh gaya',      cat:'basic'},
+  {e:'Repeat',         h:'फिर बोलिए',        p:'Phir boliye',      cat:'basic'},
+  {e:'Safe',           h:'सुरक्षित',          p:'Surakshit',        cat:'basic'},
+
+/* ── VEHICLE & TRANSPORT ──────────────────────────────────── */
+  {e:'Car / Cab',      h:'गाड़ी / कैब',       p:'Gaadi / Cab',      cat:'vehicle'},
+  {e:'Driver',         h:'ड्राइवर',           p:'Driver',           cat:'vehicle'},
+  {e:'Seat',           h:'सीट',              p:'Seat',             cat:'vehicle'},
+  {e:'Seat belt',      h:'सीट बेल्ट',         p:'Seat belt',        cat:'vehicle'},
+  {e:'AC',             h:'एयर कंडीशनर',       p:'Air conditioner',  cat:'vehicle'},
+  {e:'Window',         h:'खिड़की',            p:'Khidki',           cat:'vehicle'},
+  {e:'Door',           h:'दरवाज़ा',           p:'Darwaaza',         cat:'vehicle'},
+  {e:'Boot / Trunk',   h:'डिक्की',            p:'Dikki',            cat:'vehicle'},
+  {e:'Parking',        h:'पार्किंग',           p:'Parking',          cat:'vehicle'},
+  {e:'Traffic',        h:'ट्रैफिक',            p:'Traffic',          cat:'vehicle'},
+  {e:'Route',          h:'रास्ता',            p:'Raasta',           cat:'vehicle'},
+  {e:'Fuel / Petrol',  h:'पेट्रोल',           p:'Petrol',           cat:'vehicle'},
+  {e:'Toll',           h:'टोल',              p:'Toll',             cat:'vehicle'},
+  {e:'Luggage',        h:'सामान',            p:'Saamaan',          cat:'vehicle'},
+  {e:'Tyre',           h:'टायर',             p:'Tyre',             cat:'vehicle'},
+  {e:'Petrol pump',    h:'पेट्रोल पंप',        p:'Petrol pump',      cat:'vehicle'},
+  {e:'Expressway',     h:'एक्सप्रेसवे',         p:'Expressway',       cat:'vehicle'},
+  {e:'Highway',        h:'हाईवे',             p:'Highway',          cat:'vehicle'},
+  {e:'Shortcut',       h:'शॉर्टकट',            p:'Shortcut',         cat:'vehicle'},
+  {e:'Breakdown',      h:'गाड़ी खराब',          p:'Gaadi kharaab',    cat:'vehicle'},
+
+/* ── PLACES & LOCATIONS ───────────────────────────────────── */
+  {e:'Hotel',          h:'होटल',             p:'Hotel',            cat:'places'},
+  {e:'Airport',        h:'हवाई अड्डा',         p:'Hawai adda',       cat:'places'},
+  {e:'Railway station',h:'रेलवे स्टेशन',       p:'Railway station',   cat:'places'},
+  {e:'Temple',         h:'मंदिर',             p:'Mandir',           cat:'places'},
+  {e:'Mosque',         h:'मस्जिद',            p:'Masjid',           cat:'places'},
+  {e:'Fort',           h:'किला',              p:'Kila',             cat:'places'},
+  {e:'Garden / Park',  h:'बाग / पार्क',         p:'Baag / Park',      cat:'places'},
+  {e:'Market / Bazar', h:'बाज़ार',             p:'Bazaar',           cat:'places'},
+  {e:'Hospital',       h:'अस्पताल',            p:'Aspatal',          cat:'places'},
+  {e:'Pharmacy',       h:'दवाई की दुकान',       p:'Dawai ki dukaan',  cat:'places'},
+  {e:'ATM',            h:'एटीएम',             p:'ATM',              cat:'places'},
+  {e:'Restaurant',     h:'रेस्टोरेंट',           p:'Restaurant',       cat:'places'},
+  {e:'Washroom',       h:'शौचालय',            p:'Shauchalay',       cat:'places'},
+  {e:'Ticket counter', h:'टिकट काउंटर',        p:'Ticket counter',   cat:'places'},
+  {e:'Gate / Entry',   h:'गेट / प्रवेश',        p:'Gate / Pravesh',   cat:'places'},
+  {e:'Reception',      h:'रिसेप्शन',            p:'Reception',        cat:'places'},
+  {e:'Police station', h:'पुलिस थाना',          p:'Police thana',     cat:'places'},
+  {e:'Bank',           h:'बैंक',              p:'Bank',             cat:'places'},
+  {e:'Ghat',           h:'घाट',              p:'Ghaat',            cat:'places'},
+  {e:'Museum',         h:'संग्रहालय',           p:'Sangrahalay',      cat:'places'},
+
+/* ── MONEY & PAYMENT ──────────────────────────────────────── */
+  {e:'Cash',           h:'नकद',              p:'Nakad',            cat:'payment'},
+  {e:'UPI',            h:'यूपीआई',            p:'UPI',              cat:'payment'},
+  {e:'Card',           h:'कार्ड',             p:'Card',             cat:'payment'},
+  {e:'Payment',        h:'भुगतान',            p:'Bhugtaan',         cat:'payment'},
+  {e:'Fare',           h:'किराया',            p:'Kiraya',           cat:'payment'},
+  {e:'Bill / Receipt', h:'बिल / रसीद',         p:'Bill / Raseed',    cat:'payment'},
+  {e:'Charge',         h:'शुल्क',             p:'Shulk',            cat:'payment'},
+  {e:'Discount',       h:'छूट',              p:'Chhoot',           cat:'payment'},
+  {e:'Change (coins)', h:'खुल्ले पैसे',         p:'Khulle paise',     cat:'payment'},
+  {e:'Rupee (₹)',      h:'रुपया',             p:'Rupaya',           cat:'payment'},
+  {e:'Expensive',      h:'महंगा',             p:'Mehanga',          cat:'payment'},
+  {e:'Cheap',          h:'सस्ता',             p:'Sasta',            cat:'payment'},
+  {e:'Free',           h:'मुफ़्त',             p:'Muft',             cat:'payment'},
+  {e:'Round trip',     h:'आना-जाना',           p:'Aana-jaana',       cat:'payment'},
+  {e:'Package',        h:'पैकेज',             p:'Package',          cat:'payment'},
+  {e:'Waiting charge', h:'प्रतीक्षा शुल्क',      p:'Prateeksha shulk', cat:'payment'},
+  {e:'No extra charge',h:'कोई extra charge नहीं',p:'Koi extra charge nahin',cat:'payment'},
+  {e:'Fixed price',    h:'तय क़ीमत',           p:'Tay qeemat',       cat:'payment'},
+
+/* ── TIME & DAYS ──────────────────────────────────────────── */
+  {e:'Minute',         h:'मिनट',             p:'Minute',           cat:'time'},
+  {e:'Hour',           h:'घंटा',             p:'Ghanta',           cat:'time'},
+  {e:'Morning',        h:'सुबह',             p:'Subah',            cat:'time'},
+  {e:'Afternoon',      h:'दोपहर',            p:'Dopahar',          cat:'time'},
+  {e:'Evening',        h:'शाम',              p:'Shaam',            cat:'time'},
+  {e:'Night',          h:'रात',              p:'Raat',             cat:'time'},
+  {e:'Today',          h:'आज',              p:'Aaj',              cat:'time'},
+  {e:'Tomorrow',       h:'कल',              p:'Kal',              cat:'time'},
+  {e:'Early',          h:'जल्दी',            p:'Jaldi',            cat:'time'},
+  {e:'Late',           h:'देर',              p:'Der',              cat:'time'},
+  {e:'Sunday',         h:'रविवार',            p:'Ravivaar',         cat:'time'},
+  {e:'Monday',         h:'सोमवार',            p:'Somvaar',          cat:'time'},
+  {e:'Tuesday',        h:'मंगलवार',           p:'Mangalvaar',       cat:'time'},
+  {e:'Wednesday',      h:'बुधवार',            p:'Budhvaar',         cat:'time'},
+  {e:'Thursday',       h:'गुरुवार',            p:'Guruvaar',         cat:'time'},
+  {e:'Friday',         h:'शुक्रवार',           p:'Shukravaar',       cat:'time'},
+  {e:'Saturday',       h:'शनिवार',            p:'Shanivaar',        cat:'time'},
+
+/* ── DIRECTIONS ───────────────────────────────────────────── */
+  {e:'Left',           h:'बाईं ओर',           p:'Baayin or',        cat:'direction'},
+  {e:'Right',          h:'दाईं ओर',           p:'Daayin or',        cat:'direction'},
+  {e:'Straight',       h:'सीधे',             p:'Seedhe',           cat:'direction'},
+  {e:'Stop',           h:'रुकिए',             p:'Rukiye',           cat:'direction'},
+  {e:'Near',           h:'पास',              p:'Paas',             cat:'direction'},
+  {e:'Far',            h:'दूर',              p:'Door',             cat:'direction'},
+  {e:'Front / Ahead',  h:'आगे',              p:'Aage',             cat:'direction'},
+  {e:'Back / Behind',  h:'पीछे',             p:'Peeche',           cat:'direction'},
+  {e:'Up / Upstairs',  h:'ऊपर',              p:'Oopar',            cat:'direction'},
+  {e:'Down / Below',   h:'नीचे',             p:'Neeche',           cat:'direction'},
+  {e:'U-turn',         h:'यू-टर्न',           p:'U-turn',           cat:'direction'},
+  {e:'Crossroads',     h:'चौराहा',            p:'Chauraaha',        cat:'direction'},
+  {e:'Traffic signal', h:'सिग्नल',            p:'Signal',           cat:'direction'},
+
+/* ── COMFORT & FEELINGS ───────────────────────────────────── */
+  {e:'Hot',            h:'गर्म',              p:'Garam',            cat:'comfort'},
+  {e:'Cold',           h:'ठंडा',             p:'Thanda',           cat:'comfort'},
+  {e:'Comfortable',    h:'आरामदायक',          p:'Araamdayak',       cat:'comfort'},
+  {e:'Tired',          h:'थका हुआ',           p:'Thaka hua',        cat:'comfort'},
+  {e:'Hungry',         h:'भूखा',             p:'Bhookha',          cat:'comfort'},
+  {e:'Thirsty',        h:'प्यासा',            p:'Pyaasa',           cat:'comfort'},
+  {e:'Fast',           h:'तेज़',              p:'Tez',              cat:'comfort'},
+  {e:'Slow',           h:'धीरे',             p:'Dheere',           cat:'comfort'},
+  {e:'Quiet',          h:'शांत',             p:'Shaant',           cat:'comfort'},
+  {e:'Loud',           h:'तेज़ आवाज़',          p:'Tez aawaaz',       cat:'comfort'},
+  {e:'Sick / Unwell',  h:'बीमार',            p:'Beemaar',          cat:'comfort'},
+  {e:'Better',         h:'बेहतर',             p:'Behtar',           cat:'comfort'},
+  {e:'Happy',          h:'खुश',              p:'Khush',            cat:'comfort'},
+  {e:'Worried',        h:'चिंतित',            p:'Chintit',          cat:'comfort'},
+
+/* ── FOOD & WATER ─────────────────────────────────────────── */
+  {e:'Water',          h:'पानी',             p:'Paani',            cat:'food'},
+  {e:'Tea',            h:'चाय',              p:'Chaay',            cat:'food'},
+  {e:'Coffee',         h:'कॉफ़ी',             p:'Coffee',           cat:'food'},
+  {e:'Food / Meal',    h:'खाना',             p:'Khaana',           cat:'food'},
+  {e:'Lunch',          h:'दोपहर का खाना',     p:'Dopahar ka khaana',cat:'food'},
+  {e:'Dinner',         h:'रात का खाना',       p:'Raat ka khaana',   cat:'food'},
+  {e:'Breakfast',      h:'नाश्ता',            p:'Naashta',          cat:'food'},
+  {e:'Vegetarian',     h:'शाकाहारी',          p:'Shaakaahaari',     cat:'food'},
+  {e:'Non-vegetarian', h:'मांसाहारी',          p:'Maansaahaari',     cat:'food'},
+  {e:'Spicy',          h:'मसालेदार',          p:'Masaaledaar',      cat:'food'},
+  {e:'Sweet',          h:'मीठा',             p:'Meetha',           cat:'food'},
+  {e:'Restaurant',     h:'रेस्टोरेंट',          p:'Restaurant',       cat:'food'},
+  {e:'Washroom',       h:'शौचालय',            p:'Shauchalay',       cat:'food'},
+  {e:'Allergy',        h:'एलर्जी',            p:'Allergy',          cat:'food'},
+
+/* ── TOURISM & TICKETS ────────────────────────────────────── */
+  {e:'Ticket',         h:'टिकट',             p:'Ticket',           cat:'tourism'},
+  {e:'Entry',          h:'प्रवेश',            p:'Pravesh',          cat:'tourism'},
+  {e:'Guide',          h:'गाइड',             p:'Guide',            cat:'tourism'},
+  {e:'Photo',          h:'फ़ोटो',             p:'Photo',            cat:'tourism'},
+  {e:'Camera',         h:'कैमरा',             p:'Camera',           cat:'tourism'},
+  {e:'Monument',       h:'स्मारक',            p:'Smarak',           cat:'tourism'},
+  {e:'Heritage site',  h:'विरासत स्थल',        p:'Viraasat sthal',   cat:'tourism'},
+  {e:'Sunrise',        h:'सूर्योदय',           p:'Suryoday',         cat:'tourism'},
+  {e:'Sunset',         h:'सूर्यास्त',           p:'Suryast',          cat:'tourism'},
+  {e:'View',           h:'दृश्य',             p:'Drishya',          cat:'tourism'},
+  {e:'Famous',         h:'प्रसिद्ध',           p:'Prasiddh',         cat:'tourism'},
+  {e:'History',        h:'इतिहास',            p:'Itihaas',          cat:'tourism'},
+  {e:'UNESCO',         h:'यूनेस्को',           p:'UNESCO',           cat:'tourism'},
+  {e:'Souvenir',       h:'यादगार चीज़',         p:'Yaadgaar cheez',   cat:'tourism'},
+  {e:'Booking',        h:'बुकिंग',            p:'Booking',          cat:'tourism'},
+
+/* ── RELIGION & PILGRIMAGE ────────────────────────────────── */
+  {e:'Temple',         h:'मंदिर',             p:'Mandir',           cat:'religion'},
+  {e:'Darshan',        h:'दर्शन',             p:'Darshan',          cat:'religion'},
+  {e:'Prayer',         h:'प्रार्थना',           p:'Praarthna',        cat:'religion'},
+  {e:'Prasad',         h:'प्रसाद',             p:'Prasaad',          cat:'religion'},
+  {e:'Aarti',          h:'आरती',             p:'Aarti',            cat:'religion'},
+  {e:'Puja',           h:'पूजा',              p:'Pooja',            cat:'religion'},
+  {e:'Ghat',           h:'घाट',              p:'Ghaat',            cat:'religion'},
+  {e:'Pilgrimage',     h:'तीर्थ यात्रा',        p:'Teerth Yatra',     cat:'religion'},
+  {e:'Bhajan',         h:'भजन',              p:'Bhajan',           cat:'religion'},
+  {e:'Holy',           h:'पवित्र',            p:'Pavitra',          cat:'religion'},
+  {e:'Donation',       h:'दान',              p:'Daan',             cat:'religion'},
+  {e:'Remove shoes',   h:'जूते उतारें',         p:'Joote utaarein',   cat:'religion'},
+  {e:'Silence',        h:'मौन / शांति',         p:'Maun / Shaanti',   cat:'religion'},
+  {e:'Circumambulation',h:'परिक्रमा',           p:'Parikrama',        cat:'religion'},
+  {e:'Head covering',  h:'सिर ढकना',           p:'Sir dhakna',       cat:'religion'},
+
+/* ── SHOPPING & PRICES ────────────────────────────────────── */
+  {e:'Price',          h:'क़ीमत',             p:'Qeemat',           cat:'shopping'},
+  {e:'Marble',         h:'संगमरमर',           p:'Sangmarmar',       cat:'shopping'},
+  {e:'Leather',        h:'चमड़ा',             p:'Chamda',           cat:'shopping'},
+  {e:'Bargain',        h:'मोल-भाव',           p:'Mol bhaav',        cat:'shopping'},
+  {e:'Quality',        h:'गुणवत्ता',           p:'Gunvatta',         cat:'shopping'},
+  {e:'Original',       h:'असली',             p:'Asli',             cat:'shopping'},
+  {e:'Fake',           h:'नकली',             p:'Nakli',            cat:'shopping'},
+  {e:'Craft',          h:'हस्तकला',           p:'Hastakala',        cat:'shopping'},
+  {e:'Emporium',       h:'एम्पोरियम',           p:'Emporium',         cat:'shopping'},
+  {e:'Fixed price',    h:'निश्चित मूल्य',        p:'Nishchit moolya',  cat:'shopping'},
+  {e:'No pressure',    h:'कोई मजबूरी नहीं',      p:'Koi majboori nahin',cat:'shopping'},
+  {e:'Petha (sweet)',  h:'पेठा',              p:'Petha',            cat:'shopping'},
+
+/* ── EMERGENCY WORDS ──────────────────────────────────────── */
+  {e:'Police',         h:'पुलिस',             p:'Police',           cat:'emergency'},
+  {e:'Ambulance',      h:'एम्बुलेंस',           p:'Ambulance',        cat:'emergency'},
+  {e:'Doctor',         h:'डॉक्टर',            p:'Doctor',           cat:'emergency'},
+  {e:'Hospital',       h:'अस्पताल',            p:'Aspatal',          cat:'emergency'},
+  {e:'Emergency',      h:'आपातकाल',           p:'Aapatkal',         cat:'emergency'},
+  {e:'Help',           h:'मदद',              p:'Madad',            cat:'emergency'},
+  {e:'Accident',       h:'दुर्घटना',           p:'Durghatan',        cat:'emergency'},
+  {e:'Sick',           h:'बीमार',            p:'Beemaar',          cat:'emergency'},
+  {e:'Pain',           h:'दर्द',              p:'Dard',             cat:'emergency'},
+  {e:'Safe',           h:'सुरक्षित',           p:'Surakshit',        cat:'emergency'},
+  {e:'Calm down',      h:'शांत रहें',           p:'Shaant rahein',    cat:'emergency'},
+  {e:'Fire',           h:'आग',              p:'Aag',              cat:'emergency'},
+  {e:'Police (100)',   h:'पुलिस 100',          p:'Police 100',       cat:'emergency'},
+  {e:'Ambulance (108)',h:'एम्बुलेंस 108',        p:'Ambulance 108',    cat:'emergency'},
+
+/* ── AGRA & KEY PLACES ────────────────────────────────────── */
+  {e:'Taj Mahal',      h:'ताज महल',           p:'Taj Mahal',        cat:'agra'},
+  {e:'Agra Fort',      h:'आगरा किला',          p:'Agra Kila',        cat:'agra'},
+  {e:'Baby Taj',       h:'बेबी ताज',           p:'Baby Taj',         cat:'agra'},
+  {e:'Mehtab Bagh',    h:'मेहताब बाग',          p:'Mehtab Baag',      cat:'agra'},
+  {e:'Fatehpur Sikri', h:'फतेहपुर सीकरी',        p:'Fatehpur Sikri',   cat:'agra'},
+  {e:'Mathura',        h:'मथुरा',             p:'Mathura',          cat:'agra'},
+  {e:'Vrindavan',      h:'वृंदावन',            p:'Vrindavan',        cat:'agra'},
+  {e:'Barsana',        h:'बरसाना',            p:'Barsana',          cat:'agra'},
+  {e:'Govardhan',      h:'गोवर्धन',            p:'Govardhan',        cat:'agra'},
+  {e:'Gokul',         h:'गोकुल',             p:'Gokul',            cat:'agra'},
+  {e:'Bharatpur',      h:'भरतपुर',            p:'Bharatpur',        cat:'agra'},
+  {e:'Delhi',         h:'दिल्ली',             p:'Dilli',            cat:'agra'},
+  {e:'Jaipur',        h:'जयपुर',             p:'Jaipur',           cat:'agra'},
+  {e:'Banke Bihari',   h:'बांके बिहारी',        p:'Banke Bihari',     cat:'agra'},
+  {e:'ISKCON',        h:'इस्कॉन',             p:'ISKCON',           cat:'agra'},
+  {e:'Prem Mandir',    h:'प्रेम मंदिर',          p:'Prem Mandir',      cat:'agra'},
+  {e:'Yamuna River',   h:'यमुना नदी',           p:'Yamuna Nadi',      cat:'agra'},
+  {e:'Vishram Ghat',   h:'विश्राम घाट',          p:'Vishram Ghaat',    cat:'agra'},
+  {e:'Akbar\'s Tomb',  h:'अकबर का मकबरा',        p:'Akbar ka maqbara', cat:'agra'},
+  {e:'Sikandra',       h:'सिकंदरा',            p:'Sikandaraa',       cat:'agra'},
+];
+
+/* ============================================================
+   WORD DICTIONARY — FUNCTIONS
+   ============================================================ */
+
+function makeWordCard(w) {
+  const d  = document.createElement('div');
+  d.className = 'word-card';
+
+  /* left: word content */
+  const left = document.createElement('div'); left.style.cssText = 'min-width:0;flex:1';
+  const top  = document.createElement('div'); top.className = 'word-top';
+  const en   = document.createElement('span'); en.className = 'word-en'; en.textContent = w.e;
+  const sep  = document.createElement('span'); sep.className = 'word-sep'; sep.textContent = '·';
+  const hi   = document.createElement('span'); hi.className = 'word-hi'; hi.textContent = w.h;
+  top.appendChild(en); top.appendChild(sep); top.appendChild(hi);
+  const pr = document.createElement('div'); pr.className = 'word-pron'; pr.textContent = w.p;
+  left.appendChild(top); left.appendChild(pr);
+
+  /* right: speaker icon — indicates card is tappable */
+  const icon = document.createElement('span');
+  icon.className = 'word-speak-icon'; icon.textContent = '🔊';
+
+  d.appendChild(left); d.appendChild(icon);
+
+  /* tap the card → speak English */
+  d.style.cursor = 'pointer';
+  d.setAttribute('role', 'button');
+  d.setAttribute('tabindex', '0');
+  d.setAttribute('aria-label', 'Tap to speak: ' + w.e);
+  d.addEventListener('click', () => {
+    speakText(w.e, 'en-IN');
+    d.classList.add('speaking');
+    vibrate(8);
+    setTimeout(() => d.classList.remove('speaking'), 2200);
+  });
+  d.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') d.click(); });
+
+  return d;
+}
+
+function buildWordPills() {
+  const wrap = document.getElementById('word-cat-pills');
+  wrap.innerHTML = '';
+
+  const allBtn = document.createElement('button');
+  allBtn.className = 'cat-pill' + (activeWordCat === 'all' ? ' active' : '');
+  allBtn.innerHTML = 'All <span class="pill-count">· ' + WORDS.length + '</span>';
+  allBtn.addEventListener('click', () => setWordCat('all', allBtn));
+  wrap.appendChild(allBtn);
+
+  WORD_CATS.forEach(cat => {
+    const count = WORDS.filter(w => w.cat === cat.id).length;
+    const b = document.createElement('button');
+    b.className = 'cat-pill' + (activeWordCat === cat.id ? ' active' : '');
+    b.innerHTML = cat.icon + ' ' + cat.name + ' <span class="pill-count">· ' + count + '</span>';
+    b.addEventListener('click', () => setWordCat(cat.id, b));
+    wrap.appendChild(b);
+  });
+
+  buildAZStrip();
+}
+
+function setWordCat(id, btn) {
+  activeWordCat    = id;
+  activeWordLetter = 'all';
+  /* reset A-Z */
+  document.querySelectorAll('.az-btn').forEach(b => b.classList.remove('active'));
+  const allAz = document.querySelector('.az-btn[data-letter="all"]');
+  if (allAz) allAz.classList.add('active');
+
+  document.querySelectorAll('#word-cat-pills .cat-pill').forEach(b => b.classList.remove('active'));
+  if (btn) {
+    btn.classList.add('active');
+    btn.scrollIntoView({ inline: 'nearest', block: 'nearest', behavior: 'smooth' });
+  }
+  renderWords();
+}
+
+function buildAZStrip() {
+  const strip = document.getElementById('az-strip');
+  strip.innerHTML = '';
+
+  const allBtn = document.createElement('button');
+  allBtn.className = 'az-btn active'; allBtn.textContent = 'All';
+  allBtn.dataset.letter = 'all';
+  allBtn.addEventListener('click', () => setWordLetter('all', allBtn));
+  strip.appendChild(allBtn);
+
+  const letters = [...new Set(WORDS.map(w => w.e[0].toUpperCase()))].sort();
+  letters.forEach(l => {
+    const b = document.createElement('button');
+    b.className = 'az-btn'; b.textContent = l; b.dataset.letter = l;
+    b.addEventListener('click', () => setWordLetter(l, b));
+    strip.appendChild(b);
+  });
+}
+
+function setWordLetter(letter, btn) {
+  activeWordLetter = letter;
+  activeWordCat    = 'all';
+  /* reset category pills */
+  document.querySelectorAll('#word-cat-pills .cat-pill').forEach(b => b.classList.remove('active'));
+  const allPill = document.querySelector('#word-cat-pills .cat-pill');
+  if (allPill) allPill.classList.add('active');
+
+  document.querySelectorAll('.az-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  renderWords();
+}
+
+function onWordSearch() {
+  wordQuery        = document.getElementById('word-search').value.trim();
+  activeWordCat    = 'all';
+  activeWordLetter = 'all';
+  /* reset pills + A-Z */
+  document.querySelectorAll('#word-cat-pills .cat-pill').forEach(b => b.classList.remove('active'));
+  const allPill = document.querySelector('#word-cat-pills .cat-pill');
+  if (allPill) allPill.classList.add('active');
+  document.querySelectorAll('.az-btn').forEach(b => b.classList.remove('active'));
+  const allAz = document.querySelector('.az-btn[data-letter="all"]');
+  if (allAz) allAz.classList.add('active');
+  renderWords();
+}
+
+function renderWords() {
+  const content = document.getElementById('content');
+  content.innerHTML = '';
+  document.getElementById('no-results').style.display     = 'none';
+  document.getElementById('no-word-results').style.display = 'none';
+
+  const q = wordQuery.toLowerCase();
+
+  let filtered = WORDS.filter(w => {
+    if (activeWordCat !== 'all' && w.cat !== activeWordCat) return false;
+    if (activeWordLetter !== 'all' && w.e[0].toUpperCase() !== activeWordLetter) return false;
+    if (!q) return true;
+    return w.e.toLowerCase().includes(q) || w.h.includes(q) || w.p.toLowerCase().includes(q);
+  });
+
+  /* group by category for display when browsing all */
+  const showGrouped = (activeWordCat === 'all' && activeWordLetter === 'all' && !q);
+
+  if (showGrouped) {
+    WORD_CATS.forEach(cat => {
+      const catWords = filtered.filter(w => w.cat === cat.id);
+      if (!catWords.length) return;
+
+      const grp = document.createElement('div');
+      const hd  = document.createElement('div'); hd.className = 'cat-heading';
+      const ic  = document.createElement('div'); ic.className = 'cat-heading__icon'; ic.textContent = cat.icon;
+      const nm  = document.createElement('span'); nm.className = 'cat-heading__name'; nm.textContent = cat.name;
+      const ln  = document.createElement('div'); ln.className = 'cat-heading__line';
+      hd.appendChild(ic); hd.appendChild(nm); hd.appendChild(ln);
+      grp.appendChild(hd);
+      catWords.forEach(w => grp.appendChild(makeWordCard(w)));
+      content.appendChild(grp);
+    });
+  } else {
+    filtered.forEach(w => content.appendChild(makeWordCard(w)));
+  }
+
+  /* result count */
+  const rc = document.getElementById('word-result-count');
+  if (q || activeWordCat !== 'all' || activeWordLetter !== 'all') {
+    rc.textContent = filtered.length + ' word' + (filtered.length === 1 ? '' : 's') + ' found';
+    rc.style.display = 'block';
+  } else {
+    rc.textContent = WORDS.length + ' words in ' + WORD_CATS.length + ' categories';
+    rc.style.display = 'block';
+  }
+
+  document.getElementById('no-word-results').style.display = (!filtered.length && q) ? 'block' : 'none';
+}
+
+/* ============================================================
+   INIT
+   ============================================================ */
+buildPills('trip');
+render();
+updateStickyPositions();
+/* Re-measure on resize (orientation change, keyboard open/close) */
+window.addEventListener('resize', updateStickyPositions, { passive: true });
+
+/* ============================================================
+   PWA — Service Worker Registration
+   ============================================================ */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('/driver-app/sw.js', { scope: '/driver-app/' })
+      .catch(function(error) {
+        console.warn('Driver Helper service worker registration failed:', error);
+      });
+  });
+}
+
+/* ============================================================
+   PWA — Install Prompt (beforeinstallprompt)
+   ============================================================ */
+(function () {
+  var deferredPrompt = null;
+  var bar = document.getElementById('pwa-install-bar');
+  var btn = document.getElementById('pwa-install-btn');
+
+  window.addEventListener('beforeinstallprompt', function (e) {
+    e.preventDefault();
+    deferredPrompt = e;
+    if (bar) bar.style.display = 'flex';
+  });
+
+  if (btn) {
+    btn.addEventListener('click', function () {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then(function () {
+        deferredPrompt = null;
+        if (bar) bar.style.display = 'none';
+      });
+    });
+  }
+
+  window.addEventListener('appinstalled', function () {
+    deferredPrompt = null;
+    if (bar) bar.style.display = 'none';
+  });
+}());
+</script>
+</body>
+</html>

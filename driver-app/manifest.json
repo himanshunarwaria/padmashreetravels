@@ -1,0 +1,43 @@
+{
+  "name": "Padma Shree Driver Helper",
+  "short_name": "Driver Helper",
+  "description": "Hindi-English communication tool for Padma Shree Travels drivers",
+  "start_url": "/driver-app/",
+  "scope": "/driver-app/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#B8943A",
+  "background_color": "#FAF9F6",
+  "lang": "hi",
+  "categories": ["utilities", "travel"],
+  "icons": [
+    {
+      "src": "/driver-app/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/driver-app/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/driver-app/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/driver-app/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/driver-app/icons/icon-maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}

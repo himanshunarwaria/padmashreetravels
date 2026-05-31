@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PST Driver Helper — Icon Generator</title>
+<style>
+  body { font-family: -apple-system, 'Segoe UI', sans-serif; padding: 24px; background: #f5f3ee; color: #222; max-width: 700px; margin: 0 auto; }
+  h1 { color: #B8943A; font-size: 1.4rem; margin-bottom: 4px; }
+  .subtitle { color: #888; font-size: .85rem; margin-bottom: 20px; }
+  .note { background: #FFF8EC; border: 1.5px solid #B8943A; border-radius: 10px; padding: 14px 16px; margin-bottom: 24px; font-size: .85rem; line-height: 1.6; }
+  .note code { background: rgba(184,148,58,.12); padding: 1px 6px; border-radius: 4px; font-size: .82rem; }
+  .icons-row { display: flex; gap: 32px; flex-wrap: wrap; align-items: flex-start; }
+  .icon-item { text-align: center; }
+  .icon-item canvas { display: block; border-radius: 16px; box-shadow: 0 4px 16px rgba(0,0,0,.18); margin-bottom: 10px; }
+  .icon-item p { font-size: .8rem; font-weight: 600; color: #555; margin: 0 0 8px; }
+  .download-btn {
+    display: inline-block; background: #B8943A; color: white;
+    border: none; border-radius: 999px; padding: 8px 18px;
+    font-size: .8rem; font-weight: 700; cursor: pointer;
+    text-decoration: none; font-family: inherit;
+    transition: background .15s;
+  }
+  .download-btn:hover { background: #9a7c2e; }
+  .step { background: white; border-radius: 10px; padding: 14px 16px; margin-top: 24px; font-size: .85rem; line-height: 1.7; border: 1px solid #e8e0cc; }
+  .step strong { color: #B8943A; }
+</style>
+</head>
+<body>
+
+<h1>PST Driver Helper — Icon Generator</h1>
+<p class="subtitle">Generate PNG icons for the PWA. Open this file in Google Chrome on your computer.</p>
+
+<div class="note">
+  <strong>Instructions:</strong><br>
+  1. Click each <strong>Download</strong> button below to download the PNG file.<br>
+  2. Save each file to the <code>driver-app/icons/</code> folder with the exact filename shown.<br>
+  3. After saving all three icons, the PWA will be fully installable with proper icons.
+</div>
+
+<div class="icons-row" id="icons-row"></div>
+
+<div class="step">
+  <strong>Step-by-step for deployment:</strong><br>
+  After downloading the PNGs, upload them to your server at:<br>
+  <code>https://padmashreetravels.in/driver-app/icons/icon-192.png</code><br>
+  <code>https://padmashreetravels.in/driver-app/icons/icon-512.png</code><br>
+  <code>https://padmashreetravels.in/driver-app/icons/icon-maskable-512.png</code>
+</div>
+
+<script>
+const GOLD_TOP    = '#C8A84A';
+const GOLD_BOTTOM = '#8a6c2a';
+const WHITE       = '#FFFFFF';
+
+function drawIcon(ctx, size, maskable) {
+  const s = size;
+  const cx = s / 2;
+
+  // ── Background ──
+  const grad = ctx.createLinearGradient(0, 0, 0, s);
+  grad.addColorStop(0, GOLD_TOP);
+  grad.addColorStop(1, GOLD_BOTTOM);
+
+  if (!maskable) {
+    // Rounded square (same radius ratio as the SVG: 92/512 ≈ 18%)
+    const r = Math.round(s * 0.18);
+    ctx.beginPath();
+    ctx.moveTo(r, 0);
+    ctx.lineTo(s - r, 0); ctx.quadraticCurveTo(s, 0, s, r);
+    ctx.lineTo(s, s - r); ctx.quadraticCurveTo(s, s, s - r, s);
+    ctx.lineTo(r, s);     ctx.quadraticCurveTo(0, s, 0, s - r);
+    ctx.lineTo(0, r);     ctx.quadraticCurveTo(0, 0, r, 0);
+    ctx.closePath();
+    ctx.fillStyle = grad;
+    ctx.fill();
+  } else {
+    // Full-bleed for maskable
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, s, s);
+  }
+
+  // ── Top highlight ──
+  ctx.save();
+  ctx.globalAlpha = 0.07;
+  ctx.fillStyle = WHITE;
+  if (!maskable) {
+    // match rounded clip
+    const r = Math.round(s * 0.18);
+    ctx.beginPath();
+    ctx.moveTo(r, 0); ctx.lineTo(s - r, 0); ctx.quadraticCurveTo(s, 0, s, r);
+    ctx.lineTo(s, s / 2); ctx.lineTo(0, s / 2); ctx.lineTo(0, r);
+    ctx.quadraticCurveTo(0, 0, r, 0); ctx.closePath();
+    ctx.fill();
+  } else {
+    ctx.fillRect(0, 0, s, s / 2);
+  }
+  ctx.restore();
+
+  // ── Decorative ring ──
+  ctx.beginPath();
+  ctx.arc(cx, cx, s * 0.375, 0, Math.PI * 2);
+  ctx.strokeStyle = 'rgba(255,255,255,0.10)';
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+
+  // ── "PST" text ──
+  const pstSize = Math.round(s * (maskable ? 0.336 : 0.367));
+  ctx.font = `900 ${pstSize}px "Arial Black", Impact, sans-serif`;
+  ctx.fillStyle = WHITE;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'alphabetic';
+  ctx.fillText('PST', cx, s * (maskable ? 0.595 : 0.61));
+
+  // ── Divider ──
+  const lineW = s * 0.44;
+  const lineY = s * (maskable ? 0.672 : 0.682);
+  ctx.fillStyle = 'rgba(255,255,255,0.35)';
+  ctx.fillRect(cx - lineW / 2, lineY, lineW, Math.max(1.5, s * 0.006));
+
+  // ── "DRIVER" ──
+  const driverSize = Math.round(s * 0.094);
+  ctx.font = `700 ${driverSize}px Arial, sans-serif`;
+  ctx.fillStyle = 'rgba(255,255,255,0.78)';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('DRIVER', cx, s * (maskable ? 0.748 : 0.758));
+
+  // ── "HELPER" ──
+  const helperSize = Math.round(s * 0.066);
+  ctx.font = `500 ${helperSize}px Arial, sans-serif`;
+  ctx.fillStyle = 'rgba(255,255,255,0.46)';
+  ctx.fillText('HELPER', cx, s * (maskable ? 0.838 : 0.845));
+
+  // ── Small accent dot ──
+  ctx.beginPath();
+  ctx.arc(cx, s * (maskable ? 0.165 : 0.168), s * 0.023, 0, Math.PI * 2);
+  ctx.fillStyle = 'rgba(255,255,255,0.22)';
+  ctx.fill();
+}
+
+const specs = [
+  { id: 'c192',  size: 192, maskable: false, filename: 'icon-192.png',         label: '192×192 Regular' },
+  { id: 'c512',  size: 512, maskable: false, filename: 'icon-512.png',         label: '512×512 Regular' },
+  { id: 'cm512', size: 512, maskable: true,  filename: 'icon-maskable-512.png', label: '512×512 Maskable' },
+];
+
+const row = document.getElementById('icons-row');
+
+specs.forEach(spec => {
+  const item = document.createElement('div');
+  item.className = 'icon-item';
+
+  const canvas = document.createElement('canvas');
+  canvas.id = spec.id;
+  canvas.width  = spec.size;
+  canvas.height = spec.size;
+  // Display at 128px regardless of actual size
+  canvas.style.width  = '128px';
+  canvas.style.height = '128px';
+
+  const p = document.createElement('p');
+  p.textContent = spec.filename;
+
+  const btn = document.createElement('a');
+  btn.className = 'download-btn';
+  btn.textContent = 'Download';
+  btn.href = '#';
+  btn.addEventListener('click', e => {
+    e.preventDefault();
+    const link = document.createElement('a');
+    link.download = spec.filename;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  });
+
+  item.appendChild(canvas);
+  item.appendChild(p);
+  item.appendChild(btn);
+  row.appendChild(item);
+});
+
+// Draw after layout (fonts should be ready)
+requestAnimationFrame(() => {
+  specs.forEach(spec => {
+    const canvas = document.getElementById(spec.id);
+    const ctx = canvas.getContext('2d');
+    drawIcon(ctx, spec.size, spec.maskable);
+  });
+});
+</script>
+</body>
+</html>
