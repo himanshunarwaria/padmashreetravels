@@ -326,21 +326,6 @@ body{font-family:var(--ff);font-size:16px;line-height:1.6;color:var(--g700);
 .word-sep{color:var(--g300);font-weight:300;font-size:.9rem}
 .word-pron{font-size:.78rem;color:var(--g400);font-style:italic;margin-bottom:.85rem}
 
-/* word buttons — single row, same as phrase card pattern */
-.word-btns{display:flex;gap:.35rem;align-items:stretch;margin-top:.65rem}
-.wbtn{padding:.68rem .7rem;border-radius:var(--rp);border:none;
-      font-size:.78rem;font-weight:600;font-family:var(--ff);
-      cursor:pointer;white-space:nowrap;
-      transition:background var(--t),box-shadow var(--t),transform var(--t);
-      -webkit-user-select:none;user-select:none;
-      min-height:42px;display:flex;align-items:center;justify-content:center;gap:.2rem}
-.wbtn:active{transform:scale(.94)}
-.wbtn-en{flex:0 0 auto;background:var(--black);color:var(--white)}
-.wbtn-en:hover{background:var(--g800)}
-.wbtn-hi{flex:0 0 auto;background:var(--white);color:var(--g600);border:1.5px solid var(--g200)}
-.wbtn-hi:hover{border-color:var(--g700);color:var(--black)}
-.wbtn-show{flex:1;background:var(--gold);color:var(--white);font-size:.82rem}
-.wbtn-show:hover{background:#a67e2a;box-shadow:0 4px 12px rgba(184,148,58,.28)}
 
 /* word-count bar */
 #word-result-count{display:none;padding:.3rem 1rem .1rem;
@@ -1343,16 +1328,12 @@ const WORDS = [
   {e:'Hotel',          h:'होटल',             p:'Hotel',            cat:'places'},
   {e:'Airport',        h:'हवाई अड्डा',         p:'Hawai adda',       cat:'places'},
   {e:'Railway station',h:'रेलवे स्टेशन',       p:'Railway station',   cat:'places'},
-  {e:'Temple',         h:'मंदिर',             p:'Mandir',           cat:'places'},
   {e:'Mosque',         h:'मस्जिद',            p:'Masjid',           cat:'places'},
   {e:'Fort',           h:'किला',              p:'Kila',             cat:'places'},
   {e:'Garden / Park',  h:'बाग / पार्क',         p:'Baag / Park',      cat:'places'},
   {e:'Market / Bazar', h:'बाज़ार',             p:'Bazaar',           cat:'places'},
-  {e:'Hospital',       h:'अस्पताल',            p:'Aspatal',          cat:'places'},
   {e:'Pharmacy',       h:'दवाई की दुकान',       p:'Dawai ki dukaan',  cat:'places'},
   {e:'ATM',            h:'एटीएम',             p:'ATM',              cat:'places'},
-  {e:'Restaurant',     h:'रेस्टोरेंट',           p:'Restaurant',       cat:'places'},
-  {e:'Washroom',       h:'शौचालय',            p:'Shauchalay',       cat:'places'},
   {e:'Ticket counter', h:'टिकट काउंटर',        p:'Ticket counter',   cat:'places'},
   {e:'Gate / Entry',   h:'गेट / प्रवेश',        p:'Gate / Pravesh',   cat:'places'},
   {e:'Reception',      h:'रिसेप्शन',            p:'Reception',        cat:'places'},
