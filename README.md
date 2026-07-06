@@ -23,7 +23,7 @@ Static website + Netlify Functions booking and payment system for Padma Shree Tr
 ```
 .
 ├── book/index.html                  ← Payment-enabled booking page (/book/)
-├── contact.html                     ← Contact/enquiry page
+├── contact/index.html               ← Contact/enquiry page (/contact/)
 ├── blog/                            ← Blog articles with ?route= CTA links
 ├── js/
 │   ├── main.js                      ← Existing site JS (nav, FAQ, etc.)

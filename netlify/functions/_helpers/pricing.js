@@ -48,47 +48,47 @@ const ROUTES = {
   'agra-to-aligarh': {
     label: 'Agra to Aligarh',
     amount: 3000,
-    duration: 'One way',
+    duration: 'Round trip',
   },
   'agra-to-hathras': {
     label: 'Agra to Hathras',
     amount: 2000,
-    duration: 'One way',
+    duration: 'Round trip',
   },
   'agra-to-sirsaganj': {
     label: 'Agra to Sirsaganj',
     amount: 3000,
-    duration: 'One way',
+    duration: 'Round trip',
   },
   'agra-to-etawah': {
     label: 'Agra to Etawah',
     amount: 3500,
-    duration: 'One way',
+    duration: 'Round trip',
   },
   'agra-to-gwalior': {
     label: 'Agra to Gwalior',
     amount: 3000,
-    duration: 'One way',
+    duration: 'Round trip',
   },
   'agra-to-firozabad': {
     label: 'Agra to Firozabad',
     amount: 2500,
-    duration: 'One way',
+    duration: 'Round trip',
   },
   'agra-to-bateshwar': {
     label: 'Agra to Bateshwar',
     amount: 3000,
-    duration: 'One way',
+    duration: 'Round trip',
   },
   'agra-to-tundla': {
     label: 'Agra to Tundla',
     amount: 2000,
-    duration: 'One way',
+    duration: 'Round trip',
   },
   'agra-to-shikohabad': {
     label: 'Agra to Shikohabad',
     amount: 3000,
-    duration: 'One way',
+    duration: 'Round trip',
   },
 };
 

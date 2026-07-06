@@ -24,42 +24,74 @@ http://padmashreetravels.netlify.app/*   https://padmashreetravels.in/:splat  30
 # Short-alias redirects (SEO-friendly URL alternatives)
 /agra-to-vrindavan    /agra-to-vrindavan-cab/    301
 /agra-to-mathura      /agra-to-mathura-taxi/     301
+/agra-to-fatehpur-sikri-taxi     /fatehpur-sikri/    301
+/agra-to-fatehpur-sikri-taxi/*   /fatehpur-sikri/    301
 
-# .html → clean URL 301! redirects (force even when file exists)
-/agra-to-mathura-vrindavan.html    /agra-to-mathura-vrindavan    301!
-/mathura-vrindavan-barsana.html    /mathura-vrindavan-barsana    301!
-/fatehpur-sikri.html               /fatehpur-sikri               301!
-/agra-to-aligarh.html              /agra-to-aligarh              301!
-/agra-to-hathras.html              /agra-to-hathras              301!
-/agra-to-sirsaganj.html            /agra-to-sirsaganj            301!
-/agra-to-etawah.html               /agra-to-etawah               301!
-/agra-to-gwalior.html              /agra-to-gwalior              301!
-/agra-to-firozabad.html            /agra-to-firozabad            301!
-/agra-to-bateshwar.html            /agra-to-bateshwar            301!
-/agra-to-tundla.html               /agra-to-tundla               301!
-/agra-to-shikohabad.html           /agra-to-shikohabad           301!
-/contact.html                      /contact                      301!
-
-# 200 rewrites so clean flat URLs serve .html files
-/agra-to-mathura-vrindavan         /agra-to-mathura-vrindavan.html    200
-/mathura-vrindavan-barsana         /mathura-vrindavan-barsana.html    200
-/fatehpur-sikri                    /fatehpur-sikri.html               200
-/agra-to-aligarh                   /agra-to-aligarh.html              200
-/agra-to-hathras                   /agra-to-hathras.html              200
-/agra-to-sirsaganj                 /agra-to-sirsaganj.html            200
-/agra-to-etawah                    /agra-to-etawah.html               200
-/agra-to-gwalior                   /agra-to-gwalior.html              200
-/agra-to-firozabad                 /agra-to-firozabad.html            200
-/agra-to-bateshwar                 /agra-to-bateshwar.html            200
-/agra-to-tundla                    /agra-to-tundla.html               200
-/agra-to-shikohabad                /agra-to-shikohabad.html           200
-/contact                           /contact.html                      200
+# ── Trailing-slash migration (2026-07-03): these 13 pages moved from flat
+# .html files to folder/index.html, matching the folder pages above.
+# .html and non-slash legacy URLs 301 straight to the final trailing-slash URL.
+/agra-to-mathura-vrindavan.html    /agra-to-mathura-vrindavan/    301!
+/agra-to-mathura-vrindavan         /agra-to-mathura-vrindavan/    301
+/mathura-vrindavan-barsana.html    /mathura-vrindavan-barsana/    301!
+/mathura-vrindavan-barsana         /mathura-vrindavan-barsana/    301
+/fatehpur-sikri.html               /fatehpur-sikri/               301!
+/fatehpur-sikri                    /fatehpur-sikri/               301
+/agra-to-aligarh.html              /agra-to-aligarh/              301!
+/agra-to-aligarh                   /agra-to-aligarh/              301
+/agra-to-hathras.html              /agra-to-hathras/              301!
+/agra-to-hathras                   /agra-to-hathras/              301
+/agra-to-sirsaganj.html            /agra-to-sirsaganj/            301!
+/agra-to-sirsaganj                 /agra-to-sirsaganj/            301
+/agra-to-etawah.html               /agra-to-etawah/               301!
+/agra-to-etawah                    /agra-to-etawah/               301
+/agra-to-gwalior.html              /agra-to-gwalior/              301!
+/agra-to-gwalior                   /agra-to-gwalior/              301
+/agra-to-firozabad.html            /agra-to-firozabad/            301!
+/agra-to-firozabad                 /agra-to-firozabad/            301
+/agra-to-bateshwar.html            /agra-to-bateshwar/            301!
+/agra-to-bateshwar                 /agra-to-bateshwar/            301
+/agra-to-tundla.html               /agra-to-tundla/               301!
+/agra-to-tundla                    /agra-to-tundla/               301
+/agra-to-shikohabad.html           /agra-to-shikohabad/           301!
+/agra-to-shikohabad                /agra-to-shikohabad/           301
+/contact.html                      /contact/                      301!
+/contact                           /contact/                      301
 
 # 200 rewrites so folder URLs serve index.html without redirect loops
+/about/*                               /about/index.html                               200
+/agra-to-jaipur-taxi/*                 /agra-to-jaipur-taxi/index.html                 200
+/jaipur-to-agra-taxi/*                 /jaipur-to-agra-taxi/index.html                 200
+/agra-airport-taxi/*                    /agra-airport-taxi/index.html                   200
+/agra-railway-station-taxi/*            /agra-railway-station-taxi/index.html           200
+/taj-mahal-taxi/*                       /taj-mahal-taxi/index.html                      200
+/taj-mahal-sunrise-taxi/*               /taj-mahal-sunrise-taxi/index.html              200
+/agra-temple-tour-by-cab/*            /agra-temple-tour-by-cab/index.html             200
+/agra-to-mehandipur-balaji-taxi/*     /agra-to-mehandipur-balaji-taxi/index.html      200
+/agra-to-kaila-devi-temple-taxi/*     /agra-to-kaila-devi-temple-taxi/index.html      200
+/agra-karauli-kaila-devi-balaji-tour/*  /agra-karauli-kaila-devi-balaji-tour/index.html  200
+/agra-to-karauli-taxi/*               /agra-to-karauli-taxi/index.html               200
+/agra-to-govardhan-taxi/*             /agra-to-govardhan-taxi/index.html             200
+/agra-to-gokul-nandgaon-taxi/*        /agra-to-gokul-nandgaon-taxi/index.html        200
+/agra-to-bharatpur-taxi/*             /agra-to-bharatpur-taxi/index.html             200
+/agra-to-delhi-airport-taxi/*         /agra-to-delhi-airport-taxi/index.html         200
+/agra-to-rajasthan-temple-tour/*      /agra-to-rajasthan-temple-tour/index.html      200
 /agra-to-mathura-taxi/*         /agra-to-mathura-taxi/index.html   200
 /agra-to-vrindavan-cab/*        /agra-to-vrindavan-cab/index.html  200
 /agra-local-sightseeing/*       /agra-local-sightseeing/index.html 200
 /mathura-vrindavan-tour-from-agra/*  /mathura-vrindavan-tour-from-agra/index.html  200
+/agra-to-mathura-vrindavan/*    /agra-to-mathura-vrindavan/index.html    200
+/mathura-vrindavan-barsana/*    /mathura-vrindavan-barsana/index.html    200
+/fatehpur-sikri/*               /fatehpur-sikri/index.html               200
+/agra-to-aligarh/*              /agra-to-aligarh/index.html              200
+/agra-to-hathras/*              /agra-to-hathras/index.html              200
+/agra-to-sirsaganj/*             /agra-to-sirsaganj/index.html            200
+/agra-to-etawah/*                /agra-to-etawah/index.html               200
+/agra-to-gwalior/*               /agra-to-gwalior/index.html              200
+/agra-to-firozabad/*             /agra-to-firozabad/index.html            200
+/agra-to-bateshwar/*             /agra-to-bateshwar/index.html            200
+/agra-to-tundla/*                /agra-to-tundla/index.html               200
+/agra-to-shikohabad/*            /agra-to-shikohabad/index.html           200
+/contact/*                       /contact/index.html                     200
 
 # Booking page clean URL
 /book                                         /book/                                                   301
@@ -72,6 +104,16 @@ http://padmashreetravels.netlify.app/*   https://padmashreetravels.in/:splat  30
 /blog/agra-one-day-sightseeing                /blog/agra-one-day-sightseeing/                          301
 /blog/mathura-vrindavan-travel-guide          /blog/mathura-vrindavan-travel-guide/                    301
 /blog/agra-mathura-vrindavan-one-day-trip     /blog/agra-mathura-vrindavan-one-day-trip/               301
+/blog/agra-to-mehandipur-balaji-travel-guide  /blog/agra-to-mehandipur-balaji-travel-guide/            301
+/blog/kaila-devi-temple-karauli-guide         /blog/kaila-devi-temple-karauli-guide/                   301
+/blog/taj-mahal-sunrise-by-private-cab        /blog/taj-mahal-sunrise-by-private-cab/                  301
+/blog/agra-to-jaipur-taxi-route-guide         /blog/agra-to-jaipur-taxi-route-guide/                   301
+/blog/kaila-devi-mehandipur-balaji-one-day-tour-from-agra  /blog/kaila-devi-mehandipur-balaji-one-day-tour-from-agra/  301
+/blog/best-temples-in-vrindavan-by-cab        /blog/best-temples-in-vrindavan-by-cab/                  301
+/blog/agra-cantt-to-taj-mahal-taxi-guide      /blog/agra-cantt-to-taj-mahal-taxi-guide/                301
+/blog/agra-airport-taxi-guide                 /blog/agra-airport-taxi-guide/                           301
+/blog/braj-yatra-from-agra-by-cab             /blog/braj-yatra-from-agra-by-cab/                       301
+/blog/senior-citizen-temple-tours-from-agra   /blog/senior-citizen-temple-tours-from-agra/             301
 
 # Blog 200 rewrites for nested paths
 /blog/taj-mahal-visiting-guide/*              /blog/taj-mahal-visiting-guide/index.html                200
@@ -79,3 +121,13 @@ http://padmashreetravels.netlify.app/*   https://padmashreetravels.in/:splat  30
 /blog/agra-one-day-sightseeing/*              /blog/agra-one-day-sightseeing/index.html                200
 /blog/mathura-vrindavan-travel-guide/*        /blog/mathura-vrindavan-travel-guide/index.html          200
 /blog/agra-mathura-vrindavan-one-day-trip/*   /blog/agra-mathura-vrindavan-one-day-trip/index.html     200
+/blog/agra-to-mehandipur-balaji-travel-guide/*  /blog/agra-to-mehandipur-balaji-travel-guide/index.html  200
+/blog/kaila-devi-temple-karauli-guide/*         /blog/kaila-devi-temple-karauli-guide/index.html         200
+/blog/taj-mahal-sunrise-by-private-cab/*        /blog/taj-mahal-sunrise-by-private-cab/index.html        200
+/blog/agra-to-jaipur-taxi-route-guide/*         /blog/agra-to-jaipur-taxi-route-guide/index.html         200
+/blog/kaila-devi-mehandipur-balaji-one-day-tour-from-agra/*  /blog/kaila-devi-mehandipur-balaji-one-day-tour-from-agra/index.html  200
+/blog/best-temples-in-vrindavan-by-cab/*        /blog/best-temples-in-vrindavan-by-cab/index.html        200
+/blog/agra-cantt-to-taj-mahal-taxi-guide/*      /blog/agra-cantt-to-taj-mahal-taxi-guide/index.html      200
+/blog/agra-airport-taxi-guide/*                 /blog/agra-airport-taxi-guide/index.html                 200
+/blog/braj-yatra-from-agra-by-cab/*             /blog/braj-yatra-from-agra-by-cab/index.html             200
+/blog/senior-citizen-temple-tours-from-agra/*   /blog/senior-citizen-temple-tours-from-agra/index.html   200
