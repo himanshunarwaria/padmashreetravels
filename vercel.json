@@ -1,0 +1,70 @@
+{
+  "redirects": [
+    { "source": "/agra-to-mathura-taxi", "destination": "/agra-to-mathura-taxi/", "permanent": true },
+    { "source": "/agra-to-vrindavan-cab", "destination": "/agra-to-vrindavan-cab/", "permanent": true },
+    { "source": "/agra-local-sightseeing", "destination": "/agra-local-sightseeing/", "permanent": true },
+    { "source": "/mathura-vrindavan-tour-from-agra", "destination": "/mathura-vrindavan-tour-from-agra/", "permanent": true },
+
+    { "source": "/agra-to-vrindavan", "destination": "/agra-to-vrindavan-cab/", "permanent": true },
+    { "source": "/agra-to-mathura", "destination": "/agra-to-mathura-taxi/", "permanent": true },
+    { "source": "/agra-to-fatehpur-sikri-taxi", "destination": "/fatehpur-sikri/", "permanent": true },
+    { "source": "/agra-to-fatehpur-sikri-taxi/:path*", "destination": "/fatehpur-sikri/", "permanent": true },
+
+    { "source": "/agra-to-mathura-vrindavan.html", "destination": "/agra-to-mathura-vrindavan/", "permanent": true },
+    { "source": "/agra-to-mathura-vrindavan", "destination": "/agra-to-mathura-vrindavan/", "permanent": true },
+    { "source": "/mathura-vrindavan-barsana.html", "destination": "/mathura-vrindavan-barsana/", "permanent": true },
+    { "source": "/mathura-vrindavan-barsana", "destination": "/mathura-vrindavan-barsana/", "permanent": true },
+    { "source": "/fatehpur-sikri.html", "destination": "/fatehpur-sikri/", "permanent": true },
+    { "source": "/fatehpur-sikri", "destination": "/fatehpur-sikri/", "permanent": true },
+    { "source": "/agra-to-aligarh.html", "destination": "/agra-to-aligarh/", "permanent": true },
+    { "source": "/agra-to-aligarh", "destination": "/agra-to-aligarh/", "permanent": true },
+    { "source": "/agra-to-hathras.html", "destination": "/agra-to-hathras/", "permanent": true },
+    { "source": "/agra-to-hathras", "destination": "/agra-to-hathras/", "permanent": true },
+    { "source": "/agra-to-sirsaganj.html", "destination": "/agra-to-sirsaganj/", "permanent": true },
+    { "source": "/agra-to-sirsaganj", "destination": "/agra-to-sirsaganj/", "permanent": true },
+    { "source": "/agra-to-etawah.html", "destination": "/agra-to-etawah/", "permanent": true },
+    { "source": "/agra-to-etawah", "destination": "/agra-to-etawah/", "permanent": true },
+    { "source": "/agra-to-gwalior.html", "destination": "/agra-to-gwalior/", "permanent": true },
+    { "source": "/agra-to-gwalior", "destination": "/agra-to-gwalior/", "permanent": true },
+    { "source": "/agra-to-firozabad.html", "destination": "/agra-to-firozabad/", "permanent": true },
+    { "source": "/agra-to-firozabad", "destination": "/agra-to-firozabad/", "permanent": true },
+    { "source": "/agra-to-bateshwar.html", "destination": "/agra-to-bateshwar/", "permanent": true },
+    { "source": "/agra-to-bateshwar", "destination": "/agra-to-bateshwar/", "permanent": true },
+    { "source": "/agra-to-tundla.html", "destination": "/agra-to-tundla/", "permanent": true },
+    { "source": "/agra-to-tundla", "destination": "/agra-to-tundla/", "permanent": true },
+    { "source": "/agra-to-shikohabad.html", "destination": "/agra-to-shikohabad/", "permanent": true },
+    { "source": "/agra-to-shikohabad", "destination": "/agra-to-shikohabad/", "permanent": true },
+    { "source": "/contact.html", "destination": "/contact/", "permanent": true },
+    { "source": "/contact", "destination": "/contact/", "permanent": true },
+
+    { "source": "/book", "destination": "/book/", "permanent": true },
+
+    { "source": "/blog", "destination": "/blog/", "permanent": true },
+    { "source": "/blog/taj-mahal-visiting-guide", "destination": "/blog/taj-mahal-visiting-guide/", "permanent": true },
+    { "source": "/blog/best-time-to-visit-taj-mahal", "destination": "/blog/best-time-to-visit-taj-mahal/", "permanent": true },
+    { "source": "/blog/agra-one-day-sightseeing", "destination": "/blog/agra-one-day-sightseeing/", "permanent": true },
+    { "source": "/blog/mathura-vrindavan-travel-guide", "destination": "/blog/mathura-vrindavan-travel-guide/", "permanent": true },
+    { "source": "/blog/agra-mathura-vrindavan-one-day-trip", "destination": "/blog/agra-mathura-vrindavan-one-day-trip/", "permanent": true },
+    { "source": "/blog/agra-to-mehandipur-balaji-travel-guide", "destination": "/blog/agra-to-mehandipur-balaji-travel-guide/", "permanent": true },
+    { "source": "/blog/kaila-devi-temple-karauli-guide", "destination": "/blog/kaila-devi-temple-karauli-guide/", "permanent": true },
+    { "source": "/blog/taj-mahal-sunrise-by-private-cab", "destination": "/blog/taj-mahal-sunrise-by-private-cab/", "permanent": true },
+    { "source": "/blog/agra-to-jaipur-taxi-route-guide", "destination": "/blog/agra-to-jaipur-taxi-route-guide/", "permanent": true },
+    { "source": "/blog/kaila-devi-mehandipur-balaji-one-day-tour-from-agra", "destination": "/blog/kaila-devi-mehandipur-balaji-one-day-tour-from-agra/", "permanent": true },
+    { "source": "/blog/best-temples-in-vrindavan-by-cab", "destination": "/blog/best-temples-in-vrindavan-by-cab/", "permanent": true },
+    { "source": "/blog/agra-cantt-to-taj-mahal-taxi-guide", "destination": "/blog/agra-cantt-to-taj-mahal-taxi-guide/", "permanent": true },
+    { "source": "/blog/agra-airport-taxi-guide", "destination": "/blog/agra-airport-taxi-guide/", "permanent": true },
+    { "source": "/blog/braj-yatra-from-agra-by-cab", "destination": "/blog/braj-yatra-from-agra-by-cab/", "permanent": true },
+    { "source": "/blog/senior-citizen-temple-tours-from-agra", "destination": "/blog/senior-citizen-temple-tours-from-agra/", "permanent": true }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Permissions-Policy", "value": "geolocation=(), camera=(), microphone=()" }
+      ]
+    }
+  ]
+}

@@ -3,3 +3,9 @@ claude-skills/
 # Personal Claude Code skill config, unrelated to site source — was being
 # publicly deployed via publish="." with no benefit; untracked 2026-07-14.
 .agents/
+
+# Archived/superseded files kept for local recovery only — was reachable at
+# /_archive/<file> on Netlify via a 404 redirect rule (Vercel has no
+# equivalent syntax), so untracked instead. Still in git history (commit
+# 153edf1) and on local disk; nothing deleted.
+_archive/
