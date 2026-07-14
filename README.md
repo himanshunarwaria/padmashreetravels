@@ -20,15 +20,20 @@ Static website + Netlify Functions booking and payment system for Padma Shree Tr
 
 ## Project Structure
 
+> ⚠️ **Netlify publishes the repo root as-is** (`publish = "."` in `netlify.toml`, and GitHub Pages also mirrors `master` → `gh-pages`). Every top-level folder below is a **live URL path**, not just a source folder — this is why route/tour pages sit flat at root instead of under a `pages/` or `src/` folder. Do not relocate any folder listed under "Live site content" without adding a matching 301 in `_redirects` first.
+
 ```
 .
-├── book/index.html                  ← Payment-enabled booking page (/book/)
-├── contact/index.html               ← Contact/enquiry page (/contact/)
+├── index.html                       ← Homepage (/)
+├── about/, contact/, book/          ← Core pages (/about/, /contact/, /book/)
 ├── blog/                            ← Blog articles with ?route= CTA links
+├── agra-to-*/, taj-mahal-*/, ...    ← 27 tour/route landing page folders (one URL each)
+├── taj-mahal-agra-fort.html         ← Legacy flat page (see cleanup_report.md — orphaned, flagged for manual review)
 ├── js/
 │   ├── main.js                      ← Existing site JS (nav, FAQ, etc.)
 │   └── booking.js                   ← UTM capture, Razorpay checkout, GA conversion
 ├── css/style.css                    ← Site-wide styles
+├── images/                          ← Logo assets
 ├── netlify/
 │   └── functions/
 │       ├── createOrder.js           ← POST: creates Razorpay order
@@ -38,11 +43,20 @@ Static website + Netlify Functions booking and payment system for Padma Shree Tr
 │           ├── sheets.js            ← Google Sheets append helper
 │           ├── email.js             ← SendGrid customer + admin emails
 │           └── respond.js           ← HTTP response helpers
+├── crm/                             ← Internal CRM tool — not linked, disallowed in robots.txt/_redirects, staff access via direct URL only
+├── driver-app/                      ← Driver PWA (manifest + service worker — paths are scope-sensitive, do not move)
+├── driver-communication-helper.html ← Internal staff tool, direct-URL access only (see cleanup_report.md)
+├── review-helper.html               ← Internal review-request tool, reads reviews.json (see cleanup_report.md)
+├── reviews.json                     ← Data source for review-helper.html
+├── docs/                            ← Reference/planning docs (SEO growth plan, religious-pages copy draft, marketing context) — not served/linked, informational only
+├── _archive/                        ← Superseded/orphaned files kept for safety, not part of the live site (see cleanup_report.md)
 ├── netlify.toml                     ← Build + functions config
 ├── package.json                     ← npm dependencies for functions
 ├── .env.example                     ← Environment variable template
 └── _redirects                       ← Netlify URL routing rules
 ```
+
+See `cleanup_report.md` for the full file-by-file audit, what moved, and items flagged for manual review.
 
 ---
 

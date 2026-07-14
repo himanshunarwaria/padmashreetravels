@@ -1,1 +1,5 @@
 claude-skills/
+
+# Personal Claude Code skill config, unrelated to site source — was being
+# publicly deployed via publish="." with no benefit; untracked 2026-07-14.
+.agents/

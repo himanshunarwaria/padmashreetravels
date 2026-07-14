@@ -6,6 +6,10 @@
 /crm/          /    404
 # Ensures clean URLs work and legacy .html paths redirect properly
 
+# ── Internal archive — superseded/orphaned files, not part of the live site ──
+# No staff access needed here (unlike /crm/), so block the whole tree.
+/_archive/*    /    404
+
 # ── Domain canonicalisation: force all traffic to custom domain ──────────────
 # Must be FIRST so Netlify evaluates them before path-based rules.
 # The ! suffix forces redirect even when a matching file exists.
