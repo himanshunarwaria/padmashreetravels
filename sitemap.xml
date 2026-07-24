@@ -3,7 +3,7 @@
 
   <!-- Homepage -->
   <url>
-    <loc>https://padmashreetravels.in/</loc>
+    <loc>https://www.padmashreetravels.in/</loc>
     <lastmod>2026-05-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -11,7 +11,7 @@
 
   <!-- About / Entity Page -->
   <url>
-    <loc>https://padmashreetravels.in/about/</loc>
+    <loc>https://www.padmashreetravels.in/about/</loc>
     <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -19,37 +19,37 @@
 
   <!-- Money Pages Wave 2 -->
   <url>
-    <loc>https://padmashreetravels.in/agra-to-jaipur-taxi/</loc>
+    <loc>https://www.padmashreetravels.in/agra-to-jaipur-taxi/</loc>
     <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://padmashreetravels.in/jaipur-to-agra-taxi/</loc>
+    <loc>https://www.padmashreetravels.in/jaipur-to-agra-taxi/</loc>
     <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://padmashreetravels.in/agra-airport-taxi/</loc>
+    <loc>https://www.padmashreetravels.in/agra-airport-taxi/</loc>
     <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://padmashreetravels.in/agra-railway-station-taxi/</loc>
+    <loc>https://www.padmashreetravels.in/agra-railway-station-taxi/</loc>
     <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://padmashreetravels.in/taj-mahal-taxi/</loc>
+    <loc>https://www.padmashreetravels.in/taj-mahal-taxi/</loc>
     <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://padmashreetravels.in/taj-mahal-sunrise-taxi/</loc>
+    <loc>https://www.padmashreetravels.in/taj-mahal-sunrise-taxi/</loc>
     <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -57,25 +57,25 @@
 
   <!-- SEO Landing Pages (folder-based, clean URLs) -->
   <url>
-    <loc>https://padmashreetravels.in/agra-to-mathura-taxi/</loc>
+    <loc>https://www.padmashreetravels.in/agra-to-mathura-taxi/</loc>
     <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://padmashreetravels.in/agra-to-vrindavan-cab/</loc>
+    <loc>https://www.padmashreetravels.in/agra-to-vrindavan-cab/</loc>
     <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://padmashreetravels.in/agra-local-sightseeing/</loc>
+    <loc>https://www.padmashreetravels.in/agra-local-sightseeing/</loc>
     <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://padmashreetravels.in/mathura-vrindavan-tour-from-agra/</loc>
+    <loc>https://www.padmashreetravels.in/mathura-vrindavan-tour-from-agra/</loc>
     <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -83,7 +83,7 @@
 
   <!-- Booking Page -->
   <url>
-    <loc>https://padmashreetravels.in/book/</loc>
+    <loc>https://www.padmashreetravels.in/book/</loc>
     <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -91,19 +91,19 @@
 
   <!-- Hub Pages -->
   <url>
-    <loc>https://padmashreetravels.in/agra-temple-tour-by-cab/</loc>
+    <loc>https://www.padmashreetravels.in/agra-temple-tour-by-cab/</loc>
     <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://padmashreetravels.in/outstation-cabs-agra/</loc>
+    <loc>https://www.padmashreetravels.in/outstation-cabs-agra/</loc>
     <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://padmashreetravels.in/agra-to-rajasthan-temple-tour/</loc>
+    <loc>https://www.padmashreetravels.in/agra-to-rajasthan-temple-tour/</loc>
     <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -111,31 +111,31 @@
 
   <!-- Money Pages Wave 3 -->
   <url>
-    <loc>https://padmashreetravels.in/agra-to-karauli-taxi/</loc>
+    <loc>https://www.padmashreetravels.in/agra-to-karauli-taxi/</loc>
     <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://padmashreetravels.in/agra-to-govardhan-taxi/</loc>
+    <loc>https://www.padmashreetravels.in/agra-to-govardhan-taxi/</loc>
     <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://padmashreetravels.in/agra-to-gokul-nandgaon-taxi/</loc>
+    <loc>https://www.padmashreetravels.in/agra-to-gokul-nandgaon-taxi/</loc>
     <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://padmashreetravels.in/agra-to-bharatpur-taxi/</loc>
+    <loc>https://www.padmashreetravels.in/agra-to-bharatpur-taxi/</loc>
     <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://padmashreetravels.in/agra-to-delhi-airport-taxi/</loc>
+    <loc>https://www.padmashreetravels.in/agra-to-delhi-airport-taxi/</loc>
     <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -143,19 +143,19 @@
 
   <!-- Religious / Pilgrimage Landing Pages (Wave 1) -->
   <url>
-    <loc>https://padmashreetravels.in/agra-to-mehandipur-balaji-taxi/</loc>
+    <loc>https://www.padmashreetravels.in/agra-to-mehandipur-balaji-taxi/</loc>
     <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://padmashreetravels.in/agra-to-kaila-devi-temple-taxi/</loc>
+    <loc>https://www.padmashreetravels.in/agra-to-kaila-devi-temple-taxi/</loc>
     <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://padmashreetravels.in/agra-karauli-kaila-devi-balaji-tour/</loc>
+    <loc>https://www.padmashreetravels.in/agra-karauli-kaila-devi-balaji-tour/</loc>
     <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -164,73 +164,73 @@
   <!-- Existing Route Pages -->
   <!-- /agra-to-mathura-vrindavan/ removed: canonicals to /mathura-vrindavan-tour-from-agra/ (duplicate intent) -->
   <url>
-    <loc>https://padmashreetravels.in/mathura-vrindavan-barsana/</loc>
+    <loc>https://www.padmashreetravels.in/mathura-vrindavan-barsana/</loc>
     <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://padmashreetravels.in/fatehpur-sikri/</loc>
+    <loc>https://www.padmashreetravels.in/fatehpur-sikri/</loc>
     <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://padmashreetravels.in/agra-to-aligarh/</loc>
+    <loc>https://www.padmashreetravels.in/agra-to-aligarh/</loc>
     <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://padmashreetravels.in/agra-to-hathras/</loc>
+    <loc>https://www.padmashreetravels.in/agra-to-hathras/</loc>
     <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://padmashreetravels.in/agra-to-sirsaganj/</loc>
+    <loc>https://www.padmashreetravels.in/agra-to-sirsaganj/</loc>
     <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://padmashreetravels.in/agra-to-etawah/</loc>
+    <loc>https://www.padmashreetravels.in/agra-to-etawah/</loc>
     <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://padmashreetravels.in/agra-to-gwalior/</loc>
+    <loc>https://www.padmashreetravels.in/agra-to-gwalior/</loc>
     <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://padmashreetravels.in/agra-to-firozabad/</loc>
+    <loc>https://www.padmashreetravels.in/agra-to-firozabad/</loc>
     <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://padmashreetravels.in/agra-to-bateshwar/</loc>
+    <loc>https://www.padmashreetravels.in/agra-to-bateshwar/</loc>
     <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://padmashreetravels.in/agra-to-tundla/</loc>
+    <loc>https://www.padmashreetravels.in/agra-to-tundla/</loc>
     <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://padmashreetravels.in/agra-to-shikohabad/</loc>
+    <loc>https://www.padmashreetravels.in/agra-to-shikohabad/</loc>
     <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://padmashreetravels.in/contact/</loc>
+    <loc>https://www.padmashreetravels.in/contact/</loc>
     <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -238,97 +238,97 @@
 
   <!-- Blog Pages -->
   <url>
-    <loc>https://padmashreetravels.in/blog/</loc>
+    <loc>https://www.padmashreetravels.in/blog/</loc>
     <lastmod>2026-05-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://padmashreetravels.in/blog/taj-mahal-visiting-guide/</loc>
+    <loc>https://www.padmashreetravels.in/blog/taj-mahal-visiting-guide/</loc>
     <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://padmashreetravels.in/blog/best-time-to-visit-taj-mahal/</loc>
+    <loc>https://www.padmashreetravels.in/blog/best-time-to-visit-taj-mahal/</loc>
     <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://padmashreetravels.in/blog/agra-one-day-sightseeing/</loc>
+    <loc>https://www.padmashreetravels.in/blog/agra-one-day-sightseeing/</loc>
     <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://padmashreetravels.in/blog/mathura-vrindavan-travel-guide/</loc>
+    <loc>https://www.padmashreetravels.in/blog/mathura-vrindavan-travel-guide/</loc>
     <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://padmashreetravels.in/blog/agra-mathura-vrindavan-one-day-trip/</loc>
+    <loc>https://www.padmashreetravels.in/blog/agra-mathura-vrindavan-one-day-trip/</loc>
     <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://padmashreetravels.in/blog/agra-to-mehandipur-balaji-travel-guide/</loc>
+    <loc>https://www.padmashreetravels.in/blog/agra-to-mehandipur-balaji-travel-guide/</loc>
     <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://padmashreetravels.in/blog/kaila-devi-temple-karauli-guide/</loc>
+    <loc>https://www.padmashreetravels.in/blog/kaila-devi-temple-karauli-guide/</loc>
     <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://padmashreetravels.in/blog/taj-mahal-sunrise-by-private-cab/</loc>
+    <loc>https://www.padmashreetravels.in/blog/taj-mahal-sunrise-by-private-cab/</loc>
     <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://padmashreetravels.in/blog/agra-to-jaipur-taxi-route-guide/</loc>
+    <loc>https://www.padmashreetravels.in/blog/agra-to-jaipur-taxi-route-guide/</loc>
     <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://padmashreetravels.in/blog/kaila-devi-mehandipur-balaji-one-day-tour-from-agra/</loc>
+    <loc>https://www.padmashreetravels.in/blog/kaila-devi-mehandipur-balaji-one-day-tour-from-agra/</loc>
     <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://padmashreetravels.in/blog/best-temples-in-vrindavan-by-cab/</loc>
+    <loc>https://www.padmashreetravels.in/blog/best-temples-in-vrindavan-by-cab/</loc>
     <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://padmashreetravels.in/blog/agra-cantt-to-taj-mahal-taxi-guide/</loc>
+    <loc>https://www.padmashreetravels.in/blog/agra-cantt-to-taj-mahal-taxi-guide/</loc>
     <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://padmashreetravels.in/blog/agra-airport-taxi-guide/</loc>
+    <loc>https://www.padmashreetravels.in/blog/agra-airport-taxi-guide/</loc>
     <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://padmashreetravels.in/blog/braj-yatra-from-agra-by-cab/</loc>
+    <loc>https://www.padmashreetravels.in/blog/braj-yatra-from-agra-by-cab/</loc>
     <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://padmashreetravels.in/blog/senior-citizen-temple-tours-from-agra/</loc>
+    <loc>https://www.padmashreetravels.in/blog/senior-citizen-temple-tours-from-agra/</loc>
     <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

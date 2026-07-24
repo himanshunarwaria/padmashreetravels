@@ -9,3 +9,9 @@ claude-skills/
 # equivalent syntax), so untracked instead. Still in git history (commit
 # 153edf1) and on local disk; nothing deleted.
 _archive/
+
+# Internal SEO working files (audits, trackers, review-verification, business
+# data). Must NEVER deploy: production is on Vercel, where the old Netlify
+# `_redirects` 404 rule is inert, so a committed _seo/ would be publicly
+# downloadable. Kept local-only for the owner.
+_seo/

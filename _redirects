@@ -10,6 +10,10 @@
 # No staff access needed here (unlike /crm/), so block the whole tree.
 /_archive/*    /    404
 
+# ── Internal SEO working files (audits, trackers, review verification) ───────
+# Not part of the public site; never indexable.
+/_seo/*        /    404
+
 # ── Domain canonicalisation: force all traffic to custom domain ──────────────
 # Must be FIRST so Netlify evaluates them before path-based rules.
 # The ! suffix forces redirect even when a matching file exists.

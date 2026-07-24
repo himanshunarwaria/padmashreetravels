@@ -1,0 +1,49 @@
+# .vercelignore — files kept in the Git repo but EXCLUDED from the Vercel
+# deployment, so they are not publicly served (they return 404). On Vercel,
+# robots.txt is NOT protection and the Netlify `_redirects` 404 rule is inert,
+# so exclusion-from-deploy is the correct mechanism for private/internal paths.
+# Verified 2026-07-14.
+
+# ── Internal operational tools (customer-lead CRM + backend script source) ──
+# CRM stores data in localStorage + a Google Sheet; the deployed file has no
+# PII or hardcoded webhook, but it is a private staff tool and must not be public.
+# Staff access it locally or via an authenticated host — not the production URL.
+crm/
+
+# ── Internal helper tools (not linked, noindex) ──
+review-helper.html
+driver-communication-helper.html
+
+# ── Unverified review data (used only by review-helper.html, never by a public page) ──
+reviews.json
+
+# ── Internal strategy / working docs (were publicly downloadable at /docs/*) ──
+docs/
+cleanup_report.md
+marketing-context.md
+
+# ── Serverless function source (does NOT run on Vercel; was served as static text) ──
+# No hardcoded secrets (all process.env) but exposes backend architecture.
+netlify/
+
+# ── Inert Netlify config (Vercel ignores these; no reason to serve them) ──
+_redirects
+netlify.toml
+
+# ── Developer / CI / build config (were publicly downloadable) ──
+.claude/
+.claudeignore
+.github/
+.gitignore
+.nojekyll
+.env.example
+README.md
+
+# ── Already gitignored (belt-and-suspenders in case ever committed) ──
+_seo/
+_archive/
+.agents/
+claude-skills/
+
+# ── Superseded legacy page (noindex; keep out of the public deploy) ──
+taj-mahal-agra-fort.html

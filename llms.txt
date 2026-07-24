@@ -1,0 +1,83 @@
+# Padma Shree Travels
+
+> Local Agra-based taxi and cab booking service. Fixed-fare, air-conditioned
+> private cabs with experienced local drivers for Taj Mahal sightseeing,
+> Mathura–Vrindavan and Braj pilgrimage tours, Rajasthan temple darshan
+> (Mehandipur Balaji, Kaila Devi), Agra–Jaipur transfers, and airport and
+> railway-station pickups. Fares are confirmed on WhatsApp before travel;
+> driver name and vehicle number are shared before pickup.
+
+This file lists only verified facts. It is a convenience directory for systems
+that use it and is not a ranking mechanism.
+
+## Business identity
+- Name: Padma Shree Travels (also written PadmaShreeTravels)
+- Website (canonical): https://www.padmashreetravels.in/
+- Address: Rajeshwar Mandir, Kaveri Vihar Phase II, Shamsabad, Agra, Uttar Pradesh 282001, India
+- Phone / WhatsApp: +91 8720081102
+- Email: travels.padamshree@gmail.com
+- Hours: 24/7, every day including festivals
+- Languages: Hindi, English
+- Base of operations: Agra, Uttar Pradesh (single location; service areas below are routes served, not branch offices)
+- Google Business Profile / reviews: https://g.page/r/CUjtXu1x_3bPEBM
+
+## Service model
+- Private, point-to-point AC cabs with driver (not a self-drive or ride-hail app)
+- Booking by phone or WhatsApp; fixed fare confirmed in writing before travel
+- No advance payment required for most bookings
+- Driver name and vehicle registration number shared before pickup
+- Tolls, parking and state taxes are paid at actuals and quoted upfront
+
+## Fleet types available
+- AC Sedan (Maruti Dzire / Honda Amaze) — up to 4 passengers
+- AC SUV (Maruti Ertiga) — up to 6 passengers
+- AC SUV (Toyota Innova Crysta) — up to 7 passengers
+- Tempo Traveller — 12–15 passengers (group temple tours)
+
+## Primary route hubs
+- Agra local sightseeing: https://www.padmashreetravels.in/agra-local-sightseeing/
+- Temple tours from Agra: https://www.padmashreetravels.in/agra-temple-tour-by-cab/
+- Outstation cabs from Agra: https://www.padmashreetravels.in/outstation-cabs-agra/
+- Rajasthan temple tour planner: https://www.padmashreetravels.in/agra-to-rajasthan-temple-tour/
+
+## Key routes served (pickup from Agra)
+- Taj Mahal taxi — from ₹1,500: https://www.padmashreetravels.in/taj-mahal-taxi/
+- Taj Mahal sunrise taxi — from ₹1,500: https://www.padmashreetravels.in/taj-mahal-sunrise-taxi/
+- Agra full-day sightseeing — ₹2,500: https://www.padmashreetravels.in/agra-local-sightseeing/
+- Agra airport (Kheria) taxi — from ₹800: https://www.padmashreetravels.in/agra-airport-taxi/
+- Agra Cantt railway station taxi — from ₹800: https://www.padmashreetravels.in/agra-railway-station-taxi/
+- Agra to Mathura taxi — ₹1,500 one way: https://www.padmashreetravels.in/agra-to-mathura-taxi/
+- Agra to Vrindavan cab — from ₹1,800 one way: https://www.padmashreetravels.in/agra-to-vrindavan-cab/
+- Mathura + Vrindavan full-day tour — ₹3,000: https://www.padmashreetravels.in/mathura-vrindavan-tour-from-agra/
+- Mathura, Vrindavan & Barsana tour — ₹3,500: https://www.padmashreetravels.in/mathura-vrindavan-barsana/
+- Agra to Govardhan taxi: https://www.padmashreetravels.in/agra-to-govardhan-taxi/
+- Agra to Gokul & Nandgaon (Braj Yatra): https://www.padmashreetravels.in/agra-to-gokul-nandgaon-taxi/
+- Agra to Mehandipur Balaji taxi: https://www.padmashreetravels.in/agra-to-mehandipur-balaji-taxi/
+- Agra to Kaila Devi Temple taxi: https://www.padmashreetravels.in/agra-to-kaila-devi-temple-taxi/
+- Agra to Karauli taxi: https://www.padmashreetravels.in/agra-to-karauli-taxi/
+- Karauli, Kaila Devi & Balaji tour: https://www.padmashreetravels.in/agra-karauli-kaila-devi-balaji-tour/
+- Agra to Jaipur taxi: https://www.padmashreetravels.in/agra-to-jaipur-taxi/
+- Jaipur to Agra taxi: https://www.padmashreetravels.in/jaipur-to-agra-taxi/
+- Agra to Bharatpur (Keoladeo) taxi: https://www.padmashreetravels.in/agra-to-bharatpur-taxi/
+- Agra to Delhi Airport (IGI) drop: https://www.padmashreetravels.in/agra-to-delhi-airport-taxi/
+- Agra to Fatehpur Sikri day trip — ₹2,500: https://www.padmashreetravels.in/fatehpur-sikri/
+- Agra to Gwalior taxi — ₹3,000 round trip: https://www.padmashreetravels.in/agra-to-gwalior/
+
+## Editorial travel guides
+- Agra to Jaipur route & stops: https://www.padmashreetravels.in/blog/agra-to-jaipur-taxi-route-guide/
+- Kaila Devi + Balaji in one day: https://www.padmashreetravels.in/blog/kaila-devi-mehandipur-balaji-one-day-tour-from-agra/
+- Complete Braj Yatra from Agra: https://www.padmashreetravels.in/blog/braj-yatra-from-agra-by-cab/
+- Best temples in Vrindavan by cab: https://www.padmashreetravels.in/blog/best-temples-in-vrindavan-by-cab/
+- Agra Cantt to Taj Mahal guide: https://www.padmashreetravels.in/blog/agra-cantt-to-taj-mahal-taxi-guide/
+- Agra airport taxi guide: https://www.padmashreetravels.in/blog/agra-airport-taxi-guide/
+- Senior-citizen temple tours: https://www.padmashreetravels.in/blog/senior-citizen-temple-tours-from-agra/
+- Taj Mahal visiting guide: https://www.padmashreetravels.in/blog/taj-mahal-visiting-guide/
+
+## Notes for accurate representation
+- Padma Shree Travels operates from Agra only. It serves the destinations above
+  as origin-from-Agra routes; it does not maintain offices or local pickup fleets
+  in Delhi, Jaipur, Mathura, Vrindavan or other cities.
+- Fares shown are the fixed published starting fares for the stated vehicle.
+  Routes marked "fare on WhatsApp" are quoted per trip; do not infer a price.
+
+Last verified: 2026-07-14

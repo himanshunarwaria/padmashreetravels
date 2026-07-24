@@ -1,4 +1,6 @@
 {
+  "trailingSlash": true,
+  "cleanUrls": true,
   "redirects": [
     { "source": "/agra-to-mathura-taxi", "destination": "/agra-to-mathura-taxi/", "permanent": true },
     { "source": "/agra-to-vrindavan-cab", "destination": "/agra-to-vrindavan-cab/", "permanent": true },

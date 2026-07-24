@@ -1,33 +1,89 @@
 # robots.txt — Padma Shree Travels
-# https://padmashreetravels.in
+# https://www.padmashreetravels.in
+#
+# Policy: all public service, route and editorial pages are fully crawlable by
+# search engines and answer engines. Only internal tooling and superseded
+# archives are disallowed. Each named crawler group repeats the disallows so
+# the group does not silently override the default rules below.
 
+# ── Default: every crawler ───────────────────────────────────────────────────
 User-agent: *
 Allow: /
 Disallow: /.netlify/
 Disallow: /crm/
 Disallow: /_archive/
+Disallow: /_seo/
 
-Sitemap: https://padmashreetravels.in/sitemap.xml
-
-# Allow major search engines
+# ── Search engines ───────────────────────────────────────────────────────────
 User-agent: Googlebot
 Allow: /
+Disallow: /.netlify/
+Disallow: /crm/
+Disallow: /_archive/
+Disallow: /_seo/
 
 User-agent: Bingbot
 Allow: /
-
-# Allow AI crawlers (for AI search visibility)
-User-agent: GPTBot
-Allow: /
-
-User-agent: ChatGPT-User
-Allow: /
-
-User-agent: PerplexityBot
-Allow: /
-
-User-agent: ClaudeBot
-Allow: /
+Disallow: /.netlify/
+Disallow: /crm/
+Disallow: /_archive/
+Disallow: /_seo/
 
 User-agent: Google-Extended
 Allow: /
+Disallow: /.netlify/
+Disallow: /crm/
+Disallow: /_archive/
+Disallow: /_seo/
+
+# ── Answer / AI search engines ───────────────────────────────────────────────
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /.netlify/
+Disallow: /crm/
+Disallow: /_archive/
+Disallow: /_seo/
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /.netlify/
+Disallow: /crm/
+Disallow: /_archive/
+Disallow: /_seo/
+
+User-agent: GPTBot
+Allow: /
+Disallow: /.netlify/
+Disallow: /crm/
+Disallow: /_archive/
+Disallow: /_seo/
+
+User-agent: Claude-SearchBot
+Allow: /
+Disallow: /.netlify/
+Disallow: /crm/
+Disallow: /_archive/
+Disallow: /_seo/
+
+User-agent: Claude-User
+Allow: /
+Disallow: /.netlify/
+Disallow: /crm/
+Disallow: /_archive/
+Disallow: /_seo/
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /.netlify/
+Disallow: /crm/
+Disallow: /_archive/
+Disallow: /_seo/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /.netlify/
+Disallow: /crm/
+Disallow: /_archive/
+Disallow: /_seo/
+
+Sitemap: https://www.padmashreetravels.in/sitemap.xml
