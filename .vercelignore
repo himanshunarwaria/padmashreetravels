@@ -10,16 +10,16 @@
 # Staff access it locally or via an authenticated host — not the production URL.
 crm/
 
+# ── review-helper.html + reviews.json ARE deployed (noindex, unlinked, not in
+#    sitemap) so the owner can send customers the /review-helper/ link after a
+#    trip to collect Google reviews. Kept out of search, reachable by direct link. ──
+
 # ── Internal helper tools (not linked, noindex) ──
-review-helper.html
 driver-communication-helper.html
 
 # ── Driver PWA dev tool (icon generator) — never public; the PWA itself
 #    (driver-app/index.html) stays reachable-but-noindex per owner decision. ──
 driver-app/icons/generate-icons.html
-
-# ── Unverified review data (used only by review-helper.html, never by a public page) ──
-reviews.json
 
 # ── Internal strategy / working docs (were publicly downloadable at /docs/*) ──
 docs/
