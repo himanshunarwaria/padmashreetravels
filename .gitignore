@@ -15,3 +15,5 @@ _archive/
 # `_redirects` 404 rule is inert, so a committed _seo/ would be publicly
 # downloadable. Kept local-only for the owner.
 _seo/
+
+.vercel

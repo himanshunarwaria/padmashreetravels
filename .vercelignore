@@ -14,6 +14,10 @@ crm/
 review-helper.html
 driver-communication-helper.html
 
+# ── Driver PWA dev tool (icon generator) — never public; the PWA itself
+#    (driver-app/index.html) stays reachable-but-noindex per owner decision. ──
+driver-app/icons/generate-icons.html
+
 # ── Unverified review data (used only by review-helper.html, never by a public page) ──
 reviews.json
 

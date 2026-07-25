@@ -359,6 +359,8 @@ p:last-child { margin-bottom: 0 }
   position: relative;
   overflow: hidden;
 }
+/* Compact hero for interior tool pages (fares, route finder, fleet) */
+.hero--sm { padding: 2.6rem 0 2.8rem }
 /* Subtle texture overlay */
 .hero::before {
   content: '';

@@ -5,6 +5,14 @@
 (function () {
   'use strict';
 
+  // Self-contained analytics push (no PII), independent of main.js load order.
+  function pushEvent(name, params) {
+    window.dataLayer = window.dataLayer || [];
+    var e = { event: name, page_path: location.pathname };
+    if (params) { for (var k in params) { if (params[k] !== '' && params[k] != null) e[k] = params[k]; } }
+    window.dataLayer.push(e);
+  }
+
   // ── Route data ────────────────────────────────────────────────────────────
   const ROUTE_PRICES = {
     'agra-local-sightseeing':    2500,
@@ -80,6 +88,12 @@
   const form         = document.getElementById('payBookingForm');
   if (!form) return;
 
+  // fare_finder_start — first meaningful interaction with the enquiry form
+  let ffStarted = false;
+  form.addEventListener('input', function () {
+    if (!ffStarted) { ffStarted = true; pushEvent('fare_finder_start', { source_component: 'booking_page' }); }
+  });
+
   const dropInput    = document.getElementById('pb-drop');
   const priceDisplay = document.getElementById('pb-price-display');
   const priceAmount  = document.getElementById('pb-price-amount');
@@ -97,6 +111,7 @@
 
   // ── Route matching from free-text drop ────────────────────────────────────
   let _matchedRouteKey = '';
+  let _lastSelectedRoute = '';
 
   function bkMatchRoute(text) {
     const t = (text || '').toLowerCase();
@@ -121,6 +136,10 @@
 
     _matchedRouteKey = key;
     showPriceBadge(key);
+    if (key && key !== _lastSelectedRoute) {
+      _lastSelectedRoute = key;
+      pushEvent('route_selected', { route: key, route_name: ROUTE_LABELS[key] || '', trip_type: ROUTE_TYPE[key] || '', source_component: 'booking_page' });
+    }
   }
   window.bkMatchRoute = bkMatchRoute;
 
@@ -325,6 +344,14 @@
     const time       = document.getElementById('pb-time')?.value   || '';
     const passengers = document.getElementById('pb-passengers').value;
     const notes      = document.getElementById('pb-notes')?.value.trim() || '';
+
+    const tripTypeEl = document.getElementById('pb-trip-type');
+    pushEvent('fare_finder_complete', {
+      source_component: 'booking_page',
+      trip_type: (tripTypeEl && tripTypeEl.value) || '',
+      passenger_band: passengers || '',
+      route: _matchedRouteKey || ''
+    });
 
     setLoading(true);
     fireConversion();
