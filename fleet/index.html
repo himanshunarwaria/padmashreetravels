@@ -20,8 +20,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="../css/style.css"><style>:root{--ff:Inter,-apple-system,sans-serif;--ffd:Inter,-apple-system,sans-serif}
 .fleet-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.1rem;margin-top:1.2rem}
 .fcard{background:#fff;border:1px solid var(--g200);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column}
-.fcard__ph{position:relative;aspect-ratio:16/10;background:linear-gradient(135deg,var(--g50),var(--g100));display:flex;align-items:center;justify-content:center;color:var(--g400)}
+.fcard__ph{position:relative;aspect-ratio:16/10;background:linear-gradient(135deg,var(--g50),var(--g100));display:flex;align-items:center;justify-content:center;color:var(--g400);overflow:hidden}
 .fcard__ph i{width:52px;height:52px}
+.fcard__ph img{width:100%;height:100%;object-fit:cover;display:block}
 .fcard__ribbon{position:absolute;top:.6rem;left:.6rem;background:rgba(0,0,0,.62);color:#fff;font-size:.66rem;letter-spacing:.03em;text-transform:uppercase;padding:.2rem .5rem;border-radius:4px}
 .fcard__body{padding:1rem 1.1rem;display:flex;flex-direction:column;gap:.55rem;flex:1}
 .fcard__name{margin:0;font-size:1.12rem}
@@ -134,7 +135,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="fleet-grid">
 
 <article class="fcard">
-<div class="fcard__ph"><span class="fcard__ribbon">Vehicle photo coming soon</span><i data-lucide="car-front" aria-hidden="true"></i></div>
+<div class="fcard__ph"><img src="../images/fleet/fleet-dzire.webp" alt="Maruti Dzire AC sedan" loading="lazy" width="400" height="250"></div>
 <div class="fcard__body">
 <h3 class="fcard__name">AC Sedan</h3>
 <p class="fcard__models">Maruti Dzire / Honda Amaze (or similar)</p>
@@ -144,7 +145,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div></article>
 
 <article class="fcard">
-<div class="fcard__ph"><span class="fcard__ribbon">Vehicle photo coming soon</span><i data-lucide="car" aria-hidden="true"></i></div>
+<div class="fcard__ph"><img src="../images/fleet/fleet-ertiga.webp" alt="Maruti Ertiga AC SUV" loading="lazy" width="400" height="250"></div>
 <div class="fcard__body">
 <h3 class="fcard__name">Ertiga (AC SUV)</h3>
 <p class="fcard__models">Maruti Ertiga (or similar 6-seater)</p>
@@ -154,7 +155,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div></article>
 
 <article class="fcard">
-<div class="fcard__ph"><span class="fcard__ribbon">Vehicle photo coming soon</span><i data-lucide="car" aria-hidden="true"></i></div>
+<div class="fcard__ph"><img src="../images/fleet/fleet-innova-crysta.webp" alt="Toyota Innova Crysta premium AC SUV" loading="lazy" width="400" height="250"></div>
 <div class="fcard__body">
 <h3 class="fcard__name">Innova Crysta (Premium SUV)</h3>
 <p class="fcard__models">Toyota Innova Crysta (or similar 7-seater)</p>
@@ -164,7 +165,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div></article>
 
 <article class="fcard">
-<div class="fcard__ph"><span class="fcard__ribbon">Vehicle photo coming soon</span><i data-lucide="bus" aria-hidden="true"></i></div>
+<div class="fcard__ph"><img src="../images/fleet/fleet-tempo-traveller.webp" alt="Tempo Traveller minibus for group bookings" loading="lazy" width="400" height="250"></div>
 <div class="fcard__body">
 <h3 class="fcard__name">Tempo Traveller</h3>
 <p class="fcard__models">12&#8211;15 seater &#8212; arranged per trip</p>
@@ -174,7 +175,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div></article>
 
 </div>
-<p class="fleet-note">*Luggage figures are typical for each category and depend on the exact vehicle and passenger count. We confirm the right vehicle and luggage fit for your specific trip on WhatsApp. Vehicle images are being photographed &#8212; the illustrations above are placeholders, not the actual cars. Vehicle types shown are representative of what we provide directly or arrange through trusted local operators; availability for your dates is confirmed on WhatsApp.</p>
+<p class="fleet-note">*Luggage figures are typical for each category and depend on the exact vehicle and passenger count. We confirm the right vehicle and luggage fit for your specific trip on WhatsApp. Photos above show the vehicle category and are representative of what we provide directly or arrange through trusted local operators &#8212; exact make, trim and colour may vary by availability; your car and driver details are always confirmed before pickup.</p>
 </div></section>
 
 <section class="section section--gray" id="compare"><div class="container">

@@ -17,3 +17,12 @@ _archive/
 _seo/
 
 .vercel
+
+# Raw AI-generated source photography (~380MB, uncompressed PNG/JPEG originals).
+# Compressed, renamed WebP derivatives actually used on the site live in
+# images/fleet/, images/destinations/ and images/about/ (tracked normally).
+# Keeping these raw folders out of git avoids repo bloat and accidental
+# deployment via publish="." — the originals stay on local disk only.
+images/01 Fleet/
+images/02 Destination Images/
+images/03 Founder+ Destination/

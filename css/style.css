@@ -431,6 +431,21 @@ p:last-child { margin-bottom: 0 }
   margin-top: .3rem;
 }
 
+/* Hero with a full-bleed destination photo behind it (same treatment as .phero--img) */
+.hero--img {
+  background-image:
+    linear-gradient(90deg, rgba(10,10,10,.94) 0%, rgba(10,10,10,.86) 30%, rgba(10,10,10,.55) 60%, rgba(10,10,10,.3) 100%),
+    var(--hero-img);
+  background-size: cover;
+  background-position: center 35%;
+}
+.hero--img::before {
+  background: linear-gradient(180deg, rgba(10,10,10,0) 60%, rgba(10,10,10,.5) 100%);
+}
+@media (min-width: 960px) {
+  .hero--img { background-position: right center }
+}
+
 /* ── Trust strip ─────────────────────────────────────────────────────────── */
 .trust {
   border-bottom: 1px solid var(--g100);
@@ -493,8 +508,24 @@ p:last-child { margin-bottom: 0 }
   padding: 1.4rem 1.5rem;
   transition: box-shadow var(--t), border-color var(--t);
   position: relative;
+  overflow: hidden;
 }
 .rcard:hover { box-shadow: var(--md); border-color: var(--g200) }
+
+.rcard__thumb {
+  margin: -1.4rem -1.5rem .9rem;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--g50);
+}
+.rcard__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .5s ease;
+}
+.rcard:hover .rcard__thumb img { transform: scale(1.045) }
 
 .rcard__top {
   display: flex;
@@ -583,6 +614,18 @@ p:last-child { margin-bottom: 0 }
   margin-bottom: 1.5rem;
   max-width: 560px;
   line-height: 1.65;
+}
+
+/* Page hero with a destination photo behind it */
+.phero--img {
+  background-image: var(--phero-img);
+  background-size: cover;
+  background-position: center 38%;
+}
+.phero--img::before {
+  background:
+    linear-gradient(180deg, rgba(10,10,10,.35) 0%, rgba(10,10,10,.72) 100%),
+    linear-gradient(90deg, rgba(10,10,10,.72) 0%, rgba(10,10,10,.32) 60%, rgba(10,10,10,.55) 100%);
 }
 
 /* Price banner inside page hero */
@@ -968,11 +1011,51 @@ p:last-child { margin-bottom: 0 }
 }
 .waf:hover { transform: scale(1.08); box-shadow: 0 6px 24px rgba(37,211,102,.4) }
 
+/* ── Fleet section ────────────────────────────────────────────────────────── */
+.fleet-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; margin-top: 1.5rem }
+.fleet-card {
+  background: var(--white);
+  border: 1px solid var(--g100);
+  border-radius: var(--r);
+  overflow: hidden;
+  transition: box-shadow var(--t), border-color var(--t);
+}
+.fleet-card:hover { box-shadow: var(--md); border-color: var(--g200) }
+.fleet-card__img { aspect-ratio: 4 / 3; background: var(--g50); overflow: hidden }
+.fleet-card__img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s ease }
+.fleet-card:hover .fleet-card__img img { transform: scale(1.04) }
+.fleet-card__body { padding: .95rem 1.1rem 1.1rem }
+.fleet-card__body h3 { font-size: .95rem; margin-bottom: .15rem; color: var(--black) }
+.fleet-card__body p { font-size: .8rem; color: var(--g500) }
+
+.fleet-extra { display: grid; grid-template-columns: 1fr; gap: 1rem; margin-top: 1rem }
+.fleet-extra__card {
+  display: flex;
+  align-items: center;
+  gap: .9rem;
+  background: var(--g50);
+  border: 1px solid var(--g100);
+  border-radius: var(--r);
+  padding: .7rem;
+}
+.fleet-extra__img { width: 92px; height: 68px; flex-shrink: 0; border-radius: calc(var(--r) - 4px); overflow: hidden }
+.fleet-extra__img img { width: 100%; height: 100%; object-fit: cover; display: block }
+.fleet-extra__body h4 { font-size: .85rem; margin: 0 0 .15rem; color: var(--black) }
+.fleet-extra__body p { font-size: .78rem; color: var(--g500); margin: 0; line-height: 1.5 }
+
+/* ── Prose supporting images (About / SEO blocks) ───────────────────────── */
+.pimg { border-radius: var(--r-lg); overflow: hidden; margin: 1.6rem 0; border: 1px solid var(--g100) }
+.pimg img { width: 100%; display: block; aspect-ratio: 16 / 10; object-fit: cover }
+.pimg figcaption { padding: .55rem .9rem; font-size: .74rem; color: var(--g400); background: var(--g50); border-top: 1px solid var(--g100) }
+.pimg--tall img { aspect-ratio: 4 / 5 }
+
 /* ── Responsive breakpoints ──────────────────────────────────────────────── */
 @media (min-width: 640px) {
   .rgrid, .tgrid, .incs { grid-template-columns: repeat(2, 1fr) }
   .fgrid { grid-template-columns: repeat(2, 1fr) }
   .ft__grid { grid-template-columns: repeat(2, 1fr) }
+  .fleet-grid { grid-template-columns: repeat(2, 1fr) }
+  .fleet-extra { grid-template-columns: repeat(2, 1fr) }
 }
 
 @media (min-width: 960px) {
@@ -980,6 +1063,7 @@ p:last-child { margin-bottom: 0 }
   .ham { display: none }
   .rgrid { grid-template-columns: repeat(3, 1fr) }
   .tgrid { grid-template-columns: repeat(3, 1fr) }
+  .fleet-grid { grid-template-columns: repeat(3, 1fr) }
   .ft__grid { grid-template-columns: 1.5fr 1fr 1fr 1.1fr }
   .scall { display: none }
   .waf { bottom: 1.5rem }
