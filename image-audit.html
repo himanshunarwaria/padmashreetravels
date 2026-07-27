@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Image Audit &amp; Shoot Plan — Padma Shree Travels</title>
+<style>
+:root{
+  --paper:#F1F2EE; --paper-raised:#FFFFFF; --ink:#17191A; --ink-soft:#52585C; --ink-faint:#7B8085;
+  --line:#DBDCD6; --line-soft:#E7E8E3;
+  --accent:#D9840F; --accent-ink:#7A4A06; --accent-soft:#F6E3C6;
+  --good:#227A57; --good-soft:#DCEEE5;
+  --critical:#B5402A; --critical-soft:#F6DFD8;
+  --shadow:0 1px 2px rgba(23,25,26,.04), 0 6px 20px rgba(23,25,26,.06);
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#16181A; --paper-raised:#1E2123; --ink:#EDEEEA; --ink-soft:#A7ACAE; --ink-faint:#787E80;
+    --line:#33373A; --line-soft:#282B2D;
+    --accent:#F0A63D; --accent-ink:#FBD08A; --accent-soft:#3A2C12;
+    --good:#4FBE8D; --good-soft:#173028;
+    --critical:#E2705A; --critical-soft:#341E19;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 6px 24px rgba(0,0,0,.35);
+  }
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  font-size:15px; line-height:1.5; -webkit-font-smoothing:antialiased;
+  max-width:1180px; margin:0 auto; padding:0 1.25rem 6rem;
+}
+::selection{ background:var(--accent-soft); color:var(--ink) }
+a{ color:var(--accent-ink) }
+
+/* ---- Masthead ---- */
+.mast{ padding:2.6rem 0 1.4rem; border-bottom:1px solid var(--line) }
+.mast__eyebrow{
+  display:inline-flex; align-items:center; gap:.5rem;
+  font-size:.7rem; font-weight:800; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--accent-ink); margin:0 0 .9rem;
+}
+.mast__eyebrow::before{ content:''; width:7px; height:7px; background:var(--accent); border-radius:1px; display:inline-block }
+h1.mast__title{
+  font-size:clamp(1.7rem,4.2vw,2.5rem); font-weight:800; letter-spacing:-.02em;
+  line-height:1.12; margin:0 0 .8rem; text-wrap:balance; max-width:24ch;
+}
+.mast__sub{ font-size:1rem; color:var(--ink-soft); max-width:62ch; line-height:1.6; margin:0 0 1.6rem }
+.mast__sub b{ color:var(--ink) }
+
+/* ---- Stat strip (mile-marker board) ---- */
+.stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:10px; overflow:hidden; margin-bottom:.4rem }
+.stat{ background:var(--paper-raised); padding:1rem 1.1rem; }
+.stat__n{ font-size:1.7rem; font-weight:800; letter-spacing:-.02em; font-variant-numeric:tabular-nums; color:var(--ink) }
+.stat__n.crit{ color:var(--critical) }
+.stat__l{ font-size:.72rem; color:var(--ink-soft); margin-top:.15rem; line-height:1.35 }
+@media (max-width:720px){ .stats{ grid-template-columns:repeat(2,1fr) } }
+
+/* ---- Jump nav ---- */
+.jn-wrap{ position:sticky; top:0; z-index:30; background:var(--paper); padding:.85rem 0; border-bottom:1px solid var(--line); margin-bottom:0 }
+.jn{ display:flex; gap:.4rem; overflow-x:auto; scrollbar-width:none; padding-bottom:.1rem }
+.jn::-webkit-scrollbar{ display:none }
+.jn a{
+  flex:0 0 auto; text-decoration:none; font-size:.76rem; font-weight:700; letter-spacing:.01em;
+  color:var(--ink-soft); background:var(--paper-raised); border:1px solid var(--line);
+  padding:.4rem .75rem; border-radius:999px; white-space:nowrap; transition:border-color .15s, color .15s;
+}
+.jn a:hover{ border-color:var(--accent); color:var(--accent-ink) }
+
+/* ---- Sections ---- */
+section.blk{ padding:2.4rem 0 .6rem; border-bottom:1px solid var(--line-soft) }
+section.blk:last-of-type{ border-bottom:none }
+.blk__head{ display:flex; align-items:baseline; gap:.6rem; margin-bottom:.35rem; flex-wrap:wrap }
+.blk__num{ font-size:.72rem; font-weight:800; color:var(--accent-ink); letter-spacing:.08em }
+h2.blk__title{ font-size:1.32rem; font-weight:800; letter-spacing:-.01em; margin:0; text-wrap:balance }
+.blk__note{ font-size:.87rem; color:var(--ink-soft); max-width:74ch; line-height:1.6; margin:.5rem 0 1.2rem }
+.blk__note code{ background:var(--line-soft); padding:.05rem .35rem; border-radius:4px; font-size:.83em }
+.callout{
+  background:var(--paper-raised); border:1px solid var(--line); border-left:3px solid var(--accent);
+  border-radius:8px; padding:.8rem 1rem; font-size:.85rem; color:var(--ink-soft); line-height:1.6; margin:0 0 1.2rem;
+}
+.callout b{ color:var(--ink) }
+
+/* ---- Tables ---- */
+.twrap{ overflow-x:auto; border:1px solid var(--line); border-radius:10px; box-shadow:var(--shadow); margin-bottom:.5rem; background:var(--paper-raised) }
+table{ width:100%; border-collapse:collapse; font-size:.82rem; min-width:820px }
+thead th{
+  position:sticky; top:0; background:var(--paper-raised);
+  text-align:left; font-size:.66rem; font-weight:800; letter-spacing:.07em; text-transform:uppercase;
+  color:var(--ink-faint); padding:.65rem .8rem; border-bottom:1px solid var(--line); white-space:nowrap;
+}
+tbody td{ padding:.68rem .8rem; border-bottom:1px solid var(--line-soft); vertical-align:top; color:var(--ink-soft) }
+tbody tr:last-child td{ border-bottom:none }
+tbody tr:hover{ background:var(--line-soft) }
+td.c-loc{ color:var(--ink); font-weight:600 }
+td.c-dim{ font-variant-numeric:tabular-nums; white-space:nowrap; color:var(--ink) }
+.tag{ font-size:.66rem; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--ink-faint); white-space:nowrap }
+.pill{ display:inline-block; font-size:.68rem; font-weight:800; letter-spacing:.02em; padding:.22rem .55rem; border-radius:999px; white-space:nowrap }
+.pill--must{ background:var(--accent); color:#241300 }
+.pill--rec{ background:transparent; border:1.3px solid var(--ink-faint); color:var(--ink-soft) }
+.pill--opt{ background:transparent; color:var(--ink-faint); font-weight:600 }
+.mob{ font-size:.78rem }
+
+/* ---- legend ---- */
+.legend{ display:flex; gap:1.4rem; flex-wrap:wrap; font-size:.78rem; color:var(--ink-soft); margin:.2rem 0 1.3rem }
+.legend span{ display:inline-flex; align-items:center; gap:.4rem }
+
+/* ---- checklist (shoot plan) ---- */
+.days{ display:grid; grid-template-columns:1fr; gap:.9rem }
+.day{ background:var(--paper-raised); border:1px solid var(--line); border-radius:10px; overflow:hidden; box-shadow:var(--shadow) }
+.day__head{ display:flex; align-items:center; justify-content:space-between; padding:.85rem 1.1rem; background:var(--line-soft); border-bottom:1px solid var(--line) }
+.day__title{ font-weight:800; font-size:.95rem }
+.day__meta{ font-size:.72rem; color:var(--ink-soft); font-weight:600 }
+.day__body{ padding:.9rem 1.1rem 1.05rem }
+.chk{ list-style:none; margin:0; padding:0; display:grid; grid-template-columns:1fr 1fr; gap:.5rem 1.4rem }
+@media (max-width:640px){ .chk{ grid-template-columns:1fr } }
+.chk li{ display:flex; gap:.55rem; font-size:.85rem; line-height:1.45; color:var(--ink-soft) }
+.chk li::before{
+  content:''; flex:0 0 auto; width:14px; height:14px; margin-top:.15rem;
+  border:1.6px solid var(--ink-faint); border-radius:3px;
+}
+.chk li b{ color:var(--ink) }
+.note-inline{ font-size:.74rem; color:var(--ink-faint); font-style:italic; margin-top:.6rem }
+
+/* ---- UX pattern cards ---- */
+.pgrid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:.8rem; margin-bottom:1.2rem }
+.pcard{ background:var(--paper-raised); border:1px solid var(--line); border-radius:10px; padding:.95rem 1.05rem }
+.pcard h4{ margin:0 0 .35rem; font-size:.88rem; font-weight:800 }
+.pcard p{ margin:0; font-size:.79rem; color:var(--ink-soft); line-height:1.55 }
+.pcard .do{ color:var(--good); font-weight:700 }
+.pcard .dont{ color:var(--critical); font-weight:700 }
+
+footer.foot{ padding:2rem 0 1rem; font-size:.76rem; color:var(--ink-faint); text-align:center }
+</style>
+</head>
+<body>
+
+<header class="mast">
+  <div class="mast__eyebrow">Image Strategy Audit</div>
+  <h1 class="mast__title">Where Padma Shree Travels needs images — and where it doesn't</h1>
+  <p class="mast__sub">A page-by-page shoot plan for <b>padmashreetravels.in</b>, built from the live site (index.html, 30+ route pages, blog, about, contact, book). Goal: more trust, more WhatsApp enquiries, more confirmed bookings — without slowing the site down.</p>
+  <div class="stats">
+    <div class="stat"><div class="stat__n crit">3</div><div class="stat__l">image files exist site-wide — all logo variants</div></div>
+    <div class="stat"><div class="stat__n crit">0</div><div class="stat__l">fleet, driver, gallery or real testimonial photos</div></div>
+    <div class="stat"><div class="stat__n">~46</div><div class="stat__l">placements recommended across all templates</div></div>
+    <div class="stat"><div class="stat__n">~14</div><div class="stat__l">unique destinations to shoot, reused across 30+ pages</div></div>
+  </div>
+  <div class="callout" style="margin-top:1rem"><b>New:</b> every image referenced on this page and in the Website Image Plan now has a ready-to-copy generation prompt or real-photography capture brief in the <a href="PST-Image-Prompt-Library.html"><b>Image Prompt Library →</b></a></div>
+</header>
+
+<div class="jn-wrap"><nav class="jn">
+  <a href="#read-me">How to read this</a>
+  <a href="#homepage">Homepage</a>
+  <a href="#routes">Route pages</a>
+  <a href="#fleet">Fleet</a>
+  <a href="#drivers">Drivers &amp; safety</a>
+  <a href="#testimonials">Testimonials</a>
+  <a href="#about">About / Contact</a>
+  <a href="#booking">Booking flow</a>
+  <a href="#blog">Blog</a>
+  <a href="#sitewide">Sitewide / OG</a>
+  <a href="#ux">Galleries &amp; sliders</a>
+  <a href="#perf">Speed guardrails</a>
+  <a href="#checklist">Shoot checklist</a>
+  <a href="PST-Image-Prompt-Library.html" style="background:var(--accent);color:#241300;border-color:var(--accent);font-weight:800">★ Prompt Library</a>
+</nav></div>
+
+<section class="blk" id="read-me">
+  <div class="blk__head"><h2 class="blk__title">How to read this</h2></div>
+  <p class="blk__note">Every table uses the same seven columns: where it goes, the exact image type, size/orientation, category, what it's meant to convert, priority, and a mobile-specific note. Real photos beat stock everywhere except long-tail transit routes and generic icon moments — those are called out explicitly.</p>
+  <div class="legend">
+    <span><span class="pill pill--must">Must Have</span> ships before anything else</span>
+    <span><span class="pill pill--rec">Recommended</span> next sprint</span>
+    <span><span class="pill pill--opt">Optional</span> nice-to-have, skip if it slows the build</span>
+  </div>
+</section>
+
+<section class="blk" id="homepage">
+  <div class="blk__head"><span class="blk__num">TEMPLATE</span><h2 class="blk__title">Homepage (index.html)</h2></div>
+  <p class="blk__note">Currently 100% text and Lucide icons below the logo. The <code>.hero</code> is a solid black panel with a CSS gradient — no photo. Route cards (<code>.rcard</code>) and testimonial avatars (<code>.tc__av</code>) are pure text/initials.</p>
+  <div class="twrap"><table>
+    <thead><tr><th>Section</th><th>Image type</th><th>Size · orientation</th><th>Category</th><th>Conversion purpose</th><th>Priority</th><th>Mobile note</th></tr></thead>
+    <tbody>
+      <tr><td class="c-loc">Hero (.hero)</td><td>Cab + driver in front of Taj Mahal or a recognisable Agra landmark, right-side panel beside headline</td><td class="c-dim">800×1000<br>portrait</td><td class="tag">Real photo</td><td>Proves "verified local driver" claim in the first 3 seconds</td><td><span class="pill pill--rec">Recommended</span></td><td class="mob">Stack below headline, not behind it — never let text sit on top of a busy photo</td></tr>
+      <tr><td class="c-loc">Trust chip bar (.trust)</td><td>Keep icon-led — no image needed</td><td class="c-dim">—</td><td class="tag">Icon</td><td>Speed-scans as fact chips; a photo here adds weight without adding trust</td><td><span class="pill pill--opt">Optional</span></td><td class="mob">Icons only, unchanged</td></tr>
+      <tr><td class="c-loc">Route cards ×13 (.rcard, pilgrimage + sightseeing grids)</td><td>One destination thumbnail per card (Mathura ghat, Banke Bihari, Taj Mahal, Fatehpur Sikri…)</td><td class="c-dim">400×260<br>landscape 16:10</td><td class="tag">Destination photo</td><td>Turns a price list into a browsable, desirable trip — the single highest-leverage change on the page</td><td><span class="pill pill--must">Must Have</span></td><td class="mob">One image, ~120px tall crop; lazy-load all but the first 2 cards</td></tr>
+      <tr><td class="c-loc">How Booking Works (.inc ×3)</td><td>Real WhatsApp screenshots: (1) route enquiry, (2) fare confirmed in writing, (3) driver name/number shared</td><td class="c-dim">375×280<br>portrait, phone-frame crop</td><td class="tag">Real photo (screenshot)</td><td>Proves the process is real, not a diagram — removes "will they actually reply" doubt</td><td><span class="pill pill--rec">Recommended</span></td><td class="mob">Same screenshots read even better on mobile — this is a mobile-native asset</td></tr>
+      <tr><td class="c-loc">Temple &amp; Pilgrimage cards ×5 (2nd .rgrid)</td><td>Reuse the same destination thumbnails from the route-card set above</td><td class="c-dim">400×260<br>landscape</td><td class="tag">Destination photo</td><td>Zero extra shoot cost — same asset, second placement</td><td><span class="pill pill--must">Must Have</span></td><td class="mob">Shared asset, no extra weight</td></tr>
+      <tr><td class="c-loc">SEO prose block (#about)</td><td>1–2 inline photos breaking up the long-form text (Mathura ghat, Agra Fort)</td><td class="c-dim">800×500<br>landscape</td><td class="tag">Destination photo</td><td>Increases dwell time and gives alt-text SEO value on top of trust</td><td><span class="pill pill--opt">Optional</span></td><td class="mob">Full-width, one per screen — don't stack two in a row</td></tr>
+      <tr><td class="c-loc">"Why riders choose us" (.inc ×6)</td><td>Keep icon-led; do not replace with photos</td><td class="c-dim">—</td><td class="tag">Icon</td><td>Six claims scan faster as icons than as six unrelated photos</td><td><span class="pill pill--opt">Optional</span></td><td class="mob">Unchanged</td></tr>
+      <tr><td class="c-loc">Testimonials (.tgrid ×3, .tc__av)</td><td>Real Google review screenshots (you already have the quotes in <code>reviews.json</code>) in place of text-initial avatars</td><td class="c-dim">500×300<br>landscape, per review</td><td class="tag">Customer photo (screenshot)</td><td>Screenshots of real reviews are more persuasive than initials and need zero photo consent</td><td><span class="pill pill--must">Must Have</span></td><td class="mob">Horizontal swipe strip, one card per screen width</td></tr>
+      <tr><td class="c-loc">CTA band (.cta)</td><td>Keep flat black — no background photo</td><td class="c-dim">—</td><td class="tag">Background</td><td>A photo here fights the WhatsApp/Call button contrast; flat colour converts better</td><td><span class="pill pill--opt">Optional</span></td><td class="mob">Unchanged</td></tr>
+      <tr><td class="c-loc">Footer, next to map embed</td><td>Office signage / entrance photo beside the existing live Google Map iframe</td><td class="c-dim">600×400<br>landscape</td><td class="tag">Real photo</td><td>Matches Google Business Profile photos — helps local-SEO trust and "is this a real office" doubt</td><td><span class="pill pill--rec">Recommended</span></td><td class="mob">Stack under the map, not beside it</td></tr>
+      <tr><td class="c-loc">Floating WhatsApp button / sticky mobile CTA bar</td><td>Icon only — do not add a photo</td><td class="c-dim">—</td><td class="tag">Icon</td><td>This element must stay instant on every scroll frame; any image adds risk for zero gain</td><td><span class="pill pill--opt">Optional</span></td><td class="mob">Never add an image here</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="blk" id="routes">
+  <div class="blk__head"><span class="blk__num">TEMPLATE</span><h2 class="blk__title">Route / destination pages — applies to all 30+ pages</h2></div>
+  <p class="blk__note">Every route page (agra-to-mathura-taxi, agra-to-vrindavan-cab, fatehpur-sikri, agra-airport-taxi, etc.) shares one template: <code>.phero</code> banner → quick facts → fare table (<code>.ptbl</code>) → route details → "places to visit" list → FAQ. Shoot destinations <b>once</b>, not once per page — Mathura photos serve 4+ pages, Taj Mahal photos serve 3 pages + 3 blog posts.</p>
+  <div class="twrap"><table>
+    <thead><tr><th>Section</th><th>Image type</th><th>Size · orientation</th><th>Category</th><th>Conversion purpose</th><th>Priority</th><th>Mobile note</th></tr></thead>
+    <tbody>
+      <tr><td class="c-loc">Page hero (.phero)</td><td>Destination-specific banner — e.g. Krishna Janmabhoomi for the Mathura page, Banke Bihari gate for Vrindavan, Buland Darwaza for Fatehpur Sikri</td><td class="c-dim">1600×700<br>landscape</td><td class="tag">Destination photo</td><td>The single biggest missing trust + SEO element across every route page — right now every page opens on plain text</td><td><span class="pill pill--must">Must Have</span> (top 10 routes)<br><span class="pill pill--rec">Recommended</span> (rest)</td><td class="mob">800×900 crop with subject kept in the top-left safe zone; existing <code>.phero::before</code> dark overlay keeps text readable</td></tr>
+      <tr><td class="c-loc">Fare table (.ptbl) rows</td><td>Small vehicle-type thumbnail beside Sedan / SUV rows (reuse Fleet shoot)</td><td class="c-dim">80×60<br>landscape icon-crop</td><td class="tag">Vehicle photo</td><td>Turns "Dzire, Amaze" text into a recognisable picture — reduces "what car will actually show up" anxiety</td><td><span class="pill pill--rec">Recommended</span></td><td class="mob">Tiny thumb, ≤10KB each — never let it push the price column off-screen</td></tr>
+      <tr><td class="c-loc">"Places to Visit" list</td><td>Horizontal-scroll gallery of 3–5 stop photos (e.g. Banke Bihari, Prem Mandir, ISKCON, Nidhivan for the Vrindavan page)</td><td class="c-dim">700×500<br>landscape, per image</td><td class="tag">Gallery / destination</td><td>Turns a bullet list into a preview of the actual trip — strongest single upgrade on high-traffic pages</td><td><span class="pill pill--must">Must Have</span> — top 10 routes<br><span class="pill pill--opt">Optional</span> — transit-only routes</td><td class="mob">CSS scroll-snap strip, no JS carousel needed; swipeable with visible peek of the next card</td></tr>
+      <tr><td class="c-loc">Long-tail transit routes<br><span class="mob">(Aligarh, Firozabad, Etawah, Hathras, Tundla, Sirsaganj, Shikohabad)</span></td><td>One shared generic "on the highway" cab photo, reused across all seven pages</td><td class="c-dim">1200×675<br>landscape</td><td class="tag">Real photo (shared asset)</td><td>These are low-traffic transfer routes with no photogenic destination — one shared photo avoids seven wasted shoots</td><td><span class="pill pill--opt">Optional</span></td><td class="mob">Same shared crop across all seven pages</td></tr>
+      <tr><td class="c-loc">"How to Book" section</td><td>Reuse the same WhatsApp screenshots from the homepage</td><td class="c-dim">375×280</td><td class="tag">Real photo (screenshot)</td><td>Shared asset — zero extra cost, consistent trust signal sitewide</td><td><span class="pill pill--opt">Optional</span></td><td class="mob">Shared asset</td></tr>
+      <tr><td class="c-loc">"Why travellers trust us" (.inc)</td><td>Keep icon-led, unchanged</td><td class="c-dim">—</td><td class="tag">Icon</td><td>Consistent with homepage pattern</td><td><span class="pill pill--opt">Optional</span></td><td class="mob">Unchanged</td></tr>
+      <tr><td class="c-loc">"More Routes" related cards</td><td>Reuse the same route-card thumbnails from the homepage grid</td><td class="c-dim">400×260</td><td class="tag">Destination photo</td><td>Shared asset system — every route page automatically gets a visual upgrade once the homepage cards are shot</td><td><span class="pill pill--must">Must Have</span></td><td class="mob">Shared asset, no extra weight</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout"><b>Practical shortcut:</b> don't plan 30 separate photoshoots. Map the 30+ route pages down to roughly 14 physical destinations (Taj Mahal, Agra Fort, Baby Taj, Sikandra, Mehtab Bagh, Fatehpur Sikri, Mathura x3 spots, Vrindavan x4 spots, Barsana, Mehandipur Balaji, Kaila Devi) — everything else reuses those sets or the shared highway photo above.</div>
+</section>
+
+<section class="blk" id="fleet">
+  <div class="blk__head"><span class="blk__num">NEW SECTION</span><h2 class="blk__title">Fleet &amp; vehicles</h2></div>
+  <p class="blk__note">This section doesn't exist anywhere on the site today. Vehicles are only named in text (Dzire, Amaze, Innova, Ertiga) inside fare tables and FAQ answers — "Clean AC Cars" is the most repeated trust claim on the whole site and it currently has zero visual backing.</p>
+  <div class="twrap"><table>
+    <thead><tr><th>Placement</th><th>Image type</th><th>Size · orientation</th><th>Category</th><th>Conversion purpose</th><th>Priority</th><th>Mobile note</th></tr></thead>
+    <tbody>
+      <tr><td class="c-loc">Sedan — Dzire</td><td>Exterior, front 3/4 angle, same location/light as the other 3 vehicles</td><td class="c-dim">800×600<br>4:3 landscape</td><td class="tag">Vehicle photo</td><td>Sets expectation for what actually arrives — reduces "is it really AC / really clean" doubt</td><td><span class="pill pill--must">Must Have</span></td><td class="mob">Also crop a 4:5 portrait version for a mobile fleet-card grid</td></tr>
+      <tr><td class="c-loc">Sedan — Amaze</td><td>Same treatment as Dzire</td><td class="c-dim">800×600</td><td class="tag">Vehicle photo</td><td>Completes the sedan pair shown in every fare table</td><td><span class="pill pill--must">Must Have</span></td><td class="mob">Same crop pair</td></tr>
+      <tr><td class="c-loc">SUV — Innova</td><td>Exterior, front 3/4 angle</td><td class="c-dim">800×600</td><td class="tag">Vehicle photo</td><td>Families booking group trips need to see the bigger car before they commit</td><td><span class="pill pill--must">Must Have</span></td><td class="mob">Same crop pair</td></tr>
+      <tr><td class="c-loc">SUV — Ertiga</td><td>Same treatment as Innova</td><td class="c-dim">800×600</td><td class="tag">Vehicle photo</td><td>Completes the SUV pair</td><td><span class="pill pill--must">Must Have</span></td><td class="mob">Same crop pair</td></tr>
+      <tr><td class="c-loc">Interior — clean seats / AC vents</td><td>One generic interior shot, reused across all four vehicle cards</td><td class="c-dim">800×500<br>landscape</td><td class="tag">Vehicle photo</td><td>Backs the "sanitised, well-maintained" claim with a real look inside the car</td><td><span class="pill pill--rec">Recommended</span></td><td class="mob">Shared asset across all 4 cards</td></tr>
+      <tr><td class="c-loc">Boot / luggage space</td><td>One shot showing luggage capacity</td><td class="c-dim">800×500</td><td class="tag">Vehicle photo</td><td>Answers the unspoken "will our bags fit" question for airport and outstation bookings</td><td><span class="pill pill--opt">Optional</span></td><td class="mob">Pairs well on the airport-taxi page specifically</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="blk" id="drivers">
+  <div class="blk__head"><span class="blk__num">NEW SECTION</span><h2 class="blk__title">Drivers &amp; safety / trust</h2></div>
+  <p class="blk__note">"Verified Drivers," "driver waits during darshan," and "driver name + car number shared before pickup" are repeated across the homepage, every route page, and the About page — with zero photos backing any of it.</p>
+  <div class="twrap"><table>
+    <thead><tr><th>Placement</th><th>Image type</th><th>Size · orientation</th><th>Category</th><th>Conversion purpose</th><th>Priority</th><th>Mobile note</th></tr></thead>
+    <tbody>
+      <tr><td class="c-loc">Driver team — homepage / About</td><td>3–5 driver portraits + one group shot, semi-formal, standing beside a cab</td><td class="c-dim">600×600<br>square, per portrait</td><td class="tag">Driver photo</td><td>Turns "verified drivers" from a claim into a face — the biggest missing trust asset on the site</td><td><span class="pill pill--must">Must Have</span></td><td class="mob">3-up grid on mobile, square crops so faces stay centred at any width</td></tr>
+      <tr><td class="c-loc">ID / badge close-up</td><td>Driver ID card or uniform badge, close crop</td><td class="c-dim">300×300<br>square</td><td class="tag">Driver photo</td><td>Makes "verified" concrete — small trust icon-photo, not a hero image</td><td><span class="pill pill--rec">Recommended</span></td><td class="mob">Inline next to the "Verified Drivers" trust chip</td></tr>
+      <tr><td class="c-loc">Vehicle sanitisation in progress</td><td>Action shot — wiping down seats/handles between trips</td><td class="c-dim">800×500<br>landscape</td><td class="tag">Real photo</td><td>Backs the "sanitised before every trip" claim visually instead of just in text</td><td><span class="pill pill--rec">Recommended</span></td><td class="mob">Pairs well on the About page "trustworthy" section</td></tr>
+      <tr><td class="c-loc">Insurance sticker / commercial permit on windshield</td><td>Close-up of the visible insurance/permit sticker on the car</td><td class="c-dim">600×400</td><td class="tag">Real photo</td><td>Backs "commercially insured" without needing to publish a full document</td><td><span class="pill pill--opt">Optional</span></td><td class="mob">Small inline image, not a banner</td></tr>
+      <tr><td class="c-loc">Driver assisting a senior passenger</td><td>Staged-real shot of a driver helping an elderly rider into the cab</td><td class="c-dim">800×600<br>landscape</td><td class="tag">Real photo</td><td>Directly illustrates the About-page promise to families/senior citizens — reuse on the senior-citizen blog post too</td><td><span class="pill pill--rec">Recommended</span></td><td class="mob">Works well as a blog article image at 800×450</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="blk" id="testimonials">
+  <div class="blk__head"><span class="blk__num">SECTION</span><h2 class="blk__title">Testimonials &amp; reviews</h2></div>
+  <p class="blk__note">The homepage <code>.tgrid</code> shows 3 quotes with two-letter initials in a circle (<code>.tc__av</code>) — no real photos. A separate <code>reviews.json</code> already holds a longer list of authentic customer quotes that isn't fully surfaced yet.</p>
+  <div class="twrap"><table>
+    <thead><tr><th>Placement</th><th>Image type</th><th>Size · orientation</th><th>Category</th><th>Conversion purpose</th><th>Priority</th><th>Mobile note</th></tr></thead>
+    <tbody>
+      <tr><td class="c-loc">Review strip (new, or replacing .tgrid)</td><td>Screenshots of real Google reviews matching quotes already in <code>reviews.json</code></td><td class="c-dim">500×300<br>landscape, per card</td><td class="tag">Customer photo (screenshot)</td><td>Verifiable, zero consent friction, more credible than initials — highest ROI trust fix on the page</td><td><span class="pill pill--must">Must Have</span></td><td class="mob">Swipeable strip, one full-width card per screen</td></tr>
+      <tr><td class="c-loc">.tc__av avatar circles</td><td>Real customer photo where consent is given; otherwise keep the initials pattern — don't fake photos</td><td class="c-dim">80×80<br>square</td><td class="tag">Customer photo</td><td>A real face beats initials, but only with genuine consent — never use stock people as "customers"</td><td><span class="pill pill--rec">Recommended</span></td><td class="mob">Keep circle crop consistent with existing CSS</td></tr>
+      <tr><td class="c-loc">On-location candid (optional add)</td><td>Family boarding the cab, or a thumbs-up shot at a monument, with consent</td><td class="c-dim">800×600</td><td class="tag">Customer photo</td><td>Highest emotional trust value of any image type on the site, but slowest to collect — treat as ongoing, not a launch blocker</td><td><span class="pill pill--opt">Optional</span></td><td class="mob">Good candidate for Instagram/WhatsApp status reposting too</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="blk" id="about">
+  <div class="blk__head"><span class="blk__num">TEMPLATE</span><h2 class="blk__title">About &amp; Contact pages</h2></div>
+  <p class="blk__note">Both pages are currently pure prose (About) or a form + live Google Map embed (Contact) — the map embed already works well as-is and doesn't need replacing.</p>
+  <div class="twrap"><table>
+    <thead><tr><th>Placement</th><th>Image type</th><th>Size · orientation</th><th>Category</th><th>Conversion purpose</th><th>Priority</th><th>Mobile note</th></tr></thead>
+    <tbody>
+      <tr><td class="c-loc">About — "Where We're Based"</td><td>Office exterior / signage at Rajeshwar Mandir, Kaveri Vihar Phase II</td><td class="c-dim">900×600<br>landscape</td><td class="tag">Real photo</td><td>Confirms this is a real, findable local business — matches Google Business Profile expectations</td><td><span class="pill pill--must">Must Have</span></td><td class="mob">Full-width single image above the address block</td></tr>
+      <tr><td class="c-loc">About — "Who We Are"</td><td>Founder / team photo</td><td class="c-dim">800×800<br>square or 4:5</td><td class="tag">Real photo</td><td>Humanises the business behind the WhatsApp number</td><td><span class="pill pill--rec">Recommended</span></td><td class="mob">Single portrait, centred</td></tr>
+      <tr><td class="c-loc">About — routes/fleet section</td><td>Reuse the Fleet lineup photo</td><td class="c-dim">800×600</td><td class="tag">Vehicle photo</td><td>Zero extra shoot cost, reinforces fleet variety claim already in the text</td><td><span class="pill pill--must">Must Have</span></td><td class="mob">Shared asset</td></tr>
+      <tr><td class="c-loc">Contact — beside the map embed</td><td>Office exterior photo (reuse from About)</td><td class="c-dim">600×400</td><td class="tag">Map + real photo</td><td>Pairs the live map with a photo of what the pin actually looks like</td><td><span class="pill pill--rec">Recommended</span></td><td class="mob">Stack under the map on narrow screens</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="blk" id="booking">
+  <div class="blk__head"><span class="blk__num">TEMPLATE</span><h2 class="blk__title">Booking flow (book/) — keep this one lean</h2></div>
+  <p class="blk__note">The <code>/book/</code> page is a focused WhatsApp-handoff form (route toggle, locations, price badge, submit). This is the page where images can do the most <i>damage</i> if overused — every extra KB here is between the visitor and a confirmed booking.</p>
+  <div class="twrap"><table>
+    <thead><tr><th>Placement</th><th>Image type</th><th>Size · orientation</th><th>Category</th><th>Conversion purpose</th><th>Priority</th><th>Mobile note</th></tr></thead>
+    <tbody>
+      <tr><td class="c-loc">Above the submit button</td><td>Tiny driver+car thumbnail with a caption like "Your driver will look like this"</td><td class="c-dim">120×120<br>square, ≤25KB</td><td class="tag">Driver + vehicle photo</td><td>Small last-second reassurance right before the commit action</td><td><span class="pill pill--opt">Optional</span></td><td class="mob">Must not push the submit button below the fold — cut it on mobile if it does</td></tr>
+      <tr><td class="c-loc">Page hero / banner</td><td>Do not add one</td><td class="c-dim">—</td><td class="tag">—</td><td>The form itself must be the first thing visible — a hero image pushes it down and costs conversions</td><td><span class="pill pill--opt">Avoid</span></td><td class="mob">Never add a hero image here</td></tr>
+      <tr><td class="c-loc">Success state (.bk-success)</td><td>Keep the current checkmark icon — no photo</td><td class="c-dim">—</td><td class="tag">Icon</td><td>A confirmation icon reads instantly; a photo would only slow the moment down</td><td><span class="pill pill--opt">Optional</span></td><td class="mob">Unchanged</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="blk" id="blog">
+  <div class="blk__head"><span class="blk__num">EXISTING INFRASTRUCTURE</span><h2 class="blk__title">Blog — the placeholders are already built, the photos are the only thing missing</h2></div>
+  <div class="callout"><b>Found in the codebase:</b> <code>blog/images/README.txt</code> already specifies exact filenames and sizes for 5 posts, and <code>blog/css/blog.css</code> already has a <code>.img-ph</code> placeholder state with an <code>onerror</code> fallback wired into 5 of the 15 article templates. Right now, <b>all 15</b> listing-page cards (<code>.bcard__thumb--ph</code>) render as empty placeholders and zero image files exist beyond the README. This is the cheapest win on the entire site — the dev work is done, only the photography is outstanding.</div>
+  <div class="twrap"><table>
+    <thead><tr><th>Placement</th><th>Image type</th><th>Size · orientation</th><th>Category</th><th>Conversion purpose</th><th>Priority</th><th>Mobile note</th></tr></thead>
+    <tbody>
+      <tr><td class="c-loc">Blog listing cards ×15 (.bcard__thumb)</td><td>One destination thumbnail per post (Taj Mahal, Prem Mandir/Banke Bihari, Agra skyline, etc. — subjects already named in the README)</td><td class="c-dim">800×450<br>landscape 16:9</td><td class="tag">Destination photo</td><td>A wall of grey placeholders currently kills click-through from the blog index — this is pure lost traffic</td><td><span class="pill pill--must">Must Have</span></td><td class="mob">Single column list on mobile, image left or on top — lazy-load all but the first 3</td></tr>
+      <tr><td class="c-loc">Article hero (.article-hero-img) — 5 posts already wired</td><td>Hi-res version of the same destination subject as the listing thumb</td><td class="c-dim">1200×630<br>landscape 16:9</td><td class="tag">Destination photo</td><td>Removes the "Add your hero image here" placeholder text currently visible to every reader</td><td><span class="pill pill--must">Must Have</span></td><td class="mob"><code>aspect-ratio:16/9</code> already set — no layout shift once the image loads</td></tr>
+      <tr><td class="c-loc">Remaining 10 posts — need the pattern added</td><td>Same hero + listing thumb treatment, extended to the rest of the blog</td><td class="c-dim">1200×630 / 800×450</td><td class="tag">Destination photo</td><td>Brings the other 10 posts up to the same standard as the 5 already wired</td><td><span class="pill pill--rec">Recommended</span></td><td class="mob">Same as above</td></tr>
+      <tr><td class="c-loc">In-article supporting images (.article-img)</td><td>1–2 images inside long posts breaking up text — reuse the same destination sets shot for route pages</td><td class="c-dim">800–1000 wide<br>landscape</td><td class="tag">Destination photo</td><td>Improves dwell time and SEO; the class and caption markup already exist in the README's documented pattern</td><td><span class="pill pill--rec">Recommended</span></td><td class="mob">Full width, one per scroll of content</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="blk" id="sitewide">
+  <div class="blk__head"><span class="blk__num">SITEWIDE</span><h2 class="blk__title">Meta / share images</h2></div>
+  <p class="blk__note">Every page's <code>og:image</code> and <code>twitter:image</code> currently point at the small square logo — not a real share card. This matters more than usual here: the business runs on WhatsApp, and customers routinely <i>forward the link</i> to family when planning a trip.</p>
+  <div class="twrap"><table>
+    <thead><tr><th>Placement</th><th>Image type</th><th>Size · orientation</th><th>Category</th><th>Conversion purpose</th><th>Priority</th><th>Mobile note</th></tr></thead>
+    <tbody>
+      <tr><td class="c-loc">og:image / twitter:image (all pages)</td><td>Branded share card — logo + tagline over a hero destination photo</td><td class="c-dim">1200×630<br>landscape</td><td class="tag">Background + destination photo</td><td>This is the image people see when the link is forwarded on WhatsApp/Facebook — directly affects click-through on shared links</td><td><span class="pill pill--must">Must Have</span></td><td class="mob">Design for a small preview thumbnail — keep text large and centred</td></tr>
+      <tr><td class="c-loc">Favicon / app icons</td><td>Already done — 16/32/48px PNGs, SVG, apple-touch-icon, manifest icons all present</td><td class="c-dim">—</td><td class="tag">Icon</td><td>No action needed</td><td><span class="pill pill--opt">Done</span></td><td class="mob">—</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="blk" id="ux">
+  <div class="blk__head"><span class="blk__num">PATTERNS</span><h2 class="blk__title">Galleries, sliders, cards, banners &amp; the WhatsApp section</h2></div>
+  <p class="blk__note">Answers to "how should these actually behave" so the extra images don't turn into extra weight or clutter.</p>
+  <div class="pgrid">
+    <div class="pcard"><h4>Route / blog cards</h4><p><span class="do">Do:</span> one static thumbnail per card, lazy-loaded. <span class="dont">Don't:</span> per-card image carousels — 13+ cards on one grid can't each carry a slider without tanking load time.</p></div>
+    <div class="pcard"><h4>"Places to Visit" galleries</h4><p><span class="do">Do:</span> CSS scroll-snap horizontal strip, native and JS-free. <span class="dont">Don't:</span> a JS carousel library — unnecessary dependency for 3–5 images.</p></div>
+    <div class="pcard"><h4>Homepage hero</h4><p><span class="do">Do:</span> one static photo, or none. <span class="dont">Don't:</span> an auto-rotating full-bleed slider — adds layout-shift risk and competes with the WhatsApp CTA for attention.</p></div>
+    <div class="pcard"><h4>CTA banners (.cta)</h4><p><span class="do">Do:</span> keep the flat black band. <span class="dont">Don't:</span> put a photo behind CTA text unless it's darkened enough that button contrast is untouched.</p></div>
+    <div class="pcard"><h4>WhatsApp floating button &amp; sticky mobile bar</h4><p><span class="do">Do:</span> icon only, every page, every scroll frame. <span class="dont">Don't:</span> ever add an image here — it's the single most-clicked element on the site and must stay instant.</p></div>
+    <div class="pcard"><h4>Testimonial strip</h4><p><span class="do">Do:</span> a static grid or manual-swipe strip. <span class="dont">Don't:</span> auto-advance — hides quotes from readers who don't interact, which hurts trust on an already-thin review section.</p></div>
+    <div class="pcard"><h4>Lightbox / full-size view</h4><p><span class="do">Do:</span> a plain link-to-full-image or the native <code>&lt;dialog&gt;</code> element if you want a click-to-enlarge gallery. <span class="dont">Don't:</span> pull in a JS lightbox library for this.</p></div>
+    <div class="pcard"><h4>Fleet grid</h4><p><span class="do">Do:</span> 4 static cards, same lighting/background for visual consistency. <span class="dont">Don't:</span> mix stock car photos with real ones — inconsistency reads as untrustworthy faster than having no photos at all.</p></div>
+  </div>
+</section>
+
+<section class="blk" id="perf">
+  <div class="blk__head"><span class="blk__num">GUARDRAILS</span><h2 class="blk__title">Keeping it fast — the rules that make "more images" safe</h2></div>
+  <ul style="font-size:.87rem; color:var(--ink-soft); line-height:1.85; padding-left:1.2rem; max-width:74ch">
+    <li><b style="color:var(--ink)">Format &amp; weight:</b> WebP with JPEG fallback, target under 120–150KB per image — this matches the limit the site's own blog README already sets.</li>
+    <li><b style="color:var(--ink)">Loading strategy:</b> <code>loading="lazy"</code> on everything below the fold; <code>loading="eager"</code> only on the single largest above-the-fold image per page.</li>
+    <li><b style="color:var(--ink)">Reuse relentlessly:</b> one Taj Mahal photo set can serve a homepage route card, two route-page heroes, and three blog posts. Shoot once, deploy everywhere.</li>
+    <li><b style="color:var(--ink)">Cap density:</b> one image per route card, not a gallery per card — a 13-card grid with even 3 images each is 39 requests before a visitor sees a single price.</li>
+    <li><b style="color:var(--ink)">Skip the long tail:</b> Aligarh, Firozabad, Etawah, Hathras, Tundla, Sirsaganj, Shikohabad don't need dedicated shoots — one shared highway photo covers all seven.</li>
+    <li><b style="color:var(--ink)">Prevent layout shift:</b> set explicit <code>width</code>/<code>height</code> or <code>aspect-ratio</code> on every <code>&lt;img&gt;</code> — the blog's <code>.article-hero-img</code> already does this correctly; extend the same pattern everywhere new images go.</li>
+  </ul>
+</section>
+
+<section class="blk" id="checklist">
+  <div class="blk__head"><span class="blk__num">FINAL PLAN</span><h2 class="blk__title">Organised shoot checklist</h2></div>
+  <p class="blk__note">Four shoot days cover essentially every "Must Have" and "Recommended" row above. Days 2 and 3 need early-morning light; Day 1 can happen any time.</p>
+  <div class="days">
+    <div class="day">
+      <div class="day__head"><div class="day__title">Day 1 — Fleet, office &amp; drivers</div><div class="day__meta">Half day · controlled location · any time of day</div></div>
+      <div class="day__body"><ul class="chk">
+        <li><b>4× vehicle exteriors</b> — Dzire, Amaze, Innova, Ertiga, same spot &amp; light</li>
+        <li><b>1× interior</b> — clean seats / AC vents, reusable across all 4 cars</li>
+        <li><b>1× boot / luggage space</b></li>
+        <li><b>Office exterior + signage</b>, 2–3 angles</li>
+        <li><b>Founder / team photo</b></li>
+        <li><b>3–5 driver portraits + 1 group shot</b>, beside a cab</li>
+        <li><b>1× ID / badge close-up</b></li>
+        <li><b>1× vehicle sanitisation</b> in progress</li>
+        <li><b>1× driver assisting a senior passenger</b> into the car</li>
+      </ul></div>
+    </div>
+    <div class="day">
+      <div class="day__head"><div class="day__title">Day 2 — Agra monuments</div><div class="day__meta">Full day · highest ROI · start before sunrise</div></div>
+      <div class="day__body"><ul class="chk">
+        <li><b>Taj Mahal</b> — main gate view + sunrise glow (serves 3 route pages + 2 blog posts + homepage card)</li>
+        <li><b>Agra Fort</b> exterior</li>
+        <li><b>Baby Taj</b> (Itimad-ud-Daulah)</li>
+        <li><b>Akbar's Tomb</b>, Sikandra</li>
+        <li><b>Mehtab Bagh</b> — sunset Taj view</li>
+        <li><b>Fatehpur Sikri</b> — Buland Darwaza</li>
+        <li><b>Cab + driver waiting</b> shot at 1–2 monuments above</li>
+      </ul></div>
+    </div>
+    <div class="day">
+      <div class="day__head"><div class="day__title">Day 3 — Mathura, Vrindavan &amp; Barsana</div><div class="day__meta">Full day · second-highest ROI · evening aarti at Vishram Ghat if timed right</div></div>
+      <div class="day__body"><ul class="chk">
+        <li><b>Krishna Janmabhoomi</b>, Mathura</li>
+        <li><b>Dwarkadhish Temple</b>, Mathura — exterior only</li>
+        <li><b>Vishram Ghat</b> — ideally at evening aarti</li>
+        <li><b>Banke Bihari Temple</b>, Vrindavan — exterior/gate only</li>
+        <li><b>Prem Mandir</b> — day shot, illuminated night shot if feasible</li>
+        <li><b>ISKCON Vrindavan</b></li>
+        <li><b>Nidhivan</b></li>
+        <li><b>Radha Rani Temple</b>, Barsana</li>
+      </ul>
+      <p class="note-inline">Note: Banke Bihari and Dwarkadhish prohibit photography/phones inside the inner sanctum — plan for exteriors, gates and approach streets only.</p></div>
+    </div>
+    <div class="day">
+      <div class="day__head"><div class="day__title">Day 4 — Rajasthan temple circuit</div><div class="day__meta">Optional / as feasible · lower-traffic pages</div></div>
+      <div class="day__body"><ul class="chk">
+        <li><b>Mehandipur Balaji</b> exterior</li>
+        <li><b>Kaila Devi Temple</b>, Karauli exterior</li>
+      </ul>
+      <p class="note-inline">If a dedicated trip isn't feasible soon, these two are the acceptable stock-photo exception — they're lower-traffic pages than Mathura/Vrindavan/Taj.</p></div>
+    </div>
+    <div class="day">
+      <div class="day__head"><div class="day__title">Ongoing — reviews &amp; customer photos</div><div class="day__meta">No dedicated day · folded into daily operations</div></div>
+      <div class="day__body"><ul class="chk">
+        <li><b>Screenshot 5–6 best reviews</b> from Google, matching quotes already in <code>reviews.json</code></li>
+        <li><b>Ask drivers to snap 1 consented photo per trip</b> — car + destination, builds a growing library over weeks</li>
+        <li><b>Collect 3–5 customer testimonial photos</b> from repeat/friendly riders with a simple WhatsApp consent line</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">Built from a direct read of the live site templates — index.html, the shared route-page template, blog/, about/, contact/, book/. Reuse assets across templates wherever a table row says so. Internal planning document — not linked from site navigation, not in sitemap.xml.</footer>
+
+</body>
+</html>
