@@ -1049,6 +1049,49 @@ p:last-child { margin-bottom: 0 }
 .pimg figcaption { padding: .55rem .9rem; font-size: .74rem; color: var(--g400); background: var(--g50); border-top: 1px solid var(--g100) }
 .pimg--tall img { aspect-ratio: 4 / 5 }
 
+/* ── Route image strip (injected by js/route-images.js) ─────────────────── */
+.rstrip-wrap { padding: 2rem 0; background: var(--white) }
+.rstrip {
+  display: flex;
+  gap: .7rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: .15rem;
+}
+.rstrip::-webkit-scrollbar { display: none }
+.rstrip__item {
+  flex: 0 0 78%;
+  scroll-snap-align: start;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--r);
+  overflow: hidden;
+  border: 1px solid var(--g100);
+  background: var(--g50);
+}
+.rstrip__item img { width: 100%; height: 100%; object-fit: cover; display: block }
+.rstrip__item--empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: .8rem;
+  border-style: dashed;
+  border-color: var(--g200);
+  color: var(--g400);
+  font-size: .74rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+}
+@media (min-width: 640px) {
+  .rstrip { display: grid; grid-template-columns: repeat(3, 1fr); overflow: visible }
+  .rstrip__item { flex: none }
+}
+@media (min-width: 960px) {
+  .rstrip { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)) }
+}
+
 /* ── Responsive breakpoints ──────────────────────────────────────────────── */
 @media (min-width: 640px) {
   .rgrid, .tgrid, .incs { grid-template-columns: repeat(2, 1fr) }
