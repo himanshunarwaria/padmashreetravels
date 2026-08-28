@@ -431,19 +431,102 @@ p:last-child { margin-bottom: 0 }
   margin-top: .3rem;
 }
 
-/* Hero with a full-bleed destination photo behind it (same treatment as .phero--img) */
+/* Hero with a full-bleed photo behind it (same treatment as .phero--img).
+   The photo comes from a --hero-img custom property set in the page style attribute.
+   NOTE: the url() inside that property resolves against THIS stylesheet, not against the
+   HTML document, so the page must write it as url('../images/...') — with the ../ — even
+   on root-level pages like index.html. Drop the ../ and it 404s to /css/images/... and
+   the hero silently falls back to flat black.
+
+   The banner photo is lit for exactly this job: its left half is pure black (max
+   luminance 6/255) and the vehicles sit in the right half. So the scrim only has to
+   cover the short band where the copy runs past the black and into the first car — it
+   reaches fully transparent well before the vehicles, which stay at full contrast. */
 .hero--img {
   background-image:
-    linear-gradient(90deg, rgba(10,10,10,.94) 0%, rgba(10,10,10,.86) 30%, rgba(10,10,10,.55) 60%, rgba(10,10,10,.3) 100%),
+    linear-gradient(90deg, rgba(10,10,10,.8) 0%, rgba(10,10,10,.74) 32%, rgba(10,10,10,.4) 50%, rgba(10,10,10,0) 63%),
     var(--hero-img);
   background-size: cover;
-  background-position: center 35%;
+  background-position: 88% center;
 }
-.hero--img::before {
-  background: linear-gradient(180deg, rgba(10,10,10,0) 60%, rgba(10,10,10,.5) 100%);
+/* No bottom vignette on the photo hero — it greyed out the front of the vehicles. */
+.hero--img::before { background: none }
+/* Standalone photo band, shown only on narrow screens (see the max-width rule below). */
+.hero__photo { display: none }
+/* ── Below 960px: heading, sub-heading, then the photo ───────────────────────
+   On a phone the 2.66:1 banner can only show a fragment of itself behind the
+   copy, and a scrim heavy enough to keep that copy readable buries the vehicles
+   anyway. So on narrow screens the photo stops being a backdrop and becomes a
+   full-bleed band in the flow — after the headline and sub-heading, before the
+   CTAs — with nothing laid over it. The aspect-ratio IS the crop: 1249:941 of
+   the source anchored right, which is exactly the window holding all three
+   vehicles (bright content measured at x 1340..2489 of 2499). */
+@media (max-width: 959px) {
+  .hero--img { background-image: none; background-color: var(--black) }
+  .hero--img .hero__photo {
+    display: block;
+    aspect-ratio: 1249 / 941;
+    background-image: var(--hero-img);
+    background-size: cover;
+    background-position: right center;
+    background-repeat: no-repeat;
+    /* full-bleed: cancel the .container gutter so the band runs edge to edge */
+    margin: 1.6rem -1.25rem 1.8rem;
+  }
+}
+/* On a phone the tight 1.33 crop fills the frame with the lineup. Carry that ratio
+   into tablet widths and the band grows to ~580px and buries the CTAs, so widen the
+   window instead — it just takes in more of the photo's black left side, and the
+   vehicles stay anchored to the right edge either way. */
+@media (min-width: 600px) and (max-width: 959px) {
+  .hero--img .hero__photo { aspect-ratio: 2 / 1 }
 }
 @media (min-width: 960px) {
   .hero--img { background-position: right center }
+}
+
+/* ── Compact homepage hero ───────────────────────────────────────────────────
+   The homepage hero runs ~35% shorter than the default .hero. Widening the copy
+   column pulls the headline and the three CTAs each up a line, and the type is
+   scaled down to match, so the shorter box reads as deliberate rather than
+   cramped. Scoped to .hero--img — the interior .hero and .hero--sm pages keep
+   the original proportions. The padding rules need the doubled .hero.hero--img
+   selector to outrank the min-width:960px `.hero` padding further down this
+   file. */
+.hero.hero--img { padding: 4.8rem 0 5rem }
+.hero--img .hero__in { max-width: 780px }
+.hero--img .hero__label { margin-bottom: 1.1rem }
+.hero--img h1 {
+  font-size: clamp(1.5rem, 3.5vw, 2.9rem);
+  line-height: 1.13;
+  margin-bottom: .7rem;
+}
+.hero--img .hero__d {
+  font-size: .95rem;
+  line-height: 1.55;
+  max-width: 640px;
+  margin-bottom: 1.5rem;
+}
+.hero--img .hero__acts { gap: .5rem; margin-bottom: 1.8rem }
+.hero--img .hero__stats { padding-top: 1.5rem; gap: 1.8rem }
+.hero--img .hero__sv { font-size: 1.6rem }
+.hero--img .hero__sl { font-size: .63rem; margin-top: .22rem }
+@media (min-width: 960px) {
+  .hero.hero--img { padding: 5.7rem 0 5.9rem }
+}
+/* Below 960px the headline leads, so the hero keeps a top gap under the header —
+   just a tighter one than the desktop banner uses. */
+@media (max-width: 959px) {
+  .hero.hero--img { padding-top: 2.6rem; padding-bottom: 2.4rem }
+}
+/* On phones the CTAs stack full-width and become the tallest block in the hero,
+   so trim them and the stats to hold the compact height there too. */
+@media (max-width: 640px) {
+  .hero--img .hero__label { margin-bottom: .8rem }
+  .hero--img .hero__d { font-size: .88rem; margin-bottom: 1rem }
+  .hero--img .hero__acts .btn { padding: .72rem 1.3rem; font-size: .89rem }
+  .hero--img .hero__stats { padding-top: 1.1rem }
+  .hero--img .hero__sv { font-size: 1.35rem }
 }
 
 /* ── Trust strip ─────────────────────────────────────────────────────────── */
