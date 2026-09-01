@@ -1,4 +1,56 @@
-<!DOCTYPE html><html lang="en"><head>
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  Padma Shree Travels — Agra to Jaipur Taxi (production route page)
+  ============================================================================
+  Rebuilt from two sources:
+    * Structure, visual language and conversion flow  ..  the approved
+      neo-brutalist landing page ("Landing Pages/agra-to-jaipur/index.html").
+    * Route depth, SEO copy, schema, internal links and GTM  ..  the previous
+      production page at this same URL.
+
+  DELIBERATE DIFFERENCES FROM THE LANDING PAGE — do not "restore" these:
+    1. NO Tailwind CDN. The landing page loads https://cdn.tailwindcss.com,
+       which compiles utility classes in the browser. That is render-blocking,
+       ships ~120 KB of JS to do a stylesheet's job, and Tailwind's own docs
+       say not to use it in production. Every utility the page needed is
+       written out below as real CSS instead. The page has no third-party
+       dependency of any kind now.
+    2. Stats, gallery and "results" grids are STATIC HTML, not rendered from a
+       JS array. Static means no layout shift, crawlable content, and correct
+       width/height + loading attributes on every image.
+    3. CTA hrefs are written into the HTML, not assigned by script, so every
+       WhatsApp button works with JavaScript disabled.
+    4. Images come from the site's existing shared folders (images/fleet/,
+       images/destinations/). Every image the landing page used was verified
+       byte-identical to one already on the site, so nothing was duplicated
+       into a per-page assets folder.
+
+  DESIGN TOKENS (see :root)
+    --accent #2FE07E  CTA fill      --accent-deep #22C55E  hard card shadow
+    --ink    #000000  borders       --navy        #0E2439  dark band
+    --gold   #EFC75E  CTA hover     shadow: 7px 7px 0, NO blur
+
+  KEY RULES OF THIS DESIGN
+    * CTA text is BLACK, not white.       * Shadows never have a blur radius.
+    * 3px solid black border on buttons.  * Border radius stays small.
+    * Green accent only — no gradients, glows or glass.
+
+  BUSINESS FACTS (verified, do not invent beyond these)
+    Phone / WhatsApp .. +91-87200-81102     Email .. travels.padamshree@gmail.com
+    Route ............. Agra to Jaipur, approx. 235-240 km via NH-21 (a.k.a. NH-11)
+    Drive time ........ 4-5 hours each way
+    Fleet ............. Sedan 4 | Ertiga 6 | Innova Crysta 7 | Tempo Traveller 12-15
+    FARES ............. NOT PUBLISHED for this route. Every cab type quotes
+                        "Fare on WhatsApp". Do NOT invent numbers here.
+    Included .......... AC vehicle, fuel, driver charges
+    Customer pays ..... highway tolls on NH-21, at actuals
+    En-route stops .... Fatehpur Sikri (~40 km), Mehandipur Balaji (near Mahwa),
+                        Bharatpur / Keoladeo on the bypass
+  ============================================================================
+-->
+<html lang="en">
+<head>
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -6,269 +58,954 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-NWDQLKM9');</script>
 <!-- End Google Tag Manager -->
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="robots" content="index, follow">
 <meta name="googlebot" content="index, follow">
 <meta http-equiv="content-language" content="en-IN">
+
 <title>Agra to Jaipur Taxi | AC Cab One Way &amp; Round Trip &#8211; Fixed Fare</title>
-<meta name="description" content="Book AC taxi from Agra to Jaipur (approx. 240 km, 4&#8211;5 hrs) via NH-21. One way &amp; round trip, stop at Fatehpur Sikri or Mehandipur Balaji en route. Fixed fare on WhatsApp +91 87200 81102.">
-<meta name="keywords" content="agra to jaipur taxi, agra to jaipur cab fare, agra to jaipur taxi price, one way taxi agra to jaipur, agra to jaipur cab via fatehpur sikri">
+<meta name="description" content="Agra to Jaipur taxi &#8211; private AC cab, approx. 235&#8211;240 km via NH-21 in 4&#8211;5 hrs. One way or round trip, hotel pickup, Fatehpur Sikri stop. Fare on WhatsApp +91 87200 81102.">
+<meta name="keywords" content="agra to jaipur taxi, agra to jaipur cab, agra to jaipur taxi fare, one way taxi agra to jaipur, agra to jaipur round trip cab, agra to jaipur cab via fatehpur sikri">
 <link rel="canonical" href="https://www.padmashreetravels.in/agra-to-jaipur-taxi/">
-<meta property="og:title" content="Agra to Jaipur Taxi | AC Cab One Way &amp; Round Trip &#8211; Fixed Fare">
-<meta property="og:description" content="Book AC taxi from Agra to Jaipur (approx. 240 km, 4&#8211;5 hrs) via NH-21. One way &amp; round trip, stop at Fatehpur Sikri or Mehandipur Balaji en route. Fixed fare on WhatsApp +91 87200 81102.">
+
+<meta property="og:title" content="Agra to Jaipur Taxi &#8211; Private AC Cab, One Way or Round Trip | Padma Shree Travels">
+<meta property="og:description" content="Private AC cab from Agra to Jaipur, approx. 235&#8211;240 km in 4&#8211;5 hours. Door-to-door pickup anywhere in Agra and a fixed fare confirmed on WhatsApp before you travel.">
 <meta property="og:url" content="https://www.padmashreetravels.in/agra-to-jaipur-taxi/">
-<meta property="og:type" content="website"><meta property="og:locale" content="en_IN"><meta property="og:image" content="https://www.padmashreetravels.in/images/logo.png">
-<meta name="twitter:card" content="summary"><meta name="twitter:title" content="Agra to Jaipur Taxi | AC Cab One Way &amp; Round Trip &#8211; Fixed Fare"><meta name="twitter:description" content="Book AC taxi from Agra to Jaipur (approx. 240 km, 4&#8211;5 hrs) via NH-21. One way &amp; round trip, stop at Fatehpur Sikri or Mehandipur Balaji en route. Fixed fare on WhatsApp +91 87200 81102."><meta name="twitter:image" content="https://www.padmashreetravels.in/images/logo.png">
-<link rel="icon" href="/favicon-48x48.png" sizes="48x48" type="image/png"><link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png"><link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="shortcut icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../css/style.css">
-<style>:root{--ff:Inter,-apple-system,sans-serif;--ffd:Inter,-apple-system,sans-serif}</style>
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_IN">
+<meta property="og:site_name" content="Padma Shree Travels">
+<meta property="og:image" content="https://www.padmashreetravels.in/images/destinations/dest-jaipur-hawa-mahal.webp">
+<meta property="og:image:alt" content="Hawa Mahal in Jaipur, the destination of the Agra to Jaipur taxi route">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Agra to Jaipur Taxi &#8211; Private AC Cab, One Way or Round Trip">
+<meta name="twitter:description" content="Private AC cab from Agra to Jaipur, approx. 235&#8211;240 km in 4&#8211;5 hours. Fare confirmed on WhatsApp before you book.">
+<meta name="twitter:image" content="https://www.padmashreetravels.in/images/destinations/dest-jaipur-hawa-mahal.webp">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","@id":"https://www.padmashreetravels.in/#business","name":"Padma Shree Travels","url":"https://www.padmashreetravels.in/","telephone":"+91-87200-81102","email":"travels.padamshree@gmail.com","image":"https://www.padmashreetravels.in/images/logo.png","address":{"@type":"PostalAddress","streetAddress":"Rajeshwar Mandir, Kaveri Vihar Phase II, Shamsabad","addressLocality":"Agra","addressRegion":"Uttar Pradesh","postalCode":"282001","addressCountry":"IN"},"geo":{"@type":"GeoCoordinates","latitude":27.1767,"longitude":78.0081},"openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"00:00","closes":"23:59"}}</script>
+<link rel="icon" href="/favicon-48x48.png" sizes="48x48" type="image/png">
+<link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How far is Jaipur from Agra?","acceptedAnswer":{"@type":"Answer","text":"Jaipur is approximately 235–240 km from Agra via NH-21 (also signed as NH-11). The drive takes about 4 to 5 hours by private taxi, depending on traffic and stops."}},{"@type":"Question","name":"What is the taxi fare from Agra to Jaipur?","acceptedAnswer":{"@type":"Answer","text":"Fare depends on the cab type and whether you book one-way or round trip. Message us on WhatsApp with your travel date for today's fixed fare — we quote before you book, with tolls mentioned separately."}},{"@type":"Question","name":"Can we stop at Fatehpur Sikri on the way to Jaipur?","acceptedAnswer":{"@type":"Answer","text":"Yes. Fatehpur Sikri lies directly on the Agra–Jaipur highway, about 40 km from Agra, and is an easy 1–1.5 hour stop without a major detour. Just tell us when booking so the driver plans the stop."}},{"@type":"Question","name":"Can we also stop at Mehandipur Balaji Temple en route?","acceptedAnswer":{"@type":"Answer","text":"Yes. Mehandipur Balaji Temple is just off the same highway near Mahwa, about two-thirds of the way to Jaipur. Many travellers combine a Balaji darshan with their Agra to Jaipur journey — ask us to plan the stop when you book."}},{"@type":"Question","name":"Is a one-way taxi available, or only round trip?","acceptedAnswer":{"@type":"Answer","text":"Both are available. One-way drop to Jaipur suits travellers continuing their trip from there; round trip suits a day visit or a short Jaipur stay with the same cab bringing you back to Agra."}},{"@type":"Question","name":"What is the road like, and how many toll points are there?","acceptedAnswer":{"@type":"Answer","text":"The route runs on NH-21, a well-maintained four-lane highway for most of the way, passing Fatehpur Sikri, Bharatpur, Mahwa, and Dausa before reaching Jaipur. There are a few toll plazas along the way, paid by the customer at actuals."}},{"@type":"Question","name":"Is the cab suitable for families and senior citizens on this long drive?","acceptedAnswer":{"@type":"Answer","text":"Yes. For a 4–5 hour highway drive we recommend the Innova Crysta for extra comfort, and we plan a tea or washroom break en route. Tell us on WhatsApp about any special needs — extra stops cost nothing."}}]}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="../images/destinations/dest-cab-at-monument.webp" fetchpriority="high">
+
+<!-- Shared stylesheet, linked BEFORE this page's own inline block so the
+     inline rules still win for everything they define. It is here only to
+     supply the shared .fare-* fare-breakdown component. -->
+<link rel="stylesheet" href="../css/landing.css">
+<style>
+/* ===================================================================
+   Design tokens
+   =================================================================== */
+:root{
+  --accent:#2FE07E;
+  --accent-deep:#22C55E;
+  --accent-dark:#15803D;
+  --ink:#000;
+  --ink-950:#0A0F14;
+  --navy:#0E2439;
+  --gold:#EFC75E;
+  --warn:#FBBF24;
+  --container:1400px;
+}
+
+/* ===================================================================
+   Reset + base
+   =================================================================== */
+*,*::before,*::after{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
+body{
+  margin:0; background:#fff; color:#000; overflow-x:hidden;
+  font-family:'Poppins', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+img{ max-width:100%; display:block; }
+h1,h2,h3,h4{ color:#000; margin:0; font-weight:700; letter-spacing:-.01em; }
+p{ margin:0; }
+ul{ margin:0; padding:0; list-style:none; }
+a{ color:inherit; text-decoration:none; transition:180ms ease; }
+button{ font-family:inherit; }
+
+/* Visible keyboard focus on every interactive element. */
+a:focus-visible, button:focus-visible, summary:focus-visible{
+  outline:3px solid var(--accent-dark); outline-offset:3px; border-radius:3px;
+}
+
+.sr-only{
+  position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+  overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+}
+.wrap{ max-width:var(--container); margin:0 auto; padding-left:20px; padding-right:20px; }
+@media (min-width:640px){ .wrap{ padding-left:32px; padding-right:32px; } }
+.center{ text-align:center; }
+
+/* ===================================================================
+   PrimaryCTA — one component, every instance identical.
+   Black text, 3px black border, hard offset shadow with NO blur.
+   Hover presses the button down into its own shadow.
+   =================================================================== */
+.btn-primary{
+  display:inline-block; background:var(--accent); color:#000;
+  font-weight:700; font-size:clamp(13px,1.15vw,17px); line-height:1.35;
+  padding:clamp(16px,1.9vw,24px) clamp(20px,3vw,44px);
+  border:3px solid #000; border-radius:6px; box-shadow:7px 7px 0 #000;
+  text-align:center;
+  transition:background-color .2s ease, transform 180ms ease, box-shadow 180ms ease;
+}
+.btn-primary:hover{ background:var(--gold); transform:translate(3px,3px); box-shadow:4px 4px 0 #000; }
+.btn-primary:active{ transform:translate(7px,7px); box-shadow:0 0 0 #000; }
+
+.btn-header{
+  display:inline-block; background:var(--accent); color:#000;
+  font-weight:700; font-size:13px; padding:8px 16px;
+  border:2px solid #000; border-radius:5px; box-shadow:3px 3px 0 #000;
+  white-space:nowrap;
+  transition:background-color .2s ease, transform 180ms ease, box-shadow 180ms ease;
+}
+.btn-header:hover{ background:var(--gold); transform:translate(2px,2px); box-shadow:1px 1px 0 #000; }
+
+.link-call{
+  font-size:14px; font-weight:600; color:rgba(255,255,255,.75);
+  text-decoration:underline; text-underline-offset:2px;
+}
+.link-call:hover{ color:var(--accent); }
+
+/* ===================================================================
+   Header
+   =================================================================== */
+.hdr{ position:sticky; top:0; z-index:50; background:var(--ink-950); border-bottom:2px solid #000; }
+.hdr__in{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding-top:12px; padding-bottom:12px; }
+.hdr__logo{ display:flex; align-items:center; gap:8px; font-weight:700; font-size:14px; color:#fff; flex-shrink:0; min-width:0; }
+.hdr__mark{
+  display:inline-flex; align-items:center; justify-content:center;
+  height:28px; width:28px; border-radius:4px; background:var(--accent);
+  border:2px solid #000; color:#000; font-size:11px; font-weight:900; flex-shrink:0;
+}
+.hdr__name{ display:none; }
+.hdr__nav{ display:none; align-items:center; gap:18px; font-size:12px; font-weight:500; color:rgba(255,255,255,.75); }
+.hdr__nav a:hover{ color:var(--accent); }
+@media (min-width:640px){ .hdr__logo{ font-size:16px; } .hdr__name{ display:inline; } }
+@media (min-width:1024px){ .hdr__nav{ display:flex; } }
+
+/* ===================================================================
+   Hero band — near-black with a restrained green technical wash
+   =================================================================== */
+.hero-bg{
+  background-color:#000;
+  background-image:
+    radial-gradient(circle at 62% 18%, rgba(34,197,94,.10) 0%, transparent 42%),
+    radial-gradient(circle at 88% 72%, rgba(34,197,94,.09) 0%, transparent 38%),
+    radial-gradient(circle at 30% 88%, rgba(34,197,94,.05) 0%, transparent 45%),
+    radial-gradient(circle at 74% 30%, rgba(120,220,150,.05) 0%, transparent 9%),
+    radial-gradient(circle at 55% 62%, rgba(120,220,150,.045) 0%, transparent 7%),
+    radial-gradient(circle at 93% 22%, rgba(120,220,150,.05) 0%, transparent 6%),
+    repeating-linear-gradient(118deg, rgba(180,255,200,.030) 0 1px, transparent 1px 14px),
+    repeating-linear-gradient(62deg,  rgba(180,255,200,.020) 0 1px, transparent 1px 22px);
+}
+.hero__grid{ display:grid; grid-template-columns:1fr; gap:40px; align-items:center; padding-top:64px; padding-bottom:64px; }
+@media (min-width:640px){ .hero__grid{ padding-top:80px; padding-bottom:80px; } }
+@media (min-width:1024px){ .hero__grid{ grid-template-columns:1fr 1fr; gap:24px; padding-top:106px; padding-bottom:106px; } }
+
+.bc{ font-size:11px; color:rgba(255,255,255,.5); }
+.bc a:hover{ color:var(--accent); }
+.bc span{ color:rgba(255,255,255,.7); }
+
+.hero h1{
+  margin-top:12px; font-weight:300; text-transform:uppercase; color:#fff;
+  font-size:1.6rem; line-height:1.14; letter-spacing:-.02em;
+}
+.hero h1 .blk{ display:block; margin-top:28px; }
+.hero__value{
+  margin-top:32px; font-weight:800; text-transform:uppercase; color:#fff;
+  font-size:1.3rem; line-height:1.16; letter-spacing:-.02em;
+}
+.hero__meta{ margin-top:24px; font-size:12px; color:var(--warn); font-weight:500; max-width:28rem; line-height:1.7; }
+.hero__meta strong{ font-weight:700; }
+.hero__acts{ margin-top:32px; display:flex; flex-wrap:wrap; align-items:center; gap:12px 24px; }
+@media (min-width:640px){
+  .hero h1{ font-size:2.1rem; }
+  .hero__value{ font-size:1.65rem; }
+  .hero__meta{ font-size:14px; }
+}
+@media (min-width:1024px){
+  .hero h1{ font-size:2.65rem; }
+  .hero__value{ font-size:2.05rem; }
+}
+
+.frame-hero{
+  border:2px solid rgba(255,255,255,.85); border-radius:18px;
+  background:#000; overflow:hidden; aspect-ratio:16/9; width:100%;
+}
+.frame-hero img{ width:100%; height:100%; object-fit:cover; }
+
+/* ===================================================================
+   Proof strip
+   =================================================================== */
+.proof{ background:#fff; border-bottom:2px solid #000; }
+.proof__in{
+  display:flex; flex-direction:column; align-items:center; justify-content:space-between;
+  gap:8px; padding-top:14px; padding-bottom:14px; font-size:12px;
+}
+.proof__stars{ color:var(--accent-deep); font-size:14px; letter-spacing:-.05em; }
+.proof__rev{ display:flex; align-items:center; gap:8px; }
+.proof__rev span:last-child{ color:var(--accent-dark); font-weight:500; }
+.proof__rev:hover{ opacity:.8; }
+.proof__list{ display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:8px; font-weight:500; }
+.proof__sep{ color:rgba(0,0,0,.3); }
+@media (min-width:640px){ .proof__in{ flex-direction:row; font-size:13px; } }
+
+/* ===================================================================
+   Section rhythm
+   =================================================================== */
+.sec{ background:#fff; padding-top:56px; padding-bottom:56px; }
+.sec--tight{ padding-top:40px; padding-bottom:40px; }
+.sec--navy{ background:var(--navy); }
+@media (min-width:640px){ .sec{ padding-top:72px; padding-bottom:72px; } }
+
+.h2{ font-weight:700; font-size:1.25rem; line-height:1.3; letter-spacing:-.01em; }
+@media (min-width:640px){ .h2{ font-size:1.5rem; } }
+.h2--lg{ font-size:1.5rem; }
+@media (min-width:640px){ .h2--lg{ font-size:1.875rem; } }
+@media (min-width:1024px){ .h2--lg{ font-size:2.5rem; } }
+.h2--white{ color:#fff; }
+.lede{ margin-top:16px; font-size:14px; color:rgba(0,0,0,.7); line-height:1.7; }
+@media (min-width:640px){ .lede{ font-size:16px; } }
+.lede--white{ color:rgba(255,255,255,.7); }
+.mt-cta{ margin-top:36px; }
+
+/* ===================================================================
+   Stat card — white, black border, hard GREEN offset shadow
+   =================================================================== */
+.stats{ display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+@media (min-width:768px){ .stats{ grid-template-columns:repeat(4,1fr); gap:20px; } }
+/* Cab options row — 3-up, its own grid so no inline override is needed. */
+.cabs{ display:grid; grid-template-columns:1fr; gap:16px; max-width:48rem; margin:32px auto 0; }
+@media (min-width:640px){ .cabs{ grid-template-columns:repeat(3,1fr); gap:20px; } }
+.stat{
+  background:#fff; border:3px solid #000; border-radius:4px;
+  box-shadow:8px 8px 0 var(--accent-deep);
+  padding:clamp(14px,1.6vw,23px) 12px; text-align:center;
+}
+.stat-num{ font-weight:800; color:#000; line-height:1; letter-spacing:-.02em; font-size:clamp(2rem,5.4vw,4.2rem); }
+/* Two-word values step down one notch so the card keeps the reference height. */
+.stat-num.is-word{
+  font-size:clamp(1.5rem,3.1vw,2.55rem); line-height:1.06;
+  display:flex; align-items:center; justify-content:center;
+  min-height:clamp(2rem,5.4vw,4.2rem);
+}
+.stat-label{ margin-top:9px; font-size:clamp(11px,1.05vw,15px); color:#111; font-weight:400; line-height:1.5; }
+.stat-label strong{ font-weight:700; }
+.muted{ color:rgba(0,0,0,.6); }
+
+/* ===================================================================
+   Media frames
+   =================================================================== */
+.ph{
+  border:3px solid #000; border-radius:4px; box-shadow:6px 6px 0 var(--accent-deep);
+  background:#0A0F14; position:relative; overflow:hidden;
+}
+.ph img{ width:100%; height:100%; object-fit:cover; }
+.ph-tag{
+  position:absolute; left:8px; bottom:8px; z-index:2;
+  background:rgba(0,0,0,.72); color:#fff; font-size:9px; font-weight:700;
+  letter-spacing:.14em; text-transform:uppercase; padding:3px 7px; border-radius:2px;
+}
+.r43{ aspect-ratio:4/3; }
+.r169{ aspect-ratio:16/9; }
+.r219{ aspect-ratio:21/9; }
+
+.grid-3{ display:grid; grid-template-columns:1fr; gap:20px 20px; }
+@media (min-width:640px){ .grid-3{ grid-template-columns:repeat(2,1fr); gap:40px 20px; } }
+@media (min-width:1024px){ .grid-3{ grid-template-columns:repeat(3,1fr); gap:70px 20px; } }
+.grid-2{ display:grid; grid-template-columns:1fr; gap:20px; }
+@media (min-width:640px){ .grid-2{ grid-template-columns:repeat(2,1fr); gap:24px; } }
+
+/* ===================================================================
+   Bordered rows / cards
+   =================================================================== */
+.row-dark{ border:2px solid rgba(255,255,255,.3); border-radius:4px; padding:8px 16px; color:#fff; font-size:13px; font-weight:500; }
+.row-light{ border:1.5px solid #000; border-radius:4px; background:#fff; padding:14px 16px; font-size:13px; line-height:1.6; }
+@media (min-width:640px){ .row-dark, .row-light{ font-size:14px; } }
+.stack{ display:grid; gap:12px; }
+.stack--wide{ gap:23px; }
+
+.card{ border:1.5px solid #000; border-radius:4px; background:#fff; padding:16px 18px; }
+.card h3{ font-weight:700; font-size:13.5px; line-height:1.4; }
+.card p{ margin-top:6px; font-size:13px; color:#333; line-height:1.55; }
+.card p a{ color:var(--accent-dark); font-weight:600; text-decoration:underline; text-underline-offset:2px; }
+.card p a:hover{ color:#000; }
+
+/* FAQ accordion — same card, collapsed by default so a long FAQ list does not
+   push the booking CTA down the page. Answers stay in the HTML for search. */
+.faq-acc{ border:1.5px solid #000; border-radius:4px; background:#fff; padding:16px 18px; }
+.faq-acc summary{
+  font-weight:700; font-size:13.5px; line-height:1.4; cursor:pointer;
+  list-style:none; display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
+}
+.faq-acc summary::-webkit-details-marker{ display:none; }
+.faq-acc summary::after{ content:"+"; font-weight:700; font-size:15px; line-height:1.3; flex:0 0 auto; }
+.faq-acc[open] summary::after{ content:"\2212"; }
+.faq-acc p{ margin-top:8px; font-size:13px; color:#333; line-height:1.55; }
+
+.chip{ border:1.5px solid #000; border-radius:4px; background:#fff; padding:14px 10px; text-align:center; }
+.chip p{ font-size:12.5px; font-weight:700; line-height:1.3; }
+.chips{ display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+@media (min-width:640px){ .chips{ grid-template-columns:repeat(5,1fr); } }
+
+/* ===================================================================
+   Fare table — the production page's cab/seat table, restyled
+   =================================================================== */
+.ftbl-wrap{ overflow-x:auto; border:1.5px solid #000; border-radius:4px; }
+.ftbl{ width:100%; border-collapse:collapse; font-size:13px; min-width:420px; }
+.ftbl th, .ftbl td{ padding:11px 14px; text-align:left; border-bottom:1px solid rgba(0,0,0,.14); }
+.ftbl thead th{ background:var(--ink-950); color:#fff; font-weight:700; font-size:12px; letter-spacing:.03em; text-transform:uppercase; border-bottom:2px solid #000; }
+.ftbl tbody tr:last-child td{ border-bottom:0; }
+.ftbl tbody tr:nth-child(even){ background:#FAFAFA; }
+.ftbl td strong{ font-weight:700; }
+
+/* ===================================================================
+   Dark mesh bands (booking process, final CTA, footer)
+   =================================================================== */
+.mesh-dark{ background-color:#000; position:relative; isolation:isolate; }
+.mesh-dark::before{
+  content:""; position:absolute; inset:0; z-index:-1; pointer-events:none;
+  background-image:
+    linear-gradient(rgba(255,255,255,.075) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.075) 1px, transparent 1px);
+  background-size:64px 64px;
+  -webkit-mask-image:radial-gradient(ellipse 62% 58% at 50% 50%, transparent 30%, #000 100%);
+          mask-image:radial-gradient(ellipse 62% 58% at 50% 50%, transparent 30%, #000 100%);
+}
+.steps{ display:grid; grid-template-columns:1fr; gap:48px 64px; max-width:64rem; margin:56px auto 0; }
+@media (min-width:768px){ .steps{ grid-template-columns:repeat(2,1fr); } }
+.step h3{ color:#fff; font-size:14px; font-weight:700; }
+@media (min-width:640px){ .step h3{ font-size:16px; } }
+.step p{ margin-top:12px; font-size:13px; color:rgba(255,255,255,.65); line-height:1.7; max-width:48ch; }
+
+/* ===================================================================
+   Local partner band
+   =================================================================== */
+.partner{ display:grid; grid-template-columns:1fr; gap:48px; align-items:center; }
+@media (min-width:1024px){ .partner{ grid-template-columns:1.5fr 1fr; gap:40px; } }
+.partner__fig{ display:flex; flex-direction:column; align-items:center; text-align:center; }
+.partner__fig img{
+  width:100%; max-width:460px; aspect-ratio:14/15; object-fit:cover;
+  border-radius:20px; box-shadow:9px 9px 0 var(--accent-deep);
+}
+
+/* ===================================================================
+   Related routes
+   =================================================================== */
+.rel{ display:grid; grid-template-columns:1fr; gap:16px; }
+@media (min-width:640px){ .rel{ grid-template-columns:repeat(2,1fr); } }
+@media (min-width:1024px){ .rel{ grid-template-columns:repeat(3,1fr); } }
+.rel-card{
+  display:block; border:1.5px solid #000; border-radius:4px; background:#fff; padding:16px 18px;
+  transition:background-color .2s ease, transform 180ms ease, box-shadow 180ms ease;
+}
+.rel-card:hover{ background:#FCFCF7; transform:translate(-2px,-2px); box-shadow:5px 5px 0 var(--accent-deep); }
+.rel-card h3{ font-size:13.5px; font-weight:700; }
+.rel-card p{ margin-top:6px; font-size:12.5px; color:#444; line-height:1.55; }
+.rel-card .tag{ display:inline-block; margin-top:9px; font-size:11px; font-weight:700; color:var(--accent-dark); }
+
+/* ===================================================================
+   Footer
+   =================================================================== */
+.ft__grid{ display:grid; grid-template-columns:1fr; gap:32px; padding-top:40px; padding-bottom:24px; text-align:center; }
+@media (min-width:640px){ .ft__grid{ grid-template-columns:repeat(4,1fr); text-align:left; } }
+.ft__h{ font-weight:700; color:#fff; font-size:14px; }
+.ft__brand p{ margin-top:6px; font-size:11px; color:rgba(255,255,255,.55); line-height:1.7; }
+.ft__links{ margin-top:10px; display:grid; gap:5px; font-size:11px; color:rgba(255,255,255,.55); }
+.ft__links a:hover{ color:var(--accent); }
+.ft__bot{ background:#000; border-top:1px solid rgba(255,255,255,.1); padding-top:16px; padding-bottom:16px; }
+.ft__bot .wrap{
+  display:flex; flex-direction:column; align-items:center; justify-content:space-between;
+  gap:10px; font-size:11px; color:rgba(255,255,255,.7);
+}
+@media (min-width:640px){ .ft__bot .wrap{ flex-direction:row; font-size:12px; } }
+.ft__bot a:hover{ color:var(--accent); }
+
+/* ===================================================================
+   Floating WhatsApp (tablet + desktop) and mobile booking bar (phones)
+   =================================================================== */
+.waf{
+  position:fixed; bottom:20px; right:20px; z-index:50;
+  display:none; align-items:center; justify-content:center;
+  height:52px; width:52px; border-radius:50%;
+  background:#25D366; border:3px solid #000; box-shadow:4px 4px 0 #000;
+}
+.waf svg{ height:24px; width:24px; fill:#fff; }
+@media (min-width:640px){ .waf{ display:flex; } }
+
+.mobile-bar{
+  position:fixed; bottom:0; left:0; right:0; z-index:50;
+  display:grid; grid-template-columns:1fr 1fr; background:#fff; border-top:2px solid #000;
+}
+.mobile-bar a{
+  display:flex; align-items:center; justify-content:center; gap:7px;
+  font-weight:700; font-size:14px; padding:13px 8px; color:#000;
+  transition:background-color .2s ease;
+}
+.mobile-bar a:hover{ background:var(--gold); }
+.mobile-bar__call{ border-right:2px solid #000; }
+.mobile-bar__wa{ background:var(--accent); }
+.mobile-bar svg{ height:16px; width:16px; fill:currentColor; }
+@media (min-width:640px){ .mobile-bar{ display:none; } }
+@media (max-width:639px){ body{ padding-bottom:54px; } }
+
+@media (prefers-reduced-motion:reduce){
+  html{ scroll-behavior:auto; }
+  *{ transition-duration:.01ms !important; animation-duration:.01ms !important; }
+}
+</style>
+
+<!-- ===================== STRUCTURED DATA ===================== -->
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","@id":"https://www.padmashreetravels.in/#business","name":"Padma Shree Travels","url":"https://www.padmashreetravels.in/","telephone":"+91-87200-81102","email":"travels.padamshree@gmail.com","image":"https://www.padmashreetravels.in/images/logo.png","address":{"@type":"PostalAddress","streetAddress":"Rajeshwar Mandir, Kaveri Vihar Phase II, Shamsabad","addressLocality":"Agra","addressRegion":"Uttar Pradesh","postalCode":"282001","addressCountry":"IN"},"geo":{"@type":"GeoCoordinates","latitude":27.1767,"longitude":78.0081},"sameAs":["https://g.page/r/CUjtXu1x_3bPEBM/review"],"openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"00:00","closes":"23:59"}}</script>
 
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.padmashreetravels.in/"},{"@type":"ListItem","position":2,"name":"Outstation Cabs from Agra","item":"https://www.padmashreetravels.in/outstation-cabs-agra/"},{"@type":"ListItem","position":3,"name":"Agra to Jaipur Taxi","item":"https://www.padmashreetravels.in/agra-to-jaipur-taxi/"}]}</script>
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","serviceType":"Outstation Taxi Service","name":"Agra to Jaipur Taxi","description":"Private AC taxi from Agra to Jaipur via NH-21, one way and round trip, with optional stops at Fatehpur Sikri and Mehandipur Balaji Temple.","provider":{"@type":"LocalBusiness","name":"Padma Shree Travels","telephone":"+91-87200-81102"},"areaServed":["Agra","Jaipur"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","serviceType":"Outstation Taxi Service","name":"Agra to Jaipur Taxi","description":"Private AC cab from Agra to Jaipur covering approximately 235-240 km via NH-21 in 4-5 hours, available as a one-way drop or a round trip, with hotel, railway station or airport pickup anywhere in Agra, optional stops at Fatehpur Sikri, Mehandipur Balaji and Bharatpur, and the fare confirmed on WhatsApp before travel.","provider":{"@type":"LocalBusiness","name":"Padma Shree Travels","telephone":"+91-87200-81102"},"areaServed":["Agra","Fatehpur Sikri","Bharatpur","Mahwa","Dausa","Jaipur"],"url":"https://www.padmashreetravels.in/agra-to-jaipur-taxi/"}</script>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TouristTrip","name":"Agra to Jaipur by Private Taxi","description":"Private AC cab journey from Agra to Jaipur via NH-21, approximately 235-240 km in 4-5 hours, with optional stops at Fatehpur Sikri, Mehandipur Balaji Temple and Bharatpur.","touristType":"Families, couples and groups travelling between Agra and Jaipur","itinerary":{"@type":"ItemList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@type":"City","name":"Agra"}},{"@type":"ListItem","position":2,"item":{"@type":"Place","name":"Fatehpur Sikri"}},{"@type":"ListItem","position":3,"item":{"@type":"City","name":"Bharatpur"}},{"@type":"ListItem","position":4,"item":{"@type":"Place","name":"Mehandipur Balaji Temple"}},{"@type":"ListItem","position":5,"item":{"@type":"City","name":"Dausa"}},{"@type":"ListItem","position":6,"item":{"@type":"City","name":"Jaipur"}}]},"provider":{"@type":"LocalBusiness","name":"Padma Shree Travels","telephone":"+91-87200-81102"}}</script>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How far is Jaipur from Agra?","acceptedAnswer":{"@type":"Answer","text":"Jaipur is approximately 235-240 km from Agra via NH-21 (also signed as NH-11). The route passes Fatehpur Sikri, Bharatpur, Mahwa and Dausa before reaching Jaipur."}},
+{"@type":"Question","name":"How long does the Agra to Jaipur taxi journey take?","acceptedAnswer":{"@type":"Answer","text":"About 4 to 5 hours by private taxi, depending on traffic, your pickup point in Agra and the breaks you take on the way."}},
+{"@type":"Question","name":"What is the taxi fare from Agra to Jaipur?","acceptedAnswer":{"@type":"Answer","text":"The fare depends on the cab type and whether you book one-way or round trip. Message us on WhatsApp with your travel date and we share today's fixed fare before you book, with tolls mentioned separately."}},
+{"@type":"Question","name":"Are tolls included in the Agra to Jaipur fare?","acceptedAnswer":{"@type":"Answer","text":"No. The fare covers the AC vehicle, fuel and driver charges. Highway tolls on NH-21 are paid by the customer at actuals, and we tell you the expected toll total on WhatsApp before you book."}},
+{"@type":"Question","name":"Is a one-way taxi available, or only round trip?","acceptedAnswer":{"@type":"Answer","text":"Both are available. A one-way drop to Jaipur suits travellers continuing their trip from there; a round trip suits a day visit or a short Jaipur stay, with the same cab and driver bringing you back to Agra."}},
+{"@type":"Question","name":"Can we stop at Fatehpur Sikri on the way to Jaipur?","acceptedAnswer":{"@type":"Answer","text":"Yes. Fatehpur Sikri lies directly on the Agra-Jaipur highway, about 40 km from Agra, and is an easy 1-1.5 hour stop without a major detour. Tell us when booking so the driver plans the stop."}},
+{"@type":"Question","name":"Can we also stop at Mehandipur Balaji Temple en route?","acceptedAnswer":{"@type":"Answer","text":"Yes. Mehandipur Balaji Temple is just off the same highway near Mahwa, about two-thirds of the way to Jaipur. Many travellers combine a Balaji darshan with their Agra to Jaipur journey - ask us to plan the stop when you book."}},
+{"@type":"Question","name":"Can you pick me up from my hotel or Agra Cantt railway station?","acceptedAnswer":{"@type":"Answer","text":"Yes. We pick up from any Agra address, including hotels across the city, Agra Cantt railway station, Agra Fort railway station and Kheria Airport. Share the address on WhatsApp and the driver reaches you at your chosen time."}},
+{"@type":"Question","name":"What is the road like, and how many toll points are there?","acceptedAnswer":{"@type":"Answer","text":"The route runs on NH-21, a well-maintained four-lane highway for most of the way, passing Fatehpur Sikri, Bharatpur, Mahwa and Dausa before reaching Jaipur. There are a few toll plazas along the way, paid by the customer at actuals."}},
+{"@type":"Question","name":"Is the cab suitable for families and senior citizens on this long drive?","acceptedAnswer":{"@type":"Answer","text":"Yes. For a 4-5 hour highway drive we recommend the Innova Crysta for extra comfort, and we plan a tea or washroom break en route. Tell us on WhatsApp about any special needs - on-route breaks cost nothing."}},
+{"@type":"Question","name":"When will driver details be shared?","acceptedAnswer":{"@type":"Answer","text":"Before pickup you receive your driver's name, mobile number and car registration number on WhatsApp, so you know exactly who is arriving."}}
+]}</script>
 </head>
+
 <body>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NWDQLKM9"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
-<header class="hdr"><div class="hdr__in">
-<a href="../index.html" class="logo"><img src="../images/logo.png" alt="Padma Shree Travels Logo" class="logo__img"><div class="logo__t">Padma Shree Travels<small>Agra Taxi Service</small></div></a><nav class="nav"><ul class="nav__l">
-<li><a href="../index.html" class="nav__a">Home</a></li>
-<li class="nav__dd"><a href="../agra-temple-tour-by-cab/" class="nav__a">Pilgrimage &#9662;</a><div class="nav__ddm">
-<a href="../agra-to-mathura-taxi/">Agra &#8594; Mathura Taxi <span class="ptag">from &#8377;1,500</span></a>
-<a href="../agra-to-vrindavan-cab/">Agra &#8594; Vrindavan Cab <span class="ptag">from &#8377;1,800</span></a>
-<a href="../mathura-vrindavan-tour-from-agra/">Mathura + Vrindavan Full Day <span class="ptag">&#8377;3,000</span></a>
-<a href="../agra-to-mehandipur-balaji-taxi/">Agra &#8594; Mehandipur Balaji <span class="ptag">Fare on WhatsApp</span></a>
-<a href="../agra-temple-tour-by-cab/" class="dd__more">View All Pilgrimage &#8594;</a>
-</div></li>
-<li class="nav__dd"><a href="../agra-local-sightseeing/" class="nav__a">Sightseeing &#9662;</a><div class="nav__ddm">
-<a href="../agra-local-sightseeing/">Agra Full Day Sightseeing <span class="ptag">&#8377;2,500</span></a>
-<a href="../fatehpur-sikri/">Fatehpur Sikri Day Trip <span class="ptag">&#8377;2,500</span></a>
-<a href="../taj-mahal-taxi/">Taj Mahal Taxi <span class="ptag">from &#8377;1,500</span></a>
-<a href="../taj-mahal-sunrise-taxi/">Taj Mahal Sunrise Taxi <span class="ptag">from &#8377;1,500</span></a>
-<a href="../agra-local-sightseeing/" class="dd__more">View All Sightseeing &#8594;</a>
-</div></li>
-<li class="nav__dd"><a href="../outstation-cabs-agra/" class="nav__a">Outstation &#9662;</a><div class="nav__ddm">
-<a href="../agra-to-jaipur-taxi/">Agra &#8594; Jaipur Taxi <span class="ptag">Fare on WhatsApp</span></a>
-<a href="../agra-to-gwalior/">Agra &#8594; Gwalior <span class="ptag">&#8377;3,000 &middot; RT</span></a>
-<a href="../agra-to-aligarh/">Agra &#8594; Aligarh <span class="ptag">&#8377;3,000 &middot; RT</span></a>
-<a href="../agra-to-firozabad/">Agra &#8594; Firozabad <span class="ptag">&#8377;2,500 &middot; RT</span></a>
-<a href="../agra-to-etawah/">Agra &#8594; Etawah <span class="ptag">&#8377;3,500 &middot; RT</span></a>
-<a href="../agra-to-jaipur-taxi/">Agra &#8594; Jaipur Taxi <span class="ptag">Fare on WhatsApp</span></a>
-<a href="../agra-airport-taxi/">Agra Airport Taxi <span class="ptag">from &#8377;800</span></a>
-<a href="../agra-railway-station-taxi/">Agra Railway Station Taxi <span class="ptag">from &#8377;800</span></a>
-<a href="../outstation-cabs-agra/" class="dd__more">View All Outstation &#8594;</a>
-</div></li>
-<li class="nav__dd"><a href="../agra-taxi-fares/" class="nav__a">Fares &amp; Tools &#9662;</a><div class="nav__ddm">
-<a href="../agra-taxi-fares/">Agra Taxi Fare List <span class="ptag">Fixed fares</span></a>
-<a href="../route-finder/">Route Finder <span class="ptag">Filter routes</span></a>
-<a href="../fleet/">Our Fleet <span class="ptag">Compare cabs</span></a>
-<a href="../book/">Book Online <span class="ptag">WhatsApp booking</span></a>
-</div></li>
-<li><a href="../blog/" class="nav__a">Blog</a></li>
-<li><a href="../about/" class="nav__a">About</a></li>
-<li><a href="../contact/" class="nav__a">Contact</a></li>
-<li><a href="tel:+918720081102" class="btn btn--b btn--sm"><i data-lucide="phone" class="icon icon--sm icon--white" aria-hidden="true"></i> Call Now</a></li>
-</ul></nav>
-<button class="ham" id="ham" aria-label="Menu"><span></span><span></span><span></span></button>
-</div></header>
+<a href="#main" class="sr-only">Skip to main content</a>
 
-<div class="mnav" id="mnav">
-<a href="../index.html" class="mnav__home">Home</a>
-<button class="mnav__cat" aria-expanded="false">Pilgrimage <span class="mnav__arr">&#9662;</span></button>
-<div class="mnav__sub">
-<a href="../agra-to-mathura-taxi/">Agra to Mathura Taxi <span class="ptag">from &#8377;1,500</span></a>
-<a href="../agra-to-vrindavan-cab/">Agra to Vrindavan Cab <span class="ptag">from &#8377;1,800</span></a>
-<a href="../agra-to-mehandipur-balaji-taxi/">Agra to Mehandipur Balaji <span class="ptag">Fare on WhatsApp</span></a>
-<a href="../agra-temple-tour-by-cab/">All Temple Tours from Agra</a>
+<!-- ===================== STICKY HEADER ===================== -->
+<header class="hdr">
+  <div class="wrap hdr__in">
+    <a href="../index.html" class="hdr__logo">
+      <span class="hdr__mark" aria-hidden="true">PS</span>
+      <span class="hdr__name">Padma Shree Travels</span>
+    </a>
+    <nav class="hdr__nav" aria-label="Main">
+      <a href="../index.html">Home</a>
+      <a href="../agra-temple-tour-by-cab/">Pilgrimage</a>
+      <a href="../agra-local-sightseeing/">Sightseeing</a>
+      <a href="../outstation-cabs-agra/">Outstation</a>
+      <a href="../agra-taxi-fares/">Fares &amp; Tools</a>
+      <a href="../fleet/">Fleet</a>
+      <a href="../blog/">Blog</a>
+      <a href="../about/">About</a>
+      <a href="../contact/">Contact</a>
+    </nav>
+    <a data-cta href="https://wa.me/918720081102?text=Hi%20Padma%20Shree%20Travels%2C%20I%20would%20like%20an%20Agra%20to%20Jaipur%20taxi.%0A%0ATravel%20date%3A%20%0APickup%20point%20in%20Agra%3A%20%0APassengers%20%2F%20cab%20type%3A%20%0AOne%20way%20or%20round%20trip%3A%20%0AStops%20on%20the%20way%20(Fatehpur%20Sikri%20%2F%20Mehandipur%20Balaji)%3A%20%0A%0APlease%20share%20availability%20and%20fare." target="_blank" rel="noopener" class="btn-header">Get Fare</a>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ===================== HERO ===================== -->
+<section id="hero" class="hero hero-bg">
+  <div class="wrap hero__grid">
+    <div>
+      <nav class="bc" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a> &rsaquo;
+        <a href="../outstation-cabs-agra/">Outstation</a> &rsaquo;
+        <span>Agra to Jaipur Taxi</span>
+      </nav>
+      <h1>
+        <span class="sr-only">Agra to Jaipur Taxi &mdash; </span>Travelling From Agra To Jaipur?
+        <span class="blk">Skip The Cab<br>Booking Uncertainty.</span>
+      </h1>
+      <p class="hero__value">Private AC Cab<br>One Way Or Round Trip</p>
+      <p class="hero__meta">
+        <strong>Approx. 235&ndash;240 km &middot; 4&ndash;5 hrs &middot; via NH-21</strong> &mdash; comfortable private taxi from Agra to Jaipur, with the fare confirmed before you travel.
+      </p>
+      <div class="hero__acts">
+        <a data-cta href="https://wa.me/918720081102?text=Hi%20Padma%20Shree%20Travels%2C%20I%20would%20like%20an%20Agra%20to%20Jaipur%20taxi.%0A%0ATravel%20date%3A%20%0APickup%20point%20in%20Agra%3A%20%0APassengers%20%2F%20cab%20type%3A%20%0AOne%20way%20or%20round%20trip%3A%20%0AStops%20on%20the%20way%20(Fatehpur%20Sikri%20%2F%20Mehandipur%20Balaji)%3A%20%0A%0APlease%20share%20availability%20and%20fare." target="_blank" rel="noopener" class="btn-primary">Get Jaipur Fare on WhatsApp</a>
+        <a href="tel:+918720081102" class="link-call">or call +91-87200 81102</a>
+      </div>
+    </div>
+    <div class="frame-hero">
+      <img src="../images/destinations/dest-cab-at-monument.webp" width="1672" height="941" fetchpriority="high" decoding="async" alt="Private white AC sedan waiting in Agra before an Agra to Jaipur taxi journey">
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PROOF STRIP ===================== -->
+<section class="proof">
+  <div class="wrap proof__in">
+    <a href="https://g.page/r/CUjtXu1x_3bPEBM" target="_blank" rel="noopener" class="proof__rev">
+      <span class="proof__stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+      <span>Verified Google Reviews</span>
+    </a>
+    <div class="proof__list">
+      <span>Private AC Cab</span><span class="proof__sep">&bull;</span>
+      <span>One Way or Round Trip</span><span class="proof__sep">&bull;</span>
+      <span>Fare Before Booking</span><span class="proof__sep">&bull;</span>
+      <span>Local Agra Drivers</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== INTRO + PRIMARY CTA ===================== -->
+<section class="sec sec--tight center">
+  <div class="wrap">
+    <div style="max-width:48rem;margin:0 auto">
+      <h2 class="h2">One Private Cab From Your Agra Doorstep To Jaipur</h2>
+      <p class="lede" style="font-style:italic;font-weight:500;color:#000">
+        Your <span style="font-style:normal;font-weight:700;color:var(--accent-dark)">private cab</span> picks you up from your hotel, station, airport or chosen address in Agra and takes you straight through to Jaipur.
+      </p>
+      <p class="lede" style="margin-top:8px">No shared seats, no vehicle changes on the way and no fare surprises when you arrive.</p>
+    </div>
+    <div class="mt-cta">
+      <a data-cta href="https://wa.me/918720081102?text=Hi%20Padma%20Shree%20Travels%2C%20I%20would%20like%20an%20Agra%20to%20Jaipur%20taxi.%0A%0ATravel%20date%3A%20%0APickup%20point%20in%20Agra%3A%20%0APassengers%20%2F%20cab%20type%3A%20%0AOne%20way%20or%20round%20trip%3A%20%0AStops%20on%20the%20way%20(Fatehpur%20Sikri%20%2F%20Mehandipur%20Balaji)%3A%20%0A%0APlease%20share%20availability%20and%20fare." target="_blank" rel="noopener" class="btn-primary">Get Fare on WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TRUST LINE + STATS 1 ===================== -->
+<div class="center" style="background:#fff;padding:0 20px 36px">
+  <p style="font-weight:700;font-size:1.125rem">Trusted Agra Taxi Service For The Jaipur Route</p>
 </div>
-<button class="mnav__cat" aria-expanded="false">Sightseeing <span class="mnav__arr">&#9662;</span></button>
-<div class="mnav__sub">
-<a href="../agra-local-sightseeing/">Agra Full Day Sightseeing <span class="ptag">&#8377;2,500</span></a>
-<a href="../fatehpur-sikri/">Fatehpur Sikri Day Trip <span class="ptag">&#8377;2,500</span></a>
+<section style="background:#fff">
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat"><p class="stat-num is-word">~240 KM</p><p class="stat-label">Agra &rarr; Jaipur</p></div>
+      <div class="stat"><p class="stat-num is-word">4&ndash;5 HRS</p><p class="stat-label">Drive Time</p></div>
+      <div class="stat"><p class="stat-num is-word">ONE WAY</p><p class="stat-label">Available</p></div>
+      <div class="stat"><p class="stat-num is-word">ROUND TRIP</p><p class="stat-label">Available</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== GOOGLE REVIEWS =====================
+     Shared component. Reviews live in js/reviews-data.js — never hard-coded
+     here. The section removes itself if the pool for this page is empty. -->
+<section data-reviews-grid data-page="agra-to-jaipur"
+         data-subline="Real experiences from outstation travellers with Padma Shree Travels on Google."></section>
+
+<!-- ===================== QUICK FACTS ===================== -->
+<section class="sec">
+  <div class="wrap">
+    <h2 class="h2 center">Quick Facts: Agra to Jaipur by Taxi</h2>
+    <ul class="stack" style="margin-top:32px;max-width:56rem;margin-left:auto;margin-right:auto">
+      <li class="row-light"><strong>Distance from Agra:</strong> approx. 235&ndash;240 km via NH-21 (also signed NH-11)</li>
+      <li class="row-light"><strong>Travel time:</strong> 4&ndash;5 hours each way, depending on traffic and stops</li>
+      <li class="row-light"><strong>Trip type:</strong> one-way drop or round trip, your choice</li>
+      <li class="row-light"><strong>Route towns:</strong> Fatehpur Sikri, Bharatpur, Mahwa, Dausa, Jaipur</li>
+      <li class="row-light"><strong>En-route stops:</strong> Fatehpur Sikri (~40 km from Agra), Mehandipur Balaji Temple (near Mahwa), Bharatpur</li>
+      <li class="row-light"><strong>Pickup:</strong> any Agra address &mdash; hotel, Agra Cantt, Agra Fort station or Kheria Airport</li>
+      <li class="row-light"><strong>Fare:</strong> depends on cab type and one-way vs round trip &mdash; confirmed on WhatsApp before you book</li>
+      <li class="row-light"><strong>Booking:</strong> call or WhatsApp +91 87200 81102 &mdash; fixed fare confirmed in writing</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== THE DRIVE (gallery) ===================== -->
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <h2 class="h2 center" style="margin-bottom:36px">The Agra &rarr; Jaipur Drive</h2>
+    <div class="grid-3">
+      <div class="ph r43"><img src="../images/destinations/dest-cab-at-monument.webp" width="1672" height="941" loading="lazy" decoding="async" alt="Private white AC sedan waiting in Agra for an Agra to Jaipur taxi pickup"><span class="ph-tag">Agra Pickup</span></div>
+      <div class="ph r43"><img src="../images/fleet/fleet-dzire.webp" width="1000" height="750" loading="lazy" decoding="async" alt="AC sedan used for Agra to Jaipur taxi bookings"><span class="ph-tag">AC Sedan</span></div>
+      <div class="ph r43"><img src="../images/fleet/fleet-ertiga.webp" width="1000" height="750" loading="lazy" decoding="async" alt="Maruti Ertiga AC SUV for an Agra to Jaipur cab for up to six passengers"><span class="ph-tag">Ertiga &mdash; 6 Seats</span></div>
+      <div class="ph r43"><img src="../images/fleet/fleet-innova-crysta.webp" width="1000" height="750" loading="lazy" decoding="async" alt="Toyota Innova Crysta used for the Agra to Jaipur highway drive"><span class="ph-tag">Innova Crysta &mdash; 7 Seats</span></div>
+      <div class="ph r43"><img src="../images/fleet/fleet-interior.webp" width="1000" height="625" loading="lazy" decoding="async" alt="Rear passenger seats of the AC cab used on the Agra to Jaipur route"><span class="ph-tag">Clean AC Interior</span></div>
+      <div class="ph r43"><img src="../images/fleet/fleet-boot-luggage.webp" width="1000" height="625" loading="lazy" decoding="async" alt="Suitcases loaded into the cab boot before an Agra to Jaipur journey"><span class="ph-tag">Luggage Loaded</span></div>
+      <div class="ph r43"><img src="../images/destinations/dest-highway-sunset.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Open four lane highway on the Agra to Jaipur route at sunset"><span class="ph-tag">NH-21 Highway Drive</span></div>
+      <div class="ph r43"><img src="../images/destinations/dest-fatehpur-sikri.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Buland Darwaza at Fatehpur Sikri, an easy stop on the Agra to Jaipur highway"><span class="ph-tag">Fatehpur Sikri En Route</span></div>
+      <div class="ph r43"><img src="../images/destinations/dest-bharatpur-keoladeo.webp" width="1586" height="992" loading="lazy" decoding="async" alt="Keoladeo National Park at Bharatpur, on the bypass along the Agra to Jaipur route"><span class="ph-tag">Bharatpur On The Bypass</span></div>
+      <div class="ph r43"><img src="../images/destinations/dest-taj-mahal-sunrise.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Taj Mahal at sunrise before an early Agra to Jaipur departure"><span class="ph-tag">Sunrise Start From Agra</span></div>
+      <div class="ph r43"><img src="../images/destinations/dest-agra-fort.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Agra Fort, one of the pickup points for an Agra to Jaipur cab"><span class="ph-tag">Agra Fort Pickup Point</span></div>
+      <div class="ph r43"><img src="../images/destinations/dest-jaipur-hawa-mahal.webp" width="1600" height="700" loading="lazy" decoding="async" alt="Hawa Mahal in Jaipur, the arrival point of the Agra to Jaipur taxi route"><span class="ph-tag">Hawa Mahal, Jaipur</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PICKUP LOCATIONS ===================== -->
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <h2 class="h2 center">Pickup From Anywhere In Agra</h2>
+    <div class="chips" style="margin-top:32px">
+      <div class="chip"><p>Hotel Pickup</p></div>
+      <div class="chip"><p>Agra Cantt Pickup</p></div>
+      <div class="chip"><p>Agra Fort Station Pickup</p></div>
+      <div class="chip"><p>Airport Pickup (Kheria)</p></div>
+      <div class="chip"><p>Home / Address Pickup</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FARE BREAKDOWN =====================
+     Shared component: .fare-* in css/landing.css. The banner is the band's
+     full-bleed background, rotated by js/landing.js via the --fare-bg
+     custom property on this section. Migrated 1 Sep 2026, when this page
+     was narrowly unlocked for this component only — every heading, item and
+     CTA below is this page's own original copy, unchanged. -->
+<section class="sec sec--navy fare-band" data-fare-bg>
+  <div class="wrap">
+    <div class="fare">
+      <div class="fare__head">
+        <p class="fare__eyebrow">Clear Fare Breakdown</p>
+        <h2 class="h2 h2--lg h2--white">Everything You Need For A Comfortable Agra&ndash;Jaipur Drive</h2>
+        <p class="fare__lede">One cab, one driver and one fare from your Agra pickup point all the way to your Jaipur address.</p>
+      </div>
+
+      <div class="fare__lists">
+        <div class="fare__group">
+          <h3 class="fare__gh">What&rsquo;s Included In Your Agra&ndash;Jaipur Trip</h3>
+          <ul class="fare__list">
+            <li class="fare__item fare__item--inc">Private AC Cab</li>
+            <li class="fare__item fare__item--inc">One-Way Drop</li>
+            <li class="fare__item fare__item--inc">Round Trip</li>
+            <li class="fare__item fare__item--inc">Hotel Pickup</li>
+            <li class="fare__item fare__item--inc">Railway Station Pickup</li>
+            <li class="fare__item fare__item--inc">Airport Pickup</li>
+            <li class="fare__item fare__item--inc">Highway-Experienced Driver</li>
+            <li class="fare__item fare__item--inc">Flexible Breaks</li>
+            <li class="fare__item fare__item--inc">Driver Details Before Pickup</li>
+            <li class="fare__item fare__item--inc">Fare Confirmation In Writing</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="fare__cta">
+        <a data-cta href="https://wa.me/918720081102?text=Hi%20Padma%20Shree%20Travels%2C%20I%20would%20like%20an%20Agra%20to%20Jaipur%20taxi.%0A%0ATravel%20date%3A%20%0APickup%20point%20in%20Agra%3A%20%0APassengers%20%2F%20cab%20type%3A%20%0AOne%20way%20or%20round%20trip%3A%20%0AStops%20on%20the%20way%20(Fatehpur%20Sikri%20%2F%20Mehandipur%20Balaji)%3A%20%0A%0APlease%20share%20availability%20and%20fare." target="_blank" rel="noopener" class="btn-primary">Get Agra to Jaipur Fare on WhatsApp</a>
+        <a href="tel:+918720081102" class="link-call">or call +91-87200 81102</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CTA + STATS 2 ===================== -->
+<section class="sec sec--tight center">
+  <div class="wrap">
+    <a data-cta href="https://wa.me/918720081102?text=Hi%20Padma%20Shree%20Travels%2C%20I%20would%20like%20an%20Agra%20to%20Jaipur%20taxi.%0A%0ATravel%20date%3A%20%0APickup%20point%20in%20Agra%3A%20%0APassengers%20%2F%20cab%20type%3A%20%0AOne%20way%20or%20round%20trip%3A%20%0AStops%20on%20the%20way%20(Fatehpur%20Sikri%20%2F%20Mehandipur%20Balaji)%3A%20%0A%0APlease%20share%20availability%20and%20fare." target="_blank" rel="noopener" class="btn-primary">Get Fare on WhatsApp</a>
+    <div class="stats" style="margin-top:56px">
+      <div class="stat"><p class="stat-num is-word">4 CAB TYPES</p><p class="stat-label">Sedan to Tempo Traveller</p></div>
+      <div class="stat"><p class="stat-num is-word">UP TO 15</p><p class="stat-label">Seats Available</p></div>
+      <div class="stat"><p class="stat-num is-word">3 STOPS</p><p class="stat-label">Available On Route</p></div>
+      <div class="stat"><p class="stat-num is-word">FUEL + DRIVER</p><p class="stat-label">Included In Fare</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CHOOSE YOUR CAB / FARE ===================== -->
+<section data-track="pricing" class="sec">
+  <div class="wrap">
+    <h2 class="h2 center">Choose Your Cab For Agra To Jaipur</h2>
+    <p class="center" style="margin-top:12px;font-weight:700;font-size:1.0625rem;color:var(--accent-dark)">Fixed Fare Confirmed on WhatsApp</p>
+
+    <div class="cabs">
+      <div class="stat"><p class="stat-num">4</p><p class="stat-label"><strong>AC Sedan</strong> &mdash; Dzire / Amaze<br>Up to 4 passengers<br><span class="muted">Fare on WhatsApp</span></p></div>
+      <div class="stat"><p class="stat-num">6</p><p class="stat-label"><strong>Ertiga</strong> &mdash; AC SUV<br>Up to 6 passengers<br><span class="muted">Fare on WhatsApp</span></p></div>
+      <div class="stat"><p class="stat-num">7</p><p class="stat-label"><strong>Innova Crysta</strong> &mdash; AC SUV<br>Up to 7 passengers<br><span class="muted">Fare on WhatsApp</span></p></div>
+    </div>
+
+    <!-- Full cab / seat table kept from the previous production page -->
+    <div class="ftbl-wrap" style="margin-top:32px;max-width:48rem;margin-left:auto;margin-right:auto">
+      <table class="ftbl">
+        <caption class="sr-only">Cab types, seating and fare basis for the Agra to Jaipur route</caption>
+        <thead><tr><th scope="col">Cab Type</th><th scope="col">Seats</th><th scope="col">One Way</th><th scope="col">Round Trip</th></tr></thead>
+        <tbody>
+          <tr><td><strong>AC Sedan</strong> (Dzire / Amaze)</td><td>4</td><td>Fare on WhatsApp</td><td>Fare on WhatsApp</td></tr>
+          <tr><td><strong>AC SUV</strong> (Ertiga)</td><td>6</td><td>Fare on WhatsApp</td><td>Fare on WhatsApp</td></tr>
+          <tr><td><strong>AC SUV</strong> (Innova Crysta)</td><td>7</td><td>Fare on WhatsApp</td><td>Fare on WhatsApp</td></tr>
+          <tr><td><strong>Tempo Traveller</strong></td><td>12&ndash;15</td><td>Fare on WhatsApp</td><td>Fare on WhatsApp</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid-2" style="margin-top:32px;max-width:48rem;margin-left:auto;margin-right:auto">
+      <div class="row-light">
+        <h3 style="font-size:13.5px">Included In Every Fare</h3>
+        <p style="margin-top:6px;color:rgba(0,0,0,.75)">AC vehicle &bull; Fuel &bull; Driver charges</p>
+      </div>
+      <div class="row-light">
+        <h3 style="font-size:13.5px">Paid Separately By You</h3>
+        <p style="margin-top:6px;color:rgba(0,0,0,.75)">Highway tolls on NH-21 &bull; Any other applicable route charges (at actuals)</p>
+      </div>
+    </div>
+    <p class="center" style="margin-top:24px;font-size:13px;color:rgba(0,0,0,.6);max-width:36rem;margin-left:auto;margin-right:auto;line-height:1.7">
+      We tell you the expected toll total on WhatsApp before you book, and your cab fare is fixed before you travel &mdash; no surge pricing and no hidden charges on arrival.
+    </p>
+  </div>
+</section>
+
+<!-- ===================== ROUTE AND TRAVEL TIME ===================== -->
+<section class="sec" style="padding-top:0">
+  <div class="wrap" style="max-width:56rem">
+    <h2 class="h2">Route and Travel Time</h2>
+    <p class="lede">
+      The Agra&ndash;Jaipur route runs on NH-21 (signed as NH-11 in parts), a well-maintained four-lane highway for most of the drive. From Agra the road passes Fatehpur Sikri, continues through the Bharatpur bypass, then Mahwa &mdash; the turn-off for Mehandipur Balaji Temple &mdash; and Dausa before reaching Jaipur. Expect about 4 to 5 hours of driving depending on traffic and how many stops you make.
+    </p>
+    <p class="lede">
+      We pick up from any Agra address: your hotel, Agra Cantt railway station, Agra Fort station or Kheria Airport. A tea, breakfast or temple stop can be planned into the drive &mdash; on-route breaks are included, and only a longer detour away from the highway may change the fare, which we confirm on WhatsApp first.
+    </p>
+  </div>
+</section>
+
+<!-- ===================== POPULAR STOPS ===================== -->
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <h2 class="h2 center" style="margin-bottom:36px">Popular Stops on the Way to Jaipur</h2>
+    <div class="grid-3" style="gap:16px">
+      <div class="card">
+        <h3>Fatehpur Sikri</h3>
+        <p>Emperor Akbar&rsquo;s UNESCO World Heritage ghost city sits right on this highway, about 40 km from Agra. A 1&ndash;1.5 hour stop is easy to add without a major detour. See our <a href="../fatehpur-sikri/">Fatehpur Sikri taxi page</a> for details.</p>
+      </div>
+      <div class="card">
+        <h3>Mehandipur Balaji Temple</h3>
+        <p>This well-known Hanuman temple sits just off the same highway near Mahwa, roughly two-thirds of the way to Jaipur. Many travellers combine a Balaji darshan with their Jaipur journey &mdash; see our <a href="../agra-to-mehandipur-balaji-taxi/">Mehandipur Balaji taxi page</a>.</p>
+      </div>
+      <div class="card">
+        <h3>Bharatpur (Keoladeo National Park)</h3>
+        <p>The Bharatpur bypass lies on this route. Birdwatchers can ask about a short detour into Keoladeo National Park, especially between October and February. See our <a href="../agra-to-bharatpur-taxi/">Agra to Bharatpur taxi page</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== A BETTER WAY TO TRAVEL ===================== -->
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <h2 class="h2 h2--lg center">A Better Way To Travel Agra &rarr; Jaipur</h2>
+    <div class="grid-2" style="margin-top:28px">
+      <div class="ph r169"><img src="../images/destinations/dest-cab-at-monument.webp" width="1672" height="941" loading="lazy" decoding="async" alt="Private cab arriving for an Agra pickup on the way to Jaipur"><span class="ph-tag">Pickup In Agra</span></div>
+      <div class="ph r169"><img src="../images/fleet/fleet-dzire.webp" width="1000" height="750" loading="lazy" decoding="async" alt="Clean AC sedan ready for the Agra to Jaipur drive"><span class="ph-tag">Clean AC Cab</span></div>
+      <div class="ph r169"><img src="../images/fleet/fleet-interior.webp" width="1000" height="625" loading="lazy" decoding="async" alt="Comfortable air conditioned rear seats for the four to five hour Jaipur drive"><span class="ph-tag">Comfortable Interior</span></div>
+      <div class="ph r169"><img src="../images/fleet/fleet-boot-luggage.webp" width="1000" height="625" loading="lazy" decoding="async" alt="Luggage packed in the boot for a one way Agra to Jaipur trip"><span class="ph-tag">Luggage Loaded</span></div>
+      <div class="ph r169"><img src="../images/destinations/dest-fatehpur-sikri.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Fatehpur Sikri, a practical rest stop on the Agra to Jaipur highway"><span class="ph-tag">Break At Fatehpur Sikri</span></div>
+      <div class="ph r169"><img src="../images/fleet/fleet-innova-crysta.webp" width="1000" height="750" loading="lazy" decoding="async" alt="Innova Crysta for families and groups travelling from Agra to Jaipur"><span class="ph-tag">Room For The Group</span></div>
+    </div>
+    <div style="margin-top:24px">
+      <div class="ph r219"><img src="../images/destinations/dest-highway-sunset.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Highway stretching ahead on the 235 to 240 km drive from Agra to Jaipur"><span class="ph-tag">Agra &rarr; Jaipur, One Comfortable Drive</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== WHY A PRIVATE CAB ===================== -->
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <h2 class="h2 center" style="margin-bottom:36px">Why Travel Agra to Jaipur By Private Cab?</h2>
+    <div class="grid-2" style="max-width:64rem;margin:0 auto;gap:16px">
+      <div class="card"><h3>Door-To-Door Travel</h3><p>Picked up at your Agra hotel, station or home address and dropped at your Jaipur address. No terminals, no queues, no last-mile scramble.</p></div>
+      <div class="card"><h3>No Vehicle Changes</h3><p>The same car and the same driver take you the full 235&ndash;240 km. Nothing to change, transfer or re-book halfway.</p></div>
+      <div class="card"><h3>Comfortable AC Journey</h3><p>Four to five hours on the highway is a long stretch. An AC cab with your own seats makes it far easier than a bus or a shared vehicle.</p></div>
+      <div class="card"><h3>Travel Easily With Luggage</h3><p>Suitcases stay in the boot from Agra to Jaipur, so a hotel checkout and an onward journey on the same day stays simple.</p></div>
+      <div class="card"><h3>Drivers Who Know This Highway</h3><p>Our drivers run the Agra&ndash;Jaipur route regularly and know the rest stops, the toll points and the Fatehpur Sikri and Balaji turn-offs.</p></div>
+      <div class="card"><h3>Better For Families &amp; Groups</h3><p>Choose the vehicle that fits your group &mdash; sedan, Ertiga, Innova Crysta or a Tempo Traveller &mdash; instead of splitting across seats.</p></div>
+      <div class="card"><h3>One-Way Or Round-Trip</h3><p>Take a one-way drop if Jaipur is your next stop, or a round trip if you are returning to Agra. Both are available on every vehicle.</p></div>
+      <div class="card"><h3>Fare Known Before You Travel</h3><p>The fare is confirmed on WhatsApp before you book, with the expected toll total mentioned separately, so nothing is decided on arrival.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== BOOKING PROCESS ===================== -->
+<section class="mesh-dark sec">
+  <div class="wrap">
+    <h2 class="h2 h2--white center" style="max-width:48rem;margin:0 auto;font-size:1.375rem">
+      Here&rsquo;s How Your Agra to Jaipur Taxi Booking Works
+    </h2>
+    <div class="steps">
+      <div class="step"><h3>01 &mdash; Share Trip Details</h3><p>Travel date, pickup point in Agra, passengers and whether you need one way or a round trip.</p></div>
+      <div class="step"><h3>02 &mdash; Choose Your Cab</h3><p>Sedan, Ertiga, Innova Crysta or a Tempo Traveller for a larger group.</p></div>
+      <div class="step"><h3>03 &mdash; Get The Fare</h3><p>Your fixed fare is confirmed in writing on WhatsApp before you book, with expected tolls mentioned separately.</p></div>
+      <div class="step"><h3>04 &mdash; Receive Driver Details</h3><p>Driver name, mobile number and car registration number shared before pickup.</p></div>
+      <div class="step"><h3>05 &mdash; Get Picked Up</h3><p>Hotel, Agra Cantt, Agra Fort station, Kheria Airport or any Agra address.</p></div>
+      <div class="step"><h3>06 &mdash; Travel To Jaipur</h3><p>Comfortable highway journey with practical breaks, and any Fatehpur Sikri or Balaji stop planned in.</p></div>
+    </div>
+    <p class="center" style="margin-top:48px;font-size:14px;color:rgba(255,255,255,.55);max-width:42rem;margin-left:auto;margin-right:auto;line-height:1.7">
+      <span style="color:rgba(255,255,255,.85);font-weight:600">Nothing is locked in until you have the fare.</span> Tell us your travel date, pickup point and group size on WhatsApp, ask about adding a Fatehpur Sikri or Mehandipur Balaji stop on the way, and we quote before you commit. No app to download and no advance payment for most bookings.
+    </p>
+    <div class="center" style="margin-top:32px">
+      <a data-cta href="https://wa.me/918720081102?text=Hi%20Padma%20Shree%20Travels%2C%20I%20would%20like%20an%20Agra%20to%20Jaipur%20taxi.%0A%0ATravel%20date%3A%20%0APickup%20point%20in%20Agra%3A%20%0APassengers%20%2F%20cab%20type%3A%20%0AOne%20way%20or%20round%20trip%3A%20%0AStops%20on%20the%20way%20(Fatehpur%20Sikri%20%2F%20Mehandipur%20Balaji)%3A%20%0A%0APlease%20share%20availability%20and%20fare." target="_blank" rel="noopener" class="btn-primary">Get Agra to Jaipur Fare on WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== LOCAL PARTNER ===================== -->
+<section class="sec">
+  <div class="wrap">
+    <h2 class="h2 center" style="margin-bottom:36px">Your Local Agra Travel Partner</h2>
+    <div class="partner">
+      <ul class="stack">
+        <li class="row-light">Padma Shree Travels is an <strong>Agra-based taxi service</strong> running local sightseeing, airport transfers and outstation trips.</li>
+        <li class="row-light">Pickup arranged from <strong>hotels, Agra Cantt, Agra Fort station and Agra (Kheria) Airport</strong>.</li>
+        <li class="row-light">Fare is <strong>confirmed on WhatsApp before you travel</strong> &mdash; tolls are told to you separately, upfront.</li>
+        <li class="row-light">Driver&rsquo;s name, number and car number are <strong>shared with you before pickup</strong>.</li>
+        <li class="row-light">Direct <strong>WhatsApp and phone support</strong> before and during your journey.</li>
+        <li class="row-light">Easy to extend your trip with <strong>Fatehpur Sikri, Bharatpur, Mathura, Vrindavan or a further outstation leg</strong>.</li>
+      </ul>
+      <div class="partner__fig">
+        <img src="../images/fleet/fleet-lineup.webp" width="1400" height="788" loading="lazy" decoding="async"
+             alt="Padma Shree Travels cab fleet lined up in Agra &mdash; sedan, SUV and Tempo Traveller used on outstation routes">
+        <h3 style="margin-top:24px;font-size:1.125rem">Padma Shree Travels</h3>
+        <p style="margin-top:2px;font-size:13px;font-weight:600">Agra Taxi &amp; Outstation Service</p>
+        <p style="margin-top:4px;font-size:13px;font-weight:600;color:var(--accent-dark)">Local Pickup &bull; Clear Pricing &bull; Direct Support</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FAQ ===================== -->
+<section class="sec" id="faq" style="padding-top:0">
+  <div class="wrap">
+    <h2 class="h2 center" style="margin-bottom:36px">Questions &amp; Answers</h2>
+    <div class="grid-2" style="max-width:64rem;margin:0 auto;gap:16px">
+      <details class="faq-acc"><summary>How far is Jaipur from Agra?</summary><p>Jaipur is approximately 235&ndash;240 km from Agra via NH-21 (also signed as NH-11). The route passes Fatehpur Sikri, Bharatpur, Mahwa and Dausa before reaching Jaipur.</p></details>
+      <details class="faq-acc"><summary>How long does the Agra to Jaipur taxi journey take?</summary><p>About 4 to 5 hours by private taxi, depending on traffic, your pickup point in Agra and the breaks you take on the way.</p></details>
+      <details class="faq-acc"><summary>What is the taxi fare from Agra to Jaipur?</summary><p>The fare depends on the cab type and whether you book one-way or round trip. Message us on WhatsApp with your travel date and we share today&rsquo;s fixed fare before you book, with tolls mentioned separately.</p></details>
+      <details class="faq-acc"><summary>Are tolls included in the Agra to Jaipur fare?</summary><p>No. The fare covers the AC vehicle, fuel and driver charges. Highway tolls on NH-21 are paid by the customer at actuals, and we tell you the expected toll total on WhatsApp before you book.</p></details>
+      <details class="faq-acc"><summary>Is a one-way taxi available, or only round trip?</summary><p>Both are available. A one-way drop to Jaipur suits travellers continuing their trip from there; a round trip suits a day visit or a short Jaipur stay, with the same cab and driver bringing you back to Agra.</p></details>
+      <details class="faq-acc"><summary>Can we stop at Fatehpur Sikri on the way to Jaipur?</summary><p>Yes. Fatehpur Sikri lies directly on the Agra&ndash;Jaipur highway, about 40 km from Agra, and is an easy 1&ndash;1.5 hour stop without a major detour. Tell us when booking so the driver plans the stop.</p></details>
+      <details class="faq-acc"><summary>Can we also stop at Mehandipur Balaji Temple en route?</summary><p>Yes. Mehandipur Balaji Temple is just off the same highway near Mahwa, about two-thirds of the way to Jaipur. Many travellers combine a Balaji darshan with their Agra to Jaipur journey &mdash; ask us to plan the stop when you book.</p></details>
+      <details class="faq-acc"><summary>Can you pick me up from my hotel or Agra Cantt railway station?</summary><p>Yes. We pick up from any Agra address, including hotels across the city, Agra Cantt railway station, Agra Fort railway station and Kheria Airport. Share the address on WhatsApp and the driver reaches you at your chosen time.</p></details>
+      <details class="faq-acc"><summary>What is the road like, and how many toll points are there?</summary><p>The route runs on NH-21, a well-maintained four-lane highway for most of the way, passing Fatehpur Sikri, Bharatpur, Mahwa and Dausa before reaching Jaipur. There are a few toll plazas along the way, paid by the customer at actuals.</p></details>
+      <details class="faq-acc"><summary>Is the cab suitable for families and senior citizens on this long drive?</summary><p>Yes. For a 4&ndash;5 hour highway drive we recommend the Innova Crysta for extra comfort, and we plan a tea or washroom break en route. Tell us on WhatsApp about any special needs &mdash; on-route breaks cost nothing.</p></details>
+      <details class="faq-acc"><summary>When will driver details be shared?</summary><p>Before pickup you receive your driver&rsquo;s name, mobile number and car registration number on WhatsApp, so you know exactly who is arriving.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== RELATED ROUTES ===================== -->
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <h2 class="h2 center" style="margin-bottom:36px">More Routes From Agra</h2>
+    <div class="rel">
+      <a href="../jaipur-to-agra-taxi/" class="rel-card"><h3>Jaipur to Agra Taxi</h3><p>Same route, reverse direction, with pickup in Jaipur.</p><span class="tag">Fare on WhatsApp</span></a>
+      <a href="../fatehpur-sikri/" class="rel-card"><h3>Agra to Fatehpur Sikri Taxi</h3><p>On the same highway &mdash; an easy day trip from Agra.</p><span class="tag">From &#8377;2,500</span></a>
+      <a href="../agra-to-mehandipur-balaji-taxi/" class="rel-card"><h3>Agra to Mehandipur Balaji Taxi</h3><p>Just off this highway near Mahwa.</p><span class="tag">Fare on WhatsApp</span></a>
+      <a href="../agra-to-bharatpur-taxi/" class="rel-card"><h3>Agra to Bharatpur Taxi</h3><p>On the same highway &mdash; an easy stop either way.</p><span class="tag">Fare on WhatsApp</span></a>
+      <a href="../outstation-cabs-agra/" class="rel-card"><h3>All Outstation Cabs from Agra</h3><p>Browse every outstation route we run.</p><span class="tag">View routes</span></a>
+      <a href="../blog/agra-to-jaipur-taxi-route-guide/" class="rel-card"><h3>Read: Agra to Jaipur Route Guide</h3><p>Route, timings and the best stops along the way.</p><span class="tag">Travel Guide</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FINAL CTA ===================== -->
+<section class="mesh-dark center" style="padding:80px 20px 64px">
+  <div style="max-width:48rem;margin:0 auto">
+    <h2 class="h2 h2--lg h2--white">Ready To Travel From Agra To Jaipur?</h2>
+    <p style="margin-top:12px;font-weight:600;color:var(--warn);font-size:1.125rem">Get Your Cab Fare Before You Book.</p>
+    <p style="margin-top:16px;color:rgba(255,255,255,.65);font-size:15px;line-height:1.7">
+      Send your travel date, pickup location, group size and whether you need one way or a round trip &mdash; plus any stop you would like on the way.
+    </p>
+  </div>
+  <div class="mt-cta">
+    <a data-cta href="https://wa.me/918720081102?text=Hi%20Padma%20Shree%20Travels%2C%20I%20would%20like%20an%20Agra%20to%20Jaipur%20taxi.%0A%0ATravel%20date%3A%20%0APickup%20point%20in%20Agra%3A%20%0APassengers%20%2F%20cab%20type%3A%20%0AOne%20way%20or%20round%20trip%3A%20%0AStops%20on%20the%20way%20(Fatehpur%20Sikri%20%2F%20Mehandipur%20Balaji)%3A%20%0A%0APlease%20share%20availability%20and%20fare." target="_blank" rel="noopener" class="btn-primary">Get Fare on WhatsApp</a>
+  </div>
+  <a href="tel:+918720081102" class="link-call" style="display:inline-block;margin-top:16px">or Call Now &mdash; +91-87200 81102</a>
+</section>
+
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="mesh-dark">
+  <div class="wrap ft__grid">
+    <div class="ft__brand">
+      <p class="ft__h">Padma Shree Travels</p>
+      <p>Rajeshwar Mandir, Kaveri Vihar Phase II,<br>Shamsabad, Agra, Uttar Pradesh 282001</p>
+      <p>Your trusted partner for taxi and cab booking in Agra &mdash; outstation trips, sightseeing tours and airport transfers, available 24/7.</p>
+    </div>
+    <div>
+      <p class="ft__h">Top Routes</p>
+      <div class="ft__links">
+        <a href="../agra-local-sightseeing/">Agra Sightseeing</a>
+        <a href="../agra-to-mathura-taxi/">Mathura Taxi</a>
+        <a href="../agra-to-vrindavan-cab/">Vrindavan Cab</a>
+        <a href="../mathura-vrindavan-tour-from-agra/">Mathura Vrindavan Tour</a>
+        <a href="../agra-to-mehandipur-balaji-taxi/">Mehandipur Balaji</a>
+        <a href="../agra-to-kaila-devi-temple-taxi/">Kaila Devi</a>
+        <a href="../agra-airport-taxi/">Airport Taxi</a>
+        <a href="../agra-railway-station-taxi/">Railway Station Taxi</a>
+      </div>
+    </div>
+    <div>
+      <p class="ft__h">Tours &amp; Tools</p>
+      <div class="ft__links">
+        <a href="../agra-temple-tour-by-cab/">Temple Tours from Agra</a>
+        <a href="../mathura-vrindavan-barsana/">Barsana Tour</a>
+        <a href="../agra-karauli-kaila-devi-balaji-tour/">Karauli Kaila Devi Balaji Tour</a>
+        <a href="../agra-to-rajasthan-temple-tour/">Rajasthan Temple Tour</a>
+        <a href="../taj-mahal-sunrise-taxi/">Taj Mahal Sunrise Taxi</a>
+        <a href="../agra-taxi-fares/">Taxi Fare List</a>
+        <a href="../route-finder/">Route Finder</a>
+        <a href="../fleet/">Our Fleet</a>
+      </div>
+    </div>
+    <div>
+      <p class="ft__h">Contact</p>
+      <div class="ft__links">
+        <a href="tel:+918720081102">+91-87200 81102</a>
+        <a href="mailto:travels.padamshree@gmail.com">travels.padamshree@gmail.com</a>
+        <a href="../book/?route=agra-to-jaipur-taxi">Book Online</a>
+        <a href="../contact/">Contact Us</a>
+        <a href="../about/">About Us</a>
+        <a href="../blog/">Travel Blog</a>
+      </div>
+    </div>
+  </div>
+  <div class="ft__bot">
+    <div class="wrap">
+      <p>&copy; <span data-year>2026</span> Padma Shree Travels. All rights reserved.</p>
+      <p>Agra Taxi Service &bull; Outstation Cabs &bull; Sightseeing</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ===================== FLOATING WHATSAPP (tablet / desktop) ===================== -->
+<a id="waBtn" href="https://wa.me/918720081102?text=Hi%20Padma%20Shree%20Travels%2C%20I%20would%20like%20an%20Agra%20to%20Jaipur%20taxi.%0A%0ATravel%20date%3A%20%0APickup%20point%20in%20Agra%3A%20%0APassengers%20%2F%20cab%20type%3A%20%0AOne%20way%20or%20round%20trip%3A%20%0AStops%20on%20the%20way%20(Fatehpur%20Sikri%20%2F%20Mehandipur%20Balaji)%3A%20%0A%0APlease%20share%20availability%20and%20fare."
+   target="_blank" rel="noopener" class="waf" aria-label="Chat on WhatsApp about an Agra to Jaipur taxi">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true">
+    <path d="M16.001 2.667c-7.363 0-13.334 5.97-13.334 13.333 0 2.353.615 4.646 1.782 6.665L2.667 29.333l6.83-1.75a13.27 13.27 0 0 0 6.504 1.66h.006c7.362 0 13.333-5.97 13.333-13.333 0-3.562-1.387-6.912-3.905-9.43a13.246 13.246 0 0 0-9.434-3.913Zm0 24.4h-.005a11.05 11.05 0 0 1-5.634-1.542l-.404-.24-4.053 1.039 1.081-3.951-.263-.406a11.02 11.02 0 0 1-1.69-5.9c0-6.1 4.968-11.067 11.073-11.067 2.957 0 5.736 1.153 7.828 3.246a10.99 10.99 0 0 1 3.24 7.828c0 6.101-4.969 11.067-11.073 11.067v-.074Zm6.07-8.287c-.332-.166-1.965-.97-2.27-1.08-.305-.11-.527-.166-.748.166-.222.333-.858 1.08-1.053 1.302-.194.222-.388.25-.72.083-.332-.166-1.403-.517-2.672-1.649-.988-.881-1.655-1.969-1.85-2.302-.194-.333-.02-.512.146-.678.15-.15.333-.389.499-.583.166-.194.222-.333.333-.555.11-.222.055-.417-.028-.583-.083-.166-.748-1.803-1.026-2.469-.27-.65-.545-.562-.748-.572-.194-.008-.416-.01-.638-.01a1.22 1.22 0 0 0-.887.417c-.305.333-1.165 1.139-1.165 2.777s1.192 3.222 1.358 3.444c.166.222 2.346 3.583 5.685 5.024.795.343 1.415.548 1.898.702.797.253 1.523.217 2.097.132.64-.096 1.965-.803 2.242-1.579.277-.777.277-1.442.194-1.58-.083-.138-.305-.221-.638-.388Z"/>
+  </svg>
+</a>
+
+<!-- ===================== MOBILE BOOKING BAR (phones only) ===================== -->
+<div class="mobile-bar">
+  <a href="tel:+918720081102" class="mobile-bar__call">&#9742; Call Now</a>
+  <a data-cta href="https://wa.me/918720081102?text=Hi%20Padma%20Shree%20Travels%2C%20I%20would%20like%20an%20Agra%20to%20Jaipur%20taxi.%0A%0ATravel%20date%3A%20%0APickup%20point%20in%20Agra%3A%20%0APassengers%20%2F%20cab%20type%3A%20%0AOne%20way%20or%20round%20trip%3A%20%0AStops%20on%20the%20way%20(Fatehpur%20Sikri%20%2F%20Mehandipur%20Balaji)%3A%20%0A%0APlease%20share%20availability%20and%20fare." target="_blank" rel="noopener" class="mobile-bar__wa">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true">
+      <path d="M16.001 2.667c-7.363 0-13.334 5.97-13.334 13.333 0 2.353.615 4.646 1.782 6.665L2.667 29.333l6.83-1.75a13.27 13.27 0 0 0 6.504 1.66h.006c7.362 0 13.333-5.97 13.333-13.333 0-3.562-1.387-6.912-3.905-9.43a13.246 13.246 0 0 0-9.434-3.913Zm0 24.4h-.005a11.05 11.05 0 0 1-5.634-1.542l-.404-.24-4.053 1.039 1.081-3.951-.263-.406a11.02 11.02 0 0 1-1.69-5.9c0-6.1 4.968-11.067 11.073-11.067 2.957 0 5.736 1.153 7.828 3.246a10.99 10.99 0 0 1 3.24 7.828c0 6.101-4.969 11.067-11.073 11.067v-.074Zm6.07-8.287c-.332-.166-1.965-.97-2.27-1.08-.305-.11-.527-.166-.748.166-.222.333-.858 1.08-1.053 1.302-.194.222-.388.25-.72.083-.332-.166-1.403-.517-2.672-1.649-.988-.881-1.655-1.969-1.85-2.302-.194-.333-.02-.512.146-.678.15-.15.333-.389.499-.583.166-.194.222-.333.333-.555.11-.222.055-.417-.028-.583-.083-.166-.748-1.803-1.026-2.469-.27-.65-.545-.562-.748-.572-.194-.008-.416-.01-.638-.01a1.22 1.22 0 0 0-.887.417c-.305.333-1.165 1.139-1.165 2.777s1.192 3.222 1.358 3.444c.166.222 2.346 3.583 5.685 5.024.795.343 1.415.548 1.898.702.797.253 1.523.217 2.097.132.64-.096 1.965-.803 2.242-1.579.277-.777.277-1.442.194-1.58-.083-.138-.305-.221-.638-.388Z"/>
+    </svg>
+    WhatsApp
+  </a>
 </div>
-<button class="mnav__cat" aria-expanded="false">Outstation <span class="mnav__arr">&#9662;</span></button>
-<div class="mnav__sub">
-<a href="../agra-to-jaipur-taxi/">Agra to Jaipur Taxi <span class="ptag">Fare on WhatsApp</span></a>
-<a href="../agra-to-gwalior/">Agra to Gwalior <span class="ptag">&#8377;3,000 &middot; RT</span></a>
-<a href="../agra-to-aligarh/">Agra to Aligarh <span class="ptag">&#8377;3,000 &middot; RT</span></a>
-<a href="../agra-to-firozabad/">Agra to Firozabad <span class="ptag">&#8377;2,500 &middot; RT</span></a>
-<a href="../agra-to-etawah/">Agra to Etawah <span class="ptag">&#8377;3,500 &middot; RT</span></a>
-</div>
-<a href="../agra-taxi-fares/">Taxi Fare List</a>
-<a href="../route-finder/">Route Finder</a>
-<a href="../fleet/">Our Fleet</a>
-<a href="../blog/">Travel Blog</a>
-<a href="../about/">About Us</a>
-<a href="../contact/">Contact / Book Now</a>
-<div class="mnav__cta">
-<a href="tel:+918720081102" class="btn btn--b btn--lg"><i data-lucide="phone" class="icon icon--white" aria-hidden="true"></i> Call Now</a>
-<a href="https://wa.me/918720081102?text=Hi!%20I%20want%20an%20Agra%20to%20Jaipur%20taxi.%20Date%3A%20___%20%7C%20One%20way%2FRound%3A%20___%20%7C%20Stop%20at%20Fatehpur%20Sikri%2FBalaji%3F%20___" class="btn btn--wa btn--lg" target="_blank" rel="noopener"><i data-lucide="message-circle" class="icon icon--white" aria-hidden="true"></i> WhatsApp</a>
-</div></div>
 
-<!-- Hero -->
-<section class="phero"><div class="container"><div class="phero__in">
-<div class="bc"><a href="../index.html">Home</a> &#8250; <a href="../outstation-cabs-agra/">Outstation</a> &#8250; <span>Agra to Jaipur Taxi</span></div>
-<h1>Agra to Jaipur Taxi &#8211; AC Cab One Way &amp; Round Trip</h1>
-<p class="phero__tag">Private AC cab from Agra to the Pink City, one way or round trip. Stop at Fatehpur Sikri or Mehandipur Balaji Temple on the way if you like &#8212; your driver knows this highway well. Fixed fare confirmed on WhatsApp before you travel.</p>
-<div class="pbanner">
-<div class="pbanner__amt">Fare on WhatsApp<small>One Way &amp; Round Trip</small></div>
-<div class="pbanner__meta"><span>📍 Approx. 240 km</span><span>⏱ 4&#8211;5 hrs</span><span>Via NH-21</span></div>
-<div class="pbanner__cta">
-<a href="tel:+918720081102" class="btn btn--w btn--lg">📞 Call +91 87200 81102</a>
-<a href="https://wa.me/918720081102?text=Hi!%20I%20want%20an%20Agra%20to%20Jaipur%20taxi.%20Date%3A%20___%20%7C%20One%20way%2FRound%3A%20___%20%7C%20Stop%20at%20Fatehpur%20Sikri%2FBalaji%3F%20___" class="btn btn--wa" target="_blank" rel="noopener">💬 Get Fare on WhatsApp</a>
-</div></div></div></div></section>
+<script>
+/* Footer year. The markup ships with a real year so the page is correct
+   with JavaScript disabled; this only keeps it current. */
+document.querySelectorAll('[data-year]').forEach(function (el) {
+  el.textContent = new Date().getFullYear();
+});
+</script>
 
-<section class="trust"><div class="container"><div class="trust__in">
-<div class="tchip"><div class="tchip__i"><i data-lucide="shield-check" aria-hidden="true"></i></div>Highway-Experienced Drivers</div>
-<div class="tchip"><div class="tchip__i"><i data-lucide="wind" aria-hidden="true"></i></div>AC Cars</div>
-<div class="tchip"><div class="tchip__i"><i data-lucide="indian-rupee" aria-hidden="true"></i></div>Fixed Fare on WhatsApp</div>
-<div class="tchip"><div class="tchip__i"><i data-lucide="map-pin" aria-hidden="true"></i></div>Fatehpur Sikri / Balaji Stops Possible</div>
-<div class="tchip"><div class="tchip__i"><i data-lucide="lock" aria-hidden="true"></i></div>Insured</div>
-</div></div></section>
-
-
-<!-- Route Image Strip (populated by js/route-images.js) -->
-<div class="rstrip-wrap"><div class="container"><div class="rstrip" data-rstrip aria-label="Photos related to this route"></div></div></div>
-
-<section class="section"><div class="container"><div class="prose">
-<h2>Quick Facts: Agra to Jaipur by Taxi</h2>
-<div class="hblock">
-<p><strong>Distance from Agra:</strong> approx. 235&#8211;240 km via NH-21</p>
-<p><strong>Travel time:</strong> 4&#8211;5 hours each way, depending on traffic and stops</p>
-<p><strong>Trip type:</strong> one-way drop or round trip, your choice</p>
-<p><strong>En-route stops:</strong> Fatehpur Sikri (~40 km from Agra), Mehandipur Balaji Temple (near Mahwa), Bharatpur</p>
-<p><strong>Fare:</strong> depends on cab type and one-way vs round trip &#8212; confirmed on WhatsApp</p>
-<p><strong>Booking:</strong> call or WhatsApp +91 87200 81102 &#8212; fixed fare confirmed in writing</p>
-</div>
-
-<h2>Agra to Jaipur Taxi Fare</h2>
-<div class="assure-strip">
-<span class="assure-strip__i">&#10003; Fare fixed on WhatsApp before you travel</span>
-<span class="assure-strip__i">&#10003; Driver's name, number &amp; car number shared before pickup</span>
-<span class="assure-strip__i">&#10003; No advance for most bookings</span>
-</div>
-<div class="ptbl-wrap">
-<table class="ptbl">
-<thead><tr><th>Cab Type</th><th>Seats</th><th>One Way</th><th>Round Trip</th></tr></thead>
-<tbody>
-<tr><td>AC Sedan (Dzire / Amaze)</td><td>4</td><td>Fare on WhatsApp</td><td>Fare on WhatsApp</td></tr>
-<tr><td>AC SUV (Ertiga)</td><td>6</td><td>Fare on WhatsApp</td><td>Fare on WhatsApp</td></tr>
-<tr><td>AC SUV (Innova Crysta)</td><td>7</td><td>Fare on WhatsApp</td><td>Fare on WhatsApp</td></tr>
-<tr><td>Tempo Traveller</td><td>12&#8211;15</td><td>Fare on WhatsApp</td><td>Fare on WhatsApp</td></tr>
-</tbody></table>
-</div>
-<p class="ptbl__note">Fare covers fuel and driver charges. Highway tolls on NH-21 are paid by the customer at actuals &#8212; we tell you the expected toll total on WhatsApp before you book, so there are no surprises on the road.</p>
-
-<h2>Route and Travel Time</h2>
-<p>The Agra&#8211;Jaipur route runs on NH-21 (also signed as NH-11 in parts), a well-maintained four-lane highway for most of the drive. From Agra, the road passes Fatehpur Sikri, continues through the Bharatpur bypass, Mahwa (the turn-off for Mehandipur Balaji Temple), and Dausa before reaching Jaipur. Expect about 4 to 5 hours of driving depending on traffic and how many stops you make.</p>
-<p>We pick up from any Agra address &#8212; your hotel, Agra Cantt railway station, Agra Fort station, or Kheria Airport &#8212; and can plan a tea, breakfast, or temple stop along the way &#8212; on-route breaks are included; only a longer detour off the route may change the fare, and we confirm that on WhatsApp first.</p>
-
-<h2>Popular Stops on the Way to Jaipur</h2>
-</div></div></section>
-
-<section class="section section--gray"><div class="container">
-<div class="fcards">
-<div class="fcard"><h4>Fatehpur Sikri</h4><p>Emperor Akbar's UNESCO World Heritage ghost city sits right on this highway, about 40 km from Agra. A 1&#8211;1.5 hour stop is easy to add without a major detour. See our <a href="../fatehpur-sikri/">Fatehpur Sikri taxi page</a> for details.</p></div>
-<div class="fcard"><h4>Mehandipur Balaji Temple</h4><p>This famous Hanuman temple sits just off the highway near Mahwa, roughly two-thirds of the way to Jaipur. Many travellers combine a Balaji darshan with their Jaipur journey &#8212; see our <a href="../agra-to-mehandipur-balaji-taxi/">Mehandipur Balaji taxi page</a>.</p></div>
-<div class="fcard"><h4>Bharatpur (Keoladeo National Park)</h4><p>The Bharatpur bypass lies on this route. Birdwatchers can ask about a short detour into Keoladeo National Park, especially between October and February.</p></div>
-</div>
-</div></section>
-
-<section class="section"><div class="container"><div class="prose">
-<h2>How Booking Works</h2>
-<p><strong>1. Message or call us</strong> on +91 87200 81102 with your travel date, one-way or round trip, and any stops you'd like to add.</p>
-<p><strong>2. We confirm your fixed fare in writing on WhatsApp</strong> &#8212; including expected toll charges, so you know the full cost before you say yes.</p>
-<p><strong>3. Before pickup, you receive your driver's name, mobile number, and car registration number on WhatsApp.</strong></p>
-<p>No app to download. No advance payment for most bookings.</p>
-</div></div></section>
-
-<section class="section section--gray"><div class="container">
-<div class="text-center"><span class="sbadge">Why Us</span><h2 class="stitle">Why Choose Padma Shree Travels for Agra&#8211;Jaipur</h2></div>
-<div class="incs">
-<div class="inc"><div class="inc__i"><i data-lucide="map" aria-hidden="true"></i></div><div><h3>Drivers Who Know This Highway</h3><p>Our drivers run the Agra&#8211;Jaipur route regularly and know the rest stops, the toll points, and the Fatehpur Sikri/Balaji turn-offs.</p></div></div>
-<div class="inc"><div class="inc__i"><i data-lucide="clock" aria-hidden="true"></i></div><div><h3>One Way or Round Trip</h3><p>Continuing your trip from Jaipur, or need to be back in Agra the same day? Both options are available.</p></div></div>
-<div class="inc"><div class="inc__i"><i data-lucide="indian-rupee" aria-hidden="true"></i></div><div><h3>Fixed Fare, Told Upfront</h3><p>The fare we confirm on WhatsApp is the fare you pay, with tolls explained before booking.</p></div></div>
-<div class="inc"><div class="inc__i"><i data-lucide="users" aria-hidden="true"></i></div><div><h3>Comfortable for Long Drives</h3><p>Innova Crysta recommended for the 4&#8211;5 hour highway stretch, with breaks planned around your comfort.</p></div></div>
-<div class="inc"><div class="inc__i"><i data-lucide="map-pin" aria-hidden="true"></i></div><div><h3>En-Route Stops Welcome</h3><p>Fatehpur Sikri, Mehandipur Balaji, or Bharatpur &#8212; tell us and we'll plan it in.</p></div></div>
-<div class="inc"><div class="inc__i"><i data-lucide="shield-check" aria-hidden="true"></i></div><div><h3>Commercially Insured, Verified Drivers</h3><p>Driver details shared before every pickup.</p></div></div>
-</div>
-</div></section>
-
-<section class="cta"><div class="container">
-<h2>Ready to Book Your Agra to Jaipur Taxi?</h2>
-<p>Fixed fare in writing. Driver details before pickup. One way or round trip.</p>
-<div class="cta__acts">
-<a href="https://wa.me/918720081102?text=Hi!%20I%20want%20an%20Agra%20to%20Jaipur%20taxi.%20Date%3A%20___%20%7C%20One%20way%2FRound%3A%20___%20%7C%20Stop%20at%20Fatehpur%20Sikri%2FBalaji%3F%20___" class="btn btn--w btn--lg" target="_blank" rel="noopener">💬 Get Fare on WhatsApp</a>
-<a href="tel:+918720081102" class="btn btn--wa btn--lg">📞 +91 87200 81102</a>
-</div></div></section>
-
-<section class="section" id="faq"><div class="container"><div class="prose">
-<div class="text-center"><span class="sbadge">FAQ</span><h2 class="stitle">Frequently Asked Questions</h2></div>
-<div class="flist">
-<div class="fi open"><button class="fi__q">How far is Jaipur from Agra?<span class="fi__tog">+</span></button><div class="fi__a"><p>Jaipur is approximately 235&#8211;240 km from Agra via NH-21 (also signed as NH-11). The drive takes about 4 to 5 hours by private taxi, depending on traffic and stops.</p></div></div>
-<div class="fi"><button class="fi__q">What is the taxi fare from Agra to Jaipur?<span class="fi__tog">+</span></button><div class="fi__a"><p>Fare depends on the cab type and whether you book one-way or round trip. Message us on WhatsApp with your travel date for today's fixed fare &#8212; we quote before you book, with tolls mentioned separately.</p></div></div>
-<div class="fi"><button class="fi__q">Can we stop at Fatehpur Sikri on the way to Jaipur?<span class="fi__tog">+</span></button><div class="fi__a"><p>Yes. Fatehpur Sikri lies directly on the Agra&#8211;Jaipur highway, about 40 km from Agra, and is an easy 1&#8211;1.5 hour stop without a major detour. Just tell us when booking so the driver plans the stop.</p></div></div>
-<div class="fi"><button class="fi__q">Can we also stop at Mehandipur Balaji Temple en route?<span class="fi__tog">+</span></button><div class="fi__a"><p>Yes. Mehandipur Balaji Temple is just off the same highway near Mahwa, about two-thirds of the way to Jaipur. Many travellers combine a Balaji darshan with their Agra to Jaipur journey &#8212; ask us to plan the stop when you book.</p></div></div>
-<div class="fi"><button class="fi__q">Is a one-way taxi available, or only round trip?<span class="fi__tog">+</span></button><div class="fi__a"><p>Both are available. One-way drop to Jaipur suits travellers continuing their trip from there; round trip suits a day visit or a short Jaipur stay with the same cab bringing you back to Agra.</p></div></div>
-<div class="fi"><button class="fi__q">What is the road like, and how many toll points are there?<span class="fi__tog">+</span></button><div class="fi__a"><p>The route runs on NH-21, a well-maintained four-lane highway for most of the way, passing Fatehpur Sikri, Bharatpur, Mahwa, and Dausa before reaching Jaipur. There are a few toll plazas along the way, paid by the customer at actuals.</p></div></div>
-<div class="fi"><button class="fi__q">Is the cab suitable for families and senior citizens on this long drive?<span class="fi__tog">+</span></button><div class="fi__a"><p>Yes. For a 4&#8211;5 hour highway drive we recommend the Innova Crysta for extra comfort, and we plan a tea or washroom break en route. Tell us on WhatsApp about any special needs &#8212; extra stops cost nothing.</p></div></div>
-</div>
-</div></div></section>
-
-<section class="section section--gray"><div class="container">
-<div class="text-center"><span class="sbadge">Related Trips</span><h2 class="stitle">More Routes</h2></div>
-<div class="rel-grid">
-<a href="../jaipur-to-agra-taxi/" class="rel-card"><h4>Jaipur to Agra Taxi</h4><p>Same route, reverse direction, pickup in Jaipur.</p><span class="rp">Fare on WhatsApp</span></a>
-<a href="../fatehpur-sikri/" class="rel-card"><h4>Agra to Fatehpur Sikri Taxi</h4><p>On the same highway &#8212; from &#8377;2,500 full day.</p><span class="rp">From &#8377;2,500</span></a>
-<a href="../agra-to-mehandipur-balaji-taxi/" class="rel-card"><h4>Agra to Mehandipur Balaji Taxi</h4><p>Just off this highway near Mahwa.</p><span class="rp">Fare on WhatsApp</span></a>
-<a href="../agra-to-bharatpur-taxi/" class="rel-card"><h4>Agra to Bharatpur Taxi</h4><p>On the same highway &#8212; easy stop either way.</p><span class="rp">Fare on WhatsApp</span></a>
-<a href="../outstation-cabs-agra/" class="rel-card"><h4>All Outstation Cabs from Agra</h4><p>Browse every outstation route we run.</p><span class="rp">Fare on WhatsApp</span></a>
-<a href="../blog/agra-to-jaipur-taxi-route-guide/" class="rel-card"><h4>Read: Agra to Jaipur Route Guide</h4><p>Fare, route &amp; the three best stops on the way.</p><span class="rp">Travel Guide</span></a>
-</div>
-</div></section>
-
-<footer class="ft"><div class="container"><div class="ft__grid">
-<div class="ft__brand"><div class="logo"><img src="../images/logo.png" alt="Padma Shree Travels" class="logo__img"><div class="logo__t" style="color:#fff">Padma Shree Travels<small>Agra Taxi Service</small></div></div>
-<p>Your trusted partner for taxi and cab booking in Agra. Affordable outstation trips, sightseeing tours, and airport transfers. Available 24/7.</p></div>
-<div><h4 class="ft__h">Top Routes</h4><ul class="ft__links">
-<li><a href="../agra-local-sightseeing/">Agra Sightseeing</a></li>
-<li><a href="../agra-to-mathura-taxi/">Mathura Taxi</a></li>
-<li><a href="../agra-to-vrindavan-cab/">Vrindavan Cab</a></li>
-<li><a href="../mathura-vrindavan-tour-from-agra/">Mathura Vrindavan Tour</a></li>
-<li><a href="../agra-to-mehandipur-balaji-taxi/">Mehandipur Balaji</a></li>
-<li><a href="../agra-to-kaila-devi-temple-taxi/">Kaila Devi</a></li>
-<li><a href="../agra-to-jaipur-taxi/">Agra to Jaipur</a></li>
-<li><a href="../agra-airport-taxi/">Airport Taxi</a></li><li><a href="../agra-taxi-fares/">Taxi Fare List</a></li><li><a href="../route-finder/">Route Finder</a></li><li><a href="../fleet/">Our Fleet</a></li></ul></div>
-<div><h4 class="ft__h">Tours</h4><ul class="ft__links">
-<li><a href="../agra-temple-tour-by-cab/">Temple Tours from Agra</a></li>
-<li><a href="../mathura-vrindavan-barsana/">Barsana Tour</a></li>
-<li><a href="../agra-karauli-kaila-devi-balaji-tour/">Karauli Kaila Devi Balaji Tour</a></li>
-<li><a href="../agra-to-rajasthan-temple-tour/">Rajasthan Temple Tour</a></li>
-<li><a href="../taj-mahal-sunrise-taxi/">Taj Mahal Sunrise Taxi</a></li>
-<li><a href="../outstation-cabs-agra/">Outstation Cabs from Agra</a></li></ul></div>
-<div><h4 class="ft__h">Contact Us</h4>
-<div class="ft__cr"><div class="ft__ci"><i data-lucide="map-pin" aria-hidden="true"></i></div><div>Rajeshwar Mandir, Kaveri Vihar Phase II, Shamsabad, Agra, Uttar Pradesh 282001</div></div>
-<div class="ft__cr"><div class="ft__ci"><i data-lucide="phone" aria-hidden="true"></i></div><div><a href="tel:+918720081102" style="color:var(--g400)">+91-87200 81102</a></div></div>
-<div class="ft__cr"><div class="ft__ci"><i data-lucide="mail" aria-hidden="true"></i></div><div><a href="mailto:travels.padamshree@gmail.com" style="color:var(--g400)">travels.padamshree@gmail.com</a></div></div>
-<p style="margin-top:.6rem"><a href="../about/" style="color:var(--g400);font-size:.85rem">About Us</a></p>
-</div></div>
-<div class="ft__bot"><div>&copy; 2025 Padma Shree Travels. All rights reserved.</div><div>Agra Taxi Service &bull; Outstation Cabs &bull; Sightseeing</div></div>
-</div></footer>
-
-<div class="mcta-bar"><div class="mcta-bar__note">Usually replies within minutes</div><div class="mcta-bar__btns"><a href="tel:+918720081102" class="mcta-bar__a mcta-bar__call">&#128222; Call Now</a><a href="https://wa.me/918720081102?text=Hi!%20I%20want%20an%20Agra%20to%20Jaipur%20taxi.%20Date%3A%20___%20%7C%20One%20way%2FRound%3A%20___%20%7C%20Stop%20at%20Fatehpur%20Sikri%2FBalaji%3F%20___" class="mcta-bar__a mcta-bar__wa" target="_blank" rel="noopener">&#128172; WhatsApp</a><a href="../book/?route=agra-to-jaipur-taxi" class="mcta-bar__a mcta-bar__book">Book Now</a></div></div>
-<a href="https://wa.me/918720081102?text=Hi!%20I%20want%20an%20Agra%20to%20Jaipur%20taxi.%20Date%3A%20___%20%7C%20One%20way%2FRound%3A%20___%20%7C%20Stop%20at%20Fatehpur%20Sikri%2FBalaji%3F%20___" class="waf" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp"><i data-lucide="message-circle" aria-hidden="true"></i></a>
-<script src="../js/main.js"></script>
-<script src="../js/route-images.js" defer></script>
-<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-<script>lucide.createIcons();</script>
+<!-- Shared Google reviews: ONE dataset + ONE grid component, site-wide. -->
+<script src="../js/reviews-data.js" defer></script>
+<script src="../js/reviews-grid.js" defer></script>
+<!-- Conversion events into dataLayer, read by the GTM container above. -->
+<script src="../js/conversion-tracking.js" defer></script>
+<!-- Rotates the fare band's background banner. -->
+<script src="../js/landing.js" defer></script>
 </body>
 </html>

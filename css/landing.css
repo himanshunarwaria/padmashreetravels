@@ -1,0 +1,832 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   Padma Shree Travels — Shared stylesheet for upgraded conversion pages
+   ═══════════════════════════════════════════════════════════════════════════
+   Extracted from the two approved reference builds — agra-to-jaipur-taxi/ and
+   agra-local-sightseeing/ — after they were found to carry ~450 near-identical
+   lines of inline CSS each. This file is the single source of truth for that
+   shared 90%; those two pages are LOCKED and keep their original inline
+   styles unchanged, so this file does not touch them. Every page upgraded
+   AFTER them should link this stylesheet instead of repeating the block.
+
+   USAGE
+     <link rel="stylesheet" href="../css/landing.css">
+     (root-level pages: href="css/landing.css")
+   Then add a small <style> block in the page <head> ONLY for what is
+   genuinely specific to that page (its own hero image crop, an unusual
+   section, a one-off colour). If you are about to paste more than about
+   15–20 lines of boilerplate, it probably belongs here instead.
+
+   INDEPENDENCE FROM css/style.css
+   This is a separate design system, not an extension of the site's original
+   stylesheet. Pages that load landing.css do not also load style.css (same
+   convention the two locked pages already established) — Poppins vs Inter,
+   neo-brutalist hard-shadow cards vs the softer original site chrome. Do not
+   link both on one page.
+
+   NAMING
+   Class names match the two locked pages exactly, so copying a section's
+   markup from either reference still works unmodified against this file.
+   Two page-only class names from the reference builds were folded into the
+   shared, more general ones already used for the same purpose elsewhere:
+     .rel   (jaipur's related-routes grid)  → use .grid-3 (sightseeing's name
+                                               for the identical rule)
+   No other renames. Nothing here is dead code — every rule below is used by
+   at least one of the two reference pages today.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ───────────────────────── Design tokens ───────────────────────────────── */
+:root{
+  --accent:#2FE07E;
+  --accent-deep:#22C55E;
+  --accent-dark:#15803D;
+  --ink:#000;
+  --ink-950:#0A0F14;
+  --navy:#0E2439;
+  --gold:#EFC75E;
+  --warn:#FBBF24;
+  --container:1400px;
+}
+
+/* ───────────────────────── Reset + base ────────────────────────────────── */
+*,*::before,*::after{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
+body{
+  margin:0; background:#fff; color:#000; overflow-x:hidden;
+  font-family:'Poppins', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+img{ max-width:100%; display:block; }
+h1,h2,h3,h4{ color:#000; margin:0; font-weight:700; letter-spacing:-.01em; }
+p{ margin:0; }
+ul{ margin:0; padding:0; list-style:none; }
+a{ color:inherit; text-decoration:none; transition:180ms ease; }
+button{ font-family:inherit; }
+
+/* ───────────────────────── Accessibility helpers ───────────────────────── */
+/* Visible keyboard focus on every interactive element. */
+a:focus-visible, button:focus-visible, summary:focus-visible{
+  outline:3px solid var(--accent-dark); outline-offset:3px; border-radius:3px;
+}
+.sr-only{
+  position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+  overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+}
+/* Pair with class="sr-only skip" on the in-page "Skip to main content" link —
+   sr-only hides it until it receives keyboard focus, this reveals it. */
+.skip:focus{
+  position:fixed; top:10px; left:10px; z-index:100; width:auto; height:auto;
+  clip:auto; margin:0; padding:10px 16px; background:var(--accent);
+  border:3px solid #000; border-radius:6px; font-weight:700;
+}
+
+/* ───────────────────────── Layout wrappers ─────────────────────────────── */
+.wrap{ max-width:var(--container); margin:0 auto; padding-left:20px; padding-right:20px; }
+@media (min-width:640px){ .wrap{ padding-left:32px; padding-right:32px; } }
+.center{ text-align:center; }
+/* Prose measure for centred copy blocks under a heading. */
+.narrow{ max-width:56rem; margin-left:auto; margin-right:auto; }
+
+/* ───────────────────────── Buttons / CTA links ──────────────────────────
+   One component, every instance identical. Black text, 3px black border,
+   hard offset shadow with NO blur. Hover presses the button into its own
+   shadow — this is the signature interaction of the whole design system,
+   do not soften it with a blurred shadow or a colour-only hover state. */
+.btn-primary{
+  display:inline-block; background:var(--accent); color:#000;
+  font-weight:700; font-size:clamp(13px,1.15vw,17px); line-height:1.35;
+  padding:clamp(16px,1.9vw,24px) clamp(20px,3vw,44px);
+  border:3px solid #000; border-radius:6px; box-shadow:7px 7px 0 #000;
+  text-align:center;
+  transition:background-color .2s ease, transform 180ms ease, box-shadow 180ms ease;
+}
+.btn-primary:hover{ background:var(--gold); transform:translate(3px,3px); box-shadow:4px 4px 0 #000; }
+.btn-primary:active{ transform:translate(7px,7px); box-shadow:0 0 0 #000; }
+
+.btn-header{
+  display:inline-block; background:var(--accent); color:#000;
+  font-weight:700; font-size:13px; padding:8px 16px;
+  border:2px solid #000; border-radius:5px; box-shadow:3px 3px 0 #000;
+  white-space:nowrap;
+  transition:background-color .2s ease, transform 180ms ease, box-shadow 180ms ease;
+}
+.btn-header:hover{ background:var(--gold); transform:translate(2px,2px); box-shadow:1px 1px 0 #000; }
+
+.link-call{
+  font-size:14px; font-weight:600; color:rgba(255,255,255,.75);
+  text-decoration:underline; text-underline-offset:2px;
+}
+.link-call:hover{ color:var(--accent); }
+
+/* ───────────────────────── Header ───────────────────────────────────────
+   Simplified sticky header (no dropdown mega-menu, no mobile hamburger) —
+   deliberately different from css/style.css's .hdr. Mobile visitors get the
+   primary actions from .mobile-bar at the bottom instead of a nav drawer. */
+.hdr{ position:sticky; top:0; z-index:50; background:var(--ink-950); border-bottom:2px solid #000; }
+.hdr__in{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding-top:12px; padding-bottom:12px; }
+.hdr__logo{ display:flex; align-items:center; gap:8px; font-weight:700; font-size:14px; color:#fff; flex-shrink:0; min-width:0; }
+.hdr__mark{
+  display:inline-flex; align-items:center; justify-content:center;
+  height:28px; width:28px; border-radius:4px; background:var(--accent);
+  border:2px solid #000; color:#000; font-size:11px; font-weight:900; flex-shrink:0;
+}
+.hdr__name{ display:none; }
+.hdr__nav{ display:none; align-items:center; gap:18px; font-size:12px; font-weight:500; color:rgba(255,255,255,.75); }
+.hdr__nav a:hover{ color:var(--accent); }
+@media (min-width:640px){ .hdr__logo{ font-size:16px; } .hdr__name{ display:inline; } }
+@media (min-width:1024px){ .hdr__nav{ display:flex; } }
+
+/* ───────────────────────── Hero ─────────────────────────────────────────
+   Near-black band with a restrained green technical wash — no purple/blue
+   AI-gradient look, no glass, no neon. This IS the brand signature; do not
+   simplify it away or swap in a plain solid colour. */
+.hero-bg{
+  background-color:#000;
+  background-image:
+    radial-gradient(circle at 62% 18%, rgba(34,197,94,.10) 0%, transparent 42%),
+    radial-gradient(circle at 88% 72%, rgba(34,197,94,.09) 0%, transparent 38%),
+    radial-gradient(circle at 30% 88%, rgba(34,197,94,.05) 0%, transparent 45%),
+    radial-gradient(circle at 74% 30%, rgba(120,220,150,.05) 0%, transparent 9%),
+    radial-gradient(circle at 55% 62%, rgba(120,220,150,.045) 0%, transparent 7%),
+    radial-gradient(circle at 93% 22%, rgba(120,220,150,.05) 0%, transparent 6%),
+    repeating-linear-gradient(118deg, rgba(180,255,200,.030) 0 1px, transparent 1px 14px),
+    repeating-linear-gradient(62deg,  rgba(180,255,200,.020) 0 1px, transparent 1px 22px);
+}
+.hero__grid{ display:grid; grid-template-columns:1fr; gap:40px; align-items:center; padding-top:64px; padding-bottom:64px; }
+@media (min-width:640px){ .hero__grid{ padding-top:80px; padding-bottom:80px; } }
+@media (min-width:1024px){ .hero__grid{ grid-template-columns:1fr 1fr; gap:24px; padding-top:106px; padding-bottom:106px; } }
+
+.bc{ font-size:11px; color:rgba(255,255,255,.5); }
+.bc a:hover{ color:var(--accent); }
+.bc span{ color:rgba(255,255,255,.7); }
+
+.hero h1{
+  margin-top:12px; font-weight:300; text-transform:uppercase; color:#fff;
+  font-size:1.6rem; line-height:1.14; letter-spacing:-.02em;
+}
+/* Optional second display line inside the H1, e.g.
+   <h1>Line one<span class="blk">Bold line two</span></h1> */
+.hero h1 .blk{ display:block; margin-top:28px; }
+.hero h1 strong{ display:block; font-weight:800; margin-top:10px; }
+.hero__value{
+  margin-top:32px; font-weight:800; text-transform:uppercase; color:#fff;
+  font-size:1.3rem; line-height:1.16; letter-spacing:-.02em;
+}
+.hero__meta{ margin-top:24px; font-size:12px; color:var(--warn); font-weight:500; max-width:28rem; line-height:1.7; }
+.hero__meta strong{ font-weight:700; }
+.hero__acts{ margin-top:32px; display:flex; flex-wrap:wrap; align-items:center; gap:12px 24px; }
+@media (min-width:640px){
+  .hero h1{ font-size:2.1rem; }
+  .hero__value{ font-size:1.65rem; }
+  .hero__meta{ font-size:14px; }
+}
+@media (min-width:1024px){
+  .hero h1{ font-size:2.65rem; }
+  .hero__value{ font-size:2.05rem; }
+}
+
+.frame-hero{
+  border:2px solid rgba(255,255,255,.85); border-radius:18px;
+  background:#000; overflow:hidden; aspect-ratio:16/9; width:100%;
+}
+.frame-hero img{ width:100%; height:100%; object-fit:cover; }
+
+/* ───────────────────────── Proof strip ──────────────────────────────────
+   Thin bar directly under the hero: star rating link + a short list of
+   trust points. Keep the list to 3–4 short phrases; it is a strip, not a
+   second trust section (that role belongs to the navy inclusions band). */
+.proof{ background:#fff; border-bottom:2px solid #000; }
+.proof__in{
+  display:flex; flex-direction:column; align-items:center; justify-content:space-between;
+  gap:8px; padding-top:14px; padding-bottom:14px; font-size:12px;
+}
+.proof__stars{ color:var(--accent-deep); font-size:14px; letter-spacing:-.05em; }
+.proof__rev{ display:flex; align-items:center; gap:8px; }
+.proof__rev span:last-child{ color:var(--accent-dark); font-weight:500; }
+.proof__rev:hover{ opacity:.8; }
+.proof__list{ display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:8px; font-weight:500; }
+.proof__sep{ color:rgba(0,0,0,.3); }
+@media (min-width:640px){ .proof__in{ flex-direction:row; font-size:13px; } }
+
+/* ───────────────────────── Section rhythm ───────────────────────────────
+   .sec is the default vertical rhythm; stack sections back-to-back and add
+   .sec--top0 on one of an adjacent pair so they don't double their gap. */
+.sec{ background:#fff; padding-top:56px; padding-bottom:56px; }
+.sec--tight{ padding-top:40px; padding-bottom:40px; }
+.sec--navy{ background:var(--navy); }
+.sec--top0{ padding-top:0; }
+@media (min-width:640px){ .sec{ padding-top:72px; padding-bottom:72px; } }
+
+.h2{ font-weight:700; font-size:1.25rem; line-height:1.3; letter-spacing:-.01em; }
+@media (min-width:640px){ .h2{ font-size:1.5rem; } }
+.h2--lg{ font-size:1.5rem; }
+@media (min-width:640px){ .h2--lg{ font-size:1.875rem; } }
+@media (min-width:1024px){ .h2--lg{ font-size:2.5rem; } }
+.h2--white{ color:#fff; }
+.lede{ margin-top:16px; font-size:14px; color:rgba(0,0,0,.7); line-height:1.7; }
+@media (min-width:640px){ .lede{ font-size:16px; } }
+.lede--white{ color:rgba(255,255,255,.7); }
+.lede a{ color:var(--accent-dark); font-weight:600; text-decoration:underline; text-underline-offset:2px; }
+.lede a:hover{ color:#000; }
+.mt-cta{ margin-top:36px; }
+
+/* ───────────────────────── Statistics ───────────────────────────────────
+   White card, black border, hard GREEN offset shadow. Use ONE .stats band
+   per page — repeating the same numbers in a second band further down adds
+   no information and was flagged as a weakness in the first two pages. */
+.stats{ display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+@media (min-width:768px){ .stats{ grid-template-columns:repeat(4,1fr); gap:20px; } }
+.stat{
+  background:#fff; border:3px solid #000; border-radius:4px;
+  box-shadow:8px 8px 0 var(--accent-deep);
+  padding:clamp(14px,1.6vw,23px) 12px; text-align:center;
+}
+.stat-num{ font-weight:800; color:#000; line-height:1; letter-spacing:-.02em; font-size:clamp(2rem,5.4vw,4.2rem); }
+/* Two-word values step the type down one notch so the card keeps the
+   reference height instead of wrapping to a third line. */
+.stat-num.is-word{
+  font-size:clamp(1.5rem,3.1vw,2.55rem); line-height:1.06;
+  display:flex; align-items:center; justify-content:center;
+  min-height:clamp(2rem,5.4vw,4.2rem);
+}
+.stat-label{ margin-top:9px; font-size:clamp(11px,1.05vw,15px); color:#111; font-weight:400; line-height:1.5; }
+.stat-label strong{ font-weight:700; }
+.muted{ color:rgba(0,0,0,.6); }
+
+/* ───────────────────────── Vehicle / cab / package cards ────────────────
+   Reuses .stat's card geometry for a 3-up "choose your cab" or package row.
+   Keep to 3 cards; use a .row-light list underneath for anything beyond
+   that (a 4th+ vehicle, a larger-group note) rather than a 4th stat card. */
+.cabs{ display:grid; grid-template-columns:1fr; gap:16px; max-width:48rem; margin:32px auto 0; }
+@media (min-width:640px){ .cabs{ grid-template-columns:repeat(3,1fr); gap:20px; } }
+
+/* ───────────────────────── Image galleries ──────────────────────────────
+   Two variants, pick whichever fits the content:
+
+   1) .ph — a single photo in a hard-shadow frame with a small caption tag
+      overlaid at the bottom-left. Use .r43 / .r169 / .r219 for the aspect
+      ratio. Good for "the fleet", "the drive", simple labelled photo rows.
+      Lay multiple out in a .grid-3 (or .grid-2) wrapper.
+
+   2) .stop — a card with a photo on top and a text body below (heading,
+      description, a small duration/label chip). Use for a numbered
+      itinerary, a step-by-step journey, or anything where each image needs
+      a sentence of explanation, not just a caption. Lay multiple out in
+      .itin (its own 1/2/3-column grid, distinct from .grid-3 only because
+      itinerary cards are usually taller and read better slightly narrower).
+
+   Do not use both variants for the same set of images on one page — pick
+   the one that matches whether the images need a caption or a paragraph. */
+.ph{
+  border:3px solid #000; border-radius:4px; box-shadow:6px 6px 0 var(--accent-deep);
+  background:#0A0F14; position:relative; overflow:hidden;
+}
+.ph img{ width:100%; height:100%; object-fit:cover; }
+.ph-tag{
+  position:absolute; left:8px; bottom:8px; z-index:2;
+  background:rgba(0,0,0,.72); color:#fff; font-size:9px; font-weight:700;
+  letter-spacing:.14em; text-transform:uppercase; padding:3px 7px; border-radius:2px;
+}
+.r43{ aspect-ratio:4/3; }
+.r169{ aspect-ratio:16/9; }
+.r219{ aspect-ratio:21/9; }
+
+.itin{ display:grid; grid-template-columns:1fr; gap:20px; }
+@media (min-width:640px){ .itin{ grid-template-columns:repeat(2,1fr); } }
+@media (min-width:1024px){ .itin{ grid-template-columns:repeat(3,1fr); } }
+.stop{ border:3px solid #000; border-radius:4px; background:#fff; box-shadow:6px 6px 0 var(--accent-deep); overflow:hidden; display:flex; flex-direction:column; }
+.stop__img{ position:relative; aspect-ratio:16/10; background:#0A0F14; }
+.stop__img img{ width:100%; height:100%; object-fit:cover; }
+.stop__time{
+  position:absolute; left:8px; bottom:8px; z-index:2; background:rgba(0,0,0,.78); color:#fff;
+  font-size:10px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:4px 8px; border-radius:2px;
+}
+.stop__body{ padding:14px 16px 16px; }
+.stop__body h3{ font-size:14.5px; line-height:1.35; }
+.stop__body p{ margin-top:7px; font-size:13px; color:#333; line-height:1.6; }
+.stop__dur{ display:inline-block; margin-top:9px; font-size:11px; font-weight:700; color:var(--accent-dark); letter-spacing:.04em; text-transform:uppercase; }
+
+/* Generic content grids — used for galleries, related-route cards, and any
+   other 2-or-3-up card row on the page. */
+.grid-3{ display:grid; grid-template-columns:1fr; gap:20px 20px; }
+@media (min-width:640px){ .grid-3{ grid-template-columns:repeat(2,1fr); gap:40px 20px; } }
+@media (min-width:1024px){ .grid-3{ grid-template-columns:repeat(3,1fr); gap:70px 20px; } }
+.grid-2{ display:grid; grid-template-columns:1fr; gap:20px; }
+@media (min-width:640px){ .grid-2{ grid-template-columns:repeat(2,1fr); gap:24px; } }
+
+/* ───────────────────────── Rows / cards ─────────────────────────────────
+   .row-dark  — on the navy inclusions band.
+   .row-light — on white/gray backgrounds (quick facts, local-partner list).
+   .card      — a bordered card with a heading + paragraph (benefits grid,
+                FAQ-adjacent "why choose us" points, planning notes). */
+.row-dark{ border:2px solid rgba(255,255,255,.3); border-radius:4px; padding:8px 16px; color:#fff; font-size:13px; font-weight:500; }
+.row-light{ border:1.5px solid #000; border-radius:4px; background:#fff; padding:14px 16px; font-size:13px; line-height:1.6; }
+@media (min-width:640px){ .row-dark, .row-light{ font-size:14px; } }
+.stack{ display:grid; gap:12px; }
+.stack--wide{ gap:23px; }
+
+.card{ border:1.5px solid #000; border-radius:4px; background:#fff; padding:16px 18px; }
+.card h3{ font-weight:700; font-size:13.5px; line-height:1.4; }
+.card p{ margin-top:6px; font-size:13px; color:#333; line-height:1.6; }
+.card p a{ color:var(--accent-dark); font-weight:600; text-decoration:underline; text-underline-offset:2px; }
+.card p a:hover{ color:#000; }
+
+/* ───────────────────────── FAQ accordion ────────────────────────────────
+   Native <details>/<summary> — no JavaScript required, works with the
+   keyboard and screen readers out of the box. Collapsed by default so a
+   long FAQ list does not push the booking CTA far down the page; the full
+   answer text still ships in the HTML for search engines either way. */
+.faq-acc{ border:1.5px solid #000; border-radius:4px; background:#fff; padding:16px 18px; }
+.faq-acc summary{
+  font-weight:700; font-size:13.5px; line-height:1.4; cursor:pointer;
+  list-style:none; display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
+}
+.faq-acc summary::-webkit-details-marker{ display:none; }
+.faq-acc summary::after{ content:"+"; font-weight:700; font-size:15px; line-height:1.3; flex:0 0 auto; }
+.faq-acc[open] summary::after{ content:"\2212"; }
+.faq-acc p{ margin-top:8px; font-size:13px; color:#333; line-height:1.6; }
+.faq-acc p a{ color:var(--accent-dark); font-weight:600; text-decoration:underline; text-underline-offset:2px; }
+
+/* ───────────────────────── Pickup-coverage chips ────────────────────────*/
+.chip{ border:1.5px solid #000; border-radius:4px; background:#fff; padding:14px 10px; text-align:center; }
+.chip p{ font-size:12.5px; font-weight:700; line-height:1.3; }
+.chips{ display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+@media (min-width:640px){ .chips{ grid-template-columns:repeat(5,1fr); } }
+
+/* ───────────────────────── Fare / comparison table ──────────────────────
+   Wrap every .ftbl in .ftbl-wrap so a table wider than the viewport scrolls
+   inside its own box instead of pushing the page wide. Always give the
+   table a <caption> (screen-reader visible via a visually-styled caption,
+   not sr-only, since the summary is useful context for sighted users too)
+   and scope="col" on header cells. */
+.ftbl-wrap{ overflow-x:auto; border:1.5px solid #000; border-radius:4px; }
+.ftbl{ width:100%; border-collapse:collapse; font-size:13px; min-width:420px; }
+/* :not(.sr-only) — a caption deliberately hidden for screen readers must stay
+   hidden. Without this, `.ftbl caption` (0,1,1) outranks `.sr-only` (0,1,0)
+   and its padding/background inflate the 1x1 box into a visible chip. Found
+   on agra-to-jaipur-taxi/ when that page was linked to this stylesheet on
+   1 Sep 2026; it is the only page in the project with a sr-only caption. */
+.ftbl caption:not(.sr-only){ caption-side:top; text-align:left; padding:12px 14px 10px; font-size:12.5px; color:#333; background:#FAFAFA; border-bottom:1px solid rgba(0,0,0,.14); }
+.ftbl th, .ftbl td{ padding:11px 14px; text-align:left; border-bottom:1px solid rgba(0,0,0,.14); }
+.ftbl thead th{ background:var(--ink-950); color:#fff; font-weight:700; font-size:12px; letter-spacing:.03em; text-transform:uppercase; border-bottom:2px solid #000; }
+.ftbl tbody tr:last-child td{ border-bottom:0; }
+.ftbl tbody tr:nth-child(even){ background:#FAFAFA; }
+.ftbl td strong{ font-weight:700; }
+.ftbl .num{ white-space:nowrap; font-weight:700; }
+
+/* ───────────────────────── Dark mesh bands ──────────────────────────────
+   Booking-process band, final CTA, footer. Subtle wireframe mesh, dense at
+   the edges, fading through the middle so text stays clean. */
+.mesh-dark{ background-color:#000; position:relative; isolation:isolate; }
+.mesh-dark::before{
+  content:""; position:absolute; inset:0; z-index:-1; pointer-events:none;
+  background-image:
+    linear-gradient(rgba(255,255,255,.075) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.075) 1px, transparent 1px);
+  background-size:64px 64px;
+  -webkit-mask-image:radial-gradient(ellipse 62% 58% at 50% 50%, transparent 30%, #000 100%);
+          mask-image:radial-gradient(ellipse 62% 58% at 50% 50%, transparent 30%, #000 100%);
+}
+.steps{ display:grid; grid-template-columns:1fr; gap:48px 64px; max-width:64rem; margin:56px auto 0; }
+@media (min-width:768px){ .steps{ grid-template-columns:repeat(2,1fr); } }
+.step h3{ color:#fff; font-size:14px; font-weight:700; }
+@media (min-width:640px){ .step h3{ font-size:16px; } }
+.step p{ margin-top:12px; font-size:13px; color:rgba(255,255,255,.65); line-height:1.7; max-width:48ch; }
+
+/* ───────────────────────── Fare breakdown band (.fare-*) ────────────────
+   Replaces the old navy "what's included" layout on 31 Aug 2026. That
+   version stacked every inclusion and exclusion as an identical 2px-
+   outlined pill in a single narrow column, which read as a column of
+   disabled form fields and left the right half of the band empty.
+
+   Revised the same day: the banner is no longer a small framed card beside
+   the text — it is the full-bleed background of the whole band, with the
+   text held to the darker left side. Cinematic, but still an informational
+   fare section, not a second hero.
+
+   .row-dark is deliberately NOT removed: partners/ still uses it for its
+   "Partner Terms" list, which is not a fare section and was left alone.
+
+   Icons are background data-URIs on a pseudo-element, so no icon font, no
+   CDN, no per-item SVG repeated across 31 pages, and nothing for a screen
+   reader to announce. */
+
+/* The band itself. Layer order, top to bottom:
+     1. directional wash  — heaviest behind the text, easing off toward the
+                            fleet so the vehicles and their lighting survive
+     2. flat tint         — a small uniform knock-back over the whole frame
+     3. vertical shading  — settles the top and bottom edges into the page
+     4. the photograph    — --fare-bg, set by js/landing.js
+
+   The photo is decorative — every fact in this band is live text — so it is
+   a background rather than an <img> with invented alt text.
+
+   ONE FILE IS EVER REQUESTED. --fare-bg starts as `none` and js/landing.js
+   fills it in, so the band never fetches a placeholder that a rotation is
+   about to replace. (An earlier revision defaulted the property to a real
+   URL in CSS; measuring the resource timeline showed it cost a second
+   ~200KB download on every load, so the default moved into the
+   scripting:none query below.) With scripting off, that query supplies a
+   real photograph, resolved against THIS STYLESHEET rather than the
+   document — one declaration, correct from any page depth. If scripting is
+   on but the script never runs, the band falls back to the navy wash: no
+   photo, but every word still legible. */
+/* `section.fare-band` rather than `.fare-band`: agra-to-jaipur-taxi/ and
+   agra-local-sightseeing/ keep their own inline <style> block AFTER this
+   file, and it declares `.sec--navy{ background:var(--navy) }`. That
+   shorthand resets background-image, so at equal specificity the later
+   inline rule would erase the photograph. The element+class selector
+   (0,1,1) outranks it. Harmless everywhere else — the band is always a
+   <section>. */
+section.fare-band{
+  background-color:var(--navy);
+  background-image:
+    linear-gradient(to right,
+      rgba(8,17,28,.94) 0%, rgba(8,17,28,.90) 40%,
+      rgba(8,17,28,.62) 62%, rgba(8,17,28,.28) 85%, rgba(8,17,28,.20) 100%),
+    linear-gradient(rgba(8,17,28,.22), rgba(8,17,28,.22)),
+    linear-gradient(to bottom,
+      rgba(8,17,28,.40) 0%, rgba(8,17,28,0) 22%,
+      rgba(8,17,28,0) 80%, rgba(8,17,28,.45) 100%),
+    var(--fare-bg, none);
+  background-repeat:no-repeat;
+  background-size:cover;
+  /* Phones crop hardest (only ~20% of a 2.2:1 frame survives), so the focal
+     point sits right, on the vehicles, away from the text. */
+  background-position:78% 50%;
+}
+/* The no-JavaScript fallback photograph. */
+@media (scripting: none){
+  section.fare-band{ --fare-bg:url("../images/Banners/B1.jpg"); }
+}
+@media (min-width:768px){ section.fare-band{ background-position:72% 50%; } }
+@media (min-width:960px){ section.fare-band{ background-position:50% 60%; } }
+
+/* Below 960px the text spans the full width, so the wash has to be close to
+   uniform — the band must stay readable whichever photo is drawn. */
+@media (max-width:959.98px){
+  section.fare-band{
+    background-image:
+      linear-gradient(to right, rgba(8,17,28,.93) 0%, rgba(8,17,28,.86) 100%),
+      linear-gradient(rgba(8,17,28,.30), rgba(8,17,28,.30)),
+      linear-gradient(to bottom,
+        rgba(8,17,28,.35) 0%, rgba(8,17,28,0) 20%,
+        rgba(8,17,28,0) 82%, rgba(8,17,28,.40) 100%),
+      var(--fare-bg, none);
+  }
+}
+
+.fare{ display:grid; gap:26px; }
+@media (min-width:960px){
+  /* Text holds the darker left side, ~57-61% of the band at common desktop
+     widths, so the fleet stays visible beside it rather than behind the
+     copy. The px cap keeps the measure readable on very wide screens. */
+  .fare{ max-width:min(64%, 820px); gap:28px; }
+}
+
+.fare__eyebrow{
+  display:flex; align-items:center; gap:10px; margin:0 0 12px;
+  font-size:11.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--accent);
+}
+.fare__eyebrow::before{ content:""; flex:0 0 auto; width:26px; height:2px; background:var(--accent); }
+.fare__lede{ margin-top:12px; font-size:14.5px; line-height:1.75; color:rgba(255,255,255,.78); max-width:52ch; }
+@media (min-width:640px){ .fare__lede{ font-size:15px; } }
+
+/* Groups — inclusions carry more weight than exclusions, but exclusions
+   are never hidden or reduced to a footnote. */
+.fare__lists{ display:grid; gap:24px; }
+/* Two list columns only once the text column is wide enough that items
+   stop wrapping onto a second line. */
+@media (min-width:1200px){ .fare__lists{ grid-template-columns:1fr 1fr; gap:22px 36px; align-items:start; } }
+.fare__gh{
+  margin:0 0 12px; font-size:12px; font-weight:700; letter-spacing:.1em;
+  text-transform:uppercase; color:#fff;
+}
+.fare__group--exc{ padding-top:20px; border-top:1px solid rgba(255,255,255,.16); }
+@media (min-width:1200px){ .fare__group--exc{ padding-top:0; border-top:0; } }
+.fare__group--exc .fare__gh{ color:rgba(255,255,255,.72); }
+
+.fare__list{ margin:0; padding:0; list-style:none; display:grid; gap:9px; }
+.fare__item{
+  position:relative; padding-left:29px;
+  font-size:13.5px; line-height:1.55; color:#fff;
+}
+@media (min-width:640px){ .fare__item{ font-size:14px; } }
+.fare__item::before{
+  content:""; position:absolute; left:0; top:1px; width:19px; height:19px;
+  background-repeat:no-repeat; background-position:center; background-size:contain;
+}
+/* tick = included */
+.fare__item--inc::before{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232FE07E' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4.5 12.5l5 5 10-11'/%3E%3C/svg%3E");
+}
+/* A dozen rows across the site wrap the chargeable term in <strong> and
+   leave the condition in normal weight ("Rajasthan State Tax, Where
+   Applicable"). That is useful hierarchy, so it is kept and made
+   deliberate: the term reads at full white, the qualifier stays lighter. */
+.fare__item strong{ font-weight:700; color:#fff; }
+
+/* plus = an extra you pay on top; different SHAPE, not just a colour */
+.fare__item--exc{ color:rgba(255,255,255,.78); }
+.fare__item--exc::before{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FBBF24' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='8.4'/%3E%3Cpath d='M12 8.2v7.6M8.2 12h7.6'/%3E%3C/svg%3E");
+}
+
+/* CTA — the route's own button, plus a quiet phone link. */
+.fare__cta{ display:flex; flex-wrap:wrap; align-items:center; gap:14px 18px; }
+.fare__cta .btn-primary{ margin:0; }
+@media (max-width:519px){
+  .fare__cta .btn-primary{ display:block; width:100%; text-align:center; }
+  .fare__cta .link-call{ width:100%; text-align:center; }
+}
+/* .fare__fig / .fare__img / .fare__cap were removed with the framed image
+   card — the photograph is now the band's own background. .fare__note went
+   with them: no page ever used it. */
+
+/* ───────────────────────── Local-partner / trust band (.lp-*) ───────────
+   Replaced the previous .partner / .partner__fig pattern on 31 Aug 2026.
+   That version stacked six identically-bordered full-width rows next to a
+   20px-radius photo carrying a detached 9px green offset shadow — visually
+   noisy, inconsistent with the 4px radius used everywhere else in this
+   file, and cheap-looking beside the rest of the page.
+
+   This version is an editorial two-column band: eyebrow + heading + short
+   lede + THREE icon-led facts separated by hairlines (no boxes), against a
+   single contained portrait framed in the same 1.5px/4px card treatment as
+   .card and .ftbl-wrap, with the business identity as a restrained caption
+   INSIDE that frame rather than floating loose beneath it.
+
+   The two locked reference pages keep their own inline copy of .partner and
+   are unaffected by this change — they do not load this stylesheet.
+
+   Fact icons are supplied here as background-image data-URIs so the markup
+   stays clean and no icon font or CDN is needed; they are decorative and
+   sit on a pseudo-element, so assistive technology never announces them. */
+.lp{
+  display:grid; grid-template-columns:1fr; gap:36px;
+  max-width:1080px; margin-inline:auto;
+}
+@media (min-width:900px){
+  .lp{ grid-template-columns:minmax(0,1.28fr) minmax(260px,.72fr); gap:56px; align-items:center; }
+}
+
+/* min-width:0 stops a long unbreakable string (a URL in a page-specific
+   sentence, say) from forcing the text column wider than its grid track. */
+.lp__body{ min-width:0; }
+
+.lp__eyebrow{
+  display:flex; align-items:center; gap:10px;
+  font-size:11.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--accent-dark);
+}
+.lp__eyebrow::before{
+  content:""; flex:0 0 auto; width:26px; height:2px; background:var(--accent-deep);
+}
+.lp__head{ margin-top:14px; }
+.lp__lede{ margin-top:14px; font-size:14.5px; line-height:1.75; color:rgba(0,0,0,.72); max-width:54ch; }
+@media (min-width:640px){ .lp__lede{ font-size:15px; } }
+.lp__lede a{ color:var(--accent-dark); font-weight:600; text-decoration:underline; text-underline-offset:2px; }
+.lp__lede a:hover{ color:#000; }
+
+/* Facts — hairline-separated rows, not bordered boxes. */
+.lp__facts{ margin:26px 0 0; padding:0; list-style:none; border-top:1px solid rgba(0,0,0,.14); }
+.lp__fact{
+  position:relative; padding:15px 0 15px 34px;
+  border-bottom:1px solid rgba(0,0,0,.14);
+  font-size:13.5px; line-height:1.65; color:rgba(0,0,0,.72);
+}
+@media (min-width:640px){ .lp__fact{ font-size:14px; } }
+.lp__fact strong{ display:block; color:#000; font-weight:700; margin-bottom:2px; }
+.lp__fact::before{
+  content:""; position:absolute; left:0; top:17px; width:20px; height:20px;
+  background-repeat:no-repeat; background-position:center; background-size:contain;
+}
+.lp__fact--fare::before{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2315803D' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='2.5' y='5.5' width='19' height='13' rx='2'/%3E%3Ccircle cx='12' cy='12' r='2.6'/%3E%3Cpath d='M6 9v6M18 9v6'/%3E%3C/svg%3E");
+}
+.lp__fact--driver::before{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2315803D' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='2.5' y='4' width='19' height='16' rx='2'/%3E%3Ccircle cx='8.5' cy='10' r='2.2'/%3E%3Cpath d='M5 16c.7-1.6 2-2.4 3.5-2.4S11.3 14.4 12 16'/%3E%3Cpath d='M15 9.5h4M15 13.5h4'/%3E%3C/svg%3E");
+}
+.lp__fact--pickup::before{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2315803D' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 21.5s7-6 7-11.5a7 7 0 1 0-14 0c0 5.5 7 11.5 7 11.5z'/%3E%3Ccircle cx='12' cy='10' r='2.6'/%3E%3C/svg%3E");
+}
+.lp__fact--route::before{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2315803D' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='5.5' cy='18.5' r='2.5'/%3E%3Ccircle cx='18.5' cy='5.5' r='2.5'/%3E%3Cpath d='M8 18.5h6a4 4 0 0 0 0-8h-4a4 4 0 0 1 0-8h6'/%3E%3C/svg%3E");
+}
+
+/* CTA — one primary action, one subordinate link.
+   .link-call is defined for the dark mesh bands (white at 75% opacity), so
+   on this white band it has to be re-coloured or it is invisible. */
+.lp__cta{ display:flex; flex-wrap:wrap; align-items:center; gap:14px 18px; margin-top:26px; }
+.lp__cta .btn-primary{ margin:0; }
+.lp__cta .link-call{ color:var(--accent-dark); }
+.lp__cta .link-call:hover{ color:#000; }
+
+/* Support line — small print under the CTA, not a fourth trust point. */
+.lp__note{
+  margin-top:14px; font-size:12.5px; line-height:1.6; color:rgba(0,0,0,.6);
+}
+@media (max-width:519px){
+  .lp__cta{ gap:12px; }
+  .lp__cta .btn-primary{ display:block; width:100%; text-align:center; }
+  .lp__cta .link-call{ width:100%; text-align:center; }
+}
+
+/* Figure — contained portrait in the same card treatment as .card/.ftbl-wrap. */
+.lp__fig{
+  margin:0; border:1.5px solid #000; border-radius:4px; overflow:hidden;
+  background:#fff; max-width:380px; width:100%; justify-self:center;
+}
+@media (min-width:900px){ .lp__fig{ justify-self:end; } }
+.lp__img{
+  width:100%; height:auto; aspect-ratio:4/5; object-fit:cover; object-position:50% 25%;
+  background:#F1F1EE; display:block;
+}
+.lp__cap{
+  padding:14px 16px 15px; background:#FAFAFA; border-top:1.5px solid #000;
+}
+.lp__name{
+  display:block; font-size:13.5px; font-weight:700; color:#000; line-height:1.35;
+}
+.lp__addr{
+  display:block; margin-top:4px; font-size:12px; line-height:1.55; color:rgba(0,0,0,.66);
+}
+.lp__links{ margin-top:9px; font-size:12px; font-weight:600; }
+.lp__links a{ color:var(--accent-dark); text-decoration:underline; text-underline-offset:2px; }
+.lp__links a:hover{ color:#000; }
+.lp__sep{ color:rgba(0,0,0,.3); padding:0 6px; }
+
+/* Phones: keep the portrait from eating the screen, and leave room under
+   the section so the fixed .mobile-bar never covers the CTA. */
+@media (max-width:899px){
+  .lp__fig{ max-width:290px; }
+  .lp{ gap:30px; }
+}
+
+/* ───────────────────────── Hub route chips ──────────────────────────────
+   Added when the outstation-cabs-agra hub needed a compact way to list
+   secondary routes (a short nearby town, a station transfer) that don't
+   warrant a full .rel-card — a chip with the destination name and its fare
+   inline. Genuinely reusable on any hub/index page with a long tail of
+   minor routes (fare list, temple-tour hub, route finder) alongside the
+   handful of major routes that DO get full cards. Keep this for the tail,
+   not as a replacement for cards on routes worth full attention. */
+.rchip-row{ display:flex; flex-wrap:wrap; gap:10px; }
+.rchip{
+  display:inline-flex; align-items:center; gap:8px;
+  border:1.5px solid #000; border-radius:4px; background:#fff;
+  padding:10px 14px; font-size:13px; font-weight:600; color:#000;
+  transition:background-color .2s ease, transform 180ms ease, box-shadow 180ms ease;
+}
+.rchip:hover{ background:#FCFCF7; transform:translate(-1px,-1px); box-shadow:3px 3px 0 var(--accent-deep); }
+.rchip__fare{ font-size:11px; font-weight:700; color:var(--accent-dark); white-space:nowrap; }
+
+/* ───────────────────────── Related-route cards ──────────────────────────
+   Lay these out inside .grid-3 (or .grid-2 for a shorter list) — there is
+   no separate ".rel" grid; use the same generic grid as the galleries. */
+.rel-card{
+  display:block; border:1.5px solid #000; border-radius:4px; background:#fff; padding:16px 18px;
+  transition:background-color .2s ease, transform 180ms ease, box-shadow 180ms ease;
+}
+.rel-card:hover{ background:#FCFCF7; transform:translate(-2px,-2px); box-shadow:5px 5px 0 var(--accent-deep); }
+.rel-card h3{ font-size:13.5px; font-weight:700; }
+.rel-card p{ margin-top:6px; font-size:12.5px; color:#444; line-height:1.55; }
+.rel-card .tag{ display:inline-block; margin-top:9px; font-size:11px; font-weight:700; color:var(--accent-dark); }
+
+/* ───────────────────────── Footer ───────────────────────────────────────*/
+.ft__grid{ display:grid; grid-template-columns:1fr; gap:32px; padding-top:40px; padding-bottom:24px; text-align:center; }
+@media (min-width:640px){ .ft__grid{ grid-template-columns:repeat(4,1fr); text-align:left; } }
+.ft__h{ font-weight:700; color:#fff; font-size:14px; }
+.ft__brand p{ margin-top:6px; font-size:11px; color:rgba(255,255,255,.55); line-height:1.7; }
+.ft__links{ margin-top:10px; display:grid; gap:5px; font-size:11px; color:rgba(255,255,255,.55); }
+.ft__links a:hover{ color:var(--accent); }
+.ft__bot{ background:#000; border-top:1px solid rgba(255,255,255,.1); padding-top:16px; padding-bottom:16px; }
+.ft__bot .wrap{
+  display:flex; flex-direction:column; align-items:center; justify-content:space-between;
+  gap:10px; font-size:11px; color:rgba(255,255,255,.7);
+}
+@media (min-width:640px){ .ft__bot .wrap{ flex-direction:row; font-size:12px; } }
+.ft__bot a:hover{ color:var(--accent); }
+
+/* ───────────────────────── Floating WhatsApp + mobile action bar ────────
+   .waf is hidden on phones (the .mobile-bar covers that role there) and
+   shown from tablet width up. .mobile-bar is the reverse. body gets bottom
+   padding on phones so the fixed bar never covers the last section. */
+.waf{
+  position:fixed; bottom:20px; right:20px; z-index:50;
+  display:none; align-items:center; justify-content:center;
+  height:52px; width:52px; border-radius:50%;
+  background:#25D366; border:3px solid #000; box-shadow:4px 4px 0 #000;
+}
+.waf svg{ height:24px; width:24px; fill:#fff; }
+@media (min-width:640px){ .waf{ display:flex; } }
+
+.mobile-bar{
+  position:fixed; bottom:0; left:0; right:0; z-index:50;
+  display:grid; grid-template-columns:1fr 1fr; background:#fff; border-top:2px solid #000;
+}
+.mobile-bar a{
+  display:flex; align-items:center; justify-content:center; gap:7px;
+  font-weight:700; font-size:14px; padding:13px 8px; color:#000;
+  transition:background-color .2s ease;
+}
+.mobile-bar a:hover{ background:var(--gold); }
+.mobile-bar__call{ border-right:2px solid #000; }
+.mobile-bar__wa{ background:var(--accent); }
+.mobile-bar svg{ height:16px; width:16px; fill:currentColor; }
+@media (min-width:640px){ .mobile-bar{ display:none; } }
+@media (max-width:639px){ body{ padding-bottom:54px; } }
+
+/* ───────────────────────── Header mega-menu (.gnav-*) ────────────────────
+   Added 31 Aug 2026 to bring every rebuilt page's top nav in line with the
+   homepage's dropdown mega-menu (Pilgrimage/Sightseeing/Outstation/Fares &
+   Tools, each with route links and price tags) plus a matching mobile
+   category drawer — reversing the earlier decision documented above .hdr
+   ("no dropdown mega-menu, no mobile hamburger") at the owner's explicit
+   request. That comment is left as history, not current fact.
+   Zero JavaScript: desktop opens on :hover/:focus-within, mobile uses
+   native nested <details> for both the drawer and each category — fully
+   keyboard-operable for free. Content (which routes, which prices) is kept
+   in sync with the legacy homepage nav by a generator script; edit that
+   source, not each page, if a link or price changes.
+   Deliberately does NOT duplicate Call/WhatsApp buttons inside the mobile
+   drawer — .mobile-bar already gives every page a persistent CTA, and two
+   competing sets of buttons is exactly the "too many CTAs" friction the
+   UI/UX audit flagged elsewhere. This component is for browsing only. */
+.gnav-dd{ position:relative; }
+.gnav-dd>a::after{ content:'\25BE'; margin-left:4px; font-size:9px; vertical-align:1px; }
+.gnav-menu{
+  position:absolute; top:100%; left:0; margin-top:14px; min-width:250px;
+  background:#0E1116; border:1px solid rgba(255,255,255,.12); border-radius:8px;
+  padding:8px; box-shadow:0 16px 32px rgba(0,0,0,.45);
+  opacity:0; visibility:hidden; transform:translateY(4px);
+  transition:opacity 140ms ease, transform 140ms ease, visibility 140ms;
+  z-index:70;
+}
+.gnav-dd--right .gnav-menu{ left:auto; right:0; }
+.gnav-dd:hover>.gnav-menu, .gnav-dd:focus-within>.gnav-menu{
+  opacity:1; visibility:visible; transform:translateY(0);
+}
+.gnav-menu a{
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  padding:9px 10px; border-radius:5px; font-size:13px; font-weight:500;
+  color:rgba(255,255,255,.85); white-space:nowrap;
+}
+.gnav-menu a:hover, .gnav-menu a:focus-visible{ background:rgba(255,255,255,.08); color:#fff; }
+.gnav-tag{ font-size:11px; font-weight:600; color:var(--accent); flex-shrink:0; }
+.gnav-more{
+  margin-top:4px; padding-top:10px; border-top:1px solid rgba(255,255,255,.1);
+  color:var(--accent) !important; font-weight:700 !important; justify-content:flex-start !important;
+}
+
+/* Mobile category drawer — hidden at the same 1024px breakpoint .hdr__nav
+   uses, so exactly one of the two is ever visible. */
+.gnav-mobile{ display:block; }
+.gnav-mobile__btn{
+  display:flex; align-items:center; justify-content:center; list-style:none;
+  width:44px; height:44px; border-radius:8px; background:rgba(255,255,255,.08);
+  color:#fff; cursor:pointer; -webkit-tap-highlight-color:transparent;
+}
+.gnav-mobile__btn::-webkit-details-marker{ display:none; }
+.gnav-mobile__btn:hover, .gnav-mobile[open] .gnav-mobile__btn{ background:rgba(255,255,255,.16); }
+.gnav-mobile__panel{
+  position:absolute; left:0; right:0; top:100%; max-height:calc(100vh - 64px);
+  overflow-y:auto; background:var(--ink-950); border-top:1px solid rgba(255,255,255,.12);
+  padding:8px 20px 20px; z-index:60;
+}
+.gnav-mobile__panel>a{
+  display:block; padding:13px 2px; font-size:14px; font-weight:600; color:#fff;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.gnav-mobile__cat{ border-bottom:1px solid rgba(255,255,255,.08); }
+.gnav-mobile__cat summary{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:13px 2px; font-size:14px; font-weight:600; color:#fff; cursor:pointer;
+  list-style:none; -webkit-tap-highlight-color:transparent;
+}
+.gnav-mobile__cat summary::-webkit-details-marker{ display:none; }
+.gnav-mobile__cat summary::after{ content:'\25BE'; font-size:11px; color:rgba(255,255,255,.5); }
+.gnav-mobile__cat[open] summary::after{ content:'\25B4'; }
+.gnav-mobile__cat a{
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  padding:11px 2px 11px 14px; font-size:13px; font-weight:500; color:rgba(255,255,255,.8);
+}
+@media (min-width:1024px){ .gnav-mobile{ display:none; } }
+
+/* ───────────────────────── Reduced motion ───────────────────────────────*/
+@media (prefers-reduced-motion:reduce){
+  html{ scroll-behavior:auto; }
+  *{ transition-duration:.01ms !important; animation-duration:.01ms !important; }
+}
+
+/* ───────────────────────── Review-section compatibility ─────────────────
+   js/reviews-grid.js injects its OWN stylesheet (id="gr-styles", neo-
+   brutalist skin: Poppins, dashed borders, green square stars) unless a
+   <style id="gr-styles"> already exists in <head> before the script runs.
+   Pages using this file want exactly that default skin — it already matches
+   the palette and type here — so do nothing: just include the mount point
+     <section data-reviews-grid data-page="…"></section>
+   and load js/reviews-data.js + js/reviews-grid.js. Do NOT add a competing
+   #gr-styles block on these pages (that technique is reserved for pages
+   still on the OLD css/style.css design, like the homepage, where the
+   component's default skin would look out of place). */

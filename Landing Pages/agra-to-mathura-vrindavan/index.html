@@ -1,0 +1,911 @@
+<!--
+  ============================================================================
+  Padma Shree Travels — Mathura Vrindavan Tour from Agra
+  ============================================================================
+  UI SOURCE: cloned 1:1 from ../agra-karauli-kaila-devi-balaji/index.html
+  (itself cloned from ../agra-to-jaipur/ and the approved neo-brutalist
+  template in ../agra-local-sightseeing/). Only business, copy, imagery and
+  data changed — layout, spacing, section rhythm, typography scale, borders,
+  shadows and CTA styling are UNCHANGED. Do not "modernize" this away.
+
+  DESIGN TOKENS (see :root below)
+    --accent       #2FE07E  bright green - CTA fill
+    --accent-deep  #22C55E  deeper green - hard shadow under stat cards
+    --ink          #000000  borders, headings, CTA text
+    --navy         #0E2439  dark band background
+    --shadow-hard  7px 7px 0  (no blur - signature of the design)
+    --radius       6px (cards 4px) - deliberately small
+    --container    1400px
+
+  KEY RULES OF THIS DESIGN - do not "modernize" these away:
+    * CTA text is BLACK, not white.
+    * Shadows have NO blur radius. Never use a soft/blurred shadow.
+    * Buttons and cards carry a 3px solid black border.
+    * CTA microcopy sits INLINE on one line (in parentheses), not stacked.
+    * Border radius stays small. No large pill/bento rounding.
+    * Hero lines 1-2 are LIGHT weight; only the value statement is extrabold.
+    * The right half of the navy band stays EMPTY. Do not fill it.
+    * No purple/blue AI gradients, glows, glass or neon. Green accent only.
+
+  REAL BUSINESS DATA (verified from the live page:
+  padmashreetravels.in/mathura-vrindavan-tour-from-agra/)
+    Phone / WhatsApp .... +91-87200-81102
+    Email ................ travels.padamshree@gmail.com
+    Address .............. Rajeshwar Mandir, Kaveri Vihar Phase II, Shamsabad, Agra, UP 282001
+    Google reviews ....... https://g.page/r/CUjtXu1x_3bPEBM
+    Headline fare ........ ₹3,000 AC Sedan - standard Mathura + Vrindavan full day
+    Distance ............. approx. 200-250 km round trip (~4-5 hrs driving)
+    Duration ............. 8-10 hours full day
+    Pickup ............... recommended 6:00-7:00 AM from your Agra address
+    Drive times .......... Agra -> Mathura approx. 1.5 hrs | Mathura -> Vrindavan 15 km / ~25 min
+    Return ............... Agra typically by 6:00-7:00 PM
+    Availability ......... 24/7 including festivals
+    FARES (live pricing table)
+      Mathura + Vrindavan (standard) ..... Sedan ₹3,000 | Ertiga ₹3,800 | Innova ₹4,500
+      Mathura + Vrindavan + Barsana ...... Sedan ₹3,500 | Ertiga ₹4,500 | Innova ₹5,500
+      Mathura + Vrindavan + Govardhan .... Sedan ₹3,500 | Ertiga ₹4,500 | Innova ₹5,500
+      Complete Circuit (all 4 cities) .... Sedan ₹4,500 | Ertiga ₹5,500 | Innova ₹7,000
+    Included ............. fuel + driver charges for the full day
+    Extra ................ tolls + parking, paid by the customer at actuals
+    Temples - Mathura .... Krishna Janmabhoomi, Dwarkadhish Temple, Vishram Ghat
+    Temples - Vrindavan .. Banke Bihari, Prem Mandir, ISKCON (Krishna Balaram
+                           Mandir), Nidhivan & Seva Kunj, Kesi Ghat,
+                           Radha Vallabh Temple
+
+  DEVIATIONS FROM THE KARAULI BUILD (all deliberate, no new components, no new CSS)
+    1. The vehicle band reverts to the PRICED package layout used on
+       ../agra-local-sightseeing/ - ₹ figures as .stat-num, supporting fares in
+       .row-light rows. This route has published fares, so they are shown.
+       (Karauli had none and used seat counts instead.)
+    2. The one-day / two-day .faq-item pair from the Karauli build is dropped -
+       this is a single-day tour. No component was added in its place.
+    3. Every media slot is FILLED. Unlike Karauli, the project image library
+       (00 FB-insta-setup-PST-info/Website Images/02 PST Destination Images)
+       carries genuine Mathura & Vrindavan photography, so no empty reference
+       frames remain on this page.
+    4. Hero visual is the destination, not the cab - matching the
+       agra-local-sightseeing (Taj) and Fatehpur Sikri (Buland Darwaza)
+       precedent for destination-led pages.
+
+  IMAGE PROVENANCE
+    Sourced from the project destination library and resized to web JPEGs
+    (max 1400px, q82) into assets/img/:
+      prem-mandir.jpg ......... Prem_Mandir_white_marble_temple
+      prem-mandir-night.jpg ... Prem_Mandir_Vrindavan_night_lights
+      krishna-janmabhoomi.jpg . 08_Krishna_Janmabhoomi_Mathura
+      dwarkadhish-temple.jpg .. 09_Dwarkadhish_Temple_Mathura
+      vishram-ghat-aarti.jpg .. 10_Vishram_Ghat_evening_aarti
+      yamuna-ghat-sunrise.jpg . Yamuna_ghat_steps_at_sunrise
+      banke-bihari-lane.jpg ... Crowded_ornate_temple_entrance
+      vrindavan-lane.jpg ...... Old_Vrindavan_lane_with_cow
+      iskcon-vrindavan.jpg .... ISKCON_temple_with_carved_spires
+      nidhivan-grove.jpg ...... Nidhivan_sacred_grove_Vrindavan
+    Slots whose photo is not a verified, identifiable shot of that exact
+    building are labelled by what the photograph genuinely shows (e.g.
+    "Darshan Queue, Vrindavan" rather than naming a temple). Keep it that way.
+
+  WHERE TO EDIT CONTENT
+    Everything data-driven lives in the PAGE DATA block in the <script> at the
+    bottom of this file: SITE.bookingUrl, SITE.stats, SITE.statsRepeat,
+    SITE.creatives, SITE.results. A grid slot with no "src" renders as an empty
+    reference-style frame with a tiny label. Do not fill slots with stock
+    photos of the wrong temple or AI-generated architecture.
+  ============================================================================
+-->
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="robots" content="index, follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mathura Vrindavan Tour from Agra &#8377;3000 | Day Trip Cab &ndash; Padma Shree Travels</title>
+  <meta name="description" content="Mathura Vrindavan tour from Agra by private AC cab from &#8377;3,000 &ndash; Krishna Janmabhoomi, Banke Bihari, Prem Mandir &amp; ISKCON in one full day. 200&ndash;250 km, 8&ndash;10 hrs, fuel &amp; driver included. Call +91-87200-81102." />
+  <meta name="keywords" content="mathura vrindavan tour from agra, agra to mathura vrindavan taxi, mathura vrindavan one day tour, agra mathura vrindavan cab, mathura vrindavan taxi package, mathura vrindavan full day tour from agra, agra to vrindavan taxi, mathura vrindavan day trip" />
+  <link rel="canonical" href="https://www.padmashreetravels.in/mathura-vrindavan-tour-from-agra/" />
+
+  <meta property="og:title" content="Mathura Vrindavan Tour from Agra &ndash; Full Day Cab from &#8377;3,000 | Padma Shree Travels" />
+  <meta property="og:description" content="Krishna Janmabhoomi, Dwarkadhish, Vishram Ghat, Banke Bihari, ISKCON and Prem Mandir in one comfortable day trip from Agra. Private AC cab, 200&ndash;250 km, 8&ndash;10 hours, fixed full-day fare." />
+  <meta property="og:url" content="https://www.padmashreetravels.in/mathura-vrindavan-tour-from-agra/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_IN" />
+  <meta property="og:image" content="https://www.padmashreetravels.in/images/logo.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Mathura Vrindavan Tour from Agra &ndash; Full Day Cab from &#8377;3,000" />
+  <meta name="twitter:description" content="Both holy cities in one comfortable day from Agra by private AC cab. 10+ temple stops, 8&ndash;10 hours, fuel and driver included." />
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='10' fill='%232FE07E' stroke='%23000' stroke-width='8'/%3E%3Cpath d='M38 30 L38 70 M38 50 L62 50 M62 30 L62 70' stroke='%23000' stroke-width='9' stroke-linecap='square' fill='none'/%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" href="assets/img/prem-mandir.jpg" fetchpriority="high" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink:    { 950: '#0A0F14', 900: '#111820' },
+            navy:   { 900: '#0E2439' },
+            accent: { DEFAULT: '#2FE07E', deep: '#22C55E', dark: '#15803D' },
+            warn:   { 400: '#FBBF24' }
+          },
+          fontFamily: { display: ['Poppins', 'ui-sans-serif', 'system-ui', 'sans-serif'] },
+          maxWidth: { container: '1400px' }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root{
+      --accent:#2FE07E;
+      --accent-deep:#22C55E;
+      --ink:#000;
+      --navy:#0E2439;
+      --gold:#EFC75E;   /* hover fill for every CTA button */
+    }
+    body{ font-family:'Poppins', ui-sans-serif, system-ui, sans-serif; overflow-x:hidden; }
+
+    /* ---------- PrimaryCTA : one component, every instance identical ----------
+       Black text, 3px black border, hard black offset shadow, microcopy inline.
+       Hover presses the button into its own shadow.                          */
+    .btn-primary{
+      display:inline-block;
+      background:var(--accent);
+      color:#000;
+      font-weight:700;
+      font-size:clamp(13px, 1.15vw, 17px);
+      line-height:1.35;
+      padding:clamp(16px,1.9vw,24px) clamp(20px,3vw,44px);
+      border:3px solid #000;
+      border-radius:6px;
+      box-shadow:7px 7px 0 #000;
+      text-align:center;
+      transition:background-color .2s ease, transform 180ms ease, box-shadow 180ms ease;
+    }
+    .btn-primary:hover{ background:var(--gold); transform:translate(3px,3px); box-shadow:4px 4px 0 #000; }
+    .btn-primary:active{ transform:translate(7px,7px); box-shadow:0 0 0 #000; }
+
+    .btn-header{
+      display:inline-block; background:var(--accent); color:#000;
+      font-weight:700; font-size:13px; padding:8px 16px;
+      border:2px solid #000; border-radius:5px; box-shadow:3px 3px 0 #000;
+      transition:background-color .2s ease, transform 180ms ease, box-shadow 180ms ease;
+    }
+    .btn-header:hover{ background:var(--gold); transform:translate(2px,2px); box-shadow:1px 1px 0 #000; }
+
+    /* ---------- Hero band : near-black with a subtle green technological wash.
+       Deliberately restrained - dark bokeh + faint diagonal streaks, nothing
+       neon, no purple, no glow orbs.                                        */
+    .hero-bg{
+      background-color:#000;
+      background-image:
+        radial-gradient(circle at 62% 18%, rgba(34,197,94,.10) 0%, transparent 42%),
+        radial-gradient(circle at 88% 72%, rgba(34,197,94,.09) 0%, transparent 38%),
+        radial-gradient(circle at 30% 88%, rgba(34,197,94,.05) 0%, transparent 45%),
+        radial-gradient(circle at 74% 30%, rgba(120,220,150,.05) 0%, transparent 9%),
+        radial-gradient(circle at 55% 62%, rgba(120,220,150,.045) 0%, transparent 7%),
+        radial-gradient(circle at 93% 22%, rgba(120,220,150,.05) 0%, transparent 6%),
+        radial-gradient(circle at 40% 12%, rgba(120,220,150,.035) 0%, transparent 5%),
+        repeating-linear-gradient(118deg, rgba(180,255,200,.030) 0 1px, transparent 1px 14px),
+        repeating-linear-gradient(62deg,  rgba(180,255,200,.020) 0 1px, transparent 1px 22px);
+    }
+
+    /* ---------- Black bands : subtle wireframe mesh, dense at the edges,
+       fading out through the middle so text stays clean.                    */
+    .mesh-dark{ background-color:#000; position:relative; isolation:isolate; }
+    .mesh-dark::before{
+      content:""; position:absolute; inset:0; z-index:-1; pointer-events:none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.075) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.075) 1px, transparent 1px);
+      background-size:64px 64px;
+      -webkit-mask-image:radial-gradient(ellipse 62% 58% at 50% 50%, transparent 30%, #000 100%);
+              mask-image:radial-gradient(ellipse 62% 58% at 50% 50%, transparent 30%, #000 100%);
+    }
+
+    /* ---------- Hero visual frame : rounded container, light hairline
+       border, black interior. One visual only - no floating cards.          */
+    .frame-hero{
+      border:2px solid rgba(255,255,255,.85);
+      border-radius:18px;
+      background:#000;
+      overflow:hidden;
+    }
+    .frame-hero img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+    /* ---------- Stat : white card, black border, hard GREEN offset shadow ---------- */
+    .stat{
+      background:#fff; border:3px solid #000; border-radius:4px;
+      box-shadow:8px 8px 0 var(--accent-deep);
+      padding:clamp(14px,1.6vw,23px) 12px; text-align:center;
+    }
+    .stat-num{
+      font-weight:800; color:#000; line-height:1; letter-spacing:-.02em;
+      font-size:clamp(2rem, 5.4vw, 4.2rem);
+    }
+    .stat-label{ margin-top:9px; font-size:clamp(11px,1.05vw,15px); color:#111; font-weight:400; }
+
+    /* Word-value stat cards ("200-250 KM", "8-10 HRS"). Same card, same weight,
+       same colour - only the type size steps down so a two-word value keeps
+       the card on the reference height instead of wrapping into three lines. */
+    .stat-num.stat-word{
+      font-size:clamp(1.5rem, 3.1vw, 2.55rem); line-height:1.06;
+      /* keep the same block height as a full-size number so every label in the
+         row sits on one line - the cards are already equal height via grid */
+      display:flex; align-items:center; justify-content:center;
+      min-height:clamp(2rem, 5.4vw, 4.2rem);
+    }
+
+    /* ---------- Media frames ----------
+       .ph  = empty slot, dashed, exactly as the reference renders an unloaded
+              image well. .ph.filled drops the dash once media is present.
+       Every slot on this page is filled from the project image library. If a
+       slot is ever emptied, leave it labelled rather than substituting stock
+       or AI-generated temple architecture.                                  */
+    .ph{
+      border:2px dashed #4B5563; border-radius:2px; background:#fff;
+      position:relative; overflow:hidden;
+    }
+    .ph.filled{ border:3px solid #000; border-radius:4px; box-shadow:6px 6px 0 var(--accent-deep); background:#0A0F14; }
+    .ph-slot{
+      position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+      font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:#9CA3AF; font-weight:600;
+      text-align:center; padding:0 10%;
+    }
+    .ph img{ width:100%; height:100%; object-fit:cover; display:block; }
+    .ph-tag{
+      position:absolute; left:8px; bottom:8px; z-index:2;
+      background:rgba(0,0,0,.72); color:#fff; font-size:9px; font-weight:700;
+      letter-spacing:.14em; text-transform:uppercase; padding:3px 7px; border-radius:2px;
+    }
+
+    /* ---------- Bordered list rows ---------- */
+    .row-dark{ border:2px solid rgba(255,255,255,.3); border-radius:4px; }
+    .row-light{ border:1.5px solid #000; border-radius:4px; background:#fff; }
+
+    /* ---------- FAQ item : same bordered-card language as row-light, stacked
+       question + answer instead of a single line. Also used for the
+       "Why Families Prefer A Private Cab" benefit cards.                    */
+    .faq-item{ border:1.5px solid #000; border-radius:4px; background:#fff; padding:16px 18px; }
+    .faq-item h3{ font-weight:700; font-size:13.5px; }
+    .faq-item p{ margin-top:6px; font-size:13px; color:#333; line-height:1.55; }
+
+    /* ---------- FAQ accordion : identical card to .faq-item, collapsed by
+       default so a long FAQ list no longer pushes the booking CTA far down
+       the page on mobile. Answers stay in the HTML for search engines.     */
+    .faq-acc{ border:1.5px solid #000; border-radius:4px; background:#fff; padding:16px 18px; }
+    .faq-acc summary{
+      font-weight:700; font-size:13.5px; line-height:1.4; cursor:pointer;
+      list-style:none; display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
+    }
+    .faq-acc summary::-webkit-details-marker{ display:none; }
+    .faq-acc summary::after{ content:"+"; font-weight:700; font-size:15px; line-height:1.3; flex:0 0 auto; }
+    .faq-acc[open] summary::after{ content:"\2212"; }
+    .faq-acc p{ margin-top:8px; font-size:13px; color:#333; line-height:1.55; }
+
+    /* ---------- Pickup chip : compact bordered badge, same visual family
+       as row-light, used in place of client logos.                         */
+    .chip{ border:1.5px solid #000; border-radius:4px; background:#fff; padding:14px 10px; text-align:center; }
+    .chip-label{ font-size:12.5px; font-weight:700; line-height:1.3; }
+
+    h1,h2,h3{ color:#000; }
+    a,button{ transition:180ms ease; }
+
+    /* ---------- Mobile booking bar : phones only. Desktop is untouched. ---------- */
+    .mobile-bar{ border-top:2px solid #000; }
+    .mobile-bar a{
+      display:flex; align-items:center; justify-content:center; gap:7px;
+      font-weight:700; font-size:14px; padding:13px 8px; color:#000;
+      transition:background-color .2s ease;
+    }
+    .mobile-bar a:hover{ background:var(--gold); }
+    @media (max-width:639px){ body{ padding-bottom:54px; } }
+  </style>
+</head>
+
+<body class="bg-white text-black antialiased">
+
+  <!-- ===================== SCHEMA ===================== -->
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+    {"@type":"Question","name":"How much does the Mathura Vrindavan tour from Agra cost?","acceptedAnswer":{"@type":"Answer","text":"The full-day Mathura Vrindavan tour by AC sedan costs ₹3,000 round trip. This includes fuel, driver, and stops at all major temples in both cities. An Ertiga is ₹3,800 and an Innova ₹4,500. Tolls and parking are paid separately."}},
+    {"@type":"Question","name":"Can Mathura and Vrindavan be covered in one day from Agra?","acceptedAnswer":{"@type":"Answer","text":"Yes. Both cities sit close together — Vrindavan is only about 15 km from Mathura — so a 6:00–7:00 AM start from Agra covers the major temples of both comfortably in one 8–10 hour day, with a return to Agra typically by 6:00–7:00 PM."}},
+    {"@type":"Question","name":"What is the total distance for the round trip?","acceptedAnswer":{"@type":"Answer","text":"The round trip from Agra covering both Mathura and Vrindavan is approximately 200–250 km total, with about 4–5 hours of actual driving time plus temple visit time."}},
+    {"@type":"Question","name":"How long does the Mathura Vrindavan tour take?","acceptedAnswer":{"@type":"Answer","text":"About 8–10 hours as a full day. The drive from Agra to Mathura takes roughly 1.5 hours, Mathura to Vrindavan about 25 minutes, and the rest of the day is darshan and travel between temples."}},
+    {"@type":"Question","name":"What temples are covered in this tour?","acceptedAnswer":{"@type":"Answer","text":"In Mathura: Krishna Janmabhoomi, Dwarkadhish Temple, Vishram Ghat. In Vrindavan: Banke Bihari, Prem Mandir, ISKCON Temple, Nidhivan, Seva Kunj, and Yamuna ghats. Additional stops can be added."}},
+    {"@type":"Question","name":"What time should we leave Agra?","acceptedAnswer":{"@type":"Answer","text":"We recommend a 6:00–7:00 AM pickup from your Agra address. The drive to Mathura takes about 1.5 hours, so an early start gives you unhurried darshan in both cities and still returns you to Agra the same evening."}},
+    {"@type":"Question","name":"Are fuel and driver charges included in the fare?","acceptedAnswer":{"@type":"Answer","text":"Yes. The package fare includes fuel and driver charges for the full day, with the same cab and driver staying with you from the Agra pickup to the return."}},
+    {"@type":"Question","name":"Are tolls and parking extra?","acceptedAnswer":{"@type":"Answer","text":"Yes. Tolls and temple parking are paid by the customer at actuals and are not part of the package fare. We share the expected amounts on WhatsApp before you confirm."}},
+    {"@type":"Question","name":"Is this tour suitable for elderly people and children?","acceptedAnswer":{"@type":"Answer","text":"Absolutely. A private AC taxi is the most comfortable option. You can take breaks whenever needed, and the driver helps navigate crowded temple areas."}},
+    {"@type":"Question","name":"Can Barsana be added to the tour?","acceptedAnswer":{"@type":"Answer","text":"Yes, if you start early (6–7 AM). The extended tour including Barsana costs ₹3,500 for a sedan, ₹4,500 for an Ertiga and ₹5,500 for an Innova. Plan for a 10–12 hour day to cover all three cities comfortably."}},
+    {"@type":"Question","name":"Can Govardhan be added to the tour?","acceptedAnswer":{"@type":"Answer","text":"Yes. Mathura + Vrindavan + Govardhan is ₹3,500 for a sedan, ₹4,500 for an Ertiga and ₹5,500 for an Innova. The complete circuit covering all four — Mathura, Vrindavan, Barsana and Govardhan — is ₹4,500 for a sedan, ₹5,500 for an Ertiga and ₹7,000 for an Innova."}},
+    {"@type":"Question","name":"Can we book during Janmashtami or Holi?","acceptedAnswer":{"@type":"Answer","text":"Yes, we operate during all festivals. Book 2–3 days in advance during Janmashtami, Holi, and Radha Ashtami as demand is very high. Festival season fares may be slightly higher."}}
+  ]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","@id":"https://www.padmashreetravels.in/#business","name":"Padma Shree Travels","url":"https://www.padmashreetravels.in/","telephone":"+91-87200-81102","email":"travels.padamshree@gmail.com","image":"https://www.padmashreetravels.in/images/logo.png","address":{"@type":"PostalAddress","streetAddress":"Rajeshwar Mandir, Kaveri Vihar Phase II, Shamsabad","addressLocality":"Agra","addressRegion":"Uttar Pradesh","postalCode":"282001","addressCountry":"IN"},"geo":{"@type":"GeoCoordinates","latitude":27.1767,"longitude":78.0081},"openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"00:00","closes":"23:59"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.padmashreetravels.in/"},{"@type":"ListItem","position":2,"name":"Mathura Vrindavan Tour from Agra","item":"https://www.padmashreetravels.in/mathura-vrindavan-tour-from-agra/"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","serviceType":"Temple Tour Taxi Service","name":"Mathura Vrindavan Tour from Agra by Private AC Cab","description":"Private AC cab day trip from Agra covering the major Krishna temples of Mathura and Vrindavan — Krishna Janmabhoomi, Dwarkadhish Temple, Vishram Ghat, Banke Bihari, ISKCON, Nidhivan and Prem Mandir. Approximately 200–250 km round trip in 8–10 hours with a 6:00–7:00 AM pickup. Fuel and driver charges included; tolls and parking extra.","provider":{"@type":"LocalBusiness","name":"Padma Shree Travels","telephone":"+91-87200-81102"},"areaServed":["Agra","Mathura","Vrindavan","Barsana","Govardhan"],"hasOfferCatalog":{"@type":"OfferCatalog","name":"Mathura Vrindavan Tour Packages from Agra","itemListElement":[
+    {"@type":"Offer","name":"Mathura + Vrindavan — AC Sedan","price":"3000","priceCurrency":"INR"},
+    {"@type":"Offer","name":"Mathura + Vrindavan — Ertiga","price":"3800","priceCurrency":"INR"},
+    {"@type":"Offer","name":"Mathura + Vrindavan — Innova","price":"4500","priceCurrency":"INR"},
+    {"@type":"Offer","name":"Mathura + Vrindavan + Barsana — AC Sedan","price":"3500","priceCurrency":"INR"},
+    {"@type":"Offer","name":"Mathura + Vrindavan + Govardhan — AC Sedan","price":"3500","priceCurrency":"INR"},
+    {"@type":"Offer","name":"Complete Circuit (Mathura, Vrindavan, Barsana, Govardhan) — AC Sedan","price":"4500","priceCurrency":"INR"}
+  ]}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TouristTrip","name":"Mathura Vrindavan Day Trip from Agra by Private Taxi","description":"One-day private AC cab pilgrimage from Agra covering Krishna Janmabhoomi, Dwarkadhish Temple and Vishram Ghat in Mathura, then Banke Bihari, ISKCON, Nidhivan and Prem Mandir in Vrindavan — approximately 200–250 km in 8–10 hours.","touristType":"Families and devotees travelling from Agra for Krishna temple darshan","itinerary":{"@type":"ItemList","itemListElement":[
+    {"@type":"ListItem","position":1,"item":{"@type":"City","name":"Agra"}},
+    {"@type":"ListItem","position":2,"item":{"@type":"Place","name":"Shri Krishna Janmabhoomi, Mathura"}},
+    {"@type":"ListItem","position":3,"item":{"@type":"Place","name":"Dwarkadhish Temple, Mathura"}},
+    {"@type":"ListItem","position":4,"item":{"@type":"Place","name":"Vishram Ghat, Mathura"}},
+    {"@type":"ListItem","position":5,"item":{"@type":"Place","name":"Banke Bihari Temple, Vrindavan"}},
+    {"@type":"ListItem","position":6,"item":{"@type":"Place","name":"ISKCON Krishna Balaram Mandir, Vrindavan"}},
+    {"@type":"ListItem","position":7,"item":{"@type":"Place","name":"Nidhivan and Seva Kunj, Vrindavan"}},
+    {"@type":"ListItem","position":8,"item":{"@type":"Place","name":"Prem Mandir, Vrindavan"}},
+    {"@type":"ListItem","position":9,"item":{"@type":"City","name":"Agra"}}
+  ]},"provider":{"@type":"LocalBusiness","name":"Padma Shree Travels","telephone":"+91-87200-81102"}}</script>
+
+  <!-- ===================== STICKY HEADER ===================== -->
+  <header class="sticky top-0 z-50 bg-ink-950 border-b-2 border-black">
+    <div class="max-w-container mx-auto px-5 sm:px-8 py-3 flex items-center justify-between gap-4">
+      <a href="https://www.padmashreetravels.in/" class="flex items-center gap-2 font-display font-bold text-sm sm:text-base text-white shrink-0 min-w-0">
+        <span class="inline-flex h-7 w-7 items-center justify-center rounded-[4px] bg-accent border-2 border-black text-black text-xs font-black shrink-0">PS</span>
+        <span class="hidden sm:inline truncate">Padma Shree Travels</span>
+      </a>
+      <nav class="hidden lg:flex items-center gap-5 text-xs font-medium text-white/75">
+        <a href="https://www.padmashreetravels.in/" class="hover:text-accent">Home</a>
+        <a href="https://www.padmashreetravels.in/agra-temple-tour-by-cab/" class="hover:text-accent">Pilgrimage</a>
+        <a href="https://www.padmashreetravels.in/agra-local-sightseeing/" class="hover:text-accent">Sightseeing</a>
+        <a href="https://www.padmashreetravels.in/outstation-cabs-agra/" class="hover:text-accent">Outstation</a>
+        <a href="https://www.padmashreetravels.in/agra-taxi-fares/" class="hover:text-accent">Fares &amp; Tools</a>
+        <a href="https://www.padmashreetravels.in/blog/" class="hover:text-accent">Blog</a>
+        <a href="https://www.padmashreetravels.in/about/" class="hover:text-accent">About</a>
+        <a href="https://www.padmashreetravels.in/contact/" class="hover:text-accent">Contact</a>
+      </nav>
+      <a data-cta href="#" class="btn-header shrink-0 whitespace-nowrap"><span class="sm:hidden">Book Now</span><span class="hidden sm:inline">Book on WhatsApp</span></a>
+    </div>
+  </header>
+
+  <!-- ===================== HERO (dark band) =====================
+       The H1 carries the full service name for search, then the two display
+       lines the approved design shows. Visual result is identical to the
+       reference: light-weight line 1, light-weight line 2, extrabold value
+       statement, amber supporting line. -->
+  <section id="hero" class="hero-bg">
+    <div class="max-w-container mx-auto px-5 sm:px-8 py-16 sm:py-20 lg:py-[106px] grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-6 items-center">
+      <div>
+        <div class="text-[11px] text-white/50"><a href="https://www.padmashreetravels.in/" class="hover:text-accent">Home</a> › <span class="text-white/70">Mathura Vrindavan Tour from Agra</span></div>
+        <h1 class="mt-3 font-display font-light uppercase !text-white text-[1.6rem] sm:text-[2.1rem] lg:text-[2.65rem] leading-[1.14] tracking-tight">
+          <span class="sr-only">Mathura Vrindavan Tour from Agra &mdash; </span>Mathura + Vrindavan.
+          <span class="block mt-7">One Complete Day<br />From Agra.</span>
+        </h1>
+        <p class="mt-8 font-display font-extrabold uppercase text-white text-[1.3rem] sm:text-[1.65rem] lg:text-[2.05rem] leading-[1.16] tracking-tight">
+          Krishna&rsquo;s Sacred Places<br />By Private AC Cab
+        </p>
+        <p class="mt-6 text-xs sm:text-sm text-warn-400 font-medium max-w-md leading-relaxed">
+          <span class="font-bold">&#8377;3,000 Sedan &middot; 200&ndash;250 km &middot; 8&ndash;10 hrs</span> &mdash; Krishna Janmabhoomi, Banke Bihari, Prem Mandir, ISKCON and more, all in one comfortable day trip.
+        </p>
+
+        <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+          <a data-cta href="#" class="btn-primary">Get Mathura &amp; Vrindavan Fare on WhatsApp</a>
+          <a href="tel:+918720081102" class="text-sm font-semibold text-white/75 hover:text-accent underline underline-offset-2">or call +91-87200 81102</a>
+        </div>
+      </div>
+
+      <div class="frame-hero aspect-[16/9] w-full">
+        <img src="assets/img/prem-mandir.jpg" alt="Prem Mandir in Vrindavan, visited on the full-day Mathura Vrindavan tour from Agra by private cab" width="1376" height="768" fetchpriority="high" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PROOF STRIP ===================== -->
+  <section class="bg-white border-b-2 border-black">
+    <div class="max-w-container mx-auto px-5 sm:px-8 py-3.5 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs sm:text-[13px]">
+      <a href="https://g.page/r/CUjtXu1x_3bPEBM" target="_blank" rel="noopener" class="flex items-center gap-2 hover:opacity-80">
+        <span class="text-accent-deep text-sm tracking-tighter">★★★★★</span>
+        <span class="text-accent-dark font-medium">Verified Google Reviews</span>
+      </a>
+      <div class="flex flex-wrap justify-center items-center gap-2 text-black font-medium">
+        <span>Private AC Cab</span><span class="text-black/30">&bull;</span>
+        <span>Agra Pickup &amp; Return</span><span class="text-black/30">&bull;</span>
+        <span>Fixed Full-Day Fare</span><span class="text-black/30">&bull;</span>
+        <span>Local Agra Drivers</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== INTRO + PRIMARY CTA ===================== -->
+  <section class="bg-white px-5 sm:px-8 pt-14 sm:pt-16 pb-10 text-center">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="font-display font-bold text-lg sm:text-xl lg:text-[1.5rem] leading-snug">
+        Both Holy Cities In One Comfortable Day From Agra
+      </h2>
+      <p class="mt-4 italic font-medium text-sm sm:text-base text-black">
+        Your <span class="not-italic font-bold text-accent-dark">private cab</span> picks you up from your Agra address at 6&ndash;7 AM and covers Mathura&rsquo;s Krishna Janmabhoomi, Dwarkadhish and Vishram Ghat before crossing to Vrindavan for Banke Bihari, ISKCON, Nidhivan and Prem Mandir.
+      </p>
+      <p class="mt-2 text-sm sm:text-base text-black/70">No shared seats, no rushing through darshan and one fixed full-day fare agreed before you travel.</p>
+    </div>
+    <div class="mt-9">
+      <a data-cta href="#" class="btn-primary">Book on WhatsApp</a>
+    </div>
+  </section>
+
+  <!-- ===================== TRUST LINE ===================== -->
+  <div class="bg-white px-5 pb-9 text-center">
+    <p class="font-display font-bold text-base sm:text-xl">Trusted Agra Taxi Service For The Mathura &amp; Vrindavan Yatra</p>
+  </div>
+
+  <!-- ===================== STATS ROW (1 of 2) - rendered from SITE.stats ===================== -->
+  <section class="bg-white px-5 sm:px-8">
+    <div data-stats class="max-w-container mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-5"></div>
+  </section>
+
+  <!-- ===================== GOOGLE REVIEWS =====================
+       Shared component. Content lives in ../_shared/reviews-data.js — never
+       hard-code reviews here. Section self-removes while the pool is empty. -->
+  <section data-reviews-grid data-page="agra-to-mathura-vrindavan"></section>
+
+  <!-- ===================== THE JOURNEY (12 slots) - rendered from SITE.creatives ==============
+       Reference geometry: 3 columns, 4:3 cells, 20px column gap, 70px row gap.
+       This page sells a pilgrimage day, so the grid follows the journey in
+       order: Agra pickup, Mathura, the Yamuna ghats, Vrindavan, Prem Mandir. -->
+  <section class="bg-white pt-[53px] pb-16 sm:pb-20 px-5 sm:px-8">
+    <div class="max-w-container mx-auto">
+      <h2 class="text-center font-display font-bold text-xl sm:text-2xl tracking-tight mb-9">Your Day, In Order</h2>
+      <div data-creatives class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-10 lg:gap-y-[70px]"></div>
+    </div>
+  </section>
+
+  <!-- ===================== QUICK BENEFITS (was pickup chips / client logos) =====
+       Same .chip component and same band spacing; six items instead of five,
+       so the grid steps 2 / 3 / 6 rather than 2 / 5. No new style. -->
+  <section class="bg-white pb-[71px] px-5 sm:px-8">
+    <div class="max-w-container mx-auto">
+      <h2 class="text-center font-display font-bold text-base sm:text-xl">What You Get On This Tour</h2>
+      <div class="mt-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+        <div class="chip"><p class="chip-label">Private AC Cab</p></div>
+        <div class="chip"><p class="chip-label">Agra Pickup &amp; Return</p></div>
+        <div class="chip"><p class="chip-label">10+ Temple Stops</p></div>
+        <div class="chip"><p class="chip-label">Flexible Darshan Time</p></div>
+        <div class="chip"><p class="chip-label">Family-Friendly Trip</p></div>
+        <div class="chip"><p class="chip-label">Fixed Full-Day Fare</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== EVERYTHING YOU NEED (navy band) ===================== -->
+  <section class="bg-navy-900 py-16 sm:py-20 px-5 sm:px-8">
+    <div class="max-w-container mx-auto">
+      <h2 class="text-center font-display font-bold !text-white text-xl sm:text-2xl lg:text-[1.9rem] leading-snug max-w-4xl mx-auto">
+        Everything Planned For Your Mathura Vrindavan Yatra
+      </h2>
+      <p class="mt-4 text-center text-white/70 text-sm sm:text-base max-w-2xl mx-auto">One cab, one driver and one fixed fare from your Agra pickup point to both holy cities and back.</p>
+      <div class="mt-9 text-center">
+        <a data-cta href="#" class="btn-primary">Book Your Temple Tour</a>
+      </div>
+
+      <!-- Reference keeps the right half of this band deliberately empty - the
+           outlined list sits alone in the left column. Do not fill it. -->
+      <div class="mt-14 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+        <div>
+          <h3 class="font-display font-bold !text-white text-base sm:text-lg max-w-xs leading-snug">
+            What&rsquo;s Covered On This Temple Tour
+          </h3>
+          <ul class="mt-7 space-y-[23px] max-w-md">
+            <li class="row-dark px-4 py-2 text-white text-[13px] sm:text-sm font-medium">Private AC Cab</li>
+            <li class="row-dark px-4 py-2 text-white text-[13px] sm:text-sm font-medium">Agra Pickup &amp; Return</li>
+            <li class="row-dark px-4 py-2 text-white text-[13px] sm:text-sm font-medium">Mathura + Vrindavan</li>
+            <li class="row-dark px-4 py-2 text-white text-[13px] sm:text-sm font-medium">Krishna Janmabhoomi</li>
+            <li class="row-dark px-4 py-2 text-white text-[13px] sm:text-sm font-medium">Banke Bihari</li>
+            <li class="row-dark px-4 py-2 text-white text-[13px] sm:text-sm font-medium">Prem Mandir</li>
+            <li class="row-dark px-4 py-2 text-white text-[13px] sm:text-sm font-medium">ISKCON Temple</li>
+            <li class="row-dark px-4 py-2 text-white text-[13px] sm:text-sm font-medium">Flexible Temple Timing</li>
+            <li class="row-dark px-4 py-2 text-white text-[13px] sm:text-sm font-medium">Driver Waiting</li>
+            <li class="row-dark px-4 py-2 text-white text-[13px] sm:text-sm font-medium">Full-Day Fixed Fare</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CTA + STATS ROW (2 of 2) - white band ==================== -->
+  <section class="bg-white px-5 sm:px-8 pt-[107px] text-center">
+    <a data-cta href="#" class="btn-primary">Book on WhatsApp</a>
+  </section>
+
+  <section class="bg-white pt-[68px] px-5 sm:px-8">
+    <div data-stats-2 class="max-w-container mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-5"></div>
+  </section>
+
+  <!-- ===================== PACKAGE OPTIONS =====================
+       Same slot, same geometry and same components as the approved priced
+       package band on ../agra-local-sightseeing/: heading, a 3-up row of stat
+       cards at max-w-3xl carrying the ₹ figures, then .row-light supporting
+       rows and the included / extra disclosure pair. -->
+  <section data-track="pricing" class="bg-white pt-[62px] pb-4 px-5 sm:px-8">
+    <div class="max-w-container mx-auto">
+      <h2 class="text-center font-display font-bold text-xl sm:text-2xl tracking-tight">Mathura Vrindavan Tour Packages &amp; Fares</h2>
+      <p class="mt-3 text-center font-display font-bold text-base sm:text-lg text-accent-dark">Fixed Full-Day Fare Confirmed on WhatsApp</p>
+      <div class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 max-w-3xl mx-auto">
+        <div class="stat">
+          <p class="stat-num">&#8377;3,000</p>
+          <p class="stat-label"><strong>Mathura + Vrindavan</strong> &mdash; 8&ndash;10 hrs<br />AC Sedan &middot; all major temples<br /><span class="text-black/60">Ertiga &#8377;3,800 &middot; Innova &#8377;4,500</span></p>
+        </div>
+        <div class="stat">
+          <p class="stat-num">&#8377;3,500</p>
+          <p class="stat-label"><strong>+ Barsana</strong> &mdash; 10&ndash;12 hrs<br />AC Sedan &middot; Radha Rani&rsquo;s birthplace<br /><span class="text-black/60">Ertiga &#8377;4,500 &middot; Innova &#8377;5,500</span></p>
+        </div>
+        <div class="stat">
+          <p class="stat-num">&#8377;3,500</p>
+          <p class="stat-label"><strong>+ Govardhan</strong> &mdash; extended day<br />AC Sedan &middot; Govardhan Parikrama<br /><span class="text-black/60">Ertiga &#8377;4,500 &middot; Innova &#8377;5,500</span></p>
+        </div>
+      </div>
+
+      <!-- Complete circuit + comfort note - same bordered-row language, kept compact -->
+      <ul class="mt-8 space-y-3 max-w-3xl mx-auto">
+        <li class="row-light px-4 py-3.5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 text-[13px] sm:text-sm">
+          <span><strong>Complete Circuit</strong> &mdash; Mathura, Vrindavan, Barsana &amp; Govardhan in one trip</span>
+          <!-- three fares, not two: allow the wrap on phones (approved rows carry
+               only two values and fit nowrap at any width). Desktop unchanged. -->
+          <span class="font-bold whitespace-normal sm:whitespace-nowrap">Sedan &#8377;4,500 &middot; Ertiga &#8377;5,500 &middot; Innova &#8377;7,000</span>
+        </li>
+        <li class="row-light px-4 py-3.5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 text-[13px] sm:text-sm">
+          <span><strong>Travelling with elders or children?</strong> &mdash; the Innova is the easier choice across a full darshan day</span>
+          <span class="font-bold whitespace-nowrap">Innova from &#8377;4,500</span>
+        </li>
+      </ul>
+
+      <!-- Fare transparency - deliberately full size, not footer-sized -->
+      <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
+        <div class="row-light px-4 py-4">
+          <h3 class="font-display font-bold text-[13.5px]">Included In Every Fare</h3>
+          <p class="mt-1.5 text-[13px] text-black/75 leading-relaxed">Fuel &bull; Driver charges for the full day</p>
+        </div>
+        <div class="row-light px-4 py-4">
+          <h3 class="font-display font-bold text-[13.5px]">Paid Separately By You</h3>
+          <p class="mt-1.5 text-[13px] text-black/75 leading-relaxed">Tolls &bull; Temple parking (all at actuals)</p>
+        </div>
+      </div>
+      <p class="mt-6 text-center text-xs sm:text-sm text-black/60 max-w-xl mx-auto">We operate 24/7 including festivals. During Janmashtami, Holi and Radha Ashtami please book 2&ndash;3 days ahead &mdash; demand is very high and festival-season fares may be slightly higher.</p>
+    </div>
+  </section>
+
+  <!-- ===================== ONE DAY, TWO HOLY CITIES (results) ===================== -->
+  <section class="bg-white pt-[62px] pb-[70px] px-5 sm:px-8">
+    <div class="max-w-container mx-auto">
+      <h2 class="text-center font-display font-bold text-2xl sm:text-3xl lg:text-[2.5rem] tracking-tight">
+        One Day. Two Holy Cities. A Complete Krishna Yatra.
+      </h2>
+      <div data-results class="mt-7 grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6"></div>
+      <div data-results-wide class="mt-5 sm:mt-6"></div>
+    </div>
+  </section>
+
+  <!-- ===================== WHY A PRIVATE CAB =====================
+       Built from the existing .faq-item component at the existing FAQ
+       geometry. Practical advantages only - no luxury-brochure language. -->
+  <section class="bg-white pb-16 sm:pb-20 px-5 sm:px-8">
+    <div class="max-w-container mx-auto">
+      <h2 class="text-center font-display font-bold text-xl sm:text-2xl tracking-tight mb-9">Why Families Prefer A Private Cab For Mathura &amp; Vrindavan</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
+        <div class="faq-item"><h3>One Cab For The Full Day</h3><p>The same cab and driver stay with you from the 6&ndash;7 AM pickup to the evening return &mdash; no re-booking between Mathura and Vrindavan.</p></div>
+        <div class="faq-item"><h3>Door-To-Door Agra Pickup</h3><p>Picked up at your Agra hotel or home address and dropped back at the same address, typically by 6&ndash;7 PM.</p></div>
+        <div class="faq-item"><h3>AC Comfort Between Temples</h3><p>Mathura and Vrindavan are spread out and the temple lanes are hot and crowded. An AC cab waiting nearby makes the gaps between darshan easy.</p></div>
+        <div class="faq-item"><h3>Flexible Darshan Time</h3><p>Temples close for bhog and open again in the afternoon. With a private cab you move around the timings instead of being rushed to a fixed schedule.</p></div>
+        <div class="faq-item"><h3>Easier With Children &amp; Elders</h3><p>You can break whenever you need to, rest in the car between temples and skip a stop if the day is running long.</p></div>
+        <div class="faq-item"><h3>Belongings Stay In The Car</h3><p>Bags, footwear and shopping stay in your own vehicle through the day &mdash; useful in temple areas where lockers and cloakrooms are crowded.</p></div>
+        <div class="faq-item"><h3>Driver Familiar With Temple Areas</h3><p>Our drivers know the parking points, the walk-in routes and where a car can and cannot go in the old lanes of Vrindavan.</p></div>
+        <div class="faq-item"><h3>No Train Or Bus Changes</h3><p>One journey from Agra and back &mdash; no station queues, no shared seats and no waiting for onward transport between the two cities.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== ITINERARY (black grid band) ===================== -->
+  <section class="mesh-dark py-16 sm:py-20 px-5 sm:px-8">
+    <div class="max-w-container mx-auto">
+      <h2 class="text-center font-display font-bold !text-white text-lg sm:text-2xl lg:text-[1.7rem] max-w-3xl mx-auto leading-snug">
+        Your Mathura Vrindavan Day Trip From Agra
+      </h2>
+
+      <div class="mt-14 grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12 max-w-5xl mx-auto">
+        <div>
+          <h3 class="font-display font-bold !text-white text-sm sm:text-base">01 &mdash; Early Pickup</h3>
+          <p class="mt-3 text-[13px] sm:text-sm text-white/65 leading-relaxed max-w-[48ch]">
+            Leave Agra around 6:00&ndash;7:00 AM.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-display font-bold !text-white text-sm sm:text-base">02 &mdash; Krishna Janmabhoomi</h3>
+          <p class="mt-3 text-[13px] sm:text-sm text-white/65 leading-relaxed max-w-[48ch]">
+            Start the Mathura darshan at Krishna&rsquo;s birthplace.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-display font-bold !text-white text-sm sm:text-base">03 &mdash; Dwarkadhish + Vishram Ghat</h3>
+          <p class="mt-3 text-[13px] sm:text-sm text-white/65 leading-relaxed max-w-[48ch]">
+            Explore Mathura&rsquo;s major temple and sacred Yamuna ghat.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-display font-bold !text-white text-sm sm:text-base">04 &mdash; Drive To Vrindavan</h3>
+          <p class="mt-3 text-[13px] sm:text-sm text-white/65 leading-relaxed max-w-[48ch]">
+            Approx. 15 km / 25 minutes from Mathura.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-display font-bold !text-white text-sm sm:text-base">05 &mdash; Vrindavan Darshan</h3>
+          <p class="mt-3 text-[13px] sm:text-sm text-white/65 leading-relaxed max-w-[48ch]">
+            Banke Bihari, ISKCON, Nidhivan/Seva Kunj and other major temples depending on timing.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-display font-bold !text-white text-sm sm:text-base">06 &mdash; Prem Mandir + Return</h3>
+          <p class="mt-3 text-[13px] sm:text-sm text-white/65 leading-relaxed max-w-[48ch]">
+            Visit Prem Mandir and return to Agra, generally by evening depending on darshan time and traffic.
+          </p>
+        </div>
+      </div>
+
+      <p class="mt-12 text-center text-[13px] sm:text-sm text-white/55 max-w-2xl mx-auto">
+        <span class="text-white/85 font-semibold">Nothing is locked in until you have the fare.</span> Tell us your travel date, pickup time and group size on WhatsApp, ask about adding Barsana or Govardhan, and we confirm the full-day fare before you commit. No app to download and no advance payment for most bookings.
+      </p>
+
+      <div class="mt-8 text-center">
+        <a data-cta href="#" class="btn-primary">Book on WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== LOCAL PARTNER ===================== -->
+  <section class="bg-white pt-[76px] pb-[66px] px-5 sm:px-8">
+    <div class="max-w-container mx-auto">
+      <h2 class="text-center font-display font-bold text-xl sm:text-2xl tracking-tight mb-9">Your Local Agra Travel Partner</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-12 lg:gap-10 items-center">
+        <ul class="space-y-3">
+          <li class="row-light px-4 py-3.5 text-[13px] sm:text-sm">Padma Shree Travels is an <strong>Agra-based taxi service</strong> running local sightseeing, temple tours, airport transfers and outstation trips.</li>
+          <li class="row-light px-4 py-3.5 text-[13px] sm:text-sm">Pickup arranged from <strong>hotels, Agra Cantt, Agra Fort station and any Agra address</strong> &mdash; including an early-morning start.</li>
+          <li class="row-light px-4 py-3.5 text-[13px] sm:text-sm">The <strong>full-day fare is confirmed on WhatsApp before you travel</strong> &mdash; tolls and parking are told to you separately, upfront.</li>
+          <li class="row-light px-4 py-3.5 text-[13px] sm:text-sm">Driver&rsquo;s name, number and car number are <strong>shared with you before pickup</strong>.</li>
+          <li class="row-light px-4 py-3.5 text-[13px] sm:text-sm">Direct <strong>WhatsApp and phone support</strong> before and during your journey.</li>
+          <li class="row-light px-4 py-3.5 text-[13px] sm:text-sm">Easy to extend your yatra with <strong>Barsana, Govardhan or the complete four-city circuit</strong>.</li>
+        </ul>
+
+        <div class="flex flex-col items-center text-center">
+          <img src="assets/img/local-partner-agra.webp"
+               loading="lazy" width="1536" height="1024"
+               alt="Padma Shree Travels local Agra travel partner arranging Mathura and Vrindavan tour cabs from Agra"
+               class="w-full max-w-[460px] aspect-[14/15] rounded-[20px] object-cover"
+               style="box-shadow:9px 9px 0 var(--accent-deep); object-position:88% center" />
+          <h3 class="mt-6 font-display font-bold text-lg">Padma Shree Travels</h3>
+          <p class="mt-0.5 text-xs sm:text-[13px] font-semibold text-black">Agra Taxi &amp; Outstation Service</p>
+          <p class="mt-1 text-xs sm:text-[13px] font-semibold text-accent-dark">Local Pickup &bull; Clear Pricing &bull; Direct Support</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FAQ ===================== -->
+  <section class="bg-white pt-2 pb-16 sm:pb-20 px-5 sm:px-8" id="faq">
+    <div class="max-w-container mx-auto">
+      <h2 class="text-center font-display font-bold text-xl sm:text-2xl tracking-tight mb-9">Questions &amp; Answers</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
+        <details class="faq-acc"><summary>How much is the Mathura Vrindavan tour from Agra?</summary><p>&#8377;3,000 round trip by AC sedan for the full day, including fuel, driver and stops at all the major temples in both cities. Ertiga &#8377;3,800, Innova &#8377;4,500. Tolls and parking are paid separately.</p></details>
+        <details class="faq-acc"><summary>Can Mathura and Vrindavan be covered in one day?</summary><p>Yes. Vrindavan is only about 15 km from Mathura, so a 6&ndash;7 AM start from Agra covers the major temples of both comfortably in one 8&ndash;10 hour day.</p></details>
+        <details class="faq-acc"><summary>What is the total distance?</summary><p>Approximately 200&ndash;250 km round trip from Agra, with about 4&ndash;5 hours of actual driving time plus temple visit time.</p></details>
+        <details class="faq-acc"><summary>How long does the tour take?</summary><p>About 8&ndash;10 hours as a full day. Agra to Mathura is roughly 1.5 hours, Mathura to Vrindavan about 25 minutes, and you are usually back in Agra by 6&ndash;7 PM.</p></details>
+        <details class="faq-acc"><summary>Which temples are covered?</summary><p>In Mathura: Krishna Janmabhoomi, Dwarkadhish Temple and Vishram Ghat. In Vrindavan: Banke Bihari, Prem Mandir, ISKCON, Nidhivan, Seva Kunj and the Yamuna ghats. Additional stops can be added.</p></details>
+        <details class="faq-acc"><summary>What time should we leave Agra?</summary><p>We recommend a 6:00&ndash;7:00 AM pickup. The drive to Mathura takes about 1.5 hours, so an early start gives you unhurried darshan and still returns you to Agra the same evening.</p></details>
+        <details class="faq-acc"><summary>Are fuel and driver included?</summary><p>Yes. The fare includes fuel and driver charges for the full day, with the same cab and driver staying with you from pickup to return.</p></details>
+        <details class="faq-acc"><summary>Are tolls and parking extra?</summary><p>Yes &mdash; tolls and temple parking are paid at actuals and are not part of the package fare. We share the expected amounts on WhatsApp before you confirm.</p></details>
+        <details class="faq-acc"><summary>Is the tour suitable for elderly people and children?</summary><p>Absolutely. A private AC taxi is the most comfortable option &mdash; you can take breaks whenever needed, and the driver helps navigate crowded temple areas.</p></details>
+        <details class="faq-acc"><summary>Can Barsana be added?</summary><p>Yes, if you start early. Mathura + Vrindavan + Barsana is &#8377;3,500 for a sedan, &#8377;4,500 Ertiga and &#8377;5,500 Innova. Plan for a 10&ndash;12 hour day to cover all three cities comfortably.</p></details>
+        <details class="faq-acc"><summary>Can Govardhan be added?</summary><p>Yes. Mathura + Vrindavan + Govardhan is &#8377;3,500 sedan, &#8377;4,500 Ertiga and &#8377;5,500 Innova. The complete four-city circuit is &#8377;4,500 sedan, &#8377;5,500 Ertiga and &#8377;7,000 Innova.</p></details>
+        <details class="faq-acc"><summary>Can we book during Janmashtami or Holi?</summary><p>Yes, we operate during all festivals. Book 2&ndash;3 days in advance during Janmashtami, Holi and Radha Ashtami as demand is very high. Festival season fares may be slightly higher.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== RELATED ROUTES (secondary) ===================== -->
+  <section class="bg-white pb-16 px-5 sm:px-8">
+    <div class="max-w-container mx-auto text-center">
+      <p class="text-xs font-semibold uppercase tracking-wide text-black/40">More Trips From Agra</p>
+      <div class="mt-3 flex flex-wrap justify-center gap-x-3 gap-y-2 text-[13px] sm:text-sm">
+        <a href="https://www.padmashreetravels.in/agra-to-mathura-taxi/" class="text-black/60 hover:text-accent-dark underline underline-offset-2">Agra to Mathura Taxi</a><span class="text-black/25">|</span><a href="https://www.padmashreetravels.in/agra-to-vrindavan-taxi/" class="text-black/60 hover:text-accent-dark underline underline-offset-2">Agra to Vrindavan Taxi</a><span class="text-black/25">|</span><a href="https://www.padmashreetravels.in/agra-temple-tour-by-cab/" class="text-black/60 hover:text-accent-dark underline underline-offset-2">All Temple Tours From Agra</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FINAL CTA ===================== -->
+  <section class="mesh-dark pt-20 sm:pt-24 pb-16 sm:pb-20 px-5 sm:px-8 text-center">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="font-display font-bold !text-white text-2xl sm:text-3xl lg:text-[2.1rem] leading-snug">
+        Ready For Your Mathura Vrindavan Yatra?
+      </h2>
+      <p class="mt-3 font-display font-semibold text-warn-400 text-sm sm:text-lg">
+        Visit Both Holy Cities In One Comfortable Day
+      </p>
+      <p class="mt-4 text-white/65 text-sm sm:text-base max-w-xl mx-auto">Send your travel date, passenger count and cab preference. We&rsquo;ll confirm availability and fare.</p>
+    </div>
+    <div class="mt-9">
+      <a data-cta href="#" class="btn-primary">Book on WhatsApp</a>
+    </div>
+    <a href="tel:+918720081102" class="mt-4 inline-block text-sm font-semibold text-white/75 hover:text-accent underline underline-offset-2">or Call Now &mdash; +91-87200 81102</a>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="mesh-dark">
+    <div class="max-w-container mx-auto px-5 sm:px-8 pt-10 pb-6 grid grid-cols-1 sm:grid-cols-3 gap-8 text-center sm:text-left">
+      <div>
+        <p class="font-display font-bold text-white">Padma Shree Travels</p>
+        <p class="mt-1 text-[11px] text-white/55 leading-relaxed">Rajeshwar Mandir, Kaveri Vihar Phase II,<br />Shamsabad, Agra, Uttar Pradesh 282001</p>
+      </div>
+      <div>
+        <p class="font-display font-bold text-white text-sm">Contact</p>
+        <p class="mt-1 text-[11px] text-white/55"><a href="tel:+918720081102" class="hover:text-accent">+91-87200 81102</a></p>
+        <p class="mt-0.5 text-[11px] text-white/55"><a href="mailto:travels.padamshree@gmail.com" class="hover:text-accent">travels.padamshree@gmail.com</a></p>
+      </div>
+      <div>
+        <p class="font-display font-bold text-white text-sm">Explore</p>
+        <div class="mt-1 flex flex-wrap justify-center sm:justify-start gap-x-2 gap-y-1 text-[11px] text-white/55">
+          <a href="https://www.padmashreetravels.in/" class="hover:text-accent">Home</a>
+          <a href="https://www.padmashreetravels.in/agra-local-sightseeing/" class="hover:text-accent">Sightseeing</a>
+          <a href="https://www.padmashreetravels.in/outstation-cabs-agra/" class="hover:text-accent">Outstation</a>
+          <a href="https://www.padmashreetravels.in/about/" class="hover:text-accent">About</a>
+          <a href="https://www.padmashreetravels.in/contact/" class="hover:text-accent">Contact</a>
+        </div>
+      </div>
+    </div>
+    <div class="bg-black border-t border-white/10 px-5 sm:px-8 py-4">
+      <div class="max-w-container mx-auto flex flex-col sm:flex-row items-center justify-between gap-2.5 text-[11px] sm:text-xs">
+        <p class="text-white/70">&copy; <span data-year></span> Padma Shree Travels. All rights reserved.</p>
+        <div class="flex flex-wrap justify-center gap-x-3 gap-y-1.5 text-white/70">
+          <a href="https://www.padmashreetravels.in/" class="hover:text-accent">Home</a><span class="text-white/25">|</span>
+          <a href="https://www.padmashreetravels.in/contact/" class="hover:text-accent">Contact Us</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================== FLOATING WHATSAPP (desktop / tablet) ===================== -->
+  <a id="waBtn" href="#" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"
+     class="fixed bottom-5 right-5 z-50 hidden sm:flex h-[52px] w-[52px] items-center justify-center rounded-full bg-[#25D366] border-[3px] border-black"
+     style="box-shadow:4px 4px 0 #000">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="white" class="h-6 w-6">
+      <path d="M16.001 2.667c-7.363 0-13.334 5.97-13.334 13.333 0 2.353.615 4.646 1.782 6.665L2.667 29.333l6.83-1.75a13.27 13.27 0 0 0 6.504 1.66h.006c7.362 0 13.333-5.97 13.333-13.333 0-3.562-1.387-6.912-3.905-9.43a13.246 13.246 0 0 0-9.434-3.913Zm0 24.4h-.005a11.05 11.05 0 0 1-5.634-1.542l-.404-.24-4.053 1.039 1.081-3.951-.263-.406a11.02 11.02 0 0 1-1.69-5.9c0-6.1 4.968-11.067 11.073-11.067 2.957 0 5.736 1.153 7.828 3.246a10.99 10.99 0 0 1 3.24 7.828c0 6.101-4.969 11.067-11.073 11.067v-.074Zm6.07-8.287c-.332-.166-1.965-.97-2.27-1.08-.305-.11-.527-.166-.748.166-.222.333-.858 1.08-1.053 1.302-.194.222-.388.25-.72.083-.332-.166-1.403-.517-2.672-1.649-.988-.881-1.655-1.969-1.85-2.302-.194-.333-.02-.512.146-.678.15-.15.333-.389.499-.583.166-.194.222-.333.333-.555.11-.222.055-.417-.028-.583-.083-.166-.748-1.803-1.026-2.469-.27-.65-.545-.562-.748-.572-.194-.008-.416-.01-.638-.01a1.22 1.22 0 0 0-.887.417c-.305.333-1.165 1.139-1.165 2.777s1.192 3.222 1.358 3.444c.166.222 2.346 3.583 5.685 5.024.795.343 1.415.548 1.898.702.797.253 1.523.217 2.097.132.64-.096 1.965-.803 2.242-1.579.277-.777.277-1.442.194-1.58-.083-.138-.305-.221-.638-.388Z"/>
+    </svg>
+  </a>
+
+  <!-- ===================== MOBILE BOOKING BAR (phones only) =====================
+       Subtle, 54px tall, matches the design system (black border, green fill,
+       black text). body carries matching bottom padding so nothing is hidden. -->
+  <div class="mobile-bar sm:hidden fixed bottom-0 inset-x-0 z-50 grid grid-cols-2 bg-white">
+    <a href="tel:+918720081102" class="bg-white border-r-2 border-black">&#9742; Call Now</a>
+    <a data-cta href="#" class="bg-accent">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentColor" class="h-4 w-4" aria-hidden="true">
+        <path d="M16.001 2.667c-7.363 0-13.334 5.97-13.334 13.333 0 2.353.615 4.646 1.782 6.665L2.667 29.333l6.83-1.75a13.27 13.27 0 0 0 6.504 1.66h.006c7.362 0 13.333-5.97 13.333-13.333 0-3.562-1.387-6.912-3.905-9.43a13.246 13.246 0 0 0-9.434-3.913Zm0 24.4h-.005a11.05 11.05 0 0 1-5.634-1.542l-.404-.24-4.053 1.039 1.081-3.951-.263-.406a11.02 11.02 0 0 1-1.69-5.9c0-6.1 4.968-11.067 11.073-11.067 2.957 0 5.736 1.153 7.828 3.246a10.99 10.99 0 0 1 3.24 7.828c0 6.101-4.969 11.067-11.073 11.067v-.074Zm6.07-8.287c-.332-.166-1.965-.97-2.27-1.08-.305-.11-.527-.166-.748.166-.222.333-.858 1.08-1.053 1.302-.194.222-.388.25-.72.083-.332-.166-1.403-.517-2.672-1.649-.988-.881-1.655-1.969-1.85-2.302-.194-.333-.02-.512.146-.678.15-.15.333-.389.499-.583.166-.194.222-.333.333-.555.11-.222.055-.417-.028-.583-.083-.166-.748-1.803-1.026-2.469-.27-.65-.545-.562-.748-.572-.194-.008-.416-.01-.638-.01a1.22 1.22 0 0 0-.887.417c-.305.333-1.165 1.139-1.165 2.777s1.192 3.222 1.358 3.444c.166.222 2.346 3.583 5.685 5.024.795.343 1.415.548 1.898.702.797.253 1.523.217 2.097.132.64-.096 1.965-.803 2.242-1.579.277-.777.277-1.442.194-1.58-.083-.138-.305-.221-.638-.388Z"/>
+      </svg>
+      WhatsApp
+    </a>
+  </div>
+
+  <script>
+  /* ==========================================================================
+     PAGE DATA
+     ========================================================================== */
+  const SITE = {
+
+    /* Every green CTA on the page, the mobile bar and the floating WhatsApp
+       button point here. Number is the live business number - do not change.
+       Prefill: "Hi Padma Shree Travels, I want to book the Mathura + Vrindavan
+       full-day tour from Agra. Travel date: __. Passengers: __.
+       Preferred cab: __. Please confirm availability and fare."             */
+    bookingUrl:  "https://wa.me/918720081102?text=Hi%20Padma%20Shree%20Travels%2C%20I'd%20like%20to%20book%20the%20Mathura%20%2B%20Vrindavan%20full-day%20tour%20from%20Agra.%20Please%20share%20availability%20and%20fare%20-%20I'll%20confirm%20my%20travel%20date%20and%20group%20size.",
+    whatsappUrl: "https://wa.me/918720081102?text=Hi%20Padma%20Shree%20Travels%2C%20I'd%20like%20to%20book%20the%20Mathura%20%2B%20Vrindavan%20full-day%20tour%20from%20Agra.%20Please%20share%20availability%20and%20fare%20-%20I'll%20confirm%20my%20travel%20date%20and%20group%20size.",
+
+    /* Stat cards - row 1 (above the gallery).
+       "word: true" steps the type down one notch for two-part values so the
+       card keeps the reference height. Same card, same weight, same colour.
+       .stat-word carries a matching min-height, so mixing full-size numbers
+       and stepped-down values in one row still aligns every label. */
+    stats: [
+      { value: "&#8377;3,000",     label: "AC Sedan"                        },
+      { value: "200&ndash;250 KM", label: "Round Trip",       word: true    },
+      { value: "8&ndash;10 HRS",   label: "Full Day",         word: true    },
+      { value: "10+",              label: "Temple Stops"                    }
+    ],
+
+    /* Stat cards - row 2 (the approved design repeats them). */
+    statsRepeat: [
+      { value: "4 PACKAGES",  label: "Standard To Full Circuit", word: true },
+      { value: "3 CAB TYPES", label: "Sedan, Ertiga, Innova",    word: true },
+      { value: "15 KM",       label: "Mathura to Vrindavan" },
+      { value: "24/7",        label: "Including Festivals" }
+    ],
+
+    /* 12-slot "Your Day, In Order" gallery. The grid walks the yatra from the
+       early Agra pickup through Mathura, the Yamuna ghats and Vrindavan to
+       Prem Mandir in the evening.
+       Labels describe what the photograph genuinely shows. Where a shot is not
+       a verified, identifiable image of a named building it is labelled
+       generically ("Darshan Queue, Vrindavan"). Keep it that way - do NOT
+       relabel a generic temple photo as a specific temple. */
+    creatives: [
+      { label: "Early Pickup In Agra",       src: "assets/img/cab-at-monument.webp",     alt: "Private AC cab waiting in Agra for the early-morning Mathura and Vrindavan tour pickup" },
+      { label: "Leaving Agra At Dawn",       src: "assets/img/taj-mahal-dawn.webp",      alt: "Agra at dawn as the Mathura and Vrindavan day trip sets off" },
+      { label: "Krishna Janmabhoomi, Mathura", src: "assets/img/krishna-janmabhoomi.jpg", alt: "Pilgrims walking towards the Krishna Janmabhoomi temple complex in Mathura" },
+      { label: "Dwarkadhish Temple, Mathura", src: "assets/img/dwarkadhish-temple.jpg",  alt: "Carved temple gateway and flower sellers at the Dwarkadhish temple entrance in Mathura" },
+      { label: "Vishram Ghat Aarti",         src: "assets/img/vishram-ghat-aarti.jpg",   alt: "Evening aarti with oil lamps on the steps of Vishram Ghat on the Yamuna in Mathura" },
+      { label: "Yamuna Ghats At Sunrise",    src: "assets/img/yamuna-ghat-sunrise.jpg",  alt: "Stone ghat steps and boats on the Yamuna at sunrise near Mathura" },
+      { label: "Darshan Queue, Vrindavan",   src: "assets/img/banke-bihari-lane.jpg",    alt: "Devotees queueing at an ornate temple entrance in the temple lanes of Vrindavan" },
+      { label: "Old Vrindavan Lanes",        src: "assets/img/vrindavan-lane.jpg",       alt: "Narrow heritage lane in Vrindavan with a cow, cycle rickshaw and pilgrims walking to the temples" },
+      { label: "ISKCON Vrindavan",           src: "assets/img/iskcon-vrindavan.jpg",     alt: "White marble temple courtyard with carved spires and devotees at ISKCON Vrindavan" },
+      { label: "Nidhivan &amp; Seva Kunj",   src: "assets/img/nidhivan-grove.jpg",       alt: "Twisted trees and a small white shrine in the sacred Nidhivan grove at Vrindavan" },
+      { label: "Prem Mandir, Vrindavan",     src: "assets/img/prem-mandir.jpg",          alt: "White marble Prem Mandir with its fountain and gardens in Vrindavan" },
+      { label: "Prem Mandir Evening Lights", src: "assets/img/prem-mandir-night.jpg",    alt: "Prem Mandir lit up in changing colours during the evening light show in Vrindavan" }
+    ],
+
+    /* "One Day. Two Holy Cities." - 6 slots + 1 wide slot. */
+    results: [
+      { label: "Early Pickup From Agra",   src: "assets/img/cab-at-monument.webp",     alt: "Private cab arriving in Agra for an early-morning Mathura Vrindavan tour pickup" },
+      { label: "Krishna Janmabhoomi",      src: "assets/img/krishna-janmabhoomi.jpg",  alt: "Devotees at the Krishna Janmabhoomi temple complex in Mathura" },
+      { label: "Vishram Ghat, Mathura",    src: "assets/img/vishram-ghat-aarti.jpg",   alt: "Lamps and aarti on the Yamuna at Vishram Ghat in Mathura" },
+      { label: "Vrindavan Temple Lanes",   src: "assets/img/banke-bihari-lane.jpg",    alt: "Crowded temple entrance and flower stalls in the lanes of Vrindavan" },
+      { label: "ISKCON Vrindavan",         src: "assets/img/iskcon-vrindavan.jpg",     alt: "Marble temple courtyard and devotees at ISKCON Vrindavan" },
+      { label: "Prem Mandir Evening",      src: "assets/img/prem-mandir-night.jpg",    alt: "Prem Mandir illuminated in the evening at the end of the Vrindavan darshan" }
+    ],
+    resultsWide: { label: "Agra &rarr; Mathura &rarr; Vrindavan &rarr; Agra", src: "assets/img/highway-sunset.webp", alt: "Highway stretching ahead on the 200 to 250 km Mathura and Vrindavan round trip from Agra" }
+  };
+
+  /* ========================== RENDER ========================== */
+  (function () {
+    /* every CTA + WhatsApp button points at one place */
+    document.querySelectorAll('[data-cta]').forEach(a => {
+      a.href = SITE.bookingUrl;
+      a.target = '_blank';
+      a.rel = 'noopener';
+    });
+    const wa = document.getElementById('waBtn');
+    if (wa) wa.href = SITE.whatsappUrl;
+
+    /* stat cards - two rows, two label sets, one component */
+    const statHTML = list => list.map(s =>
+      `<div class="stat"><p class="stat-num${s.word ? ' stat-word' : ''}">${s.value}</p><p class="stat-label">${s.label}</p></div>`
+    ).join('');
+    document.querySelectorAll('[data-stats]').forEach(el => { el.innerHTML = statHTML(SITE.stats); });
+    document.querySelectorAll('[data-stats-2]').forEach(el => { el.innerHTML = statHTML(SITE.statsRepeat); });
+
+    /* one media slot - empty labelled frame, or a real photo */
+    const ents = { '&mdash;':'—', '&ndash;':'–', '&amp;':'&', '&rarr;':'→' };
+    const plain = s => (s || '').replace(/&mdash;|&ndash;|&amp;|&rarr;/g, m => ents[m]);
+
+    function slot(item, ratio, eager) {
+      const cls = `ph ${ratio}` + (item.src ? ' filled' : '');
+      if (!item.src) {
+        return `<div class="${cls}"><span class="ph-slot">${item.label || ''}</span></div>`;
+      }
+      const tag = item.label ? `<span class="ph-tag">${plain(item.label)}</span>` : '';
+      const alt = plain(item.alt || item.label || 'Mathura Vrindavan tour from Agra by private cab');
+      return `<div class="${cls}"><img src="${item.src}" loading="${eager ? 'eager' : 'lazy'}" decoding="${eager ? 'sync' : 'async'}" alt="${alt}" />${tag}</div>`;
+    }
+
+    const cg = document.querySelector('[data-creatives]');
+    if (cg) cg.innerHTML = SITE.creatives.map((i, idx) => slot(i, 'aspect-[4/3]', idx === 0)).join('');
+
+    const rg = document.querySelector('[data-results]');
+    if (rg) rg.innerHTML = SITE.results.map(i => slot(i, 'aspect-[16/9]')).join('');
+
+    const rw = document.querySelector('[data-results-wide]');
+    if (rw) rw.innerHTML = slot(SITE.resultsWide, 'aspect-[21/9]');
+
+    document.querySelectorAll('[data-year]').forEach(el => {
+      el.textContent = new Date().getFullYear();
+    });
+  })();
+  </script>
+
+  <!-- Shared Google reviews: ONE dataset + ONE grid component, all pages. -->
+  <script src="../_shared/reviews-data.js"></script>
+  <script src="../_shared/reviews-grid.js"></script>
+  <script src="../_shared/tracking.js"></script>
+</body>
+</html>

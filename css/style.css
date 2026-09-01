@@ -297,12 +297,18 @@ p:last-child { margin-bottom: 0 }
 .nav__ddm a:focus-visible { background: var(--g50); color: var(--black); outline: 2px solid var(--black) }
 .ptag { font-size: .76rem; color: var(--g400); font-weight: 600 }
 
-/* Hamburger */
+/* Hamburger — 44x44 tap target (was ~36x30; bumped 31 Aug 2026 to match the
+   new .gnav-mobile__btn used on rebuilt pages, so the menu button is the
+   same size site-wide, not just the same content). */
 .ham {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 5px;
-  padding: .45rem;
+  width: 44px;
+  height: 44px;
+  padding: 0;
   background: none;
   border: none;
   z-index: 1001;

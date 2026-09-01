@@ -1,4 +1,81 @@
 <!DOCTYPE html>
+<!--
+  ============================================================================
+  Padma Shree Travels — Agra to Vrindavan Cab (production route page)
+  ============================================================================
+  Rebuilt from:
+    * Conversion structure and visual language .. the two locked references
+      (agra-to-jaipur-taxi/, agra-local-sightseeing/) and the route-page
+      pattern settled at queue items #7-#10.
+    * Facts, fares, temple list, booking steps, internal links and GTM ......
+      the previous production version of this page.
+    * Specialized reference ..... Landing Pages/agra-to-mathura-vrindavan/
+      (framing only; its full two-city itinerary belongs to queue item #12).
+    * Fare cross-check .......... agra-taxi-fares/index.html and the
+      rebuilt agra-to-mathura-taxi/ page (queue item #10).
+
+  VERIFIED FACTS (do not exceed these)
+    Phone / WhatsApp .. +91-87200-81102   Email .. travels.padamshree@gmail.com
+    Distance ........... 70-75 km via NH-2, the route passes through Mathura
+    Travel time ........ 1.5 to 2 hours, traffic depending
+    Fare, AC sedan ..... Rs1,800 one way - corroborated in the Mathura &
+                         Vrindavan fares table on agra-taxi-fares/index.html
+                         ("Agra to Vrindavan | One way | AC Sedan | from
+                         Rs1,800").
+    Round trip ......... Rs3,000, and the previous version of this page is
+                         explicit that this figure covers stops in BOTH
+                         Mathura and Vrindavan. That matches the published
+                         "Mathura + Vrindavan Full Day Rs3,000" row on the
+                         fares hub and the same figure on the rebuilt
+                         agra-to-mathura-taxi/ page. Kept, and the two-city
+                         scope is stated wherever the number appears so it
+                         cannot read as a Vrindavan-only round trip.
+    Fare, other cabs ... Ertiga Rs2,200/Rs3,800 - Innova Rs2,800/Rs4,500 -
+                         Tempo Traveller Rs4,500/Rs7,500. Carried forward
+                         from the previous version of this page unchanged;
+                         not published anywhere else in the project, so
+                         flagged for owner confirmation in
+                         docs/page-upgrade-log.md.
+    Reverse direction .. Vrindavan to Agra is offered; pickup arranged in
+                         30-60 minutes.
+    Festivals .......... Janmashtami and Holi run, but book ahead.
+
+  CLAIMS DELIBERATELY DROPPED from the previous version of this page
+    * "Safe & Insured - commercially insured vehicles" and the "Insured"
+      hero trust badge.
+    * "Clean, sanitised AC sedans and SUVs".
+    Neither is evidenced anywhere in this project. Same policy as #7 and #10.
+
+
+  LATER CORRECTION (made while building mathura-vrindavan-tour-from-agra/)
+    An earlier draft of this rebuild claimed the fare "does not change on
+    festival days". mathura-vrindavan-tour-from-agra/ states the opposite -
+    "festival season fares may be slightly higher" - so the claim was
+    removed. The card now promises only what is actually true everywhere in
+    this project: the fare is agreed in writing before you book.
+  IMAGES - every candidate viewed before use
+    Hero  dest-prem-mandir.webp - this one IS identifiably Prem Mandir: the
+          twin-shikhara white marble temple lit at night above its fountain.
+          It is the one Vrindavan photo in the project that can be named
+          honestly, so the alt text names it. Also used on the homepage and
+          two blog posts; reuse across pages is intended here, the image is
+          simply the correct one.
+    Body  dest-nidhivan.webp - a paved path under a canopy of low, twisted
+          trees. Described for what it is; no caption asserts which grove.
+    Partner  fleet-lineup.webp - the shared fleet photo.
+    REJECTED  dest-iskcon.webp. js/route-images.js labels it "ISKCON temple,
+          Vrindavan", but the photo shows a many-spired white marble complex
+          that is not the Krishna Balaram Mandir. Naming it would
+          misrepresent a real building, so it is not used and the legacy
+          label was not reused. Third rejection of this kind in the queue,
+          after the terminal photo (#7) and the highway photo (#9).
+
+  REVIEWS
+    New curated key 'agra-to-vrindavan-cab' in js/reviews-data.js. Six of
+    the nine reviews name Vrindavan outright - more direct evidence than any
+    other route page in this project has. No review text was altered.
+  ============================================================================
+-->
 <html lang="en">
 <head>
 <!-- Google Tag Manager -->
@@ -8,307 +85,571 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-NWDQLKM9');</script>
 <!-- End Google Tag Manager -->
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="robots" content="index, follow">
 <meta name="googlebot" content="index, follow">
 <meta http-equiv="content-language" content="en-IN">
-<title>Agra to Vrindavan Cab &#8377;1800 | Taxi Booking &#8211; Padma Shree Travels</title>
-<meta name="description" content="Book Agra to Vrindavan cab starting &#8377;1800 one way, &#8377;3000 round trip. Visit Banke Bihari, Prem Mandir, ISKCON Temple. AC cars, 24/7 service. Call +91-87200-81102.">
-<meta name="keywords" content="agra to vrindavan cab, taxi agra to vrindavan, agra to vrindavan taxi fare, agra to vrindavan taxi, cab from agra to vrindavan, vrindavan cab booking from agra">
+
+<title>Agra to Vrindavan Cab &#8377;1,800 | Temple Taxi, Fixed Fare</title>
+<meta name="description" content="AC cab from Agra to Vrindavan, &#8377;1,800 one way. The &#8377;3,000 round trip covers Mathura too. 70&#8211;75 km, about 2 hrs, driver waits at each temple. WhatsApp +91 87200 81102.">
+<meta name="keywords" content="agra to vrindavan cab, agra to vrindavan taxi, vrindavan cab booking from agra, agra vrindavan taxi fare, banke bihari temple cab">
 <link rel="canonical" href="https://www.padmashreetravels.in/agra-to-vrindavan-cab/">
-<meta property="og:title" content="Agra to Vrindavan Cab &#8211; Book Taxi from &#8377;1800 | Padma Shree Travels">
-<meta property="og:description" content="Comfortable taxi from Agra to Vrindavan. Visit famous temples with our reliable cab service. Fixed fares, no hidden charges.">
+
+<meta property="og:title" content="Agra to Vrindavan Cab &#8211; AC Taxi from &#8377;1,800 One Way">
+<meta property="og:description" content="Banke Bihari, Prem Mandir, ISKCON and the Yamuna ghats, at your own pace. 70&#8211;75 km from Agra via NH-2, with the driver waiting at each temple.">
 <meta property="og:url" content="https://www.padmashreetravels.in/agra-to-vrindavan-cab/">
-<meta property="og:type" content="website"><meta property="og:locale" content="en_IN"><meta property="og:image" content="https://www.padmashreetravels.in/images/logo.png"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Agra to Vrindavan Cab &#8211; Book Taxi from &#8377;1800 | Padma Shree Travels"><meta name="twitter:description" content="Comfortable taxi from Agra to Vrindavan. Visit famous temples with our reliable cab service. Fixed fares, no hidden charges."><meta name="twitter:image" content="https://www.padmashreetravels.in/images/logo.png">
-<link rel="icon" href="/favicon-48x48.png" sizes="48x48" type="image/png"><link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png"><link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="shortcut icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../css/style.css">
-<style>:root{--ff:Inter,-apple-system,sans-serif;--ffd:Inter,-apple-system,sans-serif}</style>
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_IN">
+<meta property="og:site_name" content="Padma Shree Travels">
+<meta property="og:image" content="https://www.padmashreetravels.in/images/destinations/dest-prem-mandir.webp">
+<meta property="og:image:alt" content="Prem Mandir in Vrindavan lit up at night above its fountain">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Agra to Vrindavan Cab &#8211; AC Taxi from &#8377;1,800 One Way">
+<meta name="twitter:description" content="70&#8211;75 km via NH-2, about 2 hrs. Fixed fare, and your driver waits at each temple.">
+<meta name="twitter:image" content="https://www.padmashreetravels.in/images/destinations/dest-prem-mandir.webp">
 
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"LocalBusiness","@id":"https://www.padmashreetravels.in/#business","name":"Padma Shree Travels","url":"https://www.padmashreetravels.in/","telephone":"+91-87200-81102","email":"travels.padamshree@gmail.com","image":"https://www.padmashreetravels.in/images/logo.png","address":{"@type":"PostalAddress","streetAddress":"Rajeshwar Mandir, Kaveri Vihar Phase II, Shamsabad","addressLocality":"Agra","addressRegion":"Uttar Pradesh","postalCode":"282001","addressCountry":"IN"},"geo":{"@type":"GeoCoordinates","latitude":27.1767,"longitude":78.0081},"openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"00:00","closes":"23:59"}}
-</script>
+<link rel="icon" href="/favicon-48x48.png" sizes="48x48" type="image/png">
+<link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
 
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the taxi fare from Agra to Vrindavan?","acceptedAnswer":{"@type":"Answer","text":"The Agra to Vrindavan taxi fare starts at \u20b91,800 for a one-way trip and \u20b93,000 for a round trip in an AC sedan. Fare includes fuel and driver charges. Tolls and parking are paid separately."}},{"@type":"Question","name":"How far is Vrindavan from Agra?","acceptedAnswer":{"@type":"Answer","text":"Vrindavan is approximately 70\u201375 km from Agra via NH-2. The journey takes about 1.5 to 2 hours depending on traffic. The route passes through Mathura."}},{"@type":"Question","name":"Can I visit both Mathura and Vrindavan in one trip from Agra?","acceptedAnswer":{"@type":"Answer","text":"Yes, our round-trip package at \u20b93,000 covers stops at both cities. Visit Krishna Janmabhoomi in Mathura and Banke Bihari, Prem Mandir in Vrindavan."}},{"@type":"Question","name":"Which temples can I visit in Vrindavan with your taxi?","acceptedAnswer":{"@type":"Answer","text":"Our cab covers Banke Bihari Temple, Prem Mandir, ISKCON Temple, Radha Vallabh Temple, Nidhivan, Seva Kunj, and Yamuna ghats. Driver waits at each stop."}},{"@type":"Question","name":"Is the Agra to Vrindavan cab available on weekends and festivals?","acceptedAnswer":{"@type":"Answer","text":"Yes, our service operates every day including weekends, holidays, and festival seasons like Janmashtami and Holi. Book in advance during festivals."}},{"@type":"Question","name":"Do you provide cab service from Vrindavan back to Agra?","acceptedAnswer":{"@type":"Answer","text":"Yes, we provide both Agra to Vrindavan and Vrindavan to Agra cab service. Call +91-87200-81102 and we will arrange pickup within 30\u201360 minutes."}}]}
-</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/landing.css">
+<link rel="preload" as="image" href="../images/destinations/dest-prem-mandir.webp" fetchpriority="high">
 
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.padmashreetravels.in/"},{"@type":"ListItem","position":2,"name":"Agra to Vrindavan Cab","item":"https://www.padmashreetravels.in/agra-to-vrindavan-cab/"}]}
-</script>
+<!-- ===================== STRUCTURED DATA ===================== -->
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","@id":"https://www.padmashreetravels.in/#business","name":"Padma Shree Travels","url":"https://www.padmashreetravels.in/","telephone":"+91-87200-81102","email":"travels.padamshree@gmail.com","image":"https://www.padmashreetravels.in/images/logo.png","address":{"@type":"PostalAddress","streetAddress":"Rajeshwar Mandir, Kaveri Vihar Phase II, Shamsabad","addressLocality":"Agra","addressRegion":"Uttar Pradesh","postalCode":"282001","addressCountry":"IN"},"geo":{"@type":"GeoCoordinates","latitude":27.1767,"longitude":78.0081},"sameAs":["https://g.page/r/CUjtXu1x_3bPEBM/review"],"openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"00:00","closes":"23:59"}}</script>
 
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Service","serviceType":"Taxi Service","name":"Agra to Vrindavan Cab Service","description":"Reliable and affordable taxi service from Agra to Vrindavan with AC sedans and SUVs. One-way and round-trip available.","provider":{"@type":"LocalBusiness","name":"Padma Shree Travels","telephone":"+91-87200-81102"},"areaServed":["Agra","Vrindavan"],"offers":{"@type":"Offer","price":"1800","priceCurrency":"INR","description":"One-way AC sedan taxi from Agra to Vrindavan"}}
-</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.padmashreetravels.in/"},{"@type":"ListItem","position":2,"name":"Temple Tours from Agra","item":"https://www.padmashreetravels.in/agra-temple-tour-by-cab/"},{"@type":"ListItem","position":3,"name":"Agra to Vrindavan Cab","item":"https://www.padmashreetravels.in/agra-to-vrindavan-cab/"}]}</script>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","serviceType":"Taxi and cab hire from Agra to Vrindavan","name":"Agra to Vrindavan Cab Service","description":"Private AC cab from Agra to Vrindavan, approximately 70 to 75 km via NH-2 through Mathura and about 1.5 to 2 hours by road. One-way and round-trip bookings; on a round trip the driver waits at each temple. Fares are confirmed on WhatsApp before travel, and tolls and parking are paid separately.","provider":{"@type":"LocalBusiness","@id":"https://www.padmashreetravels.in/#business","name":"Padma Shree Travels","telephone":"+91-87200-81102"},"areaServed":[{"@type":"City","name":"Agra"},{"@type":"City","name":"Vrindavan"},{"@type":"City","name":"Mathura"}],"url":"https://www.padmashreetravels.in/agra-to-vrindavan-cab/","offers":{"@type":"Offer","price":"1800","priceCurrency":"INR","description":"One-way AC sedan cab from Agra to Vrindavan. Tolls and parking are paid separately."}}</script>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What is the taxi fare from Agra to Vrindavan?","acceptedAnswer":{"@type":"Answer","text":"The Agra to Vrindavan cab fare starts at ₹1,800 for a one-way trip in an AC sedan. The ₹3,000 round trip covers stops in both Mathura and Vrindavan. The fare covers fuel and driver charges, and tolls and parking are paid separately."}},
+{"@type":"Question","name":"How far is Vrindavan from Agra?","acceptedAnswer":{"@type":"Answer","text":"Vrindavan is approximately 70 to 75 km from Agra via NH-2. The journey takes about 1.5 to 2 hours depending on traffic, and the route passes through Mathura."}},
+{"@type":"Question","name":"Can I visit both Mathura and Vrindavan in one trip?","acceptedAnswer":{"@type":"Answer","text":"Yes, and most travellers do, because the road to Vrindavan goes through Mathura anyway. The ₹3,000 round trip covers stops in both towns - Krishna Janmabhoomi and Dwarkadhish in Mathura, then Banke Bihari and Prem Mandir in Vrindavan."}},
+{"@type":"Question","name":"Which temples can I visit in Vrindavan?","acceptedAnswer":{"@type":"Answer","text":"The usual circuit is Banke Bihari Temple, Prem Mandir, the ISKCON Krishna Balaram Mandir, Radha Vallabh Temple, Nidhivan, Seva Kunj and the Yamuna ghats at Kesi Ghat. Your driver waits at each stop, so you choose how long to spend."}},
+{"@type":"Question","name":"What cars are available for an Agra to Vrindavan cab?","acceptedAnswer":{"@type":"Answer","text":"AC sedans (Maruti Dzire, Honda Amaze) seat up to 4 passengers, AC SUVs (Maruti Ertiga, Toyota Innova) seat 6 to 7, and a Tempo Traveller is available for groups of 12 to 15."}},
+{"@type":"Question","name":"Is the cab available during festivals like Janmashtami and Holi?","acceptedAnswer":{"@type":"Answer","text":"Yes, the service runs every day of the year including festivals. Book well in advance for Janmashtami and Holi - Vrindavan is extremely busy on those days and cars go early."}},
+{"@type":"Question","name":"Do you provide pickup from Vrindavan back to Agra?","acceptedAnswer":{"@type":"Answer","text":"Yes, we run both directions. If you are already in Vrindavan and need a cab back to Agra, call +91-87200-81102 and we will arrange pickup within 30 to 60 minutes."}}
+]}</script>
 </head>
+
 <body>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NWDQLKM9"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
-<header class="hdr"><div class="hdr__in">
-<a href="../index.html" class="logo"><img src="../images/logo.png" alt="Padma Shree Travels Logo" class="logo__img"><div class="logo__t">Padma Shree Travels<small>Agra Taxi Service</small></div></a><nav class="nav"><ul class="nav__l">
-<li><a href="../index.html" class="nav__a">Home</a></li>
-<li class="nav__dd"><a href="../agra-temple-tour-by-cab/" class="nav__a">Pilgrimage &#9662;</a><div class="nav__ddm">
-<a href="../agra-to-mathura-taxi/">Agra &#8594; Mathura Taxi <span class="ptag">from &#8377;1,500</span></a>
-<a href="../agra-to-vrindavan-cab/">Agra &#8594; Vrindavan Cab <span class="ptag">from &#8377;1,800</span></a>
-<a href="../mathura-vrindavan-tour-from-agra/">Mathura + Vrindavan Full Day <span class="ptag">&#8377;3,000</span></a>
-<a href="../mathura-vrindavan-barsana/">Mathura, Vrindavan &amp; Barsana <span class="ptag">&#8377;3,500 &middot; Full Day</span></a>
-<a href="../agra-to-bateshwar/">Agra &#8594; Bateshwar <span class="ptag">&#8377;3,000 &middot; RT</span></a>
-<a href="../agra-to-mehandipur-balaji-taxi/">Agra &#8594; Mehandipur Balaji <span class="ptag">Fare on WhatsApp</span></a>
-<a href="../agra-to-kaila-devi-temple-taxi/">Agra &#8594; Kaila Devi Temple <span class="ptag">Fare on WhatsApp</span></a>
-<a href="../agra-karauli-kaila-devi-balaji-tour/">Karauli + Kaila Devi + Balaji Tour <span class="ptag">Fare on WhatsApp</span></a>
-<a href="../agra-temple-tour-by-cab/" class="dd__more">View All Pilgrimage &#8594;</a>
-</div></li>
-<li class="nav__dd"><a href="../agra-local-sightseeing/" class="nav__a">Sightseeing &#9662;</a><div class="nav__ddm">
-<a href="../agra-local-sightseeing/">Agra Full Day Sightseeing <span class="ptag">&#8377;2,500</span></a>
-<a href="../fatehpur-sikri/">Fatehpur Sikri Day Trip <span class="ptag">&#8377;2,500</span></a>
-<a href="../taj-mahal-taxi/">Taj Mahal Taxi <span class="ptag">from &#8377;1,500</span></a>
-<a href="../taj-mahal-sunrise-taxi/">Taj Mahal Sunrise Taxi <span class="ptag">from &#8377;1,500</span></a>
-<a href="../agra-local-sightseeing/" class="dd__more">View All Sightseeing &#8594;</a>
-</div></li>
-<li class="nav__dd"><a href="../outstation-cabs-agra/" class="nav__a">Outstation &#9662;</a><div class="nav__ddm">
-<a href="../agra-to-gwalior/">Agra &#8594; Gwalior <span class="ptag">&#8377;3,000 &middot; RT</span></a>
-<a href="../agra-to-aligarh/">Agra &#8594; Aligarh <span class="ptag">&#8377;3,000 &middot; RT</span></a>
-<a href="../agra-to-firozabad/">Agra &#8594; Firozabad <span class="ptag">&#8377;2,500 &middot; RT</span></a>
-<a href="../agra-to-etawah/">Agra &#8594; Etawah <span class="ptag">&#8377;3,500 &middot; RT</span></a>
-<a href="../agra-to-jaipur-taxi/">Agra &#8594; Jaipur Taxi <span class="ptag">Fare on WhatsApp</span></a>
-<a href="../agra-airport-taxi/">Agra Airport Taxi <span class="ptag">from &#8377;800</span></a>
-<a href="../agra-railway-station-taxi/">Agra Railway Station Taxi <span class="ptag">from &#8377;800</span></a>
-<a href="../outstation-cabs-agra/" class="dd__more">View All Outstation &#8594;</a>
-</div></li>
-<li class="nav__dd"><a href="../agra-taxi-fares/" class="nav__a">Fares &amp; Tools &#9662;</a><div class="nav__ddm">
-<a href="../agra-taxi-fares/">Agra Taxi Fare List <span class="ptag">Fixed fares</span></a>
-<a href="../route-finder/">Route Finder <span class="ptag">Filter routes</span></a>
-<a href="../fleet/">Our Fleet <span class="ptag">Compare cabs</span></a>
-<a href="../book/">Book Online <span class="ptag">WhatsApp booking</span></a>
-</div></li>
-<li><a href="../blog/" class="nav__a">Blog</a></li>
-<li><a href="../about/" class="nav__a">About</a></li>
-<li><a href="../contact/" class="nav__a">Contact</a></li>
-<li><a href="tel:+918720081102" class="btn btn--b btn--sm"><i data-lucide="phone" class="icon icon--sm icon--white" aria-hidden="true"></i> Call Now</a></li>
-</ul></nav>
-<button class="ham" id="ham" aria-label="Menu"><span></span><span></span><span></span></button>
-</div></header>
+<a href="#main" class="sr-only skip">Skip to main content</a>
 
-<div class="mnav" id="mnav">
-<a href="../index.html" class="mnav__home">Home</a>
-<button class="mnav__cat" aria-expanded="false">Pilgrimage <span class="mnav__arr">&#9662;</span></button>
-<div class="mnav__sub">
-<a href="../agra-to-mathura-taxi/">Agra to Mathura Taxi <span class="ptag">from &#8377;1,500</span></a>
-<a href="../agra-to-vrindavan-cab/">Agra to Vrindavan Cab <span class="ptag">from &#8377;1,800</span></a>
-<a href="../mathura-vrindavan-tour-from-agra/">Mathura + Vrindavan Tour <span class="ptag">&#8377;3,000 &middot; Full Day</span></a>
-<a href="../mathura-vrindavan-barsana/">Mathura, Vrindavan &amp; Barsana <span class="ptag">&#8377;3,500 &middot; Full Day</span></a>
-<a href="../agra-to-bateshwar/">Agra to Bateshwar <span class="ptag">&#8377;3,000 &middot; RT</span></a>
-<a href="../agra-to-mehandipur-balaji-taxi/">Agra to Mehandipur Balaji <span class="ptag">Fare on WhatsApp</span></a>
-<a href="../agra-to-kaila-devi-temple-taxi/">Agra to Kaila Devi Temple <span class="ptag">Fare on WhatsApp</span></a>
-<a href="../agra-karauli-kaila-devi-balaji-tour/">Karauli + Kaila Devi + Balaji Tour <span class="ptag">Fare on WhatsApp</span></a>
+<!-- ===================== STICKY HEADER ===================== -->
+<header class="hdr">
+  <div class="wrap hdr__in">
+    <a href="../index.html" class="hdr__logo">
+      <span class="hdr__mark" aria-hidden="true">PS</span>
+      <span class="hdr__name">Padma Shree Travels</span>
+    </a>
+    <nav class="hdr__nav" aria-label="Main">
+<a href="../index.html">Home</a>
+<span class="gnav-dd"><a href="../agra-temple-tour-by-cab/" aria-current="page">Pilgrimage</a>
+<div class="gnav-menu">
+<a href="../agra-to-mathura-taxi/">Agra &#8594; Mathura Taxi<span class="gnav-tag">from &#8377;1,500</span></a>
+<a href="../agra-to-vrindavan-cab/">Agra &#8594; Vrindavan Cab<span class="gnav-tag">from &#8377;1,800</span></a>
+<a href="../mathura-vrindavan-tour-from-agra/">Mathura + Vrindavan Full Day<span class="gnav-tag">&#8377;3,000</span></a>
+<a href="../mathura-vrindavan-barsana/">Mathura, Vrindavan &amp; Barsana<span class="gnav-tag">&#8377;3,500 &middot; Full Day</span></a>
+<a href="../agra-to-bateshwar/">Agra &#8594; Bateshwar<span class="gnav-tag">&#8377;3,000 &middot; RT</span></a>
+<a href="../agra-to-mehandipur-balaji-taxi/">Agra &#8594; Mehandipur Balaji<span class="gnav-tag">Fare on WhatsApp</span></a>
+<a href="../agra-to-kaila-devi-temple-taxi/">Agra &#8594; Kaila Devi Temple<span class="gnav-tag">Fare on WhatsApp</span></a>
+<a href="../agra-karauli-kaila-devi-balaji-tour/">Karauli + Kaila Devi + Balaji Tour<span class="gnav-tag">Fare on WhatsApp</span></a>
+<a href="../agra-temple-tour-by-cab/" class="gnav-more">View All Pilgrimage &#8594;</a>
+</div></span>
+<span class="gnav-dd"><a href="../agra-local-sightseeing/">Sightseeing</a>
+<div class="gnav-menu">
+<a href="../agra-local-sightseeing/">Agra Full Day Sightseeing<span class="gnav-tag">&#8377;2,500</span></a>
+<a href="../fatehpur-sikri/">Fatehpur Sikri Day Trip<span class="gnav-tag">&#8377;2,500</span></a>
+<a href="../taj-mahal-taxi/">Taj Mahal Taxi<span class="gnav-tag">from &#8377;1,500</span></a>
+<a href="../taj-mahal-sunrise-taxi/">Taj Mahal Sunrise Taxi<span class="gnav-tag">from &#8377;1,500</span></a>
+<a href="../agra-local-sightseeing/" class="gnav-more">View All Sightseeing &#8594;</a>
+</div></span>
+<span class="gnav-dd"><a href="../outstation-cabs-agra/">Outstation</a>
+<div class="gnav-menu">
+<a href="../agra-to-gwalior/">Agra &#8594; Gwalior<span class="gnav-tag">&#8377;3,000 &middot; RT</span></a>
+<a href="../agra-to-aligarh/">Agra &#8594; Aligarh<span class="gnav-tag">&#8377;3,000 &middot; RT</span></a>
+<a href="../agra-to-firozabad/">Agra &#8594; Firozabad<span class="gnav-tag">&#8377;2,500 &middot; RT</span></a>
+<a href="../agra-to-etawah/">Agra &#8594; Etawah<span class="gnav-tag">&#8377;3,500 &middot; RT</span></a>
+<a href="../agra-to-jaipur-taxi/">Agra &#8594; Jaipur Taxi<span class="gnav-tag">Fare on WhatsApp</span></a>
+<a href="../agra-airport-taxi/">Agra Airport Taxi<span class="gnav-tag">from &#8377;800</span></a>
+<a href="../agra-railway-station-taxi/">Agra Railway Station Taxi<span class="gnav-tag">from &#8377;800</span></a>
+<a href="../outstation-cabs-agra/" class="gnav-more">View All Outstation &#8594;</a>
+</div></span>
+<span class="gnav-dd gnav-dd--right"><a href="../agra-taxi-fares/">Fares &amp; Tools</a>
+<div class="gnav-menu">
+<a href="../agra-taxi-fares/">Agra Taxi Fare List<span class="gnav-tag">Fixed fares</span></a>
+<a href="../route-finder/">Route Finder<span class="gnav-tag">Filter routes</span></a>
+<a href="../fleet/">Our Fleet<span class="gnav-tag">Compare cabs</span></a>
+<a href="../book/">Book Online<span class="gnav-tag">WhatsApp booking</span></a>
+</div></span>
+<a href="../blog/">Blog</a>
+<a href="../about/">About</a>
+<a href="../contact/">Contact</a>
+</nav>
+<details class="gnav-mobile">
+<summary class="gnav-mobile__btn" aria-label="Open menu">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+</summary>
+<div class="gnav-mobile__panel">
+<a href="../index.html">Home</a>
+<details class="gnav-mobile__cat"><summary>Pilgrimage</summary>
+<a href="../agra-to-mathura-taxi/">Agra to Mathura Taxi<span class="gnav-tag">from &#8377;1,500</span></a>
+<a href="../agra-to-vrindavan-cab/">Agra to Vrindavan Cab<span class="gnav-tag">from &#8377;1,800</span></a>
+<a href="../mathura-vrindavan-tour-from-agra/">Mathura + Vrindavan Full Day<span class="gnav-tag">&#8377;3,000</span></a>
+<a href="../mathura-vrindavan-barsana/">Mathura, Vrindavan &amp; Barsana<span class="gnav-tag">&#8377;3,500 &middot; Full Day</span></a>
+<a href="../agra-to-bateshwar/">Agra to Bateshwar<span class="gnav-tag">&#8377;3,000 &middot; RT</span></a>
+<a href="../agra-to-mehandipur-balaji-taxi/">Agra to Mehandipur Balaji<span class="gnav-tag">Fare on WhatsApp</span></a>
+<a href="../agra-to-kaila-devi-temple-taxi/">Agra to Kaila Devi Temple<span class="gnav-tag">Fare on WhatsApp</span></a>
+<a href="../agra-karauli-kaila-devi-balaji-tour/">Karauli + Kaila Devi + Balaji Tour<span class="gnav-tag">Fare on WhatsApp</span></a>
+</details>
+<details class="gnav-mobile__cat"><summary>Sightseeing</summary>
+<a href="../agra-local-sightseeing/">Agra Full Day Sightseeing<span class="gnav-tag">&#8377;2,500</span></a>
+<a href="../fatehpur-sikri/">Fatehpur Sikri Day Trip<span class="gnav-tag">&#8377;2,500</span></a>
+<a href="../taj-mahal-taxi/">Taj Mahal Taxi<span class="gnav-tag">from &#8377;1,500</span></a>
+<a href="../taj-mahal-sunrise-taxi/">Taj Mahal Sunrise Taxi<span class="gnav-tag">from &#8377;1,500</span></a>
+</details>
+<details class="gnav-mobile__cat"><summary>Outstation</summary>
+<a href="../agra-to-gwalior/">Agra to Gwalior<span class="gnav-tag">&#8377;3,000 &middot; RT</span></a>
+<a href="../agra-to-aligarh/">Agra to Aligarh<span class="gnav-tag">&#8377;3,000 &middot; RT</span></a>
+<a href="../agra-to-firozabad/">Agra to Firozabad<span class="gnav-tag">&#8377;2,500 &middot; RT</span></a>
+<a href="../agra-to-etawah/">Agra to Etawah<span class="gnav-tag">&#8377;3,500 &middot; RT</span></a>
+<a href="../agra-to-jaipur-taxi/">Agra to Jaipur Taxi<span class="gnav-tag">Fare on WhatsApp</span></a>
+<a href="../agra-airport-taxi/">Agra Airport Taxi<span class="gnav-tag">from &#8377;800</span></a>
+<a href="../agra-railway-station-taxi/">Agra Railway Station Taxi<span class="gnav-tag">from &#8377;800</span></a>
+</details>
+<details class="gnav-mobile__cat"><summary>Fares &amp; Tools</summary>
+<a href="../agra-taxi-fares/">Agra Taxi Fare List<span class="gnav-tag">Fixed fares</span></a>
+<a href="../route-finder/">Route Finder<span class="gnav-tag">Filter routes</span></a>
+<a href="../fleet/">Our Fleet<span class="gnav-tag">Compare cabs</span></a>
+<a href="../book/">Book Online<span class="gnav-tag">WhatsApp booking</span></a>
+</details>
+<a href="../blog/">Blog</a>
+<a href="../about/">About</a>
+<a href="../contact/">Contact</a>
+</div></details>
+    <a data-cta href="https://wa.me/918720081102?text=Hi%20Padma%20Shree%20Travels%2C%20I%20need%20an%20Agra%20to%20Vrindavan%20cab.%0A%0ATravel%20date%3A%20%0APickup%20time%3A%20%0APickup%20point%20in%20Agra%3A%20%0APassengers%3A%20%0ACab%20type%3A%20%0AOne%20way%20or%20round%20trip%3A%20%0ATemples%20you%20want%20to%20cover%3A%20%0A%0APlease%20share%20availability%20and%20fare." target="_blank" rel="noopener" class="btn-header">Get Fare</a>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ===================== HERO ===================== -->
+<section id="hero" class="hero hero-bg">
+  <div class="wrap hero__grid">
+    <div>
+      <nav class="bc" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a> &rsaquo;
+        <a href="../agra-temple-tour-by-cab/">Temple Tours</a> &rsaquo;
+        <span>Agra to Vrindavan Cab</span>
+      </nav>
+      <h1>Agra To Vrindavan Cab<span class="blk">&#8377;1,800 One Way &middot; &#8377;3,000 With Mathura</span></h1>
+      <p class="hero__value">70&ndash;75 KM Via NH-2<br>About 2 Hrs &middot; Fixed Fare</p>
+      <p class="hero__meta">
+        <strong>Banke Bihari, Prem Mandir, ISKCON, the ghats</strong> &mdash; in whatever order suits the day. The road runs through Mathura, so a round trip can take in both towns, and your driver waits at each temple while you go in.
+      </p>
+      <div class="hero__acts">
+        <a data-cta href="https://wa.me/918720081102?text=Hi%20Padma%20Shree%20Travels%2C%20I%20need%20an%20Agra%20to%20Vrindavan%20cab.%0A%0ATravel%20date%3A%20%0APickup%20time%3A%20%0APickup%20point%20in%20Agra%3A%20%0APassengers%3A%20%0ACab%20type%3A%20%0AOne%20way%20or%20round%20trip%3A%20%0ATemples%20you%20want%20to%20cover%3A%20%0A%0APlease%20share%20availability%20and%20fare." target="_blank" rel="noopener" class="btn-primary">Get Vrindavan Fare on WhatsApp</a>
+        <a href="tel:+918720081102" class="link-call">or call +91-87200 81102</a>
+      </div>
+    </div>
+    <div class="frame-hero">
+      <img src="../images/destinations/dest-prem-mandir.webp" width="1536" height="1024" fetchpriority="high" decoding="async" alt="Prem Mandir in Vrindavan lit up at night, its white marble towers rising above the fountain in front">
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PROOF STRIP ===================== -->
+<section class="proof">
+  <div class="wrap proof__in">
+    <a href="https://g.page/r/CUjtXu1x_3bPEBM" target="_blank" rel="noopener" class="proof__rev">
+      <span class="proof__stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+      <span>Verified Google Reviews</span>
+    </a>
+    <div class="proof__list">
+      <span>Driver Waits At Each Temple</span><span class="proof__sep">&bull;</span>
+      <span>Mathura On The Same Trip</span><span class="proof__sep">&bull;</span>
+      <span>Fixed Fare In Writing</span><span class="proof__sep">&bull;</span>
+      <span>Runs On Festival Days</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== INTRO + PRIMARY CTA ===================== -->
+<section class="sec sec--tight center">
+  <div class="wrap">
+    <div class="narrow">
+      <h2 class="h2">Temple Timings Decide The Day, Not The Distance</h2>
+      <p class="lede">
+        The drive from Agra is under two hours. What actually shapes a Vrindavan day is darshan timing &mdash; Banke Bihari shuts between the morning and evening sessions, Nidhivan closes at sunset, and the Prem Mandir light show is worth staying for. A private cab lets you sit out a closure over lunch instead of losing the temple, and lets you shift the order on the day if a queue is long.
+      </p>
+    </div>
+    <div class="mt-cta">
+      <a data-cta href="https://wa.me/918720081102?text=Hi%20Padma%20Shree%20Travels%2C%20I%20need%20an%20Agra%20to%20Vrindavan%20cab.%0A%0ATravel%20date%3A%20%0APickup%20time%3A%20%0APickup%20point%20in%20Agra%3A%20%0APassengers%3A%20%0ACab%20type%3A%20%0AOne%20way%20or%20round%20trip%3A%20%0ATemples%20you%20want%20to%20cover%3A%20%0A%0APlease%20share%20availability%20and%20fare." target="_blank" rel="noopener" class="btn-primary">Get Fare on WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== QUICK FACTS ===================== -->
+<section style="background:#fff">
+  <div class="wrap">
+    <h2 class="sr-only">Agra To Vrindavan Cab At A Glance</h2>
+    <div class="stats">
+      <div class="stat"><p class="stat-num is-word">70&ndash;75 KM</p><p class="stat-label">Via NH-2, Through Mathura</p></div>
+      <div class="stat"><p class="stat-num is-word">1.5&ndash;2 HRS</p><p class="stat-label">Drive Time, Traffic Depending</p></div>
+      <div class="stat"><p class="stat-num">&#8377;1,800</p><p class="stat-label">One Way, AC Sedan</p></div>
+      <div class="stat"><p class="stat-num is-word">BOTH WAYS</p><p class="stat-label">Vrindavan To Agra Too</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== GOOGLE REVIEWS =====================
+     Shared component. Reviews live in js/reviews-data.js under the
+     "agra-to-vrindavan-cab" key. Six of the nine name Vrindavan outright,
+     so the subline can say so plainly. Nothing was reworded. -->
+<section data-reviews-grid data-page="agra-to-vrindavan-cab"
+         data-subline="Genuine Google reviews from Padma Shree Travels customers &#8212; most of these are Vrindavan trips, some repeated over years."></section>
+
+<!-- ===================== FARE ===================== -->
+<section data-track="pricing" class="sec sec--top0">
+  <div class="wrap">
+    <h2 class="h2 center">Agra To Vrindavan Cab Fare</h2>
+    <p class="lede center narrow">Starting fares for the whole vehicle, not per person. The round-trip column covers stops in <strong>both Mathura and Vrindavan</strong>, since the road passes through Mathura either way.</p>
+    <div class="ftbl-wrap narrow" style="margin-top:28px">
+      <table class="ftbl">
+        <caption>Agra to Vrindavan cab fares by cab type. Round trip includes Mathura stops.</caption>
+        <thead><tr><th scope="col">Cab Type</th><th scope="col">Seats</th><th scope="col">One Way</th><th scope="col">Round Trip</th></tr></thead>
+        <tbody>
+          <tr><td><strong>AC Sedan</strong> (Dzire / Amaze)</td><td>4</td><td class="num">from &#8377;1,800</td><td class="num">&#8377;3,000</td></tr>
+          <tr><td><strong>AC SUV</strong> (Ertiga)</td><td>6</td><td class="num">from &#8377;2,200</td><td class="num">&#8377;3,800</td></tr>
+          <tr><td><strong>AC SUV</strong> (Innova)</td><td>7</td><td class="num">from &#8377;2,800</td><td class="num">&#8377;4,500</td></tr>
+          <tr><td><strong>Tempo Traveller</strong></td><td>12&ndash;15</td><td class="num">from &#8377;4,500</td><td class="num">&#8377;7,500</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="center narrow" style="margin-top:16px;font-size:13px;color:rgba(0,0,0,.6)">
+      Fares cover fuel and driver charges. Tolls and temple parking are paid separately, at actuals. See the full <a href="../agra-taxi-fares/" style="color:var(--accent-dark);font-weight:600;text-decoration:underline;text-underline-offset:2px">Agra taxi fare list</a> for every other route and package.
+    </p>
+  </div>
+</section>
+
+<!-- ===================== TEMPLES ===================== -->
+<section class="sec sec--top0">
+  <div class="wrap">
+    <h2 class="h2 center">The Vrindavan Temples Most People Ask For</h2>
+    <p class="lede center narrow">Your driver knows the lanes and the parking, and can suggest an order that works around the day&rsquo;s darshan timings. Which of these you see is your call.</p>
+    <div class="grid-3" style="margin-top:34px">
+      <div class="card"><h3>Banke Bihari Temple</h3><p>Vrindavan&rsquo;s best-known temple, in the narrow lanes of the old town. Known for jhanki darshan, where the curtain is drawn and closed at intervals rather than left open.</p></div>
+      <div class="card"><h3>Prem Mandir</h3><p>The white marble temple built by Jagadguru Kripalu Maharaj, on the edge of town. Most visitors time their evening around the light show.</p></div>
+      <div class="card"><h3>ISKCON Krishna Balaram Mandir</h3><p>Founded by Srila Prabhupada. Calmer than the old-town temples, with a well-known prasadam hall.</p></div>
+      <div class="card"><h3>Nidhivan</h3><p>A grove of low, intertwined trees. By tradition it is closed to everyone after sunset, so it has to be fitted into the daytime part of your plan.</p></div>
+      <div class="card"><h3>Kesi Ghat &amp; The Yamuna</h3><p>The riverfront ghat, quietest in the early morning and busiest for the evening aarti.</p></div>
+      <div class="card"><h3>Radha Vallabh Temple</h3><p>One of the oldest temples in Vrindavan, dating to 1585, and architecturally distinct from its neighbours.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ROUTE DETAIL ===================== -->
+<section class="sec sec--top0">
+  <div class="wrap">
+    <h2 class="h2 center">The Road From Agra To Vrindavan</h2>
+    <div class="grid-2 narrow" style="margin-top:32px;align-items:start">
+      <div>
+        <ul class="stack">
+          <li class="row-light"><strong>70&ndash;75 km via NH-2</strong> towards Delhi, then off the highway into the Mathura&ndash;Vrindavan road.</li>
+          <li class="row-light"><strong>1.5 to 2 hours</strong> of driving &mdash; highway for most of it, town roads for the last stretch.</li>
+          <li class="row-light">The route <strong>passes through Mathura</strong>, so Krishna Janmabhoomi can be added on the way out or on the way back at no detour.</li>
+          <li class="row-light">Pickup from <strong>your hotel, home, Agra Cantt or Kheria Airport</strong> &mdash; anywhere in Agra city.</li>
+          <li class="row-light">The <strong>reverse leg is also available</strong>. If you are already in Vrindavan, call and we arrange a pickup within 30&ndash;60 minutes.</li>
+        </ul>
+      </div>
+      <div class="ph r169">
+        <img src="../images/destinations/dest-nidhivan.webp" width="1537" height="1023" loading="lazy" decoding="async" alt="A paved path running under a dense canopy of low, twisted trees in dappled afternoon light">
+        <span class="ph-tag">Quiet Between The Temples</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FARE BREAKDOWN =====================
+     Shared component: .fare-* in css/landing.css. The banner is the band's
+     full-bleed background, rotated by js/landing.js via the --fare-bg
+     custom property on this section; css/landing.css carries a real
+     photograph as the default, so the band still looks right with
+     JavaScript off. The photo is decorative — every inclusion, exclusion,
+     heading and CTA below is live text in this HTML. -->
+<section class="sec sec--navy fare-band" data-fare-bg>
+  <div class="wrap">
+    <div class="fare">
+      <div class="fare__head">
+        <p class="fare__eyebrow">Clear Fare Breakdown</p>
+        <h2 class="h2 h2--lg h2--white">What Your Vrindavan Booking Includes</h2>
+        <p class="fare__lede">One cab, one driver, one price agreed before you leave Agra.</p>
+      </div>
+
+      <div class="fare__lists">
+        <div class="fare__group">
+          <h3 class="fare__gh">Included On Every Booking</h3>
+          <ul class="fare__list">
+            <li class="fare__item fare__item--inc">Private AC Cab &mdash; Not Shared</li>
+            <li class="fare__item fare__item--inc">Door-To-Door Pickup Anywhere In Agra</li>
+            <li class="fare__item fare__item--inc">Driver Waiting At Each Temple (Round Trip)</li>
+            <li class="fare__item fare__item--inc">Mathura Stops On A Round Trip</li>
+            <li class="fare__item fare__item--inc">Fuel And Driver Charges</li>
+            <li class="fare__item fare__item--inc">Driver Name, Number And Car Number Before Pickup</li>
+          </ul>
+        </div>
+        <div class="fare__group fare__group--exc">
+          <h3 class="fare__gh">Paid Separately By You</h3>
+          <ul class="fare__list">
+            <li class="fare__item fare__item--exc">Highway Tolls, At Actuals</li>
+            <li class="fare__item fare__item--exc">Temple And Ghat Parking</li>
+            <li class="fare__item fare__item--exc">Any Entry Tickets, Meals And Offerings</li>
+          </ul>
+        </div>
+      </div>
+
+
+      <div class="fare__cta">
+        <a data-cta href="https://wa.me/918720081102?text=Hi%20Padma%20Shree%20Travels%2C%20I%20need%20an%20Agra%20to%20Vrindavan%20cab.%0A%0ATravel%20date%3A%20%0APickup%20time%3A%20%0APickup%20point%20in%20Agra%3A%20%0APassengers%3A%20%0ACab%20type%3A%20%0AOne%20way%20or%20round%20trip%3A%20%0ATemples%20you%20want%20to%20cover%3A%20%0A%0APlease%20share%20availability%20and%20fare." target="_blank" rel="noopener" class="btn-primary">Get Vrindavan Fare on WhatsApp</a>
+        <a href="tel:+918720081102" class="link-call">or call +91-87200 81102</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== WHY A PRIVATE CAB ===================== -->
+<section class="sec">
+  <div class="wrap">
+    <h2 class="h2 center" style="margin-bottom:32px">Why Pilgrims Book A Private Cab For Vrindavan</h2>
+    <div class="grid-3">
+      <div class="card"><h3>Darshan Timings Are Awkward</h3><p>Temples close between sessions. With your own cab you wait it out nearby instead of dropping a temple from the plan.</p></div>
+      <div class="card"><h3>The Lanes Are Narrow</h3><p>Old-town Vrindavan is not easy to drive or park in. Drivers who run this route know where to stop and where to wait.</p></div>
+      <div class="card"><h3>Belongings Stay In The Car</h3><p>Shoes, bags and phones stay with the vehicle while you go in for darshan.</p></div>
+      <div class="card"><h3>Mathura Costs You Nothing Extra</h3><p>The road already goes through it. On a round trip, Mathura stops are part of the same fare.</p></div>
+      <div class="card"><h3>The Price Before You Commit</h3><p>Whatever the date, you have the fare in writing before you book. Janmashtami and Holi are the busiest days of the year here, so ask early.</p></div>
+      <div class="card"><h3>Both Directions</h3><p>Agra to Vrindavan, or Vrindavan back to Agra with a 30&ndash;60 minute pickup.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== BOOKING PROCESS ===================== -->
+<section class="mesh-dark sec">
+  <div class="wrap">
+    <h2 class="h2 h2--white center narrow" style="font-size:1.375rem">Booking Your Agra To Vrindavan Cab</h2>
+    <div class="steps">
+      <div class="step"><h3>01 &mdash; Send Your Trip Details</h3><p>Travel date, pickup time and point in Agra, passengers, one way or round trip, and the temples you want to cover.</p></div>
+      <div class="step"><h3>02 &mdash; Fixed Fare Confirmed</h3><p>We confirm the fare in writing, with tolls and parking identified separately. No advance is needed for most bookings.</p></div>
+      <div class="step"><h3>03 &mdash; Driver Details Shared</h3><p>Name, mobile number and car number before pickup &mdash; match the plate before you board.</p></div>
+    </div>
+    <div class="center" style="margin-top:44px">
+      <a data-cta href="https://wa.me/918720081102?text=Hi%20Padma%20Shree%20Travels%2C%20I%20need%20an%20Agra%20to%20Vrindavan%20cab.%0A%0ATravel%20date%3A%20%0APickup%20time%3A%20%0APickup%20point%20in%20Agra%3A%20%0APassengers%3A%20%0ACab%20type%3A%20%0AOne%20way%20or%20round%20trip%3A%20%0ATemples%20you%20want%20to%20cover%3A%20%0A%0APlease%20share%20availability%20and%20fare." target="_blank" rel="noopener" class="btn-primary">Get Fare on WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== GOING FURTHER ===================== -->
+<section class="sec">
+  <div class="wrap">
+    <h2 class="h2 center">If You Want More Than Vrindavan</h2>
+    <p class="lede center narrow">
+      Vrindavan sits inside a cluster of Krishna sites, and the published fares step up in a straight line: the two-town full day is &#8377;3,000, adding Barsana makes it &#8377;3,500. Send us the list of places you have in mind and we will say which booking covers it.
+    </p>
+    <div class="grid-3" style="margin-top:34px">
+      <a href="../agra-to-mathura-taxi/" class="rel-card"><h3>Agra to Mathura Taxi</h3><p>Just Mathura &mdash; Krishna Janmabhoomi, Dwarkadhish and the ghats.</p><span class="tag">From &#8377;1,500 one way</span></a>
+      <a href="../mathura-vrindavan-tour-from-agra/" class="rel-card"><h3>Mathura + Vrindavan Full Day</h3><p>Both towns in one day, out and back from Agra with the driver waiting throughout.</p><span class="tag">&#8377;3,000 full day</span></a>
+      <a href="../mathura-vrindavan-barsana/" class="rel-card"><h3>Mathura, Vrindavan &amp; Barsana</h3><p>The longer pilgrimage day, adding the Radha Rani temple at Barsana.</p><span class="tag">&#8377;3,500 full day</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TRAVEL GUIDES ===================== -->
+<section class="sec sec--top0">
+  <div class="wrap">
+    <h2 class="h2 center" style="margin-bottom:34px">Read Before You Go</h2>
+    <div class="grid-3">
+      <a href="../blog/best-temples-in-vrindavan-by-cab/" class="rel-card"><h3>Best Temples In Vrindavan By Cab</h3><p>Six temples worth a day, and a sensible order to see them in.</p><span class="tag">Travel Guide</span></a>
+      <a href="../blog/mathura-vrindavan-travel-guide/" class="rel-card"><h3>Mathura &amp; Vrindavan Travel Guide</h3><p>Temples, timings, festivals and practical tips for a first visit.</p><span class="tag">Travel Guide</span></a>
+      <a href="../blog/agra-mathura-vrindavan-one-day-trip/" class="rel-card"><h3>Agra &ndash; Mathura &ndash; Vrindavan In One Day</h3><p>A worked itinerary for fitting both towns into a single day from Agra.</p><span class="tag">Itinerary</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== LOCAL PARTNER =====================
+     Shared component: .lp in css/landing.css, photo rotated by
+     js/landing.js. The <img> below is a real working fallback for
+     visitors without JavaScript; the script swaps it for another
+     photograph from the same curated pool on load. -->
+<section class="sec sec--top0">
+  <div class="wrap">
+    <div class="lp">
+      <div class="lp__body">
+        <p class="lp__eyebrow">Local Agra Operator</p>
+        <h2 class="h2 lp__head">Your Local Travel Partner In Agra</h2>
+        <p class="lp__lede">Padma Shree Travels operates from Shamsabad, Agra, running local sightseeing, station and airport transfers, pilgrimage trips and outstation routes. Also runs <a href="../agra-to-govardhan-taxi/">Govardhan</a> and the wider <a href="../agra-temple-tour-by-cab/">temple routes from Agra</a>.</p>
+        <ul class="lp__facts">
+        <li class="lp__fact lp__fact--fare"><strong>Your fare</strong> Fares are confirmed on WhatsApp before you travel, with tolls and parking identified separately.</li>
+        <li class="lp__fact lp__fact--driver"><strong>Your driver</strong> Your driver&rsquo;s name, mobile number and car registration number are shared before pickup.</li>
+        <li class="lp__fact lp__fact--pickup"><strong>Pickup and drop</strong> Pickup from any Agra address &mdash; hotel, home, Agra Cantt or Kheria Airport &mdash; and from Vrindavan for the return leg.</li>
+        </ul>
+        <div class="lp__cta">
+          <a data-cta href="https://wa.me/918720081102?text=Hi%20Padma%20Shree%20Travels%2C%20I%20need%20an%20Agra%20to%20Vrindavan%20cab.%0A%0ATravel%20date%3A%20%0APickup%20time%3A%20%0APickup%20point%20in%20Agra%3A%20%0APassengers%3A%20%0ACab%20type%3A%20%0AOne%20way%20or%20round%20trip%3A%20%0ATemples%20you%20want%20to%20cover%3A%20%0A%0APlease%20share%20availability%20and%20fare." target="_blank" rel="noopener" class="btn-primary">Get Your Fare on WhatsApp</a>
+          <a href="tel:+918720081102" class="link-call">or call +91-87200 81102</a>
+        </div>
+        <p class="lp__note">Direct WhatsApp and phone support before and during your trip.</p>
+      </div>
+
+      <figure class="lp__fig">
+        <img class="lp__img" data-lp-photo
+             src="../images/about/PadmaShree%20(5).jpg" width="1080" height="1440"
+             loading="lazy" decoding="async"
+             alt="A member of the Padma Shree Travels team standing between two branded company cars">
+        <figcaption class="lp__cap">
+          <span class="lp__name">Padma Shree Travels</span>
+          <span class="lp__addr">Rajeshwar Mandir, Kaveri Vihar Phase II, Shamsabad, Agra 282001</span>
+          <span class="lp__links"><a href="tel:+918720081102">+91-87200 81102</a><span class="lp__sep" aria-hidden="true">&bull;</span><a href="https://g.page/r/CUjtXu1x_3bPEBM" target="_blank" rel="noopener">Google reviews</a></span>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FAQ ===================== -->
+<section class="sec sec--top0" id="faq">
+  <div class="wrap">
+    <h2 class="h2 center" style="margin-bottom:34px">Agra To Vrindavan Cab &mdash; Questions &amp; Answers</h2>
+    <div class="grid-2 narrow" style="max-width:64rem">
+      <details class="faq-acc"><summary>What is the taxi fare from Agra to Vrindavan?</summary><p>The Agra to Vrindavan cab fare starts at &#8377;1,800 for a one-way trip in an AC sedan. The &#8377;3,000 round trip covers stops in both Mathura and Vrindavan. The fare covers fuel and driver charges, and tolls and parking are paid separately.</p></details>
+      <details class="faq-acc"><summary>How far is Vrindavan from Agra?</summary><p>Vrindavan is approximately 70 to 75 km from Agra via NH-2. The journey takes about 1.5 to 2 hours depending on traffic, and the route passes through Mathura.</p></details>
+      <details class="faq-acc"><summary>Can I visit both Mathura and Vrindavan in one trip?</summary><p>Yes, and most travellers do, because the road to Vrindavan goes through Mathura anyway. The &#8377;3,000 round trip covers stops in both towns &mdash; Krishna Janmabhoomi and Dwarkadhish in Mathura, then Banke Bihari and Prem Mandir in Vrindavan.</p></details>
+      <details class="faq-acc"><summary>Which temples can I visit in Vrindavan?</summary><p>The usual circuit is Banke Bihari Temple, Prem Mandir, the ISKCON Krishna Balaram Mandir, Radha Vallabh Temple, Nidhivan, Seva Kunj and the Yamuna ghats at Kesi Ghat. Your driver waits at each stop, so you choose how long to spend.</p></details>
+      <details class="faq-acc"><summary>What cars are available for an Agra to Vrindavan cab?</summary><p>AC sedans (Maruti Dzire, Honda Amaze) seat up to 4 passengers, AC SUVs (Maruti Ertiga, Toyota Innova) seat 6 to 7, and a Tempo Traveller is available for groups of 12 to 15.</p></details>
+      <details class="faq-acc"><summary>Is the cab available during festivals like Janmashtami and Holi?</summary><p>Yes, the service runs every day of the year including festivals. Book well in advance for Janmashtami and Holi &mdash; Vrindavan is extremely busy on those days and cars go early.</p></details>
+      <details class="faq-acc"><summary>Do you provide pickup from Vrindavan back to Agra?</summary><p>Yes, we run both directions. If you are already in Vrindavan and need a cab back to Agra, call +91-87200-81102 and we will arrange pickup within 30 to 60 minutes.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== RELATED SERVICES ===================== -->
+<section class="sec sec--top0">
+  <div class="wrap">
+    <h2 class="h2 center" style="margin-bottom:34px">Other Routes From Agra</h2>
+    <div class="grid-3">
+      <a href="../agra-to-mathura-vrindavan/" class="rel-card"><h3>Agra to Mathura &amp; Vrindavan</h3><p>Combined round trip covering both holy cities from Agra.</p><span class="tag">&#8377;3,000 round trip</span></a>
+      <a href="../agra-to-govardhan-taxi/" class="rel-card"><h3>Agra to Govardhan Taxi</h3><p>Govardhan Parikrama, Radha Kund and Kusum Sarovar.</p><span class="tag">Fare on WhatsApp</span></a>
+      <a href="../agra-temple-tour-by-cab/" class="rel-card"><h3>Temple Tours From Agra</h3><p>Every pilgrimage route we run, in one place.</p><span class="tag">View pilgrimage routes</span></a>
+      <a href="../agra-local-sightseeing/" class="rel-card"><h3>Agra Local Sightseeing</h3><p>Taj Mahal, Agra Fort and Akbar&rsquo;s Tomb &mdash; a full day in the city.</p><span class="tag">From &#8377;2,500</span></a>
+      <a href="../agra-taxi-fares/" class="rel-card"><h3>Full Agra Taxi Fare List</h3><p>Every route and package we run, with fares in one place.</p><span class="tag">All fares</span></a>
+      <a href="../outstation-cabs-agra/" class="rel-card"><h3>All Outstation Cabs from Agra</h3><p>Browse every outstation route we run from Agra.</p><span class="tag">View routes</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FINAL CTA ===================== -->
+<section class="mesh-dark center" style="padding:72px 20px 60px">
+  <div style="max-width:48rem;margin:0 auto">
+    <h2 class="h2 h2--lg h2--white">Planning A Vrindavan Day From Agra?</h2>
+    <p style="margin-top:12px;font-weight:600;color:var(--warn);font-size:1.05rem">Fixed fare in writing. Driver waits at every temple.</p>
+    <p style="margin-top:16px;color:rgba(255,255,255,.65);font-size:15px;line-height:1.75">
+      Send your travel date, pickup point and the temples you want to cover &mdash; we confirm the fare and the plan before you leave Agra.
+    </p>
+  </div>
+  <div class="mt-cta">
+    <a data-cta href="https://wa.me/918720081102?text=Hi%20Padma%20Shree%20Travels%2C%20I%20need%20an%20Agra%20to%20Vrindavan%20cab.%0A%0ATravel%20date%3A%20%0APickup%20time%3A%20%0APickup%20point%20in%20Agra%3A%20%0APassengers%3A%20%0ACab%20type%3A%20%0AOne%20way%20or%20round%20trip%3A%20%0ATemples%20you%20want%20to%20cover%3A%20%0A%0APlease%20share%20availability%20and%20fare." target="_blank" rel="noopener" class="btn-primary">Get Fare on WhatsApp</a>
+  </div>
+  <a href="tel:+918720081102" class="link-call" style="display:inline-block;margin-top:16px">or call now &mdash; +91-87200 81102</a>
+</section>
+
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="mesh-dark">
+  <div class="wrap ft__grid">
+    <div class="ft__brand">
+      <p class="ft__h">Padma Shree Travels</p>
+      <p>Rajeshwar Mandir, Kaveri Vihar Phase II,<br>Shamsabad, Agra, Uttar Pradesh 282001</p>
+      <p>Taxi and cab booking in Agra &mdash; local sightseeing, station and airport transfers, temple trips and outstation routes. Available 24/7.</p>
+    </div>
+    <div>
+      <p class="ft__h">Pilgrimage Routes</p>
+      <div class="ft__links">
+        <a href="../agra-to-vrindavan-cab/">Agra to Vrindavan Cab</a>
+        <a href="../agra-to-mathura-taxi/">Agra to Mathura Taxi</a>
+        <a href="../mathura-vrindavan-tour-from-agra/">Mathura + Vrindavan Tour</a>
+        <a href="../mathura-vrindavan-barsana/">Mathura, Vrindavan &amp; Barsana</a>
+        <a href="../agra-to-govardhan-taxi/">Agra to Govardhan Taxi</a>
+        <a href="../agra-temple-tour-by-cab/">Temple Tours from Agra</a>
+      </div>
+    </div>
+    <div>
+      <p class="ft__h">Trips &amp; Tools</p>
+      <div class="ft__links">
+        <a href="../agra-local-sightseeing/">Agra Sightseeing</a>
+        <a href="../outstation-cabs-agra/">Outstation Cabs</a>
+        <a href="../agra-taxi-fares/">Taxi Fare List</a>
+        <a href="../route-finder/">Route Finder</a>
+        <a href="../fleet/">Our Fleet</a>
+        <a href="../blog/">Travel Blog</a>
+      </div>
+    </div>
+    <div>
+      <p class="ft__h">Contact</p>
+      <div class="ft__links">
+        <a href="tel:+918720081102">+91-87200 81102</a>
+        <a href="mailto:travels.padamshree@gmail.com">travels.padamshree@gmail.com</a>
+        <a href="../book/?route=agra-to-vrindavan-cab">Book Online</a>
+        <a href="../contact/">Contact Us</a>
+        <a href="../about/">About Us</a>
+      </div>
+    </div>
+  </div>
+  <div class="ft__bot">
+    <div class="wrap">
+      <p>&copy; <span data-year>2026</span> Padma Shree Travels. All rights reserved.</p>
+      <p>Agra Taxi Service &bull; Temple Tours &bull; Outstation Cabs</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ===================== FLOATING WHATSAPP (tablet / desktop) ===================== -->
+<a id="waBtn" href="https://wa.me/918720081102?text=Hi%20Padma%20Shree%20Travels%2C%20I%20need%20an%20Agra%20to%20Vrindavan%20cab.%0A%0ATravel%20date%3A%20%0APickup%20time%3A%20%0APickup%20point%20in%20Agra%3A%20%0APassengers%3A%20%0ACab%20type%3A%20%0AOne%20way%20or%20round%20trip%3A%20%0ATemples%20you%20want%20to%20cover%3A%20%0A%0APlease%20share%20availability%20and%20fare."
+   target="_blank" rel="noopener" class="waf" aria-label="Chat on WhatsApp about an Agra to Vrindavan cab">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true">
+    <path d="M16.001 2.667c-7.363 0-13.334 5.97-13.334 13.333 0 2.353.615 4.646 1.782 6.665L2.667 29.333l6.83-1.75a13.27 13.27 0 0 0 6.504 1.66h.006c7.362 0 13.333-5.97 13.333-13.333 0-3.562-1.387-6.912-3.905-9.43a13.246 13.246 0 0 0-9.434-3.913Zm0 24.4h-.005a11.05 11.05 0 0 1-5.634-1.542l-.404-.24-4.053 1.039 1.081-3.951-.263-.406a11.02 11.02 0 0 1-1.69-5.9c0-6.1 4.968-11.067 11.073-11.067 2.957 0 5.736 1.153 7.828 3.246a10.99 10.99 0 0 1 3.24 7.828c0 6.101-4.969 11.067-11.073 11.067v-.074Zm6.07-8.287c-.332-.166-1.965-.97-2.27-1.08-.305-.11-.527-.166-.748.166-.222.333-.858 1.08-1.053 1.302-.194.222-.388.25-.72.083-.332-.166-1.403-.517-2.672-1.649-.988-.881-1.655-1.969-1.85-2.302-.194-.333-.02-.512.146-.678.15-.15.333-.389.499-.583.166-.194.222-.333.333-.555.11-.222.055-.417-.028-.583-.083-.166-.748-1.803-1.026-2.469-.27-.65-.545-.562-.748-.572-.194-.008-.416-.01-.638-.01a1.22 1.22 0 0 0-.887.417c-.305.333-1.165 1.139-1.165 2.777s1.192 3.222 1.358 3.444c.166.222 2.346 3.583 5.685 5.024.795.343 1.415.548 1.898.702.797.253 1.523.217 2.097.132.64-.096 1.965-.803 2.242-1.579.277-.777.277-1.442.194-1.58-.083-.138-.305-.221-.638-.388Z"/>
+  </svg>
+</a>
+
+<!-- ===================== MOBILE BOOKING BAR (phones only) ===================== -->
+<div class="mobile-bar">
+  <a href="tel:+918720081102" class="mobile-bar__call">&#9742; Call Now</a>
+  <a data-cta href="https://wa.me/918720081102?text=Hi%20Padma%20Shree%20Travels%2C%20I%20need%20an%20Agra%20to%20Vrindavan%20cab.%0A%0ATravel%20date%3A%20%0APickup%20time%3A%20%0APickup%20point%20in%20Agra%3A%20%0APassengers%3A%20%0ACab%20type%3A%20%0AOne%20way%20or%20round%20trip%3A%20%0ATemples%20you%20want%20to%20cover%3A%20%0A%0APlease%20share%20availability%20and%20fare." target="_blank" rel="noopener" class="mobile-bar__wa">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true">
+      <path d="M16.001 2.667c-7.363 0-13.334 5.97-13.334 13.333 0 2.353.615 4.646 1.782 6.665L2.667 29.333l6.83-1.75a13.27 13.27 0 0 0 6.504 1.66h.006c7.362 0 13.333-5.97 13.333-13.333 0-3.562-1.387-6.912-3.905-9.43a13.246 13.246 0 0 0-9.434-3.913Zm0 24.4h-.005a11.05 11.05 0 0 1-5.634-1.542l-.404-.24-4.053 1.039 1.081-3.951-.263-.406a11.02 11.02 0 0 1-1.69-5.9c0-6.1 4.968-11.067 11.073-11.067 2.957 0 5.736 1.153 7.828 3.246a10.99 10.99 0 0 1 3.24 7.828c0 6.101-4.969 11.067-11.073 11.067v-.074Zm6.07-8.287c-.332-.166-1.965-.97-2.27-1.08-.305-.11-.527-.166-.748.166-.222.333-.858 1.08-1.053 1.302-.194.222-.388.25-.72.083-.332-.166-1.403-.517-2.672-1.649-.988-.881-1.655-1.969-1.85-2.302-.194-.333-.02-.512.146-.678.15-.15.333-.389.499-.583.166-.194.222-.333.333-.555.11-.222.055-.417-.028-.583-.083-.166-.748-1.803-1.026-2.469-.27-.65-.545-.562-.748-.572-.194-.008-.416-.01-.638-.01a1.22 1.22 0 0 0-.887.417c-.305.333-1.165 1.139-1.165 2.777s1.192 3.222 1.358 3.444c.166.222 2.346 3.583 5.685 5.024.795.343 1.415.548 1.898.702.797.253 1.523.217 2.097.132.64-.096 1.965-.803 2.242-1.579.277-.777.277-1.442.194-1.58-.083-.138-.305-.221-.638-.388Z"/>
+    </svg>
+    WhatsApp
+  </a>
 </div>
-<button class="mnav__cat" aria-expanded="false">Sightseeing <span class="mnav__arr">&#9662;</span></button>
-<div class="mnav__sub">
-<a href="../agra-local-sightseeing/">Agra Full Day Sightseeing <span class="ptag">&#8377;2,500</span></a>
-<a href="../fatehpur-sikri/">Fatehpur Sikri Day Trip <span class="ptag">&#8377;2,500</span></a>
-</div>
-<button class="mnav__cat" aria-expanded="false">Outstation <span class="mnav__arr">&#9662;</span></button>
-<div class="mnav__sub">
-<a href="../agra-to-gwalior/">Agra to Gwalior <span class="ptag">&#8377;3,000 &middot; RT</span></a>
-<a href="../agra-to-aligarh/">Agra to Aligarh <span class="ptag">&#8377;3,000 &middot; RT</span></a>
-<a href="../agra-to-firozabad/">Agra to Firozabad <span class="ptag">&#8377;2,500 &middot; RT</span></a>
-<a href="../agra-to-etawah/">Agra to Etawah <span class="ptag">&#8377;3,500 &middot; RT</span></a>
-<a href="../agra-to-jaipur-taxi/">Agra to Jaipur Taxi <span class="ptag">Fare on WhatsApp</span></a>
-</div>
-<a href="../agra-taxi-fares/">Taxi Fare List</a>
-<a href="../route-finder/">Route Finder</a>
-<a href="../fleet/">Our Fleet</a>
-<a href="../blog/">Travel Blog</a>
-<a href="../about/">About Us</a>
-<a href="../contact/">Contact / Book Now</a>
-<div class="mnav__cta">
-<a href="tel:+918720081102" class="btn btn--b btn--lg"><i data-lucide="phone" class="icon icon--white" aria-hidden="true"></i> Call Now</a>
-<a href="https://wa.me/918720081102?text=Hi!%20I%20need%20a%20cab%20from%20Agra" class="btn btn--wa btn--lg" target="_blank" rel="noopener"><i data-lucide="message-circle" class="icon icon--white" aria-hidden="true"></i> WhatsApp</a>
-</div></div>
 
-<!-- Hero -->
-<section class="phero"><div class="container"><div class="phero__in">
-<div class="bc"><a href="../index.html">Home</a> &#8250; <a href="../agra-temple-tour-by-cab/">Temple Tours</a> &#8250; <span>Agra to Vrindavan Cab</span></div>
-<h1>Agra to Vrindavan Cab &#8211; Comfortable Taxi from &#8377;1,800</h1>
-<p class="phero__tag">Book a reliable cab from Agra to Vrindavan for temple visits. AC cars, professional drivers, transparent pricing. Available every day.</p>
-<div class="pbanner">
-<div class="pbanner__amt">&#8377;1,800<small>One Way</small></div>
-<div class="pbanner__meta"><span>&#128205; 70&#8211;75 km</span><span>&#8987; ~2 hrs</span><span>&#8377;3,000 Round Trip</span></div>
-<div class="pbanner__cta">
-<a href="tel:+918720081102" class="btn btn--w btn--lg">&#128222; Call Now</a>
-<a href="https://wa.me/918720081102?text=Hi!%20I%20need%20Agra%20to%20Vrindavan%20cab" class="btn btn--wa" target="_blank" rel="noopener">&#128172; WhatsApp</a>
-</div></div>
-</div></div></section>
-
-<!-- Trust strip -->
-<section class="trust"><div class="container"><div class="trust__in">
-<div class="tchip"><div class="tchip__i">&#10003;</div>Temple-Smart Drivers</div>
-<div class="tchip"><div class="tchip__i">&#10052;</div>AC Cars</div>
-<div class="tchip"><div class="tchip__i">&#8377;</div>Fixed Pricing</div>
-<div class="tchip"><div class="tchip__i">&#9200;</div>24/7 Available</div>
-<div class="tchip"><div class="tchip__i">&#128737;</div>Insured</div>
-</div></div></section>
-
-<!-- Main Content -->
-
-<!-- Route Image Strip (populated by js/route-images.js) -->
-<div class="rstrip-wrap"><div class="container"><div class="rstrip" data-rstrip aria-label="Photos related to this route"></div></div></div>
-
-<section class="section"><div class="container"><div class="prose">
-
-<h2>Quick Facts: Agra to Vrindavan by Taxi</h2>
-<div class="hblock">
-<p><strong>Distance:</strong> 70&#8211;75 km via NH-2 (route passes through Mathura)</p>
-<p><strong>Travel Time:</strong> 1.5 to 2 hours depending on traffic</p>
-<p><strong>Best For:</strong> Pilgrimage, family temple visits, solo devotees</p>
-<p><strong>One-Way Fare:</strong> &#8377;1,800 (AC Sedan)</p>
-<p><strong>Round-Trip Fare:</strong> &#8377;3,000 (AC Sedan, covers Mathura + Vrindavan)</p>
-<p><strong>Availability:</strong> 24/7 including festivals, weekends, and holidays</p>
-<p><strong>Booking:</strong> Call +91-87200-81102 or WhatsApp &#8212; no app needed</p>
-</div>
-
-<h2>Agra to Vrindavan Taxi Fare</h2>
-<div class="assure-strip">
-<span class="assure-strip__i">&#10003; Fare fixed on WhatsApp before you travel</span>
-<span class="assure-strip__i">&#10003; Driver's name, number &amp; car number shared before pickup</span>
-<span class="assure-strip__i">&#10003; No advance for most bookings</span>
-</div>
-<div class="ptbl-wrap"><table class="ptbl">
-<thead><tr><th>Car Type</th><th>One Way</th><th>Round Trip</th><th>Capacity</th></tr></thead>
-<tbody>
-<tr><td>AC Sedan (Dzire / Amaze)</td><td>&#8377;1,800</td><td>&#8377;3,000</td><td>4 Passengers</td></tr>
-<tr><td>AC SUV (Ertiga)</td><td>&#8377;2,200</td><td>&#8377;3,800</td><td>6 Passengers</td></tr>
-<tr><td>AC SUV (Innova)</td><td>&#8377;2,800</td><td>&#8377;4,500</td><td>7 Passengers</td></tr>
-<tr><td>Tempo Traveller</td><td>&#8377;4,500</td><td>&#8377;7,500</td><td>12&#8211;15 Passengers</td></tr>
-</tbody></table></div>
-<p class="ptbl__note">Fare includes fuel and driver charges. Tolls and parking are paid by the customer. No surge pricing or hidden fees.</p>
-
-<h2>Top Temples to Visit in Vrindavan</h2>
-<p>Our <strong>Agra to Vrindavan cab</strong> takes you to all major temples. Your driver knows the best visiting order based on opening hours and crowd patterns:</p>
-</div></div></section>
-
-<!-- Temple Cards -->
-<section class="section section--gray"><div class="container">
-<div class="fcards">
-<div class="fcard"><h4>&#127981; Banke Bihari Temple</h4><p>The most famous temple in Vrindavan, dedicated to Lord Krishna. Known for the unique &#8220;jhanki&#8221; darshan where the curtain is periodically drawn.</p></div>
-<div class="fcard"><h4>&#10024; Prem Mandir</h4><p>Stunning white marble temple built by Jagadguru Kripalu Maharaj. The evening light show makes it an unforgettable experience.</p></div>
-<div class="fcard"><h4>&#127963; ISKCON Temple</h4><p>The grand Krishna Balaram Mandir founded by Srila Prabhupada. Beautiful architecture, peaceful atmosphere, and excellent prasadam.</p></div>
-<div class="fcard"><h4>&#127807; Nidhivan</h4><p>A mysterious sacred grove where, according to legend, Lord Krishna performs Raas Leela every night. No one is allowed after sunset.</p></div>
-<div class="fcard"><h4>&#127754; Kesi Ghat &amp; Yamuna</h4><p>Sacred bathing ghat on the Yamuna river. The evening aarti ceremony at Kesi Ghat is a deeply spiritual experience.</p></div>
-<div class="fcard"><h4>&#127963; Radha Vallabh Temple</h4><p>One of the oldest temples in Vrindavan, dating to 1585. Known for its unique architectural style and deep devotional significance.</p></div>
-</div>
-</div></section>
-
-<!-- Why Choose + Route Details -->
-<section class="section"><div class="container"><div class="prose">
-
-<h2>Route Details: How to Reach Vrindavan from Agra</h2>
-<p>The Agra to Vrindavan route goes via NH-2 towards Delhi, passing through Mathura. Total distance is about <strong>70&#8211;75 km</strong>, and the journey takes approximately <strong>1.5 to 2 hours</strong>. The road is a mix of highway and city roads once you enter the Mathura&#8211;Vrindavan area.</p>
-<p>You can request your driver to stop at Mathura&#8217;s Krishna Janmabhoomi on the way to Vrindavan, or on the return journey. This makes it a complete spiritual day trip from Agra.</p>
-
-<h2>How to Book Your Agra to Vrindavan Taxi</h2>
-<p>Booking takes less than two minutes:</p>
-<p><strong>Step 1:</strong> Call <a href="tel:+918720081102">+91-87200-81102</a> or send a <a href="https://wa.me/918720081102?text=Hi!%20I%20need%20Agra%20to%20Vrindavan%20cab" target="_blank" rel="noopener">WhatsApp message</a>.</p>
-<p><strong>Step 2:</strong> Share your name, pickup location, travel date, and number of passengers.</p>
-<p><strong>Step 3:</strong> We confirm within minutes. Driver details and car number are shared before pickup.</p>
-<p>No app download, no registration, no advance payment required for most bookings.</p>
-<p>We also offer a combined <a href="../mathura-vrindavan-tour-from-agra/index.html">Mathura + Vrindavan full day tour from Agra</a> covering both holy cities. For Mathura, Vrindavan, and Barsana together, see our <a href="../mathura-vrindavan-barsana/">Mathura + Vrindavan + Barsana tour</a>. For just Mathura, see our <a href="../agra-to-mathura-taxi/index.html">Agra to Mathura taxi</a> page.</p>
-
-<h2>Vrindavan &amp; Mathura Travel Guides</h2>
-<p>Helpful reading before your temple visit:</p>
-<ul>
-<li><a href="../blog/mathura-vrindavan-travel-guide/">Mathura &amp; Vrindavan Travel Guide &#8212; Temples, Best Time &amp; Tips</a></li>
-<li><a href="../blog/agra-mathura-vrindavan-one-day-trip/">Agra &#8211; Mathura &#8211; Vrindavan One Day Trip Itinerary</a></li>
-</ul>
-
-</div></div></section>
-
-<!-- Trust Signals -->
-<section class="section section--gray"><div class="container">
-<div class="text-center"><span class="sbadge">Why Riders Choose Us</span><h2 class="stitle">Why Pilgrims &amp; Travellers Choose Padma Shree Travels</h2></div>
-<div class="incs">
-<div class="inc"><div class="inc__i">&#128737;&#65039;</div><div><h3>Safe &amp; Insured</h3><p>Commercially insured vehicles. Your family&#8217;s safety is our priority.</p></div></div>
-<div class="inc"><div class="inc__i">&#10052;&#65039;</div><div><h3>Cool AC Cars</h3><p>Clean, sanitised AC sedans and SUVs for a comfortable ride.</p></div></div>
-<div class="inc"><div class="inc__i">&#128104;&#8205;&#128188;</div><div><h3>Temple-Smart Drivers</h3><p>Local drivers who know temple timings, lanes, and parking spots.</p></div></div>
-<div class="inc"><div class="inc__i">&#128176;</div><div><h3>Fixed Pricing</h3><p>No surprise charges. Fare quoted is fare paid.</p></div></div>
-<div class="inc"><div class="inc__i">&#9200;</div><div><h3>Any Time, Any Day</h3><p>24/7 service including festivals and holidays.</p></div></div>
-<div class="inc"><div class="inc__i">&#128241;</div><div><h3>WhatsApp Booking</h3><p>No app. Just message us and your cab is ready.</p></div></div>
-</div>
-</div></section>
-
-<!-- FAQ -->
-<section class="section" id="faq"><div class="container"><div class="prose">
-<div class="text-center"><span class="sbadge">FAQ</span><h2 class="stitle">Frequently Asked Questions &#8212; Agra to Vrindavan Cab</h2></div>
-<div class="flist">
-<div class="fi open"><button class="fi__q">What is the taxi fare from Agra to Vrindavan?<span class="fi__tog">+</span></button><div class="fi__a"><p>The Agra to Vrindavan taxi fare starts at &#8377;1,800 for a one-way trip and &#8377;3,000 for a round trip in an AC sedan. Fare includes fuel and driver charges. Tolls and parking are paid separately.</p></div></div>
-<div class="fi"><button class="fi__q">How far is Vrindavan from Agra?<span class="fi__tog">+</span></button><div class="fi__a"><p>Vrindavan is approximately 70&#8211;75 km from Agra via NH-2. The journey takes about 1.5 to 2 hours depending on traffic. The route passes through Mathura.</p></div></div>
-<div class="fi"><button class="fi__q">Can I visit both Mathura and Vrindavan in one trip?<span class="fi__tog">+</span></button><div class="fi__a"><p>Yes, most travellers combine Mathura and Vrindavan in one trip. Our round-trip package at &#8377;3,000 covers stops at both cities. Visit Krishna Janmabhoomi in Mathura and Banke Bihari, Prem Mandir in Vrindavan.</p></div></div>
-<div class="fi"><button class="fi__q">Which temples can I visit in Vrindavan?<span class="fi__tog">+</span></button><div class="fi__a"><p>Our cab covers all major temples: Banke Bihari Temple, Prem Mandir, ISKCON Temple, Radha Vallabh Temple, Nidhivan, Seva Kunj, and Yamuna ghats. Your driver waits at each stop.</p></div></div>
-<div class="fi"><button class="fi__q">Is the cab available during festivals like Janmashtami and Holi?<span class="fi__tog">+</span></button><div class="fi__a"><p>Yes, our service operates every day including festivals. We recommend booking in advance during Janmashtami and Holi as demand is very high during these celebrations.</p></div></div>
-<div class="fi"><button class="fi__q">Do you provide pickup from Vrindavan to Agra?<span class="fi__tog">+</span></button><div class="fi__a"><p>Yes, we provide both directions. If you are in Vrindavan and need a taxi to Agra, call +91-87200-81102 and we will arrange pickup within 30&#8211;60 minutes.</p></div></div>
-</div>
-</div></div></section>
-
-<!-- CTA Strip -->
-<section class="cta"><div class="container">
-<h2>Book Your Agra to Vrindavan Cab Now</h2>
-<p>Visit the sacred temples of Vrindavan in comfort. Your taxi is one call away.</p>
-<div class="cta__acts">
-<a href="tel:+918720081102" class="btn btn--w btn--lg">&#128222; Call Now</a>
-<a href="https://wa.me/918720081102?text=Hi!%20I%20need%20Agra%20to%20Vrindavan%20cab" class="btn btn--wa btn--lg" target="_blank" rel="noopener">&#128172; WhatsApp</a>
-<a href="../book/?route=agra-to-vrindavan-cab" class="btn btn--o btn--lg" style="border-color:rgba(255,255,255,.2);color:#fff">Book Round-Trip Online</a>
-</div></div></section>
-
-<!-- Related Routes -->
-<section class="section"><div class="container">
-<div class="text-center"><span class="sbadge">Explore More</span><h2 class="stitle">More Routes from Agra</h2></div>
-<div class="rel-grid">
-<a href="../agra-to-mathura-taxi/index.html" class="rel-card"><h4>Agra to Mathura Taxi</h4><p>Visit Krishna Janmabhoomi and Dwarkadhish Temple.</p><span class="rp">From &#8377;1,500 one way</span></a>
-<a href="../mathura-vrindavan-tour-from-agra/index.html" class="rel-card"><h4>Mathura Vrindavan Full Tour</h4><p>Complete pilgrimage: Mathura + Vrindavan full day tour.</p><span class="rp">From &#8377;3,000 full day</span></a>
-<a href="../agra-local-sightseeing/index.html" class="rel-card"><h4>Agra Local Sightseeing</h4><p>Taj Mahal, Agra Fort, Mehtab Bagh, Akbar&#8217;s Tomb.</p><span class="rp">From &#8377;2,500 full day</span></a>
-<a href="../agra-to-mathura-vrindavan/" class="rel-card"><h4>Agra&#8211;Mathura&#8211;Vrindavan Package</h4><p>Combined round trip covering both holy cities.</p><span class="rp">&#8377;3,000 round trip</span></a>
-<a href="../mathura-vrindavan-barsana/" class="rel-card"><h4>Mathura, Vrindavan &amp; Barsana</h4><p>Extended pilgrimage adding Radha Rani Temple at Barsana.</p><span class="rp">&#8377;3,500 full day</span></a>
-<a href="../agra-to-govardhan-taxi/" class="rel-card"><h4>Agra to Govardhan Taxi</h4><p>Govardhan Parikrama, Radha Kund, Kusum Sarovar.</p><span class="rp">Fare on WhatsApp</span></a>
-<a href="../blog/best-temples-in-vrindavan-by-cab/" class="rel-card"><h4>Read: Best Temples in Vrindavan</h4><p>Six temples worth your day, planned by cab.</p><span class="rp">Travel Guide</span></a>
-</div>
-</div></section>
-
-<!-- Footer -->
-<footer class="ft"><div class="container"><div class="ft__grid">
-<div class="ft__brand"><div class="logo"><img src="../images/logo.png" alt="Padma Shree Travels" class="logo__img"><div class="logo__t" style="color:#fff">Padma Shree Travels<small>Agra Taxi Service</small></div></div>
-<p>Your trusted partner for taxi and cab booking in Agra. Affordable outstation trips, sightseeing tours, and airport transfers. Available 24/7.</p></div>
-<div><h4 class="ft__h">Top Routes</h4><ul class="ft__links">
-<li><a href="../agra-local-sightseeing/">Agra Sightseeing</a></li>
-<li><a href="../agra-to-mathura-taxi/">Mathura Taxi</a></li>
-<li><a href="../agra-to-vrindavan-cab/">Vrindavan Cab</a></li>
-<li><a href="../mathura-vrindavan-tour-from-agra/">Mathura Vrindavan Tour</a></li>
-<li><a href="../agra-to-mehandipur-balaji-taxi/">Mehandipur Balaji</a></li>
-<li><a href="../agra-to-kaila-devi-temple-taxi/">Kaila Devi</a></li>
-<li><a href="../agra-to-jaipur-taxi/">Agra to Jaipur</a></li>
-<li><a href="../agra-airport-taxi/">Airport Taxi</a></li><li><a href="../agra-taxi-fares/">Taxi Fare List</a></li><li><a href="../route-finder/">Route Finder</a></li><li><a href="../fleet/">Our Fleet</a></li></ul></div>
-<div><h4 class="ft__h">Tours</h4><ul class="ft__links">
-<li><a href="../agra-temple-tour-by-cab/">Temple Tours from Agra</a></li>
-<li><a href="../mathura-vrindavan-barsana/">Barsana Tour</a></li>
-<li><a href="../agra-karauli-kaila-devi-balaji-tour/">Karauli Kaila Devi Balaji Tour</a></li>
-<li><a href="../agra-to-rajasthan-temple-tour/">Rajasthan Temple Tour</a></li>
-<li><a href="../taj-mahal-sunrise-taxi/">Taj Mahal Sunrise Taxi</a></li>
-<li><a href="../outstation-cabs-agra/">Outstation Cabs from Agra</a></li></ul></div>
-<div><h4 class="ft__h">Contact Us</h4>
-<div class="ft__cr"><div class="ft__ci">&#128205;</div><div>Rajeshwar Mandir, Kaveri Vihar Phase II, Shamsabad, Agra, Uttar Pradesh 282001</div></div>
-<div class="ft__cr"><div class="ft__ci">&#128222;</div><div><a href="tel:+918720081102" style="color:var(--g400)">+91-87200 81102</a></div></div>
-<div class="ft__cr"><div class="ft__ci">&#9993;&#65039;</div><div><a href="mailto:travels.padamshree@gmail.com" style="color:var(--g400)">travels.padamshree@gmail.com</a></div></div>
-<p style="margin-top:.6rem"><a href="../about/" style="color:var(--g400);font-size:.85rem">About Us</a></p>
-</div></div>
-<div class="ft__bot"><div>&copy; 2025 Padma Shree Travels. All rights reserved.</div><div>Agra Taxi Service &bull; Outstation Cabs &bull; Sightseeing</div></div>
-</div></footer>
-
-<div class="mcta-bar"><div class="mcta-bar__note">Usually replies within minutes</div><div class="mcta-bar__btns"><a href="tel:+918720081102" class="mcta-bar__a mcta-bar__call">&#128222; Call Now</a><a href="https://wa.me/918720081102?text=Hi!%20I%20need%20Agra%20to%20Vrindavan%20cab" class="mcta-bar__a mcta-bar__wa" target="_blank" rel="noopener">&#128172; WhatsApp</a><a href="../book/?route=agra-to-vrindavan-cab" class="mcta-bar__a mcta-bar__book">Book Round-Trip</a></div></div>
-<a href="https://wa.me/918720081102?text=Hi!%20I%20need%20Agra%20to%20Vrindavan%20cab" class="waf" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp">&#128172;</a>
-<script src="../js/main.js"></script>
-<script src="../js/route-images.js" defer></script>
+<!-- Shared Google reviews: ONE dataset + ONE grid component, site-wide. -->
+<script src="../js/reviews-data.js" defer></script>
+<script src="../js/reviews-grid.js" defer></script>
+<!-- Conversion events into dataLayer, read by the GTM container above. -->
+<script src="../js/conversion-tracking.js" defer></script>
+<!-- Shared footer-year stamp — see js/landing.js for why this isn't inline. -->
+<script src="../js/landing.js" defer></script>
 </body>
 </html>

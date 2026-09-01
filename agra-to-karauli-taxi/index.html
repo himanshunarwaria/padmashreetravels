@@ -1,4 +1,112 @@
-<!DOCTYPE html><html lang="en"><head>
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  Padma Shree Travels — Agra to Karauli Taxi (Rajasthan cluster)
+  ============================================================================
+  Third of the Rajasthan temple pages, after #17 (Mehandipur Balaji) and #18
+  (Kaila Devi). Cluster rules carry over: Rajasthan state tax disclosed as a
+  real separate cost, and the existing 'agra-karauli-kaila-devi-balaji'
+  review key reused rather than duplicated. js/reviews-data.js NOT modified.
+
+  WHAT THIS PAGE IS FOR
+  Karauli is the only page in this cluster whose destination is a TOWN rather
+  than a single temple - Madan Mohan Ji, the City Palace, and the town itself,
+  with Kaila Devi 23 km further as an add-on. It is also, for many customers,
+  the gateway rather than the destination, and the page says so.
+
+  A GENUINE CROSS-CHECK, NOT A CARRIED-FORWARD NUMBER
+  This page says Karauli is ~150 km from Agra. agra-to-kaila-devi-temple-taxi/
+  (#18) independently says Kaila Devi is 165-175 km from Agra AND 23 km beyond
+  Karauli town. 150 + 23 = 173, which sits inside 165-175. The two rebuilt
+  pages corroborate each other - the first arithmetic cross-check in the
+  Rajasthan cluster that does NOT descend from a single source.
+
+  FLAG: THIS ROUTE IS MISSING FROM THE FARES HUB
+  agra-taxi-fares/index.html has rows for Mehandipur Balaji, Kaila Devi, the
+  Karauli+Kaila Devi+Balaji tour and the Rajasthan circuit - but NOT for
+  Agra to Karauli on its own. Confirmed by grep: zero matches. This was first
+  noted at #16 and is repeated in the log for #19. Nothing is overstated here
+  because the page says "Fare on WhatsApp" throughout, but the fares hub
+  should carry the row.
+
+  Rebuilt from:
+    * Structure and visual language ... the two locked references and the
+      pattern settled at queue items #7-#18.
+    * Facts, distances, itinerary, town detail, links, GTM ................
+      the previous production version of this page.
+    * Fare cross-check ......... the rebuilt #16, #17 and #18.
+
+  VERIFIED FACTS (do not exceed these)
+    Phone / WhatsApp .. +91-87200-81102   Email .. travels.padamshree@gmail.com
+    Distance ........... approx. 150 km from Agra
+    Route .............. towards Fatehpur Sikri and the Bharatpur bypass,
+                         then via Hindaun and the Karauli road into town.
+                         Most of it decent highway; the last stretch into
+                         town is a smaller road.
+    Travel time ........ about 3 to 3.5 hours each way
+    Kaila Devi add-on .. +23 km beyond Karauli town - corroborated by #18
+    Fare ............... NO FIXED FARE PUBLISHED. All eight fare cells read
+                         Fare on WhatsApp. Same treatment as #9, #14, #15,
+                         #17 and #18.
+    Extras ............. tolls, Rajasthan state tax if applicable, parking -
+                         paid at actuals
+    Same-day plan ...... 5:30 am pickup, 9:00 am arrive Karauli for Madan
+                         Mohan Ji and the City Palace, 10:30 am optional
+                         23 km on to Kaila Devi, 1:00 pm lunch, back in Agra
+                         7:00-8:00 pm
+    Karauli town ....... eastern Rajasthan, on the banks of the Kalisil
+                         river, pink sandstone buildings, easy-going pace
+    Madan Mohan Ji ..... Krishna temple closely connected with the Braj
+                         tradition; a 30-45 minute stop
+    City Palace ........ painted courtyards and carved facades
+    Also stated ........ overnight option available on request; waiting
+                         included within the booked day; luggage locked in
+                         the car; Innova Crysta suggested for the longer
+                         drive; no advance for most bookings
+
+  CLAIMS DELIBERATELY DROPPED from the previous version of this page
+    * The "Insured" hero trust badge.
+    * The "Commercially Insured, Verified Drivers" why-us card.
+    * "verified driver" IN THE META DESCRIPTION - the same claim family, and
+      the first time in this queue it had leaked into metadata rather than
+      body copy. Worth watching for on the remaining pages.
+
+  CLAIMS SOFTENED
+    * "Karauli's BELOVED Krishna temple" -> described. Same softening applied
+      at #18, where the identical phrase appeared.
+    * "a serene 30-45 minute stop that MANY FAMILIES CALL A HIGHLIGHT of the
+      day" -> the testimonial-shaped half is gone; the duration stays.
+    * "One of the region's MOST REVERED Shakti temples" (the Kaila Devi
+      add-on card) -> "A major Shakti temple of eastern Rajasthan", matching
+      the wording settled at #18 so the two pages agree.
+
+  IMAGES - every one viewed before use; alt text describes what is in frame
+    Hero  dest-hilltop-village.webp - a quiet village street with cows and
+          whitewashed houses, temples on the hill above. Honest for "a quiet
+          Rajasthan heritage town"; names nothing. Used as a stop image on
+          #13 and #15, but this is its first outing as a hero.
+    Body  dest-aravalli-temple.webp - a temple at the foot of dry scrub hills
+          with pilgrims on the paved approach. Used in the Kaila Devi add-on
+          section. Also the hub hero at #16.
+          fleet-ertiga.webp - plain studio shot of the SUV, no locational
+          claim.
+    Partner  fleet-lineup.webp - the shared fleet photo.
+    REJECTED  dest-jaipur-street.webp. js/route-images.js does not list it
+          for this page, but it was the only unused image that sounded like a
+          fit for "pink sandstone Rajasthan town". It is unmistakably HAWA
+          MAHAL IN JAIPUR - a world-famous, instantly identifiable building
+          in the wrong city. The clearest-cut rejection in the queue so far.
+          Also not reused: dest-kaila-devi.webp, which route-images lists as
+          this page's hero but is now the hero of #18, where it belongs.
+
+  REVIEWS
+    Reuses the EXISTING 'agra-karauli-kaila-devi-balaji' key - which is
+    literally named for this town. No review in the pool names Karauli, and
+    the subline says so rather than implying otherwise.
+  ============================================================================
+-->
+<html lang="en">
+<head>
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -6,287 +114,585 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-NWDQLKM9');</script>
 <!-- End Google Tag Manager -->
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="robots" content="index, follow">
 <meta name="googlebot" content="index, follow">
 <meta http-equiv="content-language" content="en-IN">
-<title>Agra to Karauli Taxi | AC Cab Booking, Fixed Fare &#8211; Padma Shree Travels</title>
-<meta name="description" content="Book an AC cab from Agra to Karauli for Madan Mohan Ji Temple, City Palace and a Kaila Devi add-on. Fixed fare on WhatsApp, verified driver, family-friendly cab.">
-<meta name="keywords" content="agra to karauli taxi, agra to karauli cab booking, agra to karoli taxi, karauli madan mohan ji temple taxi from agra, agra to karauli one day trip, agra to kaila devi via karauli taxi">
+
+<title>Agra to Karauli Taxi | AC Cab, Kaila Devi Add-On</title>
+<meta name="description" content="AC cab from Agra to Karauli &#8212; approx. 150 km, 3&#8211;3.5 hrs each way. Madan Mohan Ji Temple, the City Palace, and Kaila Devi 23 km further on.">
+<meta name="keywords" content="agra to karauli taxi, karauli cab from agra, madan mohan ji temple taxi, karauli city palace cab, agra karauli kaila devi trip">
 <link rel="canonical" href="https://www.padmashreetravels.in/agra-to-karauli-taxi/">
-<meta property="og:title" content="Agra to Karauli Taxi | AC Cab Booking, Fixed Fare &#8211; Padma Shree Travels">
-<meta property="og:description" content="Book an AC cab from Agra to Karauli for Madan Mohan Ji Temple, City Palace and a Kaila Devi add-on. Fixed fare on WhatsApp, verified driver, family-friendly cab.">
+
+<meta property="og:title" content="Agra to Karauli Taxi &#8211; AC Cab with a Kaila Devi Add-On">
+<meta property="og:description" content="A quiet eastern Rajasthan heritage town about 150 km from Agra. Madan Mohan Ji Temple and the City Palace, with Kaila Devi darshan 23 km further if you want it.">
 <meta property="og:url" content="https://www.padmashreetravels.in/agra-to-karauli-taxi/">
-<meta property="og:type" content="website"><meta property="og:locale" content="en_IN"><meta property="og:image" content="https://www.padmashreetravels.in/images/logo.png">
-<meta name="twitter:card" content="summary"><meta name="twitter:title" content="Agra to Karauli Taxi | AC Cab Booking, Fixed Fare &#8211; Padma Shree Travels"><meta name="twitter:description" content="Book an AC cab from Agra to Karauli for Madan Mohan Ji Temple, City Palace and a Kaila Devi add-on. Fixed fare on WhatsApp, verified driver, family-friendly cab."><meta name="twitter:image" content="https://www.padmashreetravels.in/images/logo.png">
-<link rel="icon" href="/favicon-48x48.png" sizes="48x48" type="image/png"><link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png"><link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="shortcut icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../css/style.css">
-<style>:root{--ff:Inter,-apple-system,sans-serif;--ffd:Inter,-apple-system,sans-serif}</style>
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_IN">
+<meta property="og:site_name" content="Padma Shree Travels">
+<meta property="og:image" content="https://www.padmashreetravels.in/images/destinations/dest-hilltop-village.webp">
+<meta property="og:image:alt" content="A quiet village street with cows and whitewashed houses, temples visible on the hill above">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Agra to Karauli Taxi &#8211; AC Cab with a Kaila Devi Add-On">
+<meta name="twitter:description" content="Approx. 150 km from Agra, 3&#8211;3.5 hrs each way. Madan Mohan Ji Temple, the City Palace, and Kaila Devi 23 km further.">
+<meta name="twitter:image" content="https://www.padmashreetravels.in/images/destinations/dest-hilltop-village.webp">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","@id":"https://www.padmashreetravels.in/#business","name":"Padma Shree Travels","url":"https://www.padmashreetravels.in/","telephone":"+91-87200-81102","email":"travels.padamshree@gmail.com","image":"https://www.padmashreetravels.in/images/logo.png","address":{"@type":"PostalAddress","streetAddress":"Rajeshwar Mandir, Kaveri Vihar Phase II, Shamsabad","addressLocality":"Agra","addressRegion":"Uttar Pradesh","postalCode":"282001","addressCountry":"IN"},"geo":{"@type":"GeoCoordinates","latitude":27.1767,"longitude":78.0081},"openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"00:00","closes":"23:59"}}</script>
+<link rel="icon" href="/favicon-48x48.png" sizes="48x48" type="image/png">
+<link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How far is Karauli from Agra?","acceptedAnswer":{"@type":"Answer","text":"Karauli is approximately 150 km from Agra — about 3 to 3.5 hours by private taxi via Fatehpur Sikri, the Bharatpur bypass, and Hindaun."}},{"@type":"Question","name":"What is the taxi fare from Agra to Karauli?","acceptedAnswer":{"@type":"Answer","text":"A same-day round trip is available in an AC sedan, with Ertiga, Innova Crysta, and Tempo Traveller options for families and groups. Tolls, state tax, and parking are extra at actuals and told to you before booking. Message us on WhatsApp for today's fixed fare."}},{"@type":"Question","name":"Can we visit Kaila Devi Temple on the same trip?","acceptedAnswer":{"@type":"Answer","text":"Yes. Kaila Devi Temple is about 23 km beyond Karauli town, and most visitors add it to the same day. Tell us on WhatsApp if you want the Kaila Devi add-on and we'll plan the timing accordingly."}},{"@type":"Question","name":"What is there to see in Karauli town?","acceptedAnswer":{"@type":"Answer","text":"Karauli's main sights are the Madan Mohan Ji Temple, a beloved Krishna temple closely connected with the Braj tradition, and the old Karauli City Palace nearby. Both make an easy 30–45 minute stop."}},{"@type":"Question","name":"Can we do Agra to Karauli as a one-day trip?","acceptedAnswer":{"@type":"Answer","text":"Yes. With an early morning pickup you can cover Karauli town and the Kaila Devi add-on and be back in Agra the same evening. Families preferring a slower pace can ask us for an overnight option."}},{"@type":"Question","name":"Is it spelled Karauli or Karoli?","acceptedAnswer":{"@type":"Answer","text":"Both spellings refer to the same town in eastern Rajasthan. You'll see it written as Karauli or Karoli — we run cabs there from Agra throughout the year."}},{"@type":"Question","name":"Is the cab suitable for families and senior citizens?","acceptedAnswer":{"@type":"Answer","text":"Yes. We recommend the Innova Crysta for the longer drive, plan breaks around your comfort, and the driver assists with boarding and luggage at every stop."}}]}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/landing.css">
+<link rel="preload" as="image" href="../images/destinations/dest-hilltop-village.webp" fetchpriority="high">
+
+<!-- ===================== STRUCTURED DATA ===================== -->
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","@id":"https://www.padmashreetravels.in/#business","name":"Padma Shree Travels","url":"https://www.padmashreetravels.in/","telephone":"+91-87200-81102","email":"travels.padamshree@gmail.com","image":"https://www.padmashreetravels.in/images/logo.png","address":{"@type":"PostalAddress","streetAddress":"Rajeshwar Mandir, Kaveri Vihar Phase II, Shamsabad","addressLocality":"Agra","addressRegion":"Uttar Pradesh","postalCode":"282001","addressCountry":"IN"},"geo":{"@type":"GeoCoordinates","latitude":27.1767,"longitude":78.0081},"sameAs":["https://g.page/r/CUjtXu1x_3bPEBM/review"],"openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"00:00","closes":"23:59"}}</script>
 
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.padmashreetravels.in/"},{"@type":"ListItem","position":2,"name":"Temple Tours from Agra","item":"https://www.padmashreetravels.in/agra-temple-tour-by-cab/"},{"@type":"ListItem","position":3,"name":"Agra to Karauli Taxi","item":"https://www.padmashreetravels.in/agra-to-karauli-taxi/"}]}</script>
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","serviceType":"Pilgrimage & Heritage Taxi Service","name":"Agra to Karauli Taxi","description":"Private AC taxi from Agra to Karauli, Rajasthan, covering Madan Mohan Ji Temple and Karauli City Palace, with an optional Kaila Devi Temple add-on. Fixed fare confirmed on WhatsApp.","provider":{"@type":"LocalBusiness","name":"Padma Shree Travels","telephone":"+91-87200-81102"},"areaServed":["Agra","Karauli"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","serviceType":"Taxi and pilgrimage cab service from Agra to Karauli","name":"Agra to Karauli Taxi","description":"Private AC taxi from Agra to Karauli in eastern Rajasthan - approximately 150 km via Fatehpur Sikri, the Bharatpur bypass and Hindaun, and about 3 to 3.5 hours each way. Covers the Madan Mohan Ji Temple and the Karauli City Palace, with Kaila Devi Temple available as an add-on 23 km beyond the town. Comfortable as a same-day round trip with an early start, and an overnight option is available on request. The driver waits at each stop within the booked day. Fares are confirmed on WhatsApp before travel; tolls, Rajasthan state tax where applicable, and parking are paid separately at actuals.","provider":{"@type":"LocalBusiness","@id":"https://www.padmashreetravels.in/#business","name":"Padma Shree Travels","telephone":"+91-87200-81102"},"areaServed":[{"@type":"City","name":"Agra"},{"@type":"City","name":"Karauli"},{"@type":"State","name":"Rajasthan"}],"url":"https://www.padmashreetravels.in/agra-to-karauli-taxi/"}</script>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How far is Karauli from Agra?","acceptedAnswer":{"@type":"Answer","text":"Karauli is approximately 150 km from Agra, about 3 to 3.5 hours by private taxi via Fatehpur Sikri, the Bharatpur bypass and Hindaun."}},
+{"@type":"Question","name":"What is the taxi fare from Agra to Karauli?","acceptedAnswer":{"@type":"Answer","text":"We do not publish a fixed starting price for this route. A same-day round trip is available in an AC sedan, with Ertiga, Innova Crysta and Tempo Traveller for families and groups, and a separate fare if you add Kaila Devi. Tolls, Rajasthan state tax where applicable, and parking are extra at actuals and told to you before booking. Message us on WhatsApp for today's fixed fare."}},
+{"@type":"Question","name":"Can we visit Kaila Devi Temple on the same trip?","acceptedAnswer":{"@type":"Answer","text":"Yes. Kaila Devi Temple is about 23 km beyond Karauli town, and most visitors add it to the same day. Tell us on WhatsApp if you want the Kaila Devi add-on and we will plan the timing accordingly. If Kaila Devi is your main reason for travelling rather than the town, our dedicated Kaila Devi page has the fuller plan."}},
+{"@type":"Question","name":"What is there to see in Karauli town?","acceptedAnswer":{"@type":"Answer","text":"Karauli's main sights are the Madan Mohan Ji Temple, a Krishna temple closely connected with the Braj tradition, and the old Karauli City Palace nearby, known for its painted courtyards and carved facades. Both make an easy 30 to 45 minute stop, and the town itself is a quiet one on the banks of the Kalisil river."}},
+{"@type":"Question","name":"Can we do Agra to Karauli as a one-day trip?","acceptedAnswer":{"@type":"Answer","text":"Yes. With a 5:30 am pickup you can cover Karauli town and the Kaila Devi add-on and be back in Agra the same evening, usually between 7:00 and 8:00 pm. Families preferring a slower pace can ask us for an overnight option instead."}},
+{"@type":"Question","name":"Is the cab suitable for families and senior citizens?","acceptedAnswer":{"@type":"Answer","text":"Yes. We suggest the Innova Crysta for the longer drive, plan tea and washroom breaks around your comfort rather than the clock, and the driver assists with boarding and luggage at every stop. Extra stops cost nothing."}},
+{"@type":"Question","name":"Is it spelled Karauli or Karoli?","acceptedAnswer":{"@type":"Answer","text":"Both spellings refer to the same town in eastern Rajasthan. You will see it written as Karauli or Karoli, and we run cabs there from Agra throughout the year."}}
+]}</script>
 </head>
+
 <body>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NWDQLKM9"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
-<header class="hdr"><div class="hdr__in">
-<a href="../index.html" class="logo"><img src="../images/logo.png" alt="Padma Shree Travels Logo" class="logo__img"><div class="logo__t">Padma Shree Travels<small>Agra Taxi Service</small></div></a><nav class="nav"><ul class="nav__l">
-<li><a href="../index.html" class="nav__a">Home</a></li>
-<li class="nav__dd"><a href="../agra-temple-tour-by-cab/" class="nav__a">Pilgrimage &#9662;</a><div class="nav__ddm">
-<a href="../agra-to-mathura-taxi/">Agra &#8594; Mathura Taxi <span class="ptag">from &#8377;1,500</span></a>
-<a href="../agra-to-vrindavan-cab/">Agra &#8594; Vrindavan Cab <span class="ptag">from &#8377;1,800</span></a>
-<a href="../mathura-vrindavan-tour-from-agra/">Mathura + Vrindavan Full Day <span class="ptag">&#8377;3,000</span></a>
-<a href="../mathura-vrindavan-barsana/">Mathura, Vrindavan &amp; Barsana <span class="ptag">&#8377;3,500 &middot; Full Day</span></a>
-<a href="../agra-to-mehandipur-balaji-taxi/">Agra &#8594; Mehandipur Balaji <span class="ptag">Fare on WhatsApp</span></a>
-<a href="../agra-to-kaila-devi-temple-taxi/">Agra &#8594; Kaila Devi Temple <span class="ptag">Fare on WhatsApp</span></a>
-<a href="../agra-temple-tour-by-cab/" class="dd__more">View All Pilgrimage &#8594;</a>
-</div></li>
-<li class="nav__dd"><a href="../agra-local-sightseeing/" class="nav__a">Sightseeing &#9662;</a><div class="nav__ddm">
-<a href="../agra-local-sightseeing/">Agra Full Day Sightseeing <span class="ptag">&#8377;2,500</span></a>
-<a href="../fatehpur-sikri/">Fatehpur Sikri Day Trip <span class="ptag">&#8377;2,500</span></a>
-<a href="../taj-mahal-taxi/">Taj Mahal Taxi <span class="ptag">from &#8377;1,500</span></a>
-<a href="../taj-mahal-sunrise-taxi/">Taj Mahal Sunrise Taxi <span class="ptag">from &#8377;1,500</span></a>
-<a href="../agra-local-sightseeing/" class="dd__more">View All Sightseeing &#8594;</a>
-</div></li>
-<li class="nav__dd"><a href="../outstation-cabs-agra/" class="nav__a">Outstation &#9662;</a><div class="nav__ddm">
-<a href="../agra-to-gwalior/">Agra &#8594; Gwalior <span class="ptag">&#8377;3,000 &middot; RT</span></a>
-<a href="../agra-to-aligarh/">Agra &#8594; Aligarh <span class="ptag">&#8377;3,000 &middot; RT</span></a>
-<a href="../agra-to-firozabad/">Agra &#8594; Firozabad <span class="ptag">&#8377;2,500 &middot; RT</span></a>
-<a href="../agra-to-etawah/">Agra &#8594; Etawah <span class="ptag">&#8377;3,500 &middot; RT</span></a>
-<a href="../agra-to-jaipur-taxi/">Agra &#8594; Jaipur Taxi <span class="ptag">Fare on WhatsApp</span></a>
-<a href="../agra-airport-taxi/">Agra Airport Taxi <span class="ptag">from &#8377;800</span></a>
-<a href="../agra-railway-station-taxi/">Agra Railway Station Taxi <span class="ptag">from &#8377;800</span></a>
-<a href="../outstation-cabs-agra/" class="dd__more">View All Outstation &#8594;</a>
-</div></li>
-<li class="nav__dd"><a href="../agra-taxi-fares/" class="nav__a">Fares &amp; Tools &#9662;</a><div class="nav__ddm">
-<a href="../agra-taxi-fares/">Agra Taxi Fare List <span class="ptag">Fixed fares</span></a>
-<a href="../route-finder/">Route Finder <span class="ptag">Filter routes</span></a>
-<a href="../fleet/">Our Fleet <span class="ptag">Compare cabs</span></a>
-<a href="../book/">Book Online <span class="ptag">WhatsApp booking</span></a>
-</div></li>
-<li><a href="../blog/" class="nav__a">Blog</a></li>
-<li><a href="../about/" class="nav__a">About</a></li>
-<li><a href="../contact/" class="nav__a">Contact</a></li>
-<li><a href="tel:+918720081102" class="btn btn--b btn--sm"><i data-lucide="phone" class="icon icon--sm icon--white" aria-hidden="true"></i> Call Now</a></li>
-</ul></nav>
-<button class="ham" id="ham" aria-label="Menu"><span></span><span></span><span></span></button>
-</div></header>
+<a href="#main" class="sr-only skip">Skip to main content</a>
 
-<div class="mnav" id="mnav">
-<a href="../index.html" class="mnav__home">Home</a>
-<button class="mnav__cat" aria-expanded="false">Pilgrimage <span class="mnav__arr">&#9662;</span></button>
-<div class="mnav__sub">
-<a href="../agra-to-mathura-taxi/">Agra to Mathura Taxi <span class="ptag">from &#8377;1,500</span></a>
-<a href="../agra-to-vrindavan-cab/">Agra to Vrindavan Cab <span class="ptag">from &#8377;1,800</span></a>
-<a href="../mathura-vrindavan-tour-from-agra/">Mathura + Vrindavan Tour <span class="ptag">&#8377;3,000 &middot; Full Day</span></a>
-<a href="../mathura-vrindavan-barsana/">Mathura, Vrindavan &amp; Barsana <span class="ptag">&#8377;3,500 &middot; Full Day</span></a>
-<a href="../agra-to-mehandipur-balaji-taxi/">Agra to Mehandipur Balaji <span class="ptag">Fare on WhatsApp</span></a>
-<a href="../agra-to-kaila-devi-temple-taxi/">Agra to Kaila Devi Temple <span class="ptag">Fare on WhatsApp</span></a>
-<a href="../agra-to-karauli-taxi/">Agra to Karauli Taxi <span class="ptag">Fare on WhatsApp</span></a>
+<!-- ===================== STICKY HEADER ===================== -->
+<header class="hdr">
+  <div class="wrap hdr__in">
+    <a href="../index.html" class="hdr__logo">
+      <span class="hdr__mark" aria-hidden="true">PS</span>
+      <span class="hdr__name">Padma Shree Travels</span>
+    </a>
+    <nav class="hdr__nav" aria-label="Main">
+<a href="../index.html">Home</a>
+<span class="gnav-dd"><a href="../agra-temple-tour-by-cab/" aria-current="page">Pilgrimage</a>
+<div class="gnav-menu">
+<a href="../agra-to-mathura-taxi/">Agra &#8594; Mathura Taxi<span class="gnav-tag">from &#8377;1,500</span></a>
+<a href="../agra-to-vrindavan-cab/">Agra &#8594; Vrindavan Cab<span class="gnav-tag">from &#8377;1,800</span></a>
+<a href="../mathura-vrindavan-tour-from-agra/">Mathura + Vrindavan Full Day<span class="gnav-tag">&#8377;3,000</span></a>
+<a href="../mathura-vrindavan-barsana/">Mathura, Vrindavan &amp; Barsana<span class="gnav-tag">&#8377;3,500 &middot; Full Day</span></a>
+<a href="../agra-to-bateshwar/">Agra &#8594; Bateshwar<span class="gnav-tag">&#8377;3,000 &middot; RT</span></a>
+<a href="../agra-to-mehandipur-balaji-taxi/">Agra &#8594; Mehandipur Balaji<span class="gnav-tag">Fare on WhatsApp</span></a>
+<a href="../agra-to-kaila-devi-temple-taxi/">Agra &#8594; Kaila Devi Temple<span class="gnav-tag">Fare on WhatsApp</span></a>
+<a href="../agra-karauli-kaila-devi-balaji-tour/">Karauli + Kaila Devi + Balaji Tour<span class="gnav-tag">Fare on WhatsApp</span></a>
+<a href="../agra-temple-tour-by-cab/" class="gnav-more">View All Pilgrimage &#8594;</a>
+</div></span>
+<span class="gnav-dd"><a href="../agra-local-sightseeing/">Sightseeing</a>
+<div class="gnav-menu">
+<a href="../agra-local-sightseeing/">Agra Full Day Sightseeing<span class="gnav-tag">&#8377;2,500</span></a>
+<a href="../fatehpur-sikri/">Fatehpur Sikri Day Trip<span class="gnav-tag">&#8377;2,500</span></a>
+<a href="../taj-mahal-taxi/">Taj Mahal Taxi<span class="gnav-tag">from &#8377;1,500</span></a>
+<a href="../taj-mahal-sunrise-taxi/">Taj Mahal Sunrise Taxi<span class="gnav-tag">from &#8377;1,500</span></a>
+<a href="../agra-local-sightseeing/" class="gnav-more">View All Sightseeing &#8594;</a>
+</div></span>
+<span class="gnav-dd"><a href="../outstation-cabs-agra/">Outstation</a>
+<div class="gnav-menu">
+<a href="../agra-to-gwalior/">Agra &#8594; Gwalior<span class="gnav-tag">&#8377;3,000 &middot; RT</span></a>
+<a href="../agra-to-aligarh/">Agra &#8594; Aligarh<span class="gnav-tag">&#8377;3,000 &middot; RT</span></a>
+<a href="../agra-to-firozabad/">Agra &#8594; Firozabad<span class="gnav-tag">&#8377;2,500 &middot; RT</span></a>
+<a href="../agra-to-etawah/">Agra &#8594; Etawah<span class="gnav-tag">&#8377;3,500 &middot; RT</span></a>
+<a href="../agra-to-jaipur-taxi/">Agra &#8594; Jaipur Taxi<span class="gnav-tag">Fare on WhatsApp</span></a>
+<a href="../agra-airport-taxi/">Agra Airport Taxi<span class="gnav-tag">from &#8377;800</span></a>
+<a href="../agra-railway-station-taxi/">Agra Railway Station Taxi<span class="gnav-tag">from &#8377;800</span></a>
+<a href="../outstation-cabs-agra/" class="gnav-more">View All Outstation &#8594;</a>
+</div></span>
+<span class="gnav-dd gnav-dd--right"><a href="../agra-taxi-fares/">Fares &amp; Tools</a>
+<div class="gnav-menu">
+<a href="../agra-taxi-fares/">Agra Taxi Fare List<span class="gnav-tag">Fixed fares</span></a>
+<a href="../route-finder/">Route Finder<span class="gnav-tag">Filter routes</span></a>
+<a href="../fleet/">Our Fleet<span class="gnav-tag">Compare cabs</span></a>
+<a href="../book/">Book Online<span class="gnav-tag">WhatsApp booking</span></a>
+</div></span>
+<a href="../blog/">Blog</a>
+<a href="../about/">About</a>
+<a href="../contact/">Contact</a>
+</nav>
+<details class="gnav-mobile">
+<summary class="gnav-mobile__btn" aria-label="Open menu">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+</summary>
+<div class="gnav-mobile__panel">
+<a href="../index.html">Home</a>
+<details class="gnav-mobile__cat"><summary>Pilgrimage</summary>
+<a href="../agra-to-mathura-taxi/">Agra to Mathura Taxi<span class="gnav-tag">from &#8377;1,500</span></a>
+<a href="../agra-to-vrindavan-cab/">Agra to Vrindavan Cab<span class="gnav-tag">from &#8377;1,800</span></a>
+<a href="../mathura-vrindavan-tour-from-agra/">Mathura + Vrindavan Full Day<span class="gnav-tag">&#8377;3,000</span></a>
+<a href="../mathura-vrindavan-barsana/">Mathura, Vrindavan &amp; Barsana<span class="gnav-tag">&#8377;3,500 &middot; Full Day</span></a>
+<a href="../agra-to-bateshwar/">Agra to Bateshwar<span class="gnav-tag">&#8377;3,000 &middot; RT</span></a>
+<a href="../agra-to-mehandipur-balaji-taxi/">Agra to Mehandipur Balaji<span class="gnav-tag">Fare on WhatsApp</span></a>
+<a href="../agra-to-kaila-devi-temple-taxi/">Agra to Kaila Devi Temple<span class="gnav-tag">Fare on WhatsApp</span></a>
+<a href="../agra-karauli-kaila-devi-balaji-tour/">Karauli + Kaila Devi + Balaji Tour<span class="gnav-tag">Fare on WhatsApp</span></a>
+</details>
+<details class="gnav-mobile__cat"><summary>Sightseeing</summary>
+<a href="../agra-local-sightseeing/">Agra Full Day Sightseeing<span class="gnav-tag">&#8377;2,500</span></a>
+<a href="../fatehpur-sikri/">Fatehpur Sikri Day Trip<span class="gnav-tag">&#8377;2,500</span></a>
+<a href="../taj-mahal-taxi/">Taj Mahal Taxi<span class="gnav-tag">from &#8377;1,500</span></a>
+<a href="../taj-mahal-sunrise-taxi/">Taj Mahal Sunrise Taxi<span class="gnav-tag">from &#8377;1,500</span></a>
+</details>
+<details class="gnav-mobile__cat"><summary>Outstation</summary>
+<a href="../agra-to-gwalior/">Agra to Gwalior<span class="gnav-tag">&#8377;3,000 &middot; RT</span></a>
+<a href="../agra-to-aligarh/">Agra to Aligarh<span class="gnav-tag">&#8377;3,000 &middot; RT</span></a>
+<a href="../agra-to-firozabad/">Agra to Firozabad<span class="gnav-tag">&#8377;2,500 &middot; RT</span></a>
+<a href="../agra-to-etawah/">Agra to Etawah<span class="gnav-tag">&#8377;3,500 &middot; RT</span></a>
+<a href="../agra-to-jaipur-taxi/">Agra to Jaipur Taxi<span class="gnav-tag">Fare on WhatsApp</span></a>
+<a href="../agra-airport-taxi/">Agra Airport Taxi<span class="gnav-tag">from &#8377;800</span></a>
+<a href="../agra-railway-station-taxi/">Agra Railway Station Taxi<span class="gnav-tag">from &#8377;800</span></a>
+</details>
+<details class="gnav-mobile__cat"><summary>Fares &amp; Tools</summary>
+<a href="../agra-taxi-fares/">Agra Taxi Fare List<span class="gnav-tag">Fixed fares</span></a>
+<a href="../route-finder/">Route Finder<span class="gnav-tag">Filter routes</span></a>
+<a href="../fleet/">Our Fleet<span class="gnav-tag">Compare cabs</span></a>
+<a href="../book/">Book Online<span class="gnav-tag">WhatsApp booking</span></a>
+</details>
+<a href="../blog/">Blog</a>
+<a href="../about/">About</a>
+<a href="../contact/">Contact</a>
+</div></details>
+    <a data-cta href="https://wa.me/918720081102?text=Hi%20Padma%20Shree%20Travels%2C%20I%20need%20an%20Agra%20to%20Karauli%20taxi.%0A%0ATravel%20date%3A%20%0APickup%20time%3A%20%0APickup%20point%20in%20Agra%3A%20%0APassengers%3A%20%0ACab%20type%3A%20%0AAdding%20Kaila%20Devi%20darshan%3A%20%0A%0APlease%20share%20availability%20and%20fare." target="_blank" rel="noopener" class="btn-header">Get Fare</a>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ===================== HERO ===================== -->
+<section id="hero" class="hero hero-bg">
+  <div class="wrap hero__grid">
+    <div>
+      <nav class="bc" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a> &rsaquo;
+        <a href="../agra-temple-tour-by-cab/">Temple Tours</a> &rsaquo;
+        <span>Agra to Karauli Taxi</span>
+      </nav>
+      <h1>Agra To Karauli Taxi<span class="blk">A Quiet Heritage Town, With Kaila Devi 23 KM On</span></h1>
+      <p class="hero__value">Approx. 150 KM Via Hindaun<br>3&ndash;3.5 Hrs Each Way &middot; Waiting Included</p>
+      <p class="hero__meta">
+        <strong>Madan Mohan Ji Temple and the City Palace</strong> &mdash; and, for a good many customers, the staging post for Kaila Devi darshan rather than the destination itself. Tell us which of the two you are really coming for and we will plan the day around it.
+      </p>
+      <div class="hero__acts">
+        <a data-cta href="https://wa.me/918720081102?text=Hi%20Padma%20Shree%20Travels%2C%20I%20need%20an%20Agra%20to%20Karauli%20taxi.%0A%0ATravel%20date%3A%20%0APickup%20time%3A%20%0APickup%20point%20in%20Agra%3A%20%0APassengers%3A%20%0ACab%20type%3A%20%0AAdding%20Kaila%20Devi%20darshan%3A%20%0A%0APlease%20share%20availability%20and%20fare." target="_blank" rel="noopener" class="btn-primary">Get Karauli Fare on WhatsApp</a>
+        <a href="tel:+918720081102" class="link-call">or call +91-87200 81102</a>
+      </div>
+    </div>
+    <div class="frame-hero">
+      <img src="../images/destinations/dest-hilltop-village.webp" width="1536" height="1024" fetchpriority="high" decoding="async" alt="A quiet village street with cows and whitewashed houses, temples visible on the hill above">
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PROOF STRIP ===================== -->
+<section class="proof">
+  <div class="wrap proof__in">
+    <a href="https://g.page/r/CUjtXu1x_3bPEBM" target="_blank" rel="noopener" class="proof__rev">
+      <span class="proof__stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+      <span>Verified Google Reviews</span>
+    </a>
+    <div class="proof__list">
+      <span>Kaila Devi Add-On Ready</span><span class="proof__sep">&bull;</span>
+      <span>Driver Waits At Every Stop</span><span class="proof__sep">&bull;</span>
+      <span>Tolls &amp; State Tax Told Upfront</span><span class="proof__sep">&bull;</span>
+      <span>Same-Day Or Overnight</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== INTRO + PRIMARY CTA ===================== -->
+<section class="sec sec--tight center">
+  <div class="wrap">
+    <div class="narrow">
+      <h2 class="h2">Town Or Temple &mdash; Which Are You Coming For?</h2>
+      <p class="lede">
+        Karauli works two ways. Some people come for the town itself: Madan Mohan Ji, the City Palace, and a couple of unhurried hours in a quiet corner of eastern Rajasthan. Others are really going to <a href="../agra-to-kaila-devi-temple-taxi/">Kaila Devi</a>, 23 km further on, and stop in Karauli along the way. The drive is the same; the shape of the day is not. Tell us which it is and the plan &mdash; and the fare &mdash; follows from that.
+      </p>
+    </div>
+    <div class="mt-cta">
+      <a data-cta href="https://wa.me/918720081102?text=Hi%20Padma%20Shree%20Travels%2C%20I%20need%20an%20Agra%20to%20Karauli%20taxi.%0A%0ATravel%20date%3A%20%0APickup%20time%3A%20%0APickup%20point%20in%20Agra%3A%20%0APassengers%3A%20%0ACab%20type%3A%20%0AAdding%20Kaila%20Devi%20darshan%3A%20%0A%0APlease%20share%20availability%20and%20fare." target="_blank" rel="noopener" class="btn-primary">Get Fare on WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== QUICK FACTS ===================== -->
+<section style="background:#fff">
+  <div class="wrap">
+    <h2 class="sr-only">Agra To Karauli Taxi At A Glance</h2>
+    <div class="stats">
+      <div class="stat"><p class="stat-num is-word">~150 KM</p><p class="stat-label">From Agra, Via Hindaun</p></div>
+      <div class="stat"><p class="stat-num is-word">3&ndash;3.5 HRS</p><p class="stat-label">Each Way By Cab</p></div>
+      <div class="stat"><p class="stat-num is-word">+23 KM</p><p class="stat-label">Kaila Devi, If You Add It</p></div>
+      <div class="stat"><p class="stat-num is-word">5:30 AM</p><p class="stat-label">Suggested Pickup</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== GOOGLE REVIEWS =====================
+     Shared component, reusing the EXISTING 'agra-karauli-kaila-devi-balaji'
+     key - which is literally named for this town. No review in the pool
+     names Karauli, and the subline says so plainly. -->
+<section data-reviews-grid data-page="agra-karauli-kaila-devi-balaji"
+         data-subline="Genuine Google reviews from Padma Shree Travels customers. None of these name Karauli specifically &#8212; they are long temple days out of Agra, and drivers who waited without charging extra."></section>
+
+<!-- ===================== FARE ===================== -->
+<section data-track="pricing" class="sec sec--top0">
+  <div class="wrap">
+    <h2 class="h2 center">Taxi Fare From Agra To Karauli</h2>
+    <p class="lede center narrow">We do not publish a starting price for this route. Whether you add Kaila Devi changes the day by about 46 km and a couple of hours, so the two are quoted separately rather than averaged into one number.</p>
+    <div class="ftbl-wrap narrow" style="margin-top:28px">
+      <table class="ftbl">
+        <caption>Agra to Karauli by cab type, with and without the Kaila Devi add-on. Fare is for the whole vehicle.</caption>
+        <thead><tr><th scope="col">Cab Type</th><th scope="col">Seats</th><th scope="col">Same-Day Round Trip</th><th scope="col">With Kaila Devi Add-On</th></tr></thead>
+        <tbody>
+          <tr><td><strong>AC Sedan</strong> (Dzire / Amaze)</td><td>4</td><td class="num">Fare on WhatsApp</td><td class="num">Fare on WhatsApp</td></tr>
+          <tr><td><strong>AC SUV</strong> (Ertiga)</td><td>6</td><td class="num">Fare on WhatsApp</td><td class="num">Fare on WhatsApp</td></tr>
+          <tr><td><strong>AC SUV</strong> (Innova Crysta)</td><td>7</td><td class="num">Fare on WhatsApp</td><td class="num">Fare on WhatsApp</td></tr>
+          <tr><td><strong>Tempo Traveller</strong></td><td>12&ndash;15</td><td class="num">Fare on WhatsApp</td><td class="num">Fare on WhatsApp</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="center narrow" style="margin-top:16px;font-size:13px;color:rgba(0,0,0,.6)">
+      Your fixed fare covers fuel and driver charges, including waiting at each stop. Tolls, <strong>Rajasthan state tax where applicable</strong>, and parking are paid by you at actuals, and every component is explained on WhatsApp before you confirm. See the full <a href="../agra-taxi-fares/" style="color:var(--accent-dark);font-weight:600;text-decoration:underline;text-underline-offset:2px">Agra taxi fare list</a> for the routes we do publish prices for.
+    </p>
+  </div>
+</section>
+
+<!-- ===================== ROUTE ===================== -->
+<section class="sec sec--top0">
+  <div class="wrap">
+    <h2 class="h2 center">The Road To Karauli</h2>
+    <div class="grid-2 narrow" style="margin-top:32px;align-items:start">
+      <div>
+        <ul class="stack">
+          <li class="row-light">Karauli sits in <strong>eastern Rajasthan, on the banks of the Kalisil river</strong>, about 150 km from Agra.</li>
+          <li class="row-light">The cab runs towards <strong>Fatehpur Sikri and the Bharatpur bypass</strong>, on <strong>via Hindaun</strong>, then takes the Karauli road into town.</li>
+          <li class="row-light">Most of the route is decent highway. <strong>The last stretch into town is a smaller road</strong>, where a driver who knows it makes the difference.</li>
+          <li class="row-light"><strong>3 to 3.5 hours each way</strong>, which is what puts the suggested pickup at half past five.</li>
+          <li class="row-light">Pickup from <strong>any Agra address</strong> &mdash; hotel, home, Agra Cantt, Agra Fort station or Kheria Airport &mdash; with a tea and washroom break planned on the way.</li>
+        </ul>
+      </div>
+      <div class="ph r43">
+        <img src="../images/fleet/fleet-ertiga.webp" width="1000" height="750" loading="lazy" decoding="async" alt="A white Maruti Suzuki Ertiga, one of the AC cars used on this route">
+        <span class="ph-tag">AC Cars, Sedan To Tempo Traveller</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SUGGESTED DAY ===================== -->
+<section class="sec sec--top0">
+  <div class="wrap">
+    <h2 class="h2 center">The Same-Day Plan</h2>
+    <p class="lede center narrow">This is the shape of the day with the Kaila Devi add-on included. Drop it and you are back in Agra considerably earlier.</p>
+    <div class="grid-2 narrow" style="margin-top:32px;align-items:start">
+      <ul class="stack">
+        <li class="row-light"><strong>5:30 am</strong> &mdash; pickup from your Agra hotel or home.</li>
+        <li class="row-light"><strong>9:00 am</strong> &mdash; arrive Karauli; Madan Mohan Ji Temple and the City Palace.</li>
+        <li class="row-light"><strong>10:30 am</strong> &mdash; optional: on another 23 km to Kaila Devi for darshan.</li>
+      </ul>
+      <ul class="stack">
+        <li class="row-light"><strong>1:00 pm</strong> &mdash; lunch in Karauli or on the highway.</li>
+        <li class="row-light"><strong>7:00&ndash;8:00 pm</strong> &mdash; drop back at your Agra address.</li>
+        <li class="row-light">Prefer a slower pace, or an overnight stop? Ask us and we will plan the day around your family rather than the clock.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PLACES ===================== -->
+<section class="sec sec--top0">
+  <div class="wrap">
+    <h2 class="h2 center">What There Is To See</h2>
+    <div class="grid-2 narrow" style="margin-top:34px;align-items:start">
+      <div class="stack">
+        <div class="card"><h3>Madan Mohan Ji Temple</h3><p>Karauli&rsquo;s Krishna temple, closely connected with the Braj tradition &mdash; which is why it feels familiar if you have already done the Mathura and Vrindavan circuit. An easy 30 to 45 minute stop.</p></div>
+        <div class="card"><h3>Karauli City Palace</h3><p>The town&rsquo;s historic royal palace, with painted courtyards and carved facades. A short heritage detour if your schedule allows.</p></div>
+        <div class="card"><h3>Karauli Town Itself</h3><p>A quiet town on the banks of the Kalisil river, with pink sandstone buildings and an easy-going pace &mdash; pleasant in its own right, and a comfortable stop on the way to or from Kaila Devi.</p></div>
+      </div>
+      <div>
+        <div class="ph r169" style="margin-bottom:20px">
+          <img src="../images/destinations/dest-aravalli-temple.webp" width="1376" height="768" loading="lazy" decoding="async" alt="A temple complex at the foot of dry scrub hills, with pilgrims walking up the paved approach">
+          <span class="ph-tag">Temple Country Beyond The Town</span>
+        </div>
+        <div class="card"><h3>Kaila Devi Temple &mdash; the add-on</h3><p>A major Shakti temple of eastern Rajasthan, about 23 km beyond Karauli town. Most visitors add it to the same day. If it is your main reason for travelling rather than an extra, our <a href="../agra-to-kaila-devi-temple-taxi/">dedicated Kaila Devi page</a> has the fuller plan, the Navratri warnings and the two-day option.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FARE BREAKDOWN =====================
+     Shared component: .fare-* in css/landing.css. The banner is the band's
+     full-bleed background, rotated by js/landing.js via the --fare-bg
+     custom property on this section; css/landing.css carries a real
+     photograph as the default, so the band still looks right with
+     JavaScript off. The photo is decorative — every inclusion, exclusion,
+     heading and CTA below is live text in this HTML. -->
+<section class="sec sec--navy fare-band" data-fare-bg>
+  <div class="wrap">
+    <div class="fare">
+      <div class="fare__head">
+        <p class="fare__eyebrow">Clear Fare Breakdown</p>
+        <h2 class="h2 h2--lg h2--white">What Your Booking Includes</h2>
+        <p class="fare__lede">One cab and one driver for the day, at a price agreed before you leave Agra.</p>
+      </div>
+
+      <div class="fare__lists">
+        <div class="fare__group">
+          <h3 class="fare__gh">Included In The Fare</h3>
+          <ul class="fare__list">
+            <li class="fare__item fare__item--inc">Private AC Cab For The Full Day</li>
+            <li class="fare__item fare__item--inc">Fuel And Driver Charges</li>
+            <li class="fare__item fare__item--inc">Waiting At Every Stop, Within The Booked Day</li>
+            <li class="fare__item fare__item--inc">Belongings Locked In The Car</li>
+            <li class="fare__item fare__item--inc">Door-To-Door Agra Pickup And Drop</li>
+            <li class="fare__item fare__item--inc">Driver Name, Number And Car Number Before Pickup</li>
+          </ul>
+        </div>
+        <div class="fare__group fare__group--exc">
+          <h3 class="fare__gh">Paid Separately By You</h3>
+          <ul class="fare__list">
+            <li class="fare__item fare__item--exc">Highway Tolls, At Actuals</li>
+            <li class="fare__item fare__item--exc"><strong>Rajasthan State Tax</strong>, Where Applicable</li>
+            <li class="fare__item fare__item--exc">Temple And Palace Parking</li>
+            <li class="fare__item fare__item--exc">Entry Tickets, Meals And Offerings</li>
+          </ul>
+        </div>
+      </div>
+
+
+      <div class="fare__cta">
+        <a data-cta href="https://wa.me/918720081102?text=Hi%20Padma%20Shree%20Travels%2C%20I%20need%20an%20Agra%20to%20Karauli%20taxi.%0A%0ATravel%20date%3A%20%0APickup%20time%3A%20%0APickup%20point%20in%20Agra%3A%20%0APassengers%3A%20%0ACab%20type%3A%20%0AAdding%20Kaila%20Devi%20darshan%3A%20%0A%0APlease%20share%20availability%20and%20fare." target="_blank" rel="noopener" class="btn-primary">Get Karauli Fare on WhatsApp</a>
+        <a href="tel:+918720081102" class="link-call">or call +91-87200 81102</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== WHY US ===================== -->
+<section class="sec">
+  <div class="wrap">
+    <h2 class="h2 center" style="margin-bottom:32px">Why Book This Route With Us</h2>
+    <div class="grid-3">
+      <div class="card"><h3>Route Experience</h3><p>Our drivers know the Hindaun&ndash;Karauli stretch and the parking at both the temple and the palace &mdash; the last few kilometres into town are not obvious.</p></div>
+      <div class="card"><h3>Kaila Devi Add-On Ready</h3><p>Tell us if you want to combine Karauli with Kaila Devi darshan and we plan the timing rather than improvising it on the day.</p></div>
+      <div class="card"><h3>Waiting Is In The Fare</h3><p>No waiting charge within the booked day, and your luggage stays locked in the car while you are inside.</p></div>
+      <div class="card"><h3>Family And Elder-Friendly</h3><p>The driver assists with boarding and luggage, and we plan breaks around your comfort. For the longer drive we suggest the Innova Crysta.</p></div>
+      <div class="card"><h3>Extras Told Upfront</h3><p>Tolls, Rajasthan state tax and parking are named and estimated on WhatsApp before you book, not added at the end.</p></div>
+      <div class="card"><h3>Same-Day Or Overnight</h3><p>Most people do this in a day. If you would rather not, ask and we will plan the overnight version instead.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== BOOKING PROCESS ===================== -->
+<section class="mesh-dark sec">
+  <div class="wrap">
+    <h2 class="h2 h2--white center narrow" style="font-size:1.375rem">How Booking Works</h2>
+    <div class="steps">
+      <div class="step"><h3>01 &mdash; Send Your Trip Details</h3><p>Travel date, passengers, pickup point in Agra, and whether you want Kaila Devi added.</p></div>
+      <div class="step"><h3>02 &mdash; Fixed Fare Confirmed</h3><p>Confirmed in writing on WhatsApp, including expected tolls, state tax and parking, so you know the full cost before you say yes.</p></div>
+      <div class="step"><h3>03 &mdash; Driver Details Shared</h3><p>Name, mobile number and car registration number before pickup &mdash; match the plate before boarding. No advance for most bookings.</p></div>
+    </div>
+    <div class="center" style="margin-top:44px">
+      <a data-cta href="https://wa.me/918720081102?text=Hi%20Padma%20Shree%20Travels%2C%20I%20need%20an%20Agra%20to%20Karauli%20taxi.%0A%0ATravel%20date%3A%20%0APickup%20time%3A%20%0APickup%20point%20in%20Agra%3A%20%0APassengers%3A%20%0ACab%20type%3A%20%0AAdding%20Kaila%20Devi%20darshan%3A%20%0A%0APlease%20share%20availability%20and%20fare." target="_blank" rel="noopener" class="btn-primary">Get Fare on WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== THE WIDER CIRCUIT ===================== -->
+<section class="sec">
+  <div class="wrap">
+    <h2 class="h2 center">Karauli As Part Of A Bigger Trip</h2>
+    <p class="lede center narrow">
+      Karauli sits between the two Rajasthan temples we run most often. If you want both in one go, the tour page carries the planned itinerary for the roughly 350&ndash;380 km circuit.
+    </p>
+    <div class="grid-3" style="margin-top:34px">
+      <a href="../agra-to-kaila-devi-temple-taxi/" class="rel-card"><h3>Agra to Kaila Devi Temple</h3><p>The Shakti temple 23 km beyond Karauli, as a trip in its own right &mdash; same day or two days.</p><span class="tag">Fare on WhatsApp</span></a>
+      <a href="../agra-karauli-kaila-devi-balaji-tour/" class="rel-card"><h3>Karauli + Kaila Devi + Balaji</h3><p>Both Rajasthan temples in one planned day, or a relaxed two-day version with a night halt in Karauli.</p><span class="tag">Fare on WhatsApp</span></a>
+      <a href="../agra-to-mehandipur-balaji-taxi/" class="rel-card"><h3>Agra to Mehandipur Balaji</h3><p>The Hanuman temple in Dausa district, approx. 110&ndash;120 km and 2.5&ndash;3 hrs each way.</p><span class="tag">Fare on WhatsApp</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== LOCAL PARTNER =====================
+     Shared component: .lp in css/landing.css, photo rotated by
+     js/landing.js. The <img> below is a real working fallback for
+     visitors without JavaScript; the script swaps it for another
+     photograph from the same curated pool on load. -->
+<section class="sec sec--top0">
+  <div class="wrap">
+    <div class="lp">
+      <div class="lp__body">
+        <p class="lp__eyebrow">Local Agra Operator</p>
+        <h2 class="h2 lp__head">Your Local Travel Partner In Agra</h2>
+        <p class="lp__lede">Padma Shree Travels operates from Shamsabad, Agra, running local sightseeing, station and airport transfers, pilgrimage trips and outstation routes. Every pilgrimage route we run is listed on the <a href="../agra-temple-tour-by-cab/">temple tours hub</a>, Braj and Rajasthan together.</p>
+        <ul class="lp__facts">
+        <li class="lp__fact lp__fact--fare"><strong>Your fare</strong> Fares are confirmed on WhatsApp before you travel, with tolls, Rajasthan state tax and parking identified separately.</li>
+        <li class="lp__fact lp__fact--driver"><strong>Your driver</strong> Your driver&rsquo;s name, mobile number and car registration number are shared before pickup.</li>
+        <li class="lp__fact lp__fact--pickup"><strong>Pickup and drop</strong> Pickup from any Agra address &mdash; hotel, home, Agra Cantt, Agra Fort station or Kheria Airport &mdash; and drop back at the same place.</li>
+        </ul>
+        <div class="lp__cta">
+          <a data-cta href="https://wa.me/918720081102?text=Hi%20Padma%20Shree%20Travels%2C%20I%20need%20an%20Agra%20to%20Karauli%20taxi.%0A%0ATravel%20date%3A%20%0APickup%20time%3A%20%0APickup%20point%20in%20Agra%3A%20%0APassengers%3A%20%0ACab%20type%3A%20%0AAdding%20Kaila%20Devi%20darshan%3A%20%0A%0APlease%20share%20availability%20and%20fare." target="_blank" rel="noopener" class="btn-primary">Get Your Fare on WhatsApp</a>
+          <a href="tel:+918720081102" class="link-call">or call +91-87200 81102</a>
+        </div>
+        <p class="lp__note">Direct WhatsApp and phone support before and during your trip.</p>
+      </div>
+
+      <figure class="lp__fig">
+        <img class="lp__img" data-lp-photo
+             src="../images/about/PadmaShree%20(5).jpg" width="1080" height="1440"
+             loading="lazy" decoding="async"
+             alt="A member of the Padma Shree Travels team standing between two branded company cars">
+        <figcaption class="lp__cap">
+          <span class="lp__name">Padma Shree Travels</span>
+          <span class="lp__addr">Rajeshwar Mandir, Kaveri Vihar Phase II, Shamsabad, Agra 282001</span>
+          <span class="lp__links"><a href="tel:+918720081102">+91-87200 81102</a><span class="lp__sep" aria-hidden="true">&bull;</span><a href="https://g.page/r/CUjtXu1x_3bPEBM" target="_blank" rel="noopener">Google reviews</a></span>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FAQ ===================== -->
+<section class="sec sec--top0" id="faq">
+  <div class="wrap">
+    <h2 class="h2 center" style="margin-bottom:34px">Agra To Karauli &mdash; Questions &amp; Answers</h2>
+    <div class="grid-2 narrow" style="max-width:64rem">
+      <details class="faq-acc"><summary>How far is Karauli from Agra?</summary><p>Karauli is approximately 150 km from Agra, about 3 to 3.5 hours by private taxi via Fatehpur Sikri, the Bharatpur bypass and Hindaun.</p></details>
+      <details class="faq-acc"><summary>What is the taxi fare from Agra to Karauli?</summary><p>We do not publish a fixed starting price for this route. A same-day round trip is available in an AC sedan, with Ertiga, Innova Crysta and Tempo Traveller for families and groups, and a separate fare if you add Kaila Devi. Tolls, Rajasthan state tax where applicable, and parking are extra at actuals and told to you before booking. Message us on WhatsApp for today&rsquo;s fixed fare.</p></details>
+      <details class="faq-acc"><summary>Can we visit Kaila Devi Temple on the same trip?</summary><p>Yes. Kaila Devi Temple is about 23 km beyond Karauli town, and most visitors add it to the same day. Tell us on WhatsApp if you want the Kaila Devi add-on and we will plan the timing accordingly. If Kaila Devi is your main reason for travelling rather than the town, our dedicated Kaila Devi page has the fuller plan.</p></details>
+      <details class="faq-acc"><summary>What is there to see in Karauli town?</summary><p>Karauli&rsquo;s main sights are the Madan Mohan Ji Temple, a Krishna temple closely connected with the Braj tradition, and the old Karauli City Palace nearby, known for its painted courtyards and carved facades. Both make an easy 30 to 45 minute stop, and the town itself is a quiet one on the banks of the Kalisil river.</p></details>
+      <details class="faq-acc"><summary>Can we do Agra to Karauli as a one-day trip?</summary><p>Yes. With a 5:30 am pickup you can cover Karauli town and the Kaila Devi add-on and be back in Agra the same evening, usually between 7:00 and 8:00 pm. Families preferring a slower pace can ask us for an overnight option instead.</p></details>
+      <details class="faq-acc"><summary>Is the cab suitable for families and senior citizens?</summary><p>Yes. We suggest the Innova Crysta for the longer drive, plan tea and washroom breaks around your comfort rather than the clock, and the driver assists with boarding and luggage at every stop. Extra stops cost nothing.</p></details>
+      <details class="faq-acc"><summary>Is it spelled Karauli or Karoli?</summary><p>Both spellings refer to the same town in eastern Rajasthan. You will see it written as Karauli or Karoli, and we run cabs there from Agra throughout the year.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== RELATED SERVICES ===================== -->
+<section class="sec sec--top0">
+  <div class="wrap">
+    <h2 class="h2 center" style="margin-bottom:34px">Other Temple Routes From Agra</h2>
+    <div class="grid-3">
+      <a href="../agra-temple-tour-by-cab/" class="rel-card"><h3>Temple Tours From Agra</h3><p>Every pilgrimage route we run, Braj and Rajasthan, in one place.</p><span class="tag">View pilgrimage routes</span></a>
+      <a href="../agra-to-rajasthan-temple-tour/" class="rel-card"><h3>Rajasthan Temple Tour Planner</h3><p>Compare every Rajasthan route, or plan a longer multi-day yatra.</p><span class="tag">One-day to multi-day</span></a>
+      <a href="../agra-to-mathura-taxi/" class="rel-card"><h3>Agra to Mathura Taxi</h3><p>Krishna Janmabhoomi, Dwarkadhish and the ghats.</p><span class="tag">From &#8377;1,500 one way</span></a>
+      <a href="../mathura-vrindavan-barsana/" class="rel-card"><h3>Mathura, Vrindavan &amp; Barsana</h3><p>The three-town Braj day, 10&ndash;12 hours out of Agra.</p><span class="tag">&#8377;3,500 full day</span></a>
+      <a href="../fatehpur-sikri/" class="rel-card"><h3>Fatehpur Sikri Day Trip</h3><p>Akbar&rsquo;s abandoned capital &mdash; also on the road out to Karauli.</p><span class="tag">From &#8377;2,500</span></a>
+      <a href="../agra-taxi-fares/" class="rel-card"><h3>Full Agra Taxi Fare List</h3><p>Every route and package we run, with fares in one table.</p><span class="tag">All fares</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FINAL CTA ===================== -->
+<section class="mesh-dark center" style="padding:72px 20px 60px">
+  <div style="max-width:48rem;margin:0 auto">
+    <h2 class="h2 h2--lg h2--white">Planning A Karauli Trip?</h2>
+    <p style="margin-top:12px;font-weight:600;color:var(--warn);font-size:1.05rem">Fare in writing. Waiting included. Kaila Devi add-on ready.</p>
+    <p style="margin-top:16px;color:rgba(255,255,255,.65);font-size:15px;line-height:1.75">
+      Send your travel date, who is coming, and whether Kaila Devi is on the list &mdash; we confirm the fare, the expected extras, and a pickup time that fits the plan.
+    </p>
+  </div>
+  <div class="mt-cta">
+    <a data-cta href="https://wa.me/918720081102?text=Hi%20Padma%20Shree%20Travels%2C%20I%20need%20an%20Agra%20to%20Karauli%20taxi.%0A%0ATravel%20date%3A%20%0APickup%20time%3A%20%0APickup%20point%20in%20Agra%3A%20%0APassengers%3A%20%0ACab%20type%3A%20%0AAdding%20Kaila%20Devi%20darshan%3A%20%0A%0APlease%20share%20availability%20and%20fare." target="_blank" rel="noopener" class="btn-primary">Get Fare on WhatsApp</a>
+  </div>
+  <a href="tel:+918720081102" class="link-call" style="display:inline-block;margin-top:16px">or call now &mdash; +91-87200 81102</a>
+</section>
+
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="mesh-dark">
+  <div class="wrap ft__grid">
+    <div class="ft__brand">
+      <p class="ft__h">Padma Shree Travels</p>
+      <p>Rajeshwar Mandir, Kaveri Vihar Phase II,<br>Shamsabad, Agra, Uttar Pradesh 282001</p>
+      <p>Taxi and cab booking in Agra &mdash; local sightseeing, station and airport transfers, temple trips and outstation routes. Available 24/7.</p>
+    </div>
+    <div>
+      <p class="ft__h">Rajasthan Temple Routes</p>
+      <div class="ft__links">
+        <a href="../agra-to-karauli-taxi/">Agra to Karauli Taxi</a>
+        <a href="../agra-to-kaila-devi-temple-taxi/">Kaila Devi Temple</a>
+        <a href="../agra-to-mehandipur-balaji-taxi/">Mehandipur Balaji</a>
+        <a href="../agra-karauli-kaila-devi-balaji-tour/">Karauli + Kaila Devi + Balaji</a>
+        <a href="../agra-to-rajasthan-temple-tour/">Rajasthan Temple Tour</a>
+        <a href="../agra-temple-tour-by-cab/">All Temple Tours</a>
+      </div>
+    </div>
+    <div>
+      <p class="ft__h">Trips &amp; Tools</p>
+      <div class="ft__links">
+        <a href="../agra-to-mathura-taxi/">Agra to Mathura Taxi</a>
+        <a href="../fatehpur-sikri/">Fatehpur Sikri Trip</a>
+        <a href="../agra-local-sightseeing/">Agra Sightseeing</a>
+        <a href="../outstation-cabs-agra/">Outstation Cabs</a>
+        <a href="../agra-taxi-fares/">Taxi Fare List</a>
+        <a href="../blog/">Travel Blog</a>
+      </div>
+    </div>
+    <div>
+      <p class="ft__h">Contact</p>
+      <div class="ft__links">
+        <a href="tel:+918720081102">+91-87200 81102</a>
+        <a href="mailto:travels.padamshree@gmail.com">travels.padamshree@gmail.com</a>
+        <a href="../book/?route=agra-to-karauli-taxi">Book Online</a>
+        <a href="../contact/">Contact Us</a>
+        <a href="../about/">About Us</a>
+      </div>
+    </div>
+  </div>
+  <div class="ft__bot">
+    <div class="wrap">
+      <p>&copy; <span data-year>2026</span> Padma Shree Travels. All rights reserved.</p>
+      <p>Agra Taxi Service &bull; Temple Tours &bull; Outstation Cabs</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ===================== FLOATING WHATSAPP (tablet / desktop) ===================== -->
+<a id="waBtn" href="https://wa.me/918720081102?text=Hi%20Padma%20Shree%20Travels%2C%20I%20need%20an%20Agra%20to%20Karauli%20taxi.%0A%0ATravel%20date%3A%20%0APickup%20time%3A%20%0APickup%20point%20in%20Agra%3A%20%0APassengers%3A%20%0ACab%20type%3A%20%0AAdding%20Kaila%20Devi%20darshan%3A%20%0A%0APlease%20share%20availability%20and%20fare."
+   target="_blank" rel="noopener" class="waf" aria-label="Chat on WhatsApp about an Agra to Karauli taxi">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true">
+    <path d="M16.001 2.667c-7.363 0-13.334 5.97-13.334 13.333 0 2.353.615 4.646 1.782 6.665L2.667 29.333l6.83-1.75a13.27 13.27 0 0 0 6.504 1.66h.006c7.362 0 13.333-5.97 13.333-13.333 0-3.562-1.387-6.912-3.905-9.43a13.246 13.246 0 0 0-9.434-3.913Zm0 24.4h-.005a11.05 11.05 0 0 1-5.634-1.542l-.404-.24-4.053 1.039 1.081-3.951-.263-.406a11.02 11.02 0 0 1-1.69-5.9c0-6.1 4.968-11.067 11.073-11.067 2.957 0 5.736 1.153 7.828 3.246a10.99 10.99 0 0 1 3.24 7.828c0 6.101-4.969 11.067-11.073 11.067v-.074Zm6.07-8.287c-.332-.166-1.965-.97-2.27-1.08-.305-.11-.527-.166-.748.166-.222.333-.858 1.08-1.053 1.302-.194.222-.388.25-.72.083-.332-.166-1.403-.517-2.672-1.649-.988-.881-1.655-1.969-1.85-2.302-.194-.333-.02-.512.146-.678.15-.15.333-.389.499-.583.166-.194.222-.333.333-.555.11-.222.055-.417-.028-.583-.083-.166-.748-1.803-1.026-2.469-.27-.65-.545-.562-.748-.572-.194-.008-.416-.01-.638-.01a1.22 1.22 0 0 0-.887.417c-.305.333-1.165 1.139-1.165 2.777s1.192 3.222 1.358 3.444c.166.222 2.346 3.583 5.685 5.024.795.343 1.415.548 1.898.702.797.253 1.523.217 2.097.132.64-.096 1.965-.803 2.242-1.579.277-.777.277-1.442.194-1.58-.083-.138-.305-.221-.638-.388Z"/>
+  </svg>
+</a>
+
+<!-- ===================== MOBILE BOOKING BAR (phones only) ===================== -->
+<div class="mobile-bar">
+  <a href="tel:+918720081102" class="mobile-bar__call">&#9742; Call Now</a>
+  <a data-cta href="https://wa.me/918720081102?text=Hi%20Padma%20Shree%20Travels%2C%20I%20need%20an%20Agra%20to%20Karauli%20taxi.%0A%0ATravel%20date%3A%20%0APickup%20time%3A%20%0APickup%20point%20in%20Agra%3A%20%0APassengers%3A%20%0ACab%20type%3A%20%0AAdding%20Kaila%20Devi%20darshan%3A%20%0A%0APlease%20share%20availability%20and%20fare." target="_blank" rel="noopener" class="mobile-bar__wa">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true">
+      <path d="M16.001 2.667c-7.363 0-13.334 5.97-13.334 13.333 0 2.353.615 4.646 1.782 6.665L2.667 29.333l6.83-1.75a13.27 13.27 0 0 0 6.504 1.66h.006c7.362 0 13.333-5.97 13.333-13.333 0-3.562-1.387-6.912-3.905-9.43a13.246 13.246 0 0 0-9.434-3.913Zm0 24.4h-.005a11.05 11.05 0 0 1-5.634-1.542l-.404-.24-4.053 1.039 1.081-3.951-.263-.406a11.02 11.02 0 0 1-1.69-5.9c0-6.1 4.968-11.067 11.073-11.067 2.957 0 5.736 1.153 7.828 3.246a10.99 10.99 0 0 1 3.24 7.828c0 6.101-4.969 11.067-11.073 11.067v-.074Zm6.07-8.287c-.332-.166-1.965-.97-2.27-1.08-.305-.11-.527-.166-.748.166-.222.333-.858 1.08-1.053 1.302-.194.222-.388.25-.72.083-.332-.166-1.403-.517-2.672-1.649-.988-.881-1.655-1.969-1.85-2.302-.194-.333-.02-.512.146-.678.15-.15.333-.389.499-.583.166-.194.222-.333.333-.555.11-.222.055-.417-.028-.583-.083-.166-.748-1.803-1.026-2.469-.27-.65-.545-.562-.748-.572-.194-.008-.416-.01-.638-.01a1.22 1.22 0 0 0-.887.417c-.305.333-1.165 1.139-1.165 2.777s1.192 3.222 1.358 3.444c.166.222 2.346 3.583 5.685 5.024.795.343 1.415.548 1.898.702.797.253 1.523.217 2.097.132.64-.096 1.965-.803 2.242-1.579.277-.777.277-1.442.194-1.58-.083-.138-.305-.221-.638-.388Z"/>
+    </svg>
+    WhatsApp
+  </a>
 </div>
-<button class="mnav__cat" aria-expanded="false">Sightseeing <span class="mnav__arr">&#9662;</span></button>
-<div class="mnav__sub">
-<a href="../agra-local-sightseeing/">Agra Full Day Sightseeing <span class="ptag">&#8377;2,500</span></a>
-<a href="../fatehpur-sikri/">Fatehpur Sikri Day Trip <span class="ptag">&#8377;2,500</span></a>
-</div>
-<button class="mnav__cat" aria-expanded="false">Outstation <span class="mnav__arr">&#9662;</span></button>
-<div class="mnav__sub">
-<a href="../agra-to-gwalior/">Agra to Gwalior <span class="ptag">&#8377;3,000 &middot; RT</span></a>
-<a href="../agra-to-aligarh/">Agra to Aligarh <span class="ptag">&#8377;3,000 &middot; RT</span></a>
-<a href="../agra-to-firozabad/">Agra to Firozabad <span class="ptag">&#8377;2,500 &middot; RT</span></a>
-<a href="../agra-to-etawah/">Agra to Etawah <span class="ptag">&#8377;3,500 &middot; RT</span></a>
-<a href="../agra-to-jaipur-taxi/">Agra to Jaipur Taxi <span class="ptag">Fare on WhatsApp</span></a>
-</div>
-<a href="../agra-taxi-fares/">Taxi Fare List</a>
-<a href="../route-finder/">Route Finder</a>
-<a href="../fleet/">Our Fleet</a>
-<a href="../blog/">Travel Blog</a>
-<a href="../about/">About Us</a>
-<a href="../contact/">Contact / Book Now</a>
-<div class="mnav__cta">
-<a href="tel:+918720081102" class="btn btn--b btn--lg"><i data-lucide="phone" class="icon icon--white" aria-hidden="true"></i> Call Now</a>
-<a href="https://wa.me/918720081102?text=Hi!%20I%20want%20a%20cab%20from%20Agra%20to%20Karauli.%20Date%3A%20___%20%7C%20Passengers%3A%20___%20%7C%20Pickup%20point%3A%20___%20%7C%20Kaila%20Devi%20add-on%3A%20Yes%2FNo" class="btn btn--wa btn--lg" target="_blank" rel="noopener"><i data-lucide="message-circle" class="icon icon--white" aria-hidden="true"></i> WhatsApp</a>
-</div></div>
 
-<!-- Hero -->
-<section class="phero"><div class="container"><div class="phero__in">
-<div class="bc"><a href="../index.html">Home</a> &#8250; <a href="../agra-temple-tour-by-cab/">Temple Tours</a> &#8250; <span>Agra to Karauli Taxi</span></div>
-<h1>Agra to Karauli Taxi &#8211; AC Cab Booking with Fixed Fare</h1>
-<p class="phero__tag">Visiting Karauli's Madan Mohan Ji Temple and City Palace, or using Karauli as your gateway to Kaila Devi? Travel in a private AC cab with an experienced driver who knows the road and the town &#8212; fare fixed on WhatsApp before you travel.</p>
-<div class="pbanner">
-<div class="pbanner__amt">Fare on WhatsApp<small>Round Trip</small></div>
-<div class="pbanner__meta"><span><i data-lucide="map-pin" class="icon icon--sm" aria-hidden="true"></i> Approx. 150 km</span><span><i data-lucide="clock" class="icon icon--sm" aria-hidden="true"></i> 3&#8211;3.5 hrs one way</span><span>Same-day return possible</span></div>
-<div class="pbanner__cta">
-<a href="tel:+918720081102" class="btn btn--w btn--lg"><i data-lucide="phone" class="icon icon--black" aria-hidden="true"></i> Call +91 87200 81102</a>
-<a href="https://wa.me/918720081102?text=Hi!%20I%20want%20a%20cab%20from%20Agra%20to%20Karauli.%20Date%3A%20___%20%7C%20Passengers%3A%20___%20%7C%20Pickup%20point%3A%20___%20%7C%20Kaila%20Devi%20add-on%3A%20Yes%2FNo" class="btn btn--wa" target="_blank" rel="noopener"><i data-lucide="message-circle" class="icon icon--white" aria-hidden="true"></i> Get Karauli Fare on WhatsApp</a>
-</div></div>
-</div></div></section>
-
-<!-- Trust strip -->
-<section class="trust"><div class="container"><div class="trust__in">
-<div class="tchip"><div class="tchip__i"><i data-lucide="shield-check" aria-hidden="true"></i></div>Route Experience</div>
-<div class="tchip"><div class="tchip__i"><i data-lucide="wind" aria-hidden="true"></i></div>AC Cars</div>
-<div class="tchip"><div class="tchip__i"><i data-lucide="indian-rupee" aria-hidden="true"></i></div>Fixed Fare on WhatsApp</div>
-<div class="tchip"><div class="tchip__i"><i data-lucide="clock" aria-hidden="true"></i></div>Waiting Included</div>
-<div class="tchip"><div class="tchip__i"><i data-lucide="lock" aria-hidden="true"></i></div>Insured</div>
-</div></div></section>
-
-<!-- Quick Facts -->
-
-<!-- Route Image Strip (populated by js/route-images.js) -->
-<div class="rstrip-wrap"><div class="container"><div class="rstrip" data-rstrip aria-label="Photos related to this route"></div></div></div>
-
-<section class="section"><div class="container"><div class="prose">
-<h2>Quick Facts: Agra to Karauli by Taxi</h2>
-<div class="hblock">
-<p><strong>Distance from Agra:</strong> approx. 150 km via Fatehpur Sikri and the Bharatpur bypass</p>
-<p><strong>Travel time:</strong> about 3 to 3.5 hours each way by cab</p>
-<p><strong>Trip type:</strong> same-day round trip, with an optional Kaila Devi Temple add-on (+23 km)</p>
-<p><strong>Taxi fare:</strong> fixed fare for a same-day round trip in an AC sedan &#8212; confirmed on WhatsApp</p>
-<p><strong>Places covered:</strong> Madan Mohan Ji Temple, Karauli City Palace, with Kaila Devi Temple as an add-on</p>
-<p><strong>How to book:</strong> call or WhatsApp +91 87200 81102 &#8212; fixed fare confirmed in writing</p>
-</div>
-
-<h2>Taxi Fare from Agra to Karauli</h2>
-<div class="assure-strip">
-<span class="assure-strip__i">&#10003; Fare fixed on WhatsApp before you travel</span>
-<span class="assure-strip__i">&#10003; Driver's name, number &amp; car number shared before pickup</span>
-<span class="assure-strip__i">&#10003; No advance for most bookings</span>
-</div>
-<div class="ptbl-wrap">
-<table class="ptbl">
-<thead><tr><th>Cab Type</th><th>Seats</th><th>Same-Day Round Trip</th><th>With Kaila Devi Add-on</th></tr></thead>
-<tbody>
-<tr><td>AC Sedan (Dzire / Amaze)</td><td>4</td><td>Fare on WhatsApp</td><td>Fare on WhatsApp</td></tr>
-<tr><td>AC SUV (Ertiga)</td><td>6</td><td>Fare on WhatsApp</td><td>Fare on WhatsApp</td></tr>
-<tr><td>AC SUV (Innova Crysta)</td><td>7</td><td>Fare on WhatsApp</td><td>Fare on WhatsApp</td></tr>
-<tr><td>Tempo Traveller</td><td>12&#8211;15</td><td>Fare on WhatsApp</td><td>Fare on WhatsApp</td></tr>
-</tbody></table>
-</div>
-<p class="ptbl__note">Your fixed fare covers fuel and driver charges, including waiting at each stop. Tolls, Rajasthan state tax if applicable, and parking are paid by you at actuals &#8212; we explain every component on WhatsApp before you confirm, so there are no surprises.</p>
-
-<h2>Route and Travel Time</h2>
-<p>Karauli lies in eastern Rajasthan, about 150 km from Agra. Your cab takes the highway towards Fatehpur Sikri and the Bharatpur bypass, continues via Hindaun, and follows the Karauli road into town. Expect about 3 to 3.5 hours of driving each way. Most of the route is decent highway; the last stretch into Karauli town is a smaller road where an experienced driver helps.</p>
-<p>We pick up from any Agra address &#8212; hotel, home, Agra Cantt, Agra Fort station, or Kheria Airport &#8212; and plan a tea/washroom break on the way.</p>
-
-<h2>Places Covered</h2>
-<div class="fcards">
-<div class="fcard"><h4>Karauli Town</h4><p>A quiet Rajasthan heritage town on the banks of the Kalisil river, known for its pink sandstone buildings and easy-going pace &#8212; a pleasant stop on the way to or from Kaila Devi.</p></div>
-<div class="fcard"><h4>Madan Mohan Ji Temple</h4><p>Karauli's beloved Krishna temple, closely connected with the Braj tradition. A serene 30&#8211;45 minute stop that many families call a highlight of the day.</p></div>
-<div class="fcard"><h4>Karauli City Palace</h4><p>The town's historic royal palace, known for its painted courtyards and carved facades &#8212; a short heritage detour if your schedule allows.</p></div>
-<div class="fcard"><h4>Kaila Devi Temple (add-on)</h4><p>One of the region's most revered Shakti temples, about 23 km beyond Karauli town. Tell us on WhatsApp if you'd like to add Kaila Devi darshan to your Karauli trip.</p></div>
-</div>
-
-<h2>Suggested Same-Day Itinerary</h2>
-<div class="ptbl-wrap">
-<table class="ptbl">
-<thead><tr><th>Time</th><th>Plan</th></tr></thead>
-<tbody>
-<tr><td>5:30 AM</td><td>Pickup from your Agra hotel or home</td></tr>
-<tr><td>9:00 AM</td><td>Arrive Karauli; visit Madan Mohan Ji Temple and City Palace</td></tr>
-<tr><td>10:30 AM</td><td>Optional: continue 23 km to Kaila Devi Temple for darshan</td></tr>
-<tr><td>1:00 PM</td><td>Lunch in Karauli or on the highway</td></tr>
-<tr><td>7:00 &#8211; 8:00 PM</td><td>Drop back at your Agra address</td></tr>
-</tbody></table>
-</div>
-<p>Prefer a more relaxed pace or an overnight stop? Ask us on WhatsApp &#8212; we can plan the day around your family's comfort.</p>
-
-<h2>How Booking Works</h2>
-<p><strong>1. Message or call us</strong> on +91 87200 81102 with your travel date, passengers, and pickup point.</p>
-<p><strong>2. We confirm your fixed fare in writing on WhatsApp</strong>, including expected tolls, tax, and parking.</p>
-<p><strong>3. Before pickup, you receive the driver's name, mobile number, and car number on WhatsApp.</strong> Match the plate before boarding.</p>
-</div></div></section>
-
-<section class="section section--gray"><div class="container">
-<div class="text-center"><span class="sbadge">Why Us</span><h2 class="stitle">Why Choose Padma Shree Travels for Karauli</h2></div>
-<div class="incs">
-<div class="inc"><div class="inc__i"><i data-lucide="map-pin" aria-hidden="true"></i></div><div><h3>Route Experience</h3><p>Our drivers know the Hindaun&#8211;Karauli stretch and the town's temple and palace parking.</p></div></div>
-<div class="inc"><div class="inc__i"><i data-lucide="users" aria-hidden="true"></i></div><div><h3>Family &amp; Elder-Friendly</h3><p>The driver assists with boarding and luggage, and we plan breaks around your comfort, not the clock.</p></div></div>
-<div class="inc"><div class="inc__i"><i data-lucide="hand" aria-hidden="true"></i></div><div><h3>Waiting Included</h3><p>No waiting charges within the booked day, and your luggage stays locked in the car.</p></div></div>
-<div class="inc"><div class="inc__i"><i data-lucide="indian-rupee" aria-hidden="true"></i></div><div><h3>Honest Fares</h3><p>One fixed price confirmed in writing, extras explained upfront.</p></div></div>
-<div class="inc"><div class="inc__i"><i data-lucide="map" aria-hidden="true"></i></div><div><h3>Kaila Devi Add-on Ready</h3><p>Tell us if you want to combine Karauli with Kaila Devi darshan &#8212; we'll plan the timing.</p></div></div>
-<div class="inc"><div class="inc__i"><i data-lucide="shield-check" aria-hidden="true"></i></div><div><h3>Commercially Insured, Verified Drivers</h3><p>Details shared before pickup.</p></div></div>
-</div>
-</div></section>
-
-<!-- CTA -->
-<section class="cta"><div class="container">
-<h2>Ready to Book Your Karauli Taxi?</h2>
-<p>Fixed fare in writing. Driver details before pickup. Kaila Devi add-on available.</p>
-<div class="cta__acts">
-<a href="https://wa.me/918720081102?text=Hi!%20I%20want%20a%20cab%20from%20Agra%20to%20Karauli.%20Date%3A%20___%20%7C%20Passengers%3A%20___%20%7C%20Pickup%20point%3A%20___%20%7C%20Kaila%20Devi%20add-on%3A%20Yes%2FNo" class="btn btn--w btn--lg" target="_blank" rel="noopener"><i data-lucide="message-circle" class="icon icon--black" aria-hidden="true"></i> Get Fare on WhatsApp</a>
-<a href="tel:+918720081102" class="btn btn--wa btn--lg"><i data-lucide="phone" class="icon icon--white" aria-hidden="true"></i> +91 87200 81102</a>
-</div></div></section>
-
-<!-- FAQ -->
-<section class="section" id="faq"><div class="container"><div class="prose">
-<div class="text-center"><span class="sbadge">FAQ</span><h2 class="stitle">Frequently Asked Questions</h2></div>
-<div class="flist">
-<div class="fi open"><button class="fi__q">How far is Karauli from Agra?<span class="fi__tog">+</span></button><div class="fi__a"><p>Karauli is approximately 150 km from Agra &#8212; about 3 to 3.5 hours by private taxi via Fatehpur Sikri, the Bharatpur bypass, and Hindaun.</p></div></div>
-<div class="fi"><button class="fi__q">What is the taxi fare from Agra to Karauli?<span class="fi__tog">+</span></button><div class="fi__a"><p>A same-day round trip is available in an AC sedan, with Ertiga, Innova Crysta, and Tempo Traveller options for families and groups. Tolls, state tax, and parking are extra at actuals and told to you before booking. Message us on WhatsApp for today's fixed fare.</p></div></div>
-<div class="fi"><button class="fi__q">Can we visit Kaila Devi Temple on the same trip?<span class="fi__tog">+</span></button><div class="fi__a"><p>Yes. Kaila Devi Temple is about 23 km beyond Karauli town, and most visitors add it to the same day. Tell us on WhatsApp if you want the Kaila Devi add-on and we'll plan the timing accordingly.</p></div></div>
-<div class="fi"><button class="fi__q">What is there to see in Karauli town?<span class="fi__tog">+</span></button><div class="fi__a"><p>Karauli's main sights are the Madan Mohan Ji Temple, a beloved Krishna temple closely connected with the Braj tradition, and the old Karauli City Palace nearby. Both make an easy 30&#8211;45 minute stop.</p></div></div>
-<div class="fi"><button class="fi__q">Can we do Agra to Karauli as a one-day trip?<span class="fi__tog">+</span></button><div class="fi__a"><p>Yes. With an early morning pickup you can cover Karauli town and the Kaila Devi add-on and be back in Agra the same evening. Families preferring a slower pace can ask us for an overnight option.</p></div></div>
-<div class="fi"><button class="fi__q">Is it spelled Karauli or Karoli?<span class="fi__tog">+</span></button><div class="fi__a"><p>Both spellings refer to the same town in eastern Rajasthan. You'll see it written as Karauli or Karoli &#8212; we run cabs there from Agra throughout the year.</p></div></div>
-<div class="fi"><button class="fi__q">Is the cab suitable for families and senior citizens?<span class="fi__tog">+</span></button><div class="fi__a"><p>Yes. We recommend the Innova Crysta for the longer drive, plan breaks around your comfort, and the driver assists with boarding and luggage at every stop.</p></div></div>
-</div>
-</div></div></section>
-
-<!-- Related Trips -->
-<section class="section section--gray"><div class="container">
-<div class="text-center"><span class="sbadge">Related Trips</span><h2 class="stitle">Explore More Temple Tours</h2></div>
-<div class="rel-grid">
-<a href="../agra-to-kaila-devi-temple-taxi/" class="rel-card"><h4>Agra to Kaila Devi Temple Taxi</h4><p>Mata darshan near Karauli, approx. 170 km.</p><span class="rp">Fare on WhatsApp</span></a>
-<a href="../agra-karauli-kaila-devi-balaji-tour/" class="rel-card"><h4>Karauli + Kaila Devi + Balaji Tour</h4><p>Both temples in one planned day from Agra.</p><span class="rp">Fare on WhatsApp</span></a>
-<a href="../agra-to-mehandipur-balaji-taxi/" class="rel-card"><h4>Agra to Mehandipur Balaji Taxi</h4><p>Famous Hanuman temple, approx. 115 km.</p><span class="rp">Fare on WhatsApp</span></a>
-<a href="../agra-temple-tour-by-cab/" class="rel-card"><h4>All Temple Tours from Agra</h4><p>Browse every pilgrimage route we run, Braj and Rajasthan.</p><span class="rp">Fare on WhatsApp</span></a>
-<a href="../agra-to-rajasthan-temple-tour/" class="rel-card"><h4>Rajasthan Temple Tour Planner</h4><p>Kaila Devi, Balaji, Khatu Shyam Ji &amp; more &#8212; plan a multi-day yatra.</p><span class="rp">Fare on WhatsApp</span></a>
-</div>
-</div></section>
-
-<!-- Footer -->
-<footer class="ft"><div class="container"><div class="ft__grid">
-<div class="ft__brand"><div class="logo"><img src="../images/logo.png" alt="Padma Shree Travels" class="logo__img"><div class="logo__t" style="color:#fff">Padma Shree Travels<small>Agra Taxi Service</small></div></div>
-<p>Your trusted partner for taxi and cab booking in Agra. Affordable outstation trips, sightseeing tours, and airport transfers. Available 24/7.</p></div>
-<div><h4 class="ft__h">Top Routes</h4><ul class="ft__links">
-<li><a href="../agra-local-sightseeing/">Agra Sightseeing</a></li>
-<li><a href="../agra-to-mathura-taxi/">Mathura Taxi</a></li>
-<li><a href="../agra-to-vrindavan-cab/">Vrindavan Cab</a></li>
-<li><a href="../mathura-vrindavan-tour-from-agra/">Mathura Vrindavan Tour</a></li>
-<li><a href="../agra-to-mehandipur-balaji-taxi/">Mehandipur Balaji</a></li>
-<li><a href="../agra-to-kaila-devi-temple-taxi/">Kaila Devi</a></li>
-<li><a href="../agra-to-jaipur-taxi/">Agra to Jaipur</a></li>
-<li><a href="../agra-airport-taxi/">Airport Taxi</a></li><li><a href="../agra-taxi-fares/">Taxi Fare List</a></li><li><a href="../route-finder/">Route Finder</a></li><li><a href="../fleet/">Our Fleet</a></li></ul></div>
-<div><h4 class="ft__h">Tours</h4><ul class="ft__links">
-<li><a href="../agra-temple-tour-by-cab/">Temple Tours from Agra</a></li>
-<li><a href="../agra-to-rajasthan-temple-tour/">Rajasthan Temple Tour</a></li>
-<li><a href="../agra-karauli-kaila-devi-balaji-tour/">Karauli Kaila Devi Balaji Tour</a></li>
-<li><a href="../taj-mahal-sunrise-taxi/">Taj Mahal Sunrise Taxi</a></li>
-<li><a href="../outstation-cabs-agra/">Outstation Cabs from Agra</a></li></ul></div>
-<div><h4 class="ft__h">Contact Us</h4>
-<div class="ft__cr"><div class="ft__ci"><i data-lucide="map-pin" aria-hidden="true"></i></div><div>Rajeshwar Mandir, Kaveri Vihar Phase II, Shamsabad, Agra, Uttar Pradesh 282001</div></div>
-<div class="ft__cr"><div class="ft__ci"><i data-lucide="phone" aria-hidden="true"></i></div><div><a href="tel:+918720081102" style="color:var(--g400)">+91-87200 81102</a></div></div>
-<div class="ft__cr"><div class="ft__ci"><i data-lucide="mail" aria-hidden="true"></i></div><div><a href="mailto:travels.padamshree@gmail.com" style="color:var(--g400)">travels.padamshree@gmail.com</a></div></div>
-<p style="margin-top:.6rem"><a href="../about/" style="color:var(--g400);font-size:.85rem">About Us</a></p>
-</div></div>
-<div class="ft__bot"><div>&copy; 2025 Padma Shree Travels. All rights reserved.</div><div>Agra Taxi Service &bull; Outstation Cabs &bull; Sightseeing</div></div>
-</div></footer>
-
-<div class="mcta-bar"><div class="mcta-bar__note">Usually replies within minutes</div><div class="mcta-bar__btns"><a href="tel:+918720081102" class="mcta-bar__a mcta-bar__call">&#128222; Call Now</a><a href="https://wa.me/918720081102?text=Hi!%20I%20want%20a%20cab%20from%20Agra%20to%20Karauli.%20Date%3A%20___%20%7C%20Passengers%3A%20___%20%7C%20Pickup%20point%3A%20___%20%7C%20Kaila%20Devi%20add-on%3A%20Yes%2FNo" class="mcta-bar__a mcta-bar__wa" target="_blank" rel="noopener">&#128172; WhatsApp</a><a href="../book/?route=agra-to-karauli-taxi" class="mcta-bar__a mcta-bar__book">Book Now</a></div></div>
-<a href="https://wa.me/918720081102?text=Hi!%20I%20want%20a%20cab%20from%20Agra%20to%20Karauli.%20Date%3A%20___%20%7C%20Passengers%3A%20___%20%7C%20Pickup%20point%3A%20___%20%7C%20Kaila%20Devi%20add-on%3A%20Yes%2FNo" class="waf" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp"><i data-lucide="message-circle" aria-hidden="true"></i></a>
-<script src="../js/main.js"></script>
-<script src="../js/route-images.js" defer></script>
-<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-<script>lucide.createIcons();</script>
+<!-- Shared Google reviews: ONE dataset + ONE grid component, site-wide. -->
+<script src="../js/reviews-data.js" defer></script>
+<script src="../js/reviews-grid.js" defer></script>
+<!-- Conversion events into dataLayer, read by the GTM container above. -->
+<script src="../js/conversion-tracking.js" defer></script>
+<!-- Shared footer-year stamp — see js/landing.js for why this isn't inline. -->
+<script src="../js/landing.js" defer></script>
 </body>
 </html>

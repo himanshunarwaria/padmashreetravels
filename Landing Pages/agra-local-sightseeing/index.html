@@ -1,0 +1,833 @@
+<!--
+  ============================================================================
+  Padma Shree Travels — Agra Local Sightseeing Taxi | Landing Page
+  ============================================================================
+  UI SOURCE: cloned 1:1 from the approved neo-brutalist landing page template
+  (see ../agra-to-mathura/index.html and ../agra-to-Fatehpur Sikri/index.html).
+  Only business, copy, imagery and data changed — layout, spacing, section
+  rhythm, typography scale, borders, shadows and CTA styling are UNCHANGED.
+  Do not "modernize" this away.
+
+  DESIGN TOKENS (see :root below)
+    --accent       #2FE07E  bright green - CTA fill
+    --accent-deep  #22C55E  deeper green - hard shadow under stat cards
+    --ink          #000000  borders, headings, CTA text
+    --navy         #0E2439  dark band background
+    --shadow-hard  7px 7px 0  (no blur - signature of the design)
+    --radius       6px (cards 4px) - deliberately small
+    --container    1400px
+
+  KEY RULES OF THIS DESIGN - do not "modernize" these away:
+    * CTA text is BLACK, not white.
+    * Shadows have NO blur radius. Never use a soft/blurred shadow.
+    * Buttons and cards carry a 3px solid black border.
+    * CTA microcopy sits INLINE on one line (in parentheses), not stacked.
+    * Border radius stays small. No large pill/bento rounding.
+    * Hero lines 1-2 are LIGHT weight; only the value statement is extrabold.
+    * The right half of the navy band stays EMPTY. Do not fill it.
+    * No purple/blue AI gradients, glows, glass or neon. Green accent only.
+
+  REAL BUSINESS DATA (verified from live site: padmashreetravels.in/agra-local-sightseeing/)
+    Phone / WhatsApp .... +91-87200-81102
+    Email ................ travels.padamshree@gmail.com
+    Address .............. Rajeshwar Mandir, Kaveri Vihar Phase II, Shamsabad, Agra, UP 282001
+    Google reviews ....... https://g.page/r/CUjtXu1x_3bPEBM
+    Packages (sedan / SUV)
+      Half Day .................... 4 hrs / 40 km ....... ₹1,500 / ₹2,200
+      Full Day .................... 8 hrs / 80 km ....... ₹2,500 / ₹3,500
+      Full Day + Fatehpur Sikri ... ..................... ₹3,500 / ₹4,500
+      Airport Pickup + Sightseeing  ..................... ₹2,800 / ₹3,800
+      Airport Transfer Only ....... ..................... ₹800  / ₹1,200
+    Included ............. AC car, fuel, driver
+    Extra ................ monument entry tickets, tolls, parking (at actuals)
+
+  DEVIATIONS FROM THE FATEHPUR SIKRI BUILD (both requested in the brief)
+    1. One extra WHITE section — "Why Explore Agra By Private Cab?" — built
+       entirely from the existing .faq-item component at the existing FAQ
+       geometry (md:grid-cols-2, max-w-4xl). No new visual language.
+    2. A mobile-only sticky Call / WhatsApp bar (sm:hidden). The desktop page
+       is unchanged; the floating WhatsApp bubble is hidden on mobile so the
+       two never overlap, and body carries bottom padding so the bar never
+       covers the footer.
+
+  WHERE TO EDIT CONTENT
+    Everything data-driven lives in the PAGE DATA block in the <script> at the
+    bottom of this file: SITE.bookingUrl, SITE.stats, SITE.statsRepeat,
+    SITE.creatives, SITE.results. A grid slot with no "src" renders as an empty
+    reference-style frame with a tiny label — intentional where we don't yet
+    have a genuine photo. Drop in a real photo and give it "src" to fill the
+    slot. Do not fill these with stock photos of the wrong monument or
+    AI-generated architecture.
+  ============================================================================
+-->
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="robots" content="index, follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agra Local Sightseeing Taxi &#8377;2500 | Full Day Cab &ndash; Padma Shree Travels</title>
+  <meta name="description" content="Book an Agra local sightseeing taxi from &#8377;2,500 full day. Taj Mahal, Agra Fort, Baby Taj, Sikandra &amp; Mehtab Bagh in one private AC cab. Fixed fare. Call +91-87200-81102." />
+  <meta name="keywords" content="agra local sightseeing taxi, agra sightseeing cab, agra full day sightseeing taxi, agra one day tour cab, agra sightseeing taxi price, taj mahal agra fort taxi, agra city tour taxi, agra sightseeing package by car" />
+  <link rel="canonical" href="https://www.padmashreetravels.in/agra-local-sightseeing/" />
+
+  <meta property="og:title" content="Agra Local Sightseeing Taxi &ndash; Full Day Tour from &#8377;2500 | Padma Shree Travels" />
+  <meta property="og:description" content="Taj Mahal, Agra Fort, Baby Taj, Sikandra and Mehtab Bagh in one private AC cab. Full day from &#8377;2,500 with a driver who stays with you all day." />
+  <meta property="og:url" content="https://www.padmashreetravels.in/agra-local-sightseeing/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_IN" />
+  <meta property="og:image" content="https://www.padmashreetravels.in/images/logo.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Agra Local Sightseeing Taxi &ndash; Full Day Tour from &#8377;2500 | Padma Shree Travels" />
+  <meta name="twitter:description" content="Taj Mahal, Agra Fort, Baby Taj, Sikandra and Mehtab Bagh in one private AC cab. Full day from &#8377;2,500." />
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='10' fill='%232FE07E' stroke='%23000' stroke-width='8'/%3E%3Cpath d='M38 30 L38 70 M38 50 L62 50 M62 30 L62 70' stroke='%23000' stroke-width='9' stroke-linecap='square' fill='none'/%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" href="assets/img/taj-mahal-sunrise.webp" fetchpriority="high" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink:    { 950: '#0A0F14', 900: '#111820' },
+            navy:   { 900: '#0E2439' },
+            accent: { DEFAULT: '#2FE07E', deep: '#22C55E', dark: '#15803D' },
+            warn:   { 400: '#FBBF24' }
+          },
+          fontFamily: { display: ['Poppins', 'ui-sans-serif', 'system-ui', 'sans-serif'] },
+          maxWidth: { container: '1400px' }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root{
+      --accent:#2FE07E;
+      --accent-deep:#22C55E;
+      --ink:#000;
+      --navy:#0E2439;
+      --gold:#EFC75E;   /* hover fill for every CTA button */
+    }
+    body{ font-family:'Poppins', ui-sans-serif, system-ui, sans-serif; overflow-x:hidden; }
+
+    /* ---------- PrimaryCTA : one component, every instance identical ----------
+       Black text, 3px black border, hard black offset shadow, microcopy inline.
+       Hover presses the button into its own shadow.                          */
+    .btn-primary{
+      display:inline-block;
+      background:var(--accent);
+      color:#000;
+      font-weight:700;
+      font-size:clamp(13px, 1.15vw, 17px);
+      line-height:1.35;
+      padding:clamp(16px,1.9vw,24px) clamp(20px,3vw,44px);
+      border:3px solid #000;
+      border-radius:6px;
+      box-shadow:7px 7px 0 #000;
+      text-align:center;
+      transition:background-color .2s ease, transform 180ms ease, box-shadow 180ms ease;
+    }
+    .btn-primary:hover{ background:var(--gold); transform:translate(3px,3px); box-shadow:4px 4px 0 #000; }
+    .btn-primary:active{ transform:translate(7px,7px); box-shadow:0 0 0 #000; }
+
+    .btn-header{
+      display:inline-block; background:var(--accent); color:#000;
+      font-weight:700; font-size:13px; padding:8px 16px;
+      border:2px solid #000; border-radius:5px; box-shadow:3px 3px 0 #000;
+      transition:background-color .2s ease, transform 180ms ease, box-shadow 180ms ease;
+    }
+    .btn-header:hover{ background:var(--gold); transform:translate(2px,2px); box-shadow:1px 1px 0 #000; }
+
+    /* ---------- Hero band : near-black with a subtle green technological wash.
+       Deliberately restrained - dark bokeh + faint diagonal streaks, nothing
+       neon, no purple, no glow orbs.                                        */
+    .hero-bg{
+      background-color:#000;
+      background-image:
+        radial-gradient(circle at 62% 18%, rgba(34,197,94,.10) 0%, transparent 42%),
+        radial-gradient(circle at 88% 72%, rgba(34,197,94,.09) 0%, transparent 38%),
+        radial-gradient(circle at 30% 88%, rgba(34,197,94,.05) 0%, transparent 45%),
+        radial-gradient(circle at 74% 30%, rgba(120,220,150,.05) 0%, transparent 9%),
+        radial-gradient(circle at 55% 62%, rgba(120,220,150,.045) 0%, transparent 7%),
+        radial-gradient(circle at 93% 22%, rgba(120,220,150,.05) 0%, transparent 6%),
+        radial-gradient(circle at 40% 12%, rgba(120,220,150,.035) 0%, transparent 5%),
+        repeating-linear-gradient(118deg, rgba(180,255,200,.030) 0 1px, transparent 1px 14px),
+        repeating-linear-gradient(62deg,  rgba(180,255,200,.020) 0 1px, transparent 1px 22px);
+    }
+
+    /* ---------- Black bands : subtle wireframe mesh, dense at the edges,
+       fading out through the middle so text stays clean.                    */
+    .mesh-dark{ background-color:#000; position:relative; isolation:isolate; }
+    .mesh-dark::before{
+      content:""; position:absolute; inset:0; z-index:-1; pointer-events:none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.075) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.075) 1px, transparent 1px);
+      background-size:64px 64px;
+      -webkit-mask-image:radial-gradient(ellipse 62% 58% at 50% 50%, transparent 30%, #000 100%);
+              mask-image:radial-gradient(ellipse 62% 58% at 50% 50%, transparent 30%, #000 100%);
+    }
+
+    /* ---------- Hero visual frame : rounded container, light hairline
+       border, black interior. One visual only - no floating cards.          */
+    .frame-hero{
+      border:2px solid rgba(255,255,255,.85);
+      border-radius:18px;
+      background:#000;
+      overflow:hidden;
+    }
+    .frame-hero img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+    /* ---------- Stat : white card, black border, hard GREEN offset shadow ---------- */
+    .stat{
+      background:#fff; border:3px solid #000; border-radius:4px;
+      box-shadow:8px 8px 0 var(--accent-deep);
+      padding:clamp(14px,1.6vw,23px) 12px; text-align:center;
+    }
+    .stat-num{
+      font-weight:800; color:#000; line-height:1; letter-spacing:-.02em;
+      font-size:clamp(2rem, 5.4vw, 4.2rem);
+    }
+    .stat-label{ margin-top:9px; font-size:clamp(11px,1.05vw,15px); color:#111; font-weight:400; }
+
+    /* ---------- Media frames ----------
+       .ph  = empty slot, dashed, exactly as the reference renders an unloaded
+              image well. .ph.filled drops the dash once media is present.
+       Every slot on this page currently carries a genuine photograph. If a
+       future slot has no real photo, leave "src" off rather than using a wrong
+       monument or an AI-generated building.                                  */
+    .ph{
+      border:2px dashed #4B5563; border-radius:2px; background:#fff;
+      position:relative; overflow:hidden;
+    }
+    .ph.filled{ border:3px solid #000; border-radius:4px; box-shadow:6px 6px 0 var(--accent-deep); background:#0A0F14; }
+    .ph-slot{
+      position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+      font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:#9CA3AF; font-weight:600;
+      text-align:center; padding:0 10%;
+    }
+    .ph img{ width:100%; height:100%; object-fit:cover; display:block; }
+    .ph-tag{
+      position:absolute; left:8px; bottom:8px; z-index:2;
+      background:rgba(0,0,0,.72); color:#fff; font-size:9px; font-weight:700;
+      letter-spacing:.14em; text-transform:uppercase; padding:3px 7px; border-radius:2px;
+    }
+
+    /* ---------- Bordered list rows ---------- */
+    .row-dark{ border:2px solid rgba(255,255,255,.3); border-radius:4px; }
+    .row-light{ border:1.5px solid #000; border-radius:4px; background:#fff; }
+
+    /* ---------- FAQ item : same bordered-card language as row-light, stacked
+       question + answer instead of a single line. Also used for the
+       "Why Explore Agra By Private Cab?" benefit cards.                     */
+    .faq-item{ border:1.5px solid #000; border-radius:4px; background:#fff; padding:16px 18px; }
+    .faq-item h3{ font-weight:700; font-size:13.5px; }
+    .faq-item p{ margin-top:6px; font-size:13px; color:#333; line-height:1.55; }
+
+    /* ---------- FAQ accordion : identical card to .faq-item, collapsed by
+       default so a long FAQ list no longer pushes the booking CTA far down
+       the page on mobile. Answers stay in the HTML for search engines.     */
+    .faq-acc{ border:1.5px solid #000; border-radius:4px; background:#fff; padding:16px 18px; }
+    .faq-acc summary{
+      font-weight:700; font-size:13.5px; line-height:1.4; cursor:pointer;
+      list-style:none; display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
+    }
+    .faq-acc summary::-webkit-details-marker{ display:none; }
+    .faq-acc summary::after{ content:"+"; font-weight:700; font-size:15px; line-height:1.3; flex:0 0 auto; }
+    .faq-acc[open] summary::after{ content:"\2212"; }
+    .faq-acc p{ margin-top:8px; font-size:13px; color:#333; line-height:1.55; }
+
+    /* ---------- Pickup chip : compact bordered badge, same visual family
+       as row-light, used in place of client logos.                         */
+    .chip{ border:1.5px solid #000; border-radius:4px; background:#fff; padding:14px 10px; text-align:center; }
+    .chip-label{ font-size:12.5px; font-weight:700; line-height:1.3; }
+
+    h1,h2,h3{ color:#000; }
+    a,button{ transition:180ms ease; }
+
+    /* ---------- Mobile booking bar : phones only. Desktop is untouched. ---------- */
+    .mobile-bar{ border-top:2px solid #000; }
+    .mobile-bar a{
+      display:flex; align-items:center; justify-content:center; gap:7px;
+      font-weight:700; font-size:14px; padding:13px 8px; color:#000;
+      transition:background-color .2s ease;
+    }
+    .mobile-bar a:hover{ background:var(--gold); }
+    @media (max-width:639px){ body{ padding-bottom:54px; } }
+  </style>
+</head>
+
+<body class="bg-white text-black antialiased">
+
+  <!-- ===================== SCHEMA ===================== -->
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+    {"@type":"Question","name":"How much does Agra local sightseeing cost?","acceptedAnswer":{"@type":"Answer","text":"A full-day Agra sightseeing taxi starts at ₹2,500 for an AC sedan (8 hours / 80 km) and ₹3,500 for an AC SUV. A half-day package covering the Taj Mahal and Agra Fort starts at ₹1,500 for a sedan (4 hours / 40 km) and ₹2,200 for an SUV. Fares include fuel, driver and AC car."}},
+    {"@type":"Question","name":"Which places are included in Agra local sightseeing?","acceptedAnswer":{"@type":"Answer","text":"The full-day tour covers the Taj Mahal, Agra Fort, the Tomb of Itimad-ud-Daulah (Baby Taj), Akbar's Tomb at Sikandra, Mehtab Bagh and Sadar Bazaar for shopping. You can add or skip stops depending on your interests."}},
+    {"@type":"Question","name":"Is monument entry included in the taxi fare?","acceptedAnswer":{"@type":"Answer","text":"No. Monument entry tickets are not included and are paid separately at each site. Tolls and parking are also paid by the customer at actuals."}},
+    {"@type":"Question","name":"Are fuel and driver charges included?","acceptedAnswer":{"@type":"Answer","text":"Yes. All package fares include the AC car, fuel and driver charges. Only monument entry tickets, tolls and parking are extra, and these are told to you upfront."}},
+    {"@type":"Question","name":"Can I customise the Agra sightseeing tour?","acceptedAnswer":{"@type":"Answer","text":"Yes. The itinerary is a suggestion, not a fixed route. You can skip monuments, spend longer at the Taj Mahal, start later, add shopping time or include a railway station or airport drop at the end."}},
+    {"@type":"Question","name":"Can you pick me up from Agra Cantt railway station?","acceptedAnswer":{"@type":"Answer","text":"Yes. We pick up from any address in Agra, including Agra Cantt railway station, Agra Fort railway station, Agra (Kheria) Airport and hotels across the city."}},
+    {"@type":"Question","name":"Can I keep my luggage in the car during the tour?","acceptedAnswer":{"@type":"Answer","text":"Yes. Your luggage stays in the car while you visit each monument, which is useful if you are arriving from the railway station or airport and heading onward the same day."}},
+    {"@type":"Question","name":"Can I add Fatehpur Sikri to the tour?","acceptedAnswer":{"@type":"Answer","text":"Yes. The Full Day + Fatehpur Sikri package covers Agra sightseeing plus Fatehpur Sikri and costs ₹3,500 for an AC sedan and ₹4,500 for an AC SUV."}},
+    {"@type":"Question","name":"Can you drop me at the airport or railway station afterwards?","acceptedAnswer":{"@type":"Answer","text":"Yes. We can pick you up from Agra Airport or the railway station, cover your sightseeing and drop you back for your onward journey. The Airport Pickup + Sightseeing package is ₹2,800 for a sedan and ₹3,800 for an SUV; an airport transfer on its own starts at ₹800."}},
+    {"@type":"Question","name":"What time should I begin the Agra sightseeing tour?","acceptedAnswer":{"@type":"Answer","text":"We recommend starting at sunrise, around 5:30–6:00 AM, so the Taj Mahal is cooler and less crowded, with the full tour usually finishing by 4–5 PM. A later start is completely fine if it suits your schedule better."}}
+  ]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","@id":"https://www.padmashreetravels.in/#business","name":"Padma Shree Travels","url":"https://www.padmashreetravels.in/","telephone":"+91-87200-81102","email":"travels.padamshree@gmail.com","image":"https://www.padmashreetravels.in/images/logo.png","address":{"@type":"PostalAddress","streetAddress":"Rajeshwar Mandir, Kaveri Vihar Phase II, Shamsabad","addressLocality":"Agra","addressRegion":"Uttar Pradesh","postalCode":"282001","addressCountry":"IN"},"geo":{"@type":"GeoCoordinates","latitude":27.1767,"longitude":78.0081},"openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"00:00","closes":"23:59"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.padmashreetravels.in/"},{"@type":"ListItem","position":2,"name":"Agra Local Sightseeing","item":"https://www.padmashreetravels.in/agra-local-sightseeing/"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","serviceType":"Sightseeing Taxi Service","name":"Agra Local Sightseeing Taxi","description":"Private AC cab for full-day Agra sightseeing covering the Taj Mahal, Agra Fort, Itimad-ud-Daulah (Baby Taj), Akbar's Tomb at Sikandra, Mehtab Bagh and Sadar Bazaar, with hotel, railway station or airport pickup.","provider":{"@type":"LocalBusiness","name":"Padma Shree Travels","telephone":"+91-87200-81102"},"areaServed":["Agra","Fatehpur Sikri"],"hasOfferCatalog":{"@type":"OfferCatalog","name":"Agra Sightseeing Packages","itemListElement":[
+    {"@type":"Offer","name":"Half Day Agra Sightseeing – AC Sedan (4 hrs / 40 km)","price":"1500","priceCurrency":"INR"},
+    {"@type":"Offer","name":"Half Day Agra Sightseeing – AC SUV (4 hrs / 40 km)","price":"2200","priceCurrency":"INR"},
+    {"@type":"Offer","name":"Full Day Agra Sightseeing – AC Sedan (8 hrs / 80 km)","price":"2500","priceCurrency":"INR"},
+    {"@type":"Offer","name":"Full Day Agra Sightseeing – AC SUV (8 hrs / 80 km)","price":"3500","priceCurrency":"INR"},
+    {"@type":"Offer","name":"Full Day + Fatehpur Sikri – AC Sedan","price":"3500","priceCurrency":"INR"},
+    {"@type":"Offer","name":"Full Day + Fatehpur Sikri – AC SUV","price":"4500","priceCurrency":"INR"},
+    {"@type":"Offer","name":"Airport Pickup + Sightseeing – AC Sedan","price":"2800","priceCurrency":"INR"},
+    {"@type":"Offer","name":"Airport Pickup + Sightseeing – AC SUV","price":"3800","priceCurrency":"INR"},
+    {"@type":"Offer","name":"Agra Airport Transfer Only – AC Sedan","price":"800","priceCurrency":"INR"},
+    {"@type":"Offer","name":"Agra Airport Transfer Only – AC SUV","price":"1200","priceCurrency":"INR"}
+  ]}}</script>
+
+  <!-- ===================== STICKY HEADER ===================== -->
+  <header class="sticky top-0 z-50 bg-ink-950 border-b-2 border-black">
+    <div class="max-w-container mx-auto px-5 sm:px-8 py-3 flex items-center justify-between gap-4">
+      <a href="https://www.padmashreetravels.in/" class="flex items-center gap-2 font-display font-bold text-sm sm:text-base text-white shrink-0 min-w-0">
+        <span class="inline-flex h-7 w-7 items-center justify-center rounded-[4px] bg-accent border-2 border-black text-black text-xs font-black shrink-0">PS</span>
+        <span class="hidden sm:inline truncate">Padma Shree Travels</span>
+      </a>
+      <nav class="hidden lg:flex items-center gap-5 text-xs font-medium text-white/75">
+        <a href="https://www.padmashreetravels.in/" class="hover:text-accent">Home</a>
+        <a href="https://www.padmashreetravels.in/agra-temple-tour-by-cab/" class="hover:text-accent">Pilgrimage</a>
+        <a href="https://www.padmashreetravels.in/agra-local-sightseeing/" class="hover:text-accent">Sightseeing</a>
+        <a href="https://www.padmashreetravels.in/outstation-cabs-agra/" class="hover:text-accent">Outstation</a>
+        <a href="https://www.padmashreetravels.in/agra-taxi-fares/" class="hover:text-accent">Fares &amp; Tools</a>
+        <a href="https://www.padmashreetravels.in/blog/" class="hover:text-accent">Blog</a>
+        <a href="https://www.padmashreetravels.in/about/" class="hover:text-accent">About</a>
+        <a href="https://www.padmashreetravels.in/contact/" class="hover:text-accent">Contact</a>
+      </nav>
+      <a data-cta href="#" class="btn-header shrink-0 whitespace-nowrap"><span class="sm:hidden">Book Now</span><span class="hidden sm:inline">Book on WhatsApp</span></a>
+    </div>
+  </header>
+
+  <!-- ===================== HERO (dark band) =====================
+       The H1 carries the full service name for search, then the two display
+       lines the approved design shows. Visual result is identical to the
+       reference: light-weight line 1, light-weight line 2, extrabold value
+       statement, amber supporting line. -->
+  <section id="hero" class="hero-bg">
+    <div class="max-w-container mx-auto px-5 sm:px-8 py-16 sm:py-20 lg:py-[106px] grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-6 items-center">
+      <div>
+        <div class="text-[11px] text-white/50"><a href="https://www.padmashreetravels.in/" class="hover:text-accent">Home</a> › <span class="text-white/70">Agra Local Sightseeing</span></div>
+        <h1 class="mt-3 font-display font-light uppercase !text-white text-[1.6rem] sm:text-[2.1rem] lg:text-[2.65rem] leading-[1.14] tracking-tight">
+          <span class="sr-only">Agra Local Sightseeing Taxi &mdash; </span>See The Best Of Agra
+          <span class="block mt-7">Without Changing Cabs<br />At Every Stop.</span>
+        </h1>
+        <p class="mt-8 font-display font-extrabold uppercase text-white text-[1.3rem] sm:text-[1.65rem] lg:text-[2.05rem] leading-[1.16] tracking-tight">
+          Full-Day Private AC Cab<br />From &#8377;2,500
+        </p>
+        <p class="mt-6 text-xs sm:text-sm text-warn-400 font-medium max-w-md leading-relaxed">
+          <span class="font-bold">From &#8377;2,500 full day &middot; Taj Mahal, Agra Fort, Baby Taj, Sikandra &amp; Mehtab Bagh</span> &mdash; explore Agra comfortably at your own pace.
+        </p>
+
+        <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+          <a data-cta href="#" class="btn-primary">Get Sightseeing Fare on WhatsApp</a>
+          <a href="tel:+918720081102" class="text-sm font-semibold text-white/75 hover:text-accent underline underline-offset-2">or call +91-87200 81102</a>
+        </div>
+      </div>
+
+      <div class="frame-hero aspect-[16/9] w-full">
+        <img src="assets/img/taj-mahal-sunrise.webp" alt="Taj Mahal at sunrise during an Agra local sightseeing tour" width="1600" height="900" fetchpriority="high" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PROOF STRIP ===================== -->
+  <section class="bg-white border-b-2 border-black">
+    <div class="max-w-container mx-auto px-5 sm:px-8 py-3.5 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs sm:text-[13px]">
+      <a href="https://g.page/r/CUjtXu1x_3bPEBM" target="_blank" rel="noopener" class="flex items-center gap-2 hover:opacity-80">
+        <span class="text-accent-deep text-sm tracking-tighter">★★★★★</span>
+        <span class="text-accent-dark font-medium">Verified Google Reviews</span>
+      </a>
+      <div class="flex flex-wrap justify-center items-center gap-2 text-black font-medium">
+        <span>Private AC Cab</span><span class="text-black/30">&bull;</span>
+        <span>Fixed Fare</span><span class="text-black/30">&bull;</span>
+        <span>Flexible Itinerary</span><span class="text-black/30">&bull;</span>
+        <span>Local Agra Drivers</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== INTRO + PRIMARY CTA ===================== -->
+  <section class="bg-white px-5 sm:px-8 pt-14 sm:pt-16 pb-10 text-center">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="font-display font-bold text-lg sm:text-xl lg:text-[1.5rem] leading-snug">
+        See Agra&rsquo;s Major Monuments In One Comfortable Day
+      </h2>
+      <p class="mt-4 italic font-medium text-sm sm:text-base text-black">
+        Your <span class="not-italic font-bold text-accent-dark">private cab</span> picks you up from your hotel, station, airport or chosen location in Agra and stays with you throughout your sightseeing day.
+      </p>
+      <p class="mt-2 text-sm sm:text-base text-black/70">Visit the places you want, spend more time where you like and skip what you don&rsquo;t.</p>
+    </div>
+    <div class="mt-9">
+      <a data-cta href="#" class="btn-primary">Book Your Agra Sightseeing Cab on WhatsApp</a>
+    </div>
+  </section>
+
+  <!-- ===================== TRUST LINE ===================== -->
+  <div class="bg-white px-5 pb-9 text-center">
+    <p class="font-display font-bold text-base sm:text-xl">Trusted Agra Taxi Service For Local Sightseeing</p>
+  </div>
+
+  <!-- ===================== STATS ROW (1 of 2) - rendered from SITE.stats ===================== -->
+  <section class="bg-white px-5 sm:px-8">
+    <div data-stats class="max-w-container mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-5"></div>
+  </section>
+
+  <!-- ===================== GOOGLE REVIEWS =====================
+       Shared component. Content lives in ../_shared/reviews-data.js — never
+       hard-code reviews here. Section self-removes while the pool is empty. -->
+  <section data-reviews-grid data-page="agra-local-sightseeing"></section>
+
+  <!-- ===================== DISCOVER AGRA (12 slots) - rendered from SITE.creatives ==============
+       Reference geometry: 3 columns, 4:3 cells, 20px column gap, 70px row gap. -->
+  <section class="bg-white pt-[53px] pb-16 sm:pb-20 px-5 sm:px-8">
+    <div class="max-w-container mx-auto">
+      <h2 class="text-center font-display font-bold text-xl sm:text-2xl tracking-tight mb-9">Discover Agra</h2>
+      <div data-creatives class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-10 lg:gap-y-[70px]"></div>
+    </div>
+  </section>
+
+  <!-- ===================== PICKUP LOCATIONS (was client logos) ===================== -->
+  <section class="bg-white pb-[71px] px-5 sm:px-8">
+    <div class="max-w-container mx-auto">
+      <h2 class="text-center font-display font-bold text-base sm:text-xl">Pickup From Anywhere In Agra</h2>
+      <div class="mt-8 grid grid-cols-2 sm:grid-cols-5 gap-4">
+        <div class="chip"><p class="chip-label">Hotels in Agra</p></div>
+        <div class="chip"><p class="chip-label">Agra Cantt Railway Station</p></div>
+        <div class="chip"><p class="chip-label">Agra Fort Railway Station</p></div>
+        <div class="chip"><p class="chip-label">Agra Airport (Kheria)</p></div>
+        <div class="chip"><p class="chip-label">Any Agra City Address</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== EVERYTHING YOU NEED (navy band) ===================== -->
+  <section class="bg-navy-900 py-16 sm:py-20 px-5 sm:px-8">
+    <div class="max-w-container mx-auto">
+      <h2 class="text-center font-display font-bold !text-white text-xl sm:text-2xl lg:text-[1.9rem] leading-snug max-w-4xl mx-auto">
+        Everything You Need For An Easy Agra Sightseeing Day.
+      </h2>
+      <p class="mt-4 text-center text-white/70 text-sm sm:text-base max-w-2xl mx-auto">One cab stays with you throughout the tour, so you can move comfortably between Agra&rsquo;s major attractions.</p>
+      <div class="mt-9 text-center">
+        <a data-cta href="#" class="btn-primary">Book on WhatsApp</a>
+      </div>
+
+      <!-- Reference keeps the right half of this band deliberately empty - the
+           outlined list sits alone in the left column. Do not fill it. -->
+      <div class="mt-14 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+        <div>
+          <h3 class="font-display font-bold !text-white text-base sm:text-lg max-w-xs leading-snug">
+            What&rsquo;s Included In Your Sightseeing Day
+          </h3>
+          <ul class="mt-7 space-y-[23px] max-w-md">
+            <li class="row-dark px-4 py-2 text-white text-[13px] sm:text-sm font-medium">Private AC Cab</li>
+            <li class="row-dark px-4 py-2 text-white text-[13px] sm:text-sm font-medium">Dedicated Driver</li>
+            <li class="row-dark px-4 py-2 text-white text-[13px] sm:text-sm font-medium">Hotel Pickup</li>
+            <li class="row-dark px-4 py-2 text-white text-[13px] sm:text-sm font-medium">Railway Station Pickup</li>
+            <li class="row-dark px-4 py-2 text-white text-[13px] sm:text-sm font-medium">Airport Pickup</li>
+            <li class="row-dark px-4 py-2 text-white text-[13px] sm:text-sm font-medium">Luggage Storage</li>
+            <li class="row-dark px-4 py-2 text-white text-[13px] sm:text-sm font-medium">Flexible Itinerary</li>
+            <li class="row-dark px-4 py-2 text-white text-[13px] sm:text-sm font-medium">Multiple Monument Stops</li>
+            <li class="row-dark px-4 py-2 text-white text-[13px] sm:text-sm font-medium">Fixed Fare Confirmation</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CTA + STATS ROW (2 of 2) - white band ==================== -->
+  <section class="bg-white px-5 sm:px-8 pt-[107px] text-center">
+    <a data-cta href="#" class="btn-primary">Book Your Agra Sightseeing Cab on WhatsApp</a>
+  </section>
+
+  <section class="bg-white pt-[68px] px-5 sm:px-8">
+    <div data-stats-2 class="max-w-container mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-5"></div>
+  </section>
+
+  <!-- ===================== PACKAGES & FARES =====================
+       Same slot, same geometry and same components as the reference's
+       "Choose Your Cab" band: heading, a 3-up row of stat cards at max-w-3xl,
+       then supporting rows. The two airport packages and the included/extra
+       disclosure use the existing .row-light component. -->
+  <section data-track="pricing" class="bg-white pt-[62px] pb-4 px-5 sm:px-8">
+    <div class="max-w-container mx-auto">
+      <h2 class="text-center font-display font-bold text-xl sm:text-2xl tracking-tight">Agra Sightseeing Packages &amp; Fares</h2>
+      <div class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 max-w-3xl mx-auto">
+        <div class="stat">
+          <p class="stat-num">&#8377;1,500</p>
+          <p class="stat-label"><strong>Half Day</strong> &mdash; 4 hrs / 40 km<br />Taj Mahal + Agra Fort<br /><span class="text-black/60">AC SUV &#8377;2,200</span></p>
+        </div>
+        <div class="stat">
+          <p class="stat-num">&#8377;2,500</p>
+          <p class="stat-label"><strong>Full Day</strong> &mdash; 8 hrs / 80 km<br />All major Agra monuments<br /><span class="text-black/60">AC SUV &#8377;3,500</span></p>
+        </div>
+        <div class="stat">
+          <p class="stat-num">&#8377;3,500</p>
+          <p class="stat-label"><strong>Full Day + Fatehpur Sikri</strong><br />Agra + Fatehpur Sikri<br /><span class="text-black/60">AC SUV &#8377;4,500</span></p>
+        </div>
+      </div>
+
+      <!-- Airport packages - same bordered-row language, kept compact -->
+      <ul class="mt-8 space-y-3 max-w-3xl mx-auto">
+        <li class="row-light px-4 py-3.5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 text-[13px] sm:text-sm">
+          <span><strong>Airport Pickup + Sightseeing</strong> &mdash; Agra Airport pickup, full sightseeing day &amp; drop</span>
+          <span class="font-bold whitespace-nowrap">Sedan &#8377;2,800 &middot; SUV &#8377;3,800</span>
+        </li>
+        <li class="row-light px-4 py-3.5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 text-[13px] sm:text-sm">
+          <span><strong>Airport Transfer Only</strong> &mdash; Agra Airport pickup or drop, no sightseeing</span>
+          <span class="font-bold whitespace-nowrap">Sedan &#8377;800 &middot; SUV &#8377;1,200</span>
+        </li>
+      </ul>
+
+      <!-- Pricing disclosure - deliberately full size, not footer-sized -->
+      <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
+        <div class="row-light px-4 py-4">
+          <h3 class="font-display font-bold text-[13.5px]">Included In Every Fare</h3>
+          <p class="mt-1.5 text-[13px] text-black/75 leading-relaxed">AC car &bull; Fuel &bull; Driver</p>
+        </div>
+        <div class="row-light px-4 py-4">
+          <h3 class="font-display font-bold text-[13.5px]">Paid Separately By You</h3>
+          <p class="mt-1.5 text-[13px] text-black/75 leading-relaxed">Monument entry tickets &bull; Tolls &bull; Parking (at actuals)</p>
+        </div>
+      </div>
+      <p class="mt-6 text-center text-xs sm:text-sm text-black/60 max-w-xl mx-auto">Your fare is confirmed on WhatsApp before you travel &mdash; no surge pricing and no hidden fees at the end of the day.</p>
+    </div>
+  </section>
+
+  <!-- ===================== SEE WHAT YOU CAN EXPLORE (results) ===================== -->
+  <section class="bg-white pt-[62px] pb-[70px] px-5 sm:px-8">
+    <div class="max-w-container mx-auto">
+      <h2 class="text-center font-display font-bold text-2xl sm:text-3xl lg:text-[2.5rem] tracking-tight">
+        See What You Can Explore In One Day
+      </h2>
+      <div data-results class="mt-7 grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6"></div>
+      <div data-results-wide class="mt-5 sm:mt-6"></div>
+    </div>
+  </section>
+
+  <!-- ===================== WHY A PRIVATE CAB =====================
+       Built from the existing .faq-item component at the existing FAQ
+       geometry. Practical advantages only - no luxury-brochure language. -->
+  <section class="bg-white pb-16 sm:pb-20 px-5 sm:px-8">
+    <div class="max-w-container mx-auto">
+      <h2 class="text-center font-display font-bold text-xl sm:text-2xl tracking-tight mb-9">Why Explore Agra By Private Cab?</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
+        <div class="faq-item"><h3>One Cab All Day</h3><p>No negotiating with a new auto or taxi driver at every monument. The same car and driver stay with you from pickup to final drop.</p></div>
+        <div class="faq-item"><h3>Escape The Heat</h3><p>Agra gets hot and the monuments are spread across the city. You return to an air-conditioned car between stops instead of waiting on the roadside.</p></div>
+        <div class="faq-item"><h3>Keep Your Luggage</h3><p>Bags stay safely in the car while you explore &mdash; useful if you have arrived at Agra Cantt or the airport and are moving on the same day.</p></div>
+        <div class="faq-item"><h3>Flexible Timing</h3><p>Stay longer at the places you enjoy and skip the ones you don&rsquo;t. Nothing on the itinerary is compulsory.</p></div>
+        <div class="faq-item"><h3>Local Route Knowledge</h3><p>Our drivers know the practical routes between monuments, where the ticket counters are and which parking points actually work.</p></div>
+        <div class="faq-item"><h3>Easy Final Drop</h3><p>End the day at your hotel, Agra Cantt railway station or Agra Airport &mdash; whichever suits your onward plans.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SIGHTSEEING DAY FLOW (black grid band) ===================== -->
+  <section class="mesh-dark py-16 sm:py-20 px-5 sm:px-8">
+    <div class="max-w-container mx-auto">
+      <h2 class="text-center font-display font-bold !text-white text-lg sm:text-2xl lg:text-[1.7rem] max-w-3xl mx-auto leading-snug">
+        Here&rsquo;s What Your Agra Sightseeing Day Can Look Like:
+      </h2>
+
+      <div class="mt-14 grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12 max-w-5xl mx-auto">
+        <div>
+          <h3 class="font-display font-bold !text-white text-sm sm:text-base">01 &mdash; Sunrise At The Taj Mahal</h3>
+          <p class="mt-3 text-[13px] sm:text-sm text-white/65 leading-relaxed max-w-[48ch]">
+            Start early for softer light, cooler weather and fewer crowds. Allow roughly 2&ndash;2.5 hours for a relaxed visit.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-display font-bold !text-white text-sm sm:text-base">02 &mdash; Agra Fort</h3>
+          <p class="mt-3 text-[13px] sm:text-sm text-white/65 leading-relaxed max-w-[48ch]">
+            Continue to Agra Fort and explore its palaces, courtyards and famous views back toward the Taj Mahal.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-display font-bold !text-white text-sm sm:text-base">03 &mdash; Baby Taj</h3>
+          <p class="mt-3 text-[13px] sm:text-sm text-white/65 leading-relaxed max-w-[48ch]">
+            Visit the Tomb of Itimad-ud-Daulah, known for its intricate marble inlay work and peaceful riverside gardens.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-display font-bold !text-white text-sm sm:text-base">04 &mdash; Lunch Break</h3>
+          <p class="mt-3 text-[13px] sm:text-sm text-white/65 leading-relaxed max-w-[48ch]">
+            Pause for lunch whenever it fits your schedule. Your driver can help you reach suitable restaurants nearby.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-display font-bold !text-white text-sm sm:text-base">05 &mdash; Akbar&rsquo;s Tomb, Sikandra</h3>
+          <p class="mt-3 text-[13px] sm:text-sm text-white/65 leading-relaxed max-w-[48ch]">
+            Continue toward Sikandra to visit Emperor Akbar&rsquo;s impressive mausoleum and its surrounding gardens.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-display font-bold !text-white text-sm sm:text-base">06 &mdash; Mehtab Bagh</h3>
+          <p class="mt-3 text-[13px] sm:text-sm text-white/65 leading-relaxed max-w-[48ch]">
+            Finish the sightseeing portion with a beautiful view of the Taj Mahal from across the Yamuna.
+          </p>
+        </div>
+      </div>
+
+      <p class="mt-12 text-center text-[13px] sm:text-sm text-white/55 max-w-2xl mx-auto">
+        <span class="text-white/85 font-semibold">This itinerary is a suggestion, not a fixed route.</span> Skip monuments, spend longer at the Taj Mahal, start later, add Sadar Bazaar for marble handicrafts, leather goods and Agra&rsquo;s famous petha, ask about adding Fatehpur Sikri, or finish with a railway station or airport drop. Tell us what you want and we&rsquo;ll shape the day around it.
+      </p>
+
+      <div class="mt-8 text-center">
+        <a data-cta href="#" class="btn-primary">Book Your Agra Sightseeing Cab on WhatsApp</a>
+        <p class="mt-3 text-[12px] sm:text-[13px] text-white/55">No app to download and no advance payment for most bookings.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== LOCAL PARTNER ===================== -->
+  <section class="bg-white pt-[76px] pb-[66px] px-5 sm:px-8">
+    <div class="max-w-container mx-auto grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-12 lg:gap-10 items-center">
+      <ul class="space-y-3">
+        <li class="row-light px-4 py-3.5 text-[13px] sm:text-sm">Padma Shree Travels is an <strong>Agra-based taxi service</strong> running local sightseeing, airport transfers and outstation trips.</li>
+        <li class="row-light px-4 py-3.5 text-[13px] sm:text-sm">Pickup arranged from <strong>hotels, Agra Cantt, Agra Fort station and Agra (Kheria) Airport</strong>.</li>
+        <li class="row-light px-4 py-3.5 text-[13px] sm:text-sm">Fare is <strong>confirmed on WhatsApp before you travel</strong> &mdash; no surprises at the end of the day.</li>
+        <li class="row-light px-4 py-3.5 text-[13px] sm:text-sm">Driver&rsquo;s name, number and car number are <strong>shared with you before pickup</strong>.</li>
+        <li class="row-light px-4 py-3.5 text-[13px] sm:text-sm">Direct <strong>WhatsApp and phone support</strong> before and during your sightseeing day.</li>
+        <li class="row-light px-4 py-3.5 text-[13px] sm:text-sm">Easy to extend your day with <strong>Fatehpur Sikri, Mathura, Vrindavan or an outstation trip</strong>.</li>
+      </ul>
+
+      <div class="flex flex-col items-center text-center">
+        <img src="assets/img/local-partner-agra.webp"
+             loading="lazy" width="1536" height="1024"
+             alt="Padma Shree Travels local Agra travel partner at Mehtab Bagh with the Taj Mahal across the Yamuna"
+             class="w-full max-w-[460px] aspect-[14/15] rounded-[20px] object-cover"
+             style="box-shadow:9px 9px 0 var(--accent-deep); object-position:88% center" />
+        <h3 class="mt-6 font-display font-bold text-lg">Padma Shree Travels</h3>
+        <p class="mt-0.5 text-xs sm:text-[13px] font-semibold text-black">Agra Taxi &amp; Sightseeing Service</p>
+        <p class="mt-1 text-xs sm:text-[13px] font-semibold text-accent-dark">Local Pickup &bull; Clear Pricing &bull; Direct Support</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FAQ ===================== -->
+  <section class="bg-white pt-2 pb-16 sm:pb-20 px-5 sm:px-8" id="faq">
+    <div class="max-w-container mx-auto">
+      <h2 class="text-center font-display font-bold text-xl sm:text-2xl tracking-tight mb-9">Questions &amp; Answers</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
+        <details class="faq-acc"><summary>How much does Agra sightseeing cost?</summary><p>Full day is &#8377;2,500 for an AC sedan and &#8377;3,500 for an AC SUV (8 hrs / 80 km). Half day is &#8377;1,500 sedan and &#8377;2,200 SUV (4 hrs / 40 km).</p></details>
+        <details class="faq-acc"><summary>Which places are included?</summary><p>Taj Mahal, Agra Fort, Baby Taj, Akbar&rsquo;s Tomb at Sikandra, Mehtab Bagh and Sadar Bazaar &mdash; stops vary with the itinerary you choose.</p></details>
+        <details class="faq-acc"><summary>Is monument entry included?</summary><p>No. Entry tickets are separate and paid at each site. Tolls and parking are also paid by you at actuals.</p></details>
+        <details class="faq-acc"><summary>Are fuel and driver charges included?</summary><p>Yes. Every package fare includes the AC car, fuel and driver. Only tickets, tolls and parking are extra &mdash; told to you upfront.</p></details>
+        <details class="faq-acc"><summary>Can I customise the tour?</summary><p>Yes. Sightseeing is adjusted around your schedule and priorities &mdash; skip stops, add stops or start later.</p></details>
+        <details class="faq-acc"><summary>Can you pick me up from Agra Cantt?</summary><p>Yes, we pick up from any address in Agra including Agra Cantt, Agra Fort station, Kheria Airport and hotels.</p></details>
+        <details class="faq-acc"><summary>Can I keep luggage in the car?</summary><p>Yes. Your bags stay in the car through the day, which helps if you are arriving or leaving Agra the same day.</p></details>
+        <details class="faq-acc"><summary>Can I add Fatehpur Sikri?</summary><p>Yes. Full Day + Fatehpur Sikri is &#8377;3,500 for an AC sedan and &#8377;4,500 for an AC SUV.</p></details>
+        <details class="faq-acc"><summary>Can you drop me at the airport or station afterwards?</summary><p>Yes. Airport Pickup + Sightseeing is &#8377;2,800 sedan / &#8377;3,800 SUV. A transfer on its own starts at &#8377;800.</p></details>
+        <details class="faq-acc"><summary>What time should I begin?</summary><p>A 5:30&ndash;6:00 AM start gives you the Taj Mahal cooler and less crowded, usually finishing by 4&ndash;5 PM. A later start is fine too.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== RELATED ROUTES (secondary) ===================== -->
+  <section class="bg-white pb-16 px-5 sm:px-8">
+    <div class="max-w-container mx-auto text-center">
+      <p class="text-xs font-semibold uppercase tracking-wide text-black/40">More Routes From Agra</p>
+      <div class="mt-3 flex flex-wrap justify-center gap-x-3 gap-y-2 text-[13px] sm:text-sm">
+        <a href="https://www.padmashreetravels.in/fatehpur-sikri/" class="text-black/60 hover:text-accent-dark underline underline-offset-2">Fatehpur Sikri Day Trip</a><span class="text-black/25">|</span><a href="https://www.padmashreetravels.in/taj-mahal-taxi/" class="text-black/60 hover:text-accent-dark underline underline-offset-2">Taj Mahal Taxi</a><span class="text-black/25">|</span><a href="https://www.padmashreetravels.in/agra-airport-taxi/" class="text-black/60 hover:text-accent-dark underline underline-offset-2">Agra Airport Taxi</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FINAL CTA ===================== -->
+  <section class="mesh-dark pt-20 sm:pt-24 pb-16 sm:pb-20 px-5 sm:px-8 text-center">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="font-display font-bold !text-white text-2xl sm:text-3xl lg:text-[2.1rem] leading-snug">
+        Ready To See The Best Of Agra?
+      </h2>
+      <p class="mt-3 font-display font-semibold text-warn-400 text-sm sm:text-lg">
+        Book Your Private Sightseeing Cab.
+      </p>
+      <p class="mt-4 text-white/65 text-sm sm:text-base max-w-xl mx-auto">Tell us your date, pickup location and group size. We&rsquo;ll help you choose the right sightseeing package.</p>
+    </div>
+    <div class="mt-9">
+      <a data-cta href="#" class="btn-primary">Book on WhatsApp</a>
+    </div>
+    <a href="tel:+918720081102" class="mt-4 inline-block text-sm font-semibold text-white/75 hover:text-accent underline underline-offset-2">or call +91-87200 81102</a>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="mesh-dark">
+    <div class="max-w-container mx-auto px-5 sm:px-8 pt-10 pb-6 grid grid-cols-1 sm:grid-cols-3 gap-8 text-center sm:text-left">
+      <div>
+        <p class="font-display font-bold text-white">Padma Shree Travels</p>
+        <p class="mt-1 text-[11px] text-white/55 leading-relaxed">Rajeshwar Mandir, Kaveri Vihar Phase II,<br />Shamsabad, Agra, Uttar Pradesh 282001</p>
+      </div>
+      <div>
+        <p class="font-display font-bold text-white text-sm">Contact</p>
+        <p class="mt-1 text-[11px] text-white/55"><a href="tel:+918720081102" class="hover:text-accent">+91-87200 81102</a></p>
+        <p class="mt-0.5 text-[11px] text-white/55"><a href="mailto:travels.padamshree@gmail.com" class="hover:text-accent">travels.padamshree@gmail.com</a></p>
+      </div>
+      <div>
+        <p class="font-display font-bold text-white text-sm">Explore</p>
+        <div class="mt-1 flex flex-wrap justify-center sm:justify-start gap-x-2 gap-y-1 text-[11px] text-white/55">
+          <a href="https://www.padmashreetravels.in/" class="hover:text-accent">Home</a>
+          <a href="https://www.padmashreetravels.in/agra-local-sightseeing/" class="hover:text-accent">Sightseeing</a>
+          <a href="https://www.padmashreetravels.in/outstation-cabs-agra/" class="hover:text-accent">Outstation</a>
+          <a href="https://www.padmashreetravels.in/about/" class="hover:text-accent">About</a>
+          <a href="https://www.padmashreetravels.in/contact/" class="hover:text-accent">Contact</a>
+        </div>
+      </div>
+    </div>
+    <div class="bg-black border-t border-white/10 px-5 sm:px-8 py-4">
+      <div class="max-w-container mx-auto flex flex-col sm:flex-row items-center justify-between gap-2.5 text-[11px] sm:text-xs">
+        <p class="text-white/70">&copy; <span data-year></span> Padma Shree Travels. All rights reserved.</p>
+        <div class="flex flex-wrap justify-center gap-x-3 gap-y-1.5 text-white/70">
+          <a href="https://www.padmashreetravels.in/" class="hover:text-accent">Home</a><span class="text-white/25">|</span>
+          <a href="https://www.padmashreetravels.in/contact/" class="hover:text-accent">Contact Us</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================== FLOATING WHATSAPP (desktop / tablet) ===================== -->
+  <a id="waBtn" href="#" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"
+     class="fixed bottom-5 right-5 z-50 hidden sm:flex h-[52px] w-[52px] items-center justify-center rounded-full bg-[#25D366] border-[3px] border-black"
+     style="box-shadow:4px 4px 0 #000">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="white" class="h-6 w-6">
+      <path d="M16.001 2.667c-7.363 0-13.334 5.97-13.334 13.333 0 2.353.615 4.646 1.782 6.665L2.667 29.333l6.83-1.75a13.27 13.27 0 0 0 6.504 1.66h.006c7.362 0 13.333-5.97 13.333-13.333 0-3.562-1.387-6.912-3.905-9.43a13.246 13.246 0 0 0-9.434-3.913Zm0 24.4h-.005a11.05 11.05 0 0 1-5.634-1.542l-.404-.24-4.053 1.039 1.081-3.951-.263-.406a11.02 11.02 0 0 1-1.69-5.9c0-6.1 4.968-11.067 11.073-11.067 2.957 0 5.736 1.153 7.828 3.246a10.99 10.99 0 0 1 3.24 7.828c0 6.101-4.969 11.067-11.073 11.067v-.074Zm6.07-8.287c-.332-.166-1.965-.97-2.27-1.08-.305-.11-.527-.166-.748.166-.222.333-.858 1.08-1.053 1.302-.194.222-.388.25-.72.083-.332-.166-1.403-.517-2.672-1.649-.988-.881-1.655-1.969-1.85-2.302-.194-.333-.02-.512.146-.678.15-.15.333-.389.499-.583.166-.194.222-.333.333-.555.11-.222.055-.417-.028-.583-.083-.166-.748-1.803-1.026-2.469-.27-.65-.545-.562-.748-.572-.194-.008-.416-.01-.638-.01a1.22 1.22 0 0 0-.887.417c-.305.333-1.165 1.139-1.165 2.777s1.192 3.222 1.358 3.444c.166.222 2.346 3.583 5.685 5.024.795.343 1.415.548 1.898.702.797.253 1.523.217 2.097.132.64-.096 1.965-.803 2.242-1.579.277-.777.277-1.442.194-1.58-.083-.138-.305-.221-.638-.388Z"/>
+    </svg>
+  </a>
+
+  <!-- ===================== MOBILE BOOKING BAR (phones only) =====================
+       Subtle, 54px tall, matches the design system (black border, green fill,
+       black text). body carries matching bottom padding so nothing is hidden. -->
+  <div class="mobile-bar sm:hidden fixed bottom-0 inset-x-0 z-50 grid grid-cols-2 bg-white">
+    <a href="tel:+918720081102" class="bg-white border-r-2 border-black">&#9742; Call Now</a>
+    <a data-cta href="#" class="bg-accent">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentColor" class="h-4 w-4" aria-hidden="true">
+        <path d="M16.001 2.667c-7.363 0-13.334 5.97-13.334 13.333 0 2.353.615 4.646 1.782 6.665L2.667 29.333l6.83-1.75a13.27 13.27 0 0 0 6.504 1.66h.006c7.362 0 13.333-5.97 13.333-13.333 0-3.562-1.387-6.912-3.905-9.43a13.246 13.246 0 0 0-9.434-3.913Zm0 24.4h-.005a11.05 11.05 0 0 1-5.634-1.542l-.404-.24-4.053 1.039 1.081-3.951-.263-.406a11.02 11.02 0 0 1-1.69-5.9c0-6.1 4.968-11.067 11.073-11.067 2.957 0 5.736 1.153 7.828 3.246a10.99 10.99 0 0 1 3.24 7.828c0 6.101-4.969 11.067-11.073 11.067v-.074Zm6.07-8.287c-.332-.166-1.965-.97-2.27-1.08-.305-.11-.527-.166-.748.166-.222.333-.858 1.08-1.053 1.302-.194.222-.388.25-.72.083-.332-.166-1.403-.517-2.672-1.649-.988-.881-1.655-1.969-1.85-2.302-.194-.333-.02-.512.146-.678.15-.15.333-.389.499-.583.166-.194.222-.333.333-.555.11-.222.055-.417-.028-.583-.083-.166-.748-1.803-1.026-2.469-.27-.65-.545-.562-.748-.572-.194-.008-.416-.01-.638-.01a1.22 1.22 0 0 0-.887.417c-.305.333-1.165 1.139-1.165 2.777s1.192 3.222 1.358 3.444c.166.222 2.346 3.583 5.685 5.024.795.343 1.415.548 1.898.702.797.253 1.523.217 2.097.132.64-.096 1.965-.803 2.242-1.579.277-.777.277-1.442.194-1.58-.083-.138-.305-.221-.638-.388Z"/>
+      </svg>
+      WhatsApp
+    </a>
+  </div>
+
+  <script>
+  /* ==========================================================================
+     PAGE DATA
+     ========================================================================== */
+  const SITE = {
+
+    /* Every green CTA on the page, the mobile bar and the floating WhatsApp
+       button point here. Number is the live business number - do not change. */
+    bookingUrl:  "https://wa.me/918720081102?text=Hi%20Padma%20Shree%20Travels%2C%20I'd%20like%20to%20book%20an%20Agra%20local%20sightseeing%20cab.%20Please%20share%20availability%20and%20fare%20-%20I'll%20confirm%20my%20travel%20date%20and%20group%20size.",
+    whatsappUrl: "https://wa.me/918720081102?text=Hi%20Padma%20Shree%20Travels%2C%20I'd%20like%20to%20book%20an%20Agra%20local%20sightseeing%20cab.%20Please%20share%20availability%20and%20fare%20-%20I'll%20confirm%20my%20travel%20date%20and%20group%20size.",
+
+    /* Stat cards - row 1 (above the gallery). */
+    stats: [
+      { value: "&#8377;2,500", label: "Full-Day Sedan" },
+      { value: "8 HRS",        label: "Full-Day Tour" },
+      { value: "80 KM",        label: "Package Limit" },
+      { value: "6+",           label: "Major Stops" }
+    ],
+
+    /* Stat cards - row 2 (the approved design repeats them). */
+    statsRepeat: [
+      { value: "&#8377;1,500",  label: "Half-Day Sedan" },
+      { value: "&#8377;800",    label: "Airport Transfer From" },
+      { value: "5 PACKAGES",    label: "To Choose From",  word: true },
+      { value: "FUEL + DRIVER", label: "Included In Fare", word: true }
+    ],
+
+    /* 12-slot "Discover Agra" gallery. Monuments, the city itself and the cab -
+       visual storytelling, not twelve monument facades in a row. */
+    creatives: [
+      { label: "Taj Mahal At Sunrise",  src: "assets/img/taj-mahal-sunrise.webp", alt: "Taj Mahal at sunrise during an Agra local sightseeing tour" },
+      { label: "Agra Fort",             src: "assets/img/agra-fort.webp",          alt: "Agra Fort on a full day Agra sightseeing taxi tour" },
+      { label: "Baby Taj",              src: "assets/img/baby-taj.webp",           alt: "Itimad ud Daulah Baby Taj in Agra" },
+      { label: "Akbar's Tomb, Sikandra",src: "assets/img/akbars-tomb.webp",        alt: "Akbar Tomb Sikandra Agra" },
+      { label: "Mehtab Bagh",           src: "assets/img/mehtab-bagh.webp",        alt: "Mehtab Bagh Taj Mahal sunset view across the Yamuna" },
+      { label: "Taj Mahal At Dawn",     src: "assets/img/taj-mahal-dawn.webp",     alt: "Taj Mahal at dawn seen from the Yamuna riverbank in Agra" },
+      { label: "Sadar Bazaar",          src: "assets/img/sadar-bazaar.webp",       alt: "Agra market street shopping stop on a sightseeing day" },
+      { label: "Old Agra Lanes",        src: "assets/img/agra-heritage-lane.webp", alt: "Heritage lane in old Agra" },
+      { label: "Your Cab At The Stop",  src: "assets/img/cab-at-monument.webp",    alt: "Private white sedan waiting near an Agra monument between sightseeing stops" },
+      { label: "AC Sedan",              src: "assets/img/fleet-sedan.webp",        alt: "AC sedan used for Agra sightseeing taxi bookings" },
+      { label: "Comfortable Interior",  src: "assets/img/fleet-interior.webp",     alt: "Rear passenger seats of the AC cab used for Agra sightseeing" },
+      { label: "Luggage Stays With You",src: "assets/img/fleet-luggage.webp",      alt: "Luggage stored in the cab boot during an Agra sightseeing tour" }
+    ],
+
+    /* Sightseeing stops - 6 slots + 1 wide slot underneath.
+       Images do the selling; labels stay short. */
+    results: [
+      { label: "Taj Mahal",              src: "assets/img/taj-mahal-dawn.webp",    alt: "Taj Mahal seen at dawn on an Agra one day sightseeing tour" },
+      { label: "Agra Fort",              src: "assets/img/agra-fort.webp",         alt: "Red sandstone walls of Agra Fort" },
+      { label: "Baby Taj",               src: "assets/img/baby-taj.webp",          alt: "Marble tomb of Itimad ud Daulah known as the Baby Taj" },
+      { label: "Akbar's Tomb",           src: "assets/img/akbars-tomb.webp",       alt: "Gateway of Akbar's Tomb at Sikandra near Agra" },
+      { label: "Mehtab Bagh",            src: "assets/img/mehtab-bagh.webp",       alt: "Taj Mahal viewed from Mehtab Bagh at sunset" },
+      { label: "Sadar Bazaar",           src: "assets/img/sadar-bazaar.webp",      alt: "Shopping street in Agra visited at the end of a sightseeing day" }
+    ],
+    resultsWide: { label: "One Private Cab, Every Stop", src: "assets/img/cab-at-monument.webp", alt: "Private AC cab waiting outside an Agra monument during a full day sightseeing tour" }
+  };
+
+  /* ========================== RENDER ========================== */
+  (function () {
+    /* every CTA + WhatsApp button points at one place */
+    document.querySelectorAll('[data-cta]').forEach(a => {
+      a.href = SITE.bookingUrl;
+      a.target = '_blank';
+      a.rel = 'noopener';
+    });
+    const wa = document.getElementById('waBtn');
+    if (wa) wa.href = SITE.whatsappUrl;
+
+    /* stat cards - two rows, two label sets, one component */
+    const statHTML = list => list.map(s =>
+      `<div class="stat"><p class="stat-num">${s.value}</p><p class="stat-label">${s.label}</p></div>`
+    ).join('');
+    document.querySelectorAll('[data-stats]').forEach(el => { el.innerHTML = statHTML(SITE.stats); });
+    document.querySelectorAll('[data-stats-2]').forEach(el => { el.innerHTML = statHTML(SITE.statsRepeat); });
+
+    /* one media slot - empty labelled frame, or a real photo */
+    const ents = { '&mdash;':'—', '&ndash;':'–', '&amp;':'&' };
+    const plain = s => (s || '').replace(/&mdash;|&ndash;|&amp;/g, m => ents[m]);
+
+    function slot(item, ratio, eager) {
+      const cls = `ph ${ratio}` + (item.src ? ' filled' : '');
+      if (!item.src) {
+        return `<div class="${cls}"><span class="ph-slot">${item.label || ''}</span></div>`;
+      }
+      const tag = item.label ? `<span class="ph-tag">${plain(item.label)}</span>` : '';
+      const alt = plain(item.alt || item.label || 'Agra local sightseeing');
+      return `<div class="${cls}"><img src="${item.src}" loading="${eager ? 'eager' : 'lazy'}" decoding="${eager ? 'sync' : 'async'}" alt="${alt}" />${tag}</div>`;
+    }
+
+    const cg = document.querySelector('[data-creatives]');
+    if (cg) cg.innerHTML = SITE.creatives.map((i, idx) => slot(i, 'aspect-[4/3]', idx === 0)).join('');
+
+    const rg = document.querySelector('[data-results]');
+    if (rg) rg.innerHTML = SITE.results.map(i => slot(i, 'aspect-[16/9]')).join('');
+
+    const rw = document.querySelector('[data-results-wide]');
+    if (rw) rw.innerHTML = slot(SITE.resultsWide, 'aspect-[21/9]');
+
+    document.querySelectorAll('[data-year]').forEach(el => {
+      el.textContent = new Date().getFullYear();
+    });
+  })();
+  </script>
+
+  <!-- Shared Google reviews: ONE dataset + ONE grid component, all pages. -->
+  <script src="../_shared/reviews-data.js"></script>
+  <script src="../_shared/reviews-grid.js"></script>
+  <script src="../_shared/tracking.js"></script>
+</body>
+</html>
