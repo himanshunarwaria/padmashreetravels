@@ -19,6 +19,17 @@
   --g100:   #EBEBEB;
   --g50:    #F7F7F7;
 
+  /* Premium dark-teal band (Sep 2026). Same values as the --pst-* set in
+     css/landing.css and the .grx band injected by js/reviews-grid.js; the
+     three tracks cannot share a stylesheet, so keep them in step. Used only
+     by high-value bands - see .cta below. */
+  --pst-ink:     #0E1A22;
+  --pst-teal:    #153C3A;
+  --pst-teal-mut:#315A56;
+  --pst-ivory:   #F7F3EA;
+  --pst-gold:    #C79B3B;
+  --pst-gold-lt: #EBC97F;
+
   /* Brand accents */
   --accent: #276EF1;
   --green:  #05944F;
@@ -49,7 +60,14 @@
 
 /* ── Reset ───────────────────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0 }
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; overflow-x: hidden }
+/* NOTE — do not put overflow-x on <html>.
+   `overflow-x: hidden` on the ROOT element makes it a scroll container, and
+   that silently breaks `position: sticky` for everything inside it: the
+   sticky header on all 26 pages using this stylesheet scrolled away instead
+   of pinning (found 1 Sep 2026). Horizontal overflow is still contained by
+   `body { overflow-x: hidden }` below — which is exactly how css/landing.css
+   is set up, and the header pins correctly on all 34 pages using that file. */
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100% }
 body {
   font-family: var(--ff);
   font-size: 16px;
@@ -181,11 +199,13 @@ p:last-child { margin-bottom: 0 }
 }
 .logo__t small {
   display: block;
-  font-size: .57rem;
+  /* PST-16: was .57rem (9.12px) in --g400 (3.19:1) - below AA and below a
+     comfortable reading size. .7rem = 11.2px in --g500 = 5.33:1. */
+  font-size: .7rem;
   font-weight: 500;
   letter-spacing: .07em;
   text-transform: uppercase;
-  color: var(--g400);
+  color: var(--g500);
 }
 
 /* Desktop nav */
@@ -638,11 +658,14 @@ p:last-child { margin-bottom: 0 }
   white-space: nowrap;
   text-align: right;
 }
+/* PST-16 (extension): this label qualifies what the price MEANS (one way vs
+   round trip), so it was raised from .62rem/--g400 (9.9px, 3.19:1) to
+   .7rem/--g500 (11.2px, 5.33:1). */
 .rcard__price small {
   display: block;
-  font-size: .62rem;
+  font-size: .7rem;
   font-weight: 500;
-  color: var(--g400);
+  color: var(--g500);
   text-align: right;
   text-transform: uppercase;
   letter-spacing: .05em;
@@ -969,8 +992,128 @@ p:last-child { margin-bottom: 0 }
 .fsuccess h3 { color: var(--green); margin-bottom: .3rem }
 
 /* ── CTA section ─────────────────────────────────────────────────────────── */
+/* ── Premium dark-teal band ─────────────────────────────────────── */
+/* The pattern is declared ONCE, here, for every band that uses it - the final
+   CTA and any .section--teal. Original layered CSS: edge vignette, two soft
+   lights, a diagonal diamond lattice at 3% ivory, then the teal wash. No
+   raster asset, no extra network request. Matches the homepage review band
+   and .sec--teal in css/landing.css - keep the three in step.
+
+   Use it for high-value bands only. The white/gray rhythm between them is
+   what makes a dark band read as an accent at all. */
+.cta,
+.section--teal {
+  --band-base: var(--pst-ink);      /* colour behind everything          */
+  --band-end:  var(--pst-ink);      /* where the 168deg wash lands       */
+  --band-vig:  rgba(0,0,0,.44);     /* edge vignette depth               */
+  background-color: var(--band-base);
+  background-image:
+    radial-gradient(125% 88% at 50% 44%, transparent 50%, var(--band-vig) 100%),
+    radial-gradient(900px 520px at 15% 6%,  rgba(49,90,86,.55), transparent 70%),
+    radial-gradient(780px 480px at 89% 97%, rgba(199,155,59,.085), transparent 68%),
+    repeating-linear-gradient(45deg,  rgba(247,243,234,.030) 0 1px, transparent 1px 38px),
+    repeating-linear-gradient(-45deg, rgba(247,243,234,.030) 0 1px, transparent 1px 38px),
+    linear-gradient(168deg, var(--pst-teal) 0%, var(--band-end) 62%);
+}
+
+/* The CTA keeps the deep fade to ink. These sections must not: their cards are
+   translucent, so a near-black lower half would swallow the bottom row. An
+   evener ground and a lighter vignette keep every card legible. The wash still
+   STARTS on --pst-teal, so the lightest point - and every contrast figure
+   measured against it - is unchanged. */
+.section--teal {
+  --band-base: #12332F;
+  --band-end:  #12332F;
+  --band-vig:  rgba(0,0,0,.22);
+}
+
+/* Content sitting on the teal.
+   The cards are TRANSLUCENT, not opaque. Solid ivory panels sat on the dark
+   band like stickers pasted over it; letting the band read through them is
+   what makes the section look composed rather than assembled. Every value
+   below was measured against the lightest point the pattern reaches
+   (rgb(53,85,74)), which is the worst case for light text. */
+
+/* Eyebrow: gold, wide-tracked, flanked by hairlines. Replaces the grey pill,
+   which read as a generic tag on an editorial dark band. */
+.section--teal .sbadge {
+  display: inline-flex;
+  align-items: center;
+  gap: .85rem;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  color: var(--pst-gold-lt);          /* 5.14:1 on the band */
+  font-size: .7rem;
+  font-weight: 600;
+  letter-spacing: .22em;
+  margin-bottom: 1.05rem;
+}
+/* Decorative rules only - they carry no meaning, so they are free to sit
+   below the 3:1 non-text threshold. */
+.section--teal .sbadge::before,
+.section--teal .sbadge::after {
+  content: '';
+  width: 34px;
+  height: 1px;
+  background: rgba(199,155,59,.55);
+  flex: 0 0 auto;
+}
+
+/* Display heading: serif, lighter weight, open tracking. Georgia and its
+   fallbacks are system faces, so this costs no font request. */
+.section--teal .stitle {
+  font-family: Georgia, 'Iowan Old Style', 'Times New Roman', serif;
+  font-weight: 400;
+  font-size: clamp(1.8rem, 3.6vw, 2.6rem);
+  line-height: 1.18;
+  letter-spacing: .005em;
+  color: #fff;
+  margin-bottom: .75rem;
+}
+.section--teal .sdesc {
+  color: rgba(247,243,234,.82);
+  margin-bottom: 3rem;
+  font-size: 1rem;
+}
+
+/* Glass cards. */
+.section--teal .incs { gap: 1.05rem }
+.section--teal .inc {
+  background: rgba(247,243,234,.09);
+  border: 1px solid rgba(247,243,234,.20);
+  border-radius: 14px;
+  padding: 1.55rem;
+  box-shadow: none;
+  transition: background-color var(--t), border-color var(--t);
+}
+.section--teal .inc:hover {
+  background: rgba(247,243,234,.12);
+  border-color: rgba(247,243,234,.30);
+  box-shadow: none;
+}
+.section--teal .inc h3 { color: #fff }                      /* 6.7:1  */
+.section--teal .inc p  { color: rgba(247,243,234,.88) }      /* 5.12:1 */
+
+/* Circular gold badge rather than a square chip. */
+.section--teal .inc__i {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(199,155,59,.16);
+  border: 1px solid rgba(199,155,59,.34);
+  color: var(--pst-gold-lt);
+}
+
+
+
 .cta {
-  background: var(--black);
+  /* Premium dark-teal treatment, shared with the homepage review band.
+     Defined once here for all 6 legacy pages that use .cta - never copied
+     onto a page. Original layered CSS: edge vignette, two soft lights, a
+     diagonal diamond lattice at 3% ivory, then the teal wash. Decorative
+     only; no raster asset and no extra network request. */
   color: var(--white);
   padding: 4rem 0;
   text-align: center;
@@ -986,20 +1129,72 @@ p:last-child { margin-bottom: 0 }
 }
 .cta > .container { position: relative; z-index: 1 }
 .cta h2 { color: var(--white); margin-bottom: .5rem }
-.cta p { color: rgba(255,255,255,.5); max-width: 420px; margin: 0 auto 1.75rem; font-size: .95rem }
+.cta p { color: rgba(247,243,234,.78); max-width: 420px; margin: 0 auto 1.75rem; font-size: .95rem }
 .cta__acts { display: flex; justify-content: center; flex-wrap: wrap; gap: .65rem }
+
+/* ── Collapsible SEO content block (homepage, below the FAQ) ──────────── */
+/* Native <details>, so it works with JavaScript off, is keyboard operable and
+   reports its own expanded state to assistive tech without any ARIA of ours.
+   Collapsed only hides the copy VISUALLY - it stays in the DOM, so the block
+   remains crawlable and in-page search still finds it. */
+.seo-acc { border-top: 1px solid var(--g200); }
+.seo-acc__q {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.35rem 0;
+  cursor: pointer;
+  list-style: none;              /* Firefox default triangle */
+}
+.seo-acc__q::-webkit-details-marker { display: none }
+.seo-acc__h {
+  margin: 0;
+  font-size: 1.3rem;
+  line-height: 1.3;
+  letter-spacing: -.01em;
+  font-weight: 700;
+  color: var(--black);
+}
+@media (min-width: 768px) { .seo-acc__h { font-size: 1.5rem } }
+.seo-acc__q:hover .seo-acc__h { color: var(--g800) }
+/* The +/- is generated, never typed, so the glyph can never fall out of step
+   with the open state. Decorative: the real state is on <details>. */
+.seo-acc__tog {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: var(--g100);
+  color: var(--black);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.05rem; font-weight: 600; line-height: 1;
+  flex-shrink: 0;
+  transition: background var(--t);
+}
+.seo-acc:not([open]) .seo-acc__tog::before { content: '+' }
+.seo-acc[open]      .seo-acc__tog::before { content: '−' }
+.seo-acc__q:hover .seo-acc__tog { background: var(--g200) }
+.seo-acc__q:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+.seo-acc__body { padding-bottom: .5rem }
+/* The block already carries the section heading in its summary, so the first
+   sub-heading inside must not add a second big gap above it. */
+.seo-acc__body > h3:first-child { margin-top: 0 }
 
 /* ── Footer ──────────────────────────────────────────────────────────────── */
 .ft {
   background: var(--g950);
   color: var(--g500);
-  padding: 3.5rem 0 1.5rem;
+  padding: 2.6rem 0 0;
 }
 .ft__grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 2rem;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.5rem;
+  align-items: start;
 }
 .ft__brand p {
   font-size: .84rem;
@@ -1048,6 +1243,222 @@ p:last-child { margin-bottom: 0 }
   font-size: .74rem;
   color: var(--g500);
 }
+
+/* Homepage footer sign-off: a quiet oversized brand layer above the existing
+   legal row. The full business name is already exposed in the footer brand. */
+.ft__wordmark {
+  border-top: 1px solid rgba(255,255,255,.07);
+  margin-top: 1.25rem;
+  overflow: hidden;
+  padding: clamp(1.15rem, 2.2vw, 1.7rem) 0 clamp(.5rem, .9vw, .8rem);
+  user-select: none;
+}
+.ft__wordmark-kicker {
+  align-items: center;
+  color: rgba(255,255,255,.38);
+  display: flex;
+  justify-content: center;
+  font-size: clamp(.55rem, .7vw, .68rem);
+  font-weight: 700;
+  gap: .65rem;
+  letter-spacing: .18em;
+  margin-bottom: clamp(1.1rem, 2.2vw, 1.9rem);
+  text-transform: uppercase;
+}
+.ft__wordmark-kicker span {
+  background: var(--g400);
+  display: inline-block;
+  height: 2px;
+  opacity: .8;
+  width: 1.5rem;
+}
+.ft__wordmark-type {
+  align-items: baseline;
+  display: flex;
+  justify-content: center;
+  /* Sized from measurement, not taste: at 768px the narrower of the two
+     tracks can take 14.33vw before the word clips inside its box, so 13.8vw
+     leaves a ~4% margin, and the 11.5rem cap clears the widest viewport
+     (1440px allows 196px). The <=480px rule below takes over on phones. */
+  font-size: clamp(2.5rem, 13.4vw, 11.5rem);
+  font-weight: 800;
+  letter-spacing: -.065em;
+  line-height: .9;
+  white-space: nowrap;
+}
+.ft__wordmark-type span {
+  color: rgba(255,255,255,.1);
+}
+.ft__wordmark-type strong {
+  color: rgba(255,255,255,.075);
+  font: inherit;
+  letter-spacing: -.025em;
+}
+@supports (-webkit-text-stroke: 1px currentColor) {
+  .ft__wordmark-type strong {
+    color: var(--g950);
+    -webkit-text-stroke: 1.5px rgba(255,255,255,.13);
+    paint-order: stroke fill;
+  }
+}
+@media (max-width: 480px) {
+  .ft__wordmark {
+    margin-top: 1.25rem;
+    padding-top: 1.25rem;
+  }
+  .ft__wordmark-kicker {
+    letter-spacing: .11em;
+    margin-bottom: 1.1rem;
+  }
+  .ft__wordmark-kicker span { width: 1rem; }
+  .ft__wordmark-type {
+    font-size: clamp(2rem, 11.6vw, 3.6rem);
+    letter-spacing: -.05em;
+  }
+  .ft__wordmark-type strong { letter-spacing: -.015em; }
+  @supports (-webkit-text-stroke: 1px currentColor) {
+    .ft__wordmark-type strong { -webkit-text-stroke-width: 1px; }
+  }
+}
+
+/* ── Premium teal footer (legacy track) ──────────────────────────────────
+   SYNCHRONISED with the `footer.mesh-dark` block in css/landing.css. The two
+   design tracks cannot share a stylesheet, so the same token block is
+   restated in both files. The token NAMES and VALUES are identical on
+   purpose - scripts/footer-token check compares them literally. Change one,
+   change the other.
+
+   Background is original layered CSS - no image, no request, no animation.
+   Layers, top to bottom: lower-edge vignette, two soft teal lights, the
+   diagonal diamond lattice, then the teal-to-ink wash.
+
+   Colours are measured against rgb(28,67,64), the lightest point the stack
+   reaches - the worst case for light text. */
+.ft {
+  --ft-base:      #0E1A22;                 /* footer ground                */
+  --ft-lattice:   rgba(247,243,234,.012);  /* felt, not seen               */
+  --ft-text:      rgba(247,243,234,.76);   /* body, links, contact  6.38:1 */
+  --ft-kicker:    rgba(247,243,234,.62);   /* wordmark kicker       4.86:1 */
+  --ft-rule:      rgba(247,243,234,.11);   /* dividers                     */
+  --ft-gold:      rgba(199,155,59,.26);    /* the one gold hairline        */
+  --ft-green:     #7FD8A6;                 /* hover/focus           6.37:1 */
+  --ft-wm-fill:   #0C161C;                 /* wordmark cut-out             */
+  --ft-wm-stroke: rgba(247,243,234,.34);   /* "Shree" outline              */
+  --ft-wm-padma:  rgba(247,243,234,.13);   /* "Padma" fill                 */
+
+  background-color: var(--ft-base);
+  background-image:
+    linear-gradient(to bottom, transparent 55%, rgba(0,0,0,.30) 100%),
+    radial-gradient(900px 460px at 18% 0%,  rgba(49,90,86,.42), transparent 70%),
+    radial-gradient(760px 420px at 88% 12%, rgba(21,60,58,.55), transparent 72%),
+    repeating-linear-gradient(45deg,  var(--ft-lattice) 0 1px, transparent 1px 40px),
+    repeating-linear-gradient(-45deg, var(--ft-lattice) 0 1px, transparent 1px 40px),
+    linear-gradient(178deg, #153C3A 0%, var(--ft-base) 58%);
+  color: var(--ft-text);
+}
+
+.ft__h { color: var(--pst-ivory) }
+
+/* Body copy, contact rows and links. These were --g500 (#6B6B6B) = 3.65:1,
+   and the contact links additionally carried an inline --g400 (#909090) =
+   3.41:1 that beat the stylesheet. The inline styles were removed from the
+   markup; this is now the single source. */
+.ft__brand p,
+.ft__cr,
+.ft__links a,
+.ft__meta { color: var(--ft-text) }
+.ft__meta { font-size: .85rem }
+.ft__links a:hover,
+.ft__bot a:hover,
+.ft__cr a:hover,
+.ft__meta:hover { color: var(--ft-green) }
+.ft a:focus-visible {
+  outline: 3px solid var(--ft-green);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+.ft__ci {
+  background: rgba(247,243,234,.07);
+  border: 1px solid var(--ft-rule);
+}
+
+/* ── Location card (replaces the Google Maps embed) ──────────────────────
+   The old iframe was pinned to "Agra, UP" at 27.17/78.0 - the Taj Mahal,
+   not the business address stated two rows above it. No verified
+   coordinates exist for the address in this project, so rather than invent
+   a pin this links to the real Google Business profile. The full address
+   already appears in the contact row above, so only a concise form is
+   repeated here. */
+.ft__loc {
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  margin-top: .9rem;
+  padding: .7rem .85rem;
+  border: 1px solid var(--ft-rule);
+  border-radius: var(--r);
+  background: rgba(247,243,234,.05);
+  color: var(--ft-text);
+  transition: background var(--t), border-color var(--t);
+}
+.ft__loc:hover {
+  background: rgba(247,243,234,.09);
+  border-color: rgba(127,216,166,.42);
+}
+.ft__loc-pin { width: 20px; height: 20px; flex-shrink: 0; color: var(--ft-green) }
+.ft__loc-t { display: flex; flex-direction: column; gap: .1rem; min-width: 0; flex: 1 }
+.ft__loc-t strong { font-size: .84rem; font-weight: 600; color: var(--pst-ivory) }
+.ft__loc-t span { font-size: .76rem; color: var(--ft-text); overflow-wrap: anywhere }
+.ft__loc-ext { width: 14px; height: 14px; flex-shrink: 0; color: var(--ft-green) }
+.ft__srx {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%);
+  white-space: nowrap; border: 0;
+}
+
+/* ── Legal row ───────────────────────────────────────────────────────────
+   A divider, not a separate black strip. */
+.ft__bot {
+  border-top: 1px solid var(--ft-rule);
+  color: var(--ft-text);
+  padding-top: 1rem;
+  padding-bottom: 1.1rem;
+  background: none;
+}
+
+/* ── Wordmark ────────────────────────────────────────────────────────────
+   One restrained gold hairline - the only gold in the footer. */
+.ft__wordmark { border-top: 1px solid var(--ft-gold) }
+.ft__wordmark-kicker { color: var(--ft-kicker) }
+.ft__wordmark-kicker span { background: var(--ft-green) }
+
+/* "Padma" is a filled shape, "Shree" a 1.5px outline, so the outline needs a
+   higher alpha to carry the same visual weight. The outline was .15 and all
+   but vanished next to the fill. */
+.ft__wordmark-type span { color: var(--ft-wm-padma) }
+@supports (-webkit-text-stroke: 1px currentColor) {
+  .ft__wordmark-type strong {
+    /* Opaque, and matched to the footer's colour at this height, so the
+       lattice cannot show through the outlined letters and the interior
+       still reads as a cut-out rather than a panel. */
+    color: var(--ft-wm-fill);
+    -webkit-text-stroke: 1.5px var(--ft-wm-stroke);
+  }
+}
+
+/* Clearance above the fixed mobile CTA bar (body already reserves 88px; this
+   keeps the legal row off the very edge on short screens). */
+@media (max-width: 959px) {
+  .ft__bot { padding-bottom: 1.4rem }
+}
+/* The floating WhatsApp bubble (.waf, 52px at right:20px) is only shown from
+   960px up, and it was measurably sitting on top of the service line on the
+   right of the legal row. Reserve its lane. */
+@media (min-width: 960px) {
+  .ft__bot { padding-right: 4.75rem }
+}
+
+
 
 /* Map embed in footer/contact */
 .mapbox {
@@ -1196,12 +1607,30 @@ p:last-child { margin-bottom: 0 }
   .rgrid { grid-template-columns: repeat(3, 1fr) }
   .tgrid { grid-template-columns: repeat(3, 1fr) }
   .fleet-grid { grid-template-columns: repeat(3, 1fr) }
-  .ft__grid { grid-template-columns: 1.5fr 1fr 1fr 1.1fr }
+  .ft__grid { grid-template-columns: 1.35fr 1fr 1fr 1.15fr; gap: 2rem 2.25rem }
   .scall { display: none }
   .waf { bottom: 1.5rem }
   .hero { padding: 5rem 0 5.5rem }
   .section { padding: 5rem 0 }
   .container { padding: 0 2rem }
+}
+
+/* Collapsed, the SEO block is a single row, and the full .section rhythm
+   leaves too much air around it. Placed AFTER the media query above on
+   purpose: same specificity, so source order is what makes it win at every
+   width. A modifier rather than an inline style. */
+.section--acc { padding-top: 2.5rem; padding-bottom: 2.5rem }
+
+/* Placed here, AFTER the .section media query above, for the same reason as
+   .section--acc: equal specificity, so source order is what makes it win. */
+/* A premium band needs room to breathe; these two are the most spacious
+   sections on the page by design. */
+.section--teal { padding-top: 5.5rem; padding-bottom: 5.5rem }
+@media (max-width: 640px) {
+  .section--teal { padding-top: 3.5rem; padding-bottom: 3.5rem }
+  .section--teal .sdesc { margin-bottom: 2rem }
+  .section--teal .sbadge::before,
+  .section--teal .sbadge::after { width: 20px }
 }
 
 @media (min-width: 1024px) {
@@ -1399,7 +1828,8 @@ p:last-child { margin-bottom: 0 }
   transition: box-shadow var(--t), border-color var(--t);
 }
 .rel-card:hover { border-color: var(--g200); box-shadow: var(--md) }
-.rel-card h4 { font-size: .87rem; color: var(--black); margin-bottom: .25rem; font-weight: 700 }
+/* PST-09: card titles moved h4 -> h3 to remove an h2->h4 skip. */
+.rel-card h3 { font-size: .87rem; color: var(--black); margin-bottom: .25rem; font-weight: 700 }
 .rel-card p  { font-size: .79rem; color: var(--g500); line-height: 1.55; margin-bottom: .35rem }
 .rel-card .rp { font-size: .87rem; font-weight: 700; color: var(--black) }
 @media (min-width: 640px) { .rel-grid { grid-template-columns: repeat(2, 1fr) } }
@@ -1749,7 +2179,14 @@ p:last-child { margin-bottom: 0 }
 .dtable-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 1.25rem 0; border: 1px solid var(--g100); border-radius: var(--r) }
 .dtable { width: 100%; border-collapse: collapse; font-size: .92rem; background: var(--white) }
 .dtable th, .dtable td { padding: .6rem .85rem; text-align: left; border-bottom: 1px solid var(--g100); vertical-align: top }
-.dtable thead th { background: var(--g50); font-weight: 600; font-size: .85rem; white-space: nowrap }
+/* PST-02: this rule previously also set `background: var(--g50)`, `font-weight`
+   and `font-size`. Because `.dtable thead th` (0,1,2) outranks blog/css/blog.css
+   `.dtable th` (0,1,1), it replaced that rule's dark header background but NOT
+   its `color: var(--white)` - leaving white text on #F7F7F7 at 1.07:1 across 12
+   articles. This section was added as a no-horizontal-scroll fix, so only the
+   scroll-related declaration belongs here; the header skin stays in blog.css,
+   which matches `.ftbl thead th` on the landing track. */
+.dtable thead th { white-space: nowrap }
 .dtable tbody tr:last-child td { border-bottom: none }
 .dtable-wrap .dtable { margin: 0 }
 /* Safety net: any table dropped in without a wrapper still scrolls itself */

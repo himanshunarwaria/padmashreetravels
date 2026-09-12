@@ -28,6 +28,38 @@ before this task and remains true after it.
   `gclid` from the URL into `localStorage` (`pst_utm_source` etc.) on page
   load.
 
+## 1a. Homepage coverage and the two parallel event vocabularies
+
+Added 2 Sep 2026: `index.html` now loads `js/conversion-tracking.js` with
+`defer`, bringing the homepage to 39 pages total. Two things a future
+maintainer must know before building GTM tags.
+
+**The classifier was widened, not changed.** `ctaLocation()` previously knew
+only rebuilt-track selectors, so four separate homepage CTAs all reported
+`cta_location:"section"`. Each test now names both design systems' class for
+the same control (`.mobile-bar, .mcta-bar` / `#hero, .hero` /
+`.gr-wrap, .grx` / `#waBtn` or `.waf`). Every pair is a superset: rebuilt
+pages carry both names on the same element, and `agra-to-mathura-taxi`,
+`taj-mahal-taxi` and `agra-airport-taxi` were re-measured after the change -
+header, hero, floating_bubble, mobile_bar and footer all still resolve
+exactly as before, one event per click.
+
+**Eight pages report the same tap under two vocabularies.** On any page that
+loads `js/main.js` as well (the homepage, the blog, `book/`, `fleet/`,
+`about/`, `contact/`, `route-finder/`, `agra-to-mathura-vrindavan/`), a
+single tap produces:
+
+| Tap | From `conversion-tracking.js` | From `main.js` (pre-existing) |
+|---|---|---|
+| WhatsApp CTA | `whatsapp_click` (+ `cta_location`, `cta_label`) | `whatsapp_enquiry` (+ `source_component`) and `whatsapp_booking` (the live Google Ads conversion, `AW-18103087307`) |
+| Phone link | `call_click` (+ `cta_location`, `cta_label`) | `phone_click` (+ `call_number`) |
+
+Measured, not assumed: each **name** fires exactly once per click, so nothing
+is duplicated at the dataLayer level. Double-counting only appears if someone
+builds GA4 tags on *both* names for the same action - so pick one vocabulary
+per action when configuring the container. This pairing predates the homepage
+change; it was already live on 18 pages.
+
 ## 2. What this task added (implemented, not just documented)
 
 **Attribution now flows into every conversion-tracking.js event.**

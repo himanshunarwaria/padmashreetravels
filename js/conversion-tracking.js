@@ -134,14 +134,28 @@
   })();
 
   /* Where on the page the tapped control lives. */
+  /* Each test names BOTH design systems, because this file now runs on the
+     legacy homepage (css/style.css) as well as the landing-track pages
+     (css/landing.css), and the two use different class names for the same
+     control:
+        landing track          legacy homepage
+        .mobile-bar            .mcta-bar        fixed bottom CTA bar
+        id="hero"              class="hero"     hero band
+        .gr-wrap               .grx             review section
+        id="waBtn"             .waf             floating WhatsApp bubble
+     Every pair is a superset, not a change: on landing pages the hero
+     carries id="hero" AND class="hero", and the bubble carries id="waBtn"
+     AND class="waf", so those pages resolve to exactly what they did
+     before. Without this, four separate homepage CTAs all reported
+     cta_location:"section", which is useless for attribution. */
   function ctaLocation(el) {
-    if (el.closest('.mobile-bar'))            return 'mobile_bar';
-    if (el.closest('header'))                 return 'header';
-    if (el.closest('#hero'))                  return 'hero';
-    if (el.closest('.gr-wrap'))               return 'reviews';
-    if (el.closest('footer'))                 return 'footer';
-    if (el.id === 'waBtn')                    return 'floating_bubble';
-    if (el.hasAttribute('data-cta-final'))    return 'final_cta';
+    if (el.closest('.mobile-bar, .mcta-bar'))       return 'mobile_bar';
+    if (el.closest('header'))                       return 'header';
+    if (el.closest('#hero, .hero'))                 return 'hero';
+    if (el.closest('.gr-wrap, .grx'))               return 'reviews';
+    if (el.closest('footer'))                       return 'footer';
+    if (el.id === 'waBtn' || el.classList.contains('waf')) return 'floating_bubble';
+    if (el.hasAttribute('data-cta-final'))          return 'final_cta';
     return 'section';
   }
 

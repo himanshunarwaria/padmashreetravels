@@ -305,3 +305,98 @@ existed and none was "fixed".
 | cheapest / best / number one | 0 | 0 | None found |
 
 **End of claims and policy audit.**
+
+---
+
+# 9. OWNER-CONFIRMED ANSWERS — 12 September 2026
+
+The owner supplied the following confirmations. Each is now **[CONFIRMED]** and
+implemented site-wide. This section supersedes the corresponding open questions
+in section 6.
+
+## 9.1 Support hours — resolves the 24/7 claim
+
+> **"Support operates daily, 9:00 AM–9:00 PM Indian Standard Time (IST, UTC+5:30)."**
+
+**Implemented.** Site-wide wording: *"Call or WhatsApp us daily, 9 AM–9 PM IST."*
+
+Critically, this confirms **support**, not vehicle operations. The two were
+separated before editing, because conflating them would have published a new
+unconfirmed claim in the opposite direction:
+
+| Claim type | Count found | Treatment |
+|---|---|---|
+| **SUPPORT** (answering calls/WhatsApp) | 6 distinct phrasings, 57 pages | Replaced with the confirmed 9 AM–9 PM IST hours |
+| **OPERATIONS** (pickups, vehicles running) | 17 distinct phrasings | **De-absolutised.** No longer claims round-the-clock pickups, and does **not** state pickups stop at 9 PM. Wording moved to "arranged on request — we confirm availability before you book", which matches the site's actual request→confirm model |
+| **AMBIGUOUS** (chips, stats, badges) | 17 distinct phrasings | Classified individually by rendered context, then treated as support or operations accordingly |
+
+**Result:** 0 rendered `24/7` / `24 hours a day` / `around the clock` claims remain
+on any public page. 12 occurrences remain inside HTML editorial comments, which
+are not shown to visitors — **flagged, not changed**, so the maintainer record of
+what a page once claimed stays intact.
+
+**Still unconfirmed — do not add:** whether pickups are genuinely available at any
+hour, and what notice an 04:00 sunrise or late-night airport run needs.
+
+## 9.2 Established year
+
+> **"Padma Shree Travels was established in 2025."**
+
+**Implemented.**
+* Visible: *"serving travellers since 2025"* on the homepage intro and the About
+  page opening paragraph.
+* Structured data: `"foundingDate":"2025"` added to **77 LocalBusiness nodes
+  across 41 pages**. All 230 `ld+json` blocks still parse.
+* No conflicting operating-history claim existed anywhere (the single
+  "Founded by Srila Prabhupada" refers to a temple, not the business, and was
+  correctly left alone).
+
+## 9.3 Cancellation
+
+> **"Cancel free of charge at least 12 hours before your scheduled departure."**
+
+**Implemented** on `book/`, `agra-to-sirsaganj/`, the homepage FAQ (visible +
+FAQPage schema), and as a concise line under the final CTA on 36 route pages —
+**38 pages total**.
+
+This **supersedes** section 6 question 4. Note the earlier figure was wrong:
+the retired copy said *2 hours*; the confirmed policy is *12 hours*. The stale
+maintainer note in `agra-to-sirsaganj/` that anticipated this ("If the owner says
+the real policy is something else, BOTH pages must change together") has been
+resolved — both pages were updated together, as it required.
+
+**Still unconfirmed — explicitly NOT stated anywhere:** late-cancellation
+charges, no-show terms, and advance-refund handling. Nothing on the site implies
+cancellation inside 12 hours is free.
+
+## 9.4 Official logo
+
+> **"Use the official logo currently displayed on the homepage consistently across every page's header and footer."**
+
+**Implemented** using `images/logo.png` (510×292, transparent) — the asset the
+homepage already used. It was **not** redrawn, regenerated, recoloured or
+replaced.
+
+* **37 rebuilt-track headers** previously rendered a **text monogram**
+  (`<span class="hdr__mark">PS</span>`, a green square) — replaced with the
+  official asset.
+* **37 rebuilt-track footers** had **no logo at all** — added.
+* On dark surfaces the asset uses `filter: brightness(0) invert(1)` — a display
+  treatment, and the same one `css/style.css` already applied to this asset in
+  the legacy footer. `logo2.png` and `logo3.png` were **rejected**: both have a
+  baked-in background and would lose transparency.
+* Proportions verified at 360/390/768/1440 on both tracks — aspect within 0.08
+  of the intrinsic 1.747 everywhere.
+* **Accessibility fix found along the way:** the rebuilt header link had **no
+  accessible name below 640px**, because `.hdr__name` was `display:none`. It is
+  now visually hidden instead of removed, so the link is named at every width.
+* Favicons (16/32/48/svg/ico/apple-touch) verified as the same mark, inverted
+  for small-size legibility — already aligned, no change needed.
+* Structured data `logo` present; the homepage already carried it as an
+  `ImageObject`.
+
+## 9.5 Still open after this round
+
+Sections 6 questions 1, 2, 3, 5, 7, 8, 9, 10, 11 remain unanswered:
+insurance, driver verification, sanitisation, night surcharge, waiting bounds,
+no-commission-stops, child seats, realistic response time, festival capacity.

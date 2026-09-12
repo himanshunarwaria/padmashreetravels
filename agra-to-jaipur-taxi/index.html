@@ -183,16 +183,18 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
 .hdr{ position:sticky; top:0; z-index:50; background:var(--ink-950); border-bottom:2px solid #000; }
 .hdr__in{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding-top:12px; padding-bottom:12px; }
 .hdr__logo{ display:flex; align-items:center; gap:8px; font-weight:700; font-size:14px; color:#fff; flex-shrink:0; min-width:0; }
-.hdr__mark{
-  display:inline-flex; align-items:center; justify-content:center;
-  height:28px; width:28px; border-radius:4px; background:var(--accent);
-  border:2px solid #000; color:#000; font-size:11px; font-weight:900; flex-shrink:0;
-}
-.hdr__name{ display:none; }
+/* Official logo (owner-confirmed). Height fixed, width auto so the 510x292
+   proportions are never distorted; inverted for this dark header, the same
+   display treatment css/style.css uses on the legacy footer. */
+.hdr__mark{ height:24px; width:auto; flex-shrink:0; filter:brightness(0) invert(1); }
+.hdr__name{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); clip-path:inset(50%); white-space:nowrap; border:0; }
 .hdr__nav{ display:none; align-items:center; gap:18px; font-size:12px; font-weight:500; color:rgba(255,255,255,.75); }
 .hdr__nav a:hover{ color:var(--accent); }
-@media (min-width:640px){ .hdr__logo{ font-size:16px; } .hdr__name{ display:inline; } }
+@media (min-width:640px){ .hdr__logo{ font-size:16px; }
+  .hdr__name{ position:static; width:auto; height:auto; margin:0; overflow:visible; clip:auto; clip-path:none; white-space:normal; }
+  .hdr__mark{ height:26px; } }
 @media (min-width:1024px){ .hdr__nav{ display:flex; } }
+.gnav-dd{position:relative}.gnav-dd>a::after{content:'\25BE';margin-left:4px;font-size:9px}.gnav-menu{position:absolute;top:100%;left:0;margin-top:14px;min-width:250px;background:#0e1116;border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:8px;box-shadow:0 16px 32px rgba(0,0,0,.45);opacity:0;visibility:hidden;transform:translateY(4px);transition:opacity 140ms ease,transform 140ms ease,visibility 140ms;z-index:70}.gnav-dd--right .gnav-menu{left:auto;right:0}.gnav-dd:hover>.gnav-menu,.gnav-dd:focus-within>.gnav-menu{opacity:1;visibility:visible;transform:translateY(0)}.gnav-menu a{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 10px;border-radius:5px;font-size:13px;font-weight:500;color:rgba(255,255,255,.85);white-space:nowrap}.gnav-menu a:hover,.gnav-menu a:focus-visible{background:rgba(255,255,255,.08);color:#fff}.gnav-tag{font-size:11px;font-weight:600;color:var(--accent);flex-shrink:0}.gnav-more{margin-top:4px;padding-top:10px;border-top:1px solid rgba(255,255,255,.1);color:var(--accent)!important;font-weight:700!important;justify-content:flex-start!important}.gnav-mobile{display:block}.gnav-mobile__btn{display:flex;align-items:center;justify-content:center;list-style:none;width:44px;height:44px;border-radius:8px;background:rgba(255,255,255,.08);color:#fff;cursor:pointer}.gnav-mobile__btn::-webkit-details-marker{display:none}.gnav-mobile__panel{position:absolute;left:0;right:0;top:100%;max-height:calc(100vh - 64px);overflow-y:auto;background:var(--ink-950);border-top:1px solid rgba(255,255,255,.12);padding:8px 20px 20px;z-index:60}.gnav-mobile__panel>a,.gnav-mobile__cat summary{display:flex;align-items:center;justify-content:space-between;padding:13px 2px;font-size:14px;font-weight:600;color:#fff;border-bottom:1px solid rgba(255,255,255,.08)}.gnav-mobile__cat summary{cursor:pointer;list-style:none}.gnav-mobile__cat summary::-webkit-details-marker{display:none}.gnav-mobile__cat summary::after{content:'\25BE';font-size:11px;color:rgba(255,255,255,.5)}.gnav-mobile__cat a{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 2px 11px 14px;font-size:13px;font-weight:500;color:rgba(255,255,255,.8)}@media (min-width:1024px){.gnav-mobile{display:none}}
 
 /* ===================================================================
    Hero band — near-black with a restrained green technical wash
@@ -395,6 +397,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
 .partner{ display:grid; grid-template-columns:1fr; gap:48px; align-items:center; }
 @media (min-width:1024px){ .partner{ grid-template-columns:1.5fr 1fr; gap:40px; } }
 .partner__fig{ display:flex; flex-direction:column; align-items:center; text-align:center; }
+.lp{display:grid;grid-template-columns:1fr;gap:36px;max-width:1080px;margin-inline:auto}.lp__body{min-width:0}.lp__eyebrow{display:flex;align-items:center;gap:10px;font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-dark)}.lp__eyebrow::before{content:"";width:26px;height:2px;background:var(--accent-deep)}.lp__head{margin-top:14px}.lp__lede{margin-top:14px;font-size:14.5px;line-height:1.75;color:rgba(0,0,0,.72);max-width:54ch}.lp__lede a{color:var(--accent-dark);font-weight:600;text-decoration:underline;text-underline-offset:2px}.lp__facts{margin:26px 0 0;padding:0;list-style:none;border-top:1px solid rgba(0,0,0,.14)}.lp__fact{position:relative;padding:15px 0 15px 34px;border-bottom:1px solid rgba(0,0,0,.14);font-size:13.5px;line-height:1.65;color:rgba(0,0,0,.72)}.lp__fact strong{display:block;color:#000;font-weight:700;margin-bottom:2px}.lp__fact::before{content:"\2713";position:absolute;left:2px;top:15px;color:var(--accent-dark);font-size:18px;font-weight:800}.lp__cta{display:flex;flex-wrap:wrap;align-items:center;gap:14px 18px;margin-top:26px}.lp__cta .btn-primary{margin:0}.lp__cta .link-call{color:var(--accent-dark)}.lp__note{margin-top:14px;font-size:12.5px;line-height:1.6;color:rgba(0,0,0,.6)}.lp__fig{margin:0;border:1.5px solid #000;border-radius:4px;overflow:hidden;background:#fff;max-width:380px;width:100%;justify-self:center}.lp__img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:50% 25%;display:block}.lp__cap{padding:14px 16px 15px;background:#fafafa;border-top:1.5px solid #000}.lp__name{display:block;font-size:13.5px;font-weight:700}.lp__addr{display:block;margin-top:4px;font-size:12px;line-height:1.55;color:rgba(0,0,0,.66)}.lp__links{display:block;margin-top:9px;font-size:12px;font-weight:600}.lp__links a{color:var(--accent-dark);text-decoration:underline;text-underline-offset:2px}.lp__sep{color:rgba(0,0,0,.3);padding:0 6px}@media (min-width:900px){.lp{grid-template-columns:minmax(0,1.28fr) minmax(260px,.72fr);gap:56px;align-items:center}.lp__fig{justify-self:end}}@media (max-width:899px){.lp__fig{max-width:290px}.lp{gap:30px}}@media (max-width:519px){.lp__cta .btn-primary,.lp__cta .link-call{display:block;width:100%;text-align:center}}
 .partner__fig img{
   width:100%; max-width:460px; aspect-ratio:14/15; object-fit:cover;
   border-radius:20px; box-shadow:9px 9px 0 var(--accent-deep);
@@ -467,13 +470,13 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
 </style>
 
 <!-- ===================== STRUCTURED DATA ===================== -->
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","@id":"https://www.padmashreetravels.in/#business","name":"Padma Shree Travels","url":"https://www.padmashreetravels.in/","telephone":"+91-87200-81102","email":"travels.padamshree@gmail.com","image":"https://www.padmashreetravels.in/images/logo.png","address":{"@type":"PostalAddress","streetAddress":"Rajeshwar Mandir, Kaveri Vihar Phase II, Shamsabad","addressLocality":"Agra","addressRegion":"Uttar Pradesh","postalCode":"282001","addressCountry":"IN"},"geo":{"@type":"GeoCoordinates","latitude":27.1767,"longitude":78.0081},"sameAs":["https://g.page/r/CUjtXu1x_3bPEBM/review"],"openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"00:00","closes":"23:59"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","@id":"https://www.padmashreetravels.in/#business","name":"Padma Shree Travels","foundingDate":"2025","url":"https://www.padmashreetravels.in/","telephone":"+91-87200-81102","email":"travels.padamshree@gmail.com","image":"https://www.padmashreetravels.in/images/logo.png","logo":"https://www.padmashreetravels.in/images/logo.png","address":{"@type":"PostalAddress","streetAddress":"Rajeshwar Mandir, Kaveri Vihar Phase II, Shamsabad","addressLocality":"Agra","addressRegion":"Uttar Pradesh","postalCode":"282001","addressCountry":"IN"},"geo":{"@type":"GeoCoordinates","latitude":27.1767,"longitude":78.0081},"sameAs":["https://g.page/r/CUjtXu1x_3bPEBM/review"],"openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"00:00","closes":"23:59"}}</script>
 
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.padmashreetravels.in/"},{"@type":"ListItem","position":2,"name":"Outstation Cabs from Agra","item":"https://www.padmashreetravels.in/outstation-cabs-agra/"},{"@type":"ListItem","position":3,"name":"Agra to Jaipur Taxi","item":"https://www.padmashreetravels.in/agra-to-jaipur-taxi/"}]}</script>
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","serviceType":"Outstation Taxi Service","name":"Agra to Jaipur Taxi","description":"Private AC cab from Agra to Jaipur covering approximately 235-240 km via NH-21 in 4-5 hours, available as a one-way drop or a round trip, with hotel, railway station or airport pickup anywhere in Agra, optional stops at Fatehpur Sikri, Mehandipur Balaji and Bharatpur, and the fare confirmed on WhatsApp before travel.","provider":{"@type":"LocalBusiness","name":"Padma Shree Travels","telephone":"+91-87200-81102"},"areaServed":["Agra","Fatehpur Sikri","Bharatpur","Mahwa","Dausa","Jaipur"],"url":"https://www.padmashreetravels.in/agra-to-jaipur-taxi/"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","serviceType":"Outstation Taxi Service","name":"Agra to Jaipur Taxi","description":"Private AC cab from Agra to Jaipur covering approximately 235-240 km via NH-21 in 4-5 hours, available as a one-way drop or a round trip, with hotel, railway station or airport pickup anywhere in Agra, optional stops at Fatehpur Sikri, Mehandipur Balaji and Bharatpur, and the fare confirmed on WhatsApp before travel.","provider":{"@type":"LocalBusiness","name":"Padma Shree Travels","foundingDate":"2025","telephone":"+91-87200-81102"},"areaServed":["Agra","Fatehpur Sikri","Bharatpur","Mahwa","Dausa","Jaipur"],"url":"https://www.padmashreetravels.in/agra-to-jaipur-taxi/"}</script>
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"TouristTrip","name":"Agra to Jaipur by Private Taxi","description":"Private AC cab journey from Agra to Jaipur via NH-21, approximately 235-240 km in 4-5 hours, with optional stops at Fatehpur Sikri, Mehandipur Balaji Temple and Bharatpur.","touristType":"Families, couples and groups travelling between Agra and Jaipur","itinerary":{"@type":"ItemList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@type":"City","name":"Agra"}},{"@type":"ListItem","position":2,"item":{"@type":"Place","name":"Fatehpur Sikri"}},{"@type":"ListItem","position":3,"item":{"@type":"City","name":"Bharatpur"}},{"@type":"ListItem","position":4,"item":{"@type":"Place","name":"Mehandipur Balaji Temple"}},{"@type":"ListItem","position":5,"item":{"@type":"City","name":"Dausa"}},{"@type":"ListItem","position":6,"item":{"@type":"City","name":"Jaipur"}}]},"provider":{"@type":"LocalBusiness","name":"Padma Shree Travels","telephone":"+91-87200-81102"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TouristTrip","name":"Agra to Jaipur by Private Taxi","description":"Private AC cab journey from Agra to Jaipur via NH-21, approximately 235-240 km in 4-5 hours, with optional stops at Fatehpur Sikri, Mehandipur Balaji Temple and Bharatpur.","touristType":"Families, couples and groups travelling between Agra and Jaipur","itinerary":{"@type":"ItemList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@type":"City","name":"Agra"}},{"@type":"ListItem","position":2,"item":{"@type":"Place","name":"Fatehpur Sikri"}},{"@type":"ListItem","position":3,"item":{"@type":"City","name":"Bharatpur"}},{"@type":"ListItem","position":4,"item":{"@type":"Place","name":"Mehandipur Balaji Temple"}},{"@type":"ListItem","position":5,"item":{"@type":"City","name":"Dausa"}},{"@type":"ListItem","position":6,"item":{"@type":"City","name":"Jaipur"}}]},"provider":{"@type":"LocalBusiness","name":"Padma Shree Travels","foundingDate":"2025","telephone":"+91-87200-81102"}}</script>
 
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
 {"@type":"Question","name":"How far is Jaipur from Agra?","acceptedAnswer":{"@type":"Answer","text":"Jaipur is approximately 235-240 km from Agra via NH-21 (also signed as NH-11). The route passes Fatehpur Sikri, Bharatpur, Mahwa and Dausa before reaching Jaipur."}},
@@ -502,20 +505,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <header class="hdr">
   <div class="wrap hdr__in">
     <a href="../index.html" class="hdr__logo">
-      <span class="hdr__mark" aria-hidden="true">PS</span>
+      <img src="../images/logo.png" alt="" class="hdr__mark" width="42" height="24" decoding="async">
       <span class="hdr__name">Padma Shree Travels</span>
     </a>
     <nav class="hdr__nav" aria-label="Main">
       <a href="../index.html">Home</a>
-      <a href="../agra-temple-tour-by-cab/">Pilgrimage</a>
-      <a href="../agra-local-sightseeing/">Sightseeing</a>
-      <a href="../outstation-cabs-agra/">Outstation</a>
-      <a href="../agra-taxi-fares/">Fares &amp; Tools</a>
-      <a href="../fleet/">Fleet</a>
+      <span class="gnav-dd"><a href="../agra-temple-tour-by-cab/">Pilgrimage</a><span class="gnav-menu"><a href="../agra-to-mathura-taxi/">Agra &#8594; Mathura<span class="gnav-tag">from &#8377;1,500</span></a><a href="../agra-to-vrindavan-cab/">Agra &#8594; Vrindavan<span class="gnav-tag">from &#8377;1,800</span></a><a href="../mathura-vrindavan-tour-from-agra/">Mathura + Vrindavan<span class="gnav-tag">&#8377;3,000</span></a><a class="gnav-more" href="../agra-temple-tour-by-cab/">View All Pilgrimage &#8594;</a></span></span>
+      <span class="gnav-dd"><a href="../agra-local-sightseeing/">Sightseeing</a><span class="gnav-menu"><a href="../agra-local-sightseeing/">Agra Full Day<span class="gnav-tag">&#8377;2,500</span></a><a href="../fatehpur-sikri/">Fatehpur Sikri<span class="gnav-tag">&#8377;2,500</span></a><a href="../taj-mahal-taxi/">Taj Mahal Taxi<span class="gnav-tag">from &#8377;1,500</span></a><a class="gnav-more" href="../agra-local-sightseeing/">View All Sightseeing &#8594;</a></span></span>
+      <span class="gnav-dd"><a href="../outstation-cabs-agra/" aria-current="page">Outstation</a><span class="gnav-menu"><a href="../agra-to-gwalior/">Agra &#8594; Gwalior<span class="gnav-tag">&#8377;3,000 RT</span></a><a href="../agra-to-jaipur-taxi/" aria-current="page">Agra &#8594; Jaipur<span class="gnav-tag">Fare on WhatsApp</span></a><a href="../agra-airport-taxi/">Agra Airport Taxi<span class="gnav-tag">from &#8377;800</span></a><a class="gnav-more" href="../outstation-cabs-agra/">View All Outstation &#8594;</a></span></span>
+      <span class="gnav-dd gnav-dd--right"><a href="../agra-taxi-fares/">Fares &amp; Tools</a><span class="gnav-menu"><a href="../agra-taxi-fares/">Taxi Fare List<span class="gnav-tag">Fixed fares</span></a><a href="../route-finder/">Route Finder<span class="gnav-tag">Filter routes</span></a><a href="../fleet/">Our Fleet<span class="gnav-tag">Compare cabs</span></a><a href="../book/">Book Online<span class="gnav-tag">WhatsApp booking</span></a></span></span>
       <a href="../blog/">Blog</a>
       <a href="../about/">About</a>
       <a href="../contact/">Contact</a>
     </nav>
+    <details class="gnav-mobile"><summary class="gnav-mobile__btn" aria-label="Open menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></summary><div class="gnav-mobile__panel"><a href="../index.html">Home</a><details class="gnav-mobile__cat"><summary>Pilgrimage</summary><a href="../agra-to-mathura-taxi/">Agra to Mathura</a><a href="../agra-to-vrindavan-cab/">Agra to Vrindavan</a><a href="../agra-temple-tour-by-cab/">All Pilgrimage Tours</a></details><details class="gnav-mobile__cat"><summary>Sightseeing</summary><a href="../agra-local-sightseeing/">Agra Sightseeing</a><a href="../fatehpur-sikri/">Fatehpur Sikri</a><a href="../taj-mahal-taxi/">Taj Mahal Taxi</a></details><details class="gnav-mobile__cat"><summary>Outstation</summary><a href="../agra-to-jaipur-taxi/" aria-current="page">Agra to Jaipur</a><a href="../agra-to-gwalior/">Agra to Gwalior</a><a href="../outstation-cabs-agra/">All Outstation Routes</a></details><details class="gnav-mobile__cat"><summary>Fares &amp; Tools</summary><a href="../agra-taxi-fares/">Taxi Fare List</a><a href="../route-finder/">Route Finder</a><a href="../fleet/">Our Fleet</a><a href="../book/">Book Online</a></details><a href="../blog/">Blog</a><a href="../about/">About</a><a href="../contact/">Contact</a></div></details>
     <a data-cta href="https://wa.me/918720081102?text=Hi%20Padma%20Shree%20Travels%2C%20I%20would%20like%20an%20Agra%20to%20Jaipur%20taxi.%0A%0ATravel%20date%3A%20%0APickup%20point%20in%20Agra%3A%20%0APassengers%20%2F%20cab%20type%3A%20%0AOne%20way%20or%20round%20trip%3A%20%0AStops%20on%20the%20way%20(Fatehpur%20Sikri%20%2F%20Mehandipur%20Balaji)%3A%20%0A%0APlease%20share%20availability%20and%20fare." target="_blank" rel="noopener" class="btn-header">Get Fare</a>
   </div>
 </header>
@@ -846,23 +849,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ===================== LOCAL PARTNER ===================== -->
 <section class="sec">
   <div class="wrap">
-    <h2 class="h2 center" style="margin-bottom:36px">Your Local Agra Travel Partner</h2>
-    <div class="partner">
-      <ul class="stack">
-        <li class="row-light">Padma Shree Travels is an <strong>Agra-based taxi service</strong> running local sightseeing, airport transfers and outstation trips.</li>
-        <li class="row-light">Pickup arranged from <strong>hotels, Agra Cantt, Agra Fort station and Agra (Kheria) Airport</strong>.</li>
-        <li class="row-light">Fare is <strong>confirmed on WhatsApp before you travel</strong> &mdash; tolls are told to you separately, upfront.</li>
-        <li class="row-light">Driver&rsquo;s name, number and car number are <strong>shared with you before pickup</strong>.</li>
-        <li class="row-light">Direct <strong>WhatsApp and phone support</strong> before and during your journey.</li>
-        <li class="row-light">Easy to extend your trip with <strong>Fatehpur Sikri, Bharatpur, Mathura, Vrindavan or a further outstation leg</strong>.</li>
-      </ul>
-      <div class="partner__fig">
-        <img src="../images/fleet/fleet-lineup.webp" width="1400" height="788" loading="lazy" decoding="async"
-             alt="Padma Shree Travels cab fleet lined up in Agra &mdash; sedan, SUV and Tempo Traveller used on outstation routes">
-        <h3 style="margin-top:24px;font-size:1.125rem">Padma Shree Travels</h3>
-        <p style="margin-top:2px;font-size:13px;font-weight:600">Agra Taxi &amp; Outstation Service</p>
-        <p style="margin-top:4px;font-size:13px;font-weight:600;color:var(--accent-dark)">Local Pickup &bull; Clear Pricing &bull; Direct Support</p>
-      </div>
+    <div class="lp">
+      <div class="lp__body"><p class="lp__eyebrow">Local Agra Operator</p><h2 class="h2 lp__head">Your Local Agra Travel Partner</h2><p class="lp__lede">Padma Shree Travels is an Agra-based taxi service for local sightseeing, airport transfers and outstation trips. This journey can include <a href="../fatehpur-sikri/">Fatehpur Sikri</a>, Bharatpur or Mehandipur Balaji before Jaipur.</p><ul class="lp__facts"><li class="lp__fact"><strong>Your fare</strong>Confirmed on WhatsApp before travel, with highway tolls identified separately.</li><li class="lp__fact"><strong>Your driver</strong>Name, mobile number and car registration number shared before pickup.</li><li class="lp__fact"><strong>Pickup</strong>Hotels, Agra Cantt, Agra Fort station or Agra (Kheria) Airport.</li></ul><div class="lp__cta"><a data-cta href="https://wa.me/918720081102?text=Hi%20Padma%20Shree%20Travels%2C%20I%20want%20an%20Agra%20to%20Jaipur%20taxi%20fare." target="_blank" rel="noopener" class="btn-primary">Get Your Fare on WhatsApp</a><a href="tel:+918720081102" class="link-call">or call +91-87200 81102</a></div><p class="lp__note">Direct WhatsApp and phone support before and during your journey.</p></div>
+      <figure class="lp__fig"><img class="lp__img" src="../images/about/PadmaShree%20(5).jpg" width="1080" height="1440" loading="lazy" decoding="async" alt="A member of the Padma Shree Travels team standing between two branded company cars"><figcaption class="lp__cap"><span class="lp__name">Padma Shree Travels</span><span class="lp__addr">Rajeshwar Mandir, Kaveri Vihar Phase II, Shamsabad, Agra 282001</span><span class="lp__links"><a href="tel:+918720081102">+91-87200 81102</a><span class="lp__sep">&bull;</span><a href="https://g.page/r/CUjtXu1x_3bPEBM" target="_blank" rel="noopener">Google reviews</a></span></figcaption></figure>
     </div>
   </div>
 </section>
@@ -915,6 +904,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <a data-cta href="https://wa.me/918720081102?text=Hi%20Padma%20Shree%20Travels%2C%20I%20would%20like%20an%20Agra%20to%20Jaipur%20taxi.%0A%0ATravel%20date%3A%20%0APickup%20point%20in%20Agra%3A%20%0APassengers%20%2F%20cab%20type%3A%20%0AOne%20way%20or%20round%20trip%3A%20%0AStops%20on%20the%20way%20(Fatehpur%20Sikri%20%2F%20Mehandipur%20Balaji)%3A%20%0A%0APlease%20share%20availability%20and%20fare." target="_blank" rel="noopener" class="btn-primary">Get Fare on WhatsApp</a>
   </div>
   <a href="tel:+918720081102" class="link-call" style="display:inline-block;margin-top:16px">or Call Now &mdash; +91-87200 81102</a>
+      <p class="cta-reassure">Free cancellation up to 12 hours before departure.</p>
 </section>
 
 </main>
@@ -923,9 +913,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <footer class="mesh-dark">
   <div class="wrap ft__grid">
     <div class="ft__brand">
-      <p class="ft__h">Padma Shree Travels</p>
+      <img src="../images/logo.png" alt="" class="ft__logo" width="70" height="40" loading="lazy" decoding="async">
+        <p class="ft__h">Padma Shree Travels</p>
       <p>Rajeshwar Mandir, Kaveri Vihar Phase II,<br>Shamsabad, Agra, Uttar Pradesh 282001</p>
-      <p>Your trusted partner for taxi and cab booking in Agra &mdash; outstation trips, sightseeing tours and airport transfers, available 24/7.</p>
+      <p>Your trusted partner for taxi and cab booking in Agra &mdash; outstation trips, sightseeing tours and airport transfers. Call or WhatsApp us daily, 9 AM&ndash;9 PM IST.</p>
     </div>
     <div>
       <p class="ft__h">Top Routes</p>
@@ -965,6 +956,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </div>
   </div>
+<div class="ft__wordmark" aria-hidden="true">
+<div class="ft__wordmark-kicker"><span></span>Agra &middot; Private Cabs &middot; Local Journeys</div>
+<div class="ft__wordmark-type"><span>Padma</span><strong>Shree</strong></div>
+</div>
   <div class="ft__bot">
     <div class="wrap">
       <p>&copy; <span data-year>2026</span> Padma Shree Travels. All rights reserved.</p>

@@ -104,14 +104,8 @@
      behind live text. `w`/`h` are the true intrinsic sizes, kept so the
      pool stays auditable and so a future consumer can use them. */
   var BANNERS = [
-    { file: 'B1.jpg', w: 2391, h: 1080,
-      desc: 'Sedan, MPV and minibus parked together at night under a lit portico' },
-    { file: 'B2.jpg', w: 2391, h: 1080,
-      desc: 'The three vehicles at night on wet, reflective paving' },
-    { file: 'B3.jpg', w: 2391, h: 1080,
-      desc: 'Cars and minibus at night beside a warmly lit stone and timber wall' },
-    { file: 'B%20(2).jpg', w: 2499, h: 941,
-      desc: 'The fleet at night beside a lit stone pillar; widest of the four' }
+    { file: 'fleet-lineup-night.webp', w: 2499, h: 941,
+      desc: 'The fleet at night beside a lit stone pillar' }
   ];
 
   /* ------------------------- shared rotation core ------------------------
@@ -183,7 +177,7 @@
      text — so it is set as a background, with no alt text to mislead and no
      second element downloading the same file. */
   rotate({
-    selector: '[data-fare-bg]', dir: 'images/Banners/', pool: BANNERS,
+    selector: '[data-fare-bg]', dir: 'images/fleet/', pool: BANNERS,
     lastKey: 'pst_fare_last', prefix: prefixFromStylesheet,
     apply: function (el, pick, url) {
       el.style.setProperty('--fare-bg', 'url("' + url + '")');

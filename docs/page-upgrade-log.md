@@ -8063,3 +8063,793 @@ new page).
 5. Whether to configure real GTM tags reading the events
    `conversion-tracking.js` already pushes (an account-access task, not a
    code task - no such access exists in this engagement).
+
+---
+
+## 41. Homepage conversion tracking (2026-09-02)
+
+**Instruction:** load `js/conversion-tracking.js` on `index.html` with `defer`;
+confirm it does not duplicate existing GTM or click events; verify the review
+CTA, hero CTA, phone links, floating WhatsApp control and mobile CTA bar each
+emit the intended event once per click; do not expose WhatsApp-prefill contents
+as analytics data; regression-test with GTM unavailable. Keep the existing
+no-JavaScript review fallback (duplicating all nine reviews into static HTML is
+not justified). No further visual changes.
+
+**No visual change was made. Two files changed.**
+
+### 1. `index.html` - one deferred script tag
+
+Added after the review scripts and before `js/main.js`, with a comment
+explaining the GTM relationship and the `main.js` event pairing (below).
+
+### 2. `js/conversion-tracking.js` - `ctaLocation()` widened
+
+The homepage is legacy-track (`css/style.css`); the classifier only knew
+rebuilt-track selectors. Left alone, the hero CTA, floating bubble, mobile bar
+and review CTA would **all** have reported `cta_location:"section"` - useless
+for attribution. Each test now names both systems' class for the same control:
+
+| Control | Rebuilt track | Legacy homepage |
+|---|---|---|
+| Fixed bottom CTA bar | `.mobile-bar` | `.mcta-bar` |
+| Hero band | `id="hero"` | `class="hero"` |
+| Review section | `.gr-wrap` | `.grx` |
+| Floating WhatsApp bubble | `id="waBtn"` | `.waf` |
+
+Every pair is a **superset, not a change**: rebuilt pages carry both names on
+the same element (verified: `heroHasBothIdAndClass: true`,
+`bubbleHasBothIdAndClass: true`).
+
+### Verification
+
+`js/reviews-data.js` and `js/reviews-grid.js` untouched. `node --check` passed.
+
+* **Per-click, 8 homepage controls** - every one fired **exactly 1** event with
+  the correct distinct location: review CTA + review phone -> `reviews`; hero
+  WhatsApp + hero phone -> `hero`; floating bubble -> `floating_bubble`; mobile
+  bar WhatsApp + call -> `mobile_bar`; footer phone -> `footer`. All carried
+  `page_route:"home"`.
+* **No prefill exposure** - payload keys are only `event`, `page_route`,
+  `cta_location`, `cta_label`. `label()` reads the *visible text*, never the
+  `href`. A regex sweep for `wa.me`, `?text=`, `Route%3A`, `Passengers` and the
+  phone number across every entry from **both** tracking scripts returned `[]`.
+  (Separately noted: GTM's own built-in link-click listener does capture the
+  full href including the prefill template. That is pre-existing container
+  behaviour, not from this script.)
+* **No GTM duplication** - 1 container tag, 1 tracking script tag; GTM's own
+  `gtm.js` entries were still present in `dataLayer` after our script ran,
+  proving the queue was *reused* via `= x || []`, not replaced. The file is
+  local and adds no network request.
+* **GTM unavailable** (`www.googletagmanager.com` and `unpkg.com` blackholed):
+  `gtmActuallyLoaded:false`, `dataLayerIsArray:true`, `clicksThrew:null`,
+  4 clicks -> 4 events queued in memory, `runtimeErrors:[]`, review section
+  still rendered, toggle still worked. Events queue harmlessly; nothing throws.
+* **Shared-file regression** - `js/conversion-tracking.js` is loaded by 39
+  pages, so `agra-to-mathura-taxi/`, `taj-mahal-taxi/` and `agra-airport-taxi/`
+  were re-measured after the change: header, hero, floating_bubble, mobile_bar
+  and footer all resolve exactly as before, one event per click, zero `.grx`
+  leakage.
+
+### Finding reported, not silently resolved
+
+`js/main.js` has its own delegated click handler. On the 8 pages that load
+both scripts, one tap now produces two vocabularies:
+
+| Tap | `conversion-tracking.js` | `main.js` (pre-existing) |
+|---|---|---|
+| WhatsApp | `whatsapp_click` | `whatsapp_enquiry` + `whatsapp_booking` (live Google Ads conversion `AW-18103087307`) |
+| Phone | `call_click` | `phone_click` |
+
+Measured: each **name** fires exactly once, so nothing is duplicated at the
+dataLayer level. Double-counting would only appear if GA4 tags were built on
+*both* names for the same action - a container-side decision. This pairing
+**predates this change** (already live on 18 pages: the blog, `book/`,
+`fleet/`), so neither layer was disabled unilaterally; the live Ads conversion
+in particular is the owner's to retire, not mine. Documented in
+`docs/tracking-plan.md` section 1a.
+
+---
+
+## 42. Premium dark-teal aesthetic: homepage reviews + shared band tokens (2026-09-03)
+
+**Instruction:** further improve the homepage review section, add a prominent
+Google provenance block before the booking CTA, and establish the dark-teal
+visual language as a *controlled* shared aesthetic - phased, not a blind
+site-wide replacement. Reference image supplied for atmosphere only; no logo,
+brand name, wording or artwork copied.
+
+**Three files changed. No page HTML was edited at all** - the shared treatment
+reaches every page through the central stylesheets, so the pattern is defined
+once per design track and never duplicated onto a page.
+
+### Phase 1 - homepage review section (`js/reviews-grid.js`)
+
+Section order now matches the brief exactly, verified by DOM index:
+eyebrow(3) -> h2(4) -> lede(5) -> source context(6) -> featured(8) ->
+supporting grid(23) -> **toggle(66)** -> **remainder(67)** -> provenance(138)
+-> CTA(148), strictly increasing.
+
+The toggle was moved *before* the region it controls. It previously followed
+it, which contradicted the required order and meant a keyboard user landed
+after the content they had just revealed.
+
+**Background** - original layered CSS, no raster asset, no third-party image,
+no added network request. Six layers: edge vignette, teal illumination at
+top-left, faint gold warmth at bottom-right, two 45 deg/-45 deg diamond
+lattices at 3% ivory, then a teal-to-ink wash.
+
+**Provenance panel** - an inset panel, not a paragraph: gold hairline, a plain
+typographic "G" marker (no Google artwork), the exact required statement, the
+optional supporting line, and the profile link with a visible external-link
+arrow plus a visually-hidden "(opens in a new tab)". It contains **no** rating,
+count, badge, certification wording, urgency or booking action.
+
+### Colour tokens introduced
+
+| Token | Value | Role |
+|---|---|---|
+| `--pst-ink` | `#0E1A22` | deep ink base |
+| `--pst-teal` | `#153C3A` | dark teal wash |
+| `--pst-teal-mut` | `#315A56` | soft light only |
+| `--pst-ivory` | `#F7F3EA` | warm card surface |
+| `--pst-gold` | `#C79B3B` | rules and borders (decorative, 3:1) |
+| `--pst-gold-lt` | `#EBC97F` | gold used **as text** on dark |
+| `--pst-gold-ink` | `#A8822C` | gold on ivory - stars |
+| `--pst-on-teal` | `#7FD8A6` | trusted links, eyebrow |
+
+Two of these exist *because* measurement forced them. `#C79B3B` is only 2.32:1
+on ivory and 2.8:1 as text on its own chip - fine for a hairline, not for a
+glyph. So gold splits three ways by job: `--pst-gold` for decoration,
+`--pst-gold-lt` for text on dark, `--pst-gold-ink` for stars on ivory.
+
+The tokens live in `css/landing.css`; `css/style.css` and the `.grx` sheet
+injected by `js/reviews-grid.js` restate the same values, because the three
+tracks cannot share a stylesheet. Each carries a comment saying so.
+
+### Phase 2 - inventory of every dark band on production pages
+
+| Occurrence | Count | Classification |
+|---|---|---|
+| `.sec--navy.fare-band` (fare transparency) | 33 | **Remain unchanged** - already carries full-bleed banner photography (`fleet-lineup-night.webp`). Teal would override route/brand photography, which the brief forbids. |
+| `.sec--navy` on `partners/` ("Partner Terms") | 1 | **Needs page-specific review** - that page's commercial terms are still awaiting owner approval; not a visual decision. |
+| `.cta` final-CTA band (legacy track) | 6 pages | **Safe to migrate** - solid `var(--black)`, no photography, structurally identical markup on all six. |
+| `.ft` footer (legacy track) | all legacy pages | **Needs review** - dense small text; a separate contrast pass, not a drive-by. |
+| `.gr-wrap` route review sections | 34 | **Remain unchanged** - the white review band is the light half of the rhythm. |
+
+### Phase 3 - one component family migrated
+
+`.cta` only, defined once in `css/style.css`, reaching `index.html`, `about/`,
+`agra-to-mathura-vrindavan/`, `blog/`, `contact/`, `route-finder/`.
+
+`.cta p` was `rgba(255,255,255,.5)` - 5.28:1 on the old black but only **3.39:1**
+on the lightest part of the teal, which would have failed AA. Changed to
+`rgba(247,243,234,.78)` = 5.27:1 on teal, and an improvement on black too.
+
+### Verification
+
+* **Contrast** - computed by compositing each colour over the *lightest* point
+  the pattern can reach (`rgb(53,85,74)` - teal light + lattice line + gold
+  wash). Minimum across every patterned area: **4.44 -> 5.27** after two
+  corrections (source line `.68`->`.78`; G markers to `--pst-gold-lt`).
+  Decorative gold hairline 3.21:1, above the 3:1 non-text threshold.
+* **Review integrity** - 9/9 rendered, zero mismatches against
+  `js/reviews-data.js` on text, name, date, source and rating label. Featured
+  still `review-001` (Aakash Sharma). `js/reviews-data.js` **unmodified**.
+* **Provenance** - statement exact; appears once (the intro line was reworded
+  so nothing is stated twice); after all 9 reviews and before the CTA; link
+  `https://g.page/r/CUjtXu1x_3bPEBM`, `target="_blank"`,
+  `rel="noopener noreferrer"`; banned-word scan (verified/certified/award/
+  rating/endorse/official) returned empty.
+* **Accessibility** - stars keep `role="img"` + label; star glyphs now differ
+  by **shape** (U+2605 vs U+2606) so a rating never depends on colour; quote
+  mark, avatars, G markers and arrow all `aria-hidden`; arrow also
+  `focusable="false"`; one `<h2>`; `aria-expanded` false->true->false;
+  `aria-controls` matches; focus ring resolves from `grx-styles`
+  (`3px solid var(--grx-green)`, offset 3px); reduced-motion rule present.
+* **Responsive** - 1440/1180/768/390/320: no horizontal overflow anywhere,
+  provenance panel never overflows, link tap target 46-50px (74px wrapped at
+  320). 200% zoom (720px and 640px) clean, zero clipped text blocks.
+* **Regression** - all 5 sampled fare bands still photographic, teal did not
+  leak in (**including both locked pages**, which were not touched). Route
+  review sections still use the default `.gr-wrap` renderer, 9 cards, no
+  `.grx` or provenance panel leakage, `grx-styles` not injected there.
+  All 6 `.cta` pages keep every button label and href.
+* **No new dependency** - background is `url()`-free; the arrow is inline SVG.
+* **No-JS fallback** - unchanged and still useful (heading, honest summary,
+  Google profile link with correct rel/target). Reviews are still not
+  duplicated into markup.
+
+### Two notes for the owner
+
+1. **"below" in the required statement.** The panel sits at the *bottom*, so
+   "Every review **below** was posted on Google" points the wrong way. The copy
+   was specified verbatim and is used verbatim; changing "below" to "above"
+   would fix the direction without touching anything else.
+2. **Pre-existing overflow at 195px** (a 390px phone at 200% zoom) comes from
+   unclassed `<a>` elements outside the review band. The band itself fits, and
+   320px - WCAG's reflow floor - is clean sitewide. Not touched: out of scope.
+
+---
+
+## 43. Homepage SEO block moved below the FAQ and collapsed by default (2026-09-03)
+
+**Instruction:** put the "Agra Taxi Service - Your Trusted Cab Partner in Agra"
+section below the FAQ, collapsed, opening only when the expand control is
+clicked.
+
+The block already existed on `index.html` (it was above the "Why Padma Shree"
+band). It was **moved, not rewritten** - no copy, fare or link was authored for
+this change.
+
+### What changed
+
+`index.html` - the section moved from before the trust/international bands to
+directly after `#faq` and before the footer. Order is now
+`.cta` -> FAQ -> SEO block -> footer. `id="about"` was kept, so the one inbound
+anchor (`image-audit.html`) still resolves.
+
+The prose is wrapped in a native `<details class="seo-acc">` with the existing
+`<h2>` promoted into the `<summary>`:
+
+* Native `<details>` means it works with JavaScript off, is keyboard operable
+  and reports its own expanded state - no ARIA of ours to drift out of sync.
+* The copy **stays in the DOM when collapsed**, so it is only visually hidden -
+  still crawlable and still findable with in-page search.
+* Deliberately **not** class `faq-acc`: `js/conversion-tracking.js` watches
+  `details.faq-acc`, and this is not an FAQ question, so it must not report
+  into the `faq_toggle` event.
+
+`css/style.css` - new `.seo-acc` block plus a `.section--acc` padding modifier.
+No inline styles were added.
+
+### Content integrity
+
+Text compared before and after the move, tags stripped: **byte-identical**.
+All **9 links** and all **6 fare figures** (₹1,500 / ₹3,000 / ₹3,000 / ₹1,800 /
+₹2,500 / ₹800) preserved exactly. 6 paragraphs, 5 sub-headings, 3,109
+characters present in the DOM while collapsed.
+
+### Verification
+
+* Placement: after `#faq`, before `footer.ft`, `id="about"` intact.
+* Toggle: `<details>` height 75 -> 889 -> 75 px; `open` false -> true -> false;
+  glyph `+` -> `−` -> `+`. Summary is a real `<summary>` and is focusable.
+* Collapsed by default at 1440 / 768 / 390 / 320, no horizontal overflow at any.
+* Contrast: heading 18.48:1, toggler 16.61:1, body text 10.14:1, body links
+  4.27:1 - all AA.
+* FAQ accordion untouched: 10 items, first still open, still its own `.fi`
+  pattern (no `<details>` introduced there).
+
+### Three defects found and fixed during this step
+
+1. **Minus glyph rendered as "2".** `content: '\2212'` was built inside a
+   `node -e` string, where `\221` is a JS **octal** escape - it wrote U+0091
+   followed by `2`. Replaced with the literal U+2212 character.
+2. **Padding modifier lost above 768px.** `.section--acc` sat at line ~1030 but
+   `@media { .section { padding: 5rem 0 } }` at line ~1288 has equal specificity
+   and came later, so it won. Moved the modifier after that media block; the
+   collapsed section is now a consistent 155px instead of 235px on desktop.
+3. **Collapsed block had too much air** - the full `.section` rhythm around a
+   single row. Hence the modifier above.
+
+### One measurement note
+
+`getBoundingClientRect()` on the *inner div* reports its full 814px even while
+collapsed, because Chrome now skips rendering through `::details-content`
+rather than setting `display:none` on the child. The reliable signal is the
+`<details>` element's own height. An early check read the inner div and
+appeared to show the collapse failing; it was not failing.
+
+---
+
+## 44. Homepage: removed the duplicate Google-reviews band, two more sections on teal (2026-09-03)
+
+**Instruction:** remove the "Verified reviews on Google" section (the review
+band at the top already covers it) and put the homepage review band's
+background behind "How Booking Works" and "Why riders choose us".
+
+### Removed
+
+`index.html` - the `Reviews / Verified reviews on Google` section (5 lines:
+badge, H2, explanatory paragraph, "Read our reviews on Google" button).
+
+It was redundant: the `.grx` review band near the top of the page already
+shows 9 reviews and carries the Google provenance panel with the same profile
+link. **The Google profile link is not lost** - it still appears in the
+provenance panel and in the no-JS fallback.
+
+Removing it also retires the last "Verified... reviews" wording on the page,
+which sat awkwardly against the standing rule not to use "verified review"
+language that Google does not itself provide.
+
+**Left alone:** `agra-to-mathura-vrindavan/index.html` has the same section.
+That page has no review grid of its own, so removing it there would lose the
+only route to the Google profile. Out of scope for this instruction.
+
+**Also left alone:** the hero still reads "a verified local driver". That is a
+claim about drivers, not about reviews, and it pre-dates this work.
+
+### Two sections moved onto the teal band
+
+| Section | Was | Now |
+|---|---|---|
+| How Booking Works | `.section` (white) | `.section .section--teal` |
+| Why riders choose us | `.section .section--gray` | `.section .section--teal` |
+
+The pattern is now declared **once** in `css/style.css` for a grouped selector
+`.cta, .section--teal`, rather than repeated. `.cta`'s own copy was removed in
+the same edit, so the homepage, the final CTA on 6 pages and these two sections
+all read from a single declaration. (Verified: the lattice gradient appears
+exactly once in the file.)
+
+New on-teal treatments, all scoped under `.section--teal`: `.stitle` white,
+`.sdesc` ivory at 86%, `.sbadge` gold-on-translucent-gold, and `.inc` cards
+flipped to warm ivory. Flipping the cards is what keeps this cheap - every
+heading, paragraph and gold icon chip inside them keeps its existing dark
+styling and stays readable with no further change.
+
+### Verification
+
+* Contrast on the lightest point the pattern reaches (`rgb(53,85,74)`):
+  badge 5.17, title 8.24, description 6.01; inside the ivory cards, h3 17.88
+  and body text 4.81. All AA.
+* Both bands: pattern applied, no image asset, 3 and 6 cards rendered.
+* `.cta` unchanged after the refactor - pattern still applied, 3 buttons,
+  heading 8.24, paragraph 5.27.
+* Band rhythm has no two dark bands adjacent:
+  light, **DARK grx**, light, light, **DARK teal**, light, **DARK teal**,
+  light, **DARK cta**, light, light, footer.
+* No horizontal overflow at 1440 / 768 / 390 / 320; 2 teal bands and 9 cards
+  render at every width.
+* `section--teal` appears on the homepage only - no other page changed.
+
+---
+
+## 45. Teal sections reworked to a premium glass treatment (2026-09-03)
+
+**Instruction:** the two teal sections looked cheap; match the supplied
+reference (a dark-teal band with translucent cards, a gold hairline eyebrow and
+an editorial serif heading).
+
+**One file changed: `css/style.css`.** No HTML, no content, no new dependency.
+
+### What was actually making it look cheap
+
+The opaque warm-ivory cards. Solid light panels sat on the dark band like
+stickers pasted over it. Everything else - the pill badge, the heavy bold sans
+heading, the tight spacing - compounded it.
+
+### Changes, all scoped to `.section--teal`
+
+| Element | Before | After |
+|---|---|---|
+| Cards | opaque ivory `#F7F3EA` | translucent ivory at 9%, hairline border at 20% |
+| Card text | dark on ivory | white heading, ivory at 88% |
+| Eyebrow | grey pill, `--g500` text | gold, `.22em` tracking, flanked by gold hairlines |
+| Heading | Inter 700 | Georgia serif, weight 400, `clamp(1.8rem, 3.6vw, 2.6rem)` |
+| Icon | 44px square chip | 42px gold circle |
+| Padding | 4.5-5rem | 5.5rem desktop, 3.5rem mobile |
+
+The serif is a **system stack** (Georgia, Iowan Old Style, Times New Roman) -
+the site only loads Inter, and this adds no font request.
+
+### The wash had to become tunable
+
+Glass cards exposed a problem the ivory cards had hidden: the shared wash fades
+to ink by 62%, so the bottom row of cards nearly vanished into a near-black
+lower half. Rather than fork the pattern, the three variables that matter are
+now custom properties on the shared rule - `--band-base`, `--band-end`,
+`--band-vig`. The CTA keeps the deep fade to ink; `.section--teal` overrides
+them to an even `#12332F` ground with a lighter (`.22`) vignette.
+
+The pattern is still declared **exactly once** in the file (verified), and the
+wash still *starts* on `--pst-teal`, so the lightest point - which every
+contrast figure is measured against - is unchanged.
+
+### Verification
+
+* Contrast, composited against the lightest point the pattern reaches
+  (`rgb(53,85,74)`), cards against their true translucent surface
+  (`rgb(70,99,88)`): eyebrow 5.17, heading 8.24, description 5.63, card heading
+  6.56, card body 5.02. **Minimum 5.02 - all AA.**
+* Cards confirmed translucent (alpha 0.09), icons circular, badge pill removed,
+  hairlines present, heading resolves to Georgia at weight 400.
+* **Nothing outside the teal bands changed**: `#international` uses the same
+  `.incs`/`.inc` markup and still renders opaque white cards, a grey pill badge
+  and an Inter heading. The `.cta` band is unchanged (pattern applied,
+  3 buttons).
+* No horizontal overflow at 1440 / 768 / 390 / 320. Padding resolves to 88px
+  desktop and 56px mobile - the modifier is placed after the `.section` media
+  query so source order lets it win, the same trap that caught `.section--acc`.
+
+---
+
+## 46. Premium teal footer across both public footer families (2026-09-03)
+
+**Instruction:** replace the flat near-black footer with the approved premium
+teal language on every public footer. Preserve all footer structure, content,
+links, map, contact details and the oversized "PadmaShree" sign-off. Run it as
+a controlled loop, one family at a time, verifying each. Do **not** globally
+redefine `.mesh-dark` - that class also dresses the booking-process, fare and
+CTA bands.
+
+**Two files changed: `css/landing.css` and `css/style.css`. Zero HTML edited.**
+Both footer families already had element+class selectors of their own, so the
+whole change reaches 59 pages through the stylesheets. That also means the two
+locked pages (`agra-to-jaipur-taxi`, `agra-local-sightseeing`) were never
+opened, and both were sampled as passing.
+
+### Inventory
+
+| Family | Pages | Track | Selector used |
+|---|---|---|---|
+| `footer.mesh-dark` | 37 | rebuilt (`landing.css`) | `footer.mesh-dark` |
+| `footer.ft` | 22 | legacy (`style.css`) | `.ft` |
+| `footer.foot` | 1 | `image-audit.html` | **skipped** - internal audit tool, not public |
+
+### The background
+
+Original layered CSS, identical recipe on both tracks: lower-edge vignette,
+two soft teal lights, a diagonal diamond lattice at **2.2% ivory**, then a
+teal-to-ink wash on `#0E1A22`. No image, no request, no animation. The lattice
+is quieter than the review band's 3% because a footer carries far more small
+text.
+
+### Three things that had to be handled, not just recoloured
+
+1. **The inherited wireframe.** `footer.mesh-dark` still received
+   `.mesh-dark::before`, which paints the wireframe grid. It is switched off
+   **for footers only** (`footer.mesh-dark::before{display:none}`). The bare
+   `.mesh-dark` rule at `landing.css:424` is untouched, and the content bands
+   were re-checked after the change: still `rgb(0,0,0)`, still wireframed, no
+   teal leaked.
+2. **The wordmark cut-out.** Both stylesheets filled
+   `.ft__wordmark-type strong` with the old footer colour (`#0D0D0D` /
+   `--g950`) so the outlined half reads as a punch-through. On teal that would
+   have shown as a dark blob. Both now point at a new `--ft-base` custom
+   property that also drives the background, so the two can never drift apart.
+   Verified: the computed fill equals the computed footer background on all
+   11 sampled pages.
+3. **A superseded rule.** `footer.mesh-dark{ background:#0D0D0D }` and its
+   comment were removed rather than left to contradict the new block.
+
+### Contrast - two pre-existing AA failures fixed along the way
+
+Measured against `rgb(28,67,64)`, the lightest point the footer stack reaches.
+
+| Element | Before | After |
+|---|---|---|
+| Column headings | `--g300` / `#fff` | ivory, **9.84** |
+| Body, links, contact rows | `--g500` #6B6B6B = **3.65 (failed AA)** | ivory .74, **6.20** |
+| Wordmark kicker | `rgba(255,255,255,.38)` = **3.54 (failed AA)** | ivory .62, **4.86** |
+| Bottom bar | grey | ivory .74, **6.20** |
+
+Both of those failures pre-date this work - they were below AA on the old
+near-black footer too. **Minimum across every footer element: 4.86.**
+
+Legacy hover green: `--green` (#05944F) measures only 2.78:1 on teal, so the
+legacy footer uses `#7FD8A6` - the same lightened brand green the homepage
+review band already uses on dark (6.37:1).
+
+Gold appears exactly once per footer: a single hairline above the wordmark.
+
+### Verification
+
+* **Family A (5 pages sampled, incl. both locked pages):** teal applied, no
+  image asset, not pure black, wireframe suppressed, 4 columns, 16-22 links,
+  kicker, "PadmaShree" wordmark and copyright all intact.
+* **Family B (6 pages sampled):** same, plus 3 contact rows preserved on every
+  page and the embedded map preserved on the pages that carry one
+  (`index.html`, `contact/`) and still visible at 1440/768/390/320.
+* **Nothing else moved:** homepage `.cta` still teal-patterned, 2
+  `.section--teal` bands, review band still 9 cards, SEO block still collapsed.
+* No horizontal overflow and no footer overflow at 1440 / 768 / 390 / 320.
+
+### Two notes for the owner
+
+1. **A black seam above the rebuilt footer.** On route pages the section
+   directly above the footer is the final CTA, which wears `.mesh-dark` - one
+   of the families this task was explicitly told not to repaint. So a black
+   band now meets a teal footer. That is correct scope, not a defect, but if
+   you want the seam gone, migrating the `.mesh-dark` CTA family is its own
+   deliberate pass.
+2. **Copyright years are inconsistent** in the existing markup - `index.html`
+   says © 2026, the other legacy pages say © 2025. Pre-existing content, left
+   alone under "preserve footer content".
+
+---
+
+## 47. Teal footer refinement: map, height, balance, wordmark, legal row (2026-09-04)
+
+**Instruction:** refine the new teal footer across every public page - fix the
+misleading map, cut the excessive height, balance the columns, soften the
+lattice, make "Shree" visible, strengthen the legal row, and audit operational
+claims. One family at a time.
+
+### Priority 1 - the misleading map (the audit was right, and it was worse)
+
+The embed was `!2sAgra,+UP` at `2d78.0!3d27.17`. Those are the **Taj Mahal's**
+coordinates (27.175, 78.042), not the Shamsabad address stated two rows above
+it - and they are rounded by hand, i.e. never copied from a real Google Place
+embed. It was a generic city pin dressed as a business location.
+
+No verified coordinates for the address exist anywhere in this project, so
+inventing a pin was not an option. **Replaced with a branded location card**
+linking to the real Google Business profile
+(`https://g.page/r/CUjtXu1x_3bPEBM`), with an inline map-pin SVG, an
+external-link arrow, `target="_blank"`, `rel="noopener noreferrer"` and a
+visually-hidden "(opens in a new tab)". Only a concise address
+("Shamsabad, Agra 282001") appears on the card - the full address is already in
+the contact row above, so it is not duplicated for screen readers.
+
+Present on the 3 public pages that had the embed: `index.html`, `contact/`,
+`agra-to-mathura-vrindavan/`. **Net dependency reduction**: a third-party
+iframe removed, replaced by inline SVG. `footer iframes = 0` site-wide.
+
+### A correction to entry 46
+
+Entry 46 reported "minimum 4.86 AA" for the footer. **That was incomplete.**
+The contact links carried inline `style="color:var(--g400)"` (#909090), which
+**beats any stylesheet rule** - 65 of them across 21 legacy pages, measuring
+**3.41:1, below AA**. Entry 46's harness sampled the container `.ft__cr`, not
+the inline-styled anchors inside it, so it missed them. They are now removed
+from the markup and the colour comes from the stylesheet. This pass measures
+the worst *anchor* in each footer, not the container: **6.44:1**.
+
+### Heights (was ~full viewport)
+
+| Viewport | Legacy `.ft` | Rebuilt `footer.mesh-dark` |
+|---|---|---|
+| 1440 | **597px** (index) / 698px (deepest) | **431-515px** |
+| 1180 | 583px | - |
+| 768 | 868px (2-col) | - |
+| 390 | 1338px (1-col, ~20 links) | - |
+
+Desktop is inside the 650-800px target. Achieved by trimming footer padding
+(3.5rem->2.6rem top), the grid-to-wordmark gap (2.5rem->1.5rem) and the
+wordmark itself (`clamp(4rem,12.2vw,11rem)` -> `clamp(2.55rem,8.3vw,6.4rem)`).
+No body text was shrunk.
+
+### Column balance
+
+Desktop grid is now `1.35fr 1fr 1fr 1.15fr` with a 2.25rem column gap. All four
+headings align to the same pixel. With the 200px map gone the contact column no
+longer towers: **Top Routes 297 / Tours 297 / Contact 296**. The brand column
+is 115px - naturally short (logo plus one paragraph) - and was deliberately
+**not** padded with filler links.
+
+### Background, wordmark, legal row
+
+* Lattice `rgba(247,243,234,.022)` -> **`.012`**; radial lighting and vignette
+  kept; no layers added.
+* "Shree" outline `.15` -> **`.34`**; "Padma" fill `.11` -> `.13`. The outline
+  is a 1.5px stroke against a filled shape, so it needs the higher alpha to
+  carry equal weight.
+* The cut-out fill is `--ft-wm-fill: #0C161C`, opaque and matched to the
+  footer's colour at that height, so the lattice cannot show through the
+  outlined letters. Verified opaque at runtime (alpha = 1).
+* Kicker-to-wordmark gap increased; wordmark keeps `aria-hidden="true"`.
+* Legal row is a divider, not a black strip (`background:none` on both tracks).
+* Stale `© 2025` corrected to **2026** on 20 legacy pages.
+
+### The floating WhatsApp bubble was overlapping the legal row
+
+Measured, not assumed: `.waf` (52px at `right:20px`) overlapped the service
+line on the right of the legal row at 1180 and 1440 on the rebuilt track and at
+1180 on legacy - 28-34px of overlap. A reserved lane was added
+(4.75rem legacy from 960px; 92px rebuilt from 640px). Re-measured: **0 overlaps
+at 960 / 1024 / 1180 / 1440**, clearance 20-33px.
+
+### Shared implementation
+
+Both tracks restate an identical 10-token block (`--ft-base`, `--ft-lattice`,
+`--ft-text`, `--ft-kicker`, `--ft-rule`, `--ft-gold`, `--ft-green`,
+`--ft-wm-fill`, `--ft-wm-stroke`, `--ft-wm-padma`). They cannot share a
+stylesheet, so `scratchpad/token-sync.js` compares them literally - **all 10
+identical**. Hover green unified to `#7FD8A6` on both tracks (`--green`
+#05944F measures only 2.78:1 on teal). Sizing/spacing was edited **in the
+original declarations** rather than stacked as a third override layer. No
+footer inline styles were added; 65 existing ones were removed. `.mesh-dark`
+untouched - content bands re-checked: still black, wireframe intact.
+
+### Claims audit
+
+* **"Available 24/7" KEPT.** `docs/marketing-context.md:254` records it as
+  🟢 verified by the owner, so the task's "if not confirmed" branch does not
+  apply. Not strengthened.
+* **"Affordable"** kept - subjective marketing, not a falsifiable guarantee,
+  and fares are published.
+* No response-time or guaranteed-availability language exists in the footer.
+
+### Verification
+
+59 public pages swept: **37 `mesh-dark` + 21 `.ft` footers, 0 map embeds, 0
+inline colours, 0 stale years, all 3 cards on the real profile URL.** Contrast
+- headings 9.84, body/links/legal 6.44, kicker 4.86, worst anchor 6.44. Console
+clean. No horizontal overflow at 1440/1180/768/390/320. 200% zoom clean at 720
+and 590px. Both locked pages sampled and passing (CSS-only for them).
+
+### Two remaining concerns
+
+1. **`contact/index.html` still has the same fabricated map in its page body**
+   (identical `27.17/78.0` "Agra, UP" pin) - outside the footer scope of this
+   task, so left alone. It is the same factual defect on the page where users
+   most look for location, and should get the same treatment.
+2. Below 320px (e.g. a 390px phone at 200% zoom = 195px) the footer overflows
+   and the wordmark clips. 320px is WCAG's reflow floor and is clean; 195px is
+   beyond both the brief's tested range and the standard.
+
+---
+
+## 48. Footer wordmark enlarged and centred (2026-09-04)
+
+**Instruction:** make the "PadmaShree" wordmark big, centre-aligned and
+dominating.
+
+**This deliberately reverses Priority 5 of entry 47**, which shrank the
+wordmark "enough to avoid dominating the footer". The owner has now asked for
+the opposite; the height cost is recorded below.
+
+**Two files changed: `css/style.css` and `css/landing.css`. No HTML.**
+
+### Sizing was measured, not guessed
+
+A probe rendered the word at 100px in each footer and solved for the largest
+font-size that still fits its box, per viewport:
+
+| Viewport | Legacy max | Rebuilt max | Binding |
+|---|---|---|---|
+| 320 | 13.99vw | **12.99vw** | rebuilt |
+| 390 | 14.55vw | 13.50vw | rebuilt |
+| 768 | 16.02vw | **14.33vw** | rebuilt |
+| 1180 | 16.10vw | 14.90vw | rebuilt |
+| 1440 | **13.63vw** (196px) | 14.82vw | legacy |
+
+Chosen: `clamp(2.5rem, 13.4vw, 11.5rem)` above 480px and
+`clamp(2rem, 11.6vw, 3.6rem)` below, identical on both tracks. The first pass
+used 13.8/12.2vw, which left only 15-24px of headroom at the tightest points;
+Inter loads with `display=swap`, so a wider fallback face renders briefly and
+`white-space:nowrap` + `overflow:hidden` would clip it. Trimmed ~3% for that.
+
+### Result
+
+| Viewport | Font | Fills | Headroom | Footer height (was) |
+|---|---|---|---|---|
+| 1440 | **184px** | 86-94% | 66-181px | 671px (597) |
+| 1180 | 158px | 84-90% | 108-182px | 638px (583) |
+| 768 | 103px | 84-94% | 43-115px | 904px (868) |
+| 390 | 45px | 80-87% | 45-66px | 1334px (1337) |
+| 320 | 37px | 83-90% | 27-45px | 1411px (1413) |
+
+Desktop grew ~74px, still inside entry 47's 650-800px target. Mobile is
+unchanged (the phone clamp lands in the same place).
+
+### Centring
+
+`justify-content:center` on `.ft__wordmark-type`, and the `margin-left:-.035em`
+optical offset removed - that existed only to correct left alignment. Verified
+by measuring the slack either side of the glyphs: **gaps are exactly equal L/R
+at all 20 page/viewport combinations**.
+
+The kicker was centred too. Leaving "Agra · Private Cabs · Local Journeys"
+flush left directly above a centred wordmark reads as a mistake rather than a
+choice; the content is unchanged.
+
+### Preserved / verified
+
+Complete word fits everywhere (smallest headroom 27px, no clipping, no
+overflow at any viewport). "Padma" filled, "Shree" outlined, strokes do not
+overlap, fill still opaque so the lattice cannot show through.
+`aria-hidden="true"` retained. Nothing else moved: worst footer link 6.44,
+heading 9.84, kicker 4.86, legal 6.44; 37 + 21 footers; 0 map embeds; 3
+location cards on the real profile; all 10 shared tokens identical; the two
+`.mesh-dark` content bands still black with their wireframe intact.
+
+---
+
+## 49. Site-wide premium teal migration: booking-process + final CTA bands (2026-09-04)
+
+**Instruction:** migrate the remaining flat-black content sections to the
+approved premium teal system, as a controlled loop, one component family at a
+time. No blind colour replacement.
+
+**One file changed: `css/landing.css`. Zero HTML edited**, so the two locked
+pages were never opened (both sampled and passing).
+
+### PHASE 1 - dark-section inventory
+
+Scanned both stylesheets and all 59 public pages (6 noindex tools excluded).
+**33 dark background declarations** and **110 `.mesh-dark` occurrences** found.
+
+| # | Classification | Count | Examples | Action |
+|---|---|---|---|---|
+| 1 | **Migrate to premium teal** | **73** | `section.mesh-dark.sec` (booking), `section.mesh-dark.center` (final CTA) | **migrated** |
+| 2 | Already premium teal | 5 | `.sec--teal`, `.section--teal`, `.cta`, `.grx`, teal footers | untouched |
+| 3 | Photo-backed | 8 | `.hero-bg`, `.frame-hero`, `.fare-band`, `.rt__*`, `.stop__img`, galleries | retained |
+| 4 | Functional black | 9 | `.btn--b`, `.ham span`, `.fi__tog`, `.ptbl th`, `.ftbl thead th`, `.itin__num`, `.mcta-bar__call`, `.waf` | not touched |
+| 5 | Navigation | 3 | `.hdr`, `.gnav-menu`, `.gnav-mobile__panel` | **retained - see below** |
+| 6 | Footer | 37 | `footer.mesh-dark`, `.ft` | regression-tested only |
+| 7 | Decorative / not a background | 3 | `.nav__a::after`, `.ph-tag`, `.stop__time` overlays | not touched |
+| 8 | Internal/noindex | 6 pages | crm, driver-app, image-audit, review-helper, etc. | excluded |
+| 9 | Requires judgment | 2 | `blog/` and `route-finder/` heroes (no photography) | left as-is, see below |
+
+`.nuband` was searched for and **does not exist** in this project.
+
+The 73 migration targets resolved to exactly **two families**: 36 booking-
+process bands (`.sec` + `.steps`) and 37 final CTA bands (`.center`).
+
+### Canonical implementation - no third teal system
+
+The teal recipe is still declared **exactly once** in the file. `.sec--teal`
+simply gained a second selector:
+
+```css
+.sec--teal,
+section.mesh-dark{ …the one canonical background… }
+```
+
+`section.mesh-dark::before{ display:none }` switches off the inherited
+wireframe for content bands only. The bare `.mesh-dark` rule is **left intact**
+(verified still `#000`) and `footer.mesh-dark` keeps its own override, so
+neither was disturbed.
+
+### PHASE 2 - booking-process bands (36)
+
+`.steps` was verified to appear **only** inside a `.mesh-dark` band, so card
+styling could be scoped exactly. Cards reuse the **already-approved**
+`.section--teal` glass values (`rgba(247,243,234,.09)` surface, `.20` border) -
+deliberately not a new set. Radius 14px, no blur, no drop shadow, no green
+offset. `.step p` moved from `rgba(255,255,255,.65)` (4.55:1) to warm ivory at
+.86 (5.26:1). Desktop gained a 3-column layout at >=1000px.
+
+### PHASE 4 - final CTA bands (37)
+
+Verified: `.mesh-dark.center` sits **immediately before the footer on all 36
+route pages**. With both teal, the two fields would have merged into one long
+band and the CTA would stop registering. It now carries a restrained gold
+hairline (`rgba(199,155,59,.22)`) and keeps its own padding, so the boundary is
+deliberate. Confirmed present at every viewport.
+
+The neo-brutalist `box-shadow:7px 7px 0 #000` read as a detached black slab on
+teal. **Inside these bands only** it became a deep teal-ink depth
+(`rgba(8,22,27,.9)`). Geometry, colour, label, href, prefill and tracking are
+untouched; on light sections the brand's black offset is unchanged.
+
+### Deliberately NOT migrated
+
+* **Header and mobile nav** (`.hdr`, `.gnav-menu`, `.gnav-mobile__panel`) - the
+  near-black already gives strong contrast against every band, and the brief
+  forbids a pattern behind navigation text. Retained; flagged for owner review.
+* **`blog/` and `route-finder/` heroes** - the only two non-photographic
+  heroes. Both are light, not black, so there is nothing to migrate.
+* All photo-backed sections, fare-band imagery, table headers, buttons,
+  overlays and functional black.
+
+### Verification (18 regression pages)
+
+* **23 dark bands across the sample: every one teal, none still black.**
+* Text contrast minimum **4.88** (step paragraphs). WhatsApp CTAs 12.08:1
+  (black on brand green), phone links 5.48:1, headings 7.44, step headings
+  5.93. An earlier reading of 2.55 was a harness fault - it compared the
+  button's black label against the band instead of the button's own green.
+* **Light/dark rhythm: 0 adjacent dark-dark section pairs** on any page
+  (e.g. homepage `lDllDlDlDll`, route pages `llllllllDlllD`).
+* CTA integrity: every `data-cta` href still `https://wa.me/918720081102…`,
+  labels and prefills unchanged, `rel` preserved.
+* One `<h1>` per page on all 18. No metadata or schema touched.
+* No horizontal overflow at 1440/1180/768/390/320. Cards stack 3->3->2->1->1.
+  Mobile bar clearance reserved (body padding-bottom 54px).
+* Console clean on all sampled pages. No new dependency - background is pure
+  CSS, no `url()`, no animation, no fixed attachment.
+* Footer, homepage reviews, fare-band photography and hero images all
+  unchanged.
+
+### Remaining for owner review
+
+1. **Header/nav colour** - retained near-black by judgment. A subtle teal tint
+   would need dropdown, focus and mobile-panel testing; worth a dedicated pass
+   if wanted.
+2. The final CTA's description keeps an inline `rgba(255,255,255,.65)`
+   (4.55:1 - passes AA but marginal). Fixing it needs an HTML edit across 37
+   pages including the two locked ones, so it was left alone.

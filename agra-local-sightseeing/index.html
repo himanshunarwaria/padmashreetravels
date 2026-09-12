@@ -169,14 +169,16 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
 .hdr{ position:sticky; top:0; z-index:50; background:var(--ink-950); border-bottom:2px solid #000; }
 .hdr__in{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding-top:12px; padding-bottom:12px; }
 .hdr__logo{ display:flex; align-items:center; gap:8px; font-weight:700; font-size:14px; color:#fff; flex-shrink:0; min-width:0; }
-.hdr__mark{
-  display:inline-flex; align-items:center; justify-content:center; height:28px; width:28px;
-  border-radius:4px; background:var(--accent); border:2px solid #000; color:#000; font-size:11px; font-weight:900; flex-shrink:0;
-}
-.hdr__name{ display:none; }
+/* Official logo (owner-confirmed). Height fixed, width auto so the 510x292
+   proportions are never distorted; inverted for this dark header, the same
+   display treatment css/style.css uses on the legacy footer. */
+.hdr__mark{ height:24px; width:auto; flex-shrink:0; filter:brightness(0) invert(1); }
+.hdr__name{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); clip-path:inset(50%); white-space:nowrap; border:0; }
 .hdr__nav{ display:none; align-items:center; gap:18px; font-size:12px; font-weight:500; color:rgba(255,255,255,.75); }
 .hdr__nav a:hover{ color:var(--accent); }
-@media (min-width:640px){ .hdr__logo{ font-size:16px; } .hdr__name{ display:inline; } }
+@media (min-width:640px){ .hdr__logo{ font-size:16px; }
+  .hdr__name{ position:static; width:auto; height:auto; margin:0; overflow:visible; clip:auto; clip-path:none; white-space:normal; }
+  .hdr__mark{ height:26px; } }
 @media (min-width:1024px){ .hdr__nav{ display:flex; } }
 
 /* ===== Hero ===== */
@@ -326,6 +328,10 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
 @media (min-width:1024px){ .partner{ grid-template-columns:1.5fr 1fr; gap:40px; } }
 .partner__fig{ display:flex; flex-direction:column; align-items:center; text-align:center; }
 .partner__fig img{ width:100%; max-width:440px; aspect-ratio:14/13; object-fit:cover; border-radius:20px; box-shadow:9px 9px 0 var(--accent-deep); }
+.lp{display:grid;grid-template-columns:1fr;gap:36px;max-width:1080px;margin-inline:auto}.lp__body{min-width:0}.lp__eyebrow{display:flex;align-items:center;gap:10px;font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-dark)}.lp__eyebrow::before{content:"";width:26px;height:2px;background:var(--accent-deep)}.lp__head{margin-top:14px}.lp__lede{margin-top:14px;font-size:14.5px;line-height:1.75;color:rgba(0,0,0,.72);max-width:54ch}.lp__lede a{color:var(--accent-dark);font-weight:600;text-decoration:underline;text-underline-offset:2px}.lp__facts{margin:26px 0 0;padding:0;list-style:none;border-top:1px solid rgba(0,0,0,.14)}.lp__fact{position:relative;padding:15px 0 15px 34px;border-bottom:1px solid rgba(0,0,0,.14);font-size:13.5px;line-height:1.65;color:rgba(0,0,0,.72)}.lp__fact strong{display:block;color:#000;font-weight:700;margin-bottom:2px}.lp__fact::before{content:"\2713";position:absolute;left:2px;top:15px;color:var(--accent-dark);font-size:18px;font-weight:800}.lp__cta{display:flex;flex-wrap:wrap;align-items:center;gap:14px 18px;margin-top:26px}.lp__cta .btn-primary{margin:0}.lp__cta .link-call{color:var(--accent-dark)}.lp__note{margin-top:14px;font-size:12.5px;line-height:1.6;color:rgba(0,0,0,.6)}.lp__fig{margin:0;border:1.5px solid #000;border-radius:4px;overflow:hidden;background:#fff;max-width:380px;width:100%;justify-self:center}.lp__img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:50% 25%;display:block}.lp__cap{padding:14px 16px 15px;background:#fafafa;border-top:1.5px solid #000}.lp__name{display:block;font-size:13.5px;font-weight:700}.lp__addr{display:block;margin-top:4px;font-size:12px;line-height:1.55;color:rgba(0,0,0,.66)}.lp__links{display:block;margin-top:9px;font-size:12px;font-weight:600}.lp__links a{color:var(--accent-dark);text-decoration:underline;text-underline-offset:2px}.lp__sep{color:rgba(0,0,0,.3);padding:0 6px}
+@media (min-width:900px){.lp{grid-template-columns:minmax(0,1.28fr) minmax(260px,.72fr);gap:56px;align-items:center}.lp__fig{justify-self:end}}
+@media (max-width:899px){.lp__fig{max-width:290px}.lp{gap:30px}}
+@media (max-width:519px){.lp__cta .btn-primary,.lp__cta .link-call{display:block;width:100%;text-align:center}}
 
 /* ===== Related cards ===== */
 .rel-card{ display:block; border:1.5px solid #000; border-radius:4px; background:#fff; padding:16px 18px; transition:background-color .2s ease, transform 180ms ease, box-shadow 180ms ease; }
@@ -371,11 +377,11 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
 
 <!-- ===================== STRUCTURED DATA =====================
      Every block below is backed by content visible on this page. -->
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","@id":"https://www.padmashreetravels.in/#business","name":"Padma Shree Travels","url":"https://www.padmashreetravels.in/","telephone":"+91-87200-81102","email":"travels.padamshree@gmail.com","image":"https://www.padmashreetravels.in/images/logo.png","address":{"@type":"PostalAddress","streetAddress":"Rajeshwar Mandir, Kaveri Vihar Phase II, Shamsabad","addressLocality":"Agra","addressRegion":"Uttar Pradesh","postalCode":"282001","addressCountry":"IN"},"geo":{"@type":"GeoCoordinates","latitude":27.1767,"longitude":78.0081},"sameAs":["https://g.page/r/CUjtXu1x_3bPEBM/review"],"openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"00:00","closes":"23:59"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","@id":"https://www.padmashreetravels.in/#business","name":"Padma Shree Travels","foundingDate":"2025","url":"https://www.padmashreetravels.in/","telephone":"+91-87200-81102","email":"travels.padamshree@gmail.com","image":"https://www.padmashreetravels.in/images/logo.png","logo":"https://www.padmashreetravels.in/images/logo.png","address":{"@type":"PostalAddress","streetAddress":"Rajeshwar Mandir, Kaveri Vihar Phase II, Shamsabad","addressLocality":"Agra","addressRegion":"Uttar Pradesh","postalCode":"282001","addressCountry":"IN"},"geo":{"@type":"GeoCoordinates","latitude":27.1767,"longitude":78.0081},"sameAs":["https://g.page/r/CUjtXu1x_3bPEBM/review"],"openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"00:00","closes":"23:59"}}</script>
 
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.padmashreetravels.in/"},{"@type":"ListItem","position":2,"name":"Agra Local Sightseeing Taxi","item":"https://www.padmashreetravels.in/agra-local-sightseeing/"}]}</script>
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","serviceType":"Sightseeing Taxi Service","name":"Agra Local Sightseeing Taxi","description":"Private AC cab with a driver for a half-day or full-day tour of Agra, covering the Taj Mahal, Agra Fort, Itimad-ud-Daulah (Baby Taj), Akbar's Tomb at Sikandra, Mehtab Bagh and Sadar Bazaar, with pickup from any hotel, railway station or Kheria Airport in Agra.","provider":{"@type":"LocalBusiness","@id":"https://www.padmashreetravels.in/#business","name":"Padma Shree Travels","telephone":"+91-87200-81102"},"areaServed":[{"@type":"City","name":"Agra"},{"@type":"Place","name":"Fatehpur Sikri"}],"url":"https://www.padmashreetravels.in/agra-local-sightseeing/","hasOfferCatalog":{"@type":"OfferCatalog","name":"Agra Sightseeing Taxi Packages","itemListElement":[
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","serviceType":"Sightseeing Taxi Service","name":"Agra Local Sightseeing Taxi","description":"Private AC cab with a driver for a half-day or full-day tour of Agra, covering the Taj Mahal, Agra Fort, Itimad-ud-Daulah (Baby Taj), Akbar's Tomb at Sikandra, Mehtab Bagh and Sadar Bazaar, with pickup from any hotel, railway station or Kheria Airport in Agra.","provider":{"@type":"LocalBusiness","@id":"https://www.padmashreetravels.in/#business","name":"Padma Shree Travels","foundingDate":"2025","telephone":"+91-87200-81102"},"areaServed":[{"@type":"City","name":"Agra"},{"@type":"Place","name":"Fatehpur Sikri"}],"url":"https://www.padmashreetravels.in/agra-local-sightseeing/","hasOfferCatalog":{"@type":"OfferCatalog","name":"Agra Sightseeing Taxi Packages","itemListElement":[
 {"@type":"Offer","name":"Half Day Agra Sightseeing - AC Sedan (4 hrs / 40 km)","price":"1500","priceCurrency":"INR"},
 {"@type":"Offer","name":"Half Day Agra Sightseeing - AC SUV (4 hrs / 40 km)","price":"2200","priceCurrency":"INR"},
 {"@type":"Offer","name":"Full Day Agra Sightseeing - AC Sedan (8 hrs / 80 km)","price":"2500","priceCurrency":"INR"},
@@ -386,7 +392,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
 {"@type":"Offer","name":"Agra Airport Pickup with Full Day Sightseeing - AC SUV","price":"3800","priceCurrency":"INR"}
 ]}}</script>
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"TouristTrip","name":"Agra Local Sightseeing Tour by Private Taxi","description":"A full-day private taxi tour of Agra following a suggested sunrise-to-evening itinerary: Taj Mahal, Agra Fort, Itimad-ud-Daulah (Baby Taj), a lunch break, Akbar's Tomb at Sikandra, Mehtab Bagh and Sadar Bazaar. The itinerary is a suggestion and can be reordered, shortened or extended.","touristType":"Cultural and heritage travellers visiting Agra","provider":{"@type":"LocalBusiness","@id":"https://www.padmashreetravels.in/#business","name":"Padma Shree Travels","telephone":"+91-87200-81102"},"itinerary":{"@type":"ItemList","numberOfItems":7,"itemListElement":[
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TouristTrip","name":"Agra Local Sightseeing Tour by Private Taxi","description":"A full-day private taxi tour of Agra following a suggested sunrise-to-evening itinerary: Taj Mahal, Agra Fort, Itimad-ud-Daulah (Baby Taj), a lunch break, Akbar's Tomb at Sikandra, Mehtab Bagh and Sadar Bazaar. The itinerary is a suggestion and can be reordered, shortened or extended.","touristType":"Cultural and heritage travellers visiting Agra","provider":{"@type":"LocalBusiness","@id":"https://www.padmashreetravels.in/#business","name":"Padma Shree Travels","foundingDate":"2025","telephone":"+91-87200-81102"},"itinerary":{"@type":"ItemList","numberOfItems":7,"itemListElement":[
 {"@type":"ListItem","position":1,"item":{"@type":"TouristAttraction","name":"Taj Mahal"}},
 {"@type":"ListItem","position":2,"item":{"@type":"TouristAttraction","name":"Agra Fort"}},
 {"@type":"ListItem","position":3,"item":{"@type":"TouristAttraction","name":"Tomb of Itimad-ud-Daulah (Baby Taj)"}},
@@ -424,20 +430,99 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <header class="hdr">
   <div class="wrap hdr__in">
     <a href="../index.html" class="hdr__logo">
-      <span class="hdr__mark" aria-hidden="true">PS</span>
+      <img src="../images/logo.png" alt="" class="hdr__mark" width="42" height="24" decoding="async">
       <span class="hdr__name">Padma Shree Travels</span>
     </a>
     <nav class="hdr__nav" aria-label="Main">
       <a href="../index.html">Home</a>
-      <a href="../agra-temple-tour-by-cab/">Pilgrimage</a>
-      <a href="../agra-local-sightseeing/" aria-current="page">Sightseeing</a>
-      <a href="../outstation-cabs-agra/">Outstation</a>
-      <a href="../agra-taxi-fares/">Fares &amp; Tools</a>
-      <a href="../fleet/">Fleet</a>
+      <span class="gnav-dd"><a href="../agra-temple-tour-by-cab/">Pilgrimage</a>
+        <span class="gnav-menu">
+          <a href="../agra-to-mathura-taxi/">Agra &#8594; Mathura Taxi<span class="gnav-tag">from &#8377;1,500</span></a>
+          <a href="../agra-to-vrindavan-cab/">Agra &#8594; Vrindavan Cab<span class="gnav-tag">from &#8377;1,800</span></a>
+          <a href="../mathura-vrindavan-tour-from-agra/">Mathura + Vrindavan Full Day<span class="gnav-tag">&#8377;3,000</span></a>
+          <a href="../mathura-vrindavan-barsana/">Mathura, Vrindavan &amp; Barsana<span class="gnav-tag">&#8377;3,500 &middot; Full Day</span></a>
+          <a href="../agra-to-bateshwar/">Agra &#8594; Bateshwar<span class="gnav-tag">&#8377;3,000 &middot; RT</span></a>
+          <a href="../agra-to-mehandipur-balaji-taxi/">Agra &#8594; Mehandipur Balaji<span class="gnav-tag">Fare on WhatsApp</span></a>
+          <a href="../agra-to-kaila-devi-temple-taxi/">Agra &#8594; Kaila Devi Temple<span class="gnav-tag">Fare on WhatsApp</span></a>
+          <a href="../agra-karauli-kaila-devi-balaji-tour/">Karauli + Kaila Devi + Balaji Tour<span class="gnav-tag">Fare on WhatsApp</span></a>
+          <a href="../agra-temple-tour-by-cab/" class="gnav-more">View All Pilgrimage &#8594;</a>
+        </span>
+      </span>
+      <span class="gnav-dd"><a href="../agra-local-sightseeing/" aria-current="page">Sightseeing</a>
+        <span class="gnav-menu">
+          <a href="../agra-local-sightseeing/" aria-current="page">Agra Full Day Sightseeing<span class="gnav-tag">&#8377;2,500</span></a>
+          <a href="../fatehpur-sikri/">Fatehpur Sikri Day Trip<span class="gnav-tag">&#8377;2,500</span></a>
+          <a href="../taj-mahal-taxi/">Taj Mahal Taxi<span class="gnav-tag">from &#8377;1,500</span></a>
+          <a href="../taj-mahal-sunrise-taxi/">Taj Mahal Sunrise Taxi<span class="gnav-tag">from &#8377;1,500</span></a>
+          <a href="../agra-local-sightseeing/" class="gnav-more">View All Sightseeing &#8594;</a>
+        </span>
+      </span>
+      <span class="gnav-dd"><a href="../outstation-cabs-agra/">Outstation</a>
+        <span class="gnav-menu">
+          <a href="../agra-to-gwalior/">Agra &#8594; Gwalior<span class="gnav-tag">&#8377;3,000 &middot; RT</span></a>
+          <a href="../agra-to-aligarh/">Agra &#8594; Aligarh<span class="gnav-tag">&#8377;3,000 &middot; RT</span></a>
+          <a href="../agra-to-firozabad/">Agra &#8594; Firozabad<span class="gnav-tag">&#8377;2,500 &middot; RT</span></a>
+          <a href="../agra-to-etawah/">Agra &#8594; Etawah<span class="gnav-tag">&#8377;3,500 &middot; RT</span></a>
+          <a href="../agra-to-jaipur-taxi/">Agra &#8594; Jaipur Taxi<span class="gnav-tag">Fare on WhatsApp</span></a>
+          <a href="../agra-airport-taxi/">Agra Airport Taxi<span class="gnav-tag">from &#8377;800</span></a>
+          <a href="../agra-railway-station-taxi/">Agra Railway Station Taxi<span class="gnav-tag">from &#8377;800</span></a>
+          <a href="../outstation-cabs-agra/" class="gnav-more">View All Outstation &#8594;</a>
+        </span>
+      </span>
+      <span class="gnav-dd gnav-dd--right"><a href="../agra-taxi-fares/">Fares &amp; Tools</a>
+        <span class="gnav-menu">
+          <a href="../agra-taxi-fares/">Agra Taxi Fare List<span class="gnav-tag">Fixed fares</span></a>
+          <a href="../route-finder/">Route Finder<span class="gnav-tag">Filter routes</span></a>
+          <a href="../fleet/">Our Fleet<span class="gnav-tag">Compare cabs</span></a>
+          <a href="../book/">Book Online<span class="gnav-tag">WhatsApp booking</span></a>
+        </span>
+      </span>
       <a href="../blog/">Blog</a>
       <a href="../about/">About</a>
       <a href="../contact/">Contact</a>
     </nav>
+    <details class="gnav-mobile">
+      <summary class="gnav-mobile__btn" aria-label="Open menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </summary>
+      <div class="gnav-mobile__panel">
+        <a href="../index.html">Home</a>
+        <details class="gnav-mobile__cat"><summary>Pilgrimage</summary>
+          <a href="../agra-to-mathura-taxi/">Agra to Mathura Taxi<span class="gnav-tag">from &#8377;1,500</span></a>
+          <a href="../agra-to-vrindavan-cab/">Agra to Vrindavan Cab<span class="gnav-tag">from &#8377;1,800</span></a>
+          <a href="../mathura-vrindavan-tour-from-agra/">Mathura + Vrindavan Full Day<span class="gnav-tag">&#8377;3,000</span></a>
+          <a href="../mathura-vrindavan-barsana/">Mathura, Vrindavan &amp; Barsana<span class="gnav-tag">&#8377;3,500 &middot; Full Day</span></a>
+          <a href="../agra-to-bateshwar/">Agra to Bateshwar<span class="gnav-tag">&#8377;3,000 &middot; RT</span></a>
+          <a href="../agra-to-mehandipur-balaji-taxi/">Agra to Mehandipur Balaji<span class="gnav-tag">Fare on WhatsApp</span></a>
+          <a href="../agra-to-kaila-devi-temple-taxi/">Agra to Kaila Devi Temple<span class="gnav-tag">Fare on WhatsApp</span></a>
+          <a href="../agra-karauli-kaila-devi-balaji-tour/">Karauli + Kaila Devi + Balaji Tour<span class="gnav-tag">Fare on WhatsApp</span></a>
+        </details>
+        <details class="gnav-mobile__cat" open><summary>Sightseeing</summary>
+          <a href="../agra-local-sightseeing/" aria-current="page">Agra Full Day Sightseeing<span class="gnav-tag">&#8377;2,500</span></a>
+          <a href="../fatehpur-sikri/">Fatehpur Sikri Day Trip<span class="gnav-tag">&#8377;2,500</span></a>
+          <a href="../taj-mahal-taxi/">Taj Mahal Taxi<span class="gnav-tag">from &#8377;1,500</span></a>
+          <a href="../taj-mahal-sunrise-taxi/">Taj Mahal Sunrise Taxi<span class="gnav-tag">from &#8377;1,500</span></a>
+        </details>
+        <details class="gnav-mobile__cat"><summary>Outstation</summary>
+          <a href="../agra-to-gwalior/">Agra to Gwalior<span class="gnav-tag">&#8377;3,000 &middot; RT</span></a>
+          <a href="../agra-to-aligarh/">Agra to Aligarh<span class="gnav-tag">&#8377;3,000 &middot; RT</span></a>
+          <a href="../agra-to-firozabad/">Agra to Firozabad<span class="gnav-tag">&#8377;2,500 &middot; RT</span></a>
+          <a href="../agra-to-etawah/">Agra to Etawah<span class="gnav-tag">&#8377;3,500 &middot; RT</span></a>
+          <a href="../agra-to-jaipur-taxi/">Agra to Jaipur Taxi<span class="gnav-tag">Fare on WhatsApp</span></a>
+          <a href="../agra-airport-taxi/">Agra Airport Taxi<span class="gnav-tag">from &#8377;800</span></a>
+          <a href="../agra-railway-station-taxi/">Agra Railway Station Taxi<span class="gnav-tag">from &#8377;800</span></a>
+        </details>
+        <details class="gnav-mobile__cat"><summary>Fares &amp; Tools</summary>
+          <a href="../agra-taxi-fares/">Agra Taxi Fare List<span class="gnav-tag">Fixed fares</span></a>
+          <a href="../route-finder/">Route Finder<span class="gnav-tag">Filter routes</span></a>
+          <a href="../fleet/">Our Fleet<span class="gnav-tag">Compare cabs</span></a>
+          <a href="../book/">Book Online<span class="gnav-tag">WhatsApp booking</span></a>
+        </details>
+        <a href="../blog/">Blog</a>
+        <a href="../about/">About</a>
+        <a href="../contact/">Contact</a>
+      </div>
+    </details>
     <a data-cta href="https://wa.me/918720081102?text=Hi%20Padma%20Shree%20Travels%2C%20I%20would%20like%20an%20Agra%20local%20sightseeing%20taxi.%0A%0ATravel%20date%3A%20%0APickup%20point%20in%20Agra%20(hotel%20%2F%20station%20%2F%20airport)%3A%20%0APassengers%3A%20%0ACab%20type%20(AC%20Sedan%20%2F%20AC%20SUV)%3A%20%0APackage%20(Half%20day%20%2F%20Full%20day%20%2F%20Full%20day%20%2B%20Fatehpur%20Sikri)%3A%20%0AMonuments%20to%20add%20or%20skip%3A%20%0A%0APlease%20share%20availability%20and%20fare." target="_blank" rel="noopener" class="btn-header">Get Fare</a>
   </div>
 </header>
@@ -772,23 +857,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ===================== LOCAL PARTNER ===================== -->
 <section class="sec">
   <div class="wrap">
-    <h2 class="h2 center" style="margin-bottom:34px">An Agra-Based Taxi Service</h2>
-    <div class="partner">
-      <ul class="stack">
-        <li class="row-light">Padma Shree Travels operates from <strong>Shamsabad, Agra</strong>, running local sightseeing, station and airport transfers and outstation trips.</li>
-        <li class="row-light">Pickup from <strong>hotels across Agra, Agra Cantt, Agra Fort station and Kheria Airport</strong>, at no extra pickup charge within the city.</li>
-        <li class="row-light">Fares are <strong>confirmed on WhatsApp before you travel</strong>, with tolls, parking and monument tickets identified separately.</li>
-        <li class="row-light">Your driver&rsquo;s <strong>name, mobile number and car registration number are shared before pickup</strong>.</li>
-        <li class="row-light">Direct <strong>WhatsApp and phone support</strong> on +91-87200 81102 before and during your day.</li>
-        <li class="row-light">Easy to extend into <strong><a href="../fatehpur-sikri/">Fatehpur Sikri</a>, <a href="../agra-to-mathura-taxi/">Mathura</a>, <a href="../agra-to-vrindavan-cab/">Vrindavan</a> or an <a href="../outstation-cabs-agra/">outstation trip</a></strong>.</li>
-      </ul>
-      <div class="partner__fig">
-        <img src="../images/fleet/fleet-lineup.webp" width="1400" height="788" loading="lazy" decoding="async"
-             alt="Padma Shree Travels cab fleet lined up in Agra, including sedan, SUV and Tempo Traveller">
-        <h3 style="margin-top:22px;font-size:1.05rem">Padma Shree Travels</h3>
-        <p style="margin-top:2px;font-size:13px;font-weight:600">Rajeshwar Mandir, Kaveri Vihar Phase II, Shamsabad, Agra 282001</p>
-        <p style="margin-top:6px;font-size:13px;font-weight:600;color:var(--accent-dark)"><a href="tel:+918720081102">+91-87200 81102</a> &bull; <a href="https://g.page/r/CUjtXu1x_3bPEBM" target="_blank" rel="noopener">Google reviews</a></p>
+    <div class="lp">
+      <div class="lp__body">
+        <p class="lp__eyebrow">Local Agra Operator</p><h2 class="h2 lp__head">An Agra-Based Taxi Service</h2>
+        <p class="lp__lede">Padma Shree Travels operates from Shamsabad, Agra, running local sightseeing, station and airport transfers and outstation trips. You can also extend your day to <a href="../fatehpur-sikri/">Fatehpur Sikri</a>, <a href="../agra-to-mathura-taxi/">Mathura</a> or <a href="../agra-to-vrindavan-cab/">Vrindavan</a>.</p>
+        <ul class="lp__facts"><li class="lp__fact"><strong>Your fare</strong>Confirmed on WhatsApp before travel, with tolls, parking and monument tickets identified separately.</li><li class="lp__fact"><strong>Your driver</strong>Name, mobile number and car registration number shared before pickup.</li><li class="lp__fact"><strong>Pickup and drop</strong>Hotels across Agra, Agra Cantt, Agra Fort station or Kheria Airport.</li></ul>
+        <div class="lp__cta"><a data-cta href="https://wa.me/918720081102?text=Hi%20Padma%20Shree%20Travels%2C%20I%20want%20to%20book%20an%20Agra%20sightseeing%20taxi." target="_blank" rel="noopener" class="btn-primary">Get Your Fare on WhatsApp</a><a href="tel:+918720081102" class="link-call">or call +91-87200 81102</a></div><p class="lp__note">Direct WhatsApp and phone support before and during your day.</p>
       </div>
+      <figure class="lp__fig"><img class="lp__img" src="../images/about/PadmaShree%20(5).jpg" width="1080" height="1440" loading="lazy" decoding="async" alt="A member of the Padma Shree Travels team standing between two branded company cars"><figcaption class="lp__cap"><span class="lp__name">Padma Shree Travels</span><span class="lp__addr">Rajeshwar Mandir, Kaveri Vihar Phase II, Shamsabad, Agra 282001</span><span class="lp__links"><a href="tel:+918720081102">+91-87200 81102</a><span class="lp__sep">&bull;</span><a href="https://g.page/r/CUjtXu1x_3bPEBM" target="_blank" rel="noopener">Google reviews</a></span></figcaption></figure>
     </div>
   </div>
 </section>
@@ -845,6 +921,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <a data-cta href="https://wa.me/918720081102?text=Hi%20Padma%20Shree%20Travels%2C%20I%20would%20like%20an%20Agra%20local%20sightseeing%20taxi.%0A%0ATravel%20date%3A%20%0APickup%20point%20in%20Agra%20(hotel%20%2F%20station%20%2F%20airport)%3A%20%0APassengers%3A%20%0ACab%20type%20(AC%20Sedan%20%2F%20AC%20SUV)%3A%20%0APackage%20(Half%20day%20%2F%20Full%20day%20%2F%20Full%20day%20%2B%20Fatehpur%20Sikri)%3A%20%0AMonuments%20to%20add%20or%20skip%3A%20%0A%0APlease%20share%20availability%20and%20fare." target="_blank" rel="noopener" class="btn-primary">Get Fare on WhatsApp</a>
   </div>
   <a href="tel:+918720081102" class="link-call" style="display:inline-block;margin-top:16px">or call now &mdash; +91-87200 81102</a>
+      <p class="cta-reassure">Free cancellation up to 12 hours before departure.</p>
 </section>
 
 </main>
@@ -853,9 +930,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <footer class="mesh-dark">
   <div class="wrap ft__grid">
     <div class="ft__brand">
-      <p class="ft__h">Padma Shree Travels</p>
+      <img src="../images/logo.png" alt="" class="ft__logo" width="70" height="40" loading="lazy" decoding="async">
+        <p class="ft__h">Padma Shree Travels</p>
       <p>Rajeshwar Mandir, Kaveri Vihar Phase II,<br>Shamsabad, Agra, Uttar Pradesh 282001</p>
-      <p>Taxi and cab booking in Agra &mdash; local sightseeing, station and airport transfers, temple trips and outstation routes. Available 24/7.</p>
+      <p>Taxi and cab booking in Agra &mdash; local sightseeing, station and airport transfers, temple trips and outstation routes. Call or WhatsApp us daily, 9 AM&ndash;9 PM IST.</p>
     </div>
     <div>
       <p class="ft__h">Agra Sightseeing</p>
@@ -893,6 +971,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </div>
   </div>
+<div class="ft__wordmark" aria-hidden="true">
+<div class="ft__wordmark-kicker"><span></span>Agra &middot; Private Cabs &middot; Local Journeys</div>
+<div class="ft__wordmark-type"><span>Padma</span><strong>Shree</strong></div>
+</div>
   <div class="ft__bot">
     <div class="wrap">
       <p>&copy; <span data-year>2026</span> Padma Shree Travels. All rights reserved.</p>

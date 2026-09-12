@@ -49,5 +49,15 @@ _archive/
 .agents/
 claude-skills/
 
+# Raw source photography; optimized production derivatives are in the
+# tracked images/fleet, images/destinations, and images/about folders.
+images/01 Fleet/
+images/02 Destination Images/
+images/03 Founder+ Destination/
+images/Banners/
+
+# Unoptimized landing-page source exports; live pages use their assets/ files.
+Landing Pages/_originals/
+
 # ── Superseded legacy page (noindex; keep out of the public deploy) ──
 taj-mahal-agra-fort.html

@@ -45,6 +45,19 @@
   --gold:#EFC75E;
   --warn:#FBBF24;
   --container:1400px;
+
+  /* Premium dark-teal band (Sep 2026). Shared tokens for HIGH-VALUE bands
+     only - see .sec--teal. Mirrored verbatim by the .grx band that
+     js/reviews-grid.js injects on the legacy-track homepage, which cannot
+     load this file. Keep the two in step. */
+  --pst-ink:#0E1A22;        /* deep ink base                            */
+  --pst-teal:#153C3A;       /* dark teal wash                           */
+  --pst-teal-mut:#315A56;   /* muted teal, used only as soft light      */
+  --pst-ivory:#F7F3EA;      /* warm ivory surface                       */
+  --pst-gold:#C79B3B;       /* gold for rules + borders (decorative)    */
+  --pst-gold-lt:#EBC97F;    /* gold used AS TEXT on dark (4.5:1 on its chip) */
+  --pst-gold-ink:#A8822C;   /* gold on ivory (3.2:1, meets SC 1.4.11)   */
+  --pst-on-teal:#7FD8A6;    /* trusted link green (10.3:1 on ink)       */
 }
 
 /* ───────────────────────── Reset + base ────────────────────────────────── */
@@ -114,6 +127,9 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
 .link-call{
   font-size:14px; font-weight:600; color:rgba(255,255,255,.75);
   text-decoration:underline; text-underline-offset:2px;
+  /* PST-17: was 21px tall. Padding lifts the hit area past the 24px
+     minimum without changing the type size or the visual weight. */
+  display:inline-block; padding-block:6px;
 }
 .link-call:hover{ color:var(--accent); }
 
@@ -124,15 +140,29 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
 .hdr{ position:sticky; top:0; z-index:50; background:var(--ink-950); border-bottom:2px solid #000; }
 .hdr__in{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding-top:12px; padding-bottom:12px; }
 .hdr__logo{ display:flex; align-items:center; gap:8px; font-weight:700; font-size:14px; color:#fff; flex-shrink:0; min-width:0; }
+/* Official logo. The asset is black on transparent, so on this dark header it
+   uses the same invert treatment css/style.css already applies to it in the
+   legacy footer - a display filter, not an edit to the artwork. Height is
+   fixed and width auto so the 510x292 proportions are never distorted. */
 .hdr__mark{
-  display:inline-flex; align-items:center; justify-content:center;
-  height:28px; width:28px; border-radius:4px; background:var(--accent);
-  border:2px solid #000; color:#000; font-size:11px; font-weight:900; flex-shrink:0;
+  height:24px; width:auto; flex-shrink:0;
+  filter:brightness(0) invert(1);
 }
-.hdr__name{ display:none; }
+/* The wordmark is the link's accessible name, so it must stay in the
+   accessibility tree at every width - hidden visually on phones, not removed. */
+.hdr__name{
+  position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+  overflow:hidden; clip:rect(0 0 0 0); clip-path:inset(50%); white-space:nowrap; border:0;
+}
 .hdr__nav{ display:none; align-items:center; gap:18px; font-size:12px; font-weight:500; color:rgba(255,255,255,.75); }
 .hdr__nav a:hover{ color:var(--accent); }
-@media (min-width:640px){ .hdr__logo{ font-size:16px; } .hdr__name{ display:inline; } }
+@media (min-width:640px){
+  .hdr__logo{ font-size:16px; }
+  /* restore the visible wordmark from tablet up */
+  .hdr__name{ position:static; width:auto; height:auto; margin:0; overflow:visible;
+    clip:auto; clip-path:none; white-space:normal; }
+  .hdr__mark{ height:26px; }
+}
 @media (min-width:1024px){ .hdr__nav{ display:flex; } }
 
 /* ───────────────────────── Hero ─────────────────────────────────────────
@@ -200,7 +230,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
   gap:8px; padding-top:14px; padding-bottom:14px; font-size:12px;
 }
 .proof__stars{ color:var(--accent-deep); font-size:14px; letter-spacing:-.05em; }
-.proof__rev{ display:flex; align-items:center; gap:8px; }
+/* PST-17: was 21px tall; min-height lifts it past the 24px minimum. */
+.proof__rev{ display:flex; align-items:center; gap:8px; min-height:26px; }
 .proof__rev span:last-child{ color:var(--accent-dark); font-weight:500; }
 .proof__rev:hover{ opacity:.8; }
 .proof__list{ display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:8px; font-weight:500; }
@@ -213,6 +244,87 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
 .sec{ background:#fff; padding-top:56px; padding-bottom:56px; }
 .sec--tight{ padding-top:40px; padding-bottom:40px; }
 .sec--navy{ background:var(--navy); }
+
+/* The content bands now draw the premium lattice, so the old wireframe is
+   switched off for them. footer.mesh-dark already overrides it separately;
+   the bare .mesh-dark rule is left intact for any future consumer. */
+section.mesh-dark::before{ display:none; }
+
+/* Step cards on the premium bands.
+   `.steps` was verified to appear ONLY inside a .mesh-dark band, so this
+   scoping is exact and no other layout inherits it. Surface and border reuse
+   the values already approved for the .section--teal cards on the homepage -
+   deliberately not a new set. No blur, no drop shadow, no green offset. */
+section.mesh-dark .steps{ gap:18px; margin-top:40px; }
+@media (min-width:1000px){ section.mesh-dark .steps{ grid-template-columns:repeat(3,1fr); } }
+section.mesh-dark .step{
+  background:rgba(247,243,234,.09);
+  border:1px solid rgba(247,243,234,.20);
+  border-radius:14px;
+  padding:20px 22px;
+}
+section.mesh-dark .step h3{ color:var(--pst-ivory); }
+/* was rgba(255,255,255,.65) = 4.55:1; warm ivory at .86 is 5.26:1 and
+   matches the ivory typography the rest of the system uses. */
+section.mesh-dark .step p{ color:rgba(247,243,234,.86); max-width:none; }
+section.mesh-dark .h2--white{ color:var(--pst-ivory); }
+
+/* --- Phase 4: the final CTA band --------------------------------------
+   On all 36 route pages `.mesh-dark.center` sits IMMEDIATELY above the teal
+   footer (verified). Two teal fields meeting with no boundary would read as
+   one long band and the CTA would stop registering as a call to action, so
+   it gets a restrained gold hairline and its own breathing room. This is a
+   tonal boundary, not a second design system. */
+section.mesh-dark.center{ border-bottom:1px solid rgba(199,155,59,.22); }
+/* Owner-confirmed 2026-09-12: free cancellation window. One quiet line under
+   the CTA - deliberately not a badge, so the band stays uncrowded. */
+.cta-reassure{
+  margin-top:14px; font-size:13px; line-height:1.6;
+  color:rgba(247,243,234,.78);
+}
+
+/* The neo-brutalist black offset is the brand look on LIGHT sections. On a
+   dark teal band the slab reads as a detached black rectangle, so inside
+   these bands only it becomes a deep teal-ink depth instead. Geometry,
+   colour, label, href, prefill and tracking are all unchanged. */
+section.mesh-dark .btn-primary{ border-color:#0A1418; box-shadow:7px 7px 0 rgba(8,22,27,.9); }
+section.mesh-dark .btn-primary:hover{ box-shadow:4px 4px 0 rgba(8,22,27,.9); }
+section.mesh-dark .btn-primary:active{ box-shadow:0 0 0 rgba(8,22,27,.9); }
+section.mesh-dark .btn-header{ border-color:#0A1418; box-shadow:3px 3px 0 rgba(8,22,27,.9); }
+section.mesh-dark .btn-header:hover{ box-shadow:1px 1px 0 rgba(8,22,27,.9); }
+
+/* --- Premium dark-teal band ---------------------------------------------
+   Opt-in aesthetic for high-value bands: reviews, final CTA, fare
+   transparency, trust. Defined ONCE here; never copy the pattern onto a
+   page. It is deliberately NOT a blanket replacement for .sec--navy - the
+   white/navy rhythm is what makes any dark band read as an accent.
+
+   Do not use it behind long-form article copy, behind fare tables that rely
+   on a light surface for cell contrast, or on a section that already carries
+   route photography (there, the photograph IS the background).
+
+   The pattern is original layered CSS: edge vignette, two soft lights, a
+   diagonal diamond lattice at 3% ivory, then the teal wash. Decorative only,
+   no raster asset, no third-party image, no network request. */
+.sec--teal,
+section.mesh-dark{
+  background-color:var(--pst-ink);
+  background-image:
+    radial-gradient(125% 88% at 50% 44%, transparent 50%, rgba(0,0,0,.44) 100%),
+    radial-gradient(900px 520px at 15% 6%,  rgba(49,90,86,.55), transparent 70%),
+    radial-gradient(780px 480px at 89% 97%, rgba(199,155,59,.085), transparent 68%),
+    repeating-linear-gradient(45deg,  rgba(247,243,234,.030) 0 1px, transparent 1px 38px),
+    repeating-linear-gradient(-45deg, rgba(247,243,234,.030) 0 1px, transparent 1px 38px),
+    linear-gradient(168deg, var(--pst-teal) 0%, var(--pst-ink) 62%);
+}
+/* Content treatments for anything sitting on .sec--teal. */
+.on-teal{ color:var(--pst-ivory); }
+.on-teal-muted{ color:rgba(247,243,234,.74); }
+.surf-ivory{ background:var(--pst-ivory); border:1px solid rgba(14,26,34,.08); color:#1A1A1A; }
+/* Gold AS TEXT must use the lighter token; the base gold is for rules,
+   borders and other decorative marks that only need 3:1. */
+.accent-gold{ color:var(--pst-gold-lt); }
+.rule-gold{ display:block; width:38px; height:2px; background:var(--pst-gold); border:0; margin:0 0 14px; }
 .sec--top0{ padding-top:0; }
 @media (min-width:640px){ .sec{ padding-top:72px; padding-bottom:72px; } }
 
@@ -392,6 +504,130 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
 @media (min-width:640px){ .step h3{ font-size:16px; } }
 .step p{ margin-top:12px; font-size:13px; color:rgba(255,255,255,.65); line-height:1.7; max-width:48ch; }
 
+/* ───────────────────────── Route / journey band (.rt-*) ─────────────────
+   Replaces the old route sections on 1 Sep 2026. Those stacked five or six
+   identically outlined .row-light boxes in one column beside a small .ph
+   photo with a detached green offset shadow — repetitive, no hierarchy, and
+   no sense of a journey.
+
+   This version leads with the journey itself: a two-node origin -> destination
+   line, then the two facts a traveller wants first (distance and driving
+   time), then the page's own supporting notes, beside one large photograph
+   whose caption sits inside the frame.
+
+   The distance and time shown are NOT parsed out of the prose — an earlier
+   attempt at that misread "23 km beyond Karauli town" as the Agra distance.
+   They are taken from each page's own published .stats band and written into
+   the markup, so a wrong figure cannot be silently generated.
+
+   .ph / .r43 / .r169 / .r219 / .ph-tag are deliberately kept: galleries and
+   blog articles across the site still use them. Only these route sections
+   stopped using them. */
+.rt{ display:grid; grid-template-columns:1fr; gap:26px; }
+@media (min-width:960px){
+  .rt{ grid-template-columns:minmax(0,1.04fr) minmax(300px,.96fr); gap:44px; align-items:stretch; }
+}
+
+.rt__eyebrow{
+  display:flex; align-items:center; gap:10px; margin-bottom:12px;
+  font-size:11.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--accent-dark);
+}
+.rt__eyebrow::before{ content:""; flex:0 0 auto; width:26px; height:2px; background:var(--accent-dark); }
+.rt__lede{ margin-top:12px; font-size:14.5px; line-height:1.75; color:rgba(0,0,0,.72); max-width:54ch; }
+
+/* ---- the journey line -------------------------------------------------
+   A real <ol> of two places, so a screen reader reads an ordered pair
+   rather than decoration. The connector is a pseudo-element placed into
+   its own grid track, so it adds no markup and is never announced. */
+.rt__line{
+  margin:22px 0 0; padding:0; list-style:none;
+  display:grid; grid-template-columns:1fr; grid-template-rows:auto 30px auto;
+  align-items:center; gap:0;
+}
+.rt__node{ min-width:0; }
+.rt__node:first-child{ grid-row:1; }
+.rt__node--to{ grid-row:3; }
+.rt__line::before{
+  content:""; grid-row:2; justify-self:start; width:12px; height:30px;
+  background:center/12px 30px no-repeat
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 32' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 0v22'/%3E%3Cpath d='M1.8 17.5L6 22.5l4.2-5'/%3E%3C/svg%3E");
+}
+@media (min-width:560px){
+  .rt__line{ grid-template-columns:minmax(0,1fr) 76px minmax(0,1fr); grid-template-rows:auto; }
+  .rt__node:first-child{ grid-row:1; grid-column:1; }
+  .rt__node--to{ grid-row:1; grid-column:3; }
+  .rt__line::before{
+    grid-row:1; grid-column:2; justify-self:stretch; width:auto; height:14px;
+    background:center/76px 14px no-repeat
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 76 14' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M0 7h62'/%3E%3Cpath d='M56.5 2.4L62.5 7l-6 4.6'/%3E%3C/svg%3E");
+  }
+}
+.rt__place{ display:block; font-size:19px; font-weight:700; line-height:1.25; letter-spacing:-.01em; }
+@media (min-width:640px){ .rt__place{ font-size:21px; } }
+.rt__sub{ display:block; margin-top:4px; font-size:12.5px; line-height:1.5; color:rgba(0,0,0,.62); }
+
+/* ---- the two headline facts ------------------------------------------- */
+.rt__facts{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:24px; }
+.rt__fact{ border:1.5px solid #000; border-radius:4px; background:#fff; padding:13px 15px; }
+.rt__num{ font-size:19px; font-weight:800; line-height:1.15; letter-spacing:-.02em; }
+@media (min-width:640px){ .rt__num{ font-size:22px; } }
+.rt__lbl{ margin-top:5px; font-size:11.5px; font-weight:600; letter-spacing:.05em;
+  text-transform:uppercase; color:rgba(0,0,0,.58); line-height:1.4; }
+
+/* ---- supporting notes -------------------------------------------------
+   Hairline-separated lines with a small marker, instead of the old column
+   of identical full-width outlined boxes. */
+.rt__notes{ margin:24px 0 0; padding:0; list-style:none; }
+/* Optional sub-heading where a page already grouped its bullets — Aligarh
+   splits them into "The Road" and "Where We Drop", and dropping those
+   headings left "AMU campus" reading as a bare route fact. */
+.rt__nh{
+  margin:22px 0 2px; font-size:11.5px; font-weight:700; letter-spacing:.1em;
+  text-transform:uppercase; color:rgba(0,0,0,.55);
+}
+.rt__nh:first-child{ margin-top:0; }
+.rt__notes + .rt__nh{ margin-top:24px; }
+.rt__note{
+  position:relative; padding:11px 0 11px 24px;
+  border-top:1px solid rgba(0,0,0,.13);
+  font-size:13.5px; line-height:1.65; color:rgba(0,0,0,.78);
+}
+.rt__note:last-child{ border-bottom:1px solid rgba(0,0,0,.13); }
+.rt__note::before{
+  content:""; position:absolute; left:2px; top:18px;
+  width:9px; height:2px; background:var(--accent-dark); border-radius:1px;
+}
+.rt__note strong{ color:#000; font-weight:700; }
+
+/* ---- the photograph ---------------------------------------------------
+   Stretches to the height of the text column so the two sides balance, with
+   the caption inside the frame. Restrained border to match .card; no
+   detached offset shadow. */
+.rt__fig{
+  margin:0; border:1.5px solid #000; border-radius:4px; overflow:hidden;
+  background:#0A0F14; display:flex; flex-direction:column; min-width:0;
+}
+/* Single-column widths: a plain 16:10 box.
+   `height:auto` is REQUIRED, not tidiness. The markup keeps width/height
+   attributes (they prevent layout shift), and the height attribute lands as
+   a presentational CSS declaration — so height stayed at the source's 788px
+   and aspect-ratio was ignored, rendering a tall thin strip at 320px.
+   Setting height:auto hands control back to aspect-ratio. */
+.rt__img{
+  display:block; width:100%; height:auto;
+  aspect-ratio:16/10; object-fit:cover; background:#0A0F14;
+}
+/* Two-column widths: fill the column so both sides finish level. */
+@media (min-width:960px){
+  .rt__img{ flex:1 1 auto; aspect-ratio:auto; height:100%; min-height:280px; }
+}
+.rt__cap{
+  flex:0 0 auto; padding:11px 14px 12px; font-size:12px; line-height:1.55;
+  color:rgba(255,255,255,.82); background:#0A0F14;
+  border-top:1px solid rgba(255,255,255,.16);
+}
+
 /* ───────────────────────── Fare breakdown band (.fare-*) ────────────────
    Replaces the old navy "what's included" layout on 31 Aug 2026. That
    version stacked every inclusion and exclusion as an identical 2px-
@@ -438,6 +674,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
    (0,1,1) outranks it. Harmless everywhere else — the band is always a
    <section>. */
 section.fare-band{
+  --fare-bg:url("../images/fleet/fleet-lineup-night.webp");
   background-color:var(--navy);
   background-image:
     linear-gradient(to right,
@@ -456,7 +693,7 @@ section.fare-band{
 }
 /* The no-JavaScript fallback photograph. */
 @media (scripting: none){
-  section.fare-band{ --fare-bg:url("../images/Banners/B1.jpg"); }
+  section.fare-band{ --fare-bg:url("../images/fleet/fleet-lineup-night.webp"); }
 }
 @media (min-width:768px){ section.fare-band{ background-position:72% 50%; } }
 @media (min-width:960px){ section.fare-band{ background-position:50% 60%; } }
@@ -694,19 +931,164 @@ section.fare-band{
 .rel-card .tag{ display:inline-block; margin-top:9px; font-size:11px; font-weight:700; color:var(--accent-dark); }
 
 /* ───────────────────────── Footer ───────────────────────────────────────*/
-.ft__grid{ display:grid; grid-template-columns:1fr; gap:32px; padding-top:40px; padding-bottom:24px; text-align:center; }
-@media (min-width:640px){ .ft__grid{ grid-template-columns:repeat(4,1fr); text-align:left; } }
+.ft__grid{ display:grid; grid-template-columns:1fr; gap:30px; padding-top:34px; padding-bottom:16px; text-align:center; align-items:start; }
+@media (min-width:640px){ .ft__grid{ grid-template-columns:1.35fr 1fr 1fr 1.15fr; gap:30px 36px; text-align:left; } }
+/* Footer lockup: same official asset, same invert treatment. */
+.ft__logo{ height:40px; width:auto; margin-bottom:10px; filter:brightness(0) invert(1); opacity:.92; }
 .ft__h{ font-weight:700; color:#fff; font-size:14px; }
 .ft__brand p{ margin-top:6px; font-size:11px; color:rgba(255,255,255,.55); line-height:1.7; }
 .ft__links{ margin-top:10px; display:grid; gap:5px; font-size:11px; color:rgba(255,255,255,.55); }
 .ft__links a:hover{ color:var(--accent); }
-.ft__bot{ background:#000; border-top:1px solid rgba(255,255,255,.1); padding-top:16px; padding-bottom:16px; }
+/* Match the homepage footer: the footer itself is a calm solid ink surface,
+   not another mesh band. Content sections may continue using .mesh-dark. */
+
+.ft__wordmark{
+  background:radial-gradient(65% 130% at 50% 100%,rgba(47,224,126,.035),transparent 72%);
+  border-top:1px solid rgba(255,255,255,.07);
+  margin-top:18px;
+  overflow:hidden;
+  padding:clamp(18px,2.2vw,27px) 0 clamp(8px,.9vw,13px);
+  user-select:none;
+}
+footer.mesh-dark>.ft__wordmark{
+  margin-left:auto;
+  margin-right:auto;
+  max-width:var(--container);
+  padding-left:20px;
+  padding-right:20px;
+  width:100%;
+}
+@media(min-width:640px){
+  footer.mesh-dark>.ft__wordmark{ padding-left:32px;padding-right:32px; }
+}
+.ft__wordmark-kicker{
+  align-items:center;color:rgba(255,255,255,.38);display:flex;justify-content:center;
+  font-size:clamp(9px,.7vw,11px);font-weight:700;gap:10px;
+  letter-spacing:.18em;margin-bottom:clamp(18px,2.2vw,31px);text-transform:uppercase;
+}
+.ft__wordmark-kicker span{ background:var(--accent);display:inline-block;height:2px;opacity:.8;width:24px; }
+.ft__wordmark-type{
+  align-items:baseline;display:flex;justify-content:center;
+  /* Same measured ceiling as the legacy track - keep the two in step. */
+  font-size:clamp(40px,13.4vw,184px);
+  font-weight:800;letter-spacing:-.065em;line-height:.9;white-space:nowrap;
+}
+.ft__wordmark-type span{ color:rgba(255,255,255,.1); }
+.ft__wordmark-type strong{ color:rgba(255,255,255,.075);font:inherit;letter-spacing:-.025em; }
+@supports (-webkit-text-stroke:1px currentColor){
+  .ft__wordmark-type strong{
+    color:#0D0D0D;-webkit-text-stroke:1.5px rgba(255,255,255,.13);paint-order:stroke fill;
+  }
+}
+@media(max-width:480px){
+  .ft__wordmark{ margin-top:20px;padding-top:20px; }
+  .ft__wordmark-kicker{ letter-spacing:.11em;margin-bottom:18px; }
+  .ft__wordmark-kicker span{ width:16px; }
+  .ft__wordmark-type{ font-size:clamp(32px,11.6vw,58px);letter-spacing:-.05em; }
+  .ft__wordmark-type strong{ letter-spacing:-.015em; }
+  @supports (-webkit-text-stroke:1px currentColor){ .ft__wordmark-type strong{ -webkit-text-stroke-width:1px; } }
+}
+.ft__bot{ border-top:1px solid rgba(255,255,255,.1); padding-top:14px; padding-bottom:14px; }
 .ft__bot .wrap{
   display:flex; flex-direction:column; align-items:center; justify-content:space-between;
   gap:10px; font-size:11px; color:rgba(255,255,255,.7);
 }
 @media (min-width:640px){ .ft__bot .wrap{ flex-direction:row; font-size:12px; } }
 .ft__bot a:hover{ color:var(--accent); }
+
+/* ───────────────────────── Premium teal footer ──────────────────────────
+   SYNCHRONISED with the `.ft` block in css/style.css. The two design tracks
+   cannot share a stylesheet, so the same token block is restated in both
+   files. The token NAMES and VALUES are identical on purpose. Change one,
+   change the other.
+
+   Scoped to `footer.mesh-dark`. The bare `.mesh-dark` class is ALSO worn by
+   the booking-process band and the final CTA, so redefining it would repaint
+   sections this task has nothing to do with. The footer inherits
+   `.mesh-dark::before`, which paints that wireframe; it is switched off here
+   and only here.
+
+   Background is original layered CSS - no image, no request, no animation.
+   Colours are measured against rgb(28,67,64), the lightest point the stack
+   reaches - the worst case for light text. */
+footer.mesh-dark{
+  --ft-base:      #0E1A22;                 /* footer ground                */
+  --ft-lattice:   rgba(247,243,234,.012);  /* felt, not seen               */
+  --ft-text:      rgba(247,243,234,.76);   /* body, links, contact  6.38:1 */
+  --ft-kicker:    rgba(247,243,234,.62);   /* wordmark kicker       4.86:1 */
+  --ft-rule:      rgba(247,243,234,.11);   /* dividers                     */
+  --ft-gold:      rgba(199,155,59,.26);    /* the one gold hairline        */
+  --ft-green:     #7FD8A6;                 /* hover/focus           6.37:1 */
+  --ft-wm-fill:   #0C161C;                 /* wordmark cut-out             */
+  --ft-wm-stroke: rgba(247,243,234,.34);   /* "Shree" outline              */
+  --ft-wm-padma:  rgba(247,243,234,.13);   /* "Padma" fill                 */
+
+  background-color:var(--ft-base);
+  background-image:
+    linear-gradient(to bottom, transparent 55%, rgba(0,0,0,.30) 100%),
+    radial-gradient(900px 460px at 18% 0%,  rgba(49,90,86,.42), transparent 70%),
+    radial-gradient(760px 420px at 88% 12%, rgba(21,60,58,.55), transparent 72%),
+    repeating-linear-gradient(45deg,  var(--ft-lattice) 0 1px, transparent 1px 40px),
+    repeating-linear-gradient(-45deg, var(--ft-lattice) 0 1px, transparent 1px 40px),
+    linear-gradient(178deg, #153C3A 0%, var(--ft-base) 58%);
+}
+footer.mesh-dark::before{ display:none; }
+
+footer.mesh-dark .ft__h{ color:#F7F3EA; }
+footer.mesh-dark .ft__brand p,
+footer.mesh-dark .ft__links{ color:var(--ft-text); }
+footer.mesh-dark .ft__links a{ color:inherit; }
+footer.mesh-dark .ft__links a:hover,
+footer.mesh-dark .ft__bot a:hover{ color:var(--ft-green); }
+footer.mesh-dark a:focus-visible{
+  outline:3px solid var(--ft-green); outline-offset:3px; border-radius:4px;
+}
+
+/* Legal row: a divider, not a separate black strip. */
+footer.mesh-dark .ft__bot{
+  background:none;
+  border-top:1px solid var(--ft-rule);
+}
+footer.mesh-dark .ft__bot{ color:var(--ft-text); }
+footer.mesh-dark .ft__bot .wrap{ color:var(--ft-text); }
+/* The floating WhatsApp bubble (.waf, 52px at right:20px) is shown from 640px
+   up and was measurably overlapping the service line at the right of the legal
+   row. Reserve its lane. */
+@media (min-width:640px){
+  footer.mesh-dark .ft__bot .wrap{ padding-right:92px; }
+}
+
+/* One restrained gold hairline - the only gold in the footer. */
+footer.mesh-dark .ft__wordmark{
+  border-top:1px solid var(--ft-gold);
+  background:none;
+}
+footer.mesh-dark .ft__wordmark-kicker{ color:var(--ft-kicker); }
+footer.mesh-dark .ft__wordmark-kicker span{ background:var(--ft-green); }
+
+/* "Padma" is a filled shape, "Shree" a 1.5px outline, so the outline needs a
+   higher alpha to carry the same visual weight. It was .15 and all but
+   vanished next to the fill. */
+footer.mesh-dark .ft__wordmark-type span{ color:var(--ft-wm-padma); }
+@supports (-webkit-text-stroke:1px currentColor){
+  footer.mesh-dark .ft__wordmark-type strong{
+    /* Opaque, and matched to the footer's colour at this height, so the
+       lattice cannot show through the outlined letters and the interior
+       still reads as a cut-out rather than a panel. */
+    color:var(--ft-wm-fill);
+    -webkit-text-stroke:1.5px var(--ft-wm-stroke);
+  }
+}
+
+
+/* Bottom bar was solid #000. A deeper teal keeps it distinct from the body of
+   the footer without dropping to pure black. */
+footer.mesh-dark .ft__bot{
+  background:rgba(6,14,19,.55);
+  border-top:1px solid rgba(247,243,234,.10);
+}
+footer.mesh-dark .ft__bot .wrap{ color:rgba(247,243,234,.74); }
+
 
 /* ───────────────────────── Floating WhatsApp + mobile action bar ────────
    .waf is hidden on phones (the .mobile-bar covers that role there) and
