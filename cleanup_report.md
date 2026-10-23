@@ -67,6 +67,8 @@ Both already have `<meta name="robots" content="noindex, nofollow">` in `<head>`
 
 Scanned both files (and `crm/google-apps-script.gs`) for secrets/API keys/tokens and driver phone numbers/PII — **none found**. `review-helper.html` only fetches the public `reviews.json` (customer testimonial text, already publicly displayed on the site elsewhere).
 
+> **Update 2026-10-23:** `reviews.json` has been deleted. It held ~318 pre-written review templates, not real customer reviews. `review-helper.html` no longer offers any review text: customers write their own, guided by trip-specific questions. Real Google reviews shown on the site live in `js/reviews-data.js`.
+
 **No code changes were needed or made to either file.**
 
 ### 3. `.agents/SKILL.md` — **untracked from git (moved out of deployment, kept on local disk)**

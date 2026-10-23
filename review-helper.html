@@ -9,7 +9,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
 <title>Leave a Google Review — Padma Shree Travels</title>
-<meta name="description" content="Leave a Google review for Padma Shree Travels in seconds. Select your trip, copy the review, paste on Google.">
+<meta name="description" content="Tell us how your trip went. Pick your trip, write a few lines in your own words, and post your review on Google.">
 <link rel="icon" type="image/png" href="/images/logo.png">
 <link rel="apple-touch-icon" href="/images/logo.png">
 <link rel="manifest" href="/site.webmanifest">
@@ -33,16 +33,23 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   overflow: hidden;
 }
 
-/* Route pills section */
+/* Trip pills section */
 .rh-routes {
   padding: .9rem 1.25rem .75rem;
   border-bottom: 1px solid var(--g100);
+}
+.rh-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  margin-bottom: .3rem;
 }
 .rh-thankyou {
   font-size: .92rem;
   font-weight: 700;
   color: var(--black);
-  margin: 0 0 .3rem;
+  margin: 0;
 }
 .rh-routes__label {
   font-size: .72rem;
@@ -52,6 +59,30 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   color: var(--g400);
   margin-bottom: .45rem;
 }
+
+/* English / Hindi toggle */
+.rh-lang {
+  display: inline-flex;
+  flex-shrink: 0;
+  padding: 2px;
+  border: 1.5px solid var(--g100);
+  border-radius: 999px;
+}
+.rh-lang button {
+  min-height: 30px;
+  padding: .25rem .7rem;
+  border: none;
+  border-radius: 999px;
+  background: none;
+  color: var(--g500);
+  font-size: .76rem;
+  font-weight: 600;
+  font-family: var(--ff);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.rh-lang button[aria-pressed="true"] { background: var(--black); color: var(--white) }
+
 .rh-pills {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -75,6 +106,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 }
 .rh-pill:hover  { border-color: var(--g300); background: var(--g50); color: var(--black) }
 .rh-pill.active { background: var(--black); border-color: var(--black); color: var(--white) }
+.rh-pill .rp-t { display: block }
 .rh-pill .rp-sub {
   display: block;
   font-size: .68rem;
@@ -87,16 +119,75 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .rh-review {
   padding: .9rem 1.25rem;
 }
-.rh-stars {
-  font-size: 1.35rem;
-  color: var(--gold);
-  letter-spacing: .12em;
-  margin-bottom: .5rem;
-  line-height: 1;
+.rh-intro {
+  font-size: .88rem;
+  color: var(--g700);
+  line-height: 1.55;
+  margin: 0 0 .7rem;
 }
+.rh-label {
+  font-size: .72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--g400);
+  margin: 0 0 .35rem;
+}
+
+/* Guiding questions — helper text only, never inserted into the review */
+.rh-qs {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 .8rem;
+  display: flex;
+  flex-direction: column;
+  gap: .3rem;
+}
+.rh-qs li {
+  position: relative;
+  padding-left: .95rem;
+  font-size: .84rem;
+  color: var(--g700);
+  line-height: 1.45;
+}
+.rh-qs li::before {
+  content: '';
+  position: absolute;
+  left: .1rem;
+  top: .55em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+
+/* Place-name chips */
+.rh-chips-wrap { margin-bottom: .7rem }
+.rh-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .35rem;
+}
+.rh-chip {
+  min-height: 32px;
+  padding: .3rem .7rem;
+  border: 1.5px solid var(--g100);
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--g700);
+  font-size: .78rem;
+  font-weight: 600;
+  font-family: var(--ff);
+  cursor: pointer;
+  transition: all var(--t);
+  -webkit-tap-highlight-color: transparent;
+}
+.rh-chip:hover { border-color: var(--g300); background: var(--g50); color: var(--black) }
+.rh-chip.used  { border-color: rgba(5,148,79,.35); background: rgba(5,148,79,.06); color: #047040 }
+
 .rh-textarea {
   width: 100%;
-  min-height: 120px;
+  min-height: 140px;
   padding: .8rem .9rem;
   border: 1.5px solid var(--g100);
   border-radius: var(--r);
@@ -108,6 +199,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   background: var(--g50);
   transition: border-color var(--t), box-shadow var(--t), background var(--t);
 }
+.rh-textarea::placeholder { color: var(--g400) }
 .rh-textarea:focus {
   border-color: var(--black);
   box-shadow: 0 0 0 3px rgba(0,0,0,.07);
@@ -116,8 +208,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   color: var(--black);
 }
 .rh-hint {
-  font-size: .74rem;
-  color: var(--g400);
+  font-size: .76rem;
+  color: var(--g500);
+  line-height: 1.5;
   margin-top: .4rem;
   margin-bottom: .75rem;
 }
@@ -164,14 +257,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   background: rgba(5,148,79,.07);
   border: 1px solid rgba(5,148,79,.22);
   border-radius: var(--r);
-}
-.rh-s-head {
-  display: flex;
-  align-items: center;
-  gap: .45rem;
-  font-size: .88rem;
-  font-weight: 700;
-  color: #047040;
 }
 .rh-s-steps {
   list-style: none;
@@ -332,6 +417,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <a href="/index.html#sightseeing" class="dd__more">View All Sightseeing &#8594;</a>
 </div></li>
 <li class="nav__dd"><a href="/index.html#routes" class="nav__a">Outstation &#9662;</a><div class="nav__ddm">
+<a href="/agra-to-jaipur-taxi/">Agra &#8594; Jaipur Taxi <span class="ptag">Fare on WhatsApp</span></a>
 <a href="/agra-to-gwalior">Agra &#8594; Gwalior <span class="ptag">&#8377;3,000 &middot; RT</span></a>
 <a href="/agra-to-aligarh">Agra &#8594; Aligarh <span class="ptag">&#8377;3,000 &middot; RT</span></a>
 <a href="/agra-to-firozabad">Agra &#8594; Firozabad <span class="ptag">&#8377;2,500 &middot; RT</span></a>
@@ -362,6 +448,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 <button class="mnav__cat" aria-expanded="false">Outstation <span class="mnav__arr">&#9662;</span></button>
 <div class="mnav__sub">
+<a href="/agra-to-jaipur-taxi/">Agra to Jaipur Taxi <span class="ptag">Fare on WhatsApp</span></a>
 <a href="/agra-to-gwalior">Agra to Gwalior <span class="ptag">&#8377;3,000 &middot; RT</span></a>
 <a href="/agra-to-aligarh">Agra to Aligarh <span class="ptag">&#8377;3,000 &middot; RT</span></a>
 <a href="/agra-to-firozabad">Agra to Firozabad <span class="ptag">&#8377;2,500 &middot; RT</span></a>
@@ -376,84 +463,92 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 
 <!-- ── Review Tool ──────────────────────────────────────────────────────────── -->
+<!-- The customer writes the review. This page never supplies review text:
+     it only shows guiding questions and place names they can tap to add. -->
 <main class="rh-main">
   <div class="rh-wrap">
 
     <div class="rh-card">
 
-      <!-- Route pills -->
+      <!-- Trip pills -->
       <div class="rh-routes">
-        <p class="rh-thankyou">Thank you for travelling with us &#x1F64F;</p>
-        <p class="rh-routes__label">Which trip did you take?</p>
+        <div class="rh-top">
+          <p class="rh-thankyou" data-i18n="thanks">Thank you for travelling with us &#x1F64F;</p>
+          <div class="rh-lang" role="group" aria-label="Language / भाषा">
+            <button type="button" data-lang="en" aria-pressed="true" onclick="setLang('en')">English</button>
+            <button type="button" data-lang="hi" aria-pressed="false" onclick="setLang('hi')" lang="hi">हिंदी</button>
+          </div>
+        </div>
+        <p class="rh-routes__label" data-i18n="whichTrip">Which trip did you take?</p>
         <div class="rh-pills">
-          <button class="rh-pill active" data-route="local" onclick="setRoute('local')">
-            Local Agra Trip
-            <span class="rp-sub">Within city</span>
+          <button type="button" class="rh-pill" data-trip="sightseeing" aria-pressed="false" onclick="setTrip('sightseeing')">
+            <span class="rp-t" data-i18n="t_sightseeing">Agra Sightseeing</span>
+            <span class="rp-sub" data-i18n="s_sightseeing">Taj Mahal, Agra Fort</span>
           </button>
-          <button class="rh-pill" data-route="airport" onclick="setRoute('airport')">
-            Airport / Station
-            <span class="rp-sub">Transfer &amp; pickup</span>
+          <button type="button" class="rh-pill" data-trip="fatehpur" aria-pressed="false" onclick="setTrip('fatehpur')">
+            <span class="rp-t" data-i18n="t_fatehpur">Fatehpur Sikri</span>
+            <span class="rp-sub" data-i18n="s_fatehpur">Day trip from Agra</span>
           </button>
-          <button class="rh-pill" data-route="mathura" onclick="setRoute('mathura')">
-            Agra &#8594; Mathura
-            <span class="rp-sub">Mathura darshan</span>
+          <button type="button" class="rh-pill" data-trip="mathura-vrindavan" aria-pressed="false" onclick="setTrip('mathura-vrindavan')">
+            <span class="rp-t" data-i18n="t_mathura-vrindavan">Mathura&ndash;Vrindavan</span>
+            <span class="rp-sub" data-i18n="s_mathura-vrindavan">Temple darshan</span>
           </button>
-          <button class="rh-pill" data-route="vrindavan" onclick="setRoute('vrindavan')">
-            Agra &#8594; Vrindavan
-            <span class="rp-sub">Vrindavan darshan</span>
+          <button type="button" class="rh-pill" data-trip="jaipur" aria-pressed="false" onclick="setTrip('jaipur')">
+            <span class="rp-t" data-i18n="t_jaipur">Jaipur / Golden Triangle</span>
+            <span class="rp-sub" data-i18n="s_jaipur">Agra &#8596; Jaipur</span>
           </button>
-          <button class="rh-pill" data-route="sightseeing" onclick="setRoute('sightseeing')">
-            Agra Sightseeing
-            <span class="rp-sub">Taj Mahal &amp; forts</span>
+          <button type="button" class="rh-pill" data-trip="airport" aria-pressed="false" onclick="setTrip('airport')">
+            <span class="rp-t" data-i18n="t_airport">Airport / Station</span>
+            <span class="rp-sub" data-i18n="s_airport">Pickup &amp; drop</span>
           </button>
-          <button class="rh-pill" data-route="outstation" onclick="setRoute('outstation')">
-            Outstation Trip
-            <span class="rp-sub">Gwalior, Aligarh etc.</span>
+          <button type="button" class="rh-pill" data-trip="local" aria-pressed="false" onclick="setTrip('local')">
+            <span class="rp-t" data-i18n="t_local">Local Agra</span>
+            <span class="rp-sub" data-i18n="s_local">Within the city</span>
+          </button>
+          <button type="button" class="rh-pill" data-trip="outstation" aria-pressed="false" onclick="setTrip('outstation')">
+            <span class="rp-t" data-i18n="t_outstation">Other Outstation</span>
+            <span class="rp-sub" data-i18n="s_outstation">Gwalior, Balaji etc.</span>
+          </button>
+          <button type="button" class="rh-pill" data-trip="other" aria-pressed="false" onclick="setTrip('other')">
+            <span class="rp-t" data-i18n="t_other">Something else</span>
+            <span class="rp-sub" data-i18n="s_other">Any other trip</span>
           </button>
         </div>
       </div>
 
       <!-- Review area -->
       <div class="rh-review">
-        <div class="rh-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="rh-intro" data-i18n="intro">Tell other travellers about your trip, in your own words. Two or three lines is plenty.</p>
 
-        <textarea id="rh-text" class="rh-textarea" spellcheck="true" aria-label="Your review — edit if you like"></textarea>
+        <p class="rh-label" data-i18n="qsLabel">Not sure what to write? You could mention:</p>
+        <ul class="rh-qs" id="rh-qs"></ul>
 
-        <p class="rh-hint"><strong>Please change this into your own words before posting</strong> &mdash; even 2&ndash;3 lines about your real trip are best. Google may remove reviews that look copy-pasted.</p>
+        <div class="rh-chips-wrap" id="rh-chips-wrap" hidden>
+          <p class="rh-label" data-i18n="chipsLabel">Places you visited (tap to add)</p>
+          <div class="rh-chips" id="rh-chips"></div>
+        </div>
 
-        <!-- Primary CTA — copies + opens Google in one tap -->
-        <button id="rh-main-btn" class="rh-cta" onclick="copyAndOpen()">
+        <textarea id="rh-text" class="rh-textarea" spellcheck="true" aria-label="Your review" placeholder="Write your review here&hellip;"></textarea>
+
+        <p class="rh-hint" data-i18n-html="hint">Tap the &#x1F3A4; on your phone keyboard to speak your review. Hindi or English, whichever is easier. You choose your own star rating on Google.</p>
+
+        <!-- Primary CTA — copies + opens Google in one tap (just opens Google if the box is empty) -->
+        <button id="rh-main-btn" class="rh-cta" onclick="mainClick()">
           <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-          Copy Review &amp; Open Google Review
+          Copy my review &amp; open Google
           <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
         </button>
 
-        <!-- Success state -->
-        <div id="rh-success" class="rh-success">
-          <div class="rh-s-check">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-            Review text copied successfully
-          </div>
-          <div class="rh-s-check">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-            Google Review page opened
-          </div>
-          <ol class="rh-s-steps">
-            <li>Switch to the <strong>Google Reviews</strong> tab that just opened</li>
-            <li>Tap the <strong>Write a review</strong> box</li>
-            <li id="rh-paste-hint"><kbd>Ctrl + V</kbd> on desktop &nbsp;&middot;&nbsp; long-press &rarr; <strong>Paste</strong> on phone</li>
-            <li><strong>Change a few words</strong> so the review sounds like you &mdash; your own route, your own experience</li>
-            <li>Tap <strong>Post</strong> &mdash; done!</li>
-          </ol>
-        </div>
+        <!-- Success state — rendered by renderSuccess() -->
+        <div id="rh-success" class="rh-success" aria-live="polite"></div>
 
         <!-- Clipboard fallback — shown if copy API is unavailable -->
         <div id="rh-fallback" class="rh-fallback">
           <p class="rh-fallback__hd">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-            Clipboard not available &mdash; copy manually
+            <span data-i18n="fbHead">Couldn&rsquo;t copy automatically. Copy it yourself</span>
           </p>
-          <p class="rh-fallback__sub">Tap the text below to select it, then copy and paste into Google Reviews:</p>
+          <p class="rh-fallback__sub" data-i18n="fbSub">Tap the text below to select it, copy it, then paste it into Google Reviews:</p>
           <textarea id="rh-fallback-ta" class="rh-fallback__ta" readonly onclick="this.select();this.setSelectionRange(0,99999)"></textarea>
         </div>
 
@@ -461,27 +556,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="rh-alt">
           <button class="btn btn--o" onclick="copyOnly()" id="rh-copy-only" style="font-size:.82rem">
             <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-            Copy Only
+            <span data-i18n="copyOnly">Copy only</span>
           </button>
-          <a class="btn btn--o" href="https://g.page/r/CUjtXu1x_3bPEBM/review" target="_blank" rel="noopener" style="font-size:.82rem;justify-content:center">
+          <a class="btn btn--o" href="https://g.page/r/CUjtXu1x_3bPEBM/review" target="_blank" rel="noopener" onclick="track('review_open_google')" style="font-size:.82rem;justify-content:center">
             <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            Open Google Review
+            <span data-i18n="openGoogle">Open Google Review</span>
           </a>
         </div>
       </div>
     </div>
 
     <!-- Tips — collapsed by default -->
-    <button class="rh-tips-toggle" id="rh-tips-btn" onclick="toggleTips()">What makes a good review? &#9662;</button>
+    <button class="rh-tips-toggle" id="rh-tips-btn" onclick="toggleTips()">Tips for a helpful review &#9662;</button>
     <div class="rh-tips" id="rh-tips">
-      <h3>What to mention</h3>
+      <h3 data-i18n="tipsHead">What helps other travellers</h3>
       <ul>
-        <li>Your route — e.g. Agra to Mathura, Vrindavan, or Sightseeing</li>
-        <li>Was the driver on time for pickup?</li>
-        <li>Cab cleanliness and comfort</li>
-        <li>Driver behaviour and helpfulness</li>
-        <li>Fare transparency — no hidden charges?</li>
-        <li>Whether the driver waited during darshan</li>
+        <li data-i18n="tip1">Write it in your own words. Two or three lines is plenty.</li>
+        <li data-i18n="tip2">Say which trip you took and what stood out.</li>
+        <li data-i18n="tip3">Be honest. If something could have been better, say so. It helps us improve.</li>
+        <li data-i18n="tip4">If you have a photo from the trip, add it on Google too.</li>
       </ul>
     </div>
 
@@ -514,116 +607,411 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- ── Script ───────────────────────────────────────────────────────────────── -->
 <script>
-/* 3 fallbacks per category — ensures randomness even if fetch fails */
-var REVIEWS = {
-  local: [
-    'Booked on WhatsApp for a quick drop across town. Driver reached in a few minutes, clean car, paid the flat rate I was told. Easy.',
-    'Regular local rides for me around Agra. Same fair price every time and the driver never cancels. That reliability is why I stay with them.',
-    'Late evening ride home after shopping. Driver was polite, drove safely, no extra charge for the hour. Good local service.'
-  ],
-  airport: [
-    'Early morning drop to the airport. Driver confirmed the night before and reached before time, helped with the bags. Calm start to the trip.',
-    'Pre-booked an Agra Cantt station pickup. Driver was waiting when I stepped out with my luggage. No haggling, fare exactly as told.',
-    'Booked an airport run for my parents. Driver was courteous, loaded the bags himself, and they reached with plenty of time. Reliable.'
-  ],
-  mathura: [
-    'Day trip to Mathura for darshan. Driver waited at each temple without rushing us and knew where to park. Fair price for the full day.',
-    'Took my family to Mathura on a weekend. Clean AC cab, driver was patient at the ghats, fare fixed beforehand. Smooth trip.',
-    'Booked for Dwarkadhish darshan. Left Agra early and reached in time for the aarti. Driver handled the crowded lanes calmly.'
-  ],
-  vrindavan: [
-    'Vrindavan darshan with elderly parents. Driver helped them at every temple and never hurried them. Waited patiently through the day.',
-    'Full day in Vrindavan — Banke Bihari, Prem Mandir, ISKCON. Driver knew the parking and the route. No extra charges at the end.',
-    'Booked a Vrindavan trip for the family. Comfortable AC cab, driver waited during darshan, fare was exactly as discussed.'
-  ],
-  sightseeing: [
-    'Full day Agra sightseeing. Driver planned the Taj early, then the Fort and Baby Taj. Waited at each spot, fair fixed fare.',
-    'First visit to Agra and the driver made it easy — knew the best timings and which gate to use. Comfortable car all day.',
-    'Booked a sightseeing tour for the family. Driver was patient with the kids, covered all the monuments, no rush anywhere.'
-  ],
-  outstation: [
-    'Round trip to Gwalior from Agra. Experienced highway driver, well-maintained car, fare fixed before we started. No surprises.',
-    'Outstation run to Firozabad and back. Driver on time, AC working the whole way, price as quoted. Comfortable ride.',
-    'Booked a full-day outstation trip. Driver drove steadily on the highway, waited while I finished my work, fair charge for the day.'
-  ]
-};
-
 var GOOGLE_URL = 'https://g.page/r/CUjtXu1x_3bPEBM/review';
 
-/* Track last shown per route to prevent consecutive repeats */
-var lastShown = {};
+/* Page copy. Strings used with data-i18n-html, and the step strings, are
+   trusted HTML; everything else is set as plain text. */
+var STR = {
+  en: {
+    thanks: 'Thank you for travelling with us 🙏',
+    whichTrip: 'Which trip did you take?',
+    intro: 'Tell other travellers about your trip, in your own words. Two or three lines is plenty.',
+    qsLabel: 'Not sure what to write? You could mention:',
+    chipsLabel: 'Places you visited (tap to add)',
+    textLabel: 'Your review',
+    placeholder: 'Write your review here…',
+    hint: 'Tap the &#x1F3A4; on your phone keyboard to speak your review. Hindi or English, whichever is easier. You choose your own star rating on Google.',
+    cta: 'Copy my review &amp; open Google',
+    again: 'Open Google again',
+    copyOnly: 'Copy only',
+    copied: '✓ Copied',
+    openGoogle: 'Open Google Review',
+    okCopied: 'Your review is copied',
+    okOpened: 'Google Reviews opened in a new tab',
+    stepSwitch: 'Switch to the <strong>Google</strong> tab that just opened',
+    stepStars: 'Tap the stars to choose <strong>your own rating</strong>',
+    stepWrite: 'Write a few lines about your trip',
+    stepPost: 'Tap <strong>Post</strong>. That&rsquo;s it!',
+    pasteMobile: 'In the review box, long-press &rarr; tap <strong>Paste</strong>',
+    pasteDesktop: 'Click the review box and press <kbd>Ctrl + V</kbd> (Windows) or <kbd>&#8984; V</kbd> (Mac)',
+    fbHead: 'Couldn’t copy automatically. Copy it yourself',
+    fbSub: 'Tap the text below to select it, copy it, then paste it into Google Reviews:',
+    tipsBtn: 'Tips for a helpful review',
+    tipsHead: 'What helps other travellers',
+    tip1: 'Write it in your own words. Two or three lines is plenty.',
+    tip2: 'Say which trip you took and what stood out.',
+    tip3: 'Be honest. If something could have been better, say so. It helps us improve.',
+    tip4: 'If you have a photo from the trip, add it on Google too.',
+    't_sightseeing': 'Agra Sightseeing',          's_sightseeing': 'Taj Mahal, Agra Fort',
+    't_fatehpur': 'Fatehpur Sikri',               's_fatehpur': 'Day trip from Agra',
+    't_mathura-vrindavan': 'Mathura–Vrindavan', 's_mathura-vrindavan': 'Temple darshan',
+    't_jaipur': 'Jaipur / Golden Triangle',       's_jaipur': 'Agra ↔ Jaipur',
+    't_airport': 'Airport / Station',             's_airport': 'Pickup & drop',
+    't_local': 'Local Agra',                      's_local': 'Within the city',
+    't_outstation': 'Other Outstation',           's_outstation': 'Gwalior, Balaji etc.',
+    't_other': 'Something else',                  's_other': 'Any other trip'
+  },
+  hi: {
+    thanks: 'हमारे साथ यात्रा करने के लिए धन्यवाद 🙏',
+    whichTrip: 'आपने कौन-सी यात्रा की?',
+    intro: 'अपनी यात्रा के बारे में दूसरे यात्रियों को अपने शब्दों में बताएँ। दो-तीन लाइनें काफ़ी हैं।',
+    qsLabel: 'क्या लिखें, समझ नहीं आ रहा? आप ये बता सकते हैं:',
+    chipsLabel: 'जहाँ आप गए (जोड़ने के लिए टैप करें)',
+    textLabel: 'आपका रिव्यू',
+    placeholder: 'अपना रिव्यू यहाँ लिखें…',
+    hint: 'फ़ोन कीबोर्ड पर &#x1F3A4; दबाकर अपना रिव्यू बोलकर लिखें। हिंदी या अंग्रेज़ी, जो आसान लगे। स्टार रेटिंग आप Google पर खुद चुनेंगे।',
+    cta: 'मेरा रिव्यू कॉपी करें और Google खोलें',
+    again: 'Google फिर से खोलें',
+    copyOnly: 'सिर्फ़ कॉपी करें',
+    copied: '✓ कॉपी हो गया',
+    openGoogle: 'Google रिव्यू खोलें',
+    okCopied: 'आपका रिव्यू कॉपी हो गया',
+    okOpened: 'Google रिव्यू नए टैब में खुल गया',
+    stepSwitch: 'अभी खुले <strong>Google</strong> टैब पर जाएँ',
+    stepStars: 'स्टार दबाकर <strong>अपनी रेटिंग</strong> चुनें',
+    stepWrite: 'अपनी यात्रा के बारे में कुछ लाइनें लिखें',
+    stepPost: '<strong>Post</strong> दबाएँ, बस हो गया!',
+    pasteMobile: 'रिव्यू बॉक्स में देर तक दबाएँ &rarr; <strong>Paste</strong> दबाएँ',
+    pasteDesktop: 'रिव्यू बॉक्स पर क्लिक करके <kbd>Ctrl + V</kbd> (Windows) या <kbd>&#8984; V</kbd> (Mac) दबाएँ',
+    fbHead: 'अपने-आप कॉपी नहीं हो पाया, खुद कॉपी करें',
+    fbSub: 'नीचे के टेक्स्ट को टैप करके चुनें, कॉपी करें, फिर Google रिव्यू में पेस्ट करें:',
+    tipsBtn: 'अच्छा रिव्यू लिखने के सुझाव',
+    tipsHead: 'दूसरे यात्रियों के लिए क्या मददगार है',
+    tip1: 'अपने शब्दों में लिखें। दो-तीन लाइनें काफ़ी हैं।',
+    tip2: 'बताएँ कि आपने कौन-सी यात्रा की और क्या ख़ास लगा।',
+    tip3: 'ईमानदारी से लिखें। कुछ बेहतर हो सकता था तो वह भी बताएँ, इससे हमें सुधार करने में मदद मिलती है।',
+    tip4: 'यात्रा की कोई फ़ोटो हो तो उसे भी Google पर जोड़ें।',
+    't_sightseeing': 'आगरा घूमना',              's_sightseeing': 'ताजमहल, आगरा किला',
+    't_fatehpur': 'फ़तेहपुर सीकरी',              's_fatehpur': 'एक दिन की यात्रा',
+    't_mathura-vrindavan': 'मथुरा–वृंदावन',  's_mathura-vrindavan': 'मंदिर दर्शन',
+    't_jaipur': 'जयपुर / गोल्डन ट्रायंगल',       's_jaipur': 'आगरा ↔ जयपुर',
+    't_airport': 'एयरपोर्ट / स्टेशन',            's_airport': 'पिकअप और ड्रॉप',
+    't_local': 'आगरा शहर में',                  's_local': 'लोकल सवारी',
+    't_outstation': 'दूसरे शहर की यात्रा',        's_outstation': 'ग्वालियर, बालाजी आदि',
+    't_other': 'कुछ और',                        's_other': 'कोई और यात्रा'
+  }
+};
 
-function pickRandom(arr, route) {
-  if (!arr || arr.length === 0) return '';
-  if (arr.length === 1) return arr[0];
-  var last = route ? lastShown[route] : null;
-  var pick, tries = 0;
-  do {
-    pick = arr[Math.floor(Math.random() * arr.length)];
-    tries++;
-  } while (pick === last && tries < 10);
-  if (route) lastShown[route] = pick;
-  return pick;
+/* Per trip: guiding questions (helper text only) and place names the
+   customer can tap to add. Never put review sentences here. */
+var TRIPS = {
+  sightseeing: {
+    q: {
+      en: ['Which places did you visit: Taj Mahal, Agra Fort, Mehtab Bagh?',
+           'Did the driver help with timings, gates or parking?',
+           'How were the car and the day overall?'],
+      hi: ['आपने कौन-कौन सी जगहें देखीं: ताजमहल, आगरा किला, मेहताब बाग?',
+           'क्या ड्राइवर ने समय, गेट या पार्किंग में मदद की?',
+           'गाड़ी और पूरा दिन कैसा रहा?']
+    },
+    places: {
+      en: ['Taj Mahal', 'Agra Fort', 'Mehtab Bagh', 'Baby Taj', 'Sikandra'],
+      hi: ['ताजमहल', 'आगरा किला', 'मेहताब बाग', 'बेबी ताज', 'सिकंदरा']
+    }
+  },
+  fatehpur: {
+    q: {
+      en: ['What did you see: Buland Darwaza, Jama Masjid, the palaces?',
+           'Was the pickup on time, and did the driver wait while you explored?',
+           'Did you combine it with anything else that day?'],
+      hi: ['आपने क्या-क्या देखा: बुलंद दरवाज़ा, जामा मस्जिद, महल?',
+           'क्या पिकअप समय पर हुआ, और घूमते समय ड्राइवर ने इंतज़ार किया?',
+           'क्या उसी दिन आप कहीं और भी गए?']
+    },
+    places: {
+      en: ['Buland Darwaza', 'Jama Masjid', 'Salim Chishti Dargah', 'Panch Mahal'],
+      hi: ['बुलंद दरवाज़ा', 'जामा मस्जिद', 'सलीम चिश्ती दरगाह', 'पंच महल']
+    }
+  },
+  'mathura-vrindavan': {
+    q: {
+      en: ['Which temples did you visit?',
+           'Did the driver wait patiently during darshan?',
+           'If elders or children came along, how was the day for them?',
+           'Do you remember your driver’s name?'],
+      hi: ['आपने किन मंदिरों के दर्शन किए?',
+           'क्या दर्शन के समय ड्राइवर ने धैर्य से इंतज़ार किया?',
+           'साथ में बुज़ुर्ग या बच्चे थे तो उनके लिए दिन कैसा रहा?',
+           'क्या आपको ड्राइवर का नाम याद है?']
+    },
+    places: {
+      en: ['Krishna Janmabhoomi', 'Dwarkadhish Temple', 'Vishram Ghat', 'Banke Bihari', 'Prem Mandir', 'ISKCON', 'Nidhivan', 'Barsana'],
+      hi: ['श्रीकृष्ण जन्मभूमि', 'द्वारकाधीश मंदिर', 'विश्राम घाट', 'बांके बिहारी', 'प्रेम मंदिर', 'इस्कॉन', 'निधिवन', 'बरसाना']
+    }
+  },
+  jaipur: {
+    q: {
+      en: ['Which places did you cover: Amber Fort, Hawa Mahal, City Palace, or stops on the way?',
+           'How were the highway drive and the car?',
+           'Do you remember your driver’s name?'],
+      hi: ['आपने कौन-सी जगहें देखीं: आमेर किला, हवा महल, सिटी पैलेस, या रास्ते के पड़ाव?',
+           'हाईवे का सफ़र और गाड़ी कैसी रही?',
+           'क्या आपको ड्राइवर का नाम याद है?']
+    },
+    places: {
+      en: ['Amber Fort', 'Hawa Mahal', 'City Palace', 'Jal Mahal', 'Fatehpur Sikri', 'Mehandipur Balaji'],
+      hi: ['आमेर किला', 'हवा महल', 'सिटी पैलेस', 'जल महल', 'फ़तेहपुर सीकरी', 'मेहंदीपुर बालाजी']
+    }
+  },
+  airport: {
+    q: {
+      en: ['Which airport or station, and was the pickup or drop on time?',
+           'Did the driver help with your luggage or with finding you?',
+           'How was booking on WhatsApp or by phone?'],
+      hi: ['कौन-सा एयरपोर्ट या स्टेशन था, और क्या पिकअप या ड्रॉप समय पर हुआ?',
+           'क्या ड्राइवर ने सामान में या आपको ढूँढने में मदद की?',
+           'WhatsApp या फ़ोन पर बुकिंग कैसी रही?']
+    },
+    places: {
+      en: ['Agra Airport', 'Agra Cantt Station', 'Agra Fort Station', 'Delhi Airport'],
+      hi: ['आगरा एयरपोर्ट', 'आगरा कैंट स्टेशन', 'आगरा फोर्ट स्टेशन', 'दिल्ली एयरपोर्ट']
+    }
+  },
+  local: {
+    q: {
+      en: ['Where did you go in Agra?',
+           'How quickly did the cab arrive, and how was the driver?',
+           'Anything we could do better next time?'],
+      hi: ['आप आगरा में कहाँ गए?',
+           'कैब कितनी जल्दी आई, और ड्राइवर का व्यवहार कैसा था?',
+           'अगली बार हम क्या बेहतर कर सकते हैं?']
+    },
+    places: { en: [], hi: [] }
+  },
+  outstation: {
+    q: {
+      en: ['Where did you travel to?',
+           'How were the highway drive, the car and the driver?',
+           'Was the fare the same as you were told when booking?'],
+      hi: ['आप कहाँ गए थे?',
+           'हाईवे का सफ़र, गाड़ी और ड्राइवर कैसे रहे?',
+           'क्या किराया वही रहा जो बुकिंग के समय बताया गया था?']
+    },
+    places: {
+      en: ['Gwalior', 'Mehandipur Balaji', 'Kaila Devi', 'Bateshwar', 'Aligarh', 'Firozabad', 'Etawah'],
+      hi: ['ग्वालियर', 'मेहंदीपुर बालाजी', 'कैला देवी', 'बटेश्वर', 'अलीगढ़', 'फ़िरोज़ाबाद', 'इटावा']
+    }
+  },
+  other: {
+    q: {
+      en: ['Which trip did you take with us?',
+           'What went well, and what could be better?',
+           'Do you remember your driver’s name?'],
+      hi: ['आपने हमारे साथ कौन-सी यात्रा की?',
+           'क्या अच्छा रहा, और क्या बेहतर हो सकता है?',
+           'क्या आपको ड्राइवर का नाम याद है?']
+    },
+    places: { en: [], hi: [] }
+  }
+};
+
+/* ?trip= keys from links sent before the pills were merged */
+var TRIP_ALIASES = { mathura: 'mathura-vrindavan', vrindavan: 'mathura-vrindavan' };
+
+var ICON_COPY = '<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+var ICON_DONE = '<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>';
+var ICON_OPEN = '<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>';
+var ICON_CHECK = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>';
+
+var lang = 'en';
+var trip = null;     /* selected trip key, or null */
+var state = '';      /* '' | 'copied' | 'opened' | 'fallback' */
+var caret = null;    /* last cursor position in the review box */
+var chipEnd = -1;    /* where the last tapped place name ends */
+var tipsOpen = false;
+
+function t(key) {
+  return STR[lang][key] || STR.en[key] || '';
 }
 
-/* Set active route and populate a random review variant */
-function setRoute(route) {
-  document.querySelectorAll('.rh-pill').forEach(function(p) {
-    p.classList.toggle('active', p.dataset.route === route);
+/* GTM events. Never include the review text. */
+function track(event, params) {
+  window.dataLayer = window.dataLayer || [];
+  var e = { event: event, trip: trip || 'not_selected' };
+  if (params) { for (var k in params) { if (params.hasOwnProperty(k)) e[k] = params[k]; } }
+  window.dataLayer.push(e);
+}
+
+function setLang(l, fromInit) {
+  lang = STR[l] ? l : 'en';
+  if (!fromInit) { try { localStorage.setItem('pst-review-lang', lang); } catch (e) {} }
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(function(el) {
+    el.textContent = t(el.getAttribute('data-i18n'));
   });
-  document.getElementById('rh-text').value = pickRandom(REVIEWS[route] || REVIEWS.mathura, route);
-  /* Reset any prior copy state */
-  resetState();
+  document.querySelectorAll('[data-i18n-html]').forEach(function(el) {
+    el.innerHTML = t(el.getAttribute('data-i18n-html'));
+  });
+  document.querySelectorAll('.rh-lang button').forEach(function(b) {
+    b.setAttribute('aria-pressed', b.getAttribute('data-lang') === lang ? 'true' : 'false');
+  });
+  var ta = document.getElementById('rh-text');
+  ta.placeholder = t('placeholder');
+  ta.setAttribute('aria-label', t('textLabel'));
+  renderTrip();
+  renderButton();
+  renderSuccess();
+  renderTipsBtn();
+}
+
+/* Select a trip: swaps the questions and place names, never touches the text */
+function setTrip(key, fromInit) {
+  trip = TRIPS[key] ? key : null;
+  document.querySelectorAll('.rh-pill').forEach(function(p) {
+    var on = p.getAttribute('data-trip') === trip;
+    p.classList.toggle('active', on);
+    p.setAttribute('aria-pressed', on ? 'true' : 'false');
+  });
+  renderTrip();
+  if (!fromInit) track('review_trip_selected');
+}
+
+function renderTrip() {
+  var data = TRIPS[trip || 'other'];
+  var qs = document.getElementById('rh-qs');
+  qs.innerHTML = '';
+  data.q[lang].forEach(function(q) {
+    var li = document.createElement('li');
+    li.textContent = q;
+    qs.appendChild(li);
+  });
+
+  var places = trip ? data.places[lang] : [];
+  var wrap = document.getElementById('rh-chips-wrap');
+  var box = document.getElementById('rh-chips');
+  box.innerHTML = '';
+  wrap.hidden = places.length === 0;
+  places.forEach(function(name) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'rh-chip';
+    b.textContent = '+ ' + name;
+    b.onclick = function() { addPlace(name, b); };
+    box.appendChild(b);
+  });
+}
+
+/* Insert just the place name at the cursor */
+function addPlace(name, btn) {
+  var ta = document.getElementById('rh-text');
+  var v = ta.value;
+  var pos = caret === null ? v.length : Math.min(caret, v.length);
+  var before = v.slice(0, pos);
+  var sep = '';
+  if (before.length) {
+    if (pos === chipEnd) sep = ', ';
+    else if (!/\s$/.test(before)) sep = ' ';
+  }
+  ta.value = before + sep + name + v.slice(pos);
+  caret = chipEnd = pos + sep.length + name.length;
+  btn.classList.add('used');
+  textChanged();
+}
+
+function textChanged() {
+  /* Text changed after copying or opening Google — offer to copy it (again) */
+  if (state) resetState();
+}
+
+function renderButton() {
+  var btn = document.getElementById('rh-main-btn');
+  if (state) {
+    btn.classList.add('done');
+    btn.innerHTML = ICON_DONE + t('again') + ICON_OPEN;
+  } else {
+    btn.classList.remove('done');
+    btn.innerHTML = ICON_COPY + t('cta') + ICON_OPEN;
+  }
+}
+
+function renderSuccess() {
+  var el = document.getElementById('rh-success');
+  if (state !== 'copied' && state !== 'opened') {
+    el.style.display = 'none';
+    el.innerHTML = '';
+    return;
+  }
+  var steps = state === 'copied'
+    ? [t('stepSwitch'), t('stepStars'), pasteHint(), t('stepPost')]
+    : [t('stepSwitch'), t('stepStars'), t('stepWrite'), t('stepPost')];
+  var h = '';
+  if (state === 'copied') h += '<div class="rh-s-check">' + ICON_CHECK + t('okCopied') + '</div>';
+  h += '<div class="rh-s-check">' + ICON_CHECK + t('okOpened') + '</div>';
+  /* <span> keeps each step one flex item, so bold words don't split into columns */
+  h += '<ol class="rh-s-steps"><li><span>' + steps.join('</span></li><li><span>') + '</span></li></ol>';
+  el.innerHTML = h;
+  el.style.display = 'flex';
 }
 
 /* Platform-specific paste instruction */
 function pasteHint() {
-  if (/ipad|iphone|ipod/i.test(navigator.userAgent)) {
-    return 'Long-press in the review box &rarr; tap <strong>Paste</strong> (iPhone)';
-  }
-  if (/android/i.test(navigator.userAgent)) {
-    return 'Long-press in the review box &rarr; tap <strong>Paste</strong> (Android)';
-  }
-  return '<kbd>Ctrl + V</kbd> on Windows &nbsp;&middot;&nbsp; <kbd>&#8984; V</kbd> on Mac';
+  if (/ipad|iphone|ipod|android/i.test(navigator.userAgent)) return t('pasteMobile');
+  return t('pasteDesktop');
 }
 
-/* Copy + open Google in one tap */
-function copyAndOpen() {
+function openGoogle() {
+  window.open(GOOGLE_URL, '_blank', 'noopener');
+  track('review_open_google');
+}
+
+/* Copy + open Google in one tap. With an empty box, just open Google —
+   they can write the review there. Never block them. */
+function mainClick() {
+  if (state) { openGoogle(); return; }
+  var text = document.getElementById('rh-text').value.trim();
+  if (!text) {
+    openGoogle();
+    state = 'opened';
+    renderButton();
+    renderSuccess();
+    return;
+  }
   /* Open Google first — must be synchronous to avoid popup blockers */
   window.open(GOOGLE_URL, '_blank', 'noopener');
-  doCopy(showSuccess, showFallback);
+  track('review_copy_open', { chars: text.length });
+  doCopy(text, function() {
+    state = 'copied';
+    document.getElementById('rh-fallback').style.display = 'none';
+    renderButton();
+    renderSuccess();
+  }, function() {
+    state = 'fallback';
+    renderButton();
+    renderSuccess();
+    showFallback(text);
+  });
 }
 
 /* Copy only */
 function copyOnly() {
-  doCopy(function() {
+  var ta = document.getElementById('rh-text');
+  var text = ta.value.trim();
+  if (!text) { ta.focus(); return; }
+  doCopy(text, function() {
     var btn = document.getElementById('rh-copy-only');
-    var orig = btn.innerHTML;
-    btn.innerHTML = '&#10003; Copied';
+    var label = btn.querySelector('[data-i18n]');
+    label.textContent = t('copied');
     btn.style.borderColor = 'var(--green)';
     btn.style.color = 'var(--green)';
     setTimeout(function() {
-      btn.innerHTML = orig;
+      label.textContent = t('copyOnly');
       btn.style.borderColor = '';
       btn.style.color = '';
     }, 2500);
   }, function() {
-    var ta = document.getElementById('rh-text');
     ta.focus(); ta.select(); ta.setSelectionRange(0, 99999);
   });
 }
 
-function doCopy(onSuccess, onFail) {
-  var text = document.getElementById('rh-text').value.trim();
-  if (!text) return;
+function doCopy(text, onSuccess, onFail) {
   if (navigator.clipboard && window.isSecureContext) {
     navigator.clipboard.writeText(text)
       .then(onSuccess)
       .catch(function() {
-        if (legacyCopy()) { onSuccess(); } else { onFail(text); }
+        if (legacyCopy()) { onSuccess(); } else { onFail(); }
       });
   } else {
-    if (legacyCopy()) { onSuccess(); } else { onFail(text); }
+    if (legacyCopy()) { onSuccess(); } else { onFail(); }
   }
 }
 
@@ -633,58 +1021,55 @@ function legacyCopy() {
   try { return !!document.execCommand('copy'); } catch(e) { return false; }
 }
 
-function showSuccess() {
-  var btn = document.getElementById('rh-main-btn');
-  btn.classList.add('done');
-  btn.innerHTML =
-    '<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>' +
-    'Copied &mdash; Open Google Again' +
-    '<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>';
-  btn.onclick = function() { window.open(GOOGLE_URL, '_blank', 'noopener'); };
-  document.getElementById('rh-paste-hint').innerHTML = pasteHint();
-  document.getElementById('rh-success').style.display = 'flex';
-  document.getElementById('rh-fallback').style.display = 'none';
-}
-
 function showFallback(text) {
   var fta = document.getElementById('rh-fallback-ta');
   fta.value = text;
   document.getElementById('rh-fallback').style.display = 'flex';
-  document.getElementById('rh-success').style.display = 'none';
   fta.focus(); fta.select(); fta.setSelectionRange(0, 99999);
 }
 
 function resetState() {
-  var btn = document.getElementById('rh-main-btn');
-  btn.classList.remove('done');
-  btn.innerHTML =
-    '<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>' +
-    'Copy Review &amp; Open Google Review' +
-    '<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>';
-  btn.onclick = copyAndOpen;
-  document.getElementById('rh-success').style.display = 'none';
+  state = '';
   document.getElementById('rh-fallback').style.display = 'none';
+  renderButton();
+  renderSuccess();
 }
 
 function toggleTips() {
-  var el  = document.getElementById('rh-tips');
-  var btn = document.getElementById('rh-tips-btn');
-  var open = el.classList.toggle('open');
-  btn.innerHTML = open
-    ? 'What makes a good review? &#9652;'
-    : 'What makes a good review? &#9662;';
+  tipsOpen = document.getElementById('rh-tips').classList.toggle('open');
+  renderTipsBtn();
 }
 
-/* Pre-load the active pill's review on page open */
-document.getElementById('rh-text').value = pickRandom(REVIEWS.local, 'local');
+function renderTipsBtn() {
+  document.getElementById('rh-tips-btn').innerHTML = t('tipsBtn') + (tipsOpen ? ' &#9652;' : ' &#9662;');
+}
 
-/* Fetch full pool async — overrides fallback, refreshes textarea */
-fetch('/reviews.json').then(function(r){return r.json();}).then(function(d){
-  REVIEWS = d;
-  var active = document.querySelector('.rh-pill.active');
-  var route = active ? active.dataset.route : 'local';
-  document.getElementById('rh-text').value = pickRandom(d[route], route);
-});
+/* Read ?trip= and ?lang= from the link the owner sent */
+function queryParam(name) {
+  var parts = window.location.search.replace(/^\?/, '').split('&');
+  for (var i = 0; i < parts.length; i++) {
+    var kv = parts[i].split('=');
+    if (decodeURIComponent(kv[0]) === name) return decodeURIComponent((kv[1] || '').replace(/\+/g, ' ')).toLowerCase();
+  }
+  return '';
+}
+
+(function init() {
+  var ta = document.getElementById('rh-text');
+  function saveCaret() { caret = ta.selectionStart; }
+  ['click', 'keyup', 'select', 'blur'].forEach(function(ev) { ta.addEventListener(ev, saveCaret); });
+  ta.addEventListener('input', function() { saveCaret(); chipEnd = -1; textChanged(); });
+
+  var key = queryParam('trip');
+  key = TRIP_ALIASES[key] || key;
+  if (TRIPS[key]) setTrip(key, true);
+
+  var l = queryParam('lang');
+  if (!STR[l]) {
+    try { l = localStorage.getItem('pst-review-lang'); } catch (e) { l = null; }
+  }
+  setLang(STR[l] ? l : 'en', true);
+})();
 </script>
 <script src="/js/main.js"></script>
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>

@@ -46,8 +46,7 @@ Static website + Netlify Functions booking and payment system for Padma Shree Tr
 ├── crm/                             ← Internal CRM tool — not linked, disallowed in robots.txt/_redirects, staff access via direct URL only
 ├── driver-app/                      ← Driver PWA (manifest + service worker — paths are scope-sensitive, do not move)
 ├── driver-communication-helper.html ← Internal staff tool, direct-URL access only (see cleanup_report.md)
-├── review-helper.html               ← Internal review-request tool, reads reviews.json (see cleanup_report.md)
-├── reviews.json                     ← Data source for review-helper.html
+├── review-helper.html               ← Review-request page the owner sends after a trip (noindex). Customers write their own review; the page only shows guiding questions + place names. Supports ?trip= and ?lang=hi (see docs/review-playbook.md)
 ├── docs/                            ← Reference/planning docs (SEO growth plan, religious-pages copy draft, marketing context) — not served/linked, informational only
 ├── _archive/                        ← Superseded/orphaned files kept for safety, not part of the live site (see cleanup_report.md)
 ├── netlify.toml                     ← Build + functions config
