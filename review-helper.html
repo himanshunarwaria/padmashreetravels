@@ -215,6 +215,43 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   margin-bottom: .75rem;
 }
 
+/* hidden must win over the display rules above */
+.rh-card [hidden] { display: none !important }
+
+.rh-chips--facts { margin-bottom: .7rem }
+
+/* Trip already chosen by the link: one line instead of the pill grid */
+.rh-picked { font-size: .88rem; font-weight: 600; color: var(--black); margin: .2rem 0 0 }
+.rh-picked button {
+  border: none; background: none; padding: 0 0 0 .4rem;
+  font: 600 .78rem var(--ff); color: var(--g500);
+  text-decoration: underline; text-underline-offset: 3px; cursor: pointer;
+}
+
+/* Speak button */
+.rh-mic {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  min-height: 46px;
+  margin-bottom: .5rem;
+  border: 1.5px solid var(--black);
+  border-radius: var(--r);
+  background: var(--white);
+  color: var(--black);
+  font: 700 .9rem var(--ff);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.rh-mic.on { background: #b91c1c; border-color: #b91c1c; color: #fff }
+
+.rh-nudge { font-size: .8rem; font-weight: 600; color: #92400e; margin: .4rem 0 0 }
+
+.rh-ideas { margin-bottom: .75rem }
+.rh-ideas summary { font-size: .78rem; color: var(--g500); cursor: pointer; margin-bottom: .4rem }
+
 /* Primary CTA */
 .rh-cta {
   width: 100%;
@@ -479,8 +516,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <button type="button" data-lang="hi" aria-pressed="false" onclick="setLang('hi')" lang="hi">हिंदी</button>
           </div>
         </div>
-        <p class="rh-routes__label" data-i18n="whichTrip">Which trip did you take?</p>
-        <div class="rh-pills">
+        <p class="rh-picked" id="rh-picked" hidden><span id="rh-picked-name"></span><button type="button" onclick="showPills()" data-i18n="change">Change</button></p>
+        <p class="rh-routes__label" id="rh-which" data-i18n="whichTrip">Which trip did you take?</p>
+        <div class="rh-pills" id="rh-pills">
           <button type="button" class="rh-pill" data-trip="sightseeing" aria-pressed="false" onclick="setTrip('sightseeing')">
             <span class="rp-t" data-i18n="t_sightseeing">Agra Sightseeing</span>
             <span class="rp-sub" data-i18n="s_sightseeing">Taj Mahal, Agra Fort</span>
@@ -518,19 +556,31 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <!-- Review area -->
       <div class="rh-review">
-        <p class="rh-intro" data-i18n="intro">Tell other travellers about your trip, in your own words. Two or three lines is plenty.</p>
+        <p class="rh-intro" data-i18n="intro">Tap what was true, then speak or type one line of your own. It takes about a minute.</p>
 
-        <p class="rh-label" data-i18n="qsLabel">Not sure what to write? You could mention:</p>
-        <ul class="rh-qs" id="rh-qs"></ul>
+        <p class="rh-label" data-i18n="factsLabel">Tap what was true for your trip</p>
+        <div class="rh-chips rh-chips--facts" id="rh-facts"></div>
 
         <div class="rh-chips-wrap" id="rh-chips-wrap" hidden>
           <p class="rh-label" data-i18n="chipsLabel">Places you visited (tap to add)</p>
           <div class="rh-chips" id="rh-chips"></div>
         </div>
 
+        <button type="button" id="rh-mic" class="rh-mic" onclick="toggleVoice()" hidden>
+          <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>
+          <span id="rh-mic-label">Speak your review</span>
+        </button>
+
         <textarea id="rh-text" class="rh-textarea" spellcheck="true" aria-label="Your review" placeholder="Write your review here&hellip;"></textarea>
 
+        <p class="rh-nudge" id="rh-nudge" data-i18n="nudge" hidden>Add one line of your own: what did you like most?</p>
+
         <p class="rh-hint" data-i18n-html="hint">Tap the &#x1F3A4; on your phone keyboard to speak your review. Hindi or English, whichever is easier. You choose your own star rating on Google.</p>
+
+        <details class="rh-ideas">
+          <summary data-i18n="qsLabel">Not sure what to write? You could mention:</summary>
+          <ul class="rh-qs" id="rh-qs"></ul>
+        </details>
 
         <!-- Primary CTA — copies + opens Google in one tap (just opens Google if the box is empty) -->
         <button id="rh-main-btn" class="rh-cta" onclick="mainClick()">
@@ -615,7 +665,13 @@ var STR = {
   en: {
     thanks: 'Thank you for travelling with us 🙏',
     whichTrip: 'Which trip did you take?',
-    intro: 'Tell other travellers about your trip, in your own words. Two or three lines is plenty.',
+    intro: 'Tap what was true, then speak or type one line of your own. It takes about a minute.',
+    factsLabel: 'Tap what was true for your trip',
+    speak: 'Speak your review',
+    listening: 'Listening… tap to stop',
+    voiceErr: 'Microphone blocked. Use the 🎤 on your keyboard',
+    nudge: 'Add one line of your own: what did you like most?',
+    change: 'Change',
     qsLabel: 'Not sure what to write? You could mention:',
     chipsLabel: 'Places you visited (tap to add)',
     textLabel: 'Your review',
@@ -654,7 +710,13 @@ var STR = {
   hi: {
     thanks: 'हमारे साथ यात्रा करने के लिए धन्यवाद 🙏',
     whichTrip: 'आपने कौन-सी यात्रा की?',
-    intro: 'अपनी यात्रा के बारे में दूसरे यात्रियों को अपने शब्दों में बताएँ। दो-तीन लाइनें काफ़ी हैं।',
+    intro: 'जो सही था उसे टैप करें, फिर अपनी एक लाइन बोलें या लिखें। बस एक मिनट लगेगा।',
+    factsLabel: 'जो आपकी यात्रा में सही था, उसे टैप करें',
+    speak: 'बोलकर रिव्यू लिखें',
+    listening: 'सुन रहे हैं… रोकने के लिए टैप करें',
+    voiceErr: 'माइक की अनुमति नहीं मिली। कीबोर्ड का 🎤 इस्तेमाल करें',
+    nudge: 'अपनी ओर से एक लाइन जोड़ें: आपको सबसे अच्छा क्या लगा?',
+    change: 'बदलें',
     qsLabel: 'क्या लिखें, समझ नहीं आ रहा? आप ये बता सकते हैं:',
     chipsLabel: 'जहाँ आप गए (जोड़ने के लिए टैप करें)',
     textLabel: 'आपका रिव्यू',
@@ -808,6 +870,21 @@ var TRIPS = {
 /* ?trip= keys from links sent before the pills were merged */
 var TRIP_ALIASES = { mathura: 'mathura-vrindavan', vrindavan: 'mathura-vrindavan' };
 
+/* Short facts the customer taps only if they were true for their trip.
+   Each adds one plain statement; "open" ones are starters the customer
+   finishes. Keep these as bare facts, never praise or full reviews. */
+var FACTS = [
+  { id: 'ontime',  label: { en: 'On time',          hi: 'समय पर' },           text: { en: 'Pickup was on time.',                    hi: 'पिकअप समय पर हुआ।' } },
+  { id: 'clean',   label: { en: 'Clean car',        hi: 'साफ़ गाड़ी' },         text: { en: 'The car was clean and comfortable.',     hi: 'गाड़ी साफ़ और आरामदायक थी।' } },
+  { id: 'polite',  label: { en: 'Polite driver',    hi: 'अच्छा व्यवहार' },      text: { en: 'The driver was polite.',                 hi: 'ड्राइवर का व्यवहार अच्छा था।' } },
+  { id: 'safe',    label: { en: 'Safe driving',     hi: 'सुरक्षित ड्राइविंग' },  text: { en: 'The driving felt safe.',                 hi: 'ड्राइविंग सुरक्षित थी।' } },
+  { id: 'waited',  label: { en: 'Waited for us',    hi: 'इंतज़ार किया' },       text: { en: 'The driver waited without rushing us.',  hi: 'ड्राइवर ने बिना जल्दबाज़ी के इंतज़ार किया।' } },
+  { id: 'fare',    label: { en: 'Fare as quoted',   hi: 'किराया वही रहा' },     text: { en: 'The fare was the same as quoted.',       hi: 'किराया वही रहा जो बताया गया था।' } },
+  { id: 'booking', label: { en: 'Easy booking',     hi: 'आसान बुकिंग' },        text: { en: 'Booking on WhatsApp was easy.',          hi: 'WhatsApp पर बुकिंग आसान रही।' } },
+  { id: 'driver',  label: { en: 'Driver’s name',    hi: 'ड्राइवर का नाम' },     text: { en: 'Our driver was ',                        hi: 'हमारे ड्राइवर थे ' }, open: true },
+  { id: 'better',  label: { en: 'Could be better',  hi: 'क्या बेहतर हो' },      text: { en: 'One thing that could be better: ',       hi: 'एक चीज़ जो बेहतर हो सकती थी: ' }, open: true }
+];
+
 var ICON_COPY = '<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
 var ICON_DONE = '<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>';
 var ICON_OPEN = '<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>';
@@ -819,6 +896,11 @@ var state = '';      /* '' | 'copied' | 'opened' | 'fallback' */
 var caret = null;    /* last cursor position in the review box */
 var chipEnd = -1;    /* where the last tapped place name ends */
 var tipsOpen = false;
+var usedFacts = {};          /* fact ids already tapped */
+var typed = false;           /* customer has typed or spoken something of their own */
+var pillsCollapsed = false;  /* trip came from the link, so hide the pill grid */
+var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+var rec = null, listening = false, voiceBlocked = false;
 
 function t(key) {
   return STR[lang][key] || STR.en[key] || '';
@@ -849,9 +931,96 @@ function setLang(l, fromInit) {
   ta.placeholder = t('placeholder');
   ta.setAttribute('aria-label', t('textLabel'));
   renderTrip();
+  renderFacts();
+  renderMic();
   renderButton();
   renderSuccess();
   renderTipsBtn();
+}
+
+function showPills() {
+  pillsCollapsed = false;
+  renderTrip();
+}
+
+function renderFacts() {
+  var box = document.getElementById('rh-facts');
+  box.innerHTML = '';
+  FACTS.forEach(function(f) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'rh-chip' + (usedFacts[f.id] ? ' used' : '');
+    b.textContent = '+ ' + f.label[lang];
+    b.onclick = function() { addFact(f, b); };
+    box.appendChild(b);
+  });
+}
+
+/* Add one fact to the end of the review. Starters leave the cursor in
+   the box so the customer finishes the sentence. */
+function addFact(f, btn) {
+  var ta = document.getElementById('rh-text');
+  var phrase = f.text[lang];
+  if (ta.value.indexOf(phrase.trim()) === -1) {
+    appendText(phrase);
+    usedFacts[f.id] = true;
+    btn.classList.add('used');
+    track('review_fact_tapped', { fact: f.id });
+    textChanged();
+  }
+  if (f.open) {
+    ta.focus();
+    ta.setSelectionRange(ta.value.length, ta.value.length);
+  }
+}
+
+function appendText(s) {
+  var ta = document.getElementById('rh-text');
+  var v = ta.value;
+  ta.value = v + (v.length && !/\s$/.test(v) ? ' ' : '') + s;
+  caret = ta.value.length;
+  chipEnd = -1;
+}
+
+/* Speak the review. Only shown where the browser supports it; the
+   keyboard mic stays as the fallback everywhere else. */
+function toggleVoice() {
+  if (!SR) return;
+  if (listening) { rec.stop(); return; }
+  rec = new SR();
+  rec.lang = lang === 'hi' ? 'hi-IN' : 'en-IN';
+  rec.interimResults = false;
+  rec.onresult = function(e) {
+    var s = '';
+    for (var i = e.resultIndex; i < e.results.length; i++) {
+      if (e.results[i].isFinal) s += e.results[i][0].transcript;
+    }
+    s = s.trim();
+    if (!s) return;
+    appendText(s);
+    typed = true;
+    textChanged();
+  };
+  rec.onerror = function(e) {
+    if (e.error === 'not-allowed' || e.error === 'service-not-allowed') voiceBlocked = true;
+  };
+  rec.onend = function() { listening = false; renderMic(); };
+  try {
+    rec.start();
+    listening = true;
+    voiceBlocked = false;
+    track('review_voice_start');
+  } catch (err) { listening = false; }
+  renderMic();
+}
+
+function renderMic() {
+  var btn = document.getElementById('rh-mic');
+  btn.hidden = !SR;
+  btn.classList.toggle('on', listening);
+  btn.setAttribute('aria-pressed', listening ? 'true' : 'false');
+  document.getElementById('rh-mic-label').textContent =
+    listening ? t('listening') : (voiceBlocked ? t('voiceErr') : t('speak'));
 }
 
 /* Select a trip: swaps the questions and place names, never touches the text */
@@ -868,6 +1037,11 @@ function setTrip(key, fromInit) {
 
 function renderTrip() {
   var data = TRIPS[trip || 'other'];
+  var collapsed = pillsCollapsed && !!trip;
+  document.getElementById('rh-picked').hidden = !collapsed;
+  document.getElementById('rh-which').hidden = collapsed;
+  document.getElementById('rh-pills').hidden = collapsed;
+  document.getElementById('rh-picked-name').textContent = trip ? t('t_' + trip) : '';
   var qs = document.getElementById('rh-qs');
   qs.innerHTML = '';
   data.q[lang].forEach(function(q) {
@@ -911,6 +1085,9 @@ function addPlace(name, btn) {
 function textChanged() {
   /* Text changed after copying or opening Google — offer to copy it (again) */
   if (state) resetState();
+  /* Only tapped facts so far: ask for one line in their own words */
+  var has = document.getElementById('rh-text').value.trim().length > 0;
+  document.getElementById('rh-nudge').hidden = !has || typed;
 }
 
 function renderButton() {
@@ -1058,11 +1235,11 @@ function queryParam(name) {
   var ta = document.getElementById('rh-text');
   function saveCaret() { caret = ta.selectionStart; }
   ['click', 'keyup', 'select', 'blur'].forEach(function(ev) { ta.addEventListener(ev, saveCaret); });
-  ta.addEventListener('input', function() { saveCaret(); chipEnd = -1; textChanged(); });
+  ta.addEventListener('input', function() { saveCaret(); chipEnd = -1; typed = true; textChanged(); });
 
   var key = queryParam('trip');
   key = TRIP_ALIASES[key] || key;
-  if (TRIPS[key]) setTrip(key, true);
+  if (TRIPS[key]) { pillsCollapsed = true; setTrip(key, true); }
 
   var l = queryParam('lang');
   if (!STR[l]) {
