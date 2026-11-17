@@ -24,21 +24,21 @@ Breaking these can get reviews removed in bulk or the Google profile suspended, 
 
 - Send the WhatsApp message the same evening, or the next morning for late trips.
 - Use the link for the trip they actually took. It opens the page with that trip already selected.
-- For customers who chatted in Hindi, send the Hindi message. Its link opens the page in Hindi (`&lang=hi`).
+- For customers who chatted in Hindi, send the Hindi message. The review page itself is in English only.
 - Replace `{name}` with the customer's name. Keep the rest short.
 
 ### Trip links
 
-| Trip | English link | Hindi link |
-|---|---|---|
-| Agra ↔ Jaipur / Golden Triangle | `https://www.padmashreetravels.in/review-helper/?trip=jaipur` | `https://www.padmashreetravels.in/review-helper/?trip=jaipur&lang=hi` |
-| Mathura–Vrindavan (incl. Barsana) | `https://www.padmashreetravels.in/review-helper/?trip=mathura-vrindavan` | `https://www.padmashreetravels.in/review-helper/?trip=mathura-vrindavan&lang=hi` |
-| Fatehpur Sikri | `https://www.padmashreetravels.in/review-helper/?trip=fatehpur` | `https://www.padmashreetravels.in/review-helper/?trip=fatehpur&lang=hi` |
-| Agra sightseeing (Taj, Fort) | `https://www.padmashreetravels.in/review-helper/?trip=sightseeing` | `https://www.padmashreetravels.in/review-helper/?trip=sightseeing&lang=hi` |
-| Airport / station | `https://www.padmashreetravels.in/review-helper/?trip=airport` | `https://www.padmashreetravels.in/review-helper/?trip=airport&lang=hi` |
-| Local Agra | `https://www.padmashreetravels.in/review-helper/?trip=local` | `https://www.padmashreetravels.in/review-helper/?trip=local&lang=hi` |
-| Other outstation (Gwalior, Balaji, Kaila Devi…) | `https://www.padmashreetravels.in/review-helper/?trip=outstation` | `https://www.padmashreetravels.in/review-helper/?trip=outstation&lang=hi` |
-| Anything else | `https://www.padmashreetravels.in/review-helper/?trip=other` | `https://www.padmashreetravels.in/review-helper/?trip=other&lang=hi` |
+| Trip | Link |
+|---|---|
+| Agra ↔ Jaipur / Golden Triangle | `https://www.padmashreetravels.in/review-helper/?trip=jaipur` |
+| Mathura–Vrindavan (incl. Barsana) | `https://www.padmashreetravels.in/review-helper/?trip=mathura-vrindavan` |
+| Fatehpur Sikri | `https://www.padmashreetravels.in/review-helper/?trip=fatehpur` |
+| Agra sightseeing (Taj, Fort) | `https://www.padmashreetravels.in/review-helper/?trip=sightseeing` |
+| Airport / station | `https://www.padmashreetravels.in/review-helper/?trip=airport` |
+| Local Agra | `https://www.padmashreetravels.in/review-helper/?trip=local` |
+| Other outstation (Gwalior, Balaji, Kaila Devi…) | `https://www.padmashreetravels.in/review-helper/?trip=outstation` |
+| Anything else | `https://www.padmashreetravels.in/review-helper/?trip=other` |
 
 Old links using `?trip=mathura` or `?trip=vrindavan` still work. They open the Mathura–Vrindavan option.
 
@@ -56,7 +56,7 @@ Old links using `?trip=mathura` or `?trip=vrindavan` still work. They open the M
 **Hindi**
 
 > नमस्ते {name} जी, Padma Shree Travels के साथ जयपुर की यात्रा करने के लिए धन्यवाद। अगर आपके पास दो मिनट हों, तो Google पर इस यात्रा के बारे में अपना सच्चा रिव्यू ज़रूर लिखें। आपको जैसा भी लगा, इससे दूसरे यात्रियों को और हमें सुधार करने में मदद मिलती है।
-> https://www.padmashreetravels.in/review-helper/?trip=jaipur&lang=hi
+> https://www.padmashreetravels.in/review-helper/?trip=jaipur
 
 ### Mathura–Vrindavan
 
@@ -68,7 +68,7 @@ Old links using `?trip=mathura` or `?trip=vrindavan` still work. They open the M
 **Hindi**
 
 > राधे राधे {name} जी। मथुरा–वृंदावन दर्शन के लिए हमें चुनने के लिए धन्यवाद। समय मिले तो Google पर उस दिन के बारे में अपना सच्चा रिव्यू लिखें। इससे दूसरे परिवारों को अपनी यात्रा प्लान करने में मदद मिलती है, और हमें पता चलता है कि क्या बेहतर करना है।
-> https://www.padmashreetravels.in/review-helper/?trip=mathura-vrindavan&lang=hi
+> https://www.padmashreetravels.in/review-helper/?trip=mathura-vrindavan
 
 ### Fatehpur Sikri
 
@@ -80,7 +80,7 @@ Old links using `?trip=mathura` or `?trip=vrindavan` still work. They open the M
 **Hindi**
 
 > नमस्ते {name} जी, Padma Shree Travels के साथ फ़तेहपुर सीकरी घूमने के लिए धन्यवाद। क्या आप दो मिनट निकालकर Google पर अपना सच्चा रिव्यू लिख सकते हैं? इससे आगरा आने वाले दूसरे यात्रियों को मदद मिलती है, और हमें बेहतर करने में भी।
-> https://www.padmashreetravels.in/review-helper/?trip=fatehpur&lang=hi
+> https://www.padmashreetravels.in/review-helper/?trip=fatehpur
 
 ### Any other trip
 
@@ -94,7 +94,7 @@ Swap the `trip=` value from the table above.
 **Hindi**
 
 > नमस्ते {name} जी, Padma Shree Travels के साथ यात्रा करने के लिए धन्यवाद। अगर दो मिनट हों, तो Google पर अपना सच्चा रिव्यू लिखें। अच्छा लगा हो या कुछ कमी रही हो, दोनों से हमें मदद मिलती है।
-> https://www.padmashreetravels.in/review-helper/?trip=other&lang=hi
+> https://www.padmashreetravels.in/review-helper/?trip=other
 
 ### One reminder (only if no review after 2–3 days)
 
@@ -161,7 +161,7 @@ Use these to get the tone right. Rewrite them each time, don't paste them.
 The review page sends three events to Google Tag Manager (container `GTM-NWDQLKM9`). They contain the trip type and the review length, never the review text:
 
 | Event | When | Fields |
-|---|---|---|
+|---|---|
 | `review_trip_selected` | Customer taps a trip | `trip` |
 | `review_copy_open` | Customer copies their review and Google opens | `trip`, `chars` |
 | `review_open_google` | Google opens without copying (empty box, "Open Google again", or the "Open Google Review" button) | `trip` |

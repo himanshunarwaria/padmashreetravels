@@ -60,28 +60,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   margin-bottom: .45rem;
 }
 
-/* English / Hindi toggle */
-.rh-lang {
-  display: inline-flex;
-  flex-shrink: 0;
-  padding: 2px;
-  border: 1.5px solid var(--g100);
-  border-radius: 999px;
-}
-.rh-lang button {
-  min-height: 30px;
-  padding: .25rem .7rem;
-  border: none;
-  border-radius: 999px;
-  background: none;
-  color: var(--g500);
-  font-size: .76rem;
-  font-weight: 600;
-  font-family: var(--ff);
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-}
-.rh-lang button[aria-pressed="true"] { background: var(--black); color: var(--white) }
 
 .rh-pills {
   display: grid;
@@ -511,10 +489,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="rh-routes">
         <div class="rh-top">
           <p class="rh-thankyou" data-i18n="thanks">Thank you for travelling with us &#x1F64F;</p>
-          <div class="rh-lang" role="group" aria-label="Language / भाषा">
-            <button type="button" data-lang="en" aria-pressed="true" onclick="setLang('en')">English</button>
-            <button type="button" data-lang="hi" aria-pressed="false" onclick="setLang('hi')" lang="hi">हिंदी</button>
-          </div>
         </div>
         <p class="rh-picked" id="rh-picked" hidden><span id="rh-picked-name"></span><button type="button" onclick="showPills()" data-i18n="change">Change</button></p>
         <p class="rh-routes__label" id="rh-which" data-i18n="whichTrip">Which trip did you take?</p>
@@ -578,7 +552,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         <p class="rh-nudge" id="rh-nudge" data-i18n="nudge" hidden>Add one line of your own: what did you like most?</p>
 
-        <p class="rh-hint" data-i18n-html="hint">Tap the &#x1F3A4; on your phone keyboard to speak your review. Hindi or English, whichever is easier. You choose your own star rating on Google.</p>
+        <p class="rh-hint" data-i18n-html="hint">Tap the &#x1F3A4; on your phone keyboard to speak your review. You choose your own star rating on Google.</p>
 
         <details class="rh-ideas">
           <summary data-i18n="qsLabel">Not sure what to write? You could mention:</summary>
@@ -680,7 +654,7 @@ var STR = {
     chipsLabel: 'Places you visited (tap to add)',
     textLabel: 'Your review',
     placeholder: 'Write your review here…',
-    hint: 'Tap the &#x1F3A4; on your phone keyboard to speak your review. Hindi or English, whichever is easier. You choose your own star rating on Google.',
+    hint: 'Tap the &#x1F3A4; on your phone keyboard to speak your review. You choose your own star rating on Google.',
     cta: 'Copy my review &amp; open Google',
     again: 'Open Google again',
     copyOnly: 'Copy only',
@@ -702,60 +676,22 @@ var STR = {
     tip2: 'Say which trip you took and what stood out.',
     tip3: 'Be honest. If something could have been better, say so. It helps us improve.',
     tip4: 'If you have a photo from the trip, add it on Google too.',
-    't_sightseeing': 'Agra Sightseeing',          's_sightseeing': 'Taj Mahal, Agra Fort',
-    't_fatehpur': 'Fatehpur Sikri',               's_fatehpur': 'Day trip from Agra',
-    't_mathura-vrindavan': 'Mathura–Vrindavan', 's_mathura-vrindavan': 'Temple darshan',
-    't_jaipur': 'Jaipur / Golden Triangle',       's_jaipur': 'Agra ↔ Jaipur',
-    't_airport': 'Airport / Station',             's_airport': 'Pickup & drop',
-    't_local': 'Local Agra',                      's_local': 'Within the city',
-    't_outstation': 'Other Outstation',           's_outstation': 'Gwalior, Balaji etc.',
-    't_other': 'Something else',                  's_other': 'Any other trip'
-  },
-  hi: {
-    thanks: 'हमारे साथ यात्रा करने के लिए धन्यवाद 🙏',
-    whichTrip: 'आपने कौन-सी यात्रा की?',
-    intro: 'जो सही था उसे टैप करें, फिर अपनी एक लाइन बोलें या लिखें। बस एक मिनट लगेगा।',
-    factsLabel: 'जो सही था उसे टैप करें (हटाने के लिए फिर टैप करें)',
-    driverLabel: 'आपके ड्राइवर',
-    speak: 'बोलकर रिव्यू लिखें',
-    listening: 'सुन रहे हैं… रोकने के लिए टैप करें',
-    voiceErr: 'माइक की अनुमति नहीं मिली। कीबोर्ड का 🎤 इस्तेमाल करें',
-    nudge: 'अपनी ओर से एक लाइन जोड़ें: आपको सबसे अच्छा क्या लगा?',
-    change: 'बदलें',
-    qsLabel: 'क्या लिखें, समझ नहीं आ रहा? आप ये बता सकते हैं:',
-    chipsLabel: 'जहाँ आप गए (जोड़ने के लिए टैप करें)',
-    textLabel: 'आपका रिव्यू',
-    placeholder: 'अपना रिव्यू यहाँ लिखें…',
-    hint: 'फ़ोन कीबोर्ड पर &#x1F3A4; दबाकर अपना रिव्यू बोलकर लिखें। हिंदी या अंग्रेज़ी, जो आसान लगे। स्टार रेटिंग आप Google पर खुद चुनेंगे।',
-    cta: 'मेरा रिव्यू कॉपी करें और Google खोलें',
-    again: 'Google फिर से खोलें',
-    copyOnly: 'सिर्फ़ कॉपी करें',
-    copied: '✓ कॉपी हो गया',
-    openGoogle: 'Google रिव्यू खोलें',
-    okCopied: 'आपका रिव्यू कॉपी हो गया',
-    okOpened: 'Google रिव्यू नए टैब में खुल गया',
-    stepSwitch: 'अभी खुले <strong>Google</strong> टैब पर जाएँ',
-    stepStars: 'स्टार दबाकर <strong>अपनी रेटिंग</strong> चुनें',
-    stepWrite: 'अपनी यात्रा के बारे में कुछ लाइनें लिखें',
-    stepPost: '<strong>Post</strong> दबाएँ, बस हो गया!',
-    pasteMobile: 'रिव्यू बॉक्स में देर तक दबाएँ &rarr; <strong>Paste</strong> दबाएँ',
-    pasteDesktop: 'रिव्यू बॉक्स पर क्लिक करके <kbd>Ctrl + V</kbd> (Windows) या <kbd>&#8984; V</kbd> (Mac) दबाएँ',
-    fbHead: 'अपने-आप कॉपी नहीं हो पाया, खुद कॉपी करें',
-    fbSub: 'नीचे के टेक्स्ट को टैप करके चुनें, कॉपी करें, फिर Google रिव्यू में पेस्ट करें:',
-    tipsBtn: 'अच्छा रिव्यू लिखने के सुझाव',
-    tipsHead: 'दूसरे यात्रियों के लिए क्या मददगार है',
-    tip1: 'अपने शब्दों में लिखें। दो-तीन लाइनें काफ़ी हैं।',
-    tip2: 'बताएँ कि आपने कौन-सी यात्रा की और क्या ख़ास लगा।',
-    tip3: 'ईमानदारी से लिखें। कुछ बेहतर हो सकता था तो वह भी बताएँ, इससे हमें सुधार करने में मदद मिलती है।',
-    tip4: 'यात्रा की कोई फ़ोटो हो तो उसे भी Google पर जोड़ें।',
-    't_sightseeing': 'आगरा घूमना',              's_sightseeing': 'ताजमहल, आगरा किला',
-    't_fatehpur': 'फ़तेहपुर सीकरी',              's_fatehpur': 'एक दिन की यात्रा',
-    't_mathura-vrindavan': 'मथुरा–वृंदावन',  's_mathura-vrindavan': 'मंदिर दर्शन',
-    't_jaipur': 'जयपुर / गोल्डन ट्रायंगल',       's_jaipur': 'आगरा ↔ जयपुर',
-    't_airport': 'एयरपोर्ट / स्टेशन',            's_airport': 'पिकअप और ड्रॉप',
-    't_local': 'आगरा शहर में',                  's_local': 'लोकल सवारी',
-    't_outstation': 'दूसरे शहर की यात्रा',        's_outstation': 'ग्वालियर, बालाजी आदि',
-    't_other': 'कुछ और',                        's_other': 'कोई और यात्रा'
+    t_sightseeing: 'Agra Sightseeing',
+    s_sightseeing: 'Taj Mahal, Agra Fort',
+    t_fatehpur: 'Fatehpur Sikri',
+    s_fatehpur: 'Day trip from Agra',
+    't_mathura-vrindavan': 'Mathura–Vrindavan',
+    's_mathura-vrindavan': 'Temple darshan',
+    t_jaipur: 'Jaipur / Golden Triangle',
+    s_jaipur: 'Agra ↔ Jaipur',
+    t_airport: 'Airport / Station',
+    s_airport: 'Pickup & drop',
+    t_local: 'Local Agra',
+    s_local: 'Within the city',
+    t_outstation: 'Other Outstation',
+    s_outstation: 'Gwalior, Balaji etc.',
+    t_other: 'Something else',
+    s_other: 'Any other trip'
   }
 };
 
@@ -764,111 +700,95 @@ var STR = {
 var TRIPS = {
   sightseeing: {
     q: {
-      en: ['Which places did you visit: Taj Mahal, Agra Fort, Mehtab Bagh?',
-           'Did the driver help with timings, gates or parking?',
-           'How were the car and the day overall?'],
-      hi: ['आपने कौन-कौन सी जगहें देखीं: ताजमहल, आगरा किला, मेहताब बाग?',
-           'क्या ड्राइवर ने समय, गेट या पार्किंग में मदद की?',
-           'गाड़ी और पूरा दिन कैसा रहा?']
+      en: [
+        'Which places did you visit: Taj Mahal, Agra Fort, Mehtab Bagh?',
+        'Did the driver help with timings, gates or parking?',
+        'How were the car and the day overall?'
+      ]
     },
-    places: {
-      en: ['Taj Mahal', 'Agra Fort', 'Mehtab Bagh', 'Baby Taj', 'Sikandra'],
-      hi: ['ताजमहल', 'आगरा किला', 'मेहताब बाग', 'बेबी ताज', 'सिकंदरा']
-    }
+    places: { en: ['Taj Mahal', 'Agra Fort', 'Mehtab Bagh', 'Baby Taj', 'Sikandra'] }
   },
   fatehpur: {
     q: {
-      en: ['What did you see: Buland Darwaza, Jama Masjid, the palaces?',
-           'Was the pickup on time, and did the driver wait while you explored?',
-           'Did you combine it with anything else that day?'],
-      hi: ['आपने क्या-क्या देखा: बुलंद दरवाज़ा, जामा मस्जिद, महल?',
-           'क्या पिकअप समय पर हुआ, और घूमते समय ड्राइवर ने इंतज़ार किया?',
-           'क्या उसी दिन आप कहीं और भी गए?']
+      en: [
+        'What did you see: Buland Darwaza, Jama Masjid, the palaces?',
+        'Was the pickup on time, and did the driver wait while you explored?',
+        'Did you combine it with anything else that day?'
+      ]
     },
-    places: {
-      en: ['Buland Darwaza', 'Jama Masjid', 'Salim Chishti Dargah', 'Panch Mahal'],
-      hi: ['बुलंद दरवाज़ा', 'जामा मस्जिद', 'सलीम चिश्ती दरगाह', 'पंच महल']
-    }
+    places: { en: ['Buland Darwaza', 'Jama Masjid', 'Salim Chishti Dargah', 'Panch Mahal'] }
   },
   'mathura-vrindavan': {
     q: {
-      en: ['Which temples did you visit?',
-           'Did the driver wait patiently during darshan?',
-           'If elders or children came along, how was the day for them?',
-           'Do you remember your driver’s name?'],
-      hi: ['आपने किन मंदिरों के दर्शन किए?',
-           'क्या दर्शन के समय ड्राइवर ने धैर्य से इंतज़ार किया?',
-           'साथ में बुज़ुर्ग या बच्चे थे तो उनके लिए दिन कैसा रहा?',
-           'क्या आपको ड्राइवर का नाम याद है?']
+      en: [
+        'Which temples did you visit?',
+        'Did the driver wait patiently during darshan?',
+        'If elders or children came along, how was the day for them?',
+        'Do you remember your driver’s name?'
+      ]
     },
     places: {
-      en: ['Krishna Janmabhoomi', 'Dwarkadhish Temple', 'Vishram Ghat', 'Banke Bihari', 'Prem Mandir', 'ISKCON', 'Nidhivan', 'Barsana'],
-      hi: ['श्रीकृष्ण जन्मभूमि', 'द्वारकाधीश मंदिर', 'विश्राम घाट', 'बांके बिहारी', 'प्रेम मंदिर', 'इस्कॉन', 'निधिवन', 'बरसाना']
+      en: [
+        'Krishna Janmabhoomi',
+        'Dwarkadhish Temple',
+        'Vishram Ghat',
+        'Banke Bihari',
+        'Prem Mandir',
+        'ISKCON',
+        'Nidhivan',
+        'Barsana'
+      ]
     }
   },
   jaipur: {
     q: {
-      en: ['Which places did you cover: Amber Fort, Hawa Mahal, City Palace, or stops on the way?',
-           'How were the highway drive and the car?',
-           'Do you remember your driver’s name?'],
-      hi: ['आपने कौन-सी जगहें देखीं: आमेर किला, हवा महल, सिटी पैलेस, या रास्ते के पड़ाव?',
-           'हाईवे का सफ़र और गाड़ी कैसी रही?',
-           'क्या आपको ड्राइवर का नाम याद है?']
+      en: [
+        'Which places did you cover: Amber Fort, Hawa Mahal, City Palace, or stops on the way?',
+        'How were the highway drive and the car?',
+        'Do you remember your driver’s name?'
+      ]
     },
-    places: {
-      en: ['Amber Fort', 'Hawa Mahal', 'City Palace', 'Jal Mahal', 'Fatehpur Sikri', 'Mehandipur Balaji'],
-      hi: ['आमेर किला', 'हवा महल', 'सिटी पैलेस', 'जल महल', 'फ़तेहपुर सीकरी', 'मेहंदीपुर बालाजी']
-    }
+    places: { en: ['Amber Fort', 'Hawa Mahal', 'City Palace', 'Jal Mahal', 'Fatehpur Sikri', 'Mehandipur Balaji'] }
   },
   airport: {
     q: {
-      en: ['Which airport or station, and was the pickup or drop on time?',
-           'Did the driver help with your luggage or with finding you?',
-           'How was booking on WhatsApp or by phone?'],
-      hi: ['कौन-सा एयरपोर्ट या स्टेशन था, और क्या पिकअप या ड्रॉप समय पर हुआ?',
-           'क्या ड्राइवर ने सामान में या आपको ढूँढने में मदद की?',
-           'WhatsApp या फ़ोन पर बुकिंग कैसी रही?']
+      en: [
+        'Which airport or station, and was the pickup or drop on time?',
+        'Did the driver help with your luggage or with finding you?',
+        'How was booking on WhatsApp or by phone?'
+      ]
     },
-    places: {
-      en: ['Agra Airport', 'Agra Cantt Station', 'Agra Fort Station', 'Delhi Airport'],
-      hi: ['आगरा एयरपोर्ट', 'आगरा कैंट स्टेशन', 'आगरा फोर्ट स्टेशन', 'दिल्ली एयरपोर्ट']
-    }
+    places: { en: ['Agra Airport', 'Agra Cantt Station', 'Agra Fort Station', 'Delhi Airport'] }
   },
   local: {
     q: {
-      en: ['Where did you go in Agra?',
-           'How quickly did the cab arrive, and how was the driver?',
-           'Anything we could do better next time?'],
-      hi: ['आप आगरा में कहाँ गए?',
-           'कैब कितनी जल्दी आई, और ड्राइवर का व्यवहार कैसा था?',
-           'अगली बार हम क्या बेहतर कर सकते हैं?']
+      en: [
+        'Where did you go in Agra?',
+        'How quickly did the cab arrive, and how was the driver?',
+        'Anything we could do better next time?'
+      ]
     },
-    places: { en: [], hi: [] }
+    places: { en: [] }
   },
   outstation: {
     q: {
-      en: ['Where did you travel to?',
-           'How were the highway drive, the car and the driver?',
-           'Was the fare the same as you were told when booking?'],
-      hi: ['आप कहाँ गए थे?',
-           'हाईवे का सफ़र, गाड़ी और ड्राइवर कैसे रहे?',
-           'क्या किराया वही रहा जो बुकिंग के समय बताया गया था?']
+      en: [
+        'Where did you travel to?',
+        'How were the highway drive, the car and the driver?',
+        'Was the fare the same as you were told when booking?'
+      ]
     },
-    places: {
-      en: ['Gwalior', 'Mehandipur Balaji', 'Kaila Devi', 'Bateshwar', 'Aligarh', 'Firozabad', 'Etawah'],
-      hi: ['ग्वालियर', 'मेहंदीपुर बालाजी', 'कैला देवी', 'बटेश्वर', 'अलीगढ़', 'फ़िरोज़ाबाद', 'इटावा']
-    }
+    places: { en: ['Gwalior', 'Mehandipur Balaji', 'Kaila Devi', 'Bateshwar', 'Aligarh', 'Firozabad', 'Etawah'] }
   },
   other: {
     q: {
-      en: ['Which trip did you take with us?',
-           'What went well, and what could be better?',
-           'Do you remember your driver’s name?'],
-      hi: ['आपने हमारे साथ कौन-सी यात्रा की?',
-           'क्या अच्छा रहा, और क्या बेहतर हो सकता है?',
-           'क्या आपको ड्राइवर का नाम याद है?']
+      en: [
+        'Which trip did you take with us?',
+        'What went well, and what could be better?',
+        'Do you remember your driver’s name?'
+      ]
     },
-    places: { en: [], hi: [] }
+    places: { en: [] }
   }
 };
 
@@ -881,124 +801,200 @@ var TRIP_ALIASES = { mathura: 'mathura-vrindavan', vrindavan: 'mathura-vrindavan
    "open" ones are starters the customer finishes. Keep these as bare,
    checkable facts. Never add praise, full reviews or business-written
    lines (no brand/keyword sentences): the review must be the customer's. */
-function F(id, en, hi, ten, thi, open) {
-  return { id: id, label: { en: en, hi: hi }, text: { en: ten, hi: thi }, open: !!open };
-}
-
 var FACTS = [
-  F('ontime', 'On time', 'समय पर',
-    ['Pickup was on time.', 'The cab came on time.', 'The car reached right on time.'],
-    ['पिकअप समय पर हुआ।', 'गाड़ी समय पर आ गई।', 'कैब टाइम पर पहुँच गई।']),
-  F('clean', 'Clean car', 'साफ़ गाड़ी',
-    ['The car was clean and comfortable.', 'Clean car, comfortable ride.', 'The car was neat and clean.'],
-    ['गाड़ी साफ़ और आरामदायक थी।', 'गाड़ी साफ़-सुथरी थी।', 'गाड़ी एकदम साफ़ थी।']),
-  F('polite', 'Polite driver', 'अच्छा व्यवहार',
-    ['The driver was polite.', 'The driver behaved well with us.', 'Very polite driver.'],
-    ['ड्राइवर का व्यवहार अच्छा था।', 'ड्राइवर ने अच्छे से बात की।', 'ड्राइवर बहुत शालीन थे।']),
-  F('safe', 'Safe driving', 'सुरक्षित ड्राइविंग',
-    ['The driving felt safe.', 'The driver drove carefully.', 'Safe, steady driving.'],
-    ['ड्राइविंग सुरक्षित थी।', 'गाड़ी ध्यान से चलाई।', 'ड्राइविंग में कोई डर नहीं लगा।']),
-  F('waited', 'Waited for us', 'इंतज़ार किया',
-    ['The driver waited without rushing us.', 'We were never rushed.', 'The driver waited patiently for us.'],
-    ['ड्राइवर ने बिना जल्दबाज़ी के इंतज़ार किया।', 'हमें कहीं भी जल्दी नहीं करवाई।', 'ड्राइवर ने आराम से हमारा इंतज़ार किया।']),
-  F('fare', 'Fare as quoted', 'किराया वही रहा',
-    ['The fare was the same as quoted.', 'We paid exactly what we were told.', 'Same fare as quoted, nothing extra.'],
-    ['किराया वही रहा जो बताया गया था।', 'जितना बताया था, उतना ही किराया लिया।', 'बताए गए किराए से ज़्यादा कुछ नहीं लिया।']),
-  F('booking', 'Easy booking', 'आसान बुकिंग',
-    ['Booking was easy.', 'Booking was quick and simple.', 'Easy to book.'],
-    ['बुकिंग आसान रही।', 'बुकिंग जल्दी और आसानी से हो गई।', 'बुक करना आसान था।']),
-  F('better', 'Could be better', 'क्या बेहतर हो',
-    ['One thing that could be better: '], ['एक चीज़ जो बेहतर हो सकती थी: '], true)
+  {
+    id: 'ontime',
+    label: { en: 'On time' },
+    text: { en: ['Pickup was on time.', 'The cab came on time.', 'The car reached right on time.'] }
+  },
+  {
+    id: 'clean',
+    label: { en: 'Clean car' },
+    text: {
+      en: ['The car was clean and comfortable.', 'Clean car, comfortable ride.', 'The car was neat and clean.']
+    }
+  },
+  {
+    id: 'polite',
+    label: { en: 'Polite driver' },
+    text: { en: ['The driver was polite.', 'The driver behaved well with us.', 'Very polite driver.'] }
+  },
+  {
+    id: 'safe',
+    label: { en: 'Safe driving' },
+    text: { en: ['The driving felt safe.', 'The driver drove carefully.', 'Safe, steady driving.'] }
+  },
+  {
+    id: 'waited',
+    label: { en: 'Waited for us' },
+    text: {
+      en: [
+        'The driver waited without rushing us.',
+        'We were never rushed.',
+        'The driver waited patiently for us.'
+      ]
+    }
+  },
+  {
+    id: 'fare',
+    label: { en: 'Fare as quoted' },
+    text: {
+      en: [
+        'The fare was the same as quoted.',
+        'We paid exactly what we were told.',
+        'Same fare as quoted, nothing extra.'
+      ]
+    }
+  },
+  {
+    id: 'booking',
+    label: { en: 'Easy booking' },
+    text: { en: ['Booking was easy.', 'Booking was quick and simple.', 'Easy to book.'] }
+  },
+  {
+    id: 'better',
+    label: { en: 'Could be better' },
+    text: { en: ['One thing that could be better: '] },
+    open: true
+  }
 ];
 
 /* Trip-specific facts, shown before the general ones */
-var F_STOPS = F('stops', 'Stopped when asked', 'कहने पर रुके',
-  ['The driver stopped whenever we asked.', 'We could stop for tea or a break whenever we wanted.'],
-  ['जब कहा, ड्राइवर ने गाड़ी रोकी।', 'चाय या ब्रेक के लिए जब चाहा, रुके।']);
-var F_HIGHWAY = F('highway', 'Comfortable long drive', 'आरामदायक लंबा सफ़र',
-  ['The highway drive was smooth and comfortable.', 'Long drive, but comfortable.'],
-  ['हाईवे का सफ़र आरामदायक रहा।', 'लंबा सफ़र था, फिर भी आराम से कटा।']);
-var F_EXPLAINED = F('explained', 'Told us about places', 'जगहों के बारे में बताया',
-  ['The driver told us about each place.', 'Got useful tips about each place.'],
-  ['ड्राइवर ने हर जगह के बारे में बताया।', 'हर जगह के बारे में काम की जानकारी मिली।']);
-
 var TRIP_FACTS = {
   sightseeing: [
-    F('tickets', 'Helped with tickets', 'टिकट में मदद',
-      ['The driver helped us with tickets and the right gate.', 'Got help with the Taj tickets and gates.'],
-      ['ड्राइवर ने टिकट और सही गेट बताने में मदद की।', 'टिकट और गेट की जानकारी मिल गई।']),
-    F('early', 'Early pickup', 'सुबह जल्दी पिकअप',
-      ['They picked us up early for sunrise.', 'Early morning pickup, no problem at all.'],
-      ['सूर्योदय के लिए सुबह जल्दी ले गए।', 'सुबह जल्दी पिकअप मिल गया।']),
-    F_EXPLAINED
+    {
+      id: 'tickets',
+      label: { en: 'Helped with tickets' },
+      text: {
+        en: ['The driver helped us with tickets and the right gate.', 'Got help with the Taj tickets and gates.']
+      }
+    },
+    {
+      id: 'early',
+      label: { en: 'Early pickup' },
+      text: { en: ['They picked us up early for sunrise.', 'Early morning pickup, no problem at all.'] }
+    },
+    {
+      id: 'explained',
+      label: { en: 'Told us about places' },
+      text: { en: ['The driver told us about each place.', 'Got useful tips about each place.'] }
+    }
   ],
   fatehpur: [
-    F('sameday', 'Did Agra same day', 'आगरा भी साथ में',
-      ['We covered Fatehpur Sikri and Agra the same day.', 'Did Fatehpur Sikri along with Agra in one day.'],
-      ['एक ही दिन में फ़तेहपुर सीकरी और आगरा घूम लिए।', 'आगरा के साथ फ़तेहपुर सीकरी भी हो गया।']),
-    F_EXPLAINED
+    {
+      id: 'sameday',
+      label: { en: 'Did Agra same day' },
+      text: {
+        en: ['We covered Fatehpur Sikri and Agra the same day.', 'Did Fatehpur Sikri along with Agra in one day.']
+      }
+    },
+    {
+      id: 'explained',
+      label: { en: 'Told us about places' },
+      text: { en: ['The driver told us about each place.', 'Got useful tips about each place.'] }
+    }
   ],
   'mathura-vrindavan': [
-    F('darshan', 'Waited during darshan', 'दर्शन में इंतज़ार',
-      ['The driver waited patiently during darshan.', 'No hurry during darshan, the driver waited.'],
-      ['दर्शन के समय ड्राइवर ने आराम से इंतज़ार किया।', 'दर्शन में कोई जल्दी नहीं करवाई।']),
-    F('elders', 'Good with elders', 'बुज़ुर्गों का ध्यान',
-      ['The driver took good care of the elders with us.', 'Easy trip for the elders in our family.'],
-      ['साथ आए बुज़ुर्गों का अच्छा ध्यान रखा।', 'घर के बुज़ुर्गों के लिए यात्रा आरामदायक रही।']),
-    F('timings', 'Knew temple timings', 'मंदिर का समय पता था',
-      ['The driver knew the temple timings well.', 'We reached every temple at the right time.'],
-      ['ड्राइवर को मंदिरों का समय अच्छे से पता था।', 'हर मंदिर सही समय पर पहुँच गए।']),
-    F('parking', 'Parked close by', 'पास में पार्किंग',
-      ['Parking was close to the temples.', 'We didn’t have to walk much from the parking.'],
-      ['पार्किंग मंदिर के पास ही मिली।', 'पार्किंग से ज़्यादा पैदल नहीं चलना पड़ा।'])
+    {
+      id: 'darshan',
+      label: { en: 'Waited during darshan' },
+      text: { en: ['The driver waited patiently during darshan.', 'No hurry during darshan, the driver waited.'] }
+    },
+    {
+      id: 'elders',
+      label: { en: 'Good with elders' },
+      text: { en: ['The driver took good care of the elders with us.', 'Easy trip for the elders in our family.'] }
+    },
+    {
+      id: 'timings',
+      label: { en: 'Knew temple timings' },
+      text: { en: ['The driver knew the temple timings well.', 'We reached every temple at the right time.'] }
+    },
+    {
+      id: 'parking',
+      label: { en: 'Parked close by' },
+      text: { en: ['Parking was close to the temples.', 'We didn’t have to walk much from the parking.'] }
+    }
   ],
   jaipur: [
-    F_HIGHWAY, F_STOPS,
-    F('knewjaipur', 'Knew Jaipur well', 'जयपुर की जानकारी',
-      ['The driver knew Jaipur well.', 'Good knowledge of the Jaipur sights.'],
-      ['ड्राइवर को जयपुर की अच्छी जानकारी थी।', 'जयपुर की जगहों का पूरा पता था।'])
+    {
+      id: 'highway',
+      label: { en: 'Comfortable long drive' },
+      text: { en: ['The highway drive was smooth and comfortable.', 'Long drive, but comfortable.'] }
+    },
+    {
+      id: 'stops',
+      label: { en: 'Stopped when asked' },
+      text: {
+        en: ['The driver stopped whenever we asked.', 'We could stop for tea or a break whenever we wanted.']
+      }
+    },
+    {
+      id: 'knewjaipur',
+      label: { en: 'Knew Jaipur well' },
+      text: { en: ['The driver knew Jaipur well.', 'Good knowledge of the Jaipur sights.'] }
+    }
   ],
   airport: [
-    F('arrival', 'Waiting when we arrived', 'पहले से इंतज़ार',
-      ['The driver was waiting when we arrived.', 'Our cab was already there when we came out.'],
-      ['हमारे पहुँचने पर ड्राइवर पहले से इंतज़ार कर रहे थे।', 'बाहर निकले तो गाड़ी पहले से खड़ी थी।']),
-    F('luggage', 'Helped with luggage', 'सामान में मदद',
-      ['The driver helped with our luggage.', 'Got help with the bags.'],
-      ['ड्राइवर ने सामान रखने में मदद की।', 'सामान उठाने में मदद मिली।']),
-    F('oddhours', 'Late night / early', 'देर रात / सुबह जल्दी',
-      ['Pickup at an odd hour was no problem.', 'Came on time even late at night.'],
-      ['रात या सुबह-सुबह के समय भी कोई दिक्कत नहीं हुई।', 'देर रात भी समय पर आए।'])
+    {
+      id: 'arrival',
+      label: { en: 'Waiting when we arrived' },
+      text: { en: ['The driver was waiting when we arrived.', 'Our cab was already there when we came out.'] }
+    },
+    {
+      id: 'luggage',
+      label: { en: 'Helped with luggage' },
+      text: { en: ['The driver helped with our luggage.', 'Got help with the bags.'] }
+    },
+    {
+      id: 'oddhours',
+      label: { en: 'Late night / early' },
+      text: { en: ['Pickup at an odd hour was no problem.', 'Came on time even late at night.'] }
+    }
   ],
   local: [
-    F('quick', 'Came quickly', 'जल्दी आई',
-      ['The cab came quickly.', 'Didn’t have to wait long for the cab.'],
-      ['कैब जल्दी आ गई।', 'कैब के लिए ज़्यादा इंतज़ार नहीं करना पड़ा।']),
-    F('shortnotice', 'Short notice booking', 'तुरंत बुकिंग',
-      ['Got a cab even at short notice.', 'Booked last minute and still got a car.'],
-      ['तुरंत बुकिंग पर भी गाड़ी मिल गई।', 'आख़िरी समय पर बुक किया, फिर भी गाड़ी आ गई।'])
+    {
+      id: 'quick',
+      label: { en: 'Came quickly' },
+      text: { en: ['The cab came quickly.', 'Didn’t have to wait long for the cab.'] }
+    },
+    {
+      id: 'shortnotice',
+      label: { en: 'Short notice booking' },
+      text: { en: ['Got a cab even at short notice.', 'Booked last minute and still got a car.'] }
+    }
   ],
   outstation: [
-    F_HIGHWAY, F_STOPS,
-    F('earlystart', 'Early start', 'सुबह जल्दी निकले',
-      ['We started early, just as planned.', 'Early morning start, right on time.'],
-      ['तय समय पर सुबह जल्दी निकल गए।', 'सुबह जल्दी निकलना था, समय पर निकले।'])
+    {
+      id: 'highway',
+      label: { en: 'Comfortable long drive' },
+      text: { en: ['The highway drive was smooth and comfortable.', 'Long drive, but comfortable.'] }
+    },
+    {
+      id: 'stops',
+      label: { en: 'Stopped when asked' },
+      text: {
+        en: ['The driver stopped whenever we asked.', 'We could stop for tea or a break whenever we wanted.']
+      }
+    },
+    {
+      id: 'earlystart',
+      label: { en: 'Early start' },
+      text: { en: ['We started early, just as planned.', 'Early morning start, right on time.'] }
+    }
   ]
 };
 
 /* Drivers. Tapping a name adds one line; tapping another swaps it. */
 var DRIVERS = [
-  { id: 'padam',  name: { en: 'Padam ji',  hi: 'पदम जी' } },
-  { id: 'raju',   name: { en: 'Raju',      hi: 'राजू' } },
-  { id: 'deepu',  name: { en: 'Deepu',     hi: 'दीपू' } },
-  { id: 'suneel', name: { en: 'Suneel ji', hi: 'सुनील जी' } },
-  { id: 'heera',  name: { en: 'Heera ji',  hi: 'हीरा जी' } }
+  { id: 'padam', name: { en: 'Padam ji' } },
+  { id: 'raju', name: { en: 'Raju' } },
+  { id: 'deepu', name: { en: 'Deepu' } },
+  { id: 'suneel', name: { en: 'Suneel ji' } },
+  { id: 'heera', name: { en: 'Heera ji' } }
 ];
-var DRIVER_LINES = {
-  en: ['Our driver was {n}.', '{n} was our driver.'],
-  hi: ['हमारे ड्राइवर {n} थे।', '{n} हमारे ड्राइवर थे।']
-};
-var DRIVER_OTHER = F('driver_other', 'Someone else', 'कोई और',
-  ['Our driver was '], ['ड्राइवर का नाम: '], true);
+var DRIVER_LINES = { en: ['Our driver was {n}.', '{n} was our driver.'] };
+var DRIVER_OTHER = { id: 'driver_other', label: { en: 'Someone else' }, text: { en: ['Our driver was '] }, open: true };
 
 var ICON_COPY = '<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
 var ICON_DONE = '<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>';
@@ -1029,18 +1025,14 @@ function track(event, params) {
   window.dataLayer.push(e);
 }
 
-function setLang(l, fromInit) {
-  lang = STR[l] ? l : 'en';
-  if (!fromInit) { try { localStorage.setItem('pst-review-lang', lang); } catch (e) {} }
+/* Fill the page copy from STR (English only) */
+function applyCopy() {
   document.documentElement.lang = lang;
   document.querySelectorAll('[data-i18n]').forEach(function(el) {
     el.textContent = t(el.getAttribute('data-i18n'));
   });
   document.querySelectorAll('[data-i18n-html]').forEach(function(el) {
     el.innerHTML = t(el.getAttribute('data-i18n-html'));
-  });
-  document.querySelectorAll('.rh-lang button').forEach(function(b) {
-    b.setAttribute('aria-pressed', b.getAttribute('data-lang') === lang ? 'true' : 'false');
   });
   var ta = document.getElementById('rh-text');
   ta.placeholder = t('placeholder');
@@ -1156,7 +1148,7 @@ function toggleVoice() {
   if (!SR) return;
   if (listening) { rec.stop(); return; }
   rec = new SR();
-  rec.lang = lang === 'hi' ? 'hi-IN' : 'en-IN';
+  rec.lang = 'en-IN';
   rec.interimResults = false;
   rec.onresult = function(e) {
     var s = '';
@@ -1390,7 +1382,7 @@ function renderTipsBtn() {
   document.getElementById('rh-tips-btn').innerHTML = t('tipsBtn') + (tipsOpen ? ' &#9652;' : ' &#9662;');
 }
 
-/* Read ?trip= and ?lang= from the link the owner sent */
+/* Read ?trip= from the link the owner sent */
 function queryParam(name) {
   var parts = window.location.search.replace(/^\?/, '').split('&');
   for (var i = 0; i < parts.length; i++) {
@@ -1410,11 +1402,7 @@ function queryParam(name) {
   key = TRIP_ALIASES[key] || key;
   if (TRIPS[key]) { pillsCollapsed = true; setTrip(key, true); }
 
-  var l = queryParam('lang');
-  if (!STR[l]) {
-    try { l = localStorage.getItem('pst-review-lang'); } catch (e) { l = null; }
-  }
-  setLang(STR[l] ? l : 'en', true);
+  applyCopy();
 })();
 </script>
 <script src="/js/main.js"></script>
