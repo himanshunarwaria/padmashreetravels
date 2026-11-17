@@ -538,6 +538,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <p class="rh-label" data-i18n="driverLabel">Your driver</p>
         <div class="rh-chips rh-chips--facts" id="rh-drivers"></div>
 
+        <div id="rh-dq-wrap" hidden>
+          <p class="rh-label" id="rh-dq-label"></p>
+          <div class="rh-chips rh-chips--facts" id="rh-dq"></div>
+        </div>
+
         <div class="rh-chips-wrap" id="rh-chips-wrap" hidden>
           <p class="rh-label" data-i18n="chipsLabel">Places you visited (tap to add)</p>
           <div class="rh-chips" id="rh-chips"></div>
@@ -805,24 +810,48 @@ var FACTS = [
   {
     id: 'ontime',
     label: { en: 'On time' },
-    text: { en: ['Pickup was on time.', 'The cab came on time.', 'The car reached right on time.'] }
+    text: { en: [
+        'Pickup was on time.',
+        'The cab came on time.',
+        'The car reached right on time.',
+        'The cab was there right on time.',
+        'Pickup was bang on time.'
+      ] }
   },
   {
     id: 'clean',
     label: { en: 'Clean car' },
     text: {
-      en: ['The car was clean and comfortable.', 'Clean car, comfortable ride.', 'The car was neat and clean.']
+      en: [
+        'The car was clean and comfortable.',
+        'Clean car, comfortable ride.',
+        'The car was neat and clean.',
+        'The car was spotless and comfortable.',
+        'Nice clean car, very comfortable.'
+      ]
     }
   },
   {
     id: 'polite',
     label: { en: 'Polite driver' },
-    text: { en: ['The driver was polite.', 'The driver behaved well with us.', 'Very polite driver.'] }
+    text: { en: [
+        'The driver was polite.',
+        'The driver behaved well with us.',
+        'Very polite driver.',
+        'The driver was polite the whole way.',
+        'The driver was very polite with all of us.'
+      ] }
   },
   {
     id: 'safe',
     label: { en: 'Safe driving' },
-    text: { en: ['The driving felt safe.', 'The driver drove carefully.', 'Safe, steady driving.'] }
+    text: { en: [
+        'The driving felt safe.',
+        'The driver drove carefully.',
+        'Safe, steady driving.',
+        'We felt safe the whole way.',
+        'Smooth and safe driving throughout.'
+      ] }
   },
   {
     id: 'waited',
@@ -831,7 +860,9 @@ var FACTS = [
       en: [
         'The driver waited without rushing us.',
         'We were never rushed.',
-        'The driver waited patiently for us.'
+        'The driver waited patiently for us.',
+        'The driver waited for us without any fuss.',
+        'Never felt rushed, the driver waited happily.'
       ]
     }
   },
@@ -842,14 +873,22 @@ var FACTS = [
       en: [
         'The fare was the same as quoted.',
         'We paid exactly what we were told.',
-        'Same fare as quoted, nothing extra.'
+        'Same fare as quoted, nothing extra.',
+        'No hidden charges, the fare was exactly as quoted.',
+        'Honest fare, exactly what we were told.'
       ]
     }
   },
   {
     id: 'booking',
     label: { en: 'Easy booking' },
-    text: { en: ['Booking was easy.', 'Booking was quick and simple.', 'Easy to book.'] }
+    text: { en: [
+        'Booking was easy.',
+        'Booking was quick and simple.',
+        'Easy to book.',
+        'Booking took just a couple of minutes.',
+        'Booking was really easy and quick.'
+      ] }
   },
   {
     id: 'better',
@@ -993,7 +1032,26 @@ var DRIVERS = [
   { id: 'suneel', name: { en: 'Suneel ji' } },
   { id: 'heera', name: { en: 'Heera ji' } }
 ];
-var DRIVER_LINES = { en: ['Our driver was {n}.', '{n} was our driver.'] };
+var DRIVER_LINES = { en: ['Our driver was {n}.', '{n} was our driver.', '{n} drove us.'] };
+
+/* Once a driver is picked, the customer can tap what that driver was
+   like. Their picks are joined into one sentence ("Our driver Deepu was
+   very patient with us and knew the routes well."). Nothing is added
+   unless they tap it. Each pick gets one of a few wordings at random. */
+var DRIVER_WITH = { en: ['Our driver {n} {q}.', '{n}, our driver, {q}.', 'We had {n} as our driver. {n} {q}.'] };
+/* "was" wordings follow "was" ("was very patient with us"); verb ones
+   stand alone ("knew the routes well"). No inner "and" in any wording,
+   so joined lists read cleanly. */
+var DRIVER_QUALITIES = [
+  { id: 'helpful',    label: 'Very helpful',        text: ['very helpful', 'really helpful', 'always ready to help'] },
+  { id: 'patient',    label: 'Patient',             text: ['very patient with us', 'patient the whole day', 'never in a hurry with us'] },
+  { id: 'friendly',   label: 'Friendly',            text: ['very friendly', 'really friendly', 'friendly all day'] },
+  { id: 'careful',    label: 'Careful driver',      text: ['a careful driver', 'careful on the road', 'calm at the wheel'] },
+  { id: 'respectful', label: 'Respectful',          text: ['respectful to everyone in our family', 'very respectful', 'always respectful'] },
+  { id: 'routes',     label: 'Knew the routes',     text: ['knew the routes well', 'knew the way everywhere', 'knew the roads really well'], verb: true },
+  { id: 'extra',      label: 'Went the extra mile', text: ['went the extra mile for us', 'did more than we expected', 'took extra care of us'], verb: true }
+];
+var DRIVER_THANKS = { id: 'thanks', label: 'Say thank you', text: ['Thank you, {n}!', 'Thanks a lot, {n}!', 'Big thanks to {n}.'] };
 var DRIVER_OTHER = { id: 'driver_other', label: { en: 'Someone else' }, text: { en: ['Our driver was '] }, open: true };
 
 var ICON_COPY = '<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
@@ -1089,11 +1147,22 @@ function renderFacts() {
   });
   var dbox = document.getElementById('rh-drivers');
   dbox.innerHTML = '';
-  var hasDriver = inBox('driver');
+  var hasDriver = !!driverId && inBox('driver');
   DRIVERS.forEach(function(d) {
     dbox.appendChild(makeChip(d.name[lang], hasDriver && driverId === d.id, function() { setDriver(d); }));
   });
   dbox.appendChild(makeChip(DRIVER_OTHER.label[lang], inBox(DRIVER_OTHER.id), function() { toggleFact(DRIVER_OTHER); }));
+
+  /* "What was Deepu like?" row, only while a named driver is in the box */
+  document.getElementById('rh-dq-wrap').hidden = !hasDriver;
+  var qbox = document.getElementById('rh-dq');
+  qbox.innerHTML = '';
+  if (!hasDriver) return;
+  document.getElementById('rh-dq-label').textContent = 'What was ' + driverName() + ' like? (tap any)';
+  DRIVER_QUALITIES.forEach(function(q) {
+    qbox.appendChild(makeChip(q.label, !!driverQ[q.id], function() { toggleQuality(q); }));
+  });
+  qbox.appendChild(makeChip(DRIVER_THANKS.label, !!driverThanks, function() { toggleThanks(); }));
 }
 
 /* Tap adds a fact (random wording); tap again removes it. Starters stay
@@ -1119,19 +1188,84 @@ function toggleFact(f) {
   renderFacts();
 }
 
-function setDriver(d) {
-  var same = inBox('driver') && driverId === d.id;
-  if (inBox('driver')) removePhrase(placed.driver);
-  delete placed.driver;
-  driverId = null;
-  if (!same) {
-    placed.driver = pick(DRIVER_LINES[lang]).replace('{n}', d.name[lang]);
-    driverId = d.id;
-    appendText(placed.driver);
-    track('review_driver_tapped', { driver: d.id });
+/* Driver line state. The sentence templates are picked once per driver
+   so the line doesn't jump around while the customer taps qualities. */
+var driverQ = {};          /* quality id -> { text: wording picked, verb } */
+var driverQOrder = [];     /* quality ids in the order tapped */
+var driverThanks = null;   /* thank-you wording, or null */
+var tplPlain = '', tplWith = '';
+
+function driverName() {
+  for (var i = 0; i < DRIVERS.length; i++) if (DRIVERS[i].id === driverId) return DRIVERS[i].name[lang];
+  return '';
+}
+
+function joinList(a) {
+  if (a.length < 2) return a.join('');
+  return a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1];
+}
+
+function buildDriverLine() {
+  var n = driverName();
+  var was = [], did = [];
+  driverQOrder.forEach(function(id) { (driverQ[id].verb ? did : was).push(driverQ[id].text); });
+  /* One flat list so only the last item takes "and":
+     "was very patient with us, always respectful and knew the routes well" */
+  if (was.length) was[0] = 'was ' + was[0];
+  var parts = was.concat(did);
+  var s = parts.length ? tplWith.replace('{q}', joinList(parts)) : tplPlain;
+  if (driverThanks) s += ' ' + driverThanks;
+  return s.split('{n}').join(n);
+}
+
+/* Put the current driver line in the box, replacing the old one in place */
+function updateDriverLine() {
+  var ta = document.getElementById('rh-text');
+  var old = placed.driver;
+  var fresh = driverId ? buildDriverLine() : null;
+  if (old && ta.value.indexOf(old) !== -1) {
+    if (fresh) ta.value = ta.value.replace(old, fresh);
+    else removePhrase(old);
+  } else if (fresh) {
+    appendText(fresh);
   }
+  if (fresh) placed.driver = fresh; else delete placed.driver;
+  caret = ta.value.length;
   textChanged();
   renderFacts();
+}
+
+function setDriver(d) {
+  if (driverId === d.id && inBox('driver')) {
+    /* Tapping the selected driver again removes the whole line */
+    driverId = null;
+    driverQ = {}; driverQOrder = []; driverThanks = null;
+  } else {
+    if (driverId !== d.id) {
+      tplPlain = pick(DRIVER_LINES[lang]);
+      tplWith = pick(DRIVER_WITH[lang]);
+    }
+    driverId = d.id;
+    track('review_driver_tapped', { driver: d.id });
+  }
+  updateDriverLine();
+}
+
+function toggleQuality(q) {
+  if (driverQ[q.id]) {
+    delete driverQ[q.id];
+    driverQOrder = driverQOrder.filter(function(id) { return id !== q.id; });
+  } else {
+    driverQ[q.id] = { text: pick(q.text), verb: !!q.verb };
+    driverQOrder.push(q.id);
+    track('review_driver_quality', { quality: q.id });
+  }
+  updateDriverLine();
+}
+
+function toggleThanks() {
+  driverThanks = driverThanks ? null : pick(DRIVER_THANKS.text);
+  updateDriverLine();
 }
 
 function appendText(s) {
