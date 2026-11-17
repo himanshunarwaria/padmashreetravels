@@ -558,8 +558,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="rh-review">
         <p class="rh-intro" data-i18n="intro">Tap what was true, then speak or type one line of your own. It takes about a minute.</p>
 
-        <p class="rh-label" data-i18n="factsLabel">Tap what was true for your trip</p>
+        <p class="rh-label" data-i18n="factsLabel">Tap what was true (tap again to remove)</p>
         <div class="rh-chips rh-chips--facts" id="rh-facts"></div>
+
+        <p class="rh-label" data-i18n="driverLabel">Your driver</p>
+        <div class="rh-chips rh-chips--facts" id="rh-drivers"></div>
 
         <div class="rh-chips-wrap" id="rh-chips-wrap" hidden>
           <p class="rh-label" data-i18n="chipsLabel">Places you visited (tap to add)</p>
@@ -666,7 +669,8 @@ var STR = {
     thanks: 'Thank you for travelling with us 🙏',
     whichTrip: 'Which trip did you take?',
     intro: 'Tap what was true, then speak or type one line of your own. It takes about a minute.',
-    factsLabel: 'Tap what was true for your trip',
+    factsLabel: 'Tap what was true (tap again to remove)',
+    driverLabel: 'Your driver',
     speak: 'Speak your review',
     listening: 'Listening… tap to stop',
     voiceErr: 'Microphone blocked. Use the 🎤 on your keyboard',
@@ -711,7 +715,8 @@ var STR = {
     thanks: 'हमारे साथ यात्रा करने के लिए धन्यवाद 🙏',
     whichTrip: 'आपने कौन-सी यात्रा की?',
     intro: 'जो सही था उसे टैप करें, फिर अपनी एक लाइन बोलें या लिखें। बस एक मिनट लगेगा।',
-    factsLabel: 'जो आपकी यात्रा में सही था, उसे टैप करें',
+    factsLabel: 'जो सही था उसे टैप करें (हटाने के लिए फिर टैप करें)',
+    driverLabel: 'आपके ड्राइवर',
     speak: 'बोलकर रिव्यू लिखें',
     listening: 'सुन रहे हैं… रोकने के लिए टैप करें',
     voiceErr: 'माइक की अनुमति नहीं मिली। कीबोर्ड का 🎤 इस्तेमाल करें',
@@ -871,19 +876,129 @@ var TRIPS = {
 var TRIP_ALIASES = { mathura: 'mathura-vrindavan', vrindavan: 'mathura-vrindavan' };
 
 /* Short facts the customer taps only if they were true for their trip.
-   Each adds one plain statement; "open" ones are starters the customer
-   finishes. Keep these as bare facts, never praise or full reviews. */
+   Each tap adds one plain statement, in one of two or three wordings so
+   the same tap doesn't always read the same. Tap again to remove it.
+   "open" ones are starters the customer finishes. Keep these as bare,
+   checkable facts. Never add praise, full reviews or business-written
+   lines (no brand/keyword sentences): the review must be the customer's. */
+function F(id, en, hi, ten, thi, open) {
+  return { id: id, label: { en: en, hi: hi }, text: { en: ten, hi: thi }, open: !!open };
+}
+
 var FACTS = [
-  { id: 'ontime',  label: { en: 'On time',          hi: 'समय पर' },           text: { en: 'Pickup was on time.',                    hi: 'पिकअप समय पर हुआ।' } },
-  { id: 'clean',   label: { en: 'Clean car',        hi: 'साफ़ गाड़ी' },         text: { en: 'The car was clean and comfortable.',     hi: 'गाड़ी साफ़ और आरामदायक थी।' } },
-  { id: 'polite',  label: { en: 'Polite driver',    hi: 'अच्छा व्यवहार' },      text: { en: 'The driver was polite.',                 hi: 'ड्राइवर का व्यवहार अच्छा था।' } },
-  { id: 'safe',    label: { en: 'Safe driving',     hi: 'सुरक्षित ड्राइविंग' },  text: { en: 'The driving felt safe.',                 hi: 'ड्राइविंग सुरक्षित थी।' } },
-  { id: 'waited',  label: { en: 'Waited for us',    hi: 'इंतज़ार किया' },       text: { en: 'The driver waited without rushing us.',  hi: 'ड्राइवर ने बिना जल्दबाज़ी के इंतज़ार किया।' } },
-  { id: 'fare',    label: { en: 'Fare as quoted',   hi: 'किराया वही रहा' },     text: { en: 'The fare was the same as quoted.',       hi: 'किराया वही रहा जो बताया गया था।' } },
-  { id: 'booking', label: { en: 'Easy booking',     hi: 'आसान बुकिंग' },        text: { en: 'Booking on WhatsApp was easy.',          hi: 'WhatsApp पर बुकिंग आसान रही।' } },
-  { id: 'driver',  label: { en: 'Driver’s name',    hi: 'ड्राइवर का नाम' },     text: { en: 'Our driver was ',                        hi: 'हमारे ड्राइवर थे ' }, open: true },
-  { id: 'better',  label: { en: 'Could be better',  hi: 'क्या बेहतर हो' },      text: { en: 'One thing that could be better: ',       hi: 'एक चीज़ जो बेहतर हो सकती थी: ' }, open: true }
+  F('ontime', 'On time', 'समय पर',
+    ['Pickup was on time.', 'The cab came on time.', 'The car reached right on time.'],
+    ['पिकअप समय पर हुआ।', 'गाड़ी समय पर आ गई।', 'कैब टाइम पर पहुँच गई।']),
+  F('clean', 'Clean car', 'साफ़ गाड़ी',
+    ['The car was clean and comfortable.', 'Clean car, comfortable ride.', 'The car was neat and clean.'],
+    ['गाड़ी साफ़ और आरामदायक थी।', 'गाड़ी साफ़-सुथरी थी।', 'गाड़ी एकदम साफ़ थी।']),
+  F('polite', 'Polite driver', 'अच्छा व्यवहार',
+    ['The driver was polite.', 'The driver behaved well with us.', 'Very polite driver.'],
+    ['ड्राइवर का व्यवहार अच्छा था।', 'ड्राइवर ने अच्छे से बात की।', 'ड्राइवर बहुत शालीन थे।']),
+  F('safe', 'Safe driving', 'सुरक्षित ड्राइविंग',
+    ['The driving felt safe.', 'The driver drove carefully.', 'Safe, steady driving.'],
+    ['ड्राइविंग सुरक्षित थी।', 'गाड़ी ध्यान से चलाई।', 'ड्राइविंग में कोई डर नहीं लगा।']),
+  F('waited', 'Waited for us', 'इंतज़ार किया',
+    ['The driver waited without rushing us.', 'We were never rushed.', 'The driver waited patiently for us.'],
+    ['ड्राइवर ने बिना जल्दबाज़ी के इंतज़ार किया।', 'हमें कहीं भी जल्दी नहीं करवाई।', 'ड्राइवर ने आराम से हमारा इंतज़ार किया।']),
+  F('fare', 'Fare as quoted', 'किराया वही रहा',
+    ['The fare was the same as quoted.', 'We paid exactly what we were told.', 'Same fare as quoted, nothing extra.'],
+    ['किराया वही रहा जो बताया गया था।', 'जितना बताया था, उतना ही किराया लिया।', 'बताए गए किराए से ज़्यादा कुछ नहीं लिया।']),
+  F('booking', 'Easy booking', 'आसान बुकिंग',
+    ['Booking was easy.', 'Booking was quick and simple.', 'Easy to book.'],
+    ['बुकिंग आसान रही।', 'बुकिंग जल्दी और आसानी से हो गई।', 'बुक करना आसान था।']),
+  F('better', 'Could be better', 'क्या बेहतर हो',
+    ['One thing that could be better: '], ['एक चीज़ जो बेहतर हो सकती थी: '], true)
 ];
+
+/* Trip-specific facts, shown before the general ones */
+var F_STOPS = F('stops', 'Stopped when asked', 'कहने पर रुके',
+  ['The driver stopped whenever we asked.', 'We could stop for tea or a break whenever we wanted.'],
+  ['जब कहा, ड्राइवर ने गाड़ी रोकी।', 'चाय या ब्रेक के लिए जब चाहा, रुके।']);
+var F_HIGHWAY = F('highway', 'Comfortable long drive', 'आरामदायक लंबा सफ़र',
+  ['The highway drive was smooth and comfortable.', 'Long drive, but comfortable.'],
+  ['हाईवे का सफ़र आरामदायक रहा।', 'लंबा सफ़र था, फिर भी आराम से कटा।']);
+var F_EXPLAINED = F('explained', 'Told us about places', 'जगहों के बारे में बताया',
+  ['The driver told us about each place.', 'Got useful tips about each place.'],
+  ['ड्राइवर ने हर जगह के बारे में बताया।', 'हर जगह के बारे में काम की जानकारी मिली।']);
+
+var TRIP_FACTS = {
+  sightseeing: [
+    F('tickets', 'Helped with tickets', 'टिकट में मदद',
+      ['The driver helped us with tickets and the right gate.', 'Got help with the Taj tickets and gates.'],
+      ['ड्राइवर ने टिकट और सही गेट बताने में मदद की।', 'टिकट और गेट की जानकारी मिल गई।']),
+    F('early', 'Early pickup', 'सुबह जल्दी पिकअप',
+      ['They picked us up early for sunrise.', 'Early morning pickup, no problem at all.'],
+      ['सूर्योदय के लिए सुबह जल्दी ले गए।', 'सुबह जल्दी पिकअप मिल गया।']),
+    F_EXPLAINED
+  ],
+  fatehpur: [
+    F('sameday', 'Did Agra same day', 'आगरा भी साथ में',
+      ['We covered Fatehpur Sikri and Agra the same day.', 'Did Fatehpur Sikri along with Agra in one day.'],
+      ['एक ही दिन में फ़तेहपुर सीकरी और आगरा घूम लिए।', 'आगरा के साथ फ़तेहपुर सीकरी भी हो गया।']),
+    F_EXPLAINED
+  ],
+  'mathura-vrindavan': [
+    F('darshan', 'Waited during darshan', 'दर्शन में इंतज़ार',
+      ['The driver waited patiently during darshan.', 'No hurry during darshan, the driver waited.'],
+      ['दर्शन के समय ड्राइवर ने आराम से इंतज़ार किया।', 'दर्शन में कोई जल्दी नहीं करवाई।']),
+    F('elders', 'Good with elders', 'बुज़ुर्गों का ध्यान',
+      ['The driver took good care of the elders with us.', 'Easy trip for the elders in our family.'],
+      ['साथ आए बुज़ुर्गों का अच्छा ध्यान रखा।', 'घर के बुज़ुर्गों के लिए यात्रा आरामदायक रही।']),
+    F('timings', 'Knew temple timings', 'मंदिर का समय पता था',
+      ['The driver knew the temple timings well.', 'We reached every temple at the right time.'],
+      ['ड्राइवर को मंदिरों का समय अच्छे से पता था।', 'हर मंदिर सही समय पर पहुँच गए।']),
+    F('parking', 'Parked close by', 'पास में पार्किंग',
+      ['Parking was close to the temples.', 'We didn’t have to walk much from the parking.'],
+      ['पार्किंग मंदिर के पास ही मिली।', 'पार्किंग से ज़्यादा पैदल नहीं चलना पड़ा।'])
+  ],
+  jaipur: [
+    F_HIGHWAY, F_STOPS,
+    F('knewjaipur', 'Knew Jaipur well', 'जयपुर की जानकारी',
+      ['The driver knew Jaipur well.', 'Good knowledge of the Jaipur sights.'],
+      ['ड्राइवर को जयपुर की अच्छी जानकारी थी।', 'जयपुर की जगहों का पूरा पता था।'])
+  ],
+  airport: [
+    F('arrival', 'Waiting when we arrived', 'पहले से इंतज़ार',
+      ['The driver was waiting when we arrived.', 'Our cab was already there when we came out.'],
+      ['हमारे पहुँचने पर ड्राइवर पहले से इंतज़ार कर रहे थे।', 'बाहर निकले तो गाड़ी पहले से खड़ी थी।']),
+    F('luggage', 'Helped with luggage', 'सामान में मदद',
+      ['The driver helped with our luggage.', 'Got help with the bags.'],
+      ['ड्राइवर ने सामान रखने में मदद की।', 'सामान उठाने में मदद मिली।']),
+    F('oddhours', 'Late night / early', 'देर रात / सुबह जल्दी',
+      ['Pickup at an odd hour was no problem.', 'Came on time even late at night.'],
+      ['रात या सुबह-सुबह के समय भी कोई दिक्कत नहीं हुई।', 'देर रात भी समय पर आए।'])
+  ],
+  local: [
+    F('quick', 'Came quickly', 'जल्दी आई',
+      ['The cab came quickly.', 'Didn’t have to wait long for the cab.'],
+      ['कैब जल्दी आ गई।', 'कैब के लिए ज़्यादा इंतज़ार नहीं करना पड़ा।']),
+    F('shortnotice', 'Short notice booking', 'तुरंत बुकिंग',
+      ['Got a cab even at short notice.', 'Booked last minute and still got a car.'],
+      ['तुरंत बुकिंग पर भी गाड़ी मिल गई।', 'आख़िरी समय पर बुक किया, फिर भी गाड़ी आ गई।'])
+  ],
+  outstation: [
+    F_HIGHWAY, F_STOPS,
+    F('earlystart', 'Early start', 'सुबह जल्दी निकले',
+      ['We started early, just as planned.', 'Early morning start, right on time.'],
+      ['तय समय पर सुबह जल्दी निकल गए।', 'सुबह जल्दी निकलना था, समय पर निकले।'])
+  ]
+};
+
+/* Drivers. Tapping a name adds one line; tapping another swaps it. */
+var DRIVERS = [
+  { id: 'padam',  name: { en: 'Padam ji',  hi: 'पदम जी' } },
+  { id: 'raju',   name: { en: 'Raju',      hi: 'राजू' } },
+  { id: 'deepu',  name: { en: 'Deepu',     hi: 'दीपू' } },
+  { id: 'suneel', name: { en: 'Suneel ji', hi: 'सुनील जी' } },
+  { id: 'heera',  name: { en: 'Heera ji',  hi: 'हीरा जी' } }
+];
+var DRIVER_LINES = {
+  en: ['Our driver was {n}.', '{n} was our driver.'],
+  hi: ['हमारे ड्राइवर {n} थे।', '{n} हमारे ड्राइवर थे।']
+};
+var DRIVER_OTHER = F('driver_other', 'Someone else', 'कोई और',
+  ['Our driver was '], ['ड्राइवर का नाम: '], true);
 
 var ICON_COPY = '<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
 var ICON_DONE = '<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>';
@@ -943,35 +1058,88 @@ function showPills() {
   renderTrip();
 }
 
+function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+var placed = {};      /* chip id -> exact phrase it put in the box */
+var driverId = null;  /* which driver chip is in the box */
+
+function inBox(id) {
+  var p = placed[id];
+  return !!p && document.getElementById('rh-text').value.indexOf(p) !== -1;
+}
+
+function removePhrase(p) {
+  var ta = document.getElementById('rh-text');
+  var v = ta.value, i = v.indexOf(p);
+  if (i === -1) return;
+  var end = i + p.length;
+  if (v.charAt(end) === ' ') end++;
+  else if (i > 0 && v.charAt(i - 1) === ' ') i--;
+  ta.value = v.slice(0, i) + v.slice(end);
+  caret = ta.value.length;
+}
+
+function makeChip(label, used, onTap) {
+  var b = document.createElement('button');
+  b.type = 'button';
+  b.className = 'rh-chip' + (used ? ' used' : '');
+  b.setAttribute('aria-pressed', used ? 'true' : 'false');
+  b.textContent = (used ? '✓ ' : '+ ') + label;
+  b.onclick = onTap;
+  return b;
+}
+
 function renderFacts() {
   var box = document.getElementById('rh-facts');
   box.innerHTML = '';
-  FACTS.forEach(function(f) {
-    var b = document.createElement('button');
-    b.type = 'button';
-    b.className = 'rh-chip' + (usedFacts[f.id] ? ' used' : '');
-    b.textContent = '+ ' + f.label[lang];
-    b.onclick = function() { addFact(f, b); };
-    box.appendChild(b);
+  (TRIP_FACTS[trip] || []).concat(FACTS).forEach(function(f) {
+    box.appendChild(makeChip(f.label[lang], inBox(f.id), function() { toggleFact(f); }));
   });
+  var dbox = document.getElementById('rh-drivers');
+  dbox.innerHTML = '';
+  var hasDriver = inBox('driver');
+  DRIVERS.forEach(function(d) {
+    dbox.appendChild(makeChip(d.name[lang], hasDriver && driverId === d.id, function() { setDriver(d); }));
+  });
+  dbox.appendChild(makeChip(DRIVER_OTHER.label[lang], inBox(DRIVER_OTHER.id), function() { toggleFact(DRIVER_OTHER); }));
 }
 
-/* Add one fact to the end of the review. Starters leave the cursor in
-   the box so the customer finishes the sentence. */
-function addFact(f, btn) {
+/* Tap adds a fact (random wording); tap again removes it. Starters stay
+   and just put the cursor back at the end so the customer can finish. */
+function toggleFact(f) {
   var ta = document.getElementById('rh-text');
-  var phrase = f.text[lang];
-  if (ta.value.indexOf(phrase.trim()) === -1) {
-    appendText(phrase);
-    usedFacts[f.id] = true;
-    btn.classList.add('used');
-    track('review_fact_tapped', { fact: f.id });
-    textChanged();
-  }
   if (f.open) {
+    if (!inBox(f.id)) {
+      placed[f.id] = pick(f.text[lang]);
+      appendText(placed[f.id]);
+    }
     ta.focus();
     ta.setSelectionRange(ta.value.length, ta.value.length);
+  } else if (inBox(f.id)) {
+    removePhrase(placed[f.id]);
+    delete placed[f.id];
+  } else {
+    placed[f.id] = pick(f.text[lang]);
+    appendText(placed[f.id]);
+    track('review_fact_tapped', { fact: f.id });
   }
+  textChanged();
+  renderFacts();
+}
+
+function setDriver(d) {
+  var same = inBox('driver') && driverId === d.id;
+  if (inBox('driver')) removePhrase(placed.driver);
+  delete placed.driver;
+  driverId = null;
+  if (!same) {
+    placed.driver = pick(DRIVER_LINES[lang]).replace('{n}', d.name[lang]);
+    driverId = d.id;
+    appendText(placed.driver);
+    track('review_driver_tapped', { driver: d.id });
+  }
+  textChanged();
+  renderFacts();
 }
 
 function appendText(s) {
@@ -1032,6 +1200,7 @@ function setTrip(key, fromInit) {
     p.setAttribute('aria-pressed', on ? 'true' : 'false');
   });
   renderTrip();
+  renderFacts();
   if (!fromInit) track('review_trip_selected');
 }
 
@@ -1235,7 +1404,7 @@ function queryParam(name) {
   var ta = document.getElementById('rh-text');
   function saveCaret() { caret = ta.selectionStart; }
   ['click', 'keyup', 'select', 'blur'].forEach(function(ev) { ta.addEventListener(ev, saveCaret); });
-  ta.addEventListener('input', function() { saveCaret(); chipEnd = -1; typed = true; textChanged(); });
+  ta.addEventListener('input', function() { saveCaret(); chipEnd = -1; typed = true; textChanged(); renderFacts(); });
 
   var key = queryParam('trip');
   key = TRIP_ALIASES[key] || key;

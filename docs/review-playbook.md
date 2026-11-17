@@ -2,7 +2,7 @@
 
 How Padma Shree Travels asks for Google reviews and replies to them. For the owner and anyone who messages customers after a trip.
 
-The review page is `https://www.padmashreetravels.in/review-helper/`. It does **not** give customers a ready-made review. They pick their trip, see a few questions to jog their memory, can tap place names (Amber Fort, Prem Mandir, Buland Darwaza…), tap short facts that were true for their trip (on time, clean car, fare as quoted), speak or type a line in their own words, then copy it into Google. They choose their own star rating on Google.
+The review page is `https://www.padmashreetravels.in/review-helper/`. It does **not** give customers a ready-made review. They pick their trip, see a few questions to jog their memory, can tap place names (Amber Fort, Prem Mandir, Buland Darwaza…), tap short facts that were true for their trip (on time, clean car, fare as quoted, plus trip-specific ones like "waited during darshan") and their driver's name, speak or type a line in their own words, then copy it into Google. They choose their own star rating on Google.
 
 ---
 
