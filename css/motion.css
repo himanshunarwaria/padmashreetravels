@@ -557,7 +557,7 @@
   text-transform: uppercase;
   color: rgba(255,255,255,.72);
 }
-.ff__cabs {
+.ff__seg {
   position: relative;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -595,16 +595,44 @@
 .ff__cab small { display: block; margin-top: .1rem; font-size: .64rem; font-weight: 500; opacity: .78; white-space: nowrap }
 .ff__cab[aria-checked="true"] { color: var(--black) }
 .ff__cab:focus-visible { outline: 2px solid var(--pst-gold-lt); outline-offset: 2px }
-@media (min-width: 640px) and (max-width: 959px) {
-  .ff__cabs-wrap { grid-column: 1 / -1 }
+/* A trip type this route does not run (a drop on a full-day tour). */
+.ff__cab:disabled { color: rgba(255,255,255,.34); cursor: not-allowed; text-decoration: line-through }
+
+/* Trip type: drop or round trip, two choices on one line. */
+.ff__types { grid-template-columns: 1fr 1fr; margin-top: .75rem }
+.ff__types .ff__cab { min-height: 40px; font-size: .8rem }
+
+/* Phones: the "what's included" line moves under the button, so the trip
+   type and cab rows fit without pushing the fare off the first screen. */
+@media (max-width: 639px) {
+  .ff__head { display: contents }
+  .ff__title { margin-bottom: .6rem }
+  .ff__sub { order: 4; margin-top: .8rem; text-align: center }
+  .ff__cabs-wrap { margin-top: .6rem }
+  .ff__types { margin-top: .6rem }
+  .ff__result { margin: .7rem 0 .7rem }
 }
-/* Desktop card: trip, then cab, then date, then the fare. */
+@media (min-width: 640px) and (max-width: 959px) {
+  .ff__types, .ff__cabs-wrap { grid-column: 1 / -1 }
+}
+/* Desktop card: trip, trip type, cab, date, then the fare. Spacing is kept
+   tight so the WhatsApp button stays on screen on a 768px-high laptop. */
 @media (min-width: 960px) {
+  .hero.hero--img.hero--ff { padding-top: 3rem; padding-bottom: 3.4rem }
+  .hero--ff .hero__in > .ff { padding: 1.15rem 1.3rem 1.2rem }
+  .hero--ff .ff__head { margin-bottom: .6rem }
+  .hero--ff .ff__chips { margin-bottom: .7rem }
   .hero--ff .ff__row { display: contents }
-  .hero--ff .ff__cabs-wrap { margin-top: .8rem }
-  .hero--ff .ff__row .ff__field:last-child { order: 1; margin-top: .8rem }
-  .hero--ff .ff__result { order: 2 }
-  .hero--ff .ff__acts { order: 3 }
+  .hero--ff .ff__field select,
+  .hero--ff .ff__field input { min-height: 42px; padding-top: .4rem; padding-bottom: .4rem }
+  .hero--ff .ff__types { margin-top: .55rem }
+  .hero--ff .ff__types .ff__cab { min-height: 36px }
+  .hero--ff .ff__cabs-wrap { margin-top: .55rem }
+  .hero--ff .ff__cabs .ff__cab { min-height: 42px }
+  .hero--ff .ff__row .ff__field:last-child { order: 1; margin-top: .55rem }
+  .hero--ff .ff__result { order: 2; margin: .7rem 0 .7rem }
+  .hero--ff .ff__price { font-size: 2.1rem }
+  .hero--ff .ff__acts { order: 3; gap: .55rem }
 }
 
 /* ── 15. Example confirmation arrives line by line ───────────────────────── */

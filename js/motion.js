@@ -211,28 +211,56 @@
     return { amount: m[0].replace(/\s/g, ''), from: /^from/i.test(raw) };
   }
 
-  /* The cabs a customer can pick. Sedan fares are the ones printed on the
-     route cards. A bigger cab's fare is shown only where the card carries it
-     (data-fare-ertiga / data-fare-innova / data-fare-traveller, copied from
-     that route page's own fare table); everywhere else the finder says
-     "Fare on WhatsApp" rather than guess. */
+  /* Trip types and cabs a customer can pick.
+
+     The fare printed on a route card is the SEDAN fare for that card's own
+     trip type (a card that says "One Way" is a drop; anything else is a
+     round trip or full day). Every other combination comes from the card's
+     data-fares attribute, copied from that route page's own fare table:
+
+       data-fares='{"ow":{"ertiga":"from ₹2,000"},"rt":{"sedan":"₹3,000"}}'
+         ow = one-way drop, rt = round trip / full day
+         cabs: sedan, ertiga, innova, traveller
+
+     A combination that is not listed shows "Fare on WhatsApp" rather than a
+     guess. data-only="ow" marks a trip that is only ever one way (airport
+     and station transfers); full-day and half-day tours are round trips only. */
+  var TYPES = [
+    { id: 'ow', label: 'One-way drop',          name: 'One way (drop only)',    kind: 'One Way' },
+    { id: 'rt', label: 'Round trip / full day', name: 'Round trip (same day)',  kind: 'Round Trip' }
+  ];
   var CABS = [
     { id: 'sedan',     label: 'Sedan',     seats: '4 seats',     name: 'AC Sedan (4 seats)' },
     { id: 'ertiga',    label: 'Ertiga',    seats: '6 seats',     name: 'Ertiga SUV (6 seats)' },
     { id: 'innova',    label: 'Innova',    seats: '7 seats',     name: 'Innova Crysta (7 seats)' },
     { id: 'traveller', label: 'Traveller', seats: '12–15 seats', name: 'Tempo Traveller (12–15 seats)' }
   ];
-  function cabFares(el) {
-    var out = {};
-    CABS.forEach(function (c) {
-      var v = el.getAttribute('data-fare-' + c.id);
-      if (v) out[c.id] = parsePrice(v);
-    });
-    return out;
+  function byId(list, id) { return list.filter(function (x) { return x.id === id; })[0]; }
+
+  /* Fill in t.base, t.only and t.fares from the card or link `el`. */
+  function readFares(t, el) {
+    t.base = /one way/i.test(t.kind) ? 'ow' : 'rt';
+    t.only = el.getAttribute('data-only') || (/full|half|package/i.test(t.kind) ? 'rt' : null);
+    if (t.only) t.base = t.only;
+    t.fares = { ow: {}, rt: {} };
+    var raw = el.getAttribute('data-fares');
+    if (!raw) return;
+    try {
+      var data = JSON.parse(raw);
+      ['ow', 'rt'].forEach(function (type) {
+        Object.keys(data[type] || {}).forEach(function (cab) { t.fares[type][cab] = parsePrice(data[type][cab]); });
+      });
+    } catch (e) { /* a typo in the attribute must not break the finder */ }
   }
-  function fareFor(t, cabId) {
-    if (cabId === 'sedan') return { ask: t.ask, amount: t.amount, from: t.from };
-    return t.cabs[cabId] || { ask: true };
+  function fareFor(t, typeId, cabId) {
+    if (t.fares[typeId][cabId]) return t.fares[typeId][cabId];
+    if (typeId === t.base && cabId === 'sedan') return { ask: t.ask, amount: t.amount, from: t.from };
+    return { ask: true };
+  }
+  /* The words for the chosen trip type: the card's own ("Full Day") when it
+     is the card's type, otherwise "One Way" / "Round Trip". */
+  function kindFor(t, typeId) {
+    return (typeId === t.base && t.kind) ? t.kind : byId(TYPES, typeId).kind;
   }
 
   /* Read every trip the page already lists. */
@@ -257,7 +285,7 @@
         t.kind = kind;
         t.meta = meta.join(' · ');
         t.group = group;
-        t.cabs = cabFares(card);
+        readFares(t, card);
         add(t);
       });
       /* Outstation links: "Agra to Gwalior <span class=ptag>₹3,000 · RT</span>" */
@@ -269,10 +297,10 @@
         t.title = text(a).replace(raw, '').trim();
         t.href = a.getAttribute('href');
         t.slug = slugOf(t.href);
-        t.kind = /·\s*RT/i.test(raw) ? 'Round trip' : '';
+        t.kind = /·\s*RT/i.test(raw) ? 'Round Trip' : '';
         t.meta = '';
         t.group = group;
-        t.cabs = cabFares(a);
+        readFares(t, a);
         add(t);
       });
     });
@@ -287,12 +315,14 @@
     return +m[3] + ' ' + mon + ' ' + m[1];
   }
 
-  /* f = the fare for the chosen cab (see fareFor), cab = one of CABS */
-  function waLink(t, f, cab, date) {
+  /* f = the fare for the chosen trip type and cab (see fareFor) */
+  function waLink(t, f, type, cab, date) {
     date = niceDate(date);
-    var fare = f.ask ? '' : (f.from ? 'from ' : '') + f.amount + (t.kind ? ' (' + t.kind + ')' : '');
+    var kind = kindFor(t, type.id);
+    var fare = f.ask ? '' : (f.from ? 'from ' : '') + f.amount + ' (' + kind + ')';
     var msg = 'Hi Padma Shree Travels, I need a cab from Agra.\n\n' +
       'Route: ' + t.title + '\n' +
+      'Trip type: ' + ((type.id === t.base && t.kind) ? t.kind : type.name) + '\n' +
       'Cab type: ' + cab.name + '\n' +
       (fare ? 'Fare shown on website: ' + fare + '\n' : '') +
       'Travel date: ' + (date || '') + '\n' +
@@ -363,11 +393,27 @@
     row.appendChild(field('Your trip', select));
     row.appendChild(field('Travel date', date, '(optional)'));
 
+    /* Trip type: drop or round trip. Tours and transfers that only run one
+       way keep the other choice greyed out. */
+    var types = el('div', 'ff__seg ff__types');
+    types.setAttribute('role', 'radiogroup');
+    types.setAttribute('aria-label', 'Trip type');
+    var typePill = el('span', 'ff__cabpill');
+    types.appendChild(typePill);
+    var typeButtons = TYPES.map(function (ty) {
+      var b = el('button', 'ff__cab', ty.label);
+      b.type = 'button';
+      b.setAttribute('role', 'radio');
+      b.setAttribute('data-type', ty.id);
+      types.appendChild(b);
+      return b;
+    });
+
     /* Cab picker: a row of four with a white pill that slides to the choice. */
     var cabsWrap = el('div', 'ff__cabs-wrap');
     var cabsLabel = el('span', 'ff__label', 'Select private AC cab');
     cabsLabel.id = 'ff-cabs-label';
-    var cabs = el('div', 'ff__cabs');
+    var cabs = el('div', 'ff__seg ff__cabs');
     cabs.setAttribute('role', 'radiogroup');
     cabs.setAttribute('aria-labelledby', 'ff-cabs-label');
     var cabPill = el('span', 'ff__cabpill');
@@ -412,18 +458,19 @@
     acts.appendChild(wa);
     acts.appendChild(details);
 
-    [head, chips, row, cabsWrap, result, acts].forEach(function (n) { box.appendChild(n); });
+    [head, chips, row, types, cabsWrap, result, acts].forEach(function (n) { box.appendChild(n); });
 
-    var current = null, started = false, shown = null, cab = CABS[0];
+    var current = null, started = false, shown = null, cab = CABS[0], type = TYPES[0];
 
-    function moveCabPill() {
-      var b = cabButtons[CABS.indexOf(cab)];
-      cabPill.style.width = b.offsetWidth + 'px';
-      cabPill.style.transform = 'translate3d(' + b.offsetLeft + 'px,0,0)';
+    function movePills() {
+      [[cabPill, cabButtons[CABS.indexOf(cab)]], [typePill, typeButtons[TYPES.indexOf(type)]]].forEach(function (p) {
+        p[0].style.width = p[1].offsetWidth + 'px';
+        p[0].style.transform = 'translate3d(' + p[1].offsetLeft + 'px,0,0)';
+      });
     }
 
     function fill(t, animate, redrawMap) {
-      var f = fareFor(t, cab.id);
+      var f = fareFor(t, type.id, cab.id);
       price.textContent = '';
       price.classList.toggle('ff__price--ask', !!f.ask);
       if (f.ask) {
@@ -439,18 +486,25 @@
         }
         shown = target;
       }
-      spoken.textContent = t.title + ', ' + cab.name + ': ' + (f.ask ? 'fare on WhatsApp' : (f.from ? 'from ' : '') + f.amount) + (t.kind ? ', ' + t.kind : '');
+      var kindText = kindFor(t, type.id);
+      spoken.textContent = t.title + ', ' + kindText + ', ' + cab.name + ': ' + (f.ask ? 'fare on WhatsApp' : (f.from ? 'from ' : '') + f.amount);
       if (redrawMap !== false) map.show(t.slug);
-      kind.textContent = t.kind;
+      kind.textContent = kindText;
       meta.textContent = t.meta;
       meta.hidden = !t.meta;
       wa.textContent = !f.ask ? 'Book this trip on WhatsApp'
         : (cab.id === 'sedan' ? 'Ask the fare on WhatsApp' : 'Ask the ' + cab.label + ' fare on WhatsApp');
-      wa.href = waLink(t, f, cab, date.value);
+      wa.href = waLink(t, f, type, cab, date.value);
       wa.setAttribute('data-route', t.slug);
       cabButtons.forEach(function (b) {
         var on = b.getAttribute('data-cab') === cab.id;
         b.setAttribute('aria-checked', on ? 'true' : 'false');
+        b.tabIndex = on ? 0 : -1;
+      });
+      typeButtons.forEach(function (b) {
+        var id = b.getAttribute('data-type'), on = id === type.id;
+        b.setAttribute('aria-checked', on ? 'true' : 'false');
+        b.disabled = !!t.only && t.only !== id;
         b.tabIndex = on ? 0 : -1;
       });
       details.href = t.href;
@@ -464,7 +518,9 @@
       if (!t) return;
       current = t;
       select.value = slug;
+      type = byId(TYPES, t.base);          /* each route opens on its own trip type */
       fill(t, animate && !reduce);
+      movePills();
       if (!animate || reduce) return;
       price.classList.remove('is-pulsing');
       void price.offsetWidth;            /* restart the pulse */
@@ -483,25 +539,47 @@
       interacted('chip');
     });
     select.addEventListener('change', function () { choose(select.value, true); interacted('select'); });
-    date.addEventListener('change', function () { if (current) wa.href = waLink(current, fareFor(current, cab.id), cab, date.value); });
+    date.addEventListener('change', function () { if (current) wa.href = waLink(current, fareFor(current, type.id, cab.id), type, cab, date.value); });
     wa.addEventListener('click', function () {
-      push('fare_finder_complete', { source_component: 'hero_fare_finder', route: current ? current.slug : '', trip_type: current ? current.kind : '', vehicle: cab.id });
+      push('fare_finder_complete', { source_component: 'hero_fare_finder', route: current ? current.slug : '', trip_type: current ? kindFor(current, type.id) : '', vehicle: cab.id });
     });
 
-    function pickCab(id) {
-      var next = CABS.filter(function (c) { return c.id === id; })[0];
-      if (!next || next === cab || !current) return;
-      cab = next;
-      moveCabPill();
-      fill(current, !reduce, false);      /* same route: the map does not redraw */
+    /* A change of cab or trip type on the same route: new fare, same map. */
+    function refresh() {
+      movePills();
+      fill(current, !reduce, false);
       if (!reduce) {
         price.classList.remove('is-pulsing');
         void price.offsetWidth;
         price.classList.add('is-pulsing');
       }
       if (!started) { started = true; push('fare_finder_start', { source_component: 'hero_fare_finder' }); }
+    }
+    function pickCab(id) {
+      var next = byId(CABS, id);
+      if (!next || next === cab || !current) return;
+      cab = next;
+      refresh();
       push('vehicle_selected', { vehicle: cab.id, source_component: 'hero_fare_finder', route: current.slug });
     }
+    function pickType(id) {
+      var next = byId(TYPES, id);
+      if (!next || next === type || !current || (current.only && current.only !== id)) return;
+      type = next;
+      refresh();
+      push('fare_finder_trip_type', { trip_type: type.id, source_component: 'hero_fare_finder', route: current.slug });
+    }
+    types.addEventListener('click', function (e) {
+      var b = e.target.closest('.ff__cab');
+      if (b) pickType(b.getAttribute('data-type'));
+    });
+    types.addEventListener('keydown', function (e) {
+      if (!/^Arrow/.test(e.key)) return;
+      e.preventDefault();
+      var other = TYPES[1 - TYPES.indexOf(type)];
+      pickType(other.id);
+      typeButtons[TYPES.indexOf(type)].focus();
+    });
     cabs.addEventListener('click', function (e) {
       var b = e.target.closest('.ff__cab');
       if (b) pickCab(b.getAttribute('data-cab'));
@@ -521,9 +599,9 @@
     if (hero) hero.classList.add('hero--ff');
     /* The pill can only be measured once the box is on screen, and again
        when the web font or the window width changes the button sizes. */
-    moveCabPill();
-    window.addEventListener('resize', moveCabPill);
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(moveCabPill);
+    movePills();
+    window.addEventListener('resize', movePills);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(movePills);
   }
 
   /* ── 3. Route tabs ──────────────────────────────────────────────────────── */
