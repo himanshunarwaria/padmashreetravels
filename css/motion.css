@@ -546,6 +546,67 @@
 @media (min-width: 960px) { .hero--ff .ff__map { flex-basis: 92px; width: 92px; height: 92px } }
 .hero__sv, .stat-num, .ff__price { font-variant-numeric: tabular-nums }
 
+/* Cab picker: four choices in a row, a white pill slides to the chosen one. */
+.ff__cabs-wrap { margin-top: .75rem }
+.ff__label {
+  display: block;
+  margin-bottom: .25rem;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.72);
+}
+.ff__cabs {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 3px;
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: var(--r);
+  background: rgba(255,255,255,.07);
+}
+.ff__cabpill {
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  left: 0;
+  width: 0;
+  border-radius: 8px;
+  background: var(--white);
+  transition: transform .38s var(--ease-out), width .38s var(--ease-out);
+  pointer-events: none;
+}
+.ff__cab {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  min-height: 46px;
+  padding: .3rem .15rem;
+  border: 0;
+  border-radius: 8px;
+  background: none;
+  color: rgba(255,255,255,.9);
+  font: 700 .8rem/1.2 var(--ff);
+  cursor: pointer;
+  transition: color .25s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.ff__cab small { display: block; margin-top: .1rem; font-size: .64rem; font-weight: 500; opacity: .78; white-space: nowrap }
+.ff__cab[aria-checked="true"] { color: var(--black) }
+.ff__cab:focus-visible { outline: 2px solid var(--pst-gold-lt); outline-offset: 2px }
+@media (min-width: 640px) and (max-width: 959px) {
+  .ff__cabs-wrap { grid-column: 1 / -1 }
+}
+/* Desktop card: trip, then cab, then date, then the fare. */
+@media (min-width: 960px) {
+  .hero--ff .ff__row { display: contents }
+  .hero--ff .ff__cabs-wrap { margin-top: .8rem }
+  .hero--ff .ff__row .ff__field:last-child { order: 1; margin-top: .8rem }
+  .hero--ff .ff__result { order: 2 }
+  .hero--ff .ff__acts { order: 3 }
+}
+
 /* ── 15. Example confirmation arrives line by line ───────────────────────── */
 .slip--seq .slip__row,
 .slip--seq .slip__note { opacity: 0 }
@@ -684,6 +745,6 @@
   .rcat-section.is-entering,
   .ff__price.is-pulsing { animation: none !important }
   [data-rv] { opacity: 1 !important; transform: none !important; transition: none !important }
-  .rcard, .tchip, .inc, .fi__a, .ff__result, .ff__chip, .rtabs__pill, .rtabs__btn, .olist__a { transition: none !important }
+  .rcard, .tchip, .inc, .fi__a, .ff__result, .ff__chip, .ff__cab, .ff__cabpill, .rtabs__pill, .rtabs__btn, .olist__a { transition: none !important }
   .rcard:hover, .rcard:active, .olist__a:hover, .olist__a:active { transform: none }
 }

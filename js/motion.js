@@ -211,6 +211,30 @@
     return { amount: m[0].replace(/\s/g, ''), from: /^from/i.test(raw) };
   }
 
+  /* The cabs a customer can pick. Sedan fares are the ones printed on the
+     route cards. A bigger cab's fare is shown only where the card carries it
+     (data-fare-ertiga / data-fare-innova / data-fare-traveller, copied from
+     that route page's own fare table); everywhere else the finder says
+     "Fare on WhatsApp" rather than guess. */
+  var CABS = [
+    { id: 'sedan',     label: 'Sedan',     seats: '4 seats',     name: 'AC Sedan (4 seats)' },
+    { id: 'ertiga',    label: 'Ertiga',    seats: '6 seats',     name: 'Ertiga SUV (6 seats)' },
+    { id: 'innova',    label: 'Innova',    seats: '7 seats',     name: 'Innova Crysta (7 seats)' },
+    { id: 'traveller', label: 'Traveller', seats: '12–15 seats', name: 'Tempo Traveller (12–15 seats)' }
+  ];
+  function cabFares(el) {
+    var out = {};
+    CABS.forEach(function (c) {
+      var v = el.getAttribute('data-fare-' + c.id);
+      if (v) out[c.id] = parsePrice(v);
+    });
+    return out;
+  }
+  function fareFor(t, cabId) {
+    if (cabId === 'sedan') return { ask: t.ask, amount: t.amount, from: t.from };
+    return t.cabs[cabId] || { ask: true };
+  }
+
   /* Read every trip the page already lists. */
   function readTrips() {
     var trips = [], seen = {};
@@ -233,6 +257,7 @@
         t.kind = kind;
         t.meta = meta.join(' · ');
         t.group = group;
+        t.cabs = cabFares(card);
         add(t);
       });
       /* Outstation links: "Agra to Gwalior <span class=ptag>₹3,000 · RT</span>" */
@@ -247,6 +272,7 @@
         t.kind = /·\s*RT/i.test(raw) ? 'Round trip' : '';
         t.meta = '';
         t.group = group;
+        t.cabs = cabFares(a);
         add(t);
       });
     });
@@ -261,15 +287,17 @@
     return +m[3] + ' ' + mon + ' ' + m[1];
   }
 
-  function waLink(t, date) {
+  /* f = the fare for the chosen cab (see fareFor), cab = one of CABS */
+  function waLink(t, f, cab, date) {
     date = niceDate(date);
-    var fare = t.ask ? '' : (t.from ? 'from ' : '') + t.amount + (t.kind ? ' (' + t.kind + ')' : '');
+    var fare = f.ask ? '' : (f.from ? 'from ' : '') + f.amount + (t.kind ? ' (' + t.kind + ')' : '');
     var msg = 'Hi Padma Shree Travels, I need a cab from Agra.\n\n' +
       'Route: ' + t.title + '\n' +
+      'Cab type: ' + cab.name + '\n' +
       (fare ? 'Fare shown on website: ' + fare + '\n' : '') +
       'Travel date: ' + (date || '') + '\n' +
       'Pickup time: \nPickup point in Agra: \nPassengers: \n\n' +
-      (t.ask ? 'Please share availability and fare.' : 'Please confirm availability and fare.');
+      (f.ask ? 'Please share availability and fare.' : 'Please confirm availability and fare.');
     return WA + encodeURIComponent(msg);
   }
 
@@ -335,6 +363,28 @@
     row.appendChild(field('Your trip', select));
     row.appendChild(field('Travel date', date, '(optional)'));
 
+    /* Cab picker: a row of four with a white pill that slides to the choice. */
+    var cabsWrap = el('div', 'ff__cabs-wrap');
+    var cabsLabel = el('span', 'ff__label', 'Select private AC cab');
+    cabsLabel.id = 'ff-cabs-label';
+    var cabs = el('div', 'ff__cabs');
+    cabs.setAttribute('role', 'radiogroup');
+    cabs.setAttribute('aria-labelledby', 'ff-cabs-label');
+    var cabPill = el('span', 'ff__cabpill');
+    cabs.appendChild(cabPill);
+    var cabButtons = CABS.map(function (c) {
+      var b = el('button', 'ff__cab');
+      b.type = 'button';
+      b.setAttribute('role', 'radio');
+      b.setAttribute('data-cab', c.id);
+      b.appendChild(document.createTextNode(c.label));
+      b.appendChild(el('small', '', c.seats));
+      cabs.appendChild(b);
+      return b;
+    });
+    cabsWrap.appendChild(cabsLabel);
+    cabsWrap.appendChild(cabs);
+
     var result = el('div', 'ff__result');
     var info = el('div', 'ff__info');
     var price = el('div', 'ff__price');
@@ -362,34 +412,47 @@
     acts.appendChild(wa);
     acts.appendChild(details);
 
-    [head, chips, row, result, acts].forEach(function (n) { box.appendChild(n); });
+    [head, chips, row, cabsWrap, result, acts].forEach(function (n) { box.appendChild(n); });
 
-    var current = null, started = false, shown = null;
+    var current = null, started = false, shown = null, cab = CABS[0];
 
-    function fill(t, animate) {
+    function moveCabPill() {
+      var b = cabButtons[CABS.indexOf(cab)];
+      cabPill.style.width = b.offsetWidth + 'px';
+      cabPill.style.transform = 'translate3d(' + b.offsetLeft + 'px,0,0)';
+    }
+
+    function fill(t, animate, redrawMap) {
+      var f = fareFor(t, cab.id);
       price.textContent = '';
-      price.classList.toggle('ff__price--ask', !!t.ask);
-      if (t.ask) {
+      price.classList.toggle('ff__price--ask', !!f.ask);
+      if (f.ask) {
         price.textContent = 'Fare on WhatsApp';
         shown = null;
       } else {
-        if (t.from) price.appendChild(el('small', '', 'from'));
-        var num = el('span', '', t.amount);
+        if (f.from) price.appendChild(el('small', '', 'from'));
+        var num = el('span', '', f.amount);
         price.appendChild(num);
-        var target = toNumber(t.amount);
+        var target = toNumber(f.amount);
         if (animate && shown !== null) {
           tween(shown, target, 520, function (v) { num.textContent = '₹' + v; });
         }
         shown = target;
       }
-      spoken.textContent = t.title + ': ' + (t.ask ? 'fare on WhatsApp' : (t.from ? 'from ' : '') + t.amount) + (t.kind ? ', ' + t.kind : '');
-      map.show(t.slug);
+      spoken.textContent = t.title + ', ' + cab.name + ': ' + (f.ask ? 'fare on WhatsApp' : (f.from ? 'from ' : '') + f.amount) + (t.kind ? ', ' + t.kind : '');
+      if (redrawMap !== false) map.show(t.slug);
       kind.textContent = t.kind;
       meta.textContent = t.meta;
       meta.hidden = !t.meta;
-      wa.textContent = t.ask ? 'Ask the fare on WhatsApp' : 'Book this trip on WhatsApp';
-      wa.href = waLink(t, date.value);
+      wa.textContent = !f.ask ? 'Book this trip on WhatsApp'
+        : (cab.id === 'sedan' ? 'Ask the fare on WhatsApp' : 'Ask the ' + cab.label + ' fare on WhatsApp');
+      wa.href = waLink(t, f, cab, date.value);
       wa.setAttribute('data-route', t.slug);
+      cabButtons.forEach(function (b) {
+        var on = b.getAttribute('data-cab') === cab.id;
+        b.setAttribute('aria-checked', on ? 'true' : 'false');
+        b.tabIndex = on ? 0 : -1;
+      });
       details.href = t.href;
       chips.querySelectorAll('.ff__chip').forEach(function (c) {
         c.setAttribute('aria-pressed', c.getAttribute('data-slug') === t.slug ? 'true' : 'false');
@@ -420,15 +483,47 @@
       interacted('chip');
     });
     select.addEventListener('change', function () { choose(select.value, true); interacted('select'); });
-    date.addEventListener('change', function () { if (current) wa.href = waLink(current, date.value); });
+    date.addEventListener('change', function () { if (current) wa.href = waLink(current, fareFor(current, cab.id), cab, date.value); });
     wa.addEventListener('click', function () {
-      push('fare_finder_complete', { source_component: 'hero_fare_finder', route: current ? current.slug : '', trip_type: current ? current.kind : '' });
+      push('fare_finder_complete', { source_component: 'hero_fare_finder', route: current ? current.slug : '', trip_type: current ? current.kind : '', vehicle: cab.id });
+    });
+
+    function pickCab(id) {
+      var next = CABS.filter(function (c) { return c.id === id; })[0];
+      if (!next || next === cab || !current) return;
+      cab = next;
+      moveCabPill();
+      fill(current, !reduce, false);      /* same route: the map does not redraw */
+      if (!reduce) {
+        price.classList.remove('is-pulsing');
+        void price.offsetWidth;
+        price.classList.add('is-pulsing');
+      }
+      if (!started) { started = true; push('fare_finder_start', { source_component: 'hero_fare_finder' }); }
+      push('vehicle_selected', { vehicle: cab.id, source_component: 'hero_fare_finder', route: current.slug });
+    }
+    cabs.addEventListener('click', function (e) {
+      var b = e.target.closest('.ff__cab');
+      if (b) pickCab(b.getAttribute('data-cab'));
+    });
+    cabs.addEventListener('keydown', function (e) {
+      var step = (e.key === 'ArrowRight' || e.key === 'ArrowDown') ? 1 : ((e.key === 'ArrowLeft' || e.key === 'ArrowUp') ? -1 : 0);
+      if (!step) return;
+      e.preventDefault();
+      var next = CABS[(CABS.indexOf(cab) + step + CABS.length) % CABS.length];
+      pickCab(next.id);
+      cabButtons[CABS.indexOf(cab)].focus();
     });
 
     choose(trips[0].slug, false);
     box.hidden = false;
     var hero = box.closest('.hero');
     if (hero) hero.classList.add('hero--ff');
+    /* The pill can only be measured once the box is on screen, and again
+       when the web font or the window width changes the button sizes. */
+    moveCabPill();
+    window.addEventListener('resize', moveCabPill);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(moveCabPill);
   }
 
   /* ── 3. Route tabs ──────────────────────────────────────────────────────── */
