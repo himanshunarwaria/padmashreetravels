@@ -1,0 +1,689 @@
+/* ============================================================================
+   Padma Shree Travels — motion layer + homepage v2 components
+   ============================================================================
+   Loaded AFTER css/style.css. Adds movement and three small components (fare
+   finder, route tabs, mobile swipe rows) without changing the brand: every
+   colour, radius and font here is a token from style.css.
+
+   Rules of the layer
+   - Only opacity and transform animate, so it stays smooth on budget phones.
+   - Nothing is hidden unless JavaScript is running: scroll reveals key off
+     [data-rv], which js/motion.js adds itself. No JS = a fully visible page.
+   - prefers-reduced-motion switches all of it off (bottom of this file).
+   ============================================================================ */
+
+:root {
+  --ease-out: cubic-bezier(.22, 1, .36, 1);
+}
+
+/* ── 1. Hero entrance ──────────────────────────────────────────────────────
+   Pure CSS, so it plays even before any script loads. The h1 moves but never
+   fades: it is the page's largest text and must paint immediately. */
+@keyframes m-rise {
+  from { opacity: 0; transform: translate3d(0, 16px, 0) }
+  to   { opacity: 1; transform: none }
+}
+@keyframes m-slide {
+  from { transform: translate3d(0, 12px, 0) }
+  to   { transform: none }
+}
+.hero--img .hero__in > * { animation: m-rise .6s var(--ease-out) both }
+.hero--img .hero__in > h1 { animation-name: m-slide }
+.hero--img .hero__in > :nth-child(1) { animation-delay: .02s }
+.hero--img .hero__in > :nth-child(2) { animation-delay: .06s }
+.hero--img .hero__in > :nth-child(3) { animation-delay: .12s }
+.hero--img .hero__in > :nth-child(4) { animation-delay: .18s }
+.hero--img .hero__in > :nth-child(5) { animation-delay: .24s }
+.hero--img .hero__in > :nth-child(n+6) { animation-delay: .3s }
+
+/* ── 2. Scroll reveal ──────────────────────────────────────────────────────
+   js/motion.js tags elements with [data-rv] and adds .is-in when they enter
+   the viewport, then removes the attribute so hover transitions come back. */
+[data-rv] {
+  opacity: 0;
+  transform: translate3d(0, 18px, 0);
+  transition: opacity .6s var(--ease-out), transform .6s var(--ease-out);
+  transition-delay: var(--rv-d, 0ms);
+  will-change: opacity, transform;
+}
+[data-rv].is-in { opacity: 1; transform: none }
+
+/* ── 3. Touch feedback ─────────────────────────────────────────────────────
+   Cards and chips press in slightly under a finger. */
+.rcard, .tchip, .inc { transition: box-shadow var(--t), border-color var(--t), transform .25s var(--ease-out) }
+@media (hover: hover) {
+  .rcard:hover { transform: translate3d(0, -3px, 0) }
+}
+.rcard:active { transform: scale(.985) }
+
+/* FAQ answers ease open instead of snapping. */
+.fi__a { transition: max-height .42s var(--ease-out), padding .42s var(--ease-out) }
+
+/* Sticky phone bar and WhatsApp button arrive after the page has settled. */
+@keyframes m-up { from { transform: translate3d(0, 100%, 0) } to { transform: none } }
+@keyframes m-pop { from { opacity: 0; transform: scale(.6) } to { opacity: 1; transform: none } }
+.mcta-bar { animation: m-up .5s var(--ease-out) .5s both }
+.waf { animation: m-pop .45s var(--ease-out) .9s both }
+
+/* ── 4. Fare finder (homepage hero) ────────────────────────────────────────
+   Built by js/motion.js from the route cards further down the page, so a fare
+   only ever lives in one place. Hidden until the script fills it. */
+.ff {
+  max-width: 600px;
+  margin: 0 0 1.4rem;
+  padding: 1rem 1.1rem 1.1rem;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: var(--r-lg);
+  background: rgba(16,16,16,.74);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  color-scheme: dark;
+}
+.ff[hidden] { display: none }
+.ff__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: .2rem .8rem;
+  margin-bottom: .7rem;
+}
+.ff__title { font-size: .95rem; font-weight: 700; color: var(--white) }
+.ff__sub { font-size: .74rem; color: rgba(255,255,255,.72) }
+
+.ff__chips {
+  display: flex;
+  gap: .4rem;
+  margin: 0 -1.1rem .8rem;
+  padding: 0 1.1rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.ff__chips::-webkit-scrollbar { display: none }
+.ff__chip {
+  flex: 0 0 auto;
+  min-height: 36px;
+  padding: .35rem .85rem;
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: var(--rp);
+  background: transparent;
+  color: rgba(255,255,255,.88);
+  font: 600 .8rem var(--ff);
+  cursor: pointer;
+  transition: background .2s ease, border-color .2s ease, color .2s ease, transform .2s var(--ease-out);
+  -webkit-tap-highlight-color: transparent;
+}
+.ff__chip:hover { border-color: rgba(255,255,255,.5) }
+.ff__chip:active { transform: scale(.96) }
+.ff__chip[aria-pressed="true"] { background: var(--white); border-color: var(--white); color: var(--black) }
+
+.ff__row { display: grid; grid-template-columns: 1fr; gap: .6rem }
+.ff__field { display: block }
+.ff__field > span {
+  display: block;
+  margin-bottom: .25rem;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.72);
+}
+.ff__field em { font-style: normal; font-weight: 500; text-transform: none; letter-spacing: 0 }
+.ff__field select,
+.ff__field input {
+  width: 100%;
+  min-height: 46px;
+  padding: .55rem .75rem;
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: var(--r);
+  background: rgba(255,255,255,.07);
+  color: var(--white);
+  font: 500 1rem var(--ff);   /* 16px: stops iOS zooming on focus */
+}
+.ff__field select option { color: var(--black); background: var(--white) }
+.ff__field select:focus-visible,
+.ff__field input:focus-visible,
+.ff__chip:focus-visible { outline: 2px solid var(--pst-gold-lt); outline-offset: 2px }
+
+.ff__result {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .15rem .9rem;
+  margin: .9rem 0 .85rem;
+  transition: opacity .22s ease, transform .3s var(--ease-out);
+}
+.ff__result.is-swapping { opacity: 0; transform: translate3d(0, 6px, 0) }
+.ff__price {
+  font-family: var(--ffd);
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -.02em;
+  color: var(--white);
+  font-variant-numeric: tabular-nums;
+}
+.ff__price small { font-size: .8rem; font-weight: 600; color: rgba(255,255,255,.72); margin-right: .3rem; letter-spacing: 0 }
+.ff__price--ask { font-size: 1.25rem }
+.ff__kind {
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--pst-gold-lt);
+}
+.ff__meta { flex-basis: 100%; font-size: .8rem; color: rgba(255,255,255,.78) }
+@keyframes m-pulse { 0% { transform: scale(1) } 40% { transform: scale(1.05) } 100% { transform: scale(1) } }
+.ff__price.is-pulsing { animation: m-pulse .42s var(--ease-out); transform-origin: left center }
+
+.ff__acts { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1rem }
+.ff__acts .btn { flex: 1 1 240px; justify-content: center }
+.ff__link { font-size: .84rem; font-weight: 600; color: var(--white); text-decoration: underline; text-underline-offset: 3px }
+.ff__link:hover { color: var(--pst-gold-lt) }
+
+/* The finder carries the WhatsApp action, so the generic hero button steps
+   aside (only once the finder is actually on screen). */
+.hero--ff .hero__acts > .btn--wa { display: none }
+
+/* Phones: the fare shows straight under the trip, above the optional date,
+   so the price is on the first screen. */
+@media (max-width: 639px) {
+  .ff { display: flex; flex-direction: column }
+  .ff__row { display: contents }
+  .ff__result { order: 1; margin: .85rem 0 .8rem }
+  .ff__row .ff__field:last-child { order: 2; margin-bottom: .9rem }
+  .ff__acts { order: 3 }
+}
+
+/* Wider screens: fare on the left, WhatsApp button on the right, one row. */
+@media (min-width: 640px) {
+  .ff {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    column-gap: 1.2rem;
+    align-items: end;
+    max-width: 680px;
+    padding: 1.15rem 1.3rem 1.25rem;
+  }
+  .ff__head, .ff__chips, .ff__row { grid-column: 1 / -1 }
+  .ff__chips { margin: 0 0 .85rem; padding: 0; overflow: visible }
+  .ff__chip { padding: .35rem .72rem }
+  .ff__row { grid-template-columns: 1.6fr 1fr }
+  .ff__result { margin: 1rem 0 0 }
+  .ff__acts { margin-top: 1rem; flex-wrap: nowrap }
+  .ff__acts .btn { flex: 0 0 auto }
+}
+
+/* Desktop: the finder sits on the right of the hero, beside the headline,
+   as a tall booking card. The copy keeps the left column. */
+@media (min-width: 960px) {
+  .hero--ff .hero__in {
+    max-width: none;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 400px;
+    column-gap: 3.5rem;
+    align-items: start;
+  }
+  .hero--ff .hero__in > * { grid-column: 1 }
+  .hero--ff .hero__in > .ff {
+    grid-column: 2;
+    grid-row: 1 / span 8;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    max-width: none;
+    margin: 0;
+    padding: 1.4rem 1.4rem 1.5rem;
+    background: rgba(14,14,14,.82);
+    box-shadow: 0 24px 60px -20px rgba(0,0,0,.7);
+  }
+  .hero--ff .ff__head { flex-direction: column; align-items: flex-start; gap: .25rem; margin-bottom: .9rem }
+  .hero--ff .ff__title { font-size: 1.1rem }
+  .hero--ff .ff__chips { flex-wrap: wrap; margin-bottom: 1rem }
+  .hero--ff .ff__row { grid-template-columns: 1fr; gap: .75rem }
+  .hero--ff .ff__result { margin: 1.1rem 0 1rem }
+  .hero--ff .ff__price { font-size: 2.3rem }
+  .hero--ff .ff__acts { margin-top: 0; flex-direction: column; align-items: stretch; gap: .75rem }
+  .hero--ff .ff__acts .btn { flex: 0 0 auto; width: 100% }
+  .hero--ff .ff__link { align-self: center }
+}
+
+/* ── 5. Route tabs ─────────────────────────────────────────────────────────
+   Built by js/motion.js above the route groups. A black pill slides to the
+   active tab. Without the script the groups simply all show, as before. */
+.rtabs-wrap { display: flex; justify-content: center; margin-top: 1.4rem }
+.rtabs {
+  position: relative;
+  display: inline-flex;
+  max-width: 100%;
+  padding: 4px;
+  border: 1px solid var(--g100);
+  border-radius: var(--rp);
+  background: var(--g50);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.rtabs::-webkit-scrollbar { display: none }
+.rtabs__pill {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 0;
+  width: 0;
+  border-radius: var(--rp);
+  background: var(--black);
+  transition: transform .38s var(--ease-out), width .38s var(--ease-out);
+  pointer-events: none;
+}
+.rtabs__btn {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 auto;
+  min-height: 40px;
+  padding: .45rem 1rem;
+  border: 0;
+  border-radius: var(--rp);
+  background: none;
+  color: var(--g700);
+  font: 600 .84rem var(--ff);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color .25s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.rtabs__btn[aria-selected="true"] { color: var(--white) }
+@media (max-width: 420px) {
+  .rtabs__btn { padding: .45rem .78rem; font-size: .8rem }
+}
+.rtabs__btn:focus-visible { outline: 2px solid var(--black); outline-offset: 2px }
+.rcat-section[hidden] { display: none }
+.rcat-section.is-entering { animation: m-rise .45s var(--ease-out) both }
+
+/* ── 6. Swipe rows on phones ───────────────────────────────────────────────
+   Eight stacked photo cards made the homepage very long on a phone. Inside
+   .routes--v2 each group becomes one swipeable row; the next card peeks in
+   from the right so it is obvious there is more. Desktop keeps the grid. */
+@media (max-width: 639px) {
+  .routes--v2 .rgrid {
+    display: flex;
+    gap: .75rem;
+    margin: 0 -1.25rem;
+    padding: .25rem 1.25rem .9rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 1.25rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .routes--v2 .rgrid::-webkit-scrollbar { display: none }
+  .routes--v2 .rgrid > * { flex: 0 0 82%; scroll-snap-align: start }
+  .routes--v2 .rcat-section { margin-top: 1.75rem }
+}
+
+/* ── 7. Route cards (v2) ───────────────────────────────────────────────────
+   Title above the price, so a long title or "Fare on WhatsApp" never squeezes
+   the other; buttons pinned to the bottom so a row of cards lines up; four
+   columns on wide screens so 8 and 4 cards fill whole rows. */
+.routes--v2 div.rcard { display: flex; flex-direction: column }
+.routes--v2 .rcard__top { flex-direction: column; gap: .3rem; margin-bottom: .55rem }
+.routes--v2 .rcard__price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .1rem .5rem;
+  font-size: 1.2rem;
+  text-align: left;
+  white-space: normal;
+}
+.routes--v2 .rcard__price small { display: inline; margin: 0; text-align: left }
+.routes--v2 .rcard__acts { margin-top: auto }
+.routes--v2 .rcard__meta { flex-wrap: wrap; gap: .15rem 1rem }
+.routes--v2 .rcard__meta span { white-space: nowrap }
+@media (min-width: 1100px) {
+  .routes--v2 .rgrid { grid-template-columns: repeat(4, 1fr) }
+  .routes--v2 .rcard { padding: 1.2rem 1.25rem }
+  .routes--v2 .rcard__thumb { margin: -1.2rem -1.25rem .85rem }
+}
+
+/* ── 8. Outstation fare list ───────────────────────────────────────────────
+   Destination on the left, fare on the right. One column on a phone, two on
+   a tablet, three on desktop. */
+.olist { display: grid; grid-template-columns: 1fr; gap: .5rem; margin-top: .7rem }
+.olist__a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  min-height: 48px;
+  padding: .6rem .95rem;
+  border: 1px solid var(--g100);
+  border-radius: var(--r);
+  background: var(--white);
+  color: var(--black);
+  font-size: .88rem;
+  font-weight: 600;
+  line-height: 1.3;
+  text-decoration: none;
+  transition: border-color var(--t), box-shadow var(--t), transform .25s var(--ease-out);
+}
+.olist__a .ptag { flex-shrink: 0; color: var(--g700); font-weight: 700; white-space: nowrap }
+@media (hover: hover) {
+  .olist__a:hover { border-color: var(--g300); box-shadow: var(--sm); transform: translate3d(0, -1px, 0) }
+}
+.olist__a:active { transform: scale(.985) }
+/* Phones: the first six show; a button (added by js/motion.js) opens the rest. */
+.olist__more {
+  display: none;
+  width: 100%;
+  min-height: 46px;
+  margin-top: .5rem;
+  border: 1px solid var(--g200);
+  border-radius: var(--r);
+  background: var(--g50);
+  color: var(--black);
+  font: 600 .86rem var(--ff);
+  cursor: pointer;
+}
+@media (max-width: 639px) {
+  .olist.is-short > .olist__a:nth-child(n+7) { display: none }
+  .olist.is-short + .olist__more { display: block }
+}
+@media (min-width: 640px) { .olist { grid-template-columns: repeat(2, 1fr) } }
+@media (min-width: 960px) { .olist { grid-template-columns: repeat(3, 1fr) } }
+
+/* ── 9. How Booking Works: steps + example confirmation ──────────────────── */
+.how { display: grid; gap: 1.6rem; margin-top: 1.8rem; align-items: center }
+.how .incs { grid-template-columns: 1fr }
+@media (min-width: 960px) {
+  .how { grid-template-columns: 1.05fr .95fr; gap: 3.5rem; max-width: 1000px; margin-left: auto; margin-right: auto }
+}
+.slip {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  border: 1px solid var(--g100);
+  border-radius: var(--r-lg);
+  background: var(--white);
+  box-shadow: var(--lg);
+  overflow: hidden;
+}
+.slip__hd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  padding: .95rem 1.15rem;
+  background: var(--pst-teal);
+  color: var(--pst-ivory);
+}
+.slip__brand { font-size: .92rem; font-weight: 700; line-height: 1.3 }
+.slip__brand small { display: block; font-size: .72rem; font-weight: 500; color: rgba(247,243,234,.82) }
+.slip__tag {
+  flex-shrink: 0;
+  padding: .22rem .6rem;
+  border: 1px solid rgba(235,201,127,.45);
+  border-radius: var(--rp);
+  background: rgba(235,201,127,.16);
+  color: var(--pst-gold-lt);
+  font-size: .64rem;
+  font-weight: 700;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.slip__bd { margin: 0; padding: .45rem 1.15rem 0 }
+.slip__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .6rem 0;
+  border-bottom: 1px solid var(--g100);
+  font-size: .86rem;
+}
+.slip__row dt { color: var(--g500) }
+.slip__row dd { margin: 0; color: var(--black); font-weight: 600; text-align: right }
+.slip__fare dd { font-size: 1.2rem; font-weight: 800; font-variant-numeric: tabular-nums }
+.slip__row:last-child { border-bottom: 0 }
+.slip__note { margin: 0; padding: .7rem 1.15rem 1rem; font-size: .76rem; line-height: 1.5; color: var(--g500); background: var(--g50); border-top: 1px solid var(--g100) }
+
+/* ── 10. "Discover the places" band ──────────────────────────────────────── */
+.xband { padding: 3.5rem 0; background: var(--pst-ivory); text-align: center }
+.xband__k {
+  margin-bottom: .6rem;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--pst-teal-mut);
+}
+.xband h2 { margin-bottom: 1.3rem; color: var(--pst-teal) }
+.xband__btn { background: var(--pst-teal); color: var(--white) }
+.xband__btn:hover { background: var(--pst-ink); box-shadow: 0 4px 14px rgba(14,26,34,.25) }
+
+/* ── 11. Reviews: one swipe row on phones ──────────────────────────────────
+   The review component injects its own styles at run time, so these need the
+   extra `html` to win. Only the layout changes; the cards are untouched. */
+@media (max-width: 639px) {
+  html .grx .grx__grid,
+  html .grx .grx__more:not([hidden]) {
+    display: flex;
+    gap: 12px;
+    margin-left: -1.25rem;
+    margin-right: -1.25rem;
+    padding: 0 1.25rem 6px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 1.25rem;
+    scrollbar-width: none;
+  }
+  html .grx .grx__grid::-webkit-scrollbar,
+  html .grx .grx__more::-webkit-scrollbar { display: none }
+  html .grx .grx__grid > *,
+  html .grx .grx__more > * { flex: 0 0 86%; scroll-snap-align: start }
+  html .grx .grx__more:not([hidden]) { margin-top: 12px }
+}
+
+/* ── 12. Small fixes ─────────────────────────────────────────────────────── */
+/* Sticky phone bar: line icons sized to the label */
+.mcta-bar__a svg { width: 15px; height: 15px; stroke: currentColor; stroke-width: 2.2; flex-shrink: 0 }
+
+/* Phones: Call and Book Online are in the sticky bar right below, so the hero
+   does not repeat them once the fare finder is showing. */
+@media (max-width: 639px) {
+  .hero--ff .hero__acts { display: none }
+}
+
+/* Small laptops (960-1139px): nine menu items no longer squeeze the logo
+   onto three lines. Home is the logo; About stays in the footer. */
+.logo__t { white-space: nowrap }
+@media (min-width: 960px) and (max-width: 1139px) {
+  .nav__l { gap: .5rem }
+  .nav__a { font-size: .78rem }
+  .nav__l > li:first-child { display: none }
+}
+@media (min-width: 960px) and (max-width: 1039px) {
+  .nav__l > li:has(> a[href$="about/"]) { display: none }
+  .hdr__in { gap: 1rem }
+  .nav__l { gap: .3rem }
+  .nav__a { font-size: .75rem }
+  .logo__img { height: 30px }
+  .logo__t { font-size: .9rem }
+}
+
+/* ── 13. Page-to-page transitions ──────────────────────────────────────────
+   When both the page being left and the page being opened load this file,
+   the browser cross-fades between them and the header stays put. Browsers
+   without the feature simply load the page as usual. */
+@view-transition { navigation: auto; }
+@keyframes m-vt-out { to { opacity: 0; transform: translate3d(0, -8px, 0) } }
+@keyframes m-vt-in  { from { opacity: 0; transform: translate3d(0, 12px, 0) } }
+::view-transition-old(root) { animation: m-vt-out .2s ease both }
+::view-transition-new(root) { animation: m-vt-in .36s var(--ease-out) both }
+.hdr { view-transition-name: pst-header }
+
+/* ── 14. Fare finder: mini map + counting fare ─────────────────────────────
+   The little compass shows which way the trip heads from Agra (direction is
+   real, distance is not to scale) and the line draws on every change. */
+.ff__result { flex-wrap: nowrap; align-items: center; justify-content: space-between; gap: 1rem }
+.ff__info { display: flex; flex-wrap: wrap; align-items: baseline; gap: .15rem .9rem; min-width: 0 }
+.ff__sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap }
+.ff__map { flex: 0 0 76px; width: 76px; height: 76px; overflow: visible }
+.ff__map[hidden] { display: none }
+.ff__map .ring { fill: none; stroke: rgba(255,255,255,.16); stroke-width: 1 }
+.ff__map .ring--in { stroke-dasharray: 2 3 }
+.ff__map .north { fill: rgba(255,255,255,.55); font: 700 8px var(--ff); text-anchor: middle }
+.ff__map .origin { fill: var(--white) }
+.ff__map .line { stroke: var(--pst-gold-lt); stroke-width: 2.2; stroke-linecap: round; stroke-dasharray: var(--len, 50); }
+.ff__map .dest { fill: var(--pst-gold-lt); transform-box: fill-box; transform-origin: center }
+.ff__map .loop { fill: none; stroke: var(--pst-gold-lt); stroke-width: 2; transform-box: fill-box; transform-origin: center }
+@keyframes m-draw { from { stroke-dashoffset: var(--len, 50) } to { stroke-dashoffset: 0 } }
+@keyframes m-ring { 0% { transform: scale(.4); opacity: 0 } 60% { opacity: 1 } 100% { transform: scale(1); opacity: 1 } }
+.ff__map.is-draw .line { animation: m-draw .6s var(--ease-out) both }
+.ff__map.is-draw .dest { animation: m-pop .35s var(--ease-out) .45s both }
+.ff__map.is-draw .loop { animation: m-ring .6s var(--ease-out) both }
+@media (min-width: 640px) and (max-width: 959px) { .ff__map { display: none } }
+@media (min-width: 960px) { .hero--ff .ff__map { flex-basis: 92px; width: 92px; height: 92px } }
+.hero__sv, .stat-num, .ff__price { font-variant-numeric: tabular-nums }
+
+/* ── 15. Example confirmation arrives line by line ───────────────────────── */
+.slip--seq .slip__row,
+.slip--seq .slip__note { opacity: 0 }
+.slip--seq.is-live .slip__row,
+.slip--seq.is-live .slip__note { animation: m-rise .45s var(--ease-out) both }
+.slip--seq.is-live .slip__row:nth-child(1) { animation-delay: .35s }
+.slip--seq.is-live .slip__row:nth-child(2) { animation-delay: .7s }
+.slip--seq.is-live .slip__row:nth-child(3) { animation-delay: 1.05s }
+.slip--seq.is-live .slip__row:nth-child(4) { animation-delay: 1.4s }
+.slip--seq.is-live .slip__row:nth-child(5) { animation-delay: 1.75s }
+.slip--seq.is-live .slip__row:nth-child(6) { animation-delay: 2.1s }
+.slip--seq.is-live .slip__note { animation-delay: 2.5s }
+
+/* ── 16. Hero photo drifts as you scroll ───────────────────────────────────
+   Uses the browser's scroll-linked animations, so no script runs while
+   scrolling. Browsers without them keep the still photo. */
+@supports (animation-timeline: scroll()) {
+  @media (min-width: 960px) and (prefers-reduced-motion: no-preference) {
+    /* The photo moves to its own layer so it can slide under the text. */
+    .hero--img { background-image: none; background-color: var(--black) }
+    .hero--img::after {
+      content: '';
+      position: absolute;
+      inset: -5% 0;
+      z-index: 0;
+      background: var(--hero-img) right center / cover no-repeat;
+      animation: m-drift linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 110vh;
+      will-change: transform;
+    }
+    .hero--img::before {
+      z-index: 1;
+      /* A little stronger than the still version: the photo sits slightly
+         larger on its own layer, so more of it passes under the text. */
+      background: linear-gradient(90deg, rgba(10,10,10,.88) 0%, rgba(10,10,10,.84) 38%, rgba(10,10,10,.62) 50%, rgba(10,10,10,.2) 60%, rgba(10,10,10,0) 68%);
+    }
+    @keyframes m-drift { from { transform: translate3d(0, -2.5%, 0) } to { transform: translate3d(0, 4%, 0) } }
+  }
+  @media (max-width: 959px) and (prefers-reduced-motion: no-preference) {
+    .hero--img .hero__photo {
+      animation: m-zoom linear both;
+      animation-timeline: view();
+      animation-range: entry 0% exit 100%;
+    }
+    @keyframes m-zoom { from { background-size: auto 100% } to { background-size: auto 114% } }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    /* Route pages: the hero photo eases in slightly as it scrolls past. */
+    .frame-hero { overflow: hidden }
+    .frame-hero img {
+      animation: m-imgzoom linear both;
+      animation-timeline: view();
+      animation-range: entry 0% exit 100%;
+    }
+    @keyframes m-imgzoom { from { transform: scale(1) } to { transform: scale(1.1) } }
+  }
+}
+
+/* ── 17. Moving strip of destination photos ────────────────────────────────
+   Built by js/motion.js from the route photos already on the page. Purely
+   decorative, so it is hidden from screen readers and pauses under a pointer. */
+.xband__strip {
+  overflow: hidden;
+  margin-bottom: 2.4rem;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.xband__track { display: flex; width: max-content; animation: m-marquee 70s linear infinite }
+.xband__track img {
+  flex: 0 0 auto;
+  width: 190px;
+  height: 118px;
+  margin-right: .75rem;
+  border-radius: var(--r);
+  object-fit: cover;
+}
+.xband__strip:hover .xband__track { animation-play-state: paused }
+@keyframes m-marquee { to { transform: translate3d(-50%, 0, 0) } }
+@media (min-width: 960px) { .xband__track img { width: 240px; height: 146px } }
+
+/* ── 18. Route pages (css/landing.css track) ───────────────────────────────
+   These pages have their own components, so they get their own hooks. The
+   look is untouched: same borders, colours and type. */
+.hero-bg .hero__grid > div:first-child > * { animation: m-rise .6s var(--ease-out) both }
+.hero-bg .hero__grid > div:first-child > h1 { animation-name: m-slide }
+.hero-bg .hero__grid > div:first-child > :nth-child(1) { animation-delay: .02s }
+.hero-bg .hero__grid > div:first-child > :nth-child(2) { animation-delay: .06s }
+.hero-bg .hero__grid > div:first-child > :nth-child(3) { animation-delay: .13s }
+.hero-bg .hero__grid > div:first-child > :nth-child(4) { animation-delay: .2s }
+.hero-bg .hero__grid > div:first-child > :nth-child(n+5) { animation-delay: .27s }
+.hero-bg .frame-hero { animation: m-slide .8s var(--ease-out) .1s both }
+
+/* The Agra -> destination arrow draws itself, then the destination appears. */
+.rt__line.m-seq::before { clip-path: inset(0 100% 0 0); transition: clip-path .7s var(--ease-out) .15s }
+.rt__line.m-seq .rt__node--to { opacity: 0; transform: translate3d(-8px, 0, 0); transition: opacity .45s ease .7s, transform .5s var(--ease-out) .7s }
+@media (max-width: 559px) {
+  .rt__line.m-seq::before { clip-path: inset(0 0 100% 0) }
+  .rt__line.m-seq .rt__node--to { transform: translate3d(0, -8px, 0) }
+}
+.rt__line.m-seq.is-drawn::before { clip-path: inset(0) }
+.rt__line.m-seq.is-drawn .rt__node--to { opacity: 1; transform: none }
+
+/* Cards answer a pointer the same way the related-route cards already do. */
+.card { transition: transform .25s var(--ease-out), box-shadow .25s var(--ease-out) }
+@media (hover: hover) {
+  .card:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 #000 }
+}
+.btn-primary:active { transform: scale(.97) }
+
+/* FAQ answers ease open (newer browsers; others open instantly as before). */
+@supports (interpolate-size: allow-keywords) {
+  .faq-acc, .seo-acc { interpolate-size: allow-keywords }
+  .faq-acc::details-content, .seo-acc::details-content {
+    block-size: 0;
+    overflow: clip;
+    transition: block-size .38s var(--ease-out), content-visibility .38s allow-discrete;
+  }
+  .faq-acc[open]::details-content, .seo-acc[open]::details-content { block-size: auto }
+}
+.mobile-bar { animation: m-up .5s var(--ease-out) .5s both }
+
+/* ── 19. Reduced motion ─────────────────────────────────────────────────────
+   Visitors who ask their device for less movement get none of the above. */
+@media (prefers-reduced-motion: reduce) {
+  @view-transition { navigation: none; }
+  .hero-bg .hero__grid > div:first-child > *, .hero-bg .frame-hero,
+  .mobile-bar, .xband__track,
+  .ff__map .line, .ff__map .dest, .ff__map .loop { animation: none !important }
+  .xband__strip { display: none }
+  .slip--seq .slip__row, .slip--seq .slip__note { opacity: 1 !important; animation: none !important }
+  .card { transition: none !important }
+  .card:hover { transform: none; box-shadow: none }
+  .hero--img .hero__in > *,
+  .mcta-bar, .waf,
+  .rcat-section.is-entering,
+  .ff__price.is-pulsing { animation: none !important }
+  [data-rv] { opacity: 1 !important; transform: none !important; transition: none !important }
+  .rcard, .tchip, .inc, .fi__a, .ff__result, .ff__chip, .rtabs__pill, .rtabs__btn, .olist__a { transition: none !important }
+  .rcard:hover, .rcard:active, .olist__a:hover, .olist__a:active { transform: none }
+}

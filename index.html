@@ -18,7 +18,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta property="og:url" content="https://www.padmashreetravels.in/">
 <meta property="og:type" content="website"><meta property="og:locale" content="en_IN"><meta property="og:image" content="https://www.padmashreetravels.in/images/logo.png"><meta name="application-name" content="Padma Shree Travels"><meta property="og:site_name" content="Padma Shree Travels"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Padma Shree Travels | Agra Taxi Service &amp; Cab Booking"><meta name="twitter:description" content="Book AC taxi in Agra for Taj Mahal, Mathura&#8211;Vrindavan, Mehandipur Balaji darshan &amp; outstation trips. Fixed fares, driver details before pickup. WhatsApp +91 87200 81102."><meta name="twitter:image" content="https://www.padmashreetravels.in/images/logo.png">
 <link rel="canonical" href="https://www.padmashreetravels.in/"><link rel="icon" href="/favicon-48x48.png" sizes="48x48" type="image/png"><link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png"><link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="shortcut icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/style.css"><style>:root{--ff:Inter,-apple-system,sans-serif;--ffd:Inter,-apple-system,sans-serif}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/motion.css"><style>:root{--ff:Inter,-apple-system,sans-serif;--ffd:Inter,-apple-system,sans-serif}</style>
 <!-- ── Google reviews ──────────────────────────────────────────
      The homepage opts into the "homepage-premium" variant of the shared
      review component (js/reviews-grid.js). Its styles are injected by that
@@ -128,6 +129,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="hero__label"><span class="hero__dot"></span>Support daily, 9 AM&ndash;9 PM IST</div>
 <h1>Agra Taxi Service &#8211; Fixed-Fare AC Cabs for Taj Mahal, Mathura&#8211;Vrindavan, Temple Tours &amp; Outstation</h1>
 <p class="hero__d">Private AC cab with a local driver who knows the route. The fare we quote on WhatsApp is the fare you pay &#8212; tolls and parking told upfront. Driver name and car number shared before pickup. No app. No advance for most bookings.</p>
+<!-- Fare finder: filled by js/motion.js from the route cards below. Stays
+     hidden without JavaScript, when the three buttons underneath do the job. -->
+<div class="ff" id="fare-finder" hidden></div>
 <div class="hero__photo" role="img" aria-label="Padma Shree Travels fleet at night &#8212; Maruti Ertiga, Dzire sedan and a Force Traveller"></div>
 <div class="hero__acts">
 <a data-cta href="https://wa.me/918720081102?text=Hi%20Padma%20Shree%20Travels%2C%20I%20need%20a%20cab%20from%20Agra.%0A%0ARoute%3A%20%0ATravel%20date%3A%20%0APickup%20time%3A%20%0APickup%20point%20in%20Agra%3A%20%0APassengers%3A%20%0AOne%20way%20or%20round%20trip%3A%20%0A%0APlease%20share%20availability%20and%20fare." class="btn btn--wa btn--lg" target="_blank" rel="noopener"><i data-lucide="message-circle" class="icon icon--white" aria-hidden="true"></i> Get Fare on WhatsApp</a>
@@ -137,30 +141,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <p style="margin:.5rem 0 0;font-size:.78rem;color:rgba(255,255,255,.75)">Fixed fare confirmed in writing &middot; Driver details shared before pickup &middot; Usually replies quickly</p>
 <div class="hero__stats">
 <div><div class="hero__sv">30+</div><div class="hero__sl">Routes Covered</div></div>
-<div><div class="hero__sv">&#8377;1,500</div><div class="hero__sl">AC Cab, One Way</div></div>
+<div><div class="hero__sv">&#8377;0</div><div class="hero__sl">Usual Advance</div></div>
 <div><div class="hero__sv">9&ndash;9</div><div class="hero__sl">Support Daily, IST</div></div>
 </div></div></div></section>
-
-<!-- ===================== GOOGLE REVIEWS =====================
-     Shared component: markup + behaviour from js/reviews-grid.js, review text
-     from js/reviews-data.js. Reviews are never hard-coded here.
-     data-page="home" has no curated mapping in the dataset, so forPage() falls
-     back to the first nine of the shared pool - a genuine general mix of local
-     Agra, outstation and temple trips. The section removes itself if the pool
-     is ever empty, so the homepage can never ship an empty heading. -->
-<section data-reviews-grid data-page="home" data-variant="homepage-premium"
-         data-wa="https://wa.me/918720081102?text=Hi%20Padma%20Shree%20Travels%2C%20I%20need%20a%20cab%20from%20Agra.%0A%0ARoute%3A%20%0ATravel%20date%3A%20%0APickup%20time%3A%20%0APickup%20point%20in%20Agra%3A%20%0APassengers%3A%20%0AOne%20way%20or%20round%20trip%3A%20%0A%0APlease%20share%20availability%20and%20fare."
-         data-subline="Real experiences from Padma Shree Travels customers on Google &#8212; local Agra trips, temple journeys and outstation routes.">
-  <!-- Fallback for visitors without JavaScript. The component replaces this
-       entire block on render, so it is never shown alongside the reviews.
-       It deliberately does not restate any review: the reviews live in
-       js/reviews-data.js and are not duplicated into markup. -->
-  <div class="container" style="padding-top:3rem;padding-bottom:3rem">
-    <h2 class="stitle">What Our Travellers Say</h2>
-    <p class="sdesc">Padma Shree Travels customers post their reviews on Google &#8212; local Agra trips, temple journeys and outstation routes.</p>
-    <p><a href="https://g.page/r/CUjtXu1x_3bPEBM" target="_blank" rel="noopener noreferrer">Read our reviews on Google</a></p>
-  </div>
-</section>
 
 <section class="trust"><div class="container"><div class="trust__in">
 <div class="tchip"><div class="tchip__i"><i data-lucide="indian-rupee" aria-hidden="true"></i></div>Fixed Fare</div>
@@ -169,12 +152,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="tchip"><div class="tchip__i"><i data-lucide="hand" aria-hidden="true"></i></div>Driver Waits During Darshan</div>
 <div class="tchip"><div class="tchip__i"><i data-lucide="map-pin" aria-hidden="true"></i></div>Local Agra Route Experts</div>
 </div></div></section>
-<section class="section" id="routes"><div class="container">
-<div class="text-center"><span class="sbadge">Pilgrimage &amp; Sightseeing</span><h2 class="stitle">Mathura, Vrindavan &amp; Agra Sightseeing</h2>
-<p class="sdesc">Pilgrimage tours and Agra monument sightseeing &#8212; fixed fares, driver waits at every temple and monument.</p></div>
+<section class="section routes--v2" id="routes"><div class="container">
+<div class="text-center"><span class="sbadge">Fixed Fares</span><h2 class="stitle">Mathura, Vrindavan &amp; Agra Sightseeing</h2>
+<p class="sdesc">Pilgrimage tours, Agra monument sightseeing and outstation trips &#8212; fixed fares, driver waits at every temple and monument.</p></div>
 
 <div class="rcat-section" id="pilgrimage">
-<div class="rcat-label"><i data-lucide="landmark" class="icon icon--sm icon--muted" aria-hidden="true"></i> Pilgrimage Routes</div>
+<div class="rcat-label"><i data-lucide="landmark" class="icon icon--sm icon--muted" aria-hidden="true"></i> Pilgrimage &amp; Temple Tours from Agra</div>
 <div class="rgrid">
 <div class="rcard"><div class="rcard__thumb"><img src="images/destinations/dest-mathura-janmabhoomi.webp" alt="Krishna Janmabhoomi Temple, Mathura" loading="lazy" width="400" height="225"></div><div class="rcard__top"><h3 class="rcard__dest">Agra to Mathura Taxi</h3>
 <div class="rcard__price">from &#8377;1,500<small>One Way</small></div></div>
@@ -196,10 +179,33 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <div class="rcard"><div class="rcard__thumb"><img src="images/destinations/dest-barsana.webp" alt="Radha Rani Temple on the hill at Barsana" loading="lazy" width="400" height="225"></div><div class="rcard__top"><h3 class="rcard__dest">Mathura, Vrindavan &amp; Barsana</h3>
 <div class="rcard__price">&#8377;3,500<small>Full Day</small></div></div>
-<div class="rcard__meta"><span><i data-lucide="map-pin" class="icon icon--sm icon--muted" aria-hidden="true"></i>~300 km return</span><span><i data-lucide="clock" class="icon icon--sm icon--muted" aria-hidden="true"></i>~10&#8211;12 hrs</span></div>
+<div class="rcard__meta"><span><i data-lucide="map-pin" class="icon icon--sm icon--muted" aria-hidden="true"></i>~210 km return</span><span><i data-lucide="clock" class="icon icon--sm icon--muted" aria-hidden="true"></i>~10&#8211;12 hrs</span></div>
 <p class="rcard__desc">Extended pilgrimage covering three holy cities: Mathura, Vrindavan, and Barsana &#8212; Radha&#8217;s birthplace.</p>
 <div class="rcard__acts"><a href="mathura-vrindavan-barsana/" class="btn btn--b btn--sm">View Details</a><a href="tel:+918720081102" class="btn btn--o btn--sm"><i data-lucide="phone" class="icon icon--sm icon--black" aria-hidden="true"></i> Call</a></div></div>
 
+<div class="rcard"><div class="rcard__thumb"><img src="images/destinations/dest-mehandipur-balaji.webp" alt="Hillside Hanuman temple typical of the Mehandipur Balaji route" loading="lazy" width="400" height="225"></div><div class="rcard__top"><h3 class="rcard__dest">Agra to Mehandipur Balaji Taxi</h3>
+<div class="rcard__price">Fare on WhatsApp<small>Round Trip</small></div></div>
+<div class="rcard__meta"><span><i data-lucide="map-pin" class="icon icon--sm icon--muted" aria-hidden="true"></i>Approx. 115 km</span><span><i data-lucide="clock" class="icon icon--sm icon--muted" aria-hidden="true"></i>2.5&#8211;3 hrs one way</span></div>
+<p class="rcard__desc">Famous Hanuman temple in Dausa district. Same-day return, driver waits during darshan.</p>
+<div class="rcard__acts"><a href="agra-to-mehandipur-balaji-taxi/" class="btn btn--b btn--sm">View Details</a><a href="tel:+918720081102" class="btn btn--o btn--sm"><i data-lucide="phone" class="icon icon--sm icon--black" aria-hidden="true"></i> Call</a></div></div>
+
+<div class="rcard"><div class="rcard__thumb"><img src="images/destinations/dest-kaila-devi.webp" alt="Temple on a rocky ravine, typical of the Kaila Devi route near Karauli" loading="lazy" width="400" height="225"></div><div class="rcard__top"><h3 class="rcard__dest">Agra to Kaila Devi Temple Taxi</h3>
+<div class="rcard__price">Fare on WhatsApp<small>Round Trip</small></div></div>
+<div class="rcard__meta"><span><i data-lucide="map-pin" class="icon icon--sm icon--muted" aria-hidden="true"></i>Approx. 170 km</span><span><i data-lucide="clock" class="icon icon--sm icon--muted" aria-hidden="true"></i>3.5&#8211;4 hrs one way</span></div>
+<p class="rcard__desc">Revered Shakti temple near Karauli. Same-day or relaxed 2-day option available.</p>
+<div class="rcard__acts"><a href="agra-to-kaila-devi-temple-taxi/" class="btn btn--b btn--sm">View Details</a><a href="tel:+918720081102" class="btn btn--o btn--sm"><i data-lucide="phone" class="icon icon--sm icon--black" aria-hidden="true"></i> Call</a></div></div>
+
+<div class="rcard"><div class="rcard__thumb"><img src="images/destinations/dest-aravalli-temple.webp" alt="Temple in the Aravalli hills of Rajasthan, typical of the Karauli and Balaji temple route" loading="lazy" width="400" height="225"></div><div class="rcard__top"><h3 class="rcard__dest">Karauli + Kaila Devi + Balaji Tour</h3>
+<div class="rcard__price">Fare on WhatsApp<small>Full-Day Package</small></div></div>
+<div class="rcard__meta"><span><i data-lucide="map-pin" class="icon icon--sm icon--muted" aria-hidden="true"></i>~350&#8211;380 km circuit</span><span><i data-lucide="clock" class="icon icon--sm icon--muted" aria-hidden="true"></i>12&#8211;13 hrs</span></div>
+<p class="rcard__desc">Both Rajasthan temples in one carefully planned day, or a relaxed 2-day version.</p>
+<div class="rcard__acts"><a href="agra-karauli-kaila-devi-balaji-tour/" class="btn btn--b btn--sm">View Details</a><a href="tel:+918720081102" class="btn btn--o btn--sm"><i data-lucide="phone" class="icon icon--sm icon--black" aria-hidden="true"></i> Call</a></div></div>
+
+<a href="agra-temple-tour-by-cab/" class="rcard" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:.5rem">
+<i data-lucide="landmark" style="width:28px;height:28px" aria-hidden="true"></i>
+<h3 class="rcard__dest">View All Temple Tours</h3>
+<p class="rcard__desc">Browse every pilgrimage route we run from Agra.</p>
+</a>
 </div></div>
 
 <div class="rcat-section" id="sightseeing">
@@ -232,78 +238,69 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <div class="rcat-section" id="outstation">
 <div class="rcat-label"><i data-lucide="map" class="icon icon--sm icon--muted" aria-hidden="true"></i> Outstation &amp; More</div>
-<div style="display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.5rem">
-<a href="agra-to-jaipur-taxi/" style="display:inline-flex;align-items:center;gap:.5rem;padding:.5rem .85rem;background:var(--g50);border:1px solid var(--g200);border-radius:var(--r);text-decoration:none;color:var(--black);font-size:.84rem;font-weight:500;white-space:nowrap">Agra to Jaipur Taxi <span class="ptag">Fare on WhatsApp</span></a>
-<a href="agra-airport-taxi/" style="display:inline-flex;align-items:center;gap:.5rem;padding:.5rem .85rem;background:var(--g50);border:1px solid var(--g200);border-radius:var(--r);text-decoration:none;color:var(--black);font-size:.84rem;font-weight:500;white-space:nowrap">Agra Airport Taxi <span class="ptag">from &#8377;800</span></a>
-<a href="agra-railway-station-taxi/" style="display:inline-flex;align-items:center;gap:.5rem;padding:.5rem .85rem;background:var(--g50);border:1px solid var(--g200);border-radius:var(--r);text-decoration:none;color:var(--black);font-size:.84rem;font-weight:500;white-space:nowrap">Agra Railway Station Taxi <span class="ptag">from &#8377;800</span></a>
-<a href="agra-to-bateshwar/" style="display:inline-flex;align-items:center;gap:.5rem;padding:.5rem .85rem;background:var(--g50);border:1px solid var(--g200);border-radius:var(--r);text-decoration:none;color:var(--black);font-size:.84rem;font-weight:500;white-space:nowrap">Agra to Bateshwar <span class="ptag">&#8377;3,000 &middot; RT</span></a>
-<a href="agra-to-gwalior/" style="display:inline-flex;align-items:center;gap:.5rem;padding:.5rem .85rem;background:var(--g50);border:1px solid var(--g200);border-radius:var(--r);text-decoration:none;color:var(--black);font-size:.84rem;font-weight:500;white-space:nowrap">Agra to Gwalior <span class="ptag">&#8377;3,000 &middot; RT</span></a>
-<a href="agra-to-aligarh/" style="display:inline-flex;align-items:center;gap:.5rem;padding:.5rem .85rem;background:var(--g50);border:1px solid var(--g200);border-radius:var(--r);text-decoration:none;color:var(--black);font-size:.84rem;font-weight:500;white-space:nowrap">Agra to Aligarh <span class="ptag">&#8377;3,000 &middot; RT</span></a>
-<a href="agra-to-etawah/" style="display:inline-flex;align-items:center;gap:.5rem;padding:.5rem .85rem;background:var(--g50);border:1px solid var(--g200);border-radius:var(--r);text-decoration:none;color:var(--black);font-size:.84rem;font-weight:500;white-space:nowrap">Agra to Etawah <span class="ptag">&#8377;3,500 &middot; RT</span></a>
-<a href="agra-to-firozabad/" style="display:inline-flex;align-items:center;gap:.5rem;padding:.5rem .85rem;background:var(--g50);border:1px solid var(--g200);border-radius:var(--r);text-decoration:none;color:var(--black);font-size:.84rem;font-weight:500;white-space:nowrap">Agra to Firozabad <span class="ptag">&#8377;2,500 &middot; RT</span></a>
-<a href="agra-to-hathras/" style="display:inline-flex;align-items:center;gap:.5rem;padding:.5rem .85rem;background:var(--g50);border:1px solid var(--g200);border-radius:var(--r);text-decoration:none;color:var(--black);font-size:.84rem;font-weight:500;white-space:nowrap">Agra to Hathras <span class="ptag">&#8377;2,000 &middot; RT</span></a>
-<a href="agra-to-tundla/" style="display:inline-flex;align-items:center;gap:.5rem;padding:.5rem .85rem;background:var(--g50);border:1px solid var(--g200);border-radius:var(--r);text-decoration:none;color:var(--black);font-size:.84rem;font-weight:500;white-space:nowrap">Agra to Tundla <span class="ptag">&#8377;2,000 &middot; RT</span></a>
-<a href="agra-to-sirsaganj/" style="display:inline-flex;align-items:center;gap:.5rem;padding:.5rem .85rem;background:var(--g50);border:1px solid var(--g200);border-radius:var(--r);text-decoration:none;color:var(--black);font-size:.84rem;font-weight:500;white-space:nowrap">Agra to Sirsaganj <span class="ptag">&#8377;3,000 &middot; RT</span></a>
-<a href="agra-to-shikohabad/" style="display:inline-flex;align-items:center;gap:.5rem;padding:.5rem .85rem;background:var(--g50);border:1px solid var(--g200);border-radius:var(--r);text-decoration:none;color:var(--black);font-size:.84rem;font-weight:500;white-space:nowrap">Agra to Shikohabad <span class="ptag">&#8377;3,000 &middot; RT</span></a>
-<a href="golden-triangle-agra-jaipur-delhi/" style="display:inline-flex;align-items:center;gap:.5rem;padding:.5rem .85rem;background:var(--g50);border:1px solid var(--g200);border-radius:var(--r);text-decoration:none;color:var(--black);font-size:.84rem;font-weight:500;max-width:100%;flex-wrap:wrap">Golden Triangle Trip Planning <span class="ptag">Planning Guide</span></a>
+<div class="olist">
+<a href="agra-to-jaipur-taxi/" class="olist__a"><span class="olist__n">Agra to Jaipur Taxi</span> <span class="ptag">Fare on WhatsApp</span></a>
+<a href="agra-airport-taxi/" class="olist__a"><span class="olist__n">Agra Airport Taxi</span> <span class="ptag">from &#8377;800</span></a>
+<a href="agra-railway-station-taxi/" class="olist__a"><span class="olist__n">Agra Railway Station Taxi</span> <span class="ptag">from &#8377;800</span></a>
+<a href="agra-to-bateshwar/" class="olist__a"><span class="olist__n">Agra to Bateshwar</span> <span class="ptag">&#8377;3,000 &middot; RT</span></a>
+<a href="agra-to-gwalior/" class="olist__a"><span class="olist__n">Agra to Gwalior</span> <span class="ptag">&#8377;3,000 &middot; RT</span></a>
+<a href="agra-to-aligarh/" class="olist__a"><span class="olist__n">Agra to Aligarh</span> <span class="ptag">&#8377;3,000 &middot; RT</span></a>
+<a href="agra-to-etawah/" class="olist__a"><span class="olist__n">Agra to Etawah</span> <span class="ptag">&#8377;3,500 &middot; RT</span></a>
+<a href="agra-to-firozabad/" class="olist__a"><span class="olist__n">Agra to Firozabad</span> <span class="ptag">&#8377;2,500 &middot; RT</span></a>
+<a href="agra-to-hathras/" class="olist__a"><span class="olist__n">Agra to Hathras</span> <span class="ptag">&#8377;2,000 &middot; RT</span></a>
+<a href="agra-to-tundla/" class="olist__a"><span class="olist__n">Agra to Tundla</span> <span class="ptag">&#8377;2,000 &middot; RT</span></a>
+<a href="agra-to-sirsaganj/" class="olist__a"><span class="olist__n">Agra to Sirsaganj</span> <span class="ptag">&#8377;3,000 &middot; RT</span></a>
+<a href="agra-to-shikohabad/" class="olist__a"><span class="olist__n">Agra to Shikohabad</span> <span class="ptag">&#8377;3,000 &middot; RT</span></a>
+<a href="golden-triangle-agra-jaipur-delhi/" class="olist__a"><span class="olist__n">Golden Triangle Trip Planning</span> <span class="ptag">Planning Guide</span></a>
 </div>
 <p style="margin-top:.6rem;font-size:.79rem;color:var(--g400)">More routes available. <a href="contact/" style="color:var(--g500);font-weight:500">Call for custom fares &#8594;</a></p>
 </div>
 
 </div></section>
 
+<!-- ===================== GOOGLE REVIEWS =====================
+     Shared component: markup + behaviour from js/reviews-grid.js, review text
+     from js/reviews-data.js. Reviews are never hard-coded here.
+     data-page="home" has no curated mapping in the dataset, so forPage() falls
+     back to the first nine of the shared pool - a genuine general mix of local
+     Agra, outstation and temple trips. The section removes itself if the pool
+     is ever empty, so the homepage can never ship an empty heading. -->
+<section data-reviews-grid data-page="home" data-variant="homepage-premium"
+         data-wa="https://wa.me/918720081102?text=Hi%20Padma%20Shree%20Travels%2C%20I%20need%20a%20cab%20from%20Agra.%0A%0ARoute%3A%20%0ATravel%20date%3A%20%0APickup%20time%3A%20%0APickup%20point%20in%20Agra%3A%20%0APassengers%3A%20%0AOne%20way%20or%20round%20trip%3A%20%0A%0APlease%20share%20availability%20and%20fare."
+         data-subline="Real experiences from Padma Shree Travels customers on Google &#8212; local Agra trips, temple journeys and outstation routes.">
+  <!-- Fallback for visitors without JavaScript. The component replaces this
+       entire block on render, so it is never shown alongside the reviews.
+       It deliberately does not restate any review: the reviews live in
+       js/reviews-data.js and are not duplicated into markup. -->
+  <div class="container" style="padding-top:3rem;padding-bottom:3rem">
+    <h2 class="stitle">What Our Travellers Say</h2>
+    <p class="sdesc">Padma Shree Travels customers post their reviews on Google &#8212; local Agra trips, temple journeys and outstation routes.</p>
+    <p><a href="https://g.page/r/CUjtXu1x_3bPEBM" target="_blank" rel="noopener noreferrer">Read our reviews on Google</a></p>
+  </div>
+</section>
+
 <!-- How Booking Works -->
-<section class="section section--teal"><div class="container">
+<section class="section section--gray"><div class="container">
 <div class="text-center"><span class="sbadge">How It Works</span><h2 class="stitle">How Booking Works</h2></div>
+<div class="how">
 <div class="incs">
 <div class="inc"><div class="inc__i"><i data-lucide="message-circle" aria-hidden="true"></i></div><div><h3>1. WhatsApp or Call</h3><p>Share your route, travel date, and pickup point with us.</p></div></div>
 <div class="inc"><div class="inc__i"><i data-lucide="indian-rupee" aria-hidden="true"></i></div><div><h3>2. Fixed Fare Confirmed</h3><p>We confirm your fare in writing on WhatsApp &#8212; including expected tolls and parking.</p></div></div>
 <div class="inc"><div class="inc__i"><i data-lucide="shield-check" aria-hidden="true"></i></div><div><h3>3. Driver Details Shared</h3><p>Your driver's name, mobile number, and car registration number reach you before pickup.</p></div></div>
-</div></div></section>
-
-<!-- Temple & Pilgrimage Tours -->
-<section class="section section--gray"><div class="container">
-<div class="text-center"><span class="sbadge">Temple &amp; Pilgrimage Tours</span><h2 class="stitle">Temple &amp; Pilgrimage Tours from Agra</h2>
-<p class="sdesc">Braj darshan and Rajasthan temple circuits &#8212; fixed fare, driver waits at every stop.</p></div>
-<div class="rgrid">
-<div class="rcard"><div class="rcard__thumb"><img src="images/destinations/dest-vishram-ghat.webp" alt="Evening aarti at Vishram Ghat, Mathura" loading="lazy" width="400" height="225"></div><div class="rcard__top"><h3 class="rcard__dest">Mathura + Vrindavan Full Day</h3>
-<div class="rcard__price">&#8377;3,000<small>Full Day</small></div></div>
-<div class="rcard__meta"><span><i data-lucide="map-pin" class="icon icon--sm icon--muted" aria-hidden="true"></i>~200 km return</span><span><i data-lucide="clock" class="icon icon--sm icon--muted" aria-hidden="true"></i>~8&#8211;10 hrs</span></div>
-<p class="rcard__desc">Both holy cities in one day. Fixed fare, driver waits at every temple.</p>
-<div class="rcard__acts"><a href="mathura-vrindavan-tour-from-agra/" class="btn btn--b btn--sm">View Details</a></div></div>
-
-<div class="rcard"><div class="rcard__thumb"><img src="images/destinations/dest-barsana.webp" alt="Radha Rani Temple on the hill at Barsana" loading="lazy" width="400" height="225"></div><div class="rcard__top"><h3 class="rcard__dest">Mathura, Vrindavan &amp; Barsana</h3>
-<div class="rcard__price">&#8377;3,500<small>Full Day</small></div></div>
-<div class="rcard__meta"><span><i data-lucide="map-pin" class="icon icon--sm icon--muted" aria-hidden="true"></i>~210 km return</span><span><i data-lucide="clock" class="icon icon--sm icon--muted" aria-hidden="true"></i>10&#8211;12 hrs</span></div>
-<p class="rcard__desc">Extended pilgrimage adding Radha Rani Temple at Barsana &#8212; Radha&#8217;s birthplace.</p>
-<div class="rcard__acts"><a href="mathura-vrindavan-barsana/" class="btn btn--b btn--sm">View Details</a></div></div>
-
-<div class="rcard"><div class="rcard__thumb"><img src="images/destinations/dest-mehandipur-balaji.webp" alt="Hillside Hanuman temple typical of the Mehandipur Balaji route" loading="lazy" width="400" height="225"></div><div class="rcard__top"><h3 class="rcard__dest">Agra to Mehandipur Balaji Taxi</h3>
-<div class="rcard__price">Fare on WhatsApp<small>Round Trip</small></div></div>
-<div class="rcard__meta"><span><i data-lucide="map-pin" class="icon icon--sm icon--muted" aria-hidden="true"></i>Approx. 115 km</span><span><i data-lucide="clock" class="icon icon--sm icon--muted" aria-hidden="true"></i>2.5&#8211;3 hrs one way</span></div>
-<p class="rcard__desc">Famous Hanuman temple in Dausa district. Same-day return, driver waits during darshan.</p>
-<div class="rcard__acts"><a href="agra-to-mehandipur-balaji-taxi/" class="btn btn--b btn--sm">View Details</a></div></div>
-
-<div class="rcard"><div class="rcard__thumb"><img src="images/destinations/dest-kaila-devi.webp" alt="Temple on a rocky ravine, typical of the Kaila Devi route near Karauli" loading="lazy" width="400" height="225"></div><div class="rcard__top"><h3 class="rcard__dest">Agra to Kaila Devi Temple Taxi</h3>
-<div class="rcard__price">Fare on WhatsApp<small>Round Trip</small></div></div>
-<div class="rcard__meta"><span><i data-lucide="map-pin" class="icon icon--sm icon--muted" aria-hidden="true"></i>Approx. 170 km</span><span><i data-lucide="clock" class="icon icon--sm icon--muted" aria-hidden="true"></i>3.5&#8211;4 hrs one way</span></div>
-<p class="rcard__desc">Revered Shakti temple near Karauli. Same-day or relaxed 2-day option available.</p>
-<div class="rcard__acts"><a href="agra-to-kaila-devi-temple-taxi/" class="btn btn--b btn--sm">View Details</a></div></div>
-
-<div class="rcard"><div class="rcard__thumb"><img src="images/about/founder-mehandipur-balaji.webp" alt="Hillside temple approach typical of the Mehandipur Balaji stop on this combined tour" loading="lazy" width="400" height="225"></div><div class="rcard__top"><h3 class="rcard__dest">Karauli + Kaila Devi + Balaji Tour</h3>
-<div class="rcard__price">Fare on WhatsApp<small>Full-Day Package</small></div></div>
-<div class="rcard__meta"><span><i data-lucide="map-pin" class="icon icon--sm icon--muted" aria-hidden="true"></i>~350&#8211;380 km circuit</span><span><i data-lucide="clock" class="icon icon--sm icon--muted" aria-hidden="true"></i>12&#8211;13 hrs</span></div>
-<p class="rcard__desc">Both Rajasthan temples in one carefully planned day, or a relaxed 2-day version.</p>
-<div class="rcard__acts"><a href="agra-karauli-kaila-devi-balaji-tour/" class="btn btn--b btn--sm">View Details</a></div></div>
-
-<a href="agra-temple-tour-by-cab/" class="rcard" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:.5rem">
-<i data-lucide="landmark" style="width:28px;height:28px" aria-hidden="true"></i>
-<h3 class="rcard__dest">View All Temple Tours</h3>
-<p class="rcard__desc">Browse every pilgrimage route we run from Agra.</p>
-</a>
 </div>
-</div></section>
-
+<aside class="slip" aria-label="Example of a booking confirmation">
+<div class="slip__hd"><div class="slip__brand">Padma Shree Travels<small>Booking confirmation on WhatsApp</small></div><span class="slip__tag">Example</span></div>
+<dl class="slip__bd">
+<div class="slip__row"><dt>Trip</dt><dd>Mathura + Vrindavan Full Day</dd></div>
+<div class="slip__row"><dt>Pickup</dt><dd>Your hotel in Agra, 7:00 AM</dd></div>
+<div class="slip__row slip__fare"><dt>Fixed fare</dt><dd data-fare-of="mathura-vrindavan-tour-from-agra">&#8377;3,000</dd></div>
+<div class="slip__row"><dt>Tolls and parking</dt><dd>Extra, told upfront</dd></div>
+<div class="slip__row"><dt>Driver</dt><dd>Name and mobile number</dd></div>
+<div class="slip__row"><dt>Car</dt><dd>Model and registration number</dd></div>
+</dl>
+<p class="slip__note">An example of what we send. Your own confirmation shows your trip, fare and driver.</p>
+</aside>
+</div></div></section>
 
 <section class="section section--teal"><div class="container"><div class="text-center"><span class="sbadge">Why Padma Shree Travels</span><h2 class="stitle">Why riders choose us</h2>
 <p class="sdesc">Every detail designed around pilgrims, families, and first-time visitors.</p></div>
@@ -318,13 +315,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <section class="section section--gray" id="international"><div class="container">
 <div class="text-center"><span class="sbadge">For Visitors From Abroad</span><h2 class="stitle">Planning Your Agra Trip From Outside India?</h2>
 <p class="sdesc">The same practical questions every first-time international visitor asks us, answered upfront.</p></div>
-<div class="incs">
-<div class="inc"><div class="inc__i"><i data-lucide="indian-rupee" aria-hidden="true"></i></div><div><h3>Fare Confirmed Before You Travel</h3><p>We send your fare in writing on WhatsApp before your trip starts — no meter, no bargaining, no surprise total at the end.</p></div></div>
-<div class="inc"><div class="inc__i"><i data-lucide="car" aria-hidden="true"></i></div><div><h3>Private Cab, Never Shared</h3><p>Every booking is a private vehicle for your group only. We do not run shared or pooled rides.</p></div></div>
-<div class="inc"><div class="inc__i"><i data-lucide="map-pin" aria-hidden="true"></i></div><div><h3>Pickup Wherever You Are</h3><p>Hotel lobby, Kheria Airport arrivals, or Agra Cantt station — tell us where, and your driver meets you there.</p></div></div>
-<div class="inc"><div class="inc__i"><i data-lucide="receipt" aria-hidden="true"></i></div><div><h3>Tolls, Parking &amp; Tickets Are Separate</h3><p>The fare covers the vehicle and driver. Highway tolls, parking, and monument entry tickets are paid by you directly, and we tell you what to expect before you book.</p></div></div>
-<div class="inc"><div class="inc__i"><i data-lucide="briefcase" aria-hidden="true"></i></div><div><h3>Your Luggage, Your Driver</h3><p>Bags stay safely in the car between stops. Your driver&rsquo;s name, phone number and car registration number reach you on WhatsApp before pickup.</p></div></div>
-<div class="inc"><div class="inc__i"><i data-lucide="map" aria-hidden="true"></i></div><div><h3>Your Itinerary, Your Choice</h3><p>A monument guide is not part of the ride unless you ask us to arrange one in advance, and we do not add shopping stops you have not asked for.</p></div></div>
+<div class="flist">
+<div class="fi open"><button class="fi__q">Fare Confirmed Before You Travel<span class="fi__tog">+</span></button><div class="fi__a"><p>We send your fare in writing on WhatsApp before your trip starts — no meter, no bargaining, no surprise total at the end.</p></div></div>
+<div class="fi"><button class="fi__q">Private Cab, Never Shared<span class="fi__tog">+</span></button><div class="fi__a"><p>Every booking is a private vehicle for your group only. We do not run shared or pooled rides.</p></div></div>
+<div class="fi"><button class="fi__q">Pickup Wherever You Are<span class="fi__tog">+</span></button><div class="fi__a"><p>Hotel lobby, Kheria Airport arrivals, or Agra Cantt station — tell us where, and your driver meets you there.</p></div></div>
+<div class="fi"><button class="fi__q">Tolls, Parking &amp; Tickets Are Separate<span class="fi__tog">+</span></button><div class="fi__a"><p>The fare covers the vehicle and driver. Highway tolls, parking, and monument entry tickets are paid by you directly, and we tell you what to expect before you book.</p></div></div>
+<div class="fi"><button class="fi__q">Your Luggage, Your Driver<span class="fi__tog">+</span></button><div class="fi__a"><p>Bags stay safely in the car between stops. Your driver&rsquo;s name, phone number and car registration number reach you on WhatsApp before pickup.</p></div></div>
+<div class="fi"><button class="fi__q">Your Itinerary, Your Choice<span class="fi__tog">+</span></button><div class="fi__a"><p>A monument guide is not part of the ride unless you ask us to arrange one in advance, and we do not add shopping stops you have not asked for.</p></div></div>
 </div></div></section>
 <section class="cta"><div class="container">
 <h2>Your cab. Your itinerary. Our driver. Fixed price.</h2>
@@ -414,7 +411,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 <div class="ft__bot"><div>&copy; 2026 Padma Shree Travels. All rights reserved.</div><div>Agra Taxi Service &bull; Outstation Cabs &bull; Sightseeing</div></div>
 </div></footer>
-<div class="mcta-bar"><div class="mcta-bar__note">Usually replies within minutes</div><div class="mcta-bar__btns"><a href="tel:+918720081102" class="mcta-bar__a mcta-bar__call">&#128222; Call Now</a><a data-cta href="https://wa.me/918720081102?text=Hi%20Padma%20Shree%20Travels%2C%20I%20need%20a%20cab%20from%20Agra.%0A%0ARoute%3A%20%0ATravel%20date%3A%20%0APickup%20time%3A%20%0APickup%20point%20in%20Agra%3A%20%0APassengers%3A%20%0AOne%20way%20or%20round%20trip%3A%20%0A%0APlease%20share%20availability%20and%20fare." class="mcta-bar__a mcta-bar__wa" target="_blank" rel="noopener">&#128172; WhatsApp</a><a href="book/" class="mcta-bar__a mcta-bar__book">&#128274; Book Online</a></div></div>
+<div class="mcta-bar"><div class="mcta-bar__note">Usually replies within minutes</div><div class="mcta-bar__btns"><a href="tel:+918720081102" class="mcta-bar__a mcta-bar__call"><i data-lucide="phone" aria-hidden="true"></i> Call Now</a><a data-cta href="https://wa.me/918720081102?text=Hi%20Padma%20Shree%20Travels%2C%20I%20need%20a%20cab%20from%20Agra.%0A%0ARoute%3A%20%0ATravel%20date%3A%20%0APickup%20time%3A%20%0APickup%20point%20in%20Agra%3A%20%0APassengers%3A%20%0AOne%20way%20or%20round%20trip%3A%20%0A%0APlease%20share%20availability%20and%20fare." class="mcta-bar__a mcta-bar__wa" target="_blank" rel="noopener"><i data-lucide="message-circle" aria-hidden="true"></i> WhatsApp</a><a href="book/" class="mcta-bar__a mcta-bar__book"><i data-lucide="calendar-check" aria-hidden="true"></i> Book Online</a></div></div>
 <a data-cta href="https://wa.me/918720081102?text=Hi%20Padma%20Shree%20Travels%2C%20I%20need%20a%20cab%20from%20Agra.%0A%0ARoute%3A%20%0ATravel%20date%3A%20%0APickup%20time%3A%20%0APickup%20point%20in%20Agra%3A%20%0APassengers%3A%20%0AOne%20way%20or%20round%20trip%3A%20%0A%0APlease%20share%20availability%20and%20fare." class="waf" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp"><i data-lucide="message-circle" aria-hidden="true"></i></a>
 <!-- Shared Google reviews: ONE dataset + ONE grid component, site-wide.
      Paths are root-relative here because index.html sits at the site root. -->
@@ -439,6 +436,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      blog, book/ and fleet/ pages. -->
 <script src="js/conversion-tracking.js" defer></script>
 <script src="js/main.js"></script>
-<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script src="js/motion.js" defer></script>
+<script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
 <script>lucide.createIcons();</script>
 </body></html>
